@@ -167,34 +167,34 @@
           Mulțumim! Mesajul a fost trimis. Revenim cu un răspuns în câteva zile.
         </div>
 
-        <form id="contact-form-page">
-          <div class="field-row">
-            <div class="field">
-              <label for="c-name">Nume</label>
-              <input id="c-name" type="text" required placeholder="Ioana Popescu">
-            </div>
-            <div class="field">
-              <label for="c-email">Email</label>
-              <input id="c-email" type="email" required placeholder="ioana@firma.ro">
-            </div>
-          </div>
+		<form id="contact-form-page" action="https://formspree.io/f/xpqbwzak" method="POST">
+		  <div class="field-row">
+			<div class="field">
+			  <label for="c-name">Nume</label>
+			  <input name="nume" id="c-name" type="text" required placeholder="Ioana Popescu">
+			</div>
+			<div class="field">
+			  <label for="c-email">Email</label>
+			  <input name="email" id="c-email" type="email" required placeholder="ioana@firma.ro">
+			</div>
+		  </div>
 
-          <div class="field">
-            <label for="c-topic">Subiect</label>
-            <select id="c-topic">
-              <option>Întrebare generală</option>
-              <option>Sugestie articol / temă</option>
-              <option>Invitat în podcast</option>
-              <option>Colaborare / parteneriat</option>
-              <option>Feedback resurse</option>
-              <option>Altele</option>
-            </select>
-          </div>
+		  <div class="field">
+			<label for="c-topic">Subiect</label>
+			<select name="subiect" id="c-topic">
+			  <option>Întrebare generală</option>
+			  <option>Sugestie articol / temă</option>
+			  <option>Invitat în podcast</option>
+			  <option>Colaborare / parteneriat</option>
+			  <option>Feedback resurse</option>
+			  <option>Altele</option>
+			</select>
+		  </div>
 
-          <div class="field">
-            <label for="c-msg">Mesaj</label>
-            <textarea id="c-msg" required placeholder="Scrie-ne ce te interesează..." style="min-height: 160px;"></textarea>
-          </div>
+		  <div class="field">
+			<label for="c-msg">Mesaj</label>
+			<textarea name="mesaj" id="c-msg" required placeholder="Scrie-ne ce te interesează..." style="min-height: 160px;"></textarea>
+		  </div>
 
           <div class="gdpr-note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -289,13 +289,31 @@
 
 <script src="assets/site.js"></script>
 <script>
-document.getElementById('contact-form-page').addEventListener('submit', e => {
+document.getElementById('contact-form-page').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const ok = document.getElementById('form-success');
-  ok.classList.add('show');
-  e.target.reset();
-  ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  setTimeout(() => ok.classList.remove('show'), 5000);
+  const form = e.target;
+  const status = document.getElementById('form-success');
+  const data = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      status.style.display = 'flex'; // Afișează mesajul tău verde de succes
+      form.reset(); // Golește câmpurile
+      status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Mesajul dispare după 6 secunde
+      setTimeout(() => { status.style.display = 'none'; }, 6000);
+    } else {
+      alert("Hopa! A apărut o eroare. Te rugăm să încerci din nou.");
+    }
+  } catch (error) {
+    alert("Eroare de conexiune. Verifică internetul.");
+  }
 });
 </script>
 </body>
