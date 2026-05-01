@@ -1,0 +1,1724 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Misiunea AI Accounting Hub — AI Accounting Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ ARTICLE PAGE ============ */
+.article-wrap {
+  position: relative; z-index: 1;
+  max-width: 1360px; margin: 0 auto;
+  padding: 64px 32px 96px;
+  display: grid;
+  grid-template-columns: 1fr 720px 1fr;
+  gap: 48px;
+}
+.article-side { position: relative; }
+.article-side.left { justify-self: end; }
+.article-side .sticky {
+  position: sticky; top: 96px;
+  padding: 20px 0;
+  max-height: calc(100vh - 112px);
+  overflow: hidden;
+}
+.toc {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-1);
+  max-height: calc(100vh - 136px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+.toc::-webkit-scrollbar { width: 8px; }
+.toc::-webkit-scrollbar-track { background: transparent; }
+.toc::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+.toc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 14px;
+}
+.toc a {
+  display: block;
+  font-size: 13px; color: var(--fg-muted);
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid var(--border);
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.toc a:hover { color: var(--accent); border-color: var(--accent); }
+.toc a.active { color: var(--accent); border-color: var(--accent); }
+
+.article-main {
+  position: relative;
+  /* Critical for mobile: grid items default to min-width: auto (their content's
+     intrinsic min size). The <pre> code blocks below have long unbreakable
+     lines, which would otherwise force the grid item — and the prose with it —
+     wider than the viewport, clipping all the regular paragraph text. */
+  min-width: 0;
+}
+/* Same defence one level deeper: keep prose locked to its parent column */
+.article-main .prose,
+.article-main .prose pre,
+.article-main .prose img { max-width: 100%; }
+.article-main .prose pre { box-sizing: border-box; }
+
+.article-meta-top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.article-meta-top .sep { opacity: 0.4; }
+.article-category {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+.article-main h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.article-main h1 .accent {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 55%, color-mix(in oklab, var(--accent) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.article-lede {
+  font-size: 19px; line-height: 1.55; color: var(--fg-muted);
+  margin-bottom: 36px;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+}
+
+.author-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  display: grid; place-items: center;
+  color: #07121a; font-weight: 700; font-size: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+  flex-shrink: 0;
+}
+.author-info { flex: 1; min-width: 0; }
+.author-name { font-size: 14px; font-weight: 600; }
+.author-role { font-size: 12px; color: var(--fg-muted); }
+.share-row { display: flex; gap: 8px; }
+.share-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn svg { width: 15px; height: 15px; }
+
+.article-cover {
+  position: relative;
+  margin: 0 -32px 48px;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 360px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.article-cover-bg {
+  position: absolute; inset: 0;
+  background-image: url('assets/hero-vf.png');
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05) brightness(0.92);
+}
+.article-cover::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--bg-0) 80%, transparent) 100%);
+}
+.article-cover-caption {
+  position: absolute; left: 24px; bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-muted);
+  letter-spacing: 0.08em;
+  z-index: 2;
+}
+
+/* Prose */
+.prose {
+  font-size: 17px; line-height: 1.75;
+  color: var(--fg);
+  /* Prevent any unbreakable string from forcing horizontal overflow on mobile */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.prose p {
+  margin: 0 0 22px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.prose h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px; line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 56px 0 20px;
+  scroll-margin-top: 100px;
+}
+.prose h2::before {
+  content: '§'; color: var(--accent);
+  font-weight: 400;
+  margin-right: 12px;
+  opacity: 0.6;
+}
+.prose h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; line-height: 1.25; letter-spacing: -0.01em;
+  font-weight: 600;
+  margin: 36px 0 14px;
+  scroll-margin-top: 100px;
+}
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { color: var(--accent); font-style: normal; font-family: 'Space Grotesk', sans-serif; }
+.prose a { color: var(--accent); border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); transition: all 0.2s; }
+.prose a:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.prose ul, .prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose li {
+  margin-bottom: 10px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.prose li::marker { color: var(--accent); }
+.prose blockquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  border-radius: 0 12px 12px 0;
+  font-size: 18px;
+  color: var(--fg);
+  font-style: italic;
+}
+.prose blockquote cite {
+  display: block;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-style: normal;
+  color: var(--fg-muted); letter-spacing: 0.05em;
+}
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88em;
+  padding: 2px 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent);
+}
+.prose pre {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.6;
+}
+.prose pre code {
+  background: none; border: none; padding: 0; color: var(--fg);
+}
+.callout {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 14px;
+}
+.callout .ic {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center;
+  background: color-mix(in oklab, var(--accent) 15%, transparent);
+  color: var(--accent);
+}
+.callout .ic svg { width: 16px; height: 16px; }
+.callout .cbody { font-size: 14px; line-height: 1.6; color: var(--fg); }
+.callout .cbody strong { color: var(--accent); }
+
+/* End of article */
+.article-end {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+.author-card {
+  margin: 72px 0 0;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.author-card .author-avatar { width: 64px; height: 64px; font-size: 20px; }
+.author-card h3 { font-size: 20px; margin-bottom: 6px; }
+.author-card .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; margin-bottom: 12px; }
+.author-card p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+
+/* Related */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.related-card {
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; flex-direction: column;
+  transition: all 0.3s ease;
+}
+.related-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.related-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.related-card h3 { font-size: 18px; line-height: 1.25; margin-bottom: 10px; }
+.related-card p { font-size: 13px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.related-read {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.related-read svg { transition: transform 0.2s; }
+.related-card:hover .related-read svg { transform: translateX(4px); }
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 34px 0;
+}
+.table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 28px 0 34px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-1);
+}
+.prose table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.prose th,
+.prose td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.prose th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  text-align: left;
+}
+.prose tr:last-child td { border-bottom: 0; }
+.podcast-callout .ic { background: color-mix(in oklab, var(--accent-2) 15%, transparent); color: var(--accent-2); }
+/* Responsive */
+@media (max-width: 1200px) {
+  .article-wrap { grid-template-columns: 1fr; max-width: 760px; padding: 48px 24px 72px; }
+  .article-side { display: none; }
+}
+@media (max-width: 960px) {
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .article-cover { margin: 0 0 36px; height: 280px; }
+}
+@media (max-width: 720px) {
+  .article-wrap { padding: 28px 16px 48px; }
+  /* Match the mobile container padding so the cover doesn't push out beyond
+     the viewport (the desktop -32px margin assumed 32px container padding). */
+  .article-cover { height: 220px; margin: 0 -16px 24px; border-radius: 14px; }
+  .article-cover-caption { left: 16px; bottom: 14px; font-size: 10px; }
+  .article-main h1 { font-size: clamp(26px, 7.5vw, 34px); }
+  .article-lede { font-size: 16px; padding-left: 14px; }
+  .author-row { flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .share-row { width: 100%; justify-content: flex-end; }
+  .prose { font-size: 16px; line-height: 1.7; overflow-wrap: break-word; word-wrap: break-word; }
+  .prose h2 { font-size: 22px; margin: 36px 0 14px; }
+  .prose h2::before { margin-right: 8px; }
+  .prose h3 { font-size: 18px; margin: 26px 0 12px; }
+  .prose blockquote { margin: 22px 0; padding: 14px 16px; font-size: 15px; border-radius: 0 10px 10px 0; }
+  .prose pre { padding: 12px; font-size: 12px; border-radius: 10px; }
+  .callout { flex-direction: column; gap: 10px; padding: 16px; }
+  .author-card { flex-direction: column; gap: 16px; padding: 22px; margin-top: 48px; }
+  .author-card .author-avatar { width: 52px; height: 52px; font-size: 18px; }
+  .article-end { gap: 16px; padding-top: 24px; margin-top: 36px; }
+  .related-grid { grid-template-columns: 1fr; gap: 14px; }
+  .related-card { padding: 20px; }
+}
+@media (max-width: 420px) {
+  .article-wrap { padding: 22px 14px 40px; }
+  .article-cover { margin: 0 -14px 22px; height: 190px; }
+  .article-main h1 { font-size: 24px; line-height: 1.06; }
+  .article-lede { font-size: 14.5px; padding-left: 12px; margin-bottom: 28px; }
+  .article-meta-top { gap: 8px; font-size: 10px; margin-bottom: 18px; }
+  .article-meta-top .sep { display: none; }
+  .prose { font-size: 15px; line-height: 1.65; }
+  .prose p { margin-bottom: 18px; }
+  .prose h2 { font-size: 19px; margin: 28px 0 12px; }
+  .prose h2::before { display: none; }
+  .prose h3 { font-size: 16px; margin: 22px 0 10px; }
+  .prose blockquote { padding: 12px 14px; font-size: 14px; }
+  .prose ul, .prose ol { padding-left: 20px; }
+  .tags-row { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="article-meta-top">
+      <span class="article-category">Manifest</span>
+      <span>2026</span>
+      <span class="sep">·</span>
+      <span>30-40 min citire</span>
+    </div>
+
+    <h1><span class="accent">AI Accounting Hub</span></h1>
+    <p class="article-lede">
+      Manifestul unei Comunități pentru Profesia Contabilă Rom&#226;nească &#238;n Era Inteligenței Artificiale
+    </p>
+    <div class="author-row">
+      <div class="author-avatar">IM</div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">aiaccountinghub.ro</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// manifest · comunitate · AI Accounting Hub</div>
+    </div>
+
+    <div class="prose">
+<blockquote>
+<em>„Revoluția AI &#238;n contabilitate nu este un &#171;dacă&#187;. Este un &#171;c&#226;nd&#187;. Și &#171;c&#226;nd&#187;-ul este ACUM.&quot;</em>
+<cite>— Alex, Episodul 5 al podcastului AI Accounting Hub</cite>
+</blockquote>
+
+<hr>
+
+<p><strong>Un articol manifest publicat de AI Accounting Hub</strong> <em>Timp estimat de lectură: 30-40 de minute</em> <em>Categorie: Manifest | Strategie comunitară | Apel la acțiune</em></p>
+
+<hr>
+
+<h2 id="prolog">PROLOG: Episodul Cinci — Episodul Cel Mai Personal</h2>
+
+<p>Acesta este al cincilea articol-manifest dintr-o serie de cinci. Sunt c&#226;teva diferențe importante față de articolele anterioare.</p>
+
+<p>Primul: este <em>cel mai scurt</em> (relativ vorbind — &#238;ncă substanțial). Pentru că, după patru articole de analiză profundă, este timpul să fim direcți.</p>
+
+<p>Al doilea: este <em>cel mai personal</em>. Aici nu mai vorbim doar despre industrie, despre tehnologie, despre paralele istorice și skill-uri tehnice. Aici vorbim despre <em>de ce am creat acest proiect, pentru cine, și ce vrem să construim &#238;mpreună cu voi</em>.</p>
+
+<p>Al treilea: este <em>cel mai direct ca apel la acțiune</em>. Articolele anterioare au cartografiat terenul. Acesta &#238;ți cere să faci primul pas — <em>astăzi, după ce termini de citit</em>.</p>
+
+<p>Pentru cei care au parcurs articolele anterioare, mulțumim că ați fost cu noi:</p>
+
+<ul>
+  <li>Articolul 1: <em>„Contextul Revoluției AI: de la ChatGPT la AI Agents&quot;</em> — istoria evoluției AI &#238;ntre 2022 și 2026</li>
+  <li>Articolul 2: <em>„Evoluția Contabilității: de la registre pe h&#226;rtie la era AI&quot;</em> — paralele istorice cu Excel, Cloud / RPA, Digitalizare</li>
+  <li>Articolul 3: <em>„Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering&quot;</em> — roadmap operațional &#238;n 90 de zile</li>
+  <li>Articolul 4: <em>„Viitorul Profesiei: cum va arăta contabilitatea &#238;n 5–10 ani&quot;</em></li>
+  <li><em>Articolul 5 — „Misiunea AI Accounting Hub&quot; — pe care &#238;l citești acum</em> — manifestul comunității</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „E episodul cel mai personal pentru noi. Pentru că aici nu mai vorbim doar despre industrie sau despre tehnologie — vorbim despre de ce am creat acest proiect, pentru cine l-am creat, și ce vrem să construim &#238;mpreună cu voi.&quot;</div>
+</div>
+
+<hr>
+
+<h2 id="cap1">CAPITOLUL 1</h2>
+
+<h2 id="s2">Problema pe Care Vrem să o Rezolvăm — Gap-ul de 57 de Puncte Procentuale</h2>
+
+<h3 id="s3">Patru cifre care spun totul despre starea profesiei</h3>
+
+<p>Există patru cifre, publicate &#238;n studiul <em>State of AI in Accounting</em> de către platforma Karbon, care, citite &#238;mpreună, captează <em>exact</em> problema pe care AI Accounting Hub a fost creat să o rezolve:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Indicator</th><th>Procentaj</th></tr></thead>
+<tbody>
+<tr><td>Contabili <em>intrigați sau entuziasmați</em> de AI</td><td><strong>82%</strong></td></tr>
+<tr><td>Contabili care <em>investesc activ &#238;n training AI</em></td><td><strong>doar 25%</strong></td></tr>
+<tr><td>Contabili <em>&#238;ngrijorați de securitatea datelor</em></td><td><strong>76%</strong></td></tr>
+<tr><td>Contabili <em>preocupați de dileme etice</em></td><td><strong>49%</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Diferența &#238;ntre prima și a doua cifră — <em>82% intrigați minus 25% activi = 57 de puncte procentuale</em> — este <em>gap-ul</em> care ne-a făcut să creăm acest proiect.</p>
+
+<p>Această diferență nu este o anomalie statistică. Este <em>condiția psihologică a unei profesii &#238;ntregi</em>: oamenii recunosc importanța transformării, dar nu reușesc să facă pasul de la conștientizare la acțiune. &#206;n psihologie, fenomenul se numește <em>intention-action gap</em>. &#206;n management, este una dintre cele mai costisitoare patologii organizaționale. &#206;n contextul nostru, este <em>fereastra de oportunitate</em> pentru cei care decid să acționeze.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „82% din contabili sunt intrigați sau entuziasmați de AI. Dar doar 25% investesc activ &#238;n training. 76% sunt &#238;ngrijorați de securitatea datelor. 49% sunt preocupați de dileme etice. Gap-ul dintre entuziasm și acțiune este enorm.&quot;</div>
+</div>
+
+<h3 id="s4">De ce contează acest gap pentru noi, personal</h3>
+
+<p>Am văzut acest gap &#238;n jurul nostru, la prieteni, la colegi, la clienți. Am văzut profesioniști competenți, cu 10-20 de ani de carieră solidă, care <em>știau</em> că AI-ul este transformator, dar <em>nu reușeau să &#238;nceapă</em>. &#206;ntrebările tipice: <em>„De unde să &#238;ncep?&quot;</em>, <em>„Ce tool să aleg?&quot;</em>, <em>„Cum aplic concret &#238;n munca mea?&quot;</em></p>
+
+<p>Am &#238;nțeles că <em>informația există</em> (cantități uriașe, &#238;n engleză, fragmentată), dar <em>contextul lipsește</em>. Nu există un loc unde un contabil rom&#226;n, cu reglementare ANAF &#238;n cap și cu SAGA pe ecran, să găsească <em>exact</em> ghidul de care are nevoie. Așa s-a născut ideea AI Accounting Hub.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Gap-ul de 57 puncte ca oportunitate strategică</strong><br>Pentru profesionistul individual, gap-ul Karbon nu este o problemă statistică — este <em>cea mai mare oportunitate strategică pe care o vei vedea &#238;n cariera ta</em>. Dacă 75% dintre colegii tăi nu acționează, iar tu acționezi acum, ai <em>practic 2-3 ani de avans</em> asupra valului de adopție masivă. Acest avans este <em>non-comoditizabil</em> — odată construit, este greu de recuperat. Este motivul pentru care fiecare săptăm&#226;nă de am&#226;nare contează.</div>
+</div>
+
+<hr>
+
+<h2 id="cap2">CAPITOLUL 2</h2>
+
+<h2 id="s6">Cele Patru Cauze Structurale ale Paraliziei Profesionale</h2>
+
+<h3 id="s7">De ce 75% dintre contabili stau pe loc, deși <em>vor</em> să se miște</h3>
+
+<p>Pentru a rezolva o problemă, trebuie să-i &#238;nțelegi cauzele. Din zeci de discuții cu colegi din profesie, am identificat <em>patru cauze structurale</em> ale paraliziei. Le enumerăm pe r&#226;nd, pentru că <em>exact</em> aceste patru cauze sunt cele pe care AI Accounting Hub le adresează.</p>
+
+<h3 id="s8">Cauza 1 — <em>„Nu știu de unde să &#238;ncep&quot;</em></h3>
+
+<p>Informația despre AI este <em>vastă, fragmentată, și &#238;n mare parte &#238;n engleză</em>. Search-ul pe Google pe „AI for accounting&quot; returnează 50 de milioane de rezultate. Care e bun? Care e pentru tine? De unde &#238;ncepi?</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Ce tool aleg? Ce curs urmez? Cum aplic concret &#238;n munca mea? E copleșitor.&quot;</div>
+</div>
+
+<p>Această copleșire este <em>paralizantă</em>. Profesionistul ocupat nu are timp să cerceteze 50 de cursuri ca să-l aleagă pe cel mai bun. Are nevoie de <em>cineva care să fi făcut deja triajul</em>.</p>
+
+<h3 id="s9">Cauza 2 — <em>„Lipsa exemplelor practice&quot;</em></h3>
+
+<p>Există tone de materiale despre AI <em>&#238;n general</em>, dar foarte puține care arată concret: <em>„iată cum procesezi 100 de facturi cu AI &#238;n 10 minute&quot;</em> sau <em>„iată cum faci reconcilierea bancară cu Claude&quot;</em>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Contabilii au nevoie de aplicabilitate imediată, nu de teorie abstractă.&quot;</div>
+</div>
+
+<p>Această observație este crucială. Contabilul nu vrea să citească un articol filozofic despre <em>„viitorul muncii cognitive&quot;</em>. Vrea să vadă <em>exact</em> cum se procesează o factură cu AI, <em>exact</em> ce prompt scrii, <em>exact</em> ce output primești, <em>exact</em> cum &#238;l validezi. Aplicabilitate imediată, <em>luni dimineața</em>.</p>
+
+<h3 id="s10">Cauza 3 — <em>„Lipsește contextul rom&#226;nesc&quot;</em></h3>
+
+<p>Cele mai multe resurse AI pentru contabilitate sunt g&#226;ndite pentru piața americană sau britanică. Care e relevanța lor pentru un contabil din Cluj care folosește SAGA și care raportează la ANAF prin SAF-T?</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Reglementările de la ANAF, e-Factura, SAF-T, software-urile rom&#226;nești — Saga, Nexus, SmartBill — limbajul &#238;n rom&#226;nă. Cele mai multe resurse sunt g&#226;ndite pentru piața americană sau britanică.&quot;</div>
+</div>
+
+<p>Adaptarea acestor resurse la contextul rom&#226;nesc este <em>muncă de localizare</em>. Se face &#238;n comunitate, nu individual. Și nu se face <em>o dată</em>, ci <em>continuu</em> — pentru că legislația rom&#226;nească se modifică constant.</p>
+
+<h3 id="s11">Cauza 4 — <em>„Lipsește comunitatea&quot;</em></h3>
+
+<p>Să &#238;nveți singur e greu. Să &#238;nveți &#238;ntr-un grup unde poți pune &#238;ntrebări, unde vezi ce funcționează la alții, unde cineva te poate ajuta c&#226;nd te blochezi — <em>asta accelerează totul</em>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Să &#238;nveți singur e greu. Să &#238;nveți &#238;ntr-un grup unde poți pune &#238;ntrebări, unde vezi ce funcționează și ce nu la alții, unde cineva te poate ajuta c&#226;nd te blochezi — asta accelerează totul.&quot;</div>
+</div>
+
+<p>&#206;nvățarea &#238;n comunitate are trei beneficii pe care &#238;nvățarea izolată nu le poate replica:</p>
+
+<ul>
+  <li><em>Feedback rapid</em> — postezi un prompt, primești 5 sugestii de &#238;mbunătățire &#238;n c&#226;teva ore</li>
+  <li><em>Bucla pozitivă</em> — vezi că alții reușesc, te motivează să continui</li>
+  <li><em>Reducerea costului erorilor</em> — &#238;nvețe din greșelile altora, nu doar din propriile</li>
+</ul>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Cele patru cauze ca foaie de drum</strong><br>Cele patru cauze de paralizie sunt <em>exact</em> cele patru probleme pe care AI Accounting Hub le adresează — fiecare prin c&#226;te un pilon operațional dedicat. <em>„Nu știu de unde să &#238;ncep&quot;</em> → ghiduri structurate de start (Pilonul Educație). <em>„Lipsesc exemple practice&quot;</em> → biblioteca de prompt-uri și studii de caz (Pilonul Tools &amp; Library). <em>„Lipsește contextul rom&#226;nesc&quot;</em> → toate resursele filtrate prin grila locală (Principiul Context Rom&#226;nesc). <em>„Lipsește comunitatea&quot;</em> → forum activ, peer learning (Pilonul Comunitate). Această corespondență 1-la-1 nu este coincidență. Este <em>exact arhitectura strategică</em> a Hub-ului.</div>
+</div>
+
+<hr>
+
+<h2 id="cap3">CAPITOLUL 3</h2>
+
+<h2 id="s13">De Ce Contabilitatea Este Profesia Perfectă pentru AI — Paradoxul Exigenței</h2>
+
+<h3 id="s14">Argumentul care răstoarnă logica obișnuită</h3>
+
+<p>Există o logică intuitivă care merge cam așa: <em>„AI-ul va &#238;nlocui mai &#238;nt&#226;i profesiile cele mai simple, pentru că sunt cele mai ușor de automatizat. Profesia contabilă, fiind complexă și exigentă, va fi printre ultimele afectate.&quot;</em> Această logică <em>este greșită</em>. De fapt, <em>exact opusul</em> este adevărat. Contabilitatea este <em>printre primele profesii</em> care vor fi profund transformate de AI — <em>tocmai pentru că este complexă și exigentă</em>.</p>
+
+<p>Iată argumentul:</p>
+
+<h3 id="s15">Combinația care face contabilitatea „AI-ready&quot;</h3>
+
+<p>Profesia contabilă combină <em>opt elemente</em> care, &#238;mpreună, o fac un teren ideal pentru AI:</p>
+
+<ol>
+  <li><strong>Volum mare de informație</strong> — facturi, tranzacții, documente, rapoarte</li>
+  <li><strong>Reguli explicite</strong> — standardele contabile, codul fiscal, normele de raportare</li>
+  <li><strong>Excepții bine definite</strong> — cazurile speciale au reguli proprii, nu sunt arbitrare</li>
+  <li><strong>Documentare obligatorie</strong> — fiecare decizie trebuie justificată cu acte</li>
+  <li><strong>Reconciliere sistematică</strong> — verificarea &#238;ncrucișată este parte din meserie</li>
+  <li><strong>Explicații narative</strong> — notele explicative, rapoartele, advisory-ul</li>
+  <li><strong>Controale</strong> — verificările interne și externe sunt parte din procese</li>
+  <li><strong>Deadline-uri</strong> — calendarul este strict, nu flexibil</li>
+</ol>
+
+<p>Această combinație este <em>quasi-unică</em> &#238;n peisajul profesiilor. Fiecare element &#238;n parte există și &#238;n alte profesii (medicii au volum mare de informație, inginerii au reguli explicite, juriștii au documentare). Dar <em>combinația tuturor opt</em> este caracteristică contabilității.</p>
+
+<h3 id="s16">Implicația-cheie: structurat suficient + critic suficient</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Asta &#238;nseamnă că multe activități sunt structurate suficient pentru a beneficia de AI, dar și critice suficient &#238;nc&#226;t să ceară judecată profesională, trasabilitate și control.&quot;</div>
+</div>
+
+<p>Aceasta este <em>formula magică</em> a AI-ului &#238;n contabilitate:</p>
+
+<ul>
+  <li><em>Structurat suficient</em> → AI-ul poate face mult</li>
+  <li><em>Critic suficient</em> → AI-ul nu poate face totul</li>
+</ul>
+
+<p>Dacă activitatea contabilă ar fi <em>doar structurată</em> (ca o linie de asamblare), AI-ul ar &#238;nlocui complet contabilul. Dacă ar fi <em>doar critică</em> (ca terapia psihologică), AI-ul ar avea impact marginal. Pentru că este <em>ambele</em>, AI-ul <em>transformă</em> profesia — fără să o elimine.</p>
+
+<h3 id="s17">Tabelul de calibrare</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Categorie</th><th>Ce face AI-ul</th><th>Ce face contabilul</th></tr></thead>
+<tbody>
+<tr><td><strong>Procesare facturi</strong></td><td>90-95% — extragere, clasificare, validare</td><td>5-10% — excepții complexe</td></tr>
+<tr><td><strong>Reconciliere bancară</strong></td><td>85-90% — matching automat</td><td>10-15% — investigarea diferențelor</td></tr>
+<tr><td><strong>Raportare standard</strong></td><td>70-80% — generare draft-uri</td><td>20-30% — review, ajustare, semnătură</td></tr>
+<tr><td><strong>Audit</strong></td><td>50-60% — pattern recognition</td><td>40-50% — judecată profesională</td></tr>
+<tr><td><strong>Strategic advisory</strong></td><td>20-30% — pregătire materiale</td><td>70-80% — interpretare, decizie</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Paradoxul exigenței</strong><br>Profesiile <em>mai puțin</em> exigente (data entry pură, transcriere, calcul mecanic) sunt <em>complet</em> &#238;nlocuite de AI — nu transformate, ci eliminate. Profesia contabilă, <em>tocmai pentru că este exigentă</em>, este <em>transformată</em> — păstrată &#238;n esență, redefinită &#238;n formă. Asta &#238;nseamnă că <em>exigența</em> este ceea ce <em>protejează</em> profesia, nu ceea ce o expune. Cei care au ales contabilitatea pentru complexitatea ei intelectuală sunt <em>exact</em> cei care vor prospera &#238;n era AI.</div>
+</div>
+
+<hr>
+
+<h2 id="cap4">CAPITOLUL 4</h2>
+
+<h2 id="s19">De Ce Singura Strategie Matură Este Adoptarea Controlată</h2>
+
+<h3 id="s20">Trei strategii, două eșuează, una funcționează</h3>
+
+<p>&#206;n fața valului AI, există <em>trei strategii</em> posibile pentru un contabil sau pentru o firmă de contabilitate. Două dintre ele eșuează. Doar una este matură. Iată-le:</p>
+
+<h3 id="s21">Strategia 1 — Ignorarea (Eșec Garantat)</h3>
+
+<p><em>„Voi aștepta să se vadă cum merge.&quot;</em> <em>„C&#226;nd va fi obligatoriu, atunci voi &#238;nvăța.&quot;</em> <em>„Am 10-20 de ani p&#226;nă la pensie, voi reuși fără AI.&quot;</em></p>
+
+<p><strong>De ce eșuează:</strong> Pentru că <em>valul vine indiferent dacă vrei sau nu</em>. Concurenții tăi adoptă AI și &#238;și comprimă costurile. Clienții tăi văd că alții livrează același serviciu mai rapid și mai ieftin. <em>Nu poți concura cu o tehnologie pe care n-o folosești</em>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Dacă ignori AI-ul, pierzi timp pe muncă documentară și operațională pe care alții o comprimă radical.&quot;</div>
+</div>
+
+<h3 id="s22">Strategia 2 — Adoptarea fără Discernăm&#226;nt (Eșec Sigur, Mai Lent)</h3>
+
+<p><em>„AI-ul rezolvă tot. Voi delega totul.&quot;</em> <em>„Nu mai trebuie să verific — AI-ul nu greșește.&quot;</em> <em>„Pot folosi orice tool gratuit de pe internet.&quot;</em></p>
+
+<p><strong>De ce eșuează:</strong> Pentru că AI-ul <em>halucinează</em>. Pentru că LLM-urile publice gratuite <em>folosesc datele tale pentru antrenare</em>. Pentru că un singur output greșit semnat profesional poate distruge reputația construită &#238;n 20 de ani.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Dacă &#238;l adopți fără discernăm&#226;nt, &#238;ți crești riscul de eroare, confidențialitate și non-compliance.&quot;</div>
+</div>
+
+<h3 id="s23">Strategia 3 — Adoptarea Controlată (Singura Matură)</h3>
+
+<p><em>„&#206;nvăț pas cu pas, cu controale.&quot;</em> <em>„Folosesc tool-uri enterprise cu garanții de confidențialitate.&quot;</em> <em>„Aplic principiul &#171;trust but verify&#187;.&quot;</em> <em>„Investesc 5-7 ore pe săptăm&#226;nă &#238;n 90 de zile.&quot;</em></p>
+
+<p><strong>De ce funcționează:</strong> Pentru că respectă <em>natura duală</em> a profesiei contabile — <em>structurat suficient + critic suficient</em>. Acceptă ce poate face AI-ul (mult), recunoaște ce nu poate face (judecata finală), și construiește un workflow care exploatează ambele.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Nu e totul sau nimic. E o adoptare graduală, cu controale, cu verificare, cu judecată profesională la fiecare pas. Și asta e expertiza pe care o are un contabil bun — discernăm&#226;ntul.&quot;</div>
+</div>
+
+<h3 id="s24">Tabelul de comparație</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Strategia</th><th>Riscul principal</th><th>Outcome la 3 ani</th><th>Cine alege această strategie?</th></tr></thead>
+<tbody>
+<tr><td><strong>Ignorare</strong></td><td>Irelevanță competitivă</td><td>Pierdere clienți, marje comprimate</td><td>Contabili anxioși de schimbare</td></tr>
+<tr><td><strong>Adoptare fără discernăm&#226;nt</strong></td><td>Erori materiale, breach-uri etice</td><td>Pierdere reputație, expunere juridică</td><td>Entuziaști naivi, „early adopters&quot; needucați</td></tr>
+<tr><td><strong>Adoptare controlată</strong></td><td>Mai puține; necesită disciplină</td><td><strong>Avantaj competitiv durabil</strong></td><td>Profesioniști maturi, AI-fluent</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Misiunea Hub-ului decurge din această analiză</strong><br>AI Accounting Hub <em>nu</em> există pentru a &#238;mpinge entuziasmul către AI (există deja — 82%). Există pentru a transforma entuziasmul &#238;n <em>adoptare controlată</em> — singura strategie care funcționează. Tot conținutul nostru — ghidurile, prompt library-ul, training-urile, forumul — este construit &#238;n jurul acestei filozofii. Nu „adoptă AI-ul cu orice preț&quot;. Ci „adoptă-l matur, controlat, cu judecata profesională intactă&quot;.</div>
+</div>
+
+<hr>
+
+<h2 id="cap5">CAPITOLUL 5</h2>
+
+<h2 id="s26">Misiunea Noastră — Să Transformăm Contabilii Rom&#226;ni &#238;n Lideri, Nu Doar &#238;n Adoptatori</h2>
+
+<h3 id="s27">Diferența dintre a urma valul și a-l ghida</h3>
+
+<p>Misiunea pe care ne-am asumat-o este formulată &#238;ntr-o singură propoziție:</p>
+
+<blockquote>
+<strong>„Să transformăm profesioniștii contabili rom&#226;ni &#238;n lideri ai revoluției AI.&quot;</strong>
+</blockquote>
+
+<p>Cuv&#226;ntul cheie aici este <em>„lideri&quot;</em>, nu <em>„utilizatori&quot;</em>, nu <em>„adoptatori&quot;</em>. Este o distincție importantă pe care vrem să o explicăm.</p>
+
+<h3 id="s28">Lideri vs Utilizatori vs Adoptatori — distincția esențială</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Tip</th><th>Ce face</th><th>Cine este</th></tr></thead>
+<tbody>
+<tr><td><strong>Utilizator</strong></td><td>Folosește AI-ul ca instrument personal</td><td>Cei mai mulți contabili &#238;n 2030</td></tr>
+<tr><td><strong>Adoptator</strong></td><td>Implementează AI-ul &#238;n firma lui</td><td>Top 25-30% al profesiei</td></tr>
+<tr><td><strong>Lider</strong></td><td><em>Modelează</em> cum se folosește AI-ul &#238;n profesie, scrie standardele, formează colegii</td><td>Top 5-10% al profesiei</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Nu doar adoptatori. Nu doar utilizatori. Lideri. Pentru că avem talentul și capacitatea să fim &#238;n fruntea acestei transformări, nu &#238;n urma ei.&quot;</div>
+</div>
+
+<h3 id="s29">De ce credem că Rom&#226;nia poate produce lideri, nu doar adoptatori</h3>
+
+<p>Există motive concrete să credem că profesia rom&#226;nă are <em>materia primă</em> pentru a produce lideri AI, nu doar utilizatori:</p>
+
+<p><strong>1. Talentul tehnic rom&#226;nesc este recunoscut global.</strong> Industria IT a demonstrat că putem produce profesioniști de top mondial. Nu există motiv tehnic pentru care această excelență să nu se traducă și &#238;n adopția AI &#238;n contabilitate.</p>
+
+<p><strong>2. Substratul digital ANAF este unic &#238;n UE.</strong> E-Factura, SAF-T, SPV, e-Transport — toate creează un teren mai pregătit pentru AI dec&#226;t &#238;n multe țări vest-europene.</p>
+
+<p><strong>3. Maturitatea cloud accounting-ului autohton.</strong> SmartBill (din 2007), Keez (din 2018), ERP-uri locale, SAP , UiPath. Infrastructura este aici.</p>
+
+<p><strong>4. Decalajul față de Vest s-a redus dramatic.</strong> Pentru Excel a fost 10 ani; pentru cloud / RPA, 4-5 ani; pentru AI, <em>1 an</em>. Pentru prima dată &#238;n istoria profesiei, putem fi <em>aproape sincron</em> cu valul global — și, &#238;n anumite zone (cum este integrarea cu E-Factura), putem fi <em>&#238;naintea</em> lui.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Rom&#226;nia merită să fie lider, nu follower. Avem talent excepțional. Avem oportunitatea să fim early adopters. Putem seta standardele, nu doar să urmăm ce fac alții.&quot;</div>
+</div>
+
+<h3 id="s30">Ce &#238;nseamnă concret „a fi lider&quot; pentru un contabil rom&#226;n &#238;n 2026-2030</h3>
+
+<ul>
+  <li><em>La nivel personal:</em> să devii referința pentru AI &#238;n firma ta, &#238;n orașul tău, &#238;n comunitatea ta profesională</li>
+  <li><em>La nivel de firmă:</em> să implementezi workflow-uri AI care servesc drept model pentru colegi și competitori</li>
+  <li><em>La nivel de industrie:</em> să contribui la formarea standardelor de bună practică pentru AI &#238;n contabilitate</li>
+  <li><em>La nivel de profesie:</em> să faci parte din generația care va transmite mai departe — către juniori, către universități, către corpurile profesionale (CECCAR, ACCA Rom&#226;nia) — modul corect de a integra AI</li>
+</ul>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce „lider&quot; și nu „expert&quot;</strong><br>Am ales deliberat cuv&#226;ntul <em>„lider&quot;</em> și nu <em>„expert&quot;</em>. Expertul <em>știe</em>. Liderul <em>acționează</em> — și <em>&#238;i inspiră pe alții să acționeze</em>. &#206;n tranziția AI, nu avem nevoie doar de oameni care știu, ci de oameni care <em>modelează</em>. Diferența pare semantică, dar este profundă: expertul răm&#226;ne &#238;n cercul lui, liderul deschide cercul. Avem nevoie de cercuri deschise, nu &#238;nchise.</div>
+</div>
+
+<hr>
+
+<h2 id="cap6">CAPITOLUL 6</h2>
+
+<h2 id="s32">Cei Patru Piloni Operaționali ai Hub-ului</h2>
+
+<h3 id="s33">Cum se traduce o misiune &#238;n structură</h3>
+
+<p>Misiunea — <em>„să transformăm contabilii rom&#226;ni &#238;n lideri AI&quot;</em> — se traduce operațional &#238;n <em>patru piloni</em>. Fiecare răspunde la una dintre cele patru cauze de paralizie identificate &#238;n Capitolul 2.</p>
+
+<h3 id="s34">Pilonul 1 — Educație Practică și Accesibilă</h3>
+
+<p><strong>Răspunde la:</strong> <em>„Nu știu de unde să &#238;ncep.&quot;</em></p>
+
+<p><strong>Resurse oferite:</strong></p>
+
+<ul>
+  <li><em>Tutoriale pas-cu-pas</em> pentru AI tools — fiecare cu instrucțiuni clare, screenshots, exemple</li>
+  <li><em>Prompt libraries</em> pentru sarcini contabile concrete</li>
+  <li><em>Video demos</em> cu use case-uri reale, filmate cu cifre rom&#226;nești</li>
+  <li><em>Template-uri și workflow-uri ready-to-use</em></li>
+</ul>
+
+<p><strong>Format-uri multiple — pentru toate stilurile de &#238;nvățare:</strong></p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Format</th><th>Pentru cine</th></tr></thead>
+<tbody>
+<tr><td><strong>Articole pe blog</strong></td><td>Cei care preferă să citească atent și sistematic</td></tr>
+<tr><td><strong>Podcasturi</strong></td><td>Pentru drumul cu mașina sau cu metroul</td></tr>
+<tr><td><strong>Video tutorials</strong></td><td>Cei care preferă să vadă cum se face</td></tr>
+<tr><td><strong>Webinarii live</strong></td><td>Pentru Q&amp;A interactiv, &#238;n timp real</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>Teme planificate (selecție):</strong></p>
+
+<ul>
+  <li><em>„Primele 30 de zile cu ChatGPT pentru Contabili&quot;</em> — ghid pentru oricine</li>
+  <li><em>„Cum să automatizezi Month-End Close cu AI&quot;</em></li>
+  <li><em>„Prompt Engineering 101 pentru Financial Analysis&quot;</em></li>
+  <li><em>„Excel + AI: Combinația Perfectă&quot;</em> — pentru că nu renunțăm la Excel, ci &#238;l potențăm</li>
+  <li><em>„AI pentru Audit: Detecting Anomalies&quot;</em></li>
+  <li><em>„Building Custom GPTs pentru Accounting&quot;</em></li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Și &#238;n multiple formate, pentru că fiecare &#238;nvață diferit: articole pe blog pentru cei care preferă să citească. Podcasturi — cum e acesta — pentru drumul cu mașina sau cu metroul. Video tutorials pentru cei care preferă să vadă. Și webinars live cu Q&amp;A interactiv.&quot;</div>
+</div>
+
+<h3 id="s35">Pilonul 2 — Comunitate și Peer Learning</h3>
+
+<p><strong>Răspunde la:</strong> <em>„Lipsește comunitatea.&quot;</em></p>
+
+<p><strong>Spațiul de comunitate include:</strong></p>
+
+<ul>
+  <li><em>Forum de discuție</em> unde poți &#238;mpărți victoriile și eșecurile</li>
+  <li><em>Posibilitatea de a pune &#238;ntrebări</em> — fără teama de a părea ignorant; <em>nu există &#238;ntrebări proaste</em></li>
+  <li><em>Colaborare la soluții</em> — &#238;mpreună rezolvăm probleme pe care individual le-am rumega săptăm&#226;ni</li>
+  <li><em>Accountability partners</em> — cineva care te ține motivat c&#226;nd vrei să renunți</li>
+</ul>
+
+<p><strong>Success Stories ca motor de comunitate:</strong> Vom prezenta constant membri care au implementat AI cu succes. Cu <em>metrici concrete</em>: c&#226;t timp au economisit, cum a crescut acuratețea, ce capabilități noi au c&#226;știgat. Scopul: <em>„dacă ei pot, pot și eu&quot;</em>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Success stories: vom prezenta constant membri ai comunității care au implementat AI cu succes. Cu metrici: c&#226;t timp au economisit, cum a crescut acuratețea, ce capabilități noi au c&#226;știgat. Scopul e simplu: dacă ei pot, pot și eu.&quot;</div>
+</div>
+
+<h3 id="s36">Pilonul 3 — Prompts și Tools Library</h3>
+
+<p><strong>Răspunde la:</strong> <em>„Lipsesc exemplele practice.&quot;</em></p>
+
+<p><strong>Colecție curatoriată de peste 100 de prompt-uri testate</strong> — organizate pe categorii operaționale:</p>
+
+<ul>
+  <li>Procesare facturi</li>
+  <li>Analiză financiară</li>
+  <li>Generare rapoarte</li>
+  <li>Proceduri de audit</li>
+  <li>Research fiscal</li>
+  <li>Comunicare cu clienții</li>
+</ul>
+
+<p><strong>Review-uri oneste de tool-uri AI:</strong></p>
+
+<ul>
+  <li>Evaluări reale (nu reclamă)</li>
+  <li>Comparații de prețuri</li>
+  <li>Capabilități de integrare cu ERP-urile rom&#226;nești (SAGA, WinMentor, SmartBill, Charisma)</li>
+  <li>Considerații specifice pentru Rom&#226;nia</li>
+</ul>
+
+<p><strong>Template-uri:</strong></p>
+
+<ul>
+  <li><em>Excel templates</em> optimizate pentru AI processing</li>
+  <li><em>Template-uri de documente</em> pregătite pentru integrare cu AI</li>
+  <li><em>Diagrame de workflow</em> pentru implementarea AI &#238;n procese existente</li>
+</ul>
+
+<h3 id="s37">Pilonul 4 — Programe de Training Structurate</h3>
+
+<p><strong>Răspunde la:</strong> <em>„Nu știu de unde să &#238;ncep&quot; + „Lipsește contextul rom&#226;nesc&quot;</em></p>
+
+<p>Trei niveluri progresive — pe care le vom dezvolta &#238;n Capitolul 8.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce patru piloni, nu unul singur</strong><br>Am putea fi tentați să rezumăm Hub-ul la o singură componentă (de exemplu „doar educație&quot;). Dar paralizia profesională are <em>patru cauze</em>, nu una. Un Hub care oferă <em>doar</em> educație, fără comunitate, fără biblioteci practice, fără training structurat — ar acoperi 25% din nevoie. Cei patru piloni nu sunt suprapuneri redundante — sunt <em>complementari</em>. &#206;mpreună acoperă &#238;ntreaga cale de la <em>„nu știu nimic&quot;</em> la <em>„sunt operațional &#238;n AI&quot;</em>.</div>
+</div>
+
+<hr>
+
+<h2 id="cap7">CAPITOLUL 7</h2>
+
+<h2 id="s39">Cele Cinci Principii Fundamentale</h2>
+
+<h3 id="s40">Filozofia care decide cum operăm</h3>
+
+<p>Pe l&#226;ngă cei patru piloni <em>operaționali</em>, Hub-ul are <em>cinci principii</em> care definesc <em>cum</em> funcționează zi de zi. Acestea nu sunt slogan-uri de marketing — sunt reguli interne care ghidează fiecare decizie de conținut și de comunitate.</p>
+
+<h3 id="s41">Principiul 1 — Transparență Totală</h3>
+
+<p><strong>Ce &#238;nseamnă:</strong> &#206;mpărtășim <em>ce funcționează</em> ȘI <em>ce nu funcționează</em>. Nu facem gatekeeping — totul este <em>free și open</em> la nivel de bază. Feedback-ul comunității modelează conținutul.</p>
+
+<p><strong>De ce contează:</strong> Pentru că AI-ul este un domeniu unde <em>eșecurile sunt la fel de instructive ca succesele</em>. Un articol care spune <em>„am &#238;ncercat această abordare și nu a funcționat — iată de ce&quot;</em> este, adesea, mai valoros dec&#226;t unul care spune doar <em>„iată cum se face perfect&quot;</em>.</p>
+
+<h3 id="s42">Principiul 2 — Practical peste Theoretical</h3>
+
+<p><strong>Ce &#238;nseamnă:</strong> Focus pe <em>„cum să FACI&quot;</em>, nu pe <em>„ce ESTE&quot;</em>. Exemple reale de la contabili reali. Implementări pas-cu-pas pe care le poți aplica <em>luni dimineața</em>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Focus pe &#171;cum să FACI&#187;, nu doar pe &#171;ce ESTE&#187;. Exemple reale de la contabili reali. Implementări pas-cu-pas pe care le poți aplica luni dimineața.&quot;</div>
+</div>
+
+<p><strong>De ce contează:</strong> Pentru că <em>teoria nu plătește facturile</em>. Un contabil care a citit 10 articole filozofice despre <em>„viitorul AI&quot;</em> dar nu a procesat o singură factură cu AI este <em>&#238;n aceeași poziție</em> cu unul care n-a citit nimic.</p>
+
+<h3 id="s43">Principiul 3 — Context Rom&#226;nesc</h3>
+
+<p><strong>Ce &#238;nseamnă:</strong> Cum se aplică AI-ul &#238;n realitatea noastră specifică. Compatibilitate cu software-urile locale (SAGA, Nexus, SmartBill, WinMentor). Conformitate cu cerințele ANAF (E-Factura, SAF-T, SPV). Limba rom&#226;nă ca limbă primară, accesibilă.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Cum se aplică &#238;n realitatea noastră. Compatibilitate cu software-urile locale — Saga, Nexus, SmartBill. Conformitate cu cerințele ANAF. Și limba rom&#226;nă ca limbă primară, accesibilă.&quot;</div>
+</div>
+
+<p><strong>De ce contează:</strong> Pentru că, așa cum am argumentat &#238;n articolele anterioare, <em>importul direct</em> de soluții americane sau britanice este <em>ineficient</em>. Adaptarea locală nu este un detaliu — este <em>substanța</em> utilității Hub-ului.</p>
+
+<h3 id="s44">Principiul 4 — Safe Space pentru &#206;nvățare</h3>
+
+<p><strong>Ce &#238;nseamnă:</strong> Este <em>OK</em> să faci greșeli. Este <em>OK</em> să nu știi. Ne susținem unii pe alții. Creștem &#238;mpreună.</p>
+
+<p><strong>De ce contează:</strong> Pentru că <em>frica de a părea ignorant</em> este una dintre cele mai puternice bariere de &#238;nvățare &#238;n profesia contabilă (unde <em>imaginea de competență</em> este parte din contractul cu clientul). Un spațiu unde <em>poți &#238;ntreba „ce este un token?&quot; fără să-ți pierzi statura</em> este o necesitate, nu un lux.</p>
+
+<h3 id="s45">Principiul 5 — Evoluție Continuă</h3>
+
+<p><strong>Ce &#238;nseamnă:</strong> AI-ul se schimbă rapid, iar noi ne adaptăm la fel de rapid. Update-uri săptăm&#226;nale cu noutăți. Comunitatea votează topicurile. Abordare agilă, nu structură rigidă.</p>
+
+<p><strong>De ce contează:</strong> Pentru că ce funcționa &#238;n 2024 nu mai funcționează la fel &#238;n 2026. <em>Dacă nu evoluăm, devenim irelevanți</em>. Asta &#238;nseamnă că Hub-ul nu este un produs <em>„construit o dată&quot;</em>, ci o platformă <em>&#238;n continuă evoluție</em>.</p>
+
+<h3 id="s46">Tabelul rezumativ al principiilor</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Principiu</th><th>Ce &#238;nseamnă</th><th>De ce contează</th></tr></thead>
+<tbody>
+<tr><td><strong>Transparență totală</strong></td><td>&#206;mpărtășim succese și eșecuri</td><td>Eșecurile sunt instructive</td></tr>
+<tr><td><strong>Practical peste Theoretical</strong></td><td>Cum să faci, nu ce este</td><td>Teoria nu plătește facturile</td></tr>
+<tr><td><strong>Context rom&#226;nesc</strong></td><td>Local, nu importat</td><td>Importul direct e ineficient</td></tr>
+<tr><td><strong>Safe space</strong></td><td>OK să nu știi</td><td>Frica de ignoranță e barieră majoră</td></tr>
+<tr><td><strong>Evoluție continuă</strong></td><td>Update săptăm&#226;nal</td><td>AI-ul se schimbă rapid</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce principiile sunt mai importante dec&#226;t planul</strong><br>Un plan se schimbă. Principiile, dacă sunt bune, răm&#226;n. Cele cinci principii ale AI Accounting Hub vor ghida deciziile noastre și &#238;n 2030, c&#226;nd peisajul AI va fi radical diferit. Pentru că <em>substanța</em> lor — transparență, aplicabilitate, localizare, siguranță emoțională, evoluție — este <em>atemporală</em>. Tot ce facem operațional decurge din aceste cinci ancore.</div>
+</div>
+
+<hr>
+
+<h2 id="cap8">CAPITOLUL 8</h2>
+
+<h2 id="s48">Cele Trei Programe de Training — Beginner, Intermediate, Advanced</h2>
+
+<h3 id="s49">Drumul de la „nu știu nimic&quot; la „pot conduce transformarea unei firme&quot;</h3>
+
+<p>Cele trei programe de training reprezintă coloana vertebrală educațională a Hub-ului. Sunt structurate progresiv, fiecare adres&#226;nd un nivel de competență distinct, cu obiective măsurabile și timp estimat de parcurgere.</p>
+
+<h3 id="s50">Programul Beginner — Primele 0-3 Luni</h3>
+
+<p><strong>Pentru cine:</strong> Contabilul care folosește AI prima dată sau care a experimentat sporadic, fără sistematicitate.</p>
+
+<p><strong>Obiective la final de program:</strong></p>
+
+<ul>
+  <li>&#206;nțelegi <em>ce este</em> AI-ul, <em>cum funcționează</em> la nivel conceptual</li>
+  <li>Ai cont activ și folosești curent ChatGPT sau Claude</li>
+  <li>Stăp&#226;nești bazele prompt engineering-ului</li>
+  <li>Ai obținut <em>minimum 10 victorii rapide</em> concrete cu AI &#238;n munca ta zilnică</li>
+</ul>
+
+<p><strong>Curriculum sintetic:</strong></p>
+
+<ul>
+  <li>Săpt. 1-2: <em>Ce este AI-ul și cum funcționează</em> — concepte fundamentale (LLM, tokens, halucinații)</li>
+  <li>Săpt. 3-4: <em>Primii pași cu ChatGPT sau Claude</em> — interfață, setup, prima conversație productivă</li>
+  <li>Săpt. 5-8: <em>Bazele prompt engineering-ului</em> — cele 5 tehnici esențiale, cu exerciții</li>
+  <li>Săpt. 9-12: <em>10 victorii rapide cu AI &#238;n contabilitate</em> — implementări concrete, una pe săptăm&#226;nă</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Beginner Track — primele 0-3 luni: Ce este AI-ul și cum funcționează, primii pași cu ChatGPT sau Claude, bazele prompt engineering-ului, 10 victorii rapide cu AI &#238;n contabilitate.&quot;</div>
+</div>
+
+<h3 id="s51">Programul Intermediate — 3-12 Luni</h3>
+
+<p><strong>Pentru cine:</strong> Contabilul care a parcurs Beginner-ul (sau a ajuns autodidact la nivel echivalent) și vrea să-și sofistice utilizarea.</p>
+
+<p><strong>Obiective la final de program:</strong></p>
+
+<ul>
+  <li>Stăp&#226;nești tehnici avansate de prompting</li>
+  <li>Selectezi inteligent tool-urile potrivite pentru diverse sarcini</li>
+  <li>Construiești workflow-uri stabile, nu doar interacțiuni ad-hoc</li>
+  <li>&#206;nțelegi profund data privacy și security</li>
+  <li>Poți măsura <em>ROI-ul</em> concret al investiției AI &#238;n firma ta</li>
+</ul>
+
+<p><strong>Curriculum sintetic:</strong></p>
+
+<ul>
+  <li>Lunile 4-5: <em>Tehnici avansate de prompting</em> — chain-of-thought multi-pas, role prompting compus, structured output</li>
+  <li>Lunile 6-7: <em>Selecția tool-urilor</em> — comparații concrete, criterii de alegere, integrare cu ERP-urile rom&#226;nești</li>
+  <li>Lunile 8-9: <em>Construirea de workflow-uri</em> — design end-to-end, checkpoints de validare, automatizări</li>
+  <li>Lunile 10-11: <em>Data privacy și security</em> — versiuni enterprise, GDPR, EU AI Act</li>
+  <li>Luna 12: <em>Măsurarea ROI</em> — metrici, dashboards de productivitate, business case pentru firmă</li>
+</ul>
+
+<h3 id="s52">Programul Advanced — 12+ Luni</h3>
+
+<p><strong>Pentru cine:</strong> Contabilul care a internalizat AI-ul și vrea să devină <em>arhitect de soluții</em>, nu doar utilizator.</p>
+
+<p><strong>Obiective la final de program:</strong></p>
+
+<ul>
+  <li>Construiești soluții AI custom pentru nișa ta</li>
+  <li>&#206;nțelegi conceptual fine-tuning și RAG</li>
+  <li>Folosești integrări prin API pentru automatizări sofisticate</li>
+  <li>Conduci transformarea AI la nivel de firmă</li>
+</ul>
+
+<p><strong>Curriculum sintetic:</strong></p>
+
+<ul>
+  <li><em>Soluții AI custom</em> — Custom GPTs, Claude Projects, agenți specializați</li>
+  <li><em>Fine-tuning și RAG</em> — c&#226;nd și cum specializezi un AI pentru domeniul tău</li>
+  <li><em>Integrări prin API</em> — automatizări care lucrează 24/7 fără supraveghere</li>
+  <li><em>Leadership al transformării</em> — cum conduci o firmă &#238;ntreagă prin tranziția AI</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Advanced Track — 12+ luni: Soluții AI custom, fine-tuning de modele, integrări prin API, conducerea transformării AI la nivel de firmă.&quot;</div>
+</div>
+
+<h3 id="s53">Tabelul cumulativ al celor trei programe</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Program</th><th>Durata</th><th>Investiție timp/săpt.</th><th>Outcome</th><th>Identitate la final</th></tr></thead>
+<tbody>
+<tr><td><strong>Beginner</strong></td><td>0-3 luni</td><td>5-7 ore</td><td>10 victorii rapide</td><td>AI-experimentat</td></tr>
+<tr><td><strong>Intermediate</strong></td><td>3-12 luni</td><td>6-8 ore</td><td>Workflow-uri stabile + ROI măsurat</td><td>AI-competent</td></tr>
+<tr><td><strong>Advanced</strong></td><td>12+ luni</td><td>Integrată &#238;n muncă</td><td>Soluții custom + leadership</td><td>AI-arhitect / lider</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce trei programe, nu unul singur</strong><br>Adopția AI nu este o destinație unică, ci un <em>traseu cu mai multe etape</em>. Un singur program ar fi prea generic — fie prea simplu pentru avansați, fie prea complex pentru &#238;ncepători. Cele trei programe respectă <em>zona proximă de dezvoltare</em> a fiecărui nivel. Fiecare etapă pregătește pentru următoarea, fără să sară pași. <em>Drumul de la zero la lider durează 12-18 luni</em>. Nu este foarte lung — dar nici foarte scurt. Necesită consistență.</div>
+</div>
+
+<hr>
+
+<h2 id="cap9">CAPITOLUL 9</h2>
+
+<h2 id="s55">Resursele Care Sunt Deja Disponibile</h2>
+
+<h3 id="s56">Ce găsești pe platformă chiar din prima zi</h3>
+
+<p>Cele trei programe de training se construiesc treptat, pe parcursul anilor 2026-2027. Dar Hub-ul <em>nu</em> așteaptă să fie complet pentru a fi util. Există deja resurse semnificative disponibile pentru utilizare imediată.</p>
+
+<h3 id="s57">Inventarul resurselor curent disponibile</h3>
+
+<p><strong>Articole de fond — seria de cinci articole-manifest:</strong></p>
+
+<ul>
+  <li><em>„Viitorul Profesiei: cum va arăta contabilitatea &#238;n 5–10 ani&quot;</em> (~12.000 cuvinte)</li>
+  <li><em>„Contextul Revoluției AI: de la ChatGPT la AI Agents&quot;</em> (~10.000 cuvinte) — istoria AI 2022-2026</li>
+  <li><em>„Evoluția Contabilității: de la registre pe h&#226;rtie la era AI&quot;</em> (~10.000 cuvinte) — paralele istorice cu Excel, Cloud / RPA</li>
+  <li><em>„Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering&quot;</em> (~9.500 cuvinte) — roadmap operațional 90 zile</li>
+  <li><em>„Misiunea AI Accounting Hub&quot;</em> — articolul de față</li>
+  <li>Articole noi planificate, pe teme actuale</li>
+</ul>
+
+<p><strong>Podcasturi:</strong></p>
+
+<ul>
+  <li>Episodul pilot &#238;n 5 părți (acoperind aceleași teme ca articolele)</li>
+  <li>Episoade noi planificate, pe teme operaționale concrete</li>
+</ul>
+
+<p><strong>Prompts library — &#238;n construcție activă:</strong></p>
+
+<ul>
+  <li>Peste 100 de prompt-uri vor fi publicate progresiv &#238;n lunile următoare, organizate pe categorii (procesare facturi, analiză financiară, raportare, audit, research fiscal, comunicare cu clienții)</li>
+</ul>
+
+<p><strong>Studii de caz rom&#226;nești:</strong></p>
+
+<ul>
+  <li>Implementări reale ale membrilor comunității, prezentate cu metrici concrete</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Ce găsiți pe platforma noastră: ghiduri practice pas-cu-pas, testate și dovedite. Prompt library cu peste 100 de prompt-uri gata de folosit pentru contabilitate. Comunitate activă cu Q&amp;A, suport, colaborare. Resurse gratuite — articole, podcasturi, video-uri. Programe de training de la beginner la advanced. Review-uri oneste de tool-uri AI.&quot;</div>
+</div>
+
+<h3 id="s58">Modelul economic — ce este gratuit, ce va fi premium</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Cea mai importantă parte: totul este gratuit la nivel de bază. Misiunea noastră e educația și adopția, nu profitul. Succesul nostru se măsoară &#238;n contabili rom&#226;ni care prosperă &#238;n era AI. Vor fi oferte premium &#238;n viitor pentru conținut avansat, dar fundația răm&#226;ne gratuită și deschisă.&quot;</div>
+</div>
+
+<p>Această filozofie merită explicată. <em>De ce</em> gratuit la bază? Pentru că:</p>
+
+<ol>
+  <li><strong>Misiunea noastră este adopția</strong>, nu monetizarea. Dacă barăm accesul &#238;n spatele unei plăți, eliminăm exact segmentul care are cea mai mare nevoie — contabilul individual sau firma mică, fără buget de transformare.</li>
+</ol>
+
+<ol>
+  <li><strong>Avem de c&#226;știgat dintr-o profesie mai puternică</strong>, nu dintr-un Hub mai bogat. Succesul nostru se măsoară &#238;n contabili rom&#226;ni care prosperă &#238;n era AI — nu &#238;n numărul de abonamente plătite.</li>
+</ol>
+
+<ol>
+  <li><strong>Premium vine pentru conținut avansat</strong>, nu pentru fundamente. Cei care vor să acceseze training-uri de coaching individual, sesiuni de consultanță, certificări — vor avea opțiuni plătite. Dar <em>fundamentul răm&#226;ne deschis</em>.</li>
+</ol>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Categorie</th><th>Acces</th></tr></thead>
+<tbody>
+<tr><td>Articole, podcasturi, ghiduri de bază</td><td><strong>Gratuit, accesibil oricui</strong></td></tr>
+<tr><td>Prompt library principal</td><td><strong>Gratuit, accesibil oricui</strong></td></tr>
+<tr><td>Forum de comunitate</td><td><strong>Gratuit, accesibil oricui</strong></td></tr>
+<tr><td>Webinarii lunare</td><td><strong>Gratuit, &#238;nregistrate și disponibile ulterior</strong></td></tr>
+<tr><td>Cursuri Beginner Track</td><td><strong>Gratuit</strong></td></tr>
+<tr><td>Cursuri Intermediate / Advanced detaliate</td><td>Premium (&#238;n viitor)</td></tr>
+<tr><td>Coaching individual</td><td>Premium (&#238;n viitor)</td></tr>
+<tr><td>Certificări și consultanță pentru firme</td><td>Premium (&#238;n viitor)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce modelul economic contează strategic</strong><br>Decizia de a păstra fundamentul gratuit nu este <em>altruistă</em>. Este <em>strategică</em>. Pentru că Hub-ul devine valoros <em>prin densitatea comunității</em>, iar comunitatea devine densă doar dacă bariera de intrare este zero. Cu c&#226;t mai mulți contabili participă la nivel de bază, cu at&#226;t valoarea pentru toți crește — inclusiv pentru cei care, eventual, vor opta pentru servicii premium. Este <em>un model de creștere prin generozitate</em>, opus modelului tradițional <em>de creștere prin restricție</em>.</div>
+</div>
+
+<hr>
+
+<h2 id="cap10">CAPITOLUL 10</h2>
+
+<h2 id="s60">Cele Patru &#206;ntrebări de Reflecție pe Care Trebuie să Ți Le Pui</h2>
+
+<h3 id="s61">&#206;ntrebări care nu te lasă să răm&#226;i neutru</h3>
+
+<p>Acest articol nu se va &#238;ncheia fără să-ți cerem <em>un efort</em>. Și efortul &#238;ncepe cu <em>&#238;ntrebări</em> — pentru că, &#238;nainte de acțiune, este nevoie de <em>conștientizare</em>. Vom enumera patru &#238;ntrebări. Te invităm să te oprești după fiecare, măcar 30 de secunde, și să-ți răspunzi sincer.</p>
+
+<h3 id="s62">&#206;ntrebarea 1 — Calculul timpului pierdut</h3>
+
+<p><strong>C&#226;t timp petreci pe sarcini repetitive care ar putea fi automatizate?</strong></p>
+
+<p>Calculează concret:</p>
+
+<ul>
+  <li><em>Ore pe săptăm&#226;nă</em> pe sarcini repetitive (introducere date, reconciliere, raportare standard)</li>
+  <li><em>&#206;nmulțit cu 50 de săptăm&#226;ni</em> (lăsăm 2 săptăm&#226;ni pentru concediu)</li>
+  <li><em>C&#226;te ore pe an?</em></li>
+  <li><em>Ce ai putea face cu timpul recuperat?</em></li>
+</ul>
+
+<p>Pentru o estimare orientativă: dacă petreci 10 ore/săptăm&#226;nă pe sarcini automatizabile, asta &#238;nseamnă <strong>500 de ore/an</strong> — adică <em>3 luni de muncă cu normă &#238;ntreagă</em>. AI-ul, bine implementat, poate recupera 60-80% din acest timp. Adică <em>2 luni de muncă efectivă pe an, eliberate</em>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Calculează: ore pe săptăm&#226;nă, &#238;nmulțit cu 50 de săptăm&#226;ni — c&#226;te ore pe an? Ce ai putea face cu timpul recuperat?&quot;</div>
+</div>
+
+<h3 id="s63">&#206;ntrebarea 2 — Proiecția pe 5 ani fără AI</h3>
+
+<p><strong>Cum arată job-ul tău peste 5 ani dacă NU adopți AI?</strong></p>
+
+<p>Reflectează concret:</p>
+
+<ul>
+  <li><em>Cum va arăta competiția</em> din piață &#238;n 2031?</li>
+  <li><em>C&#226;t de relevante</em> vor mai fi skill-urile tale actuale?</li>
+  <li><em>Ce oportunități</em> de creștere &#238;n carieră &#238;ți răm&#226;n?</li>
+  <li><em>Cu ce categorie de clienți</em> vei mai putea lucra (cei conservatori, dispuși să plătească mai mult pentru muncă manuală — categorie &#238;n scădere) și cu ce categorie <em>nu</em> vei mai putea lucra?</li>
+</ul>
+
+<p>Această proiecție nu este apocaliptică. Dar este <em>realistă</em>. Și a o face <em>acum</em> este mai util dec&#226;t a o face &#238;n 2030, c&#226;nd opțiunile sunt deja restr&#226;nse.</p>
+
+<h3 id="s64">&#206;ntrebarea 3 — Identificarea fricii reale</h3>
+
+<p><strong>Care este cea mai mare frică legată de AI?</strong></p>
+
+<p>Posibile răspunsuri (alege-l pe cel autentic, nu pe cel social acceptabil):</p>
+
+<ul>
+  <li><em>Pierderea locului de muncă?</em> — frică validă, dar adresabilă prin acțiune</li>
+  <li><em>Incompetența tehnică?</em> — frică ușor de depășit (curba AI este surprinzător de lină)</li>
+  <li><em>Copleșirea de informație?</em> — adresabilă printr-o comunitate care filtrează zgomotul</li>
+  <li><em>Frica de a face greșeli profesionale grave?</em> — adresabilă prin framework-uri de validare</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Și mai important — este această frică validă, sau e doar o scuză să nu &#238;ncepi?&quot;</div>
+</div>
+
+<p>Această &#238;ntrebare — <em>„e validă, sau e o scuză?&quot;</em> — este crucială. Frica validă cere <em>acțiune calibrată</em>. Frica-scuză cere <em>recunoaștere onestă</em> că am&#226;narea nu este protecție.</p>
+
+<h3 id="s65">&#206;ntrebarea 4 — Imaginarea timpului recuperat</h3>
+
+<p><strong>Dacă ai putea automatiza 50% din munca ta actuală, ce ai face cu timpul?</strong></p>
+
+<p>Posibile răspunsuri:</p>
+
+<ul>
+  <li><em>Mai mulți clienți</em> — scalezi practica</li>
+  <li><em>Muncă de mai mare valoare</em> — advisory, strategie, judecată profesională</li>
+  <li><em>Echilibru viață-muncă</em> mai bun — recuperezi seri și weekend-uri</li>
+  <li><em>Noi competențe și certificări</em> — investești &#238;n creștere personală</li>
+  <li><em>Toate cele de mai sus</em>, &#238;n proporții variabile</li>
+</ul>
+
+<p>Această &#238;ntrebare deplasează discuția de la <em>„AI-ul &#238;mi va lua jobul?&quot;</em> la <em>„AI-ul &#238;mi va elibera timpul&quot;</em>. Diferența psihologică este <em>uriașă</em>. Prima generează anxietate; a doua, oportunitate.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce &#238;ntrebările contează mai mult dec&#226;t răspunsurile</strong><br>Cele patru &#238;ntrebări nu au <em>răspunsuri corecte</em>. Au <em>răspunsuri proprii</em>. Răspunsul tău este diferit de al colegului tău, pentru că situația ta este diferită. Important nu este să răspunzi <em>corect</em>, ci să răspunzi <em>sincer</em>. Sinceritatea cu propria situație este <em>prerequisite-ul</em> pentru orice acțiune autentică.</div>
+</div>
+
+<hr>
+
+<h2 id="cap11">CAPITOLUL 11</h2>
+
+<h2 id="s67">Apelul la Acțiune — Astăzi, Săptăm&#226;na Asta, Luna Asta</h2>
+
+<h3 id="s68">De la conștientizare la acțiune, &#238;n trei orizonturi</h3>
+
+<p>&#206;ntrebările de reflecție din capitolul anterior sunt <em>prerequisite</em> pentru acțiune. Dar acțiunea trebuie să fie <em>concretă, măsurabilă, programată</em>. Iată planul pe trei orizonturi.</p>
+
+<h3 id="s69">ASTĂZI — Literal După Ce Termini de Citit Acest Articol (~45 de minute)</h3>
+
+<p><strong>Pasul 1: Petrece 30 de minute experiment&#226;nd cu AI.</strong></p>
+
+<ul>
+  <li>Deschide ChatGPT sau Claude (versiunea gratuită este suficientă pentru a &#238;ncepe)</li>
+  <li>Alege un task repetitiv din săptăm&#226;na asta și &#238;ncearcă să-l faci cu AI</li>
+</ul>
+
+<p><strong>Idei concrete de start:</strong></p>
+
+<ul>
+  <li><em>Scrie un email</em> către un client explic&#226;nd un delay de raport</li>
+  <li><em>Rezumă un document</em> cu noul standard contabil</li>
+  <li><em>Creează un checklist</em> pentru audit de final de an</li>
+  <li><em>Generează un draft de notă explicativă</em> pentru o tranzacție complexă</li>
+</ul>
+
+<p><strong>Scopul:</strong> <em>vezi cu ochii tăi</em> ce poate face AI-ul. Nu citești despre asta — <em>experimentezi</em>.</p>
+
+<p><strong>Pasul 2: Documentează experiența — 10 minute.</strong></p>
+
+<ul>
+  <li><em>Ce a mers bine?</em></li>
+  <li><em>Ce a mers prost?</em></li>
+  <li><em>C&#226;t timp ai economisit sau pierdut?</em></li>
+  <li><em>Ce ai &#238;nvățat?</em></li>
+</ul>
+
+<p>Notează concluziile. Nu doar mental — <em>&#238;n scris</em>. Această documentare este punctul de pornire al <em>jurnalului tău AI</em>.</p>
+
+<p><strong>Pasul 3: &#206;mpărtășește — 5 minute.</strong></p>
+
+<ul>
+  <li>Povestește cuiva experiența: un coleg, un prieten din profesie</li>
+  <li>Sau, mai bine: alătură-te comunității AI Accounting Hub și postează ce ai &#238;nvățat</li>
+</ul>
+
+<p><strong>De ce &#238;mpărtășire?</strong> <em>„Pentru că a preda este cea mai bună metodă de &#238;nvățare.&quot;</em> Articularea verbală a ceea ce ai descoperit <em>consolidează</em> &#238;nvățarea — și <em>&#238;i ajută</em> pe cei care vin după tine.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „ASTĂZI — literal după ce asculți acest podcast — petrece 30 de minute experiment&#226;nd. Deschide ChatGPT sau Claude, versiunea gratuită e suficientă pentru start. Alege un task repetitiv din săptăm&#226;na asta și &#238;ncearcă să-l faci cu AI.&quot;</div>
+</div>
+
+<h3 id="s70">SĂPTĂM&#194;NA ASTA — 30 de Minute pe Zi</h3>
+
+<p>&#238;ncearcă <em>un experiment AI de 30 de minute</em>, &#238;n fiecare zi, timp de o săptăm&#226;nă. Iată un exemplu de plan zilnic:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Zi</th><th>Subiect</th></tr></thead>
+<tbody>
+<tr><td><strong>Luni</strong></td><td>Automatizare procesare facturi</td></tr>
+<tr><td><strong>Marți</strong></td><td>Rezumare rapoarte financiare</td></tr>
+<tr><td><strong>Miercuri</strong></td><td>Redactare email-uri pentru clienți</td></tr>
+<tr><td><strong>Joi</strong></td><td>Analiză de date și creare grafice</td></tr>
+<tr><td><strong>Vineri</strong></td><td>Research fiscal</td></tr>
+<tr><td><strong>Weekend</strong></td><td>Reflectezi și planifici săptăm&#226;na următoare</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>Și — important — notează-ți c&#226;te ore ai fi petrecut manual versus cu AI.</strong> Această măsurare <em>materializează</em> c&#226;știgul. Fără ea, beneficiul răm&#226;ne abstract; cu ea, devine <em>evidență de luat &#238;n business case</em>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Săptăm&#226;na asta: comite-te la 30 de minute pe zi cu AI. [...] Și notează-ți c&#226;te ore ai fi petrecut manual versus cu AI.&quot;</div>
+</div>
+
+<h3 id="s71">LUNA ASTA — Formalizează Un Workflow</h3>
+
+<p>La sf&#226;rșitul lunii, obiectivul tău este să ai <em>un workflow AI complet, documentat, reutilizabil</em>.</p>
+
+<p><strong>Pașii:</strong></p>
+
+<ol>
+  <li><em>Alege un proces recurent</em> — closing lunar, procesare facturi, reconciliere</li>
+  <li><em>Design-uiește workflow-ul complet cu AI</em> — fiecare pas, fiecare prompt, fiecare validare</li>
+  <li><em>Documentează pașii</em> — &#238;ntr-un format pe care să-l poți partaja</li>
+  <li><em>Antrenează un coleg</em> să-l folosească (asta &#238;ți validează că documentarea este suficient de clară)</li>
+  <li><em>Măsoară impactul</em> — ore salvate, erori reduse, calitate &#238;mbunătățită</li>
+  <li><em>Alătură-te unui training formal</em> (Beginner Track al Hub-ului, dacă &#238;ncă nu ești &#238;nscris)</li>
+</ol>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Luna asta: formalizează un workflow cu AI. Alege un proces recurent — lunar close, procesare facturi, reconciliere — design-uiește workflow-ul complet cu AI, documentează pașii, antrenează un coleg să-l folosească, măsoară impactul &#238;n ore salvate, erori reduse, calitate &#238;mbunătățită.&quot;</div>
+</div>
+
+<h3 id="s72">Tabelul de planificare pentru următoarele 30 de zile</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Orizont</th><th>Investiție timp</th><th>Outcome măsurabil</th></tr></thead>
+<tbody>
+<tr><td><strong>Astăzi</strong></td><td>45 min</td><td>Prima experiență AI documentată</td></tr>
+<tr><td><strong>Săptăm&#226;na asta</strong></td><td>30 min/zi &#215; 5 = 2,5 ore</td><td>5 experimente diferite, măsurate</td></tr>
+<tr><td><strong>Luna asta</strong></td><td>5-7 ore/săpt = 20-28 ore total</td><td>1 workflow AI complet, antrenat unui coleg</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce trei orizonturi, nu unul singur</strong><br><em>Astăzi</em> — pentru că momentum-ul se construiește &#238;n primele 24 de ore. Dacă nu acționezi azi, probabilitatea să acționezi m&#226;ine scade dramatic. <em>Săptăm&#226;na asta</em> — pentru că <em>consistența</em> este mai importantă dec&#226;t intensitatea. 30 min/zi &#215; 5 zile = mai valoros dec&#226;t 3 ore &#238;ntr-o singură zi. <em>Luna asta</em> — pentru că <em>un workflow documentat</em> este <em>prima dovadă tangibilă</em> că ai trecut de la <em>experimentator</em> la <em>practician</em>. Cele trei orizonturi &#238;mpreună acoperă psihologic <em>toate cele trei nivele de motivație</em> care decid dacă o intenție devine acțiune sau răm&#226;ne intenție.</div>
+</div>
+
+<hr>
+
+<h2 id="cap12">CAPITOLUL 12</h2>
+
+<h2 id="s74">Două Scenarii pentru 2030 — Povestea pe Care O Vei Spune Despre Tine</h2>
+
+<h3 id="s75">Două povești posibile, o singură decizie care le separă</h3>
+
+<p>Acest articol se apropie de final. &#206;nainte să &#238;nchidem, vrem să te lăsăm cu <em>un exercițiu de imaginație</em>. Anul este 2030. Stai cu un coleg la o cafea, undeva &#238;n București, Cluj sau Constanța. Discutați despre ultimii ani din profesie. Există <em>două povești posibile</em> pe care le poți spune. Ambele sunt plauzibile. Doar tu decizi care va fi a ta.</p>
+
+<h3 id="s76">Povestea A — Spectatorul</h3>
+
+<blockquote>
+<em>„Nu-mi vine să cred c&#226;t de mult s-a schimbat. Acum c&#226;țiva ani, prin 2025-2026, toți vorbeau despre AI, dar mi se părea at&#226;t de departe de munca mea. Aveam at&#226;tea de făcut — declarații, &#238;nchideri, clienți. Nu am avut timp să mă uit serios la asta. Acum, c&#226;nd văd c&#226;t de avansați sunt unii colegi, mă &#238;ntreb ce s-ar fi &#238;nt&#226;mplat dacă aș fi &#238;nceput atunci. Acum &#238;ncerc să recuperez, dar e mult mai greu — toți știu deja, eu sunt cel care &#238;nvață primii pași &#238;n 2030. Mă simt mereu cu un pas &#238;n urmă. Și sincer, nu mai sunt sigur unde mă duce cariera. Clienții mei mai mari au plecat la firme care livrează mai rapid. Cu cei rămași, lucrez mai mult pentru același bani.&quot;</em>
+</blockquote>
+
+<p>Această poveste <em>este reală</em> pentru aproximativ 50-60% dintre profesioniștii din 2030. Nu este o predicție alarmistă. Este <em>consecința matematică</em> a accelerării adopției pe care o discutăm de patru articole.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „&#171;Nu-mi vine să cred c&#226;t de mult s-a schimbat. Și eu am stat pe margine și am privit. Acum alerg după toată lumea și nu ajung din urmă.&#187;&quot;</div>
+</div>
+
+<h3 id="s77">Povestea B — Liderul</h3>
+
+<blockquote>
+<em>„Nu-mi vine să cred c&#226;t de mult s-a schimbat. Și sunt m&#226;ndru că am fost parte din transformare. Am &#238;nceput &#238;n primăvara lui 2026 — &#238;mi amintesc clar momentul. Am citit niște articole, am ascultat un podcast despre AI Accounting Hub, și pentru prima dată am simțit că pot să fac asta. Am dedicat 5-7 ore pe săptăm&#226;nă, 90 de zile. Apoi am continuat. Am făcut greșeli, am &#238;nvățat, am crescut. Acum conduc transformarea AI &#238;n firma noastră. Am clienți mai buni, lucrez mai puține ore, iar munca mea este mult mai interesantă — analiză, strategie, advisory. Și cel mai mult mă bucur că pot ajuta colegi mai tineri să facă același parcurs. Văd, &#238;n ei, profesionistul care eram eu acum patru ani.&quot;</em>
+</blockquote>
+
+<p>Această poveste <em>este accesibilă</em> oricui acționează acum. Nu necesită talent excepțional. Nu necesită bani mulți. Necesită <em>consistență</em> — 5-7 ore pe săptăm&#226;nă, 90 de zile, apoi continuitate.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „&#171;Nu-mi vine să cred c&#226;t de mult s-a schimbat. Și sunt m&#226;ndru că am fost parte din transformare. Am &#238;nceput devreme, am &#238;nvățat, am crescut, și acum ajut pe alții să facă același lucru.&#187;&quot;</div>
+</div>
+
+<h3 id="s78">Decizia care separă cele două povești</h3>
+
+<p>&#206;ntrebarea pe care ți-o lăsăm:</p>
+
+<blockquote>
+<em>„Care vrei să fie povestea ta &#238;n 2030?&quot;</em>
+</blockquote>
+
+<p>Răspunsul tău, <em>acum</em>, decide.</p>
+
+<p>Cele două povești sunt separate de <em>o singură decizie</em>: să &#238;ncepi sau să am&#226;ni. <em>Astăzi</em>. Nu m&#226;ine. Astăzi.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Alegerea e a ta. Noi suntem aici să te susținem.&quot;</div>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Decizia care contează cel mai mult</strong><br>Cea mai costisitoare <em>iluzie</em> a profesionistului ocupat este că <em>„voi &#238;ncepe c&#226;nd voi avea timp&quot;</em>. <em>Niciodată nu vei avea timp</em>. Programul tău este deja plin. Decizia nu este <em>„c&#226;nd voi avea timp&quot;</em> — este <em>„ce voi sacrifica pentru a face loc&quot;</em>. 5-7 ore săptăm&#226;nale &#238;nseamnă <em>o singură seară pe săptăm&#226;nă</em>, sau <em>o oră &#238;n fiecare dimineață</em>. Asta e tot. <em>Diferența &#238;ntre povestea A și povestea B este o oră pe zi</em>.</div>
+</div>
+
+<hr>
+
+<h2 id="epilog">EPILOG</h2>
+
+<h2 id="s80">De Ce Am Scris Cinci Articole-Manifest — și Ce Urmează</h2>
+
+<h3 id="s81">Recapitulare onestă a ce am construit &#238;mpreună</h3>
+
+<p>Ai ajuns la finalul ultimului articol-manifest dintr-o serie de cinci. Asta &#238;nseamnă, dacă ai citit toate cinci, că ai parcurs aproximativ <strong>50.000 de cuvinte</strong> despre profesia ta. Asta &#238;nseamnă probabil 4-6 ore din viața ta. Suntem profund recunoscători pentru această investiție.</p>
+
+<p>Vrem să &#238;nchidem cinstit, cu trei observații.</p>
+
+<h3 id="s82">Observația 1 — De ce <em>cinci</em> articole, nu unul singur</h3>
+
+<p>Am ales structura de cinci articole pentru că <em>transformarea pe care o discutăm are cinci dimensiuni distincte</em>:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Articolul</th><th>&#206;ntrebarea la care răspunde</th></tr></thead>
+<tbody>
+<tr><td><strong>1 — Contextul Revoluției AI: de la ChatGPT la AI Agents</strong></td><td><em>De unde venim recent?</em> (Istoria 2022-2026, cele trei ere)</td></tr>
+<tr><td><strong>2 — Evoluția Contabilității: de la registre pe h&#226;rtie la era AI</strong></td><td><em>De unde venim, &#238;n mare?</em> (Paralele cu Excel, Cloud / RPA, accelerarea)</td></tr>
+<tr><td><strong>3 — Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering</strong></td><td><em>Ce să faci concret?</em> (Roadmap-ul de 90 de zile, cele cinci skill-uri)</td></tr>
+<tr><td><strong>4 — Viitorul Profesiei: cum va arăta contabilitatea &#238;n 5–10 ani</strong></td><td><em>Unde mergem?</em> (Viziunea 2030, rolurile noi, riscurile)</td></tr>
+<tr><td><strong>5 — Misiunea AI Accounting Hub (acest articol)</strong></td><td><em>De ce &#238;mpreună?</em> (Misiune, comunitate, apel la acțiune)</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Niciun articol singular nu putea acoperi onest toate aceste cinci &#238;ntrebări. Reducerea la unul singur ar fi &#238;nsemnat <em>fie superficialitate</em>, <em>fie o singură dimensiune privilegiată &#238;n detrimentul celorlalte</em>.</p>
+
+<h3 id="s83">Observația 2 — De ce am investit at&#226;t de mult &#238;n calitate</h3>
+
+<p>Cele cinci articole au fost construite cu o cantitate de muncă care, &#238;n ecosistemul de conținut online curent, este <em>anormală</em>. Articole de 10.000-12.000 de cuvinte fiecare. Date verificate. Citate atente. Adaptare la contextul rom&#226;nesc. Trimiteri &#238;ncrucișate &#238;ntre articole.</p>
+
+<p>De ce am făcut asta? Pentru că <em>credem &#238;n această profesie</em>. Pentru că <em>nu vrem ca o transformare istorică să găsească contabilii rom&#226;ni nepregătiți</em>. Pentru că <em>un articol superficial despre un subiect important este, &#238;n sine, o formă de lipsă de respect față de cititor</em>.</p>
+
+<h3 id="s84">Observația 3 — Ce urmează</h3>
+
+<p>Cele cinci articole-manifest sunt <em>temelia</em>, nu <em>clădirea</em>. Pe această temelie vom construi, &#238;n lunile și anii următori:</p>
+
+<ul>
+  <li><em>Articole tehnice operaționale</em> — <em>„cum să faci X cu Y&quot;</em>, cu pași concreți</li>
+  <li><em>Studii de caz</em> din implementări reale, cu metrici cuantificate</li>
+  <li><em>Episoade noi de podcast</em> pe teme specifice</li>
+  <li><em>Webinarii live</em> cu Q&amp;A</li>
+  <li><em>Prompt library</em> extins, organizat pe categorii operaționale</li>
+  <li><em>Programe de training structurate</em> — Beginner, Intermediate, Advanced</li>
+  <li><em>Forum activ</em> unde comunitatea se ajută reciproc</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Vă mulțumim din suflet că ați fost alături de noi pe parcursul tuturor celor cinci episoade! Și ne auzim foarte cur&#226;nd cu episoade noi pe teme concrete.&quot;</div>
+</div>
+
+<h3 id="s85">Invitația finală</h3>
+
+<p>Misiunea noastră — <em>să transformăm profesioniștii contabili rom&#226;ni &#238;n lideri ai revoluției AI</em> — nu se realizează prin cinci articole. Se realizează prin <em>o comunitate activă de profesioniști care &#238;nvață &#238;mpreună, se susțin, evoluează</em>.</p>
+
+<p>Te invităm să fii parte din această comunitate. Nu ca pe un act de consum — ci ca pe un <em>act de co-construcție</em>. Profesia se va schimba indiferent de noi. &#206;ntrebarea este <em>cine va fi la masa unde se decide cum se schimbă</em>. Vrem să fie c&#226;t mai mulți profesioniști rom&#226;ni la acea masă. Vrem ca acea masă să fie aici.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Bine ai venit la AI Accounting Hub. &#206;mpreună, construim viitorul contabilității &#238;n Rom&#226;nia.&quot;</div>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Hai să &#238;ncepem!&quot;<br>
+<strong>Maria:</strong> „Hai să &#238;ncepem!&quot;</div>
+</div>
+
+<p><strong>Bun venit la AI Accounting Hub.</strong></p>
+
+<hr>
+
+<p><em>Acest articol &#238;ncheie seria de cinci articole-manifest publicate pe site-ul AI Accounting Hub. Vom continua să publicăm conținut tehnic operațional, studii de caz, podcasturi și resurse practice — pentru ca tranziția pe care am cartografiat-o &#238;n această serie să se traducă, pentru c&#226;t mai mulți contabili rom&#226;ni, &#238;n avantaj competitiv real.</em></p>
+
+<p><strong>Data publicării: 2026</strong> <strong>Versiunea: 1.0</strong></p>
+
+<p><strong>Bun venit la AI Accounting Hub.</strong></p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#manifest</a>
+          <a href="#" class="tag">#comunitate</a>
+          <a href="#" class="tag">#ai</a>
+          <a href="#" class="tag">#contabilitate</a>
+        </div>
+        <span class="footer-mono">Articolul #005</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#prolog">PROLOG: Episodul Cinci — Episodul Cel Mai Personal</a>
+        <a href="#cap1">CAPITOLUL 1: Problema pe Care Vrem să o Rezolvăm — Gap-ul de 57 de Puncte Procentuale</a>
+        <a href="#cap2">CAPITOLUL 2: Cele Patru Cauze Structurale ale Paraliziei Profesionale</a>
+        <a href="#cap3">CAPITOLUL 3: De Ce Contabilitatea Este Profesia Perfectă pentru AI — Paradoxul Exigenței</a>
+        <a href="#cap4">CAPITOLUL 4: De Ce Singura Strategie Matură Este Adoptarea Controlată</a>
+        <a href="#cap5">CAPITOLUL 5: Misiunea Noastră — Să Transformăm Contabilii Rom&#226;ni &#238;n Lideri, Nu Doar &#238;n Adoptatori</a>
+        <a href="#cap6">CAPITOLUL 6: Cei Patru Piloni Operaționali ai Hub-ului</a>
+        <a href="#cap7">CAPITOLUL 7: Cele Cinci Principii Fundamentale</a>
+        <a href="#cap8">CAPITOLUL 8: Cele Trei Programe de Training — Beginner, Intermediate, Advanced</a>
+        <a href="#cap9">CAPITOLUL 9: Resursele Care Sunt Deja Disponibile</a>
+        <a href="#cap10">CAPITOLUL 10: Cele Patru &#206;ntrebări de Reflecție pe Care Trebuie să Ți Le Pui</a>
+        <a href="#cap11">CAPITOLUL 11: Apelul la Acțiune — Astăzi, Săptăm&#226;na Asta, Luna Asta</a>
+        <a href="#cap12">CAPITOLUL 12: Două Scenarii pentru 2030 — Povestea pe Care O Vei Spune Despre Tine</a>
+        <a href="#epilog">EPILOG: De Ce Am Scris Cinci Articole-Manifest — și Ce Urmează</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA (în loc de Articole conexe — la lansare avem un singur articol) -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Explorează restul hub-ului.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="index.html#podcast" class="related-card fade-in">
+        <div class="related-date">PODCAST · E01</div>
+        <h3>RO e-Factura: Între promisiunea digitalizării și realitatea din SPV</h3>
+        <p>Două gazde AI demontează promisiunile e-Factura: ce funcționează cu adevărat în SPV, unde sunt fricțiunile reale pe flux și ce ar trebui să facă acum o firmă de contabilitate ca să nu fie prinsă pe contrapicior.</p>
+        <span class="related-read">Ascultă episodul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html" class="related-card fade-in">
+        <div class="related-date">TOOL · ANAF</div>
+        <h3>Verificare CIF — site ANAF</h3>
+        <p>Interfață simplă peste API-ul public ANAF: introduci un CIF și primești nume firmă, stare activă și plătitor TVA. Rulează în browser.</p>
+        <span class="related-read">Deschide tool-ul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="contact.html" class="related-card fade-in">
+        <div class="related-date">CONTACT</div>
+        <h3>Ai o temă, un feedback sau un invitat de podcast?</h3>
+        <p>Colaborare, sugestii de articole sau invitați. Răspundem, de obicei, în 2-3 zile lucrătoare.</p>
+        <span class="related-read">Scrie-ne
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required placeholder="Ex. Ioana Popescu"></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required placeholder="ioana@firma.ro"></div>
+      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required placeholder="Scrie-ne ce te interesează..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+/* TOC active link on scroll */
+(function () {
+  const links = document.querySelectorAll('.toc a');
+  if (!links.length) return;
+  const ids = Array.from(links).map(a => a.getAttribute('href').slice(1));
+  const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  targets.forEach(t => io.observe(t));
+})();
+</script>
+</body>
+</html>

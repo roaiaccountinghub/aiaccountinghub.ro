@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Viitorul profesiei contabile — AI Accounting Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ MISSION PAGE ============ */
+.mission-wrap {
+  position: relative; z-index: 1;
+  max-width: 990px; margin: 0 auto;
+  padding: 32px 32px 80px;
+}
+
+.mission-intro {
+  position: relative;
+  padding: 28px 32px;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent-warm) 10%, transparent), transparent 60%),
+    var(--bg-1);
+  margin-bottom: 36px;
+}
+.mission-intro p {
+  font-size: 17px; line-height: 1.7; color: var(--fg-muted);
+  margin: 0 0 16px;
+}
+.mission-intro p:last-child { margin-bottom: 0; }
+.mission-intro p strong { color: var(--fg); font-weight: 600; }
+.mission-intro p em { color: var(--accent-warm); font-style: normal; }
+
+/* 5-part overview */
+.parts-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 56px;
+}
+.part-pill {
+  padding: 14px 16px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; flex-direction: column; gap: 6px;
+  transition: all 0.25s ease;
+}
+.part-pill:hover { border-color: var(--accent-warm); transform: translateY(-2px); }
+.part-pill .part-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent-warm);
+}
+.part-pill .part-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; line-height: 1.25; letter-spacing: -0.01em;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+/* Format zones — Podcast / Articles */
+.format-zones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-bottom: 64px;
+}
+.zone {
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  padding: 24px;
+  background: var(--bg-1);
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.zone-podcast {
+  background:
+    radial-gradient(ellipse 100% 80% at 0% 0%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 60%),
+    var(--bg-1);
+}
+.zone-articles {
+  background:
+    radial-gradient(ellipse 100% 80% at 100% 0%, color-mix(in oklab, var(--accent-warm) 12%, transparent), transparent 60%),
+    var(--bg-1);
+}
+/* Zone header: icon + (label + title + subtitle) inline */
+.zone-head {
+  display: flex; align-items: flex-start; gap: 14px;
+  margin-bottom: 16px;
+}
+.zone-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.zone-podcast .zone-icon { background: color-mix(in oklab, var(--accent) 14%, var(--bg-2)); color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); }
+.zone-articles .zone-icon { background: color-mix(in oklab, var(--accent-warm) 14%, var(--bg-2)); color: var(--accent-warm); border: 1px solid color-mix(in oklab, var(--accent-warm) 30%, transparent); }
+.zone-icon svg { width: 20px; height: 20px; }
+.zone-titles { min-width: 0; flex: 1; }
+.zone-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.zone-podcast .zone-label { color: var(--accent); }
+.zone-articles .zone-label { color: var(--accent-warm); }
+.zone h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 19px; line-height: 1.2; letter-spacing: -0.02em;
+  font-weight: 600; margin: 0 0 4px;
+}
+.zone-subline {
+  font-size: 12.5px; color: var(--fg-muted); font-style: italic;
+  line-height: 1.4;
+}
+.zone .zone-blurb {
+  font-size: 14px; line-height: 1.6; color: var(--fg-muted);
+  margin-bottom: 18px;
+}
+
+/* Tagline pinned above the two columns */
+.format-tagline {
+  text-align: center;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  border: 1px dashed color-mix(in oklab, var(--accent-warm) 35%, transparent);
+}
+.format-tagline p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(16px, 1.7vw, 19px);
+  color: var(--fg);
+  font-style: italic;
+  margin: 0;
+}
+.zone-list { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 0; }
+.zone-list li {
+  border-top: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+  display: flex; align-items: center; gap: 8px;
+}
+.zone-list li:first-child { border-top: none; }
+.zone-list li > a {
+  flex: 1;
+  display: grid; grid-template-columns: 70px 1fr; gap: 14px; align-items: baseline;
+  padding: 10px 4px;
+  color: inherit;
+  transition: background 0.18s ease, color 0.18s ease;
+  border-radius: 6px;
+  min-width: 0;
+}
+/* Listen-on-Spotify play button (only on the podcast zone) */
+.zone-play {
+  flex-shrink: 0;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+.zone-play svg { width: 14px; height: 14px; transform: translateX(1px); }
+.zone-play:hover { background: var(--accent); color: #07121a; border-color: var(--accent); transform: scale(1.06); box-shadow: 0 6px 18px -6px color-mix(in oklab, var(--accent) 70%, transparent); }
+.zone-list li > a:hover { background: color-mix(in oklab, var(--bg-2) 60%, transparent); }
+.zone-podcast .zone-list li > a:hover .lbl { color: var(--accent); }
+.zone-articles .zone-list li > a:hover .lbl { color: var(--accent-warm); }
+.zone-list .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.zone-podcast .zone-list .num { color: var(--accent); }
+.zone-articles .zone-list .num { color: var(--accent-warm); }
+.zone-list .lbl { font-size: 13.5px; color: var(--fg); line-height: 1.4; transition: color 0.18s ease; }
+
+.zone-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 600;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.zone-cta svg { width: 12px; height: 12px; transition: transform 0.22s ease; }
+.zone-cta:hover { transform: translateY(-1px); }
+.zone-cta:hover svg { transform: translateX(3px); }
+.zone-podcast .zone-cta { background: var(--accent); color: #07121a; box-shadow: 0 8px 22px -8px color-mix(in oklab, var(--accent) 70%, transparent); }
+.zone-articles .zone-cta { background: var(--accent-warm); color: #1a0f07; box-shadow: 0 8px 22px -8px color-mix(in oklab, var(--accent-warm) 70%, transparent); }
+
+/* Tighter page header — no lede paragraph below the H1 */
+.page-header { padding-bottom: 36px; }
+
+@media (max-width: 960px) {
+  .mission-wrap { padding: 40px 20px 64px; }
+  .mission-intro { padding: 24px; margin-bottom: 36px; }
+  .mission-intro p { font-size: 15.5px; }
+  .parts-strip { grid-template-columns: 1fr; gap: 8px; margin-bottom: 36px; }
+  .part-pill { flex-direction: row; align-items: center; gap: 14px; padding: 12px 14px; }
+  .part-pill .part-num { flex: 0 0 auto; min-width: 60px; }
+  .format-zones { grid-template-columns: 1fr; gap: 18px; margin-bottom: 40px; }
+  .zone { padding: 22px; }
+  .zone h2 { font-size: 20px; }
+}
+@media (max-width: 420px) {
+  .mission-wrap { padding: 28px 16px 48px; }
+  .mission-intro { padding: 20px; }
+  .mission-intro p { font-size: 14.5px; line-height: 1.6; }
+  .zone { padding: 18px; }
+  .zone h2 { font-size: 18px; }
+  .zone-list li { grid-template-columns: 60px 1fr; gap: 10px; padding: 8px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="logo-text"><span>AI Accounting Hub</span></div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-ambient"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <span>Viitorul profesiei contabile</span>
+    </div>
+    <div class="page-kicker"><span class="dot"></span>// Seria fondatoare — 5 părți</div>
+    <h1>Viitorul <span class="accent">profesiei contabile</span>.</h1>
+  </div>
+</section>
+
+<main class="mission-wrap">
+
+  <div class="mission-intro fade-in">
+    <p>Cea mai completă analiză în limba română despre ce se întâmplă <strong>acum</strong> în profesia contabilă — busola strategică în era inteligenței artificiale.</p>
+    <p>Parcurgem împreună drumul de la geneza ChatGPT (nov. 2022) până la realitatea Agenților AI (aprilie 2026), explorând saltul de la tabele Pivot la <em>Prompt Engineering</em> și schițând arhitectura clară a profesiei contabile pentru următorii <strong>5–10 ani</strong>.</p>
+    <p>Mai mult decât o cronică — un plan de acțiune pentru <strong>noul contabil augmentat tehnologic</strong>.</p>
+  </div>
+
+  <!-- 5-PART OVERVIEW -->
+  <div class="parts-strip">
+    <div class="part-pill"><span class="part-num">Partea 1</span><span class="part-title">Contextul Revoluției AI: de la ChatGPT la AI Agents</span></div>
+    <div class="part-pill"><span class="part-num">Partea 2</span><span class="part-title">Evoluția Contabilității: de la registre pe hârtie la era AI</span></div>
+    <div class="part-pill"><span class="part-num">Partea 3</span><span class="part-title">Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering</span></div>
+    <div class="part-pill"><span class="part-num">Partea 4</span><span class="part-title">Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani</span></div>
+    <div class="part-pill"><span class="part-num">Partea 5</span><span class="part-title">Misiunea AI Accounting Hub</span></div>
+  </div>
+
+  <!-- Closing line — moved to the TOP, above the two columns -->
+  <div class="format-tagline fade-in">
+    <p>Același conținut. Alegi ritmul tău.</p>
+  </div>
+
+  <!-- FORMAT ZONES -->
+  <div class="format-zones">
+
+    <!-- Podcast zone -->
+    <div class="zone zone-podcast fade-in">
+      <div class="zone-head">
+        <div class="zone-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </div>
+        <div class="zone-titles">
+          <div class="zone-label">🎧 Format Podcast</div>
+          <h2>Două gazde · 20–30 min per episod</h2>
+          <div class="zone-subline">(Powered by NotebookLM)</div>
+        </div>
+      </div>
+      <p class="zone-blurb">Conversație dinamică între două gazde. Ideal pentru naveta zilnică, mașină sau metrou. Intri în flux, asculți, ieși cu o perspectivă nouă.</p>
+      <ul class="zone-list zone-list-podcast">
+        <li>
+          <a href="podcast.html#manifest"><span class="num">Partea 1</span><span class="lbl">Contextul Revoluției AI: de la ChatGPT la AI Agents</span></a>
+          <button type="button" class="zone-play sp-trigger" data-spotify="4k0YbxKWkKNWGpKFJ3JklL" data-title="Partea 1 — Contextul Revoluției AI: de la ChatGPT la AI Agents" aria-label="Ascultă pe Spotify · Partea 1">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </li>
+        <li>
+          <a href="podcast.html#manifest"><span class="num">Partea 2</span><span class="lbl">Evoluția Contabilității: de la registre pe hârtie la era AI</span></a>
+          <button type="button" class="zone-play sp-trigger" data-spotify="0hb9PUgaN6QNCN37qLwzPt" data-title="Partea 2 — Evoluția Contabilității: de la registre pe hârtie la era AI" aria-label="Ascultă pe Spotify · Partea 2">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </li>
+        <li>
+          <a href="podcast.html#manifest"><span class="num">Partea 3</span><span class="lbl">Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering</span></a>
+          <button type="button" class="zone-play sp-trigger" data-spotify="3FfSF66urjapVHvrPlOi6T" data-title="Partea 3 — Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering" aria-label="Ascultă pe Spotify · Partea 3">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </li>
+        <li>
+          <a href="podcast.html#manifest"><span class="num">Partea 4</span><span class="lbl">Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani</span></a>
+          <button type="button" class="zone-play sp-trigger" data-spotify="1OFGHOtAYGsBjZJHUsRHgD" data-title="Partea 4 — Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani" aria-label="Ascultă pe Spotify · Partea 4">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </li>
+        <li>
+          <a href="podcast.html#manifest"><span class="num">Partea 5</span><span class="lbl">Misiunea AI Accounting Hub</span></a>
+          <button type="button" class="zone-play sp-trigger" data-spotify="7IsybDIfyJawn5Hv3PZG97" data-title="Partea 5 — Misiunea AI Accounting Hub" aria-label="Ascultă pe Spotify · Partea 5">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </li>
+      </ul>
+      <a href="podcast.html#manifest" class="zone-cta">
+        Ascultă seria
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <!-- Articles zone -->
+    <div class="zone zone-articles fade-in">
+      <div class="zone-head">
+        <div class="zone-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/>
+          </svg>
+        </div>
+        <div class="zone-titles">
+          <div class="zone-label">📖 Articol Manifest</div>
+          <h2>Format extins · 30–40 min lectură densă</h2>
+        </div>
+      </div>
+      <p class="zone-blurb">Analize de profunzime. Ideal pentru momentele de liniște — diminețile de weekend la o cafea, când ai timp să procesezi, să analizezi critic și să faci conexiuni noi.</p>
+      <ul class="zone-list">
+        <li><a href="2026-05-01-M1-Contextul-Revolutiei-AI.html"><span class="num">Partea 1</span><span class="lbl">Contextul Revoluției AI: de la ChatGPT la AI Agents</span></a></li>
+        <li><a href="2026-05-01-M2-Evolutia-Contabilitatii.html"><span class="num">Partea 2</span><span class="lbl">Evoluția Contabilității: de la registre pe hârtie la era AI</span></a></li>
+        <li><a href="2026-05-01-M3-Skilluri-de-la-Excel-la-AI-Literacy.html"><span class="num">Partea 3</span><span class="lbl">Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering</span></a></li>
+        <li><a href="2026-05-01-M4-Viitorul-profesiei-contabile.html"><span class="num">Partea 4</span><span class="lbl">Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani</span></a></li>
+        <li><a href="2026-05-01-M5-Misiunea-AI-Accounting-Hub.html"><span class="num">Partea 5</span><span class="lbl">Misiunea AI Accounting Hub</span></a></li>
+      </ul>
+      <a href="arhiva.html#manifest" class="zone-cta">
+        Citește seria
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text"><span>AI Accounting Hub</span><small>aiaccountinghub.ro</small></div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- SPOTIFY EPISODE MODAL -->
+<div class="sp-modal-backdrop" id="spotify-modal" role="dialog" aria-modal="true" aria-labelledby="sp-modal-title" hidden>
+  <div class="sp-modal-card" role="document">
+    <button class="sp-modal-close" type="button" aria-label="Închide player-ul">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="sp-modal-meta">
+      <span class="sp-modal-label">// Episod podcast · Spotify</span>
+      <h3 class="sp-modal-title" id="sp-modal-title"></h3>
+    </div>
+    <div class="sp-modal-iframe" id="sp-modal-iframe"></div>
+    <div class="sp-modal-foot">Powered by NotebookLM · Hosted on Spotify</div>
+  </div>
+</div>
+
+<style>
+.sp-modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(4, 8, 14, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 250;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.32s ease;
+  display: grid; place-items: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+.sp-modal-backdrop[hidden] { display: none; }
+.sp-modal-backdrop.open { opacity: 1; pointer-events: auto; }
+.sp-modal-card {
+  position: relative;
+  width: min(560px, 100%);
+  background: linear-gradient(145deg, #0d2a3b 0%, #091a27 100%);
+  border: 1px solid color-mix(in oklab, var(--accent) 28%, transparent);
+  border-radius: 18px;
+  padding: 28px 28px 22px;
+  box-shadow: 0 40px 80px -30px rgba(0,0,0,0.55);
+  transform: scale(0.92);
+  transition: transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.sp-modal-backdrop.open .sp-modal-card { transform: scale(1); }
+.sp-modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #d4e7f0;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  z-index: 2;
+}
+.sp-modal-close svg { width: 16px; height: 16px; }
+.sp-modal-close:hover { background: var(--accent); color: #07121a; border-color: var(--accent); }
+.sp-modal-meta { margin-bottom: 18px; padding-right: 44px; }
+.sp-modal-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); display: block; margin-bottom: 8px;
+}
+.sp-modal-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.25; letter-spacing: -0.01em;
+  font-weight: 600; color: #fff; margin: 0;
+}
+.sp-modal-iframe {
+  width: 100%; min-height: 232px;
+  border-radius: 12px; overflow: hidden;
+  background: rgba(0,0,0,0.2);
+}
+.sp-modal-iframe iframe { display: block; width: 100%; height: 232px; border: 0; }
+.sp-modal-foot {
+  text-align: center; margin-top: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: color-mix(in oklab, #d4e7f0 50%, transparent);
+}
+@media (max-width: 640px) {
+  .sp-modal-card { padding: 22px 20px 18px; }
+}
+</style>
+
+<script>
+/* Spotify episode modal — wired to any .sp-trigger[data-spotify] element. */
+(function () {
+  const modal     = document.getElementById('spotify-modal');
+  const iframeBox = document.getElementById('sp-modal-iframe');
+  const titleEl   = document.getElementById('sp-modal-title');
+  const closeBtn  = modal.querySelector('.sp-modal-close');
+
+  function open(epId, title) {
+    if (!epId) return;
+    titleEl.textContent = title || 'Episod podcast';
+    iframeBox.innerHTML =
+      '<iframe style="border-radius:12px" ' +
+      'src="https://open.spotify.com/embed/episode/' + epId + '?utm_source=generator" ' +
+      'width="100%" height="232" frameBorder="0" allowfullscreen="" ' +
+      'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" ' +
+      'loading="lazy"></iframe>';
+    modal.hidden = false;
+    requestAnimationFrame(() => modal.classList.add('open'));
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    modal.classList.remove('open');
+    setTimeout(() => {
+      modal.hidden = true;
+      iframeBox.innerHTML = '';
+      document.body.style.overflow = '';
+    }, 320);
+  }
+
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.sp-trigger[data-spotify]');
+    if (!trigger) return;
+    e.preventDefault();
+    e.stopPropagation();
+    open(trigger.dataset.spotify, trigger.dataset.title);
+  });
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
+})();
+</script>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

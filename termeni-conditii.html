@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Termeni și Condiții — AI Accounting Hub</title>
+<meta name="description" content="Termeni și Condiții de Utilizare AI Accounting Hub — reguli de acces, proprietate intelectuală, limitarea răspunderii.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ LEGAL PAGE ============ */
+.legal-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 56px 32px 96px;
+}
+.legal-meta {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-1);
+  margin-bottom: 36px;
+}
+.legal-meta .sep { opacity: 0.4; }
+.legal-meta strong { color: var(--accent); font-weight: 500; letter-spacing: 0.05em; }
+
+.legal-toc {
+  padding: 22px 24px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--accent) 3%, var(--bg-1));
+  margin-bottom: 48px;
+}
+.legal-toc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 14px;
+}
+.legal-toc ol {
+  list-style: none; counter-reset: toc;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 28px;
+}
+.legal-toc li { counter-increment: toc; }
+.legal-toc a {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 6px 0;
+  font-size: 14px; color: var(--fg-muted);
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+.legal-toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim);
+  flex-shrink: 0;
+}
+.legal-toc a:hover { color: var(--accent); }
+.legal-toc a:hover::before { color: var(--accent); }
+
+.legal-body h2 {
+  font-size: 24px; letter-spacing: -0.02em;
+  margin: 48px 0 18px;
+  font-weight: 600;
+  scroll-margin-top: 100px;
+  display: flex; align-items: baseline; gap: 14px;
+}
+.legal-body h2 .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; color: var(--accent);
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+.legal-body h3 {
+  font-size: 17px; letter-spacing: -0.01em;
+  margin: 28px 0 12px;
+  font-weight: 600;
+  color: var(--fg);
+}
+.legal-body p {
+  font-size: 15px; line-height: 1.75;
+  color: var(--fg-muted);
+  margin-bottom: 16px;
+}
+.legal-body ul {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+.legal-body ul li {
+  position: relative;
+  padding: 6px 0 6px 22px;
+  font-size: 15px; line-height: 1.7;
+  color: var(--fg-muted);
+}
+.legal-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 17px;
+  width: 12px; height: 1px;
+  background: var(--accent);
+}
+.legal-body a:not(.btn) {
+  color: var(--accent);
+  border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+  transition: border-color 0.2s;
+}
+.legal-body a:not(.btn):hover { border-bottom-color: var(--accent); }
+
+.legal-callout {
+  margin: 28px 0;
+  padding: 20px 24px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--accent-warm, #f59e0b) 40%, transparent);
+  background: color-mix(in oklab, var(--accent-warm, #f59e0b) 8%, transparent);
+  font-size: 14px; line-height: 1.65;
+  color: var(--fg);
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.legal-callout svg {
+  width: 20px; height: 20px; flex-shrink: 0;
+  color: var(--accent-warm, #f59e0b);
+  margin-top: 2px;
+}
+
+.legal-allow-deny {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0 24px;
+}
+.legal-allow-deny .box {
+  padding: 20px 22px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+}
+.legal-allow-deny .box h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.legal-allow-deny .box.allow { border-color: color-mix(in oklab, #22c55e 35%, transparent); }
+.legal-allow-deny .box.allow h4 { color: #22c55e; }
+.legal-allow-deny .box.deny { border-color: color-mix(in oklab, #f43f5e 35%, transparent); }
+.legal-allow-deny .box.deny h4 { color: #f43f5e; }
+.legal-allow-deny .box ul { margin: 0; }
+.legal-allow-deny .box ul li { font-size: 14px; padding: 4px 0 4px 22px; }
+.legal-allow-deny .box.allow ul li::before { background: #22c55e; }
+.legal-allow-deny .box.deny ul li::before { background: #f43f5e; }
+
+.legal-contact-box {
+  margin-top: 56px;
+  padding: 28px;
+  border-radius: 14px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-1);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+}
+.legal-contact-box h3 { font-size: 16px; margin-bottom: 4px; }
+.legal-contact-box p { font-size: 13px; color: var(--fg-muted); margin: 0; }
+.legal-contact-box .icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: grid; place-items: center;
+  background: color-mix(in oklab, var(--accent) 10%, var(--bg-2));
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .legal-wrap { padding: 40px 20px 72px; }
+  .legal-toc ol { grid-template-columns: 1fr; }
+  .legal-body h2 { font-size: 21px; }
+  .legal-body h3 { font-size: 16px; }
+  .legal-body p, .legal-body ul li { font-size: 14px; }
+  .legal-allow-deny { grid-template-columns: 1fr; }
+  .legal-contact-box { grid-template-columns: 1fr; text-align: center; }
+  .legal-contact-box .icon { margin: 0 auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="logo-text"><span>AI Accounting Hub</span></div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-ambient"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <span>Legal</span>
+      <span class="sep">/</span>
+      <span>Termeni și condiții</span>
+    </div>
+    <div class="page-kicker"><span class="dot"></span>Legal · Utilizare</div>
+    <h1>Termeni și <span class="accent">condiții</span> de utilizare.</h1>
+    <p class="page-lede">Regulile care guvernează accesul și utilizarea AI Accounting Hub. Prin utilizarea site-ului, confirmi că ai citit și accepți acești termeni.</p>
+  </div>
+</section>
+
+<!-- BODY -->
+<main class="legal-wrap">
+
+  <div class="legal-meta">
+    <span>Ultima actualizare: <strong>Mai 2026</strong></span>
+    <span class="sep">·</span>
+    <span>Versiune: <strong>1.0</strong></span>
+    <span class="sep">·</span>
+    <span>Jurisdicție: <strong>România</strong></span>
+  </div>
+
+  <nav class="legal-toc" aria-label="Cuprins">
+    <div class="legal-toc-title">// Cuprins</div>
+    <ol>
+      <li><a href="#acceptare">Acceptarea termenilor</a></li>
+      <li><a href="#descriere">Descrierea platformei</a></li>
+      <li><a href="#informativ">Caracter informativ</a></li>
+      <li><a href="#ai">Conținut generat cu AI</a></li>
+      <li><a href="#proprietate">Proprietate intelectuală</a></li>
+      <li><a href="#conduita">Conduita utilizatorilor</a></li>
+      <li><a href="#raspundere">Limitarea răspunderii</a></li>
+      <li><a href="#lege">Legea aplicabilă</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </nav>
+
+  <article class="legal-body">
+
+    <h2 id="acceptare"><span class="num">01</span>Acceptarea termenilor</h2>
+    <p>Prin accesarea și utilizarea site-ului <strong>aiaccountinghub.ro</strong>, confirmați că ați citit, înțeles și acceptat în totalitate prezentii Termeni și Condiții de Utilizare. Dacă nu sunteți de acord cu acești termeni, vă rugăm să nu utilizați site-ul.</p>
+    <p>Acești termeni pot fi actualizați periodic. Data ultimei modificări este indicată în antetul documentului.</p>
+
+    <h2 id="descriere"><span class="num">02</span>Descrierea platformei</h2>
+    <p>AI Accounting Hub este o platformă educațională dedicată profesioniștilor contabili interesați de adoptarea instrumentelor de inteligență artificială în activitatea lor profesională.</p>
+    <p>Platforma oferă <strong>gratuit</strong>:</p>
+    <ul>
+      <li>Articole și ghiduri practice despre utilizarea AI în contabilitate</li>
+      <li>Episoade de podcast pe teme relevante pentru profesia contabilă</li>
+      <li>Resurse educaționale, template-uri și exemple practice</li>
+      <li>Informații despre tool-uri și soluții AI aplicabile în domeniu</li>
+    </ul>
+    <p>Ne rezervăm dreptul de a modifica, extinde sau întrerupe orice parte a conținutului sau serviciilor oferite, fără notificare prealabilă.</p>
+
+    <h2 id="informativ"><span class="num">03</span>Caracter informativ — fără consultanță certificată</h2>
+    <div class="legal-callout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>Tot conținutul publicat pe AI Accounting Hub are scop <strong>exclusiv informativ și educațional</strong>.</span>
+    </div>
+    <p>Informațiile, articolele, podcasturile și materialele publicate pe acest site:</p>
+    <ul>
+      <li>Nu constituie consultanță contabilă, fiscală, juridică sau financiară certificată</li>
+      <li>Nu înlocuiesc sfatul unui profesionist calificat pentru situații specifice</li>
+      <li>Nu reprezintă poziția oficială a unor organisme profesionale sau autorități</li>
+    </ul>
+    <p>Vă recomandăm să consultați întotdeauna un specialist calificat înainte de a aplica orice informație din conținutul nostru în activitatea dumneavoastră profesională sau în situații cu implicații financiare, fiscale sau juridice.</p>
+
+    <h2 id="ai"><span class="num">04</span>Conținut generat cu ajutorul inteligenței artificiale</h2>
+    <p>O parte din conținutul publicat pe această platformă este creat sau îmbunătățit cu ajutorul instrumentelor de inteligență artificială, inclusiv pentru scripturi de podcast, articole și materiale educaționale.</p>
+    <p>Tot conținutul generat cu ajutorul AI este <strong>revizuit și editat de echipa noastră</strong> înainte de publicare. Cu toate acestea, conținutul AI poate conține uneori inexactități sau informații care necesită verificare suplimentară. Vă încurajăm să verificați informațiile critice din surse oficiale înainte de a le aplica în activitatea profesională.</p>
+
+    <h2 id="proprietate"><span class="num">05</span>Proprietate intelectuală</h2>
+    <p>Tot conținutul publicat pe aiaccountinghub.ro — incluzând dar fără a se limita la articole, episoade de podcast, scripturi, grafice, logo-uri și design — este proprietatea AI Accounting Hub și este protejat de legislația română și internațională privind drepturile de autor.</p>
+
+    <div class="legal-allow-deny">
+      <div class="box allow">
+        <h4>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Este permis
+        </h4>
+        <ul>
+          <li>Accesarea și utilizarea conținutului în scop personal și profesional</li>
+          <li>Distribuirea link-urilor către conținut pe rețele sociale sau alte platforme</li>
+          <li>Citarea de fragmente scurte cu menționarea sursei și link către pagina originală</li>
+        </ul>
+      </div>
+      <div class="box deny">
+        <h4>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          Este interzis fără acord
+        </h4>
+        <ul>
+          <li>Reproducerea integrală sau substanțială a articolelor, scripturilor sau episoadelor</li>
+          <li>Descărcarea și redistribuirea fișierelor audio ale podcasturilor</li>
+          <li>Utilizarea conținutului în scopuri comerciale proprii</li>
+          <li>Crearea de materiale derivate bazate pe conținutul nostru fără atribuire</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 id="conduita"><span class="num">06</span>Conduita utilizatorilor</h2>
+    <p>Utilizatorii care interacționează cu platforma — inclusiv prin formularul de contact sau în eventuale spații comunitare viitoare — se angajează să respecte următoarele reguli:</p>
+    <ul>
+      <li>Să nu transmită conținut fals, înșelător sau defăimător</li>
+      <li>Să nu utilizeze platforma pentru activități ilegale</li>
+      <li>Să nu transmită mesaje comerciale nesolicitate (spam)</li>
+      <li>Să nu încerce accesul neautorizat la sistemele platformei</li>
+      <li>Să respecte drepturile de proprietate intelectuală ale altor utilizatori și ale platformei</li>
+    </ul>
+    <p>Ne rezervăm dreptul de a restricționa accesul utilizatorilor care încalcă aceste reguli.</p>
+
+    <h2 id="raspundere"><span class="num">07</span>Limitarea răspunderii</h2>
+
+    <h3>7.1 Acuratețea informațiilor</h3>
+    <p>Depunem eforturi rezonabile pentru a menține informațiile publicate actualizate și corecte. Cu toate acestea, domeniul inteligenței artificiale evoluează rapid, iar unele informații pot deveni parțial depășite. Nu garantăm acuratețea, completitudinea sau actualitatea absolută a conținutului.</p>
+
+    <h3>7.2 Disponibilitatea site-ului</h3>
+    <p>Nu garantăm disponibilitatea continuă și neîntreruptă a site-ului. Pot exista perioade de întrerupere pentru mentenanță, actualizări sau din cauze tehnice independente de voința noastră.</p>
+
+    <h3>7.3 Link-uri externe</h3>
+    <p>Site-ul poate conține link-uri către resurse externe — alte site-uri, platforme sau tool-uri. Nu avem control asupra conținutului acestor resurse și nu ne asumăm răspunderea pentru conținutul sau practicile acestora.</p>
+
+    <h3>7.4 Limitare generală</h3>
+    <p>În măsura maximă permisă de legislația aplicabilă, AI Accounting Hub nu este responsabil pentru niciun prejudiciu direct, indirect sau consecvent rezultat din utilizarea sau imposibilitatea utilizării site-ului ori a informațiilor publicate.</p>
+
+    <h2 id="lege"><span class="num">08</span>Legea aplicabilă</h2>
+    <p>Prezentii Termeni și Condiții sunt guvernați de <strong>legislația română</strong> în vigoare. Orice litigiu decurgând din utilizarea site-ului va fi soluționat în primul rând pe cale amiabilă. În cazul în care soluționarea amiabilă nu este posibilă, litigiul va fi supus jurisdicției instanțelor competente din România.</p>
+
+    <h2 id="contact"><span class="num">09</span>Contact</h2>
+    <p>Pentru orice întrebări legate de prezentii Termeni și Condiții:</p>
+
+    <div class="legal-contact-box">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div>
+        <h3>Contactează-ne</h3>
+        <p>Trimite-ne un mesaj prin <a href="contact.html">formularul de contact</a> — răspundem personal în ~48h.</p>
+      </div>
+    </div>
+
+  </article>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text"><span>AI Accounting Hub</span><small>aiaccountinghub.ro</small></div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script>
+(function() {
+  const tocLinks = document.querySelectorAll('.legal-toc a');
+  const headings = Array.from(document.querySelectorAll('.legal-body h2[id]'));
+  if (!('IntersectionObserver' in window) || !headings.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        const id = en.target.id;
+        tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  headings.forEach(h => io.observe(h));
+})();
+</script>
+</body>
+</html>

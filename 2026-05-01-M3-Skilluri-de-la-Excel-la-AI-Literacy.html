@@ -1,0 +1,1770 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering — AI Accounting Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ ARTICLE PAGE ============ */
+.article-wrap {
+  position: relative; z-index: 1;
+  max-width: 1360px; margin: 0 auto;
+  padding: 64px 32px 96px;
+  display: grid;
+  grid-template-columns: 1fr 720px 1fr;
+  gap: 48px;
+}
+.article-side { position: relative; }
+.article-side.left { justify-self: end; }
+.article-side .sticky {
+  position: sticky; top: 96px;
+  padding: 20px 0;
+  max-height: calc(100vh - 112px);
+  overflow: hidden;
+}
+.toc {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-1);
+  max-height: calc(100vh - 136px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+.toc::-webkit-scrollbar { width: 8px; }
+.toc::-webkit-scrollbar-track { background: transparent; }
+.toc::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+.toc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 14px;
+}
+.toc a {
+  display: block;
+  font-size: 13px; color: var(--fg-muted);
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid var(--border);
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.toc a:hover { color: var(--accent); border-color: var(--accent); }
+.toc a.active { color: var(--accent); border-color: var(--accent); }
+
+.article-main {
+  position: relative;
+  /* Critical for mobile: grid items default to min-width: auto (their content's
+     intrinsic min size). The <pre> code blocks below have long unbreakable
+     lines, which would otherwise force the grid item — and the prose with it —
+     wider than the viewport, clipping all the regular paragraph text. */
+  min-width: 0;
+}
+/* Same defence one level deeper: keep prose locked to its parent column */
+.article-main .prose,
+.article-main .prose pre,
+.article-main .prose img { max-width: 100%; }
+.article-main .prose pre { box-sizing: border-box; }
+
+.article-meta-top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.article-meta-top .sep { opacity: 0.4; }
+.article-category {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+.article-main h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.article-main h1 .accent {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 55%, color-mix(in oklab, var(--accent) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.article-lede {
+  font-size: 19px; line-height: 1.55; color: var(--fg-muted);
+  margin-bottom: 36px;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+}
+
+.author-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  display: grid; place-items: center;
+  color: #07121a; font-weight: 700; font-size: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+  flex-shrink: 0;
+}
+.author-info { flex: 1; min-width: 0; }
+.author-name { font-size: 14px; font-weight: 600; }
+.author-role { font-size: 12px; color: var(--fg-muted); }
+.share-row { display: flex; gap: 8px; }
+.share-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn svg { width: 15px; height: 15px; }
+
+.article-cover {
+  position: relative;
+  margin: 0 -32px 48px;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 360px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.article-cover-bg {
+  position: absolute; inset: 0;
+  background-image: url('assets/hero-vf.png');
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05) brightness(0.92);
+}
+.article-cover::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--bg-0) 80%, transparent) 100%);
+}
+.article-cover-caption {
+  position: absolute; left: 24px; bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-muted);
+  letter-spacing: 0.08em;
+  z-index: 2;
+}
+
+/* Prose */
+.prose {
+  font-size: 17px; line-height: 1.75;
+  color: var(--fg);
+  /* Prevent any unbreakable string from forcing horizontal overflow on mobile */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.prose p {
+  margin: 0 0 22px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.prose h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px; line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 56px 0 20px;
+  scroll-margin-top: 100px;
+}
+.prose h2::before {
+  content: '§'; color: var(--accent);
+  font-weight: 400;
+  margin-right: 12px;
+  opacity: 0.6;
+}
+.prose h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; line-height: 1.25; letter-spacing: -0.01em;
+  font-weight: 600;
+  margin: 36px 0 14px;
+  scroll-margin-top: 100px;
+}
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { color: var(--accent); font-style: normal; font-family: 'Space Grotesk', sans-serif; }
+.prose a { color: var(--accent); border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); transition: all 0.2s; }
+.prose a:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.prose ul, .prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose li {
+  margin-bottom: 10px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.prose li::marker { color: var(--accent); }
+.prose blockquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  border-radius: 0 12px 12px 0;
+  font-size: 18px;
+  color: var(--fg);
+  font-style: italic;
+}
+.prose blockquote cite {
+  display: block;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-style: normal;
+  color: var(--fg-muted); letter-spacing: 0.05em;
+}
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88em;
+  padding: 2px 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent);
+}
+.prose pre {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.6;
+}
+.prose pre code {
+  background: none; border: none; padding: 0; color: var(--fg);
+}
+.callout {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 14px;
+}
+.callout .ic {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center;
+  background: color-mix(in oklab, var(--accent) 15%, transparent);
+  color: var(--accent);
+}
+.callout .ic svg { width: 16px; height: 16px; }
+.callout .cbody { font-size: 14px; line-height: 1.6; color: var(--fg); }
+.callout .cbody strong { color: var(--accent); }
+
+/* End of article */
+.article-end {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+.author-card {
+  margin: 72px 0 0;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.author-card .author-avatar { width: 64px; height: 64px; font-size: 20px; }
+.author-card h3 { font-size: 20px; margin-bottom: 6px; }
+.author-card .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; margin-bottom: 12px; }
+.author-card p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+
+/* Related */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.related-card {
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; flex-direction: column;
+  transition: all 0.3s ease;
+}
+.related-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.related-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.related-card h3 { font-size: 18px; line-height: 1.25; margin-bottom: 10px; }
+.related-card p { font-size: 13px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.related-read {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.related-read svg { transition: transform 0.2s; }
+.related-card:hover .related-read svg { transform: translateX(4px); }
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 34px 0;
+}
+.table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 28px 0 34px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-1);
+}
+.prose table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.prose th,
+.prose td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.prose th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  text-align: left;
+}
+.prose tr:last-child td { border-bottom: 0; }
+.podcast-callout .ic { background: color-mix(in oklab, var(--accent-2) 15%, transparent); color: var(--accent-2); }
+/* Responsive */
+@media (max-width: 1200px) {
+  .article-wrap { grid-template-columns: 1fr; max-width: 760px; padding: 48px 24px 72px; }
+  .article-side { display: none; }
+}
+@media (max-width: 960px) {
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .article-cover { margin: 0 0 36px; height: 280px; }
+}
+@media (max-width: 720px) {
+  .article-wrap { padding: 28px 16px 48px; }
+  /* Match the mobile container padding so the cover doesn't push out beyond
+     the viewport (the desktop -32px margin assumed 32px container padding). */
+  .article-cover { height: 220px; margin: 0 -16px 24px; border-radius: 14px; }
+  .article-cover-caption { left: 16px; bottom: 14px; font-size: 10px; }
+  .article-main h1 { font-size: clamp(26px, 7.5vw, 34px); }
+  .article-lede { font-size: 16px; padding-left: 14px; }
+  .author-row { flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .share-row { width: 100%; justify-content: flex-end; }
+  .prose { font-size: 16px; line-height: 1.7; overflow-wrap: break-word; word-wrap: break-word; }
+  .prose h2 { font-size: 22px; margin: 36px 0 14px; }
+  .prose h2::before { margin-right: 8px; }
+  .prose h3 { font-size: 18px; margin: 26px 0 12px; }
+  .prose blockquote { margin: 22px 0; padding: 14px 16px; font-size: 15px; border-radius: 0 10px 10px 0; }
+  .prose pre { padding: 12px; font-size: 12px; border-radius: 10px; }
+  .callout { flex-direction: column; gap: 10px; padding: 16px; }
+  .author-card { flex-direction: column; gap: 16px; padding: 22px; margin-top: 48px; }
+  .author-card .author-avatar { width: 52px; height: 52px; font-size: 18px; }
+  .article-end { gap: 16px; padding-top: 24px; margin-top: 36px; }
+  .related-grid { grid-template-columns: 1fr; gap: 14px; }
+  .related-card { padding: 20px; }
+}
+@media (max-width: 420px) {
+  .article-wrap { padding: 22px 14px 40px; }
+  .article-cover { margin: 0 -14px 22px; height: 190px; }
+  .article-main h1 { font-size: 24px; line-height: 1.06; }
+  .article-lede { font-size: 14.5px; padding-left: 12px; margin-bottom: 28px; }
+  .article-meta-top { gap: 8px; font-size: 10px; margin-bottom: 18px; }
+  .article-meta-top .sep { display: none; }
+  .prose { font-size: 15px; line-height: 1.65; }
+  .prose p { margin-bottom: 18px; }
+  .prose h2 { font-size: 19px; margin: 28px 0 12px; }
+  .prose h2::before { display: none; }
+  .prose h3 { font-size: 16px; margin: 22px 0 10px; }
+  .prose blockquote { padding: 12px 14px; font-size: 14px; }
+  .prose ul, .prose ol { padding-left: 20px; }
+  .tags-row { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="article-meta-top">
+      <span class="article-category">Manifest</span>
+      <span>2026</span>
+      <span class="sep">·</span>
+      <span>40-50 min citire</span>
+    </div>
+
+    <h1>Skill-uri: <span class="accent">De la Excel la AI Literacy</span></h1>
+    <p class="article-lede">
+      Anatomia Profesionistului Contabil &#238;n Era Inteligenței Artificiale
+    </p>
+    <div class="author-row">
+      <div class="author-avatar">IM</div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">aiaccountinghub.ro</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// AI literacy · Excel · competențe profesionale</div>
+    </div>
+
+    <div class="prose">
+<blockquote>
+<em>„&#206;n Era Excel, valoarea ta era să știi să EXECUȚI analiza. &#206;n Era AI, valoarea ta este să știi să VALIDEZI și să INTERPRETEZI analiza. Execuția o face AI-ul. Judecata răm&#226;ne a ta.&quot;</em>
+<cite>— Maria, Episodul 3 al podcastului AI Accounting Hub</cite>
+</blockquote>
+
+<hr>
+
+<p><strong>Un articol manifest publicat de AI Accounting Hub</strong> <em>Timp estimat de lectură: 40-50 de minute</em> <em>Categorie: Dezvoltare profesională | Strategie de carieră | Tehnologie financiară</em></p>
+
+<hr>
+
+<h2 id="prolog">PROLOG: &#206;ntrebarea Care Decide Cariere — La Interviu, &#238;n 2030</h2>
+
+<p>&#206;n anul 2010, deja exista o &#238;ntrebare la interviul de angajare pentru orice poziție de contabil care, dacă nu primea răspuns competent, &#238;ți &#238;nchidea ușa. &#206;ntrebarea era: <em>„Cum ai analiza 50.000 de tranzacții pentru a identifica top 10 clienți pe categorie de produs?&quot;</em>. Dacă nu știai să răspunzi cu <em>„construiesc un Pivot Table cu această structură...&quot;</em>, șansele tale de a primi oferta scădeau dramatic. Pivot Table-ul, lansat &#238;n 1994 de Microsoft, devenise — &#238;n doar 15 ani — <em>cunoaștere de bază necontestabilă</em> a profesiei.</p>
+
+<p>Cu c&#226;teva luni &#238;nainte de a scrie acest articol, am &#238;nceput să auzim de la companii din top 100 din Rom&#226;nia alte &#238;ntrebări la interviu:</p>
+
+<ul>
+  <li><em>„Ce &#238;nțelegi prin LLM și cum ai putea să-l folosești &#238;n contabilitate?&quot;</em></li>
+  <li><em>„Ce sunt tokenii &#238;ntr-un context AI și de ce contează?&quot;</em></li>
+  <li><em>„Explică-mi ce este prompt engineering și dă-mi un exemplu bun versus rău de prompt pentru o sarcină contabilă.&quot;</em></li>
+</ul>
+
+<p>Aceste &#238;ntrebări — astăzi &#238;ncă marginale, m&#226;ine generalizate — sunt <em>Pivot Table-ul anului 2030</em>. Cei care vor ști să răspundă vor avea avantajul competitiv de care colegii lor cu Excel-ul &#238;n 1995-2005 s-au bucurat. Cei care nu vor ști vor descoperi, treptat, că ușa se &#238;nchide.</p>
+
+<p>Acest articol este un ghid operațional pentru cei care vor să fie de prima parte a acestei tranziții. <em>Nu</em> este un articol de tip „AI va schimba totul&quot;. Este un articol de tip <em>„iată exact ce trebuie să știi, &#238;n ce ordine, cu ce investiție de timp, și care este standardul de competență pe care va trebui să-l atingi&quot;</em>.</p>
+
+<p>Structurăm conversația &#238;n jurul a două repere paralele:</p>
+
+<ul>
+  <li><em>Era Excel</em> — pe care o folosim ca <em>referință de calibrare</em> a investiției &#238;n skill-uri noi</li>
+  <li><em>Era AI</em> — pe care o disecăm &#238;n cele cinci skill-uri critice pe care fiecare contabil trebuie să le dezvolte</li>
+</ul>
+
+<p>Pentru cei care au citit articolele anterioare din această serie — <em>„Contextul Revoluției AI&quot;</em> și <em>„Evoluția Contabilității&quot;</em> — articolul de față este <em>partea operațională</em>. Acolo am descris terenul; aici descriem traseul.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Dacă acum zece ani la interviu te &#238;ntrebau dacă știi să faci un Pivot Table, astăzi te vor &#238;ntreba dacă știi ce sunt tokenii și cum faci prompt engineering.&quot;</div>
+</div>
+
+<hr>
+
+<h2 id="cap1">CAPITOLUL 1</h2>
+
+<h2 id="era-excel-anatomia-unei-competente-care-a-definit-profesia">Era Excel — Anatomia unei Competențe Care a Definit Profesia</h2>
+
+<h3 id="hook-de-ce-calibrarea-cu-trecutul-e-necesara-pentru-a-evalua-viitorul">De ce calibrarea cu trecutul e necesară pentru a evalua viitorul</h3>
+
+<p>&#206;nainte de a vorbi despre skill-urile AI, trebuie să stabilim <em>ce a &#238;nsemnat operațional</em> să &#238;nveți Excel-ul ca standard profesional. Această calibrare contează din două motive: (1) o folosim ca <em>etalon de comparație</em> pentru investiția AI, și (2) ne ajută să distingem &#238;ntre <em>complexitatea reală</em> a unui skill și <em>frica de necunoscut</em> care ne face să-l percepem ca insurmontabil.</p>
+
+<h3 id="excel-ca-standard-de-admisibilitate-2000-2020">Excel ca standard de admisibilitate, 2000-2020</h3>
+
+<p>Pentru două decenii — aproximativ 2000-2020 — <em>un contabil care nu stăp&#226;nea Excel la nivel decent nu era angajabil</em>. Nu era o opinie, era o cerință de piață. La interviul de angajare, dovada competenței Excel era practic obligatorie: la mid-level erai pus să demonstrezi un Pivot Table; la senior erai testat la INDEX-MATCH și nested formulas.</p>
+
+<p>Iar investiția pentru a ajunge acolo era considerabilă:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Nivel de competență</th><th>Ore de practică estimate</th></tr></thead>
+<tbody>
+<tr><td>Basic</td><td>20-40 ore</td></tr>
+<tr><td>Intermediate</td><td>100-200 ore</td></tr>
+<tr><td>Advanced</td><td>500+ ore</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>Cinci sute de ore de practică</strong> pentru un nivel cu adevărat avansat. Un an &#238;ntreg de practică serioasă, integrată &#238;n munca zilnică.</p>
+
+<p>Iar adopția nu a fost uniformă. Patru decenii mai t&#226;rziu, statisticile arată o imagine nuanțată:</p>
+
+<ul>
+  <li><strong>65% din data analysts</strong> folosesc Excel <em>zilnic</em></li>
+  <li><strong>28,3% din contabili</strong> &#238;l consideră <em>tool-ul principal</em></li>
+  <li>Dar <strong>57% din angajați au doar nivel de bază sau deloc</strong></li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Statistic, 65% din data analysts folosesc Excel zilnic, 28% din contabili &#238;l consideră tool-ul principal. Dar 57% din angajați au doar nivel de bază sau deloc — deci a existat mereu un gap de competență.&quot;</div>
+</div>
+
+<p>Această ultimă cifră — <em>57% au doar nivel de bază</em> — este crucială. &#206;nseamnă că, <em>după aproape patru decenii de adopție</em>, mai mult de jumătate dintre angajați nu folosesc Excel-ul la potențialul lui real. Aceasta nu este o anomalie. Este <em>condiția normală</em> a oricărui skill profesional: o adopție inegală, cu o coadă lungă de oameni care răm&#226;n la nivel suboptim.</p>
+
+<h3 id="implicatia-pentru-ai-literacy">Implicația pentru AI Literacy</h3>
+
+<p>Această observație are o implicație directă pentru tine, cel care citești acum: <em>adopția AI Literacy va urma exact același pattern</em>. Vor exista cei care o vor stăp&#226;ni la nivel avansat (10-20%), cei care vor avea un nivel funcțional (30-40%), și o coadă lungă (40-50%) care va răm&#226;ne la nivel de bază. &#206;ntrebarea strategică este <em>&#238;n care segment vrei să fii</em>.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX</strong><br>Faptul că <em>după 30 de ani de Excel</em>, 57% dintre profesioniști sunt &#238;ncă la nivel de bază nu &#238;nseamnă că adopția AI va fi diferită. &#206;nseamnă că <strong>fereastra pentru a fi &#238;n top 10-20% răm&#226;ne deschisă mult timp</strong> pentru cei care decid să investească serios. Excel-ul ne arată că „adopția generalizată&quot; nu &#238;nseamnă „toți la nivel avansat&quot; — &#238;nseamnă doar „toți la un nivel minim&quot;. Top-ul răm&#226;ne rezervat celor care fac efortul.</div>
+</div>
+
+<hr>
+
+<h2 id="cap2">CAPITOLUL 2</h2>
+
+<h2 id="cele-sase-skill-uri-excel-care-erau-obligatorii-la-interviu">Cele Șase Skill-uri Excel Care Erau Obligatorii la Interviu</h2>
+
+<h3 id="hook-ce-trebuia-sa-demonstrezi-ca-sa-primesti-o-oferta">Ce trebuia să demonstrezi ca să primești o ofertă</h3>
+
+<p>Pentru a fi specifici despre ce a &#238;nsemnat <em>Excel-mastery</em>, vom enumera cele șase categorii de competențe care erau evaluate sistematic la interviuri &#238;n perioada 2000-2020. Vom face apoi, &#238;n capitolele următoare, paralelele directe cu skill-urile AI — ca să vedem unde se păstrează simetria și unde se rupe.</p>
+
+<h3 id="cele-sase-categorii-si-intrebarile-tip">Cele șase categorii și &#238;ntrebările-tip</h3>
+
+<h3 id="skill-1-pivot-tables">Skill 1 — Pivot Tables</h3>
+
+<p><strong>Ce permitea:</strong> agregarea și analiza rapidă a mii de tranzacții; rezumare multi-dimensională (v&#226;nzări pe produs &#215; regiune &#215; lună); rapoarte summary pentru management.</p>
+
+<p><strong>&#206;ntrebări-tip la interviu:</strong></p>
+
+<ul>
+  <li><em>„Cum ai analiza 50.000 de tranzacții pentru a identifica top 10 clienți pe categorie de produs?&quot;</em></li>
+  <li><em>„Creează un Pivot Table care să arate monthly revenue breakdown by region.&quot;</em></li>
+</ul>
+
+<h3 id="skill-2-vlookup-si-index-match">Skill 2 — VLOOKUP și INDEX-MATCH</h3>
+
+<p><strong>Ce permitea:</strong> consolidarea datelor din tabele separate; lookup automat de prețuri, conturi, customer info; eliminarea erorilor manuale de căutare.</p>
+
+<p><strong>&#206;ntrebări-tip la interviu:</strong></p>
+
+<ul>
+  <li><em>„Ai un tabel cu orders și altul cu customer details. Cum aduci customer name &#238;n tabelul cu orders?&quot;</em></li>
+  <li><em>„Explică diferența &#238;ntre VLOOKUP și INDEX-MATCH.&quot;</em></li>
+</ul>
+
+<h3 id="skill-3-if-statements-si-logica-conditionala">Skill 3 — IF Statements și Logică Condițională</h3>
+
+<p><strong>Ce permitea:</strong> categorizare automată; flagging excepții; calcularea commission tiers.</p>
+
+<p><strong>&#206;ntrebare-tip la interviu:</strong> <em>„Creează o formulă care să categorizeze cheltuielile: &lt;100 &#171;Low&#187;, 100-1000 &#171;Medium&#187;, &gt;1000 &#171;High&#187;.&quot;</em></p>
+
+<h3 id="skill-4-formule-financiare-pmt-npv-irr-fv-pv">Skill 4 — Formule Financiare (PMT, NPV, IRR, FV, PV)</h3>
+
+<p><strong>Ce permitea:</strong> calcularea ratelor la &#238;mprumuturi; evaluarea investițiilor; time value of money.</p>
+
+<p><strong>&#206;ntrebare-tip la interviu:</strong> <em>„Calculează monthly payment pentru un &#238;mprumut de $100k la 5% pe 30 ani.&quot;</em></p>
+
+<h3 id="skill-5-data-management">Skill 5 — Data Management</h3>
+
+<p><strong>Ce permitea:</strong> sorting și filtering; remove duplicates; funcții text (CONCATENATE, LEFT, RIGHT, TRIM); manipulare date (EOMONTH, DATEDIF).</p>
+
+<h3 id="skill-6-charting-si-visualization">Skill 6 — Charting și Visualization</h3>
+
+<p><strong>Ce permitea:</strong> line charts pentru trends; bar charts pentru comparisons; pie charts pentru composition; dashboards pentru executive summary.</p>
+
+<h3 id="skill-bonus-vba-macros">Skill bonus — VBA Macros</h3>
+
+<p><strong>Ce permitea:</strong> automatizarea task-urilor repetitive; butoane custom pentru workflows; import/export automatizat. Acest skill <em>transcendea baseline-ul</em> — era deja diferențiator.</p>
+
+<h3 id="calibrarea-pe-niveluri-ierarhice">Calibrarea pe niveluri ierarhice</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Nivel</th><th>Așteptări de competență Excel</th></tr></thead>
+<tbody>
+<tr><td><strong>Junior</strong></td><td>Formule de bază + Pivot Tables simple</td></tr>
+<tr><td><strong>Mid-level</strong></td><td>VLOOKUP + Pivot Tables complexe + Charts</td></tr>
+<tr><td><strong>Senior</strong></td><td>INDEX-MATCH + nested formulas + VBA basic + Dashboard creation</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Competențele se evaluau pe niveluri: un junior trebuia să știe formule de bază și Pivot Tables simple. Un mid-level trebuia să stăp&#226;nească VLOOKUP, Pivot Tables complexe și Charts. Un senior trebuia INDEX-MATCH, nested formulas, VBA basic, și dashboard creation.&quot;</div>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Trei observații despre tabelul Excel</strong><br><em>Prima:</em> skill-urile sunt <em>cumulative</em>, nu <em>substituibile</em>. Un senior nu uită Pivot Tables; le adaugă pe celelalte. Aceeași logică se aplică AI: nu vei renunța la Excel, vei adăuga AI peste el. <em>A doua:</em> fiecare skill servește o <em>intenție de business</em> concretă (analiză, consolidare, categorizare etc.) — nu este competență pentru competență. La AI vom vedea aceeași logică. <em>A treia:</em> curba de &#238;nvățare a fost lentă &#238;n primele 50-100 de ore, exponențială după. La AI vom vedea o curbă similară, dar accelerată.</div>
+</div>
+
+<hr>
+
+<h2 id="cap3">CAPITOLUL 3</h2>
+
+<h2 id="de-la-a-sti-sa-calculezi-la-a-sti-sa-validezi-schimbarea-contractului">De la „A Ști să Calculezi&quot; la „A Ști să Validezi&quot; — Schimbarea Contractului</h2>
+
+<h3 id="hook-cele-trei-contracte-ale-profesiei-contabile-in-cinci-secole">Cele trei contracte ale profesiei contabile, &#238;n cinci secole</h3>
+
+<p>Pentru a &#238;nțelege <em>de ce</em> skill-urile cerute se schimbă at&#226;t de radical, trebuie să &#238;nțelegem că <em>natura contractului profesional</em> dintre contabil și piață se schimbă. Nu mai vinzi același lucru. Iată cum a evoluat acest contract:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Era</th><th>Ce a v&#226;ndut contabilul</th><th>Ce primea &#238;n schimb</th></tr></thead>
+<tbody>
+<tr><td><strong>Pre-Digitală (p&#226;nă &#238;n 1980)</strong></td><td><em>Capacitatea de a calcula corect manual</em></td><td>Acces la cifre exacte &#238;ntr-o lume fără calculatoare</td></tr>
+<tr><td><strong>Microsoft Office (1990-2010)</strong></td><td><em>Capacitatea de a construi modele și de a interpreta rezultate</em></td><td>Capacitate analitică, scenarii, decizii</td></tr>
+<tr><td><strong>AI Agentic (2024+)</strong></td><td><em><strong>Capacitatea de a valida și de a aplica judecata profesională</strong></em></td><td>Răspundere, &#238;ncredere, interpretare strategică</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Tranziția de la „a calcula&quot; la „a valida&quot; <em>nu este o degradare</em> a profesiei. Este, paradoxal, <em>o promovare</em>. Mecanic la strategic. Operațional la consultativ. Reactiv la proactiv.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „&#206;n Era Excel, valoarea ta era să știi să EXECUȚI analiza. &#206;n Era AI, valoarea ta este să știi să VALIDEZI și să INTERPRETEZI analiza. Execuția o face AI-ul. Judecata răm&#226;ne a ta.&quot;</div>
+</div>
+
+<h3 id="implicatiile-pentru-ce-skill-uri-cerem">Implicațiile pentru ce skill-uri cerem</h3>
+
+<p>Această schimbare de contract are implicații directe asupra a <em>ce trebuie să știi</em>. Hai să le sintetizăm:</p>
+
+<p><strong>Ce trecuse pe locul doi sau dispărut din lista de skill-uri necesare:</strong></p>
+
+<ul>
+  <li>Viteza de calcul mental — <em>practic irelevantă</em></li>
+  <li>Memoria pentru detalii legislative — <em>auxiliară</em>; AI deține o copie</li>
+  <li>Atenția la introducerea datelor — <em>delegată</em>; AI introduce, tu validezi</li>
+  <li>Stăp&#226;nirea unei singure aplicații (Excel) — <em>devenită bază, nu diferențiator</em></li>
+</ul>
+
+<p><strong>Ce a devenit critic &#238;n noua eră:</strong></p>
+
+<ul>
+  <li>Prompt Engineering — <em>traducerea problemelor &#238;n cereri pe care AI le poate executa</em></li>
+  <li>Output Validation — <em>capacitatea de a recunoaște halucinațiile</em></li>
+  <li>Critical thinking — <em>evaluarea continuă a output-urilor probabilistice</em></li>
+  <li>Process Design — <em>integrarea AI-ului &#238;n fluxuri de lucru</em></li>
+  <li>Comunicarea cu clientul — <em>amplificată, pentru că tot mai multă valoare e relațională</em></li>
+</ul>
+
+<h3 id="tabelul-comparativ-vechi-vs-noi-skill-uri">Tabelul comparativ — vechi vs noi skill-uri</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Era pre-AI (p&#226;nă &#238;n 2022)</th><th>Era AI (2025+)</th></tr></thead>
+<tbody>
+<tr><td>Excel avansat — diferențiator</td><td>Excel — bază, dar nu diferențiator</td></tr>
+<tr><td>Cunoașterea legislației — esențială</td><td>Esențială — dar AI deține o copie</td></tr>
+<tr><td>Atenție la detalii la introducere</td><td>Atenție la <em>validarea introducerii</em></td></tr>
+<tr><td>Viteza de calcul mental</td><td>Practic irelevantă</td></tr>
+<tr><td>Memorie pentru standarde</td><td>Auxiliară — <em>interogarea inteligentă</em> contează mai mult</td></tr>
+<tr><td>Comunicarea cu clientul</td><td><em>Esențială și amplificată</em></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Skill-uri care abia existau &#238;n 2022</th><th>Importanță &#238;n 2026</th></tr></thead>
+<tbody>
+<tr><td>Prompt Engineering</td><td>Critică</td></tr>
+<tr><td>AI Output Validation</td><td>Critică</td></tr>
+<tr><td>Process Design pentru fluxuri hibride</td><td>&#206;naltă</td></tr>
+<tr><td>&#206;nțelegerea ML / RAG</td><td>Mediu spre &#238;nalt</td></tr>
+<tr><td>Etica utilizării AI</td><td>&#206;naltă, &#238;n creștere</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Predicția de calibrare</strong><br>&#206;n anul 2000, <em>„I don&#39;t know Excel&quot;</em> era &#238;ncă o frază acceptabilă &#238;n multe medii contabile. &#206;n anul 2010, devenise inadmisibilă. Predicția fundamentată pentru anul 2030: <em><strong>„I don&#39;t know AI&quot; va fi exact ce era „I don&#39;t know Excel&quot; &#238;n 2010.</strong></em> Nu o limitare. O excludere de pe piața muncii.</div>
+</div>
+
+<hr>
+
+<h2 id="cap4">CAPITOLUL 4</h2>
+
+<h2 id="cele-trei-intrebari-de-interviu-care-vor-defini-angajabilitatea-in-2030">Cele Trei &#206;ntrebări de Interviu Care Vor Defini Angajabilitatea &#238;n 2030</h2>
+
+<h3 id="hook-raspunsurile-pe-care-orice-contabil-ar-trebui-sa-le-poata-da">Răspunsurile pe care orice contabil ar trebui să le poată da</h3>
+
+<p>Pentru a face palpabilă schimbarea, vom relua aici cele trei &#238;ntrebări care au &#238;nceput deja să apară la interviuri &#238;n firmele cele mai avansate — și pe care le-am introdus &#238;n Prolog. Le vom analiza pe r&#226;nd, cu răspunsurile așteptate complete.</p>
+
+<h3 id="intrebarea-1-ce-intelegi-prin-llm-si-cum-ai-putea-sa-l-folosesti-in-contabilitate">&#206;ntrebarea 1 — <em>„Ce &#238;nțelegi prin LLM și cum ai putea să-l folosești &#238;n contabilitate?&quot;</em></h3>
+
+<p><strong>Răspuns așteptat:</strong></p>
+
+<blockquote>
+<em>„LLM &#238;nseamnă Large Language Model. Este un model de AI antrenat pe volume masive de text care poate &#238;nțelege și genera limbaj natural. &#206;n contabilitate, pot folosi un LLM pentru:</em><br>
+- <em>să rezum rapid rapoarte financiare de 50 de pagini</em><br>
+- <em>să caut &#238;n standardele contabile (IFRS/GAAP) printr-o &#238;ntrebare simplă, &#238;n loc să răsfoiesc manual</em><br>
+- <em>să generez draft-uri de memo-uri sau rapoarte</em><br>
+- <em>să analizez contracte pentru identificarea obligațiilor de revenue recognition</em><br>
+<em>Exemplu concret: &#238;n loc să citesc manual 100 de pagini de contract, &#238;ntreb LLM-ul &#171;care sunt toate milestone-urile de plată și condițiile pentru revenue recognition?&#187; și primesc un rezumat structurat — pe care apoi &#238;l validez.&quot;</em>
+</blockquote>
+
+<p><strong>De ce contează acest răspuns:</strong> demonstrează că nu doar <em>știi ce este</em> un LLM, ci ai <em>un mental model funcțional</em> despre cum se inserează &#238;n munca ta zilnică. Demonstrează și <em>maturitate critică</em> — finalul cu <em>„pe care apoi &#238;l validez&quot;</em> este cheia.</p>
+
+<h3 id="intrebarea-2-ce-sunt-tokenii-intr-un-context-ai-si-de-ce-conteaza">&#206;ntrebarea 2 — <em>„Ce sunt tokenii &#238;ntr-un context AI și de ce contează?&quot;</em></h3>
+
+<p><strong>Răspuns așteptat:</strong></p>
+
+<blockquote>
+<em>„Tokenii sunt unitățile de text pe care LLM-ul le procesează. &#206;n medie, 1 token ≈ 0,75 cuvinte &#238;n engleză. Contează din trei motive:</em><br>
+<em>1. Cost: plătești per token procesat — at&#226;t la input c&#226;t și la output.</em><br>
+<em>2. Limite de context: fiecare model are un maximum de tokeni pe care &#238;i poate procesa dintr-o dată — de exemplu 128.000 tokeni = ~96.000 de cuvinte.</em><br>
+<em>3. Eficiență: un prompt bun folosește mai puțini tokeni pentru același rezultat.</em><br>
+<em>Exemplu practic: dacă trimit un document de 100 de pagini (~50.000 tokeni) și primesc un răspuns de 1.000 de cuvinte (~1.300 tokeni), la prețurile standard (input ~$0,003 / 1k tokens, output ~$0,015 / 1k tokens), costul este: (50 &#215; $0,003) + (1,3 &#215; $0,015) ≈ $0,17 — adică sub 20 de cenți.</em><br>
+<em>De aceea sunt important să fiu concis &#238;n prompt-uri și să cer output-uri la lungimea necesară — nu mai lungi.&quot;</em>
+</blockquote>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Și poți calcula costul concret. Dacă trimiți un document de 100 de pagini — cam 50.000 de tokeni — și primești un răspuns de 1.000 de cuvinte — cam 1.300 de tokeni — la prețurile standard, costul tău e sub 20 de cenți. Deci e foarte accesibil, dar trebuie să &#238;nțelegi mecanismul.&quot;</div>
+</div>
+
+<p><strong>De ce contează acest răspuns:</strong> demonstrează <em>fluență tehnică reală</em>. Nu doar că ai folosit ChatGPT, ci &#238;nțelegi <em>economia subiacentă</em>. Asta semnalează un nivel de seriozitate &#238;n adopția AI.</p>
+
+<h3 id="intrebarea-3-explica-mi-ce-este-prompt-engineering-si-da-mi-un-exemplu-bun-versus-rau-de-prompt-pentru-o-sarcina-contabila">&#206;ntrebarea 3 — <em>„Explică-mi ce este prompt engineering și dă-mi un exemplu bun versus rău de prompt pentru o sarcină contabilă.&quot;</em></h3>
+
+<p><strong>Răspuns așteptat:</strong></p>
+
+<blockquote>
+<em>„Prompt engineering este arta de a scrie instrucțiuni clare și eficiente pentru AI astfel &#238;nc&#226;t să obții răspunsul dorit.</em><br>
+<em>Exemplu de prompt RĂU: &#171;Uită-te la factura asta și spune-mi ce vezi.&#187;</em><br>
+<em>De ce e rău? E prea vag — &#171;ce vezi&#187; poate &#238;nsemna orice. Nu specifici ce informații &#238;ți trebuie. Nu ceri o structură.</em><br>
+<em>Exemplu de prompt BUN: &#171;Analizează această factură și extrage următoarele informații &#238;ntr-un format structurat:</em><br>
+<em>1. Număr factură; 2. Data emiterii; 3. Furnizor (nume complet, CUI); 4. Client (nume complet, CUI); 5. Lista produse/servicii (denumire, cantitate, preț unitar, total); 6. Subtotal; 7. TVA (rată și sumă); 8. Total de plată; 9. Termen de plată; 10. Identifică orice inconsistențe sau erori (calcule greșite, TVA incorect).</em><br>
+<em>Returnează informațiile &#238;n format JSON pentru import automat &#238;n sistem.&#187;</em><br>
+<em>De ce e bun? Specific (AI-ul știe exact ce să caute), structurat (output previzibil), acționabil (formatul JSON permite automatizarea), include validare (cere să verifice și erori).&quot;</em>
+</blockquote>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Vedeți diferența? Promptul bun este specific — AI-ul știe exact ce să caute. Este structurat — output-ul va fi previzibil. Este acționabil — formatul JSON permite automatizarea importului. Și include validare — cere să verifice și erori.&quot;</div>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Diferența dintre un prompt bun și unul rău e ca diferența dintre un VLOOKUP care funcționează și unul care dă eroare. E un skill tehnic care se poate &#238;nvăța și perfecționa.&quot;</div>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce aceste trei &#238;ntrebări, exact?</strong><br>Cele trei &#238;ntrebări nu sunt aleatorii. Ele acoperă <em>cele trei dimensiuni</em> esențiale ale AI Literacy: <em>conceptual</em> (ce este un LLM), <em>economic</em> (ce sunt tokenii), <em>practic</em> (cum scrii un prompt bun). Un candidat care răspunde competent la toate trei demonstrează că <em>nu doar a folosit ChatGPT</em>, ci a internalizat fundamentele. Asta este diferența &#238;ntre <em>experimentator</em> și <em>profesionist AI-fluent</em>.</div>
+</div>
+
+<hr>
+
+<h2 id="cap5">CAPITOLUL 5</h2>
+
+<h2 id="skill-1-ai-literacy-concepte-fundamentale">Skill 1 — AI Literacy &amp; Concepte Fundamentale</h2>
+
+<h3 id="hook-cele-sapte-concepte-fara-de-care-nu-poti-avea-o-discutie-serioasa-despre-ai">Cele șapte concepte fără de care nu poți avea o discuție serioasă despre AI</h3>
+
+<p>&#206;nainte de a vorbi despre tehnici (prompt engineering, validare etc.), trebuie să stăp&#226;nești <em>vocabularul de bază</em>. Fără el, ești &#238;n poziția unui contabil din 1995 care vrea să folosească Excel-ul, dar nu știe ce este o <em>celulă</em>, <em>o formulă</em> sau <em>o referință absolută</em>. Poți face lucruri, dar nu poți face lucruri <em>bune</em>.</p>
+
+<h3 id="cele-sapte-concepte-fundamentale-pe-care-trebuie-sa-le-stapanesti">Cele șapte concepte fundamentale pe care trebuie să le stăp&#226;nești</h3>
+
+<h3 id="1-llm-large-language-model">1. LLM (Large Language Model)</h3>
+
+<p><strong>Ce este:</strong> un model de AI antrenat pe volume masive de text (sute de miliarde de cuvinte din cărți, articole, internet). Pe baza acestei expuneri, &#238;nvață <em>tipare statistice</em> despre cum se &#238;nlănțuie limba — și poate genera text coerent ca răspuns la &#238;ntrebări.</p>
+
+<p><strong>Capabilități:</strong> &#238;nțelege și generează text natural; rezumă, traduce, analizează, generează cod, răspunde la &#238;ntrebări complexe.</p>
+
+<p><strong>Limitări:</strong> nu <em>„știe&quot;</em> lucruri &#238;n sens tradițional — <em>generează</em> răspunsuri statistic plauzibile; poate halucina; nu are acces la informații după data antrenării (dec&#226;t prin tools externe).</p>
+
+<h3 id="2-tokens">2. Tokens</h3>
+
+<p><strong>Ce sunt:</strong> unitățile de text pe care LLM-ul le procesează intern. <em>1 token ≈ 0,75 cuvinte &#238;n engleză</em>; &#238;n rom&#226;nă, raportul este puțin diferit (mai puține cuvinte per token, pentru că rom&#226;na nu este at&#226;t de bine reprezentată &#238;n datele de antrenament).</p>
+
+<p><strong>De ce contează:</strong> plătești per token; există limite de cantitate per cerere; un prompt bun folosește mai puțini tokeni pentru același rezultat.</p>
+
+<h3 id="3-context-window">3. Context Window</h3>
+
+<p><strong>Ce este:</strong> limita maximă de tokeni pe care AI-ul &#238;i poate procesa &#238;ntr-o singură interacțiune. Modelele moderne au context window-uri de la 128.000 tokeni (~96.000 cuvinte, echivalentul unui roman scurt) la 1.000.000 tokeni (cazul Gemini).</p>
+
+<p><strong>Implicația practică:</strong> &#238;n 2022, abia &#238;ncăpea o jumătate de notă explicativă (3.000 tokeni); &#238;n 2026, &#238;ncape un raport financiar &#238;ntreg cu toate notele și anexele.</p>
+
+<h3 id="4-hallucinations-halucinatii">4. Hallucinations (Halucinații)</h3>
+
+<p><strong>Ce sunt:</strong> invenții pe care AI-ul le produce cu <em>aplomb derutant</em> — un standard contabil care nu există, un caz juridic fictiv, un autor care nu a scris niciodată. Apar pentru că modelul <em>generează statistic</em>, nu <em>recuperează factual</em>.</p>
+
+<p><strong>Implicația pentru contabil:</strong> <em>fundamentală</em>. Un AI care „inventează cu aplomb&quot; este periculos pentru profesia contabilă. Skill 4 (validarea output-ului) este construit exact pentru a contracara acest risc.</p>
+
+<h3 id="5-training-data-knowledge-cutoff">5. Training Data &amp; Knowledge Cutoff</h3>
+
+<p><strong>Ce sunt:</strong> datele pe care AI-ul a fost antrenat (Training Data) și data ultimă a acestor date (Knowledge Cutoff). De exemplu, un model cu cutoff iulie 2025 nu „știe&quot; ce s-a &#238;nt&#226;mplat după acea dată — dec&#226;t dacă are acces la unelte externe (web search).</p>
+
+<p><strong>Implicația pentru contabil:</strong> &#238;ntotdeauna <em>verifică actualitatea</em> citațiilor de legislație. Codul Fiscal rom&#226;nesc se modifică des; un AI cu cutoff de acum un an poate cita un articol modificat &#238;ntre timp.</p>
+
+<h3 id="6-prompting">6. Prompting</h3>
+
+<p><strong>Ce este:</strong> comunicarea cu AI-ul prin instrucțiuni text. Vom dedica un capitol &#238;ntreg tehnicilor (Capitolul 6).</p>
+
+<h3 id="7-fine-tuning-vs-rag-retrieval-augmented-generation">7. Fine-tuning vs RAG (Retrieval-Augmented Generation)</h3>
+
+<p>*<em>Două metode de a </em>specializa<em> un AI generic pentru un domeniu specific:</em>*</p>
+
+<ul>
+  <li><strong>Fine-tuning</strong> — re-antrenezi modelul pe datele tale; complex, costisitor, dar produce un AI cu „cunoștințe interne&quot; specifice</li>
+  <li><strong>RAG</strong> — conectezi AI-ul la o bază de cunoștințe externă (manualele tale, legislația locală, documentele firmei); AI-ul „caută&quot; &#238;n bază &#238;nainte de a răspunde</li>
+</ul>
+
+<p><strong>Implicația pentru contabil:</strong> &#238;n piața rom&#226;nească, <em>RAG va fi cea mai relevantă metodă</em> pentru AI specializat — pentru că legislația se schimbă des și fine-tuning-ul ar trebui refăcut continuu.</p>
+
+<h3 id="resursele-de-invatare">Resursele de &#238;nvățare</h3>
+
+<p>Pentru a internaliza aceste șapte concepte, recomandăm:</p>
+
+<ul>
+  <li><strong>OpenAI Prompt Engineering Guide</strong> — gratuit, conceptual și aplicat</li>
+  <li><strong>Anthropic Claude Prompting Documentation</strong> — la fel, gratuit</li>
+  <li><strong>Cursuri specifice „AI for Accountants&quot;</strong> — vor apărea tot mai multe &#238;n 2026-2027</li>
+  <li><strong>Practică directă</strong> — 10 ore de experimentare pe ChatGPT și Claude</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Trebuie să &#238;nțelegi ce este un LLM, cum funcționează la nivel conceptual, care &#238;i sunt capabilitățile și limitările. Trebuie să știi ce sunt tokenii, ce este context window-ul, ce sunt halucinațiile și de ce apar, ce &#238;nseamnă training data și knowledge cutoff, bazele prompting-ului, și diferența dintre fine-tuning și RAG.&quot;</div>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce nu poți să sari peste acest skill</strong><br>Tentația, mai ales pentru profesioniștii cu agenda &#238;ncărcată, este să sari direct la „cum scriu un prompt bun&quot; fără să stăp&#226;nești fundamentele. <em>Această tentație este o eroare.</em> Fără &#238;nțelegerea conceptelor, vei face greșeli sistematice (de exemplu, vei urca date confidențiale &#238;ntr-un LLM public pentru că nu &#238;nțelegi unde se procesează datele; sau vei accepta cu &#238;ncredere o citare halucinată pentru că nu știi că AI-ul <em>poate</em> halucina). Cele 10-20 de ore investite &#238;n concepte sunt cea mai mare ROI investiție din &#238;ntregul roadmap.</div>
+</div>
+
+<p><strong>Estimare timp:</strong> 10-20 ore pentru a deveni <em>conversațional fluent</em> cu vocabularul AI.</p>
+
+<hr>
+
+<h2 id="cap6">CAPITOLUL 6</h2>
+
+<h2 id="skill-2-prompt-engineering-cele-cinci-tehnici-esentiale">Skill 2 — Prompt Engineering, Cele Cinci Tehnici Esențiale</h2>
+
+<h3 id="hook-de-ce-a-vorbi-cu-ai-ul-este-o-competenta-tehnica-nu-o-conversatie">De ce „a vorbi cu AI-ul&quot; este o competență tehnică, nu o conversație</h3>
+
+<p>Există o concepție greșită răsp&#226;ndită despre prompt engineering: <em>„e doar conversație normală, oricine poate face asta&quot;</em>. Această concepție produce rezultate mediocre. Prompt engineering <em>este o competență tehnică</em>, cu reguli, tehnici, modele de bună practică, exact ca scrierea de formule Excel sau de SQL queries.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Diferența dintre un prompt bun și unul rău e ca diferența dintre un VLOOKUP care funcționează și unul care dă eroare. E un skill tehnic care se poate &#238;nvăța și perfecționa.&quot;</div>
+</div>
+
+<p>Vom parcurge cele cinci tehnici de bază, &#238;n ordine de complexitate.</p>
+
+<h3 id="tehnica-a-zero-shot-prompting">Tehnica A — Zero-shot Prompting</h3>
+
+<p><strong>Ce este:</strong> dai instrucțiunea directă, fără exemple.</p>
+
+<p><strong>Exemplu:</strong> ``<code> Analizează acest contract și identifică toate obligațiile de plată. </code>``</p>
+
+<p><strong>C&#226;nd să folosești:</strong> sarcini simple, clare, unde AI-ul are deja contextul suficient. Avantaj: rapid, simplu. Dezavantaj: rezultate variabile pentru sarcini specializate.</p>
+
+<h3 id="tehnica-b-few-shot-prompting">Tehnica B — Few-shot Prompting</h3>
+
+<p><strong>Ce este:</strong> dai c&#226;teva exemple &#238;nainte de a cere noua sarcină.</p>
+
+<p><strong>Exemplu:</strong> ``` Categorizează aceste cheltuieli. Exemple:</p>
+
+<ul>
+  <li>&#39;Uber to client meeting&#39; → Travel</li>
+  <li>&#39;Laptop Dell&#39; → Equipment</li>
+  <li>&#39;AWS cloud hosting&#39; → Technology</li>
+</ul>
+
+<p>Acum categorizează:</p>
+
+<ul>
+  <li>&#39;Taxi to airport&#39;</li>
+  <li>&#39;Microsoft 365 subscription&#39;</li>
+  <li>&#39;Office chairs&#39;</li>
+</ul>
+
+<p>```</p>
+
+<p><strong>C&#226;nd să folosești:</strong> sarcini de clasificare, formatare, transformare repetitivă. Exemplele „ancorează&quot; AI-ul &#238;n logica ta.</p>
+
+<h3 id="tehnica-c-chain-of-thought-rationament-pas-cu-pas">Tehnica C — Chain-of-Thought (Raționament Pas-cu-Pas)</h3>
+
+<p><strong>Ce este:</strong> ceri AI-ului să g&#226;ndească explicit pas cu pas, nu să sară direct la răspuns.</p>
+
+<p><strong>Exemplu:</strong> ``` Calculează profitul net pentru Q4. G&#226;ndește pas cu pas:</p>
+
+<ol>
+  <li>Identifică toate veniturile</li>
+  <li>Identifică toate cheltuielile</li>
+  <li>Calculează gross profit</li>
+  <li>Scade operating expenses</li>
+  <li>Aplică taxes</li>
+  <li>Arată calcul final</li>
+</ol>
+
+<p>```</p>
+
+<p><strong>C&#226;nd să folosești:</strong> sarcini matematice, logice, multi-pas. Are dublu beneficiu: (1) AI-ul produce răspunsuri mai corecte, (2) tu poți <em>audita raționamentul</em>, nu doar concluzia.</p>
+
+<h3 id="tehnica-d-role-prompting">Tehnica D — Role Prompting</h3>
+
+<p><strong>Ce este:</strong> &#238;i spui AI-ului <em>ce rol</em> să joace.</p>
+
+<p><strong>Exemplu:</strong> ``<code> Acționează ca un Senior Financial Auditor cu 15 ani experiență. Analizează acest balance sheet și identifică 5 red flags potențiale. </code>``</p>
+
+<p><strong>C&#226;nd să folosești:</strong> sarcini care necesită o perspectivă specifică (auditor, controller, advisor); ridică nivelul de profundimea răspunsului.</p>
+
+<h3 id="tehnica-e-structured-output">Tehnica E — Structured Output</h3>
+
+<p><strong>Ce este:</strong> ceri specific <em>formatul</em> output-ului — JSON, tabel, liste, etc.</p>
+
+<p><strong>Exemplu:</strong> ``<code> Extrage informații din această factură și returnează &#238;n format JSON: { &quot;invoice_number&quot;: &quot;&quot;, &quot;date&quot;: &quot;&quot;, &quot;vendor&quot;: &quot;&quot;, &quot;total&quot;: 0, &quot;vat&quot;: 0, &quot;items&quot;: [] } </code>``</p>
+
+<p><strong>C&#226;nd să folosești:</strong> c&#226;nd vrei să automatizezi prelucrarea ulterioară (import &#238;n sistem, trimitere către alt API, integrare &#238;n Excel etc.). Outputul JSON poate fi <em>prelucrat programatic</em>.</p>
+
+<h3 id="tabelul-de-sinteza">Tabelul de sinteză</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Tehnica</th><th>Complexitate</th><th>Cand să folosești</th><th>Avantaj cheie</th></tr></thead>
+<tbody>
+<tr><td><strong>Zero-shot</strong></td><td>Mică</td><td>Sarcini simple, clare</td><td>Rapid</td></tr>
+<tr><td><strong>Few-shot</strong></td><td>Medie</td><td>Clasificare, transformare</td><td>Ancorare &#238;n logica ta</td></tr>
+<tr><td><strong>Chain-of-Thought</strong></td><td>Medie</td><td>Calcule, logică multi-pas</td><td>Auditabilitate</td></tr>
+<tr><td><strong>Role Prompting</strong></td><td>Mică-medie</td><td>Sarcini cu perspectivă</td><td>Profundime crescută</td></tr>
+<tr><td><strong>Structured Output</strong></td><td>Mică</td><td>Automatizare downstream</td><td>Procesabilitate</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Estimăm că 20-40 de ore de practică pe prompt writing te duc la un nivel funcțional bun. Comparativ cu cele 500+ ore pentru Excel avansat, investiția este mult mai mică.&quot;</div>
+</div>
+
+<h3 id="practica-recomandata">Practică recomandată</h3>
+
+<p>Pentru a deveni <em>funcțional competent</em> &#238;n prompt engineering: <strong>20-40 ore de practică deliberată</strong>. Asta nu &#238;nseamnă „să folosești ChatGPT pentru orice timp de două luni&quot; — &#238;nseamnă să petreci 20-40 ore <em>conștient</em>, scriind, compar&#226;nd, rafin&#226;nd prompt-uri pentru sarcini contabile concrete.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce 20-40 ore vs 500+ ore Excel</strong><br>Diferența uriașă (20-40 ore pentru prompt engineering funcțional vs 500+ ore pentru Excel avansat) nu este accidentală. Are două cauze: (1) curba de &#238;nvățare AI este inerent mai lină — vorbești cu el &#238;n limbaj natural, nu memorezi sintaxa, (2) substratul digital este deja instalat — nu mai trebuie să &#238;nveți să folosești un calculator. <em>Paradoxal, această ușurință este ea &#238;nsăși un risc:</em> pentru că AI-ul este at&#226;t de accesibil, mulți cred că nu mai au nimic de &#238;nvățat. Aceasta este o eroare. Bara „acceptabil&quot; e joasă; bara „competent&quot; răm&#226;ne sus.</div>
+</div>
+
+<hr>
+
+<h2 id="cap7">CAPITOLUL 7</h2>
+
+<h2 id="skill-3-tool-platform-literacy">Skill 3 — Tool &amp; Platform Literacy</h2>
+
+<h3 id="hook-nu-exista-ai-ul-exista-un-peisaj-de-instrumente-fiecare-cu-nisa-lui">Nu există „AI-ul&quot;; există un peisaj de instrumente, fiecare cu nișa lui</h3>
+
+<p>&#206;n discuțiile populare se vorbește despre „AI&quot; ca și cum ar fi un singur instrument. &#206;n realitate, peisajul este <em>un ecosistem</em> de modele și platforme, fiecare cu specificuri distincte, costuri diferite și contexte de utilizare optime. Profesionistul AI-fluent știe să aleagă instrumentul potrivit pentru sarcina potrivită.</p>
+
+<h3 id="cele-patru-platforme-generaliste-pe-care-trebuie-sa-le-cunosti">Cele patru platforme generaliste pe care trebuie să le cunoști</h3>
+
+<h3 id="1-chatgpt-openai">1. ChatGPT (OpenAI)</h3>
+
+<p><strong>Pozitionare:</strong> General purpose, <em>versatil</em>. Cea mai mare bază de utilizatori, cel mai cunoscut brand.</p>
+
+<p><strong>Punctele tari:</strong> ecosistem mare de plugin-uri și GPT-uri custom; integrare cu Code Interpreter (rulează cod Python pentru analize de date); voice mode bun.</p>
+
+<p><strong>Punctele slabe:</strong> poate fi prolix; pentru analize foarte lungi de documente, alte platforme sunt mai bune.</p>
+
+<p><strong>Costuri (2026):</strong> Plus la $20/lună, Pro la $200/lună (acces la modele mai puternice).</p>
+
+<h3 id="2-claude-anthropic">2. Claude (Anthropic)</h3>
+
+<p><strong>Pozitionare:</strong> Excelent pentru <em>analiza documentelor lungi și pentru coding</em>. Reputație de model atent la siguranță și etică.</p>
+
+<p><strong>Punctele tari:</strong> context window foarte mare; răspunde <em>natural</em> la documente extinse; Claude Code (pentru programatori) și Claude Cowork (pentru non-programatori, lansat ianuarie 2026) sunt agenți autonomi puternici.</p>
+
+<p><strong>Punctele slabe:</strong> ecosistem de plugin-uri mai mic dec&#226;t ChatGPT.</p>
+
+<p><strong>Costuri (2026):</strong> Pro la $20/lună, planuri enterprise variabile.</p>
+
+<h3 id="3-gemini-google">3. Gemini (Google)</h3>
+
+<p><strong>Pozitionare:</strong> Integrare nativă cu <em>Google Workspace</em> (Docs, Sheets, Drive, Gmail, Calendar). Context window extrem (p&#226;nă la 1 milion tokeni).</p>
+
+<p><strong>Punctele tari:</strong> dacă lucrezi &#238;n ecosistem Google, este integrat. Multimodal puternic (imagini, video).</p>
+
+<p><strong>Punctele slabe:</strong> mai puțin matur conversațional dec&#226;t ChatGPT și Claude.</p>
+
+<h3 id="4-copilot-microsoft">4. Copilot (Microsoft)</h3>
+
+<p><strong>Pozitionare:</strong> Integrat nativ cu <em>Office 365</em> (Excel, Word, PowerPoint, Outlook, Teams).</p>
+
+<p><strong>Punctele tari:</strong> dacă firma ta este pe Microsoft, Copilot vine deja &#238;n interfața familiară. Funcționează <em>&#238;n</em> Excel, nu separat.</p>
+
+<p><strong>Punctele slabe:</strong> dependent de calitatea datelor din Office; rezultate variabile pentru sarcini complexe.</p>
+
+<h3 id="tabel-de-sinteza-a-peisajului-platformelor">Tabel de sinteză a peisajului platformelor</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Platforma</th><th>Cea mai bună pentru</th><th>Integrare optimă</th></tr></thead>
+<tbody>
+<tr><td><strong>ChatGPT</strong></td><td>General purpose, brainstorming, plugin-uri</td><td>Standalone web/mobile</td></tr>
+<tr><td><strong>Claude</strong></td><td>Documente lungi, coding, agenți autonomi</td><td>Standalone, dar Cowork integrează cu file system</td></tr>
+<tr><td><strong>Gemini</strong></td><td>Multimodal, context foarte mare</td><td>Google Workspace</td></tr>
+<tr><td><strong>Copilot</strong></td><td>Sarcini &#238;n Office</td><td>Office 365</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="skill-urile-suplimentare-in-aceasta-zona">Skill-urile suplimentare &#238;n această zonă</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Și trebuie să știi cum să configurezi AI pentru workflow-ul tău, cum să faci integrări cu sistemele existente — ERP-uri, software contabil — bazele API-urilor pentru automatizări custom, și foarte important: data privacy și security atunci c&#226;nd alegi un tool.&quot;</div>
+</div>
+
+<p>Concret:</p>
+
+<ul>
+  <li><em>Configurare pentru workflow</em> — fiecare platformă permite <em>„custom GPT-uri&quot;</em> sau <em>„Projects&quot;</em> unde definești contextul, instrucțiunile, fișierele de referință</li>
+  <li><em>Integrări cu ERP-uri și software contabil</em> — &#238;n Rom&#226;nia, integrarea cu SAGA, SmartBill, Keez devine tot mai disponibilă</li>
+  <li><em>Bazele API-urilor</em> — pentru a construi automatizări custom (c&#226;nd ai volum mare de sarcini repetitive)</li>
+  <li><em>Data privacy</em> — <em>cea mai importantă alegere</em> (vom dezvolta &#238;n Skill 5)</li>
+</ul>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Strategia recomandată pentru &#238;ncepători</strong><br>Nu &#238;ncerca să stăp&#226;nești toate cele patru platforme simultan. <em>Alege una</em> (recomandare: ChatGPT sau Claude, ambele cu trial gratuit decent), petrece 30 de zile aproape exclusiv cu ea. Apoi, av&#226;nd un mental model construit, adaugă o a doua. După 6 luni de practică, decide care sunt cele <em>2-3 platforme</em> care &#238;ți servesc cel mai bine fluxul de muncă — <em>și abonează-te la toate</em>. Costul total $40-60/lună este derizoriu față de avantajul competitiv obținut.</div>
+</div>
+
+<hr>
+
+<h2 id="cap8">CAPITOLUL 8</h2>
+
+<h2 id="skill-4-evaluarea-critica-a-output-ului-ai">Skill 4 — Evaluarea Critică a Output-ului AI</h2>
+
+<h3 id="hook-cea-mai-importanta-competenta-a-contabilului-in-era-ai">Cea mai importantă competență a contabilului &#238;n Era AI</h3>
+
+<p>Dacă ar trebui să alegem <em>un singur skill</em> dintre cele cinci pe care &#238;l considerăm cel mai critic, am alege fără ezitare <em>evaluarea critică a output-ului AI</em>. Iată de ce: AI-ul ușurează producția; <em>singurul lucru</em> care decide dacă output-ul produs poate fi folosit profesional este <em>capacitatea ta de a-l valida</em>. Fără această capacitate, viteza AI-ului devine un risc, nu un beneficiu.</p>
+
+<h3 id="framework-ul-de-validare-in-cinci-pasi">Framework-ul de validare &#238;n cinci pași</h3>
+
+<h3 id="pasul-1-verificarea-de-substanta">Pasul 1 — Verificarea de substanță</h3>
+
+<p><strong>&#206;ntrebarea-cheie:</strong> <em>„Are sens din punct de vedere business?&quot;</em></p>
+
+<p><strong>Red flags tipice:</strong></p>
+
+<ul>
+  <li>Cifre rotunjite suspect (exact 100.000, exact 1 milion, etc.)</li>
+  <li>Categorii neobișnuite („Misc&quot;, „Other&quot; etc. &#238;n volume mari)</li>
+  <li>Procente care nu se adună la 100%</li>
+  <li>Tendințe contradictorii (v&#226;nzări &#238;n creștere, dar și cheltuieli &#238;n scădere proporțională inexplicabilă)</li>
+</ul>
+
+<h3 id="pasul-2-verificarea-surselor">Pasul 2 — Verificarea surselor</h3>
+
+<p><strong>&#206;ntrebarea-cheie:</strong> <em>„Sursele citate sunt reale și actuale?&quot;</em></p>
+
+<ul>
+  <li>Dacă AI citează <em>IFRS 15</em> — verifici &#238;n standardul actual că ai &#238;nțeles corect</li>
+  <li>Dacă AI citează <em>prevederi legislative rom&#226;nești</em> — verifici textul actual pe ANAF / Monitorul Oficial</li>
+  <li>Dacă AI menționează <em>o decizie de instanță</em> — verifici existența și conținutul</li>
+</ul>
+
+<h3 id="pasul-3-verificarea-calculelor">Pasul 3 — Verificarea calculelor</h3>
+
+<p><strong>&#206;ntrebarea-cheie:</strong> <em>„Calculele sunt corecte?&quot;</em></p>
+
+<ul>
+  <li>Recalculezi manual prin sondaj (selectezi 3-5 numere și le verifici)</li>
+  <li>Verifici totaluri vs sume de subtotaluri</li>
+  <li>Verifici procentajele (&#238;mpărțirile)</li>
+</ul>
+
+<h3 id="pasul-4-gradul-de-completare">Pasul 4 — Gradul de completare</h3>
+
+<p><strong>&#206;ntrebarea-cheie:</strong> <em>„AI a răspuns la toate &#238;ntrebările? Există omisiuni?&quot;</em></p>
+
+<ul>
+  <li>Recitești prompt-ul tău</li>
+  <li>Pentru fiecare punct cerut, verifici dacă există &#238;n răspuns</li>
+  <li>Atenție la <em>omisiuni tăcute</em> — AI-ul nu te avertizează c&#226;nd a sărit ceva</li>
+</ul>
+
+<h3 id="pasul-5-detectia-halucinatiilor">Pasul 5 — Detecția halucinațiilor</h3>
+
+<p><strong>&#206;ntrebarea-cheie:</strong> <em>„Există ceva inventat?&quot;</em></p>
+
+<p>Halucinațiile clasice:</p>
+
+<ul>
+  <li>Standarde inexistente (<em>„IFRS 25&quot;</em> — nu există)</li>
+  <li>Citate atribuite unor autori care nu le-au scris</li>
+  <li>Cazuri juridice fictive</li>
+  <li>Numere care „sună bine&quot; dar nu vin de undeva verificabil</li>
+</ul>
+
+<h3 id="framework-ul-de-trust-but-verify">Framework-ul de „Trust but Verify&quot;</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Best practice-ul nostru: &#171;Trust but verify&#187; — Tratezi AI-ul ca pe un junior foarte capabil, dar TOTDEAUNA &#238;i revizuiești output-ul. Niciodată nu lași output-ul AI-ului să plece la client fără review uman.&quot;</div>
+</div>
+
+<p>Această filosofie — <em>„trust but verify&quot;</em> — este moștenită din relația cu juniorii. Un junior bun produce rapid, dar cu erori inevitabile pe care senior-ul trebuie să le prindă. AI-ul funcționează identic — produce rapid, cu erori inevitabile, pe care contabilul trebuie să le prindă.</p>
+
+<h3 id="tabel-de-calibrare-cand-e-acceptabil-good-enough">Tabel de calibrare — c&#226;nd e acceptabil „good enough&quot;</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Tipul output-ului</th><th>Nivel de validare necesar</th></tr></thead>
+<tbody>
+<tr><td>Brainstorming intern, ideație</td><td>Minimal — doar verifici că răspunsul e relevant</td></tr>
+<tr><td>Draft de email intern</td><td>Mediu — citești atent, ajustezi</td></tr>
+<tr><td>Draft de raport către client</td><td><strong>&#206;nalt</strong> — validare pe toți cei 5 pași</td></tr>
+<tr><td>Date care merg &#238;ntr-o declarație</td><td><strong>Total</strong> — recalculezi manual fiecare cifră</td></tr>
+<tr><td>Citare de standarde sau legislație</td><td><strong>Total</strong> — verificare obligatorie pe surse oficiale</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce această competență definește profesionistul AI-fluent</strong><br>&#206;n Era AI, <em>toți</em> vor folosi AI. Diferența &#238;ntre <em>amator</em> și <em>profesionist</em> va fi capacitatea de validare. Amatorul ia output-ul AI-ului și &#238;l trimite &#238;nainte. Profesionistul ia output-ul, &#238;l trece prin cele cinci verificări, găsește 1-3 erori care ar fi trecut neobservate, le corectează — și <em>abia atunci</em> trimite &#238;nainte. <em>Această diferență — capacitatea de a prinde halucinațiile</em> — va decide cine prosperă &#238;n profesie și cine &#238;și pierde clienții.</div>
+</div>
+
+<hr>
+
+<h2 id="cap9">CAPITOLUL 9</h2>
+
+<h2 id="skill-5-etica-utilizarii-ai-si-data-privacy">Skill 5 — Etica Utilizării AI și Data Privacy</h2>
+
+<h3 id="hook-cinci-dileme-noi-fara-precedent-in-profesie">Cinci dileme noi, fără precedent &#238;n profesie</h3>
+
+<p>Etica utilizării AI ridică &#238;ntrebări care, &#238;n principiu, nu existau &#238;n profesia contabilă acum cinci ani. Le vom enumera pe r&#226;nd, fiecare cu implicațiile concrete.</p>
+
+<h3 id="dilema-1-confidentialitatea-datelor">Dilema 1 — Confidențialitatea datelor</h3>
+
+<p><strong>Regula de aur:</strong> <em>NICIODATĂ</em> nu urci date confidențiale ale clientului &#238;ntr-un LLM public (versiunea gratuită ChatGPT, Gemini, Claude).</p>
+
+<p><strong>De ce:</strong> versiunile gratuite ale acestor servicii folosesc datele tale pentru <em>antrenare ulterioară</em> a modelelor. Asta &#238;nseamnă că informațiile clientului tău pot ajunge, <em>teoretic</em>, &#238;n răspunsurile date altor utilizatori. Pentru un contabil, aceasta este o &#238;ncălcare gravă a obligațiilor de confidențialitate.</p>
+
+<p><strong>Soluția:</strong> folosești <em>versiunile enterprise</em> ale platformelor — care vin cu contracte formale de confidențialitate, politici de retenție clare, și <em>garanții că datele tale nu sunt folosite pentru antrenare</em>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Confidențialitatea: NICIODATĂ nu urci date confidențiale ale clientului &#238;ntr-un LLM public, cum ar fi versiunea gratuită de ChatGPT. Folosești versiunile enterprise care au politici de retenție a datelor și garanții de confidențialitate. Trebuie să &#238;nțelegi unde se stochează datele.&quot;</div>
+</div>
+
+<h3 id="dilema-2-acuratete-vs-viteza">Dilema 2 — Acuratețe vs Viteză</h3>
+
+<p>AI-ul oferă <em>viteză</em>, dar poate fi <em>incomplet sau eronat</em>. Decizia c&#226;nd e acceptabil <em>„good enough&quot;</em> vs c&#226;nd necesiti <em>100% acuratețe</em> este o judecată profesională.</p>
+
+<p><strong>Calibrare practică:</strong></p>
+
+<ul>
+  <li><em>Good enough acceptabil:</em> draft-uri preliminare, brainstorming, sinteze interne</li>
+  <li><em>100% acuratețe necesară:</em> date care merg &#238;n declarații, rapoarte oficiale, documente cu impact juridic</li>
+</ul>
+
+<h3 id="dilema-3-bias-in-ai">Dilema 3 — Bias &#238;n AI</h3>
+
+<p>AI-ul reflectă <em>bias-urile din datele pe care a fost antrenat</em>. Implicații concrete:</p>
+
+<ul>
+  <li>Poate discrimina &#238;n decizii de credit (dacă datele istorice conțin discriminări)</li>
+  <li>Poate avea prejudecăți pe domenii (favorizează anumite industrii, anumite tipuri de clienți)</li>
+</ul>
+
+<p><strong>Răspunsul profesional:</strong> <em>monitorizezi pentru fairness</em> &#238;n deciziile asistate de AI; nu accepți că <em>„AI-ul a decis&quot;</em> este o justificare suficientă pentru o decizie discriminatorie.</p>
+
+<h3 id="dilema-4-responsabilitatea-profesionala">Dilema 4 — Responsabilitatea profesională</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „TU ești responsabil pentru output, nu AI-ul. &#171;AI a greșit&#187; nu e o scuză validă &#238;n fața unui client sau al unui regulator. Trebuie să menții scepticismul profesional exact ca și c&#226;nd ai lucra cu un junior.&quot;</div>
+</div>
+
+<p>Această observație, scurtă, este probabil cea mai importantă din &#238;ntregul articol. Cadrul juridic, regulator și profesional atribuie <em>răspunderea ultimă contabilului uman</em> — nu instrumentului. Dacă AI-ul a făcut o eroare materială, <em>tu ești cel care răspunde</em>. Aceasta nu este o opinie — este realitatea structurală a profesiei.</p>
+
+<h3 id="dilema-5-disclosure">Dilema 5 — Disclosure</h3>
+
+<p><strong>&#206;ntrebări pentru care fiecare firmă trebuie să-și stabilească politici clare:</strong></p>
+
+<ul>
+  <li>C&#226;nd trebuie să declari că ai folosit AI?</li>
+  <li>Cum comunici cu clienții despre utilizarea AI?</li>
+  <li>Cum menții <em>audit trail-ul</em> pentru deciziile asistate de AI?</li>
+</ul>
+
+<p>&#206;n momentul actual, <em>nu există un standard general acceptat</em> pentru aceste &#238;ntrebări. Așteptăm clarificări de la organismele profesionale (CECCAR &#238;n Rom&#226;nia, ACCA, AICPA, IFAC la nivel internațional).</p>
+
+<h3 id="cadrul-de-reglementare-pe-care-trebuie-sa-l-cunosti">Cadrul de reglementare pe care trebuie să-l cunoști</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Reglementare</th><th>Aria de aplicare</th><th>Stadiu</th></tr></thead>
+<tbody>
+<tr><td><strong>EU AI Act</strong></td><td>UE — clasificare risc, obligații furnizori și utilizatori</td><td>Adoptat 2024, aplicare etapizată din 2025</td></tr>
+<tr><td><strong>NIST AI Framework</strong></td><td>SUA — cadru voluntar de guvernanță risc AI</td><td>&#206;n aplicare</td></tr>
+<tr><td><strong>GDPR — implicații AI</strong></td><td>UE — confidențialitate, drepturi subiecți</td><td>Aplicabilă, cu interpretări specifice AI &#238;n dezvoltare</td></tr>
+<tr><td><strong>Standarde profesionale</strong> (CECCAR, AICPA, IFAC)</td><td>Profesia contabilă</td><td>&#206;n dezvoltare; actualizări periodice</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce etica nu este opțională</strong><br>Există tentația de a vedea etica utilizării AI ca pe o <em>„chestiune nice-to-have&quot;</em> — ceva la care te uiți după ce stăp&#226;nești tehnica. Aceasta este o eroare strategică. Erorile etice (date confidențiale urcate &#238;ntr-un LLM public, decizie discriminatorie acceptată fără audit, ascunderea utilizării AI față de client) pot <em>distruge</em> o carieră profesională &#238;n c&#226;teva luni. <em>&#206;nainte</em> de a &#238;nvăța prompt engineering avansat, &#238;nvață regulile etice fundamentale. Acestea sunt <em>prerequisite</em>, nu <em>bonus</em>.</div>
+</div>
+
+<hr>
+
+<h2 id="cap10">CAPITOLUL 10</h2>
+
+<h2 id="excel-vs-ai-opt-dimensiuni-de-comparatie">Excel vs AI — Opt Dimensiuni de Comparație</h2>
+
+<h3 id="hook-tabelul-care-sintetizeaza-tot">Tabelul care sintetizează tot</h3>
+
+<p>Pentru a sintetiza vizual diferențele structurale &#238;ntre cele două ere, propunem următorul tabel comparativ pe opt dimensiuni:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Dimensiunea</th><th>Era Excel</th><th>Era AI</th></tr></thead>
+<tbody>
+<tr><td><strong>Skill principal</strong></td><td>Stăp&#226;nirea formulelor, funcțiilor și Pivot Tables</td><td>Prompt engineering și mastery-ul tool-urilor AI</td></tr>
+<tr><td><strong>&#206;ntrebarea-tip la interviu</strong></td><td>„Creează un Pivot Table care să arate...&quot;</td><td>„Cum ai folosi AI pentru...&quot;</td></tr>
+<tr><td><strong>Timpul de &#238;nvățare</strong></td><td>200-500 ore pentru Excel avansat</td><td>50-100 ore pentru competență funcțională</td></tr>
+<tr><td><strong>Output-ul tipic</strong></td><td>Un fișier Excel, un PowerPoint, un raport manual</td><td>Rapoarte automatizate, analize generate de AI, deliverables &#238;n multiple formate generate simultan</td></tr>
+<tr><td><strong>Sarcini repetitive</strong></td><td>Automatizate prin macros și formule (limitat)</td><td>Delegate complet la agenți AI</td></tr>
+<tr><td><strong>Analiza complexă</strong></td><td>Setup manual, formule complexe, mult timp</td><td>Promptezi AI-ul, primești output aproape instant, validezi rapid</td></tr>
+<tr><td><strong>Scalabilitate</strong></td><td>Liniară (mai multă muncă = mai mult timp)</td><td><strong>Aproape infinită</strong> (același prompt procesează 10 sau 10.000 elemente la fel de repede)</td></tr>
+<tr><td><strong>Tipul erorilor</strong></td><td>Erori de formule, greșeli de copy-paste</td><td>Halucinații, interpretări greșite</td></tr>
+<tr><td><strong>Valoarea adăugată umană</strong></td><td>Acuratețea &#238;n formule și <em>thoroughness</em></td><td><strong>Critical thinking, validare, judecată profesională</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „&#206;n Era Excel, valoarea ta era să știi să EXECUȚI analiza. &#206;n Era AI, valoarea ta este să știi să VALIDEZI și să INTERPRETEZI analiza. Execuția o face AI-ul. Judecata răm&#226;ne a ta.&quot;</div>
+</div>
+
+<h3 id="trei-observatii-cheie-din-tabel">Trei observații cheie din tabel</h3>
+
+<p><strong>Observația 1 — Bariera de intrare e mai mică, dar bara de top răm&#226;ne sus.</strong> Cele 50-100 ore necesare pentru competență funcțională &#238;n AI sunt mult mai puține dec&#226;t 500+ ore pentru Excel avansat. Asta &#238;nseamnă că <em>intrarea &#238;n profesie</em> va fi mai accesibilă. Dar atenție: asta <em>nu</em> &#238;nseamnă că v&#226;rful e mai accesibil. Mastery-ul real, cu cele cinci skill-uri integrate, cere ani de practică.</p>
+
+<p><strong>Observația 2 — Scalabilitatea infinită schimbă fundamental economia muncii.</strong> Faptul că același prompt procesează 10 sau 10.000 de elemente la fel de repede &#238;nseamnă că <em>un singur contabil bine antrenat &#238;n AI</em> poate produce ce ar fi luat unei echipe de 10 oameni cu o lună &#238;nainte. Asta are implicații enorme pentru structura firmelor de contabilitate.</p>
+
+<p><strong>Observația 3 — Tipurile de erori se schimbă, dar riscul răm&#226;ne similar.</strong> Excel-ul a introdus categoria <em>„erori de formule&quot;</em> — pe care contabilul a &#238;nvățat să le anticipeze și să le verifice. AI-ul introduce categoria <em>„halucinații&quot;</em> — pe care contabilul AI-fluent o anticipează și o verifică. Riscul pentru profesie e similar; <em>natura</em> riscului e diferită.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX</strong><br><em>Insight-ul cheie</em> care emerge din tabelul de mai sus este următorul: trecerea de la Excel la AI nu este <em>o tranziție &#238;n care &#238;nveți alte instrumente</em>. Este <em>o tranziție &#238;n care valoarea ta profesională se mută &#238;ntr-o altă coordonată cognitivă</em> — de la <em>execuție</em> la <em>judecată</em>. Cei care fac doar primul pas (&#238;nvață instrumentele AI) vor fi <em>&#238;nlocuiți</em> de cei care fac al doilea pas (&#238;și dezvoltă judecata pentru a valida și interpreta).</div>
+</div>
+
+<hr>
+
+<h2 id="cap11">CAPITOLUL 11</h2>
+
+<h2 id="roadmap-personal-de-la-nu-stiu-nimic-la-operational-in-ai-in-90-de-zile">Roadmap Personal — De la „Nu Știu Nimic&quot; la „Operațional &#238;n AI&quot; &#238;n 90 de Zile</h2>
+
+<h3 id="hook-planul-concret-pentru-contabilul-care-vrea-sa-actioneze-acum">Planul concret pentru contabilul care vrea să acționeze acum</h3>
+
+<p>Toate analizele de mai sus sunt utile — dar nu sunt acționabile fără un plan concret. Iată un roadmap structurat pe 90 de zile, calibrat pe baza investiției totale estimate de <strong>80-160 ore</strong> pentru competență funcțională &#238;n AI.</p>
+
+<h3 id="faza-1-zilele-1-30-fundamentele-25-40-ore">Faza 1 — Zilele 1-30: Fundamentele (~25-40 ore)</h3>
+
+<p><strong>Obiectiv:</strong> Devino <em>conversațional fluent</em> cu vocabularul AI.</p>
+
+<p><strong>Activități săptăm&#226;nale:</strong></p>
+
+<ul>
+  <li><em>5-7 ore/săpt.</em> de citit și experimentat</li>
+  <li>Lectura: OpenAI Prompt Engineering Guide + Anthropic Claude Prompting Documentation</li>
+  <li>Activitate: Cont premium la Claude sau ChatGPT ($20/lună)</li>
+  <li>Practică: 30 de minute pe zi de experimentare</li>
+</ul>
+
+<p><strong>Milestone-uri:</strong></p>
+
+<ul>
+  <li>Săpt. 1: &#206;nțelegi cele 7 concepte fundamentale (Capitolul 5)</li>
+  <li>Săpt. 2: Ai folosit toate cele 5 tehnici de prompt engineering (Capitolul 6)</li>
+  <li>Săpt. 3: Ai testat 2 platforme și &#238;nțelegi diferența</li>
+  <li>Săpt. 4: Ai automatizat un task simplu din munca ta zilnică</li>
+</ul>
+
+<h3 id="faza-2-zilele-31-60-aplicarea-25-40-ore">Faza 2 — Zilele 31-60: Aplicarea (~25-40 ore)</h3>
+
+<p><strong>Obiectiv:</strong> Integrează AI &#238;n 2-3 procese concrete din munca ta.</p>
+
+<p><strong>Activități săptăm&#226;nale:</strong></p>
+
+<ul>
+  <li><em>5-7 ore/săpt.</em> de aplicare deliberată</li>
+  <li>Identifică <em>3 procese repetitive</em> din munca ta unde AI poate ajuta</li>
+  <li>Construiește prompt-uri reutilizabile pentru fiecare</li>
+  <li>Măsoară <em>c&#226;știgul de timp</em></li>
+</ul>
+
+<p><strong>Milestone-uri:</strong></p>
+
+<ul>
+  <li>Săpt. 5-6: Primul proces complet automatizat (ex: extragerea datelor din facturi)</li>
+  <li>Săpt. 7: Al doilea proces (ex: draft de note explicative)</li>
+  <li>Săpt. 8: Al treilea proces (ex: research &#238;n standarde contabile)</li>
+</ul>
+
+<h3 id="faza-3-zilele-61-90-validarea-si-etica-25-40-ore">Faza 3 — Zilele 61-90: Validarea și Etica (~25-40 ore)</h3>
+
+<p><strong>Obiectiv:</strong> Rafinează skill-urile critice — validare și etică.</p>
+
+<p><strong>Activități săptăm&#226;nale:</strong></p>
+
+<ul>
+  <li><em>5-7 ore/săpt.</em> pe validare deliberată și pe etică</li>
+  <li>Studiază framework-ul de validare &#238;n 5 pași (Capitolul 8)</li>
+  <li>Practică: pentru fiecare output AI, parcurge explicit cei 5 pași</li>
+  <li>Documentează <em>halucinațiile</em> pe care le prinzi (vor fi multe la &#238;nceput)</li>
+  <li>Studiază reglementările (EU AI Act, GDPR pentru AI)</li>
+</ul>
+
+<p><strong>Milestone-uri:</strong></p>
+
+<ul>
+  <li>Săpt. 9-10: Construiești <em>propriul tău playbook</em> de validare</li>
+  <li>Săpt. 11: Stabilești <em>politica personală</em> de utilizare AI (ce poți și ce nu poți face cu datele clienților)</li>
+  <li>Săpt. 12: Faci o prezentare internă &#238;n firma ta — devii <em>„persoana AI&quot;</em></li>
+</ul>
+
+<h3 id="tabel-de-sinteza-investitia-in-90-de-zile">Tabel de sinteză — investiția &#238;n 90 de zile</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Faza</th><th>Săpt.</th><th>Focus</th><th>Ore/săpt.</th><th>Total ore</th></tr></thead>
+<tbody>
+<tr><td><strong>1 — Fundamentele</strong></td><td>1-4</td><td>Concepte + Tehnici</td><td>5-7</td><td>25-40</td></tr>
+<tr><td><strong>2 — Aplicarea</strong></td><td>5-8</td><td>3 procese automatizate</td><td>5-7</td><td>25-40</td></tr>
+<tr><td><strong>3 — Validarea și Etica</strong></td><td>9-12</td><td>Skill 4 și Skill 5</td><td>5-7</td><td>25-40</td></tr>
+<tr><td><strong>TOTAL</strong></td><td></td><td></td><td></td><td><strong>75-120 ore</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="dupa-cele-90-de-zile">După cele 90 de zile</h3>
+
+<p>La finalul celor 90 de zile, vei fi &#238;n topul 25% al profesiei (pentru că majoritatea colegilor tăi <em>nu</em> va fi făcut acest exercițiu). De aici, drumul continuă — cu specializare, cu tool-uri specifice industriei tale, cu construirea de fluxuri tot mai sofisticate.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Cifra magică: 5-7 ore/săptăm&#226;nă</strong><br>Cinci-șapte ore pe săptăm&#226;nă pentru 12 săptăm&#226;ni este <em>o investiție rezonabilă</em> pentru orice contabil cu un program normal. Este mai puțin dec&#226;t petrec mulți pe Netflix sau scroll pe rețele sociale. Dacă acest ritm pare imposibil, problema nu este <em>resursa de timp</em> — este <em>prioritizarea</em>. Iar prioritizarea reflectă <em>conștientizarea reală</em> a urgenței. Cei care nu reușesc să găsească 5-7 ore/săpt. acum vor fi cei care, &#238;n 2028, vor fi nevoiți să recupereze g&#226;f&#226;ind, &#238;n condiții deja saturate.</div>
+</div>
+
+<hr>
+
+<h2 id="cap12">CAPITOLUL 12</h2>
+
+<h2 id="provocarile-si-avantajele-contabilului-roman-in-ai-literacy">Provocările și Avantajele Contabilului Rom&#226;n &#238;n AI Literacy</h2>
+
+<h3 id="hook-de-ce-contabilul-roman-are-atat-handicapuri-cat-si-avantaje">De ce contabilul rom&#226;n are at&#226;t handicapuri, c&#226;t și avantaje</h3>
+
+<p>Adopția AI Literacy &#238;n profesia contabilă rom&#226;nească are un context specific — care este <em>parțial dezavantajos</em>, <em>parțial avantajos</em>, și care merită analizat onest.</p>
+
+<h3 id="provocarile-specifice-contabilului-roman">Provocările specifice contabilului rom&#226;n</h3>
+
+<p><strong>Provocarea 1 — Limba rom&#226;nă imperfect reprezentată &#238;n modele.</strong> LLM-urile sunt antrenate dominant pe engleză. Performanța &#238;n rom&#226;nă există și a crescut substanțial, dar răm&#226;ne inferioară. Implicații:</p>
+
+<ul>
+  <li><em>Pentru sarcini complexe:</em> prompting bilingv (input &#238;n rom&#226;nă, dar instrucțiuni structurate &#238;n engleză)</li>
+  <li><em>Vigilență</em> la traducerile termenilor de specialitate (ex: <em>accrual</em> poate fi tradus inconstant)</li>
+  <li><em>Atenție</em> la citarea de legislație: AI poate cita legislație americană ca și cum ar fi rom&#226;nească</li>
+</ul>
+
+<p><strong>Provocarea 2 — Costul abonamentelor &#238;n context salarial rom&#226;nesc.</strong> $20/lună pentru ChatGPT Plus sau Claude Pro reprezintă, raportat la salariul mediu rom&#226;nesc, un procent semnificativ mai mare dec&#226;t &#238;n SUA. Această realitate nu este o scuză pentru non-adopție, dar este o realitate care explică ezitarea unora.</p>
+
+<p><strong>Provocarea 3 — Lipsa unui ecosistem matur de cursuri AI specifice contabilității rom&#226;nești.</strong> &#206;n SUA există deja zeci de cursuri <em>„AI for Accountants&quot;</em>. &#206;n Rom&#226;nia, oferta este &#238;n formare. <em>Aici intervine, parțial, rolul AI Accounting Hub.</em></p>
+
+<p><strong>Provocarea 4 — Cultura organizațională conservatoare.</strong> Mediul economic rom&#226;nesc are o relație ambivalentă cu inovația — entuziasm la nivel de discurs, conservatorism la nivel de buget și de practică reală.</p>
+
+<h3 id="avantajele-invizibile-ale-contabilului-roman">Avantajele invizibile ale contabilului rom&#226;n</h3>
+
+<p><strong>Avantajul 1 — Substratul ANAF de date standardizate.</strong> E-Factura, SAF-T, SPV — toate creează un substrat <em>unic &#238;n UE</em> pentru AI agentic. AI-ul nu trebuie să „ghicească&quot; layout-ul facturilor — primește XML structurat. Acuratețea extragerii crește de la 85-95% la practic 100%.</p>
+
+<p><strong>Avantajul 2 — Maturitatea cloud accounting-ului autohton.</strong> SmartBill (din 2007), Keez (din 2018) sunt platforme deja capitalizate de Visma (gigant norvegian de 12+ miliarde $). AI agentic se va așeza pe o infrastructură deja matură — nu trebuie construită de la zero.</p>
+
+<p><strong>Avantajul 3 — Tinerii sunt deja AI-fluent.</strong> Generația care intră acum &#238;n profesie a folosit ChatGPT din liceu sau facultate. Ei aduc reflexele AI fără efort de re-&#238;nvățare. Pentru o firmă mică sau medie, <em>un junior AI-fluent</em> poate fi vectorul de transformare.</p>
+
+<p><strong>Avantajul 4 — Decalajul față de Vest s-a redus dramatic la AI.</strong> Pentru Excel, decalajul a fost 10 ani. Pentru cloud / RPA, 4-5 ani. Pentru AI, <em>decalajul este de 1 an</em>. Asta &#238;nseamnă că adopția &#238;n Rom&#226;nia poate fi <em>aproape sincronă</em> cu valul global — pentru prima dată &#238;n istoria profesiei.</p>
+
+<h3 id="strategia-practica-pentru-contabilul-roman">Strategia practică pentru contabilul rom&#226;n</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Provocare</th><th>Strategie de mitigare</th></tr></thead>
+<tbody>
+<tr><td>Limba rom&#226;nă imperfectă</td><td>Prompting bilingv + validare suplimentară pe termeni tehnici</td></tr>
+<tr><td>Costul abonamentelor</td><td>Abonament la <em>o singură</em> platformă inițial; trial gratuit la altele</td></tr>
+<tr><td>Lipsa cursurilor specifice</td><td>Folosește AI Accounting Hub; folosește resursele OpenAI/Anthropic &#238;n engleză</td></tr>
+<tr><td>Cultura conservatoare</td><td>Educă <em>activ</em> clienții și colegii; nu aștepta să-ți ceară</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Avantajul invizibil care se va vedea &#238;n 2028</strong><br>Contabilul rom&#226;n care, acum, &#238;n 2026, &#238;nțelege specificul local și acționează strategic, va culege beneficii dublu: (1) <em>avantajul early adopter</em> (universal, &#238;n orice geografie), plus (2) <em>avantajul cunoașterii pieței locale</em> (specific rom&#226;nesc). Această combinație este <em>non-comoditizabilă</em> — nici Big 4, nici un AI american, nu o pot replica fără ani de prezență locală. <em>Aici se află ferestra strategică reală pentru profesionistul rom&#226;n</em>.</div>
+</div>
+
+<hr>
+
+<h2 id="cap13">CAPITOLUL 13</h2>
+
+<h2 id="2030-o-zi-de-munca-cu-skill-urile-noi-in-actiune">2030 — O Zi de Muncă cu Skill-urile Noi &#238;n Acțiune</h2>
+
+<h3 id="hook-cum-se-traduc-cele-cinci-skill-uri-intr-o-zi-reala">Cum se traduc cele cinci skill-uri &#238;ntr-o zi reală</h3>
+
+<p>Pentru a vedea concret cum se folosesc cele cinci skill-uri &#238;ntr-o zi normală de muncă, urmărim, pe scurt, ziua Andreei — personajul pe care l-am construit &#238;n articolele anterioare. Andreea, 32 de ani, Senior Accountant &#238;ntr-o firmă mid-size din București.</p>
+
+<p>(Pentru ziua completă a Andreei, recomandăm articolele anterioare din serie. Aici evidențiem <em>unde apar cele cinci skill-uri &#238;n acțiune</em>.)</p>
+
+<h3 id="traseul-celor-cinci-skill-uri-intr-o-zi">Traseul celor cinci skill-uri &#238;ntr-o zi</h3>
+
+<p><strong>07:30 — Cafea, scroll-ul de dimineață.</strong> Andreea verifică dashboard-ul AI care a procesat datele peste noapte. Nu mai sunt notificări de tip „lipsesc 47 facturi din clientul X&quot;. Sunt <em>insight-uri agregate</em>: 3 alerte de excepții la 2 clienți, o cerere de consultanță urgentă, un indicator de cash flow anormal care merită discuție.</p>
+
+<ul>
+  <li><em>Skill 4 (Validare critică) &#238;n acțiune:</em> citește alertele cu ochi critic, identifică care sunt reale și care sunt false positives.</li>
+</ul>
+
+<p><strong>09:00 — Ședință cu CFO.</strong> Pregătirea s-a făcut prin briefing AI.</p>
+
+<ul>
+  <li><em>Skill 2 (Prompt Engineering) &#238;n acțiune:</em> prompt-ul ei către AI a inclus role prompting (<em>„acționează ca CFO advisor&quot;</em>), chain-of-thought (<em>„analizează lună cu lună variațiile&quot;</em>) și structured output (<em>„returnează 3 observații strategice + 8 scenarii de acțiune&quot;</em>).</li>
+</ul>
+
+<p><strong>11:00 — Excepții de validat.</strong> Trei tranzacții marcate de AI ca <em>„necesită judecată profesională&quot;</em>.</p>
+
+<ul>
+  <li><em>Skill 4 (Validare critică) &#238;n acțiune din nou:</em> pe fiecare tranzacție, parcurge framework-ul de 5 pași.</li>
+  <li><em>Skill 1 (AI Literacy) &#238;n acțiune:</em> &#238;nțelege <em>de ce</em> AI-ul a marcat aceste tranzacții (recunoaște limitele modelului) și aplică propria judecată.</li>
+</ul>
+
+<p><strong>13:00 — Mentorat junior.</strong> Subiect: cum se interpretează un raport AI.</p>
+
+<ul>
+  <li><em>Skill 5 (Etică) &#238;n acțiune:</em> discută cu junior-ul despre confidențialitate (ce date au voie să urce &#238;ntr-un LLM și ce nu).</li>
+</ul>
+
+<p><strong>15:00 — Configurare client nou.</strong> &#206;mpreună cu un AI Accounting Analyst.</p>
+
+<ul>
+  <li><em>Skill 3 (Tool &amp; Platform Literacy) &#238;n acțiune:</em> alege instrumentele potrivite pentru workflow-ul specific al noului client (Claude pentru analiza contractelor, Copilot pentru lucru &#238;n Excel-urile lor).</li>
+</ul>
+
+<p><strong>17:00 — Final de zi.</strong> Andreea &#238;nchide laptop-ul. Cele cinci skill-uri au fost active &#238;n fiecare etapă.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Cele cinci skill-uri sunt indivizibile</strong><br>Observația cheie din ziua Andreei este că <em>cele cinci skill-uri funcționează &#238;mpreună</em>, nu separat. Un contabil care stăp&#226;nește doar prompt engineering (Skill 2), dar nu și validarea (Skill 4), va produce output-uri rapide <em>și greșite</em>. Un contabil care &#238;nțelege etica (Skill 5), dar nu cunoaște tool-urile (Skill 3), nu va avea curajul să adopte AI-ul. <em>Mastery-ul vine din integrare, nu din componentă</em>. Roadmap-ul de 90 de zile (Capitolul 11) este construit exact pentru a dezvolta cele cinci skill-uri &#238;n paralel, nu secvențial.</div>
+</div>
+
+<hr>
+
+<h2 id="manifest">EPILOG</h2>
+
+<h2 id="de-ce-exista-ai-accounting-hub">De Ce Există AI Accounting Hub</h2>
+
+<h3 id="hook-cele-5-7-ore-saptamanale-care-decid-cariere-si-de-ce-nu-trebuie-facute-singur">Cele 5-7 ore săptăm&#226;nale care decid cariere — și de ce nu trebuie făcute singur</h3>
+
+<p>Roadmap-ul de 90 de zile pe care l-am propus &#238;n Capitolul 11 este <em>fezabil</em> pentru orice contabil. Dar este <em>substantial mai ușor</em> de parcurs <em>&#238;n comunitate</em> dec&#226;t &#238;n izolare. Iată de ce.</p>
+
+<p>&#206;nvățarea izolată are trei probleme structurale:</p>
+
+<p><strong>Problema 1 — Lipsa feedback-ului.</strong> C&#226;nd scrii primele tale prompt-uri și nu știi dacă sunt bune sau rele, fără cineva care să te corecteze, vei consolida greșeli pe care apoi va fi greu să le dez-&#238;nveți.</p>
+
+<p><strong>Problema 2 — Bucla negativă a frustrării.</strong> Primele 10-20 de ore cu AI sunt frustrante — nu obții imediat ce vrei. Fără cineva care să-ți spună <em>„e normal, persistă&quot;</em>, mulți renunță &#238;n săptăm&#226;na 2.</p>
+
+<p><strong>Problema 3 — Lipsa adaptării la contextul rom&#226;nesc.</strong> Resursele globale (OpenAI Guide, Anthropic Documentation) sunt excelente, dar generice. Adaptarea la contextul rom&#226;nesc (ANAF, CECCAR, ERP-uri locale, Cod Fiscal) trebuie făcută local — și e mult mai eficientă &#238;n comunitate.</p>
+
+<h3 id="cele-trei-convingeri-pe-care-construim-hub-ul">Cele trei convingeri pe care construim Hub-ul</h3>
+
+<p><strong>Convingerea 1: Tranziția nu se face singur.</strong> Nimeni nu are, individual, toate cunoștințele necesare. Avem nevoie de profesioniștii contabili care &#238;nțeleg substanța meseriei, de specialiștii AI care &#238;nțeleg tehnologia, de practicienii care au testat și au &#238;nvățat din erori. <em>Niciuna dintre aceste categorii nu deține singură răspunsul.</em> Comunitatea le poate uni.</p>
+
+<p><strong>Convingerea 2: Profesia rom&#226;nă merită un Hub propriu.</strong> Specificul rom&#226;nesc — limba, reglementarea, infrastructura ANAF, cultura organizațională — face ca importul direct de soluții străine să fie ineficient. Avem nevoie de un loc unde se discută adaptarea locală. Unde experiența firmei din Cluj se &#238;nt&#226;lnește cu cea a firmei din Constanța.</p>
+
+<p><strong>Convingerea 3: Tranziția trebuie să fie incluzivă.</strong> Există un risc serios ca AI-ul să creeze o profesie cu două viteze: cei din firme mari, care au resurse pentru transformare, și cei din firme mici sau independenți, care răm&#226;n &#238;n urmă. <em>Nu acceptăm acest viitor cu două viteze.</em> Misiunea Hub-ului este să facă transformarea accesibilă tuturor profesioniștilor rom&#226;ni.</p>
+
+<h3 id="ce-oferim-concret-pentru-cele-90-de-zile">Ce oferim — concret pentru cele 90 de zile</h3>
+
+<ul>
+  <li><strong>Prompt libraries &#238;n rom&#226;nă</strong> — biblioteci de prompt-uri pentru sarcini contabile concrete, testate și rafinate de comunitate</li>
+  <li><strong>Studii de caz rom&#226;nești</strong> — exemple reale, cu cifre &#238;n lei, cu legislație rom&#226;nească</li>
+  <li><strong>Forum de practică deliberată</strong> — postezi un prompt, primești feedback, rafinezi</li>
+  <li><strong>Webinarii lunare</strong> — pe teme tehnice și pe teme etice/regulatorii</li>
+  <li><strong>Curatoriat critic al instrumentelor</strong> — testăm tool-urile noi, le evaluăm pentru contextul rom&#226;nesc</li>
+  <li><strong>Networking</strong> — conectarea profesioniștilor &#238;ntre ei, pentru schimb de experiență, mentorat</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „De aceea am creat AI Accounting Hub. Vrem să oferim resurse practice, ghiduri, prompt libraries, exemple concrete din contabilitate, ca fiecare profesionist contabil din Rom&#226;nia să poată face această tranziție.&quot;</div>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Și să o facă fără frică, &#238;ntr-o comunitate care &#238;nvață &#238;mpreună, &#238;n contextul rom&#226;nesc — cu software-urile noastre, cu regulamentele noastre, cu provocările noastre specifice.&quot;</div>
+</div>
+
+<h3 id="apelul-nostru">Apelul nostru</h3>
+
+<p>&#206;n 2005, <em>„nu știu Excel&quot;</em> era ușa &#238;nchisă. &#206;n 2030, <em>„nu știu AI&quot;</em> va fi ușa &#238;nchisă. &#206;ntre cele două momente, noi alegem cum să acționăm. Investiția de 75-120 ore pe parcursul a 90 de zile, distribuite &#238;n 5-7 ore săptăm&#226;nale, este <em>fezabilă pentru oricine</em>. Decizia de a face investiția — <em>singura decizie care contează</em>.</p>
+
+<p>Vrem să fii aici. Vrem să facem &#238;mpreună această tranziție. Vrem ca, &#238;n 2030, să te uiți &#238;napoi la 2026 și să spui: <em>„atunci am &#238;nceput, atunci s-a schimbat tot.&quot;</em></p>
+
+<p><strong>Bun venit la AI Accounting Hub.</strong></p>
+
+<hr>
+
+<p><em>Acest articol face parte dintr-o serie de cinci articole-manifest publicate pe site-ul AI Accounting Hub. Articolele se complementează — pentru o perspectivă completă, recomandăm parcurgerea &#238;ntregii serii.</em></p>
+
+<p><strong>Data publicării: 01 MAI 2026</strong> <strong>Versiunea: 1.0</strong></p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#ai-literacy</a>
+          <a href="#" class="tag">#excel</a>
+          <a href="#" class="tag">#carieră</a>
+          <a href="#" class="tag">#prompting</a>
+        </div>
+        <span class="footer-mono">Articolul #003</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#prolog">PROLOG: &#206;ntrebarea Care Decide Cariere — La Interviu, &#238;n 2030</a>
+        <a href="#cap1">CAPITOLUL 1: Era Excel — Anatomia unei Competențe Care a Definit Profesia</a>
+        <a href="#cap2">CAPITOLUL 2: Cele Șase Skill-uri Excel Care Erau Obligatorii la Interviu</a>
+        <a href="#cap3">CAPITOLUL 3: De la „A Ști să Calculezi&quot; la „A Ști să Validezi&quot; — Schimbarea Contractului</a>
+        <a href="#cap4">CAPITOLUL 4: Cele Trei &#206;ntrebări de Interviu Care Vor Defini Angajabilitatea &#238;n 2030</a>
+        <a href="#cap5">CAPITOLUL 5: Skill 1 — AI Literacy &amp; Concepte Fundamentale</a>
+        <a href="#cap6">CAPITOLUL 6: Skill 2 — Prompt Engineering, Cele Cinci Tehnici Esențiale</a>
+        <a href="#cap7">CAPITOLUL 7: Skill 3 — Tool &amp; Platform Literacy</a>
+        <a href="#cap8">CAPITOLUL 8: Skill 4 — Evaluarea Critică a Output-ului AI</a>
+        <a href="#cap9">CAPITOLUL 9: Skill 5 — Etica Utilizării AI și Data Privacy</a>
+        <a href="#cap10">CAPITOLUL 10: Excel vs AI — Opt Dimensiuni de Comparație</a>
+        <a href="#cap11">CAPITOLUL 11: Roadmap Personal — De la „Nu Știu Nimic&quot; la „Operațional &#238;n AI&quot; &#238;n 90 de Zile</a>
+        <a href="#cap12">CAPITOLUL 12: Provocările și Avantajele Contabilului Rom&#226;n &#238;n AI Literacy</a>
+        <a href="#cap13">CAPITOLUL 13: 2030 — O Zi de Muncă cu Skill-urile Noi &#238;n Acțiune</a>
+        <a href="#manifest">EPILOG: De Ce Există AI Accounting Hub</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA (în loc de Articole conexe — la lansare avem un singur articol) -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Explorează restul hub-ului.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="index.html#podcast" class="related-card fade-in">
+        <div class="related-date">PODCAST · E01</div>
+        <h3>RO e-Factura: Între promisiunea digitalizării și realitatea din SPV</h3>
+        <p>Două gazde AI demontează promisiunile e-Factura: ce funcționează cu adevărat în SPV, unde sunt fricțiunile reale pe flux și ce ar trebui să facă acum o firmă de contabilitate ca să nu fie prinsă pe contrapicior.</p>
+        <span class="related-read">Ascultă episodul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html" class="related-card fade-in">
+        <div class="related-date">TOOL · ANAF</div>
+        <h3>Verificare CIF — site ANAF</h3>
+        <p>Interfață simplă peste API-ul public ANAF: introduci un CIF și primești nume firmă, stare activă și plătitor TVA. Rulează în browser.</p>
+        <span class="related-read">Deschide tool-ul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="contact.html" class="related-card fade-in">
+        <div class="related-date">CONTACT</div>
+        <h3>Ai o temă, un feedback sau un invitat de podcast?</h3>
+        <p>Colaborare, sugestii de articole sau invitați. Răspundem, de obicei, în 2-3 zile lucrătoare.</p>
+        <span class="related-read">Scrie-ne
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required placeholder="Ex. Ioana Popescu"></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required placeholder="ioana@firma.ro"></div>
+      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required placeholder="Scrie-ne ce te interesează..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+/* TOC active link on scroll */
+(function () {
+  const links = document.querySelectorAll('.toc a');
+  if (!links.length) return;
+  const ids = Array.from(links).map(a => a.getAttribute('href').slice(1));
+  const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  targets.forEach(t => io.observe(t));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Arhiva articolelor — AI Accounting Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ ARCHIVE ============ */
+.archive-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  margin-bottom: 36px;
+}
+.search-box {
+  flex: 1 1 280px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+.search-box:focus-within { border-color: var(--accent); }
+.search-box svg { width: 16px; height: 16px; color: var(--fg-muted); flex-shrink: 0; }
+.search-box input {
+  flex: 1; border: none; background: none; outline: none;
+  color: var(--fg); font-family: inherit; font-size: 14px;
+}
+.search-box input::placeholder { color: var(--fg-dim); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  padding: 8px 14px; border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+  background: transparent;
+  transition: all 0.2s;
+}
+.chip:hover { border-color: var(--border-strong); color: var(--fg); }
+.chip.active { background: var(--accent); color: #07121a; border-color: var(--accent); }
+
+.sort-group {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.sort-group select {
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--fg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.archive-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim);
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.archive-count span { color: var(--accent); }
+
+.article-list { display: flex; flex-direction: column; gap: 14px; }
+.article-item {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 24px 28px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.article-item::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 8%, transparent) 0%, transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.article-item:hover { border-color: var(--border-strong); transform: translateX(4px); box-shadow: var(--shadow-lg); }
+.article-item:hover::before { opacity: 1; }
+.article-item .date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--fg-dim);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+.article-item .date .day { display: block; font-size: 28px; color: var(--accent); letter-spacing: -0.02em; font-weight: 500; line-height: 1; margin-bottom: 4px; font-family: 'Space Grotesk', sans-serif; }
+.article-item .body { min-width: 0; position: relative; z-index: 1; }
+.article-item .cat {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.article-item .cat::before { content: ''; width: 18px; height: 1px; background: var(--accent); }
+.article-item h3 { font-size: 20px; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 8px; font-weight: 600; }
+.article-item p { font-size: 13px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 12px; }
+.article-item .meta {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--fg-dim);
+  letter-spacing: 0.05em;
+}
+.article-item .meta .sep { opacity: 0.4; }
+.article-item .go {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  flex-shrink: 0;
+  transition: all 0.25s;
+  position: relative; z-index: 1;
+}
+.article-item:hover .go { border-color: var(--accent); color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.article-item .go svg { transition: transform 0.25s; }
+.article-item:hover .go svg { transform: translateX(3px); }
+
+.no-results {
+  padding: 64px 24px;
+  text-align: center;
+  border: 1px dashed var(--border-strong);
+  border-radius: 14px;
+  color: var(--fg-muted);
+  font-size: 14px;
+  display: none;
+}
+.no-results.show { display: block; }
+
+.load-more {
+  display: flex; justify-content: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 960px) {
+  .archive-toolbar { padding: 16px; gap: 12px; }
+  .sort-group { flex-basis: 100%; justify-content: space-between; }
+  .chips { width: 100%; }
+}
+@media (max-width: 720px) {
+  .article-item { grid-template-columns: 1fr; gap: 12px; padding: 20px; }
+  .article-item .date {
+    display: flex; align-items: baseline; gap: 10px;
+    font-size: 11px;
+  }
+  .article-item .date .day { font-size: 22px; margin-bottom: 0; }
+  .article-item h3 { font-size: 18px; }
+  .article-item .go { display: none; }
+  .article-item:hover { transform: none; }
+  .archive-toolbar { padding: 14px; }
+  .search-box { flex-basis: 100%; }
+  .chip { padding: 7px 12px; font-size: 10px; }
+}
+@media (max-width: 420px) {
+  .article-item { padding: 18px; }
+  .article-item h3 { font-size: 17px; }
+  .article-item p { font-size: 12.5px; }
+  .article-item .meta { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="logo-text"><span>AI Accounting Hub</span></div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-ambient"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <span>Arhivă</span>
+    </div>
+    <div class="page-kicker"><span class="dot"></span>Toate articolele</div>
+    <h1>Arhiva <span class="accent">articolelor</span>.</h1>
+    <p class="page-lede">Opinii, analize și ghiduri practice despre intersecția dintre AI și contabilitate. Ordonate cronologic — cele mai noi mai întâi.</p>
+  </div>
+</section>
+
+<!-- ARCHIVE -->
+<section class="block" style="padding-top: 56px;">
+  <div class="block-inner">
+
+    <div class="archive-toolbar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" id="search" placeholder="Caută după titlu, temă sau etichetă...">
+      </div>
+      <div class="chips" id="chips">
+        <button class="chip active" data-cat="all">Toate</button>
+        <button class="chip" data-cat="opinie">Opinie</button>
+        <button class="chip" data-cat="analiza">Analiză</button>
+        <button class="chip" data-cat="ghid">Ghid</button>
+        <button class="chip" data-cat="legislatie">Legislație</button>
+        <button class="chip" data-cat="tool">Tool</button>
+      </div>
+      <div class="sort-group">
+        <span>Sort</span>
+        <select id="sort">
+          <option value="new">Cele mai noi</option>
+          <option value="old">Cele mai vechi</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="archive-count"><span id="count">0</span> <span id="count-label">ARTICOLE</span></div>
+
+    <div class="article-list" id="article-list"></div>
+
+    <div class="no-results" id="no-results">
+      Nu am găsit articole pentru criteriile selectate. Încearcă un alt cuvânt-cheie sau resetează filtrele.
+    </div>
+
+    <div class="load-more">
+      <button class="btn btn-ghost" id="load-more">Încarcă mai multe
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- MANIFEST SERIES — separately highlighted -->
+<section class="block" id="manifest" style="padding-top: 16px;">
+  <div class="block-inner">
+    <div class="manifest-head">
+      <div class="manifest-label">// Seria fondatoare</div>
+      <h2>Viitorul profesiei contabile <span class="manifest-sep">—</span> 5 părți</h2>
+      <p>Articol manifest în 5 părți. Format extins, 30–40 minute lectură densă fiecare. Gândit pentru momentele de liniște — diminețile de weekend la o cafea, când ai timp să procesezi, să analizezi critic și să faci conexiuni noi.</p>
+    </div>
+    <div class="article-list manifest-list" id="manifest-list"></div>
+  </div>
+</section>
+
+<style>
+.manifest-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.manifest-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 10px;
+}
+.manifest-head h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 600; letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.manifest-head .manifest-sep { color: var(--accent-warm); font-weight: 400; }
+.manifest-head p {
+  color: var(--fg-muted); font-size: 14.5px; line-height: 1.6;
+  max-width: 560px; margin: 0 auto;
+}
+.manifest-list .article-item {
+  border-color: color-mix(in oklab, var(--accent-warm) 18%, var(--border));
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent-warm) 6%, transparent), transparent 60%),
+    var(--bg-1);
+}
+.manifest-list .article-item .cat { color: var(--accent-warm); }
+.manifest-list .article-item .cat::before { background: var(--accent-warm); }
+.manifest-list .article-item .date .day { color: var(--accent-warm); }
+.manifest-list .article-item:hover { border-color: var(--accent-warm); }
+.manifest-list .article-item:hover .go { border-color: var(--accent-warm); color: var(--accent-warm); background: color-mix(in oklab, var(--accent-warm) 8%, transparent); }
+</style>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text"><span>AI Accounting Hub</span><small>aiaccountinghub.ro</small></div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required></div>
+      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+const ARTICLES = [
+  { date: '2026-05-01', day: '01', month: 'MAI', cat: 'opinie',      catLabel: 'Opinie',
+    title: 'Goana după promptul perfect — plus shortcut-ul care schimbă jocul',
+    excerpt: 'Cele 7 ingrediente ale unui prompt bun — și scurtătura pe care o folosesc ca să nu le mai memorez.',
+    read: '12 min', tags: ['#prompting', '#workflow'], href: '2026-05-01-Goana-dupa-promptul-perfect.html' },
+  { date: '2026-05-01', day: '01', month: 'MAI', cat: 'opinie',      catLabel: 'Opinie',
+    title: 'Primul proiect de Vibe Coding',
+    excerpt: 'De la primul prompt la prima funcție livrată — povestea unui proiect construit alături de un model AI: ce a mers, ce a deraiat și ce am învățat despre modul nou de a scrie cod.',
+    read: '10 min', tags: ['#vibecoding', '#workflow'], href: '#' }
+];
+
+/* Seria fondatoare — afișată separat, sub lista regulară. */
+const MANIFEST = [
+  { date: '2026-05-01', day: '01', month: 'MAI', part: 'Partea 1',
+    title: 'Contextul Revoluției AI: de la ChatGPT la AI Agents',
+    excerpt: 'De la lansarea ChatGPT (nov. 2022) la realitatea Agenților AI (apr. 2026). Patru ani care au schimbat felul în care lucrăm cu informația — și ce înseamnă asta pentru profesia contabilă.',
+    read: '32 min', href: '2026-05-01-M1-Contextul-Revolutiei-AI.html' },
+  { date: '2026-05-01', day: '01', month: 'MAI', part: 'Partea 2',
+    title: 'Evoluția Contabilității: de la registre pe hârtie la era AI',
+    excerpt: 'Trei decenii de schimbări în profesia contabilă — de la registru manual la ERP cloud, și de aici la fluxuri augmentate de AI. Pattern-uri care se repetă, lecții care contează.',
+    read: '36 min', href: '2026-05-01-M2-Evolutia-Contabilitatii.html' },
+  { date: '2026-05-01', day: '01', month: 'MAI', part: 'Partea 3',
+    title: 'Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering',
+    excerpt: 'Setul de competențe care definește contabilul deceniului următor. Ce rămâne, ce dispare, ce se adaugă — și cum arată tranziția practică, săptămână de săptămână.',
+    read: '34 min', href: '2026-05-01-M3-Skilluri-de-la-Excel-la-AI-Literacy.html' },
+  { date: '2026-05-01', day: '01', month: 'MAI', part: 'Partea 4',
+    title: 'Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani',
+    excerpt: 'Trei scenarii plauzibile pentru profesia contabilă în 2030–2035. Cine câștigă, cine pierde, ce roluri apar, ce roluri se sting — și cum te poziționezi acum pentru viitor.',
+    read: '38 min', href: '2026-05-01-M4-Viitorul-profesiei-contabile.html' },
+  { date: '2026-05-01', day: '01', month: 'MAI', part: 'Partea 5',
+    title: 'Misiunea AI Accounting Hub',
+    excerpt: 'De ce există acest proiect, pentru cine e gândit și ce livrează în următorii 12 luni — manifestul complet și planul de acțiune pentru contabilul augmentat tehnologic.',
+    read: '28 min', href: '2026-05-01-M5-Misiunea-AI-Accounting-Hub.html' }
+];
+
+const state = { cat: 'all', q: '', sort: 'new', page: 1, perPage: 8 };
+
+const listEl = document.getElementById('article-list');
+const countEl = document.getElementById('count');
+const noRes = document.getElementById('no-results');
+const loadMore = document.getElementById('load-more');
+
+function filtered() {
+  let arr = ARTICLES.slice();
+  if (state.cat !== 'all') arr = arr.filter(a => a.cat === state.cat);
+  if (state.q) {
+    const q = state.q.toLowerCase();
+    arr = arr.filter(a => (a.title + ' ' + a.excerpt + ' ' + a.tags.join(' ')).toLowerCase().includes(q));
+  }
+  arr.sort((a, b) => state.sort === 'new' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date));
+  return arr;
+}
+
+function render() {
+  const all = filtered();
+  const visible = all.slice(0, state.page * state.perPage);
+  countEl.textContent = all.length;
+  const label = document.getElementById('count-label');
+  if (label) label.textContent = all.length === 1 ? 'ARTICOL' : 'ARTICOLE';
+  noRes.classList.toggle('show', all.length === 0);
+  loadMore.style.display = visible.length < all.length ? '' : 'none';
+
+  listEl.innerHTML = visible.map(a => `
+    <a href="${a.href || '#'}" class="article-item fade-in">
+      <div class="date"><span class="day">${a.day}</span>${a.month} · ${a.date.slice(0,4)}</div>
+      <div class="body">
+        <div class="cat">${a.catLabel}</div>
+        <h3>${a.title}</h3>
+        <p>${a.excerpt}</p>
+        <div class="meta">
+          <span>${a.read} citire</span>
+          <span class="sep">·</span>
+          <span>${a.tags.join(' ')}</span>
+        </div>
+      </div>
+      <div class="go">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+    </a>`).join('');
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
+    listEl.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  }
+}
+
+/* Render the 5-part manifest series — order is fixed, never filtered/sorted */
+(function renderManifest() {
+  const el = document.getElementById('manifest-list');
+  if (!el) return;
+  el.innerHTML = MANIFEST.map(m => `
+    <a href="${m.href}" class="article-item fade-in">
+      <div class="date"><span class="day">${m.day}</span>${m.month} · ${m.date.slice(0,4)}</div>
+      <div class="body">
+        <div class="cat">${m.part}</div>
+        <h3>${m.title}</h3>
+        <p>${m.excerpt}</p>
+        <div class="meta">
+          <span>${m.read} citire</span>
+          <span class="sep">·</span>
+          <span>Articol manifest</span>
+        </div>
+      </div>
+      <div class="go">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+    </a>`).join('');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
+    el.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  }
+})();
+
+document.getElementById('chips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === b));
+  state.cat = b.dataset.cat;
+  state.page = 1;
+  render();
+});
+document.getElementById('search').addEventListener('input', e => { state.q = e.target.value.trim(); state.page = 1; render(); });
+document.getElementById('sort').addEventListener('change', e => { state.sort = e.target.value; state.page = 1; render(); });
+loadMore.addEventListener('click', () => { state.page++; render(); });
+
+// Ascunde chip-urile pentru categoriile fără articole (evită „no results" înșelător)
+(function pruneEmptyChips() {
+  const cats = new Set(ARTICLES.map(a => a.cat));
+  document.querySelectorAll('.chip').forEach(c => {
+    if (c.dataset.cat !== 'all' && !cats.has(c.dataset.cat)) c.style.display = 'none';
+  });
+})();
+
+// Respect ?cat=xxx from URL
+const urlCat = new URL(location.href).searchParams.get('cat');
+if (urlCat && document.querySelector(`.chip[data-cat="${urlCat}"]`)) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.cat === urlCat));
+  state.cat = urlCat;
+}
+
+render();
+</script>
+</body>
+</html>

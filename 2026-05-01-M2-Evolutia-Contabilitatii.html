@@ -1,0 +1,1682 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Evoluția Contabilității — AI Accounting Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ ARTICLE PAGE ============ */
+.article-wrap {
+  position: relative; z-index: 1;
+  max-width: 1360px; margin: 0 auto;
+  padding: 64px 32px 96px;
+  display: grid;
+  grid-template-columns: 1fr 720px 1fr;
+  gap: 48px;
+}
+.article-side { position: relative; }
+.article-side.left { justify-self: end; }
+.article-side .sticky {
+  position: sticky; top: 96px;
+  padding: 20px 0;
+  max-height: calc(100vh - 112px);
+  overflow: hidden;
+}
+.toc {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-1);
+  max-height: calc(100vh - 136px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+.toc::-webkit-scrollbar { width: 8px; }
+.toc::-webkit-scrollbar-track { background: transparent; }
+.toc::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+.toc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 14px;
+}
+.toc a {
+  display: block;
+  font-size: 13px; color: var(--fg-muted);
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid var(--border);
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.toc a:hover { color: var(--accent); border-color: var(--accent); }
+.toc a.active { color: var(--accent); border-color: var(--accent); }
+
+.article-main {
+  position: relative;
+  /* Critical for mobile: grid items default to min-width: auto (their content's
+     intrinsic min size). The <pre> code blocks below have long unbreakable
+     lines, which would otherwise force the grid item — and the prose with it —
+     wider than the viewport, clipping all the regular paragraph text. */
+  min-width: 0;
+}
+/* Same defence one level deeper: keep prose locked to its parent column */
+.article-main .prose,
+.article-main .prose pre,
+.article-main .prose img { max-width: 100%; }
+.article-main .prose pre { box-sizing: border-box; }
+
+.article-meta-top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.article-meta-top .sep { opacity: 0.4; }
+.article-category {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+.article-main h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.article-main h1 .accent {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 55%, color-mix(in oklab, var(--accent) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.article-lede {
+  font-size: 19px; line-height: 1.55; color: var(--fg-muted);
+  margin-bottom: 36px;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+}
+
+.author-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  display: grid; place-items: center;
+  color: #07121a; font-weight: 700; font-size: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+  flex-shrink: 0;
+}
+.author-info { flex: 1; min-width: 0; }
+.author-name { font-size: 14px; font-weight: 600; }
+.author-role { font-size: 12px; color: var(--fg-muted); }
+.share-row { display: flex; gap: 8px; }
+.share-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn svg { width: 15px; height: 15px; }
+
+.article-cover {
+  position: relative;
+  margin: 0 -32px 48px;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 360px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.article-cover-bg {
+  position: absolute; inset: 0;
+  background-image: url('assets/hero-vf.png');
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05) brightness(0.92);
+}
+.article-cover::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--bg-0) 80%, transparent) 100%);
+}
+.article-cover-caption {
+  position: absolute; left: 24px; bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-muted);
+  letter-spacing: 0.08em;
+  z-index: 2;
+}
+
+/* Prose */
+.prose {
+  font-size: 17px; line-height: 1.75;
+  color: var(--fg);
+  /* Prevent any unbreakable string from forcing horizontal overflow on mobile */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.prose p {
+  margin: 0 0 22px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.prose h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px; line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 56px 0 20px;
+  scroll-margin-top: 100px;
+}
+.prose h2::before {
+  content: '§'; color: var(--accent);
+  font-weight: 400;
+  margin-right: 12px;
+  opacity: 0.6;
+}
+.prose h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; line-height: 1.25; letter-spacing: -0.01em;
+  font-weight: 600;
+  margin: 36px 0 14px;
+  scroll-margin-top: 100px;
+}
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { color: var(--accent); font-style: normal; font-family: 'Space Grotesk', sans-serif; }
+.prose a { color: var(--accent); border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); transition: all 0.2s; }
+.prose a:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.prose ul, .prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose li {
+  margin-bottom: 10px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.prose li::marker { color: var(--accent); }
+.prose blockquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  border-radius: 0 12px 12px 0;
+  font-size: 18px;
+  color: var(--fg);
+  font-style: italic;
+}
+.prose blockquote cite {
+  display: block;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-style: normal;
+  color: var(--fg-muted); letter-spacing: 0.05em;
+}
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88em;
+  padding: 2px 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent);
+}
+.prose pre {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.6;
+}
+.prose pre code {
+  background: none; border: none; padding: 0; color: var(--fg);
+}
+.callout {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 14px;
+}
+.callout .ic {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center;
+  background: color-mix(in oklab, var(--accent) 15%, transparent);
+  color: var(--accent);
+}
+.callout .ic svg { width: 16px; height: 16px; }
+.callout .cbody { font-size: 14px; line-height: 1.6; color: var(--fg); }
+.callout .cbody strong { color: var(--accent); }
+
+/* End of article */
+.article-end {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+.author-card {
+  margin: 72px 0 0;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.author-card .author-avatar { width: 64px; height: 64px; font-size: 20px; }
+.author-card h3 { font-size: 20px; margin-bottom: 6px; }
+.author-card .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; margin-bottom: 12px; }
+.author-card p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+
+/* Related */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.related-card {
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; flex-direction: column;
+  transition: all 0.3s ease;
+}
+.related-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.related-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.related-card h3 { font-size: 18px; line-height: 1.25; margin-bottom: 10px; }
+.related-card p { font-size: 13px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.related-read {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.related-read svg { transition: transform 0.2s; }
+.related-card:hover .related-read svg { transform: translateX(4px); }
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 34px 0;
+}
+.table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 28px 0 34px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-1);
+}
+.prose table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.prose th,
+.prose td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.prose th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  text-align: left;
+}
+.prose tr:last-child td { border-bottom: 0; }
+.podcast-callout .ic { background: color-mix(in oklab, var(--accent-2) 15%, transparent); color: var(--accent-2); }
+/* Responsive */
+@media (max-width: 1200px) {
+  .article-wrap { grid-template-columns: 1fr; max-width: 760px; padding: 48px 24px 72px; }
+  .article-side { display: none; }
+}
+@media (max-width: 960px) {
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .article-cover { margin: 0 0 36px; height: 280px; }
+}
+@media (max-width: 720px) {
+  .article-wrap { padding: 28px 16px 48px; }
+  /* Match the mobile container padding so the cover doesn't push out beyond
+     the viewport (the desktop -32px margin assumed 32px container padding). */
+  .article-cover { height: 220px; margin: 0 -16px 24px; border-radius: 14px; }
+  .article-cover-caption { left: 16px; bottom: 14px; font-size: 10px; }
+  .article-main h1 { font-size: clamp(26px, 7.5vw, 34px); }
+  .article-lede { font-size: 16px; padding-left: 14px; }
+  .author-row { flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .share-row { width: 100%; justify-content: flex-end; }
+  .prose { font-size: 16px; line-height: 1.7; overflow-wrap: break-word; word-wrap: break-word; }
+  .prose h2 { font-size: 22px; margin: 36px 0 14px; }
+  .prose h2::before { margin-right: 8px; }
+  .prose h3 { font-size: 18px; margin: 26px 0 12px; }
+  .prose blockquote { margin: 22px 0; padding: 14px 16px; font-size: 15px; border-radius: 0 10px 10px 0; }
+  .prose pre { padding: 12px; font-size: 12px; border-radius: 10px; }
+  .callout { flex-direction: column; gap: 10px; padding: 16px; }
+  .author-card { flex-direction: column; gap: 16px; padding: 22px; margin-top: 48px; }
+  .author-card .author-avatar { width: 52px; height: 52px; font-size: 18px; }
+  .article-end { gap: 16px; padding-top: 24px; margin-top: 36px; }
+  .related-grid { grid-template-columns: 1fr; gap: 14px; }
+  .related-card { padding: 20px; }
+}
+@media (max-width: 420px) {
+  .article-wrap { padding: 22px 14px 40px; }
+  .article-cover { margin: 0 -14px 22px; height: 190px; }
+  .article-main h1 { font-size: 24px; line-height: 1.06; }
+  .article-lede { font-size: 14.5px; padding-left: 12px; margin-bottom: 28px; }
+  .article-meta-top { gap: 8px; font-size: 10px; margin-bottom: 18px; }
+  .article-meta-top .sep { display: none; }
+  .prose { font-size: 15px; line-height: 1.65; }
+  .prose p { margin-bottom: 18px; }
+  .prose h2 { font-size: 19px; margin: 28px 0 12px; }
+  .prose h2::before { display: none; }
+  .prose h3 { font-size: 16px; margin: 22px 0 10px; }
+  .prose blockquote { padding: 12px 14px; font-size: 14px; }
+  .prose ul, .prose ol { padding-left: 20px; }
+  .tags-row { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="article-meta-top">
+      <span class="article-category">Manifest</span>
+      <span>2026</span>
+      <span class="sep">·</span>
+      <span>40-50 min citire</span>
+    </div>
+
+    <h1>Evoluția <span class="accent">Contabilității</span></h1>
+    <p class="article-lede">
+      O Paralelă Istorică pentru Profesionistul Modern
+    </p>
+    <div class="author-row">
+      <div class="author-avatar">IM</div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">aiaccountinghub.ro</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// evoluția contabilității · istorie profesională · AI</div>
+    </div>
+
+    <div class="prose">
+<blockquote>
+<em>„Dacă &#238;nțelegi pattern-ul, poți anticipa ce urmează și te poți pregăti.&quot;</em>
+<cite>— Maria, Episodul 2 al podcastului AI Accounting Hub</cite>
+</blockquote>
+
+<hr>
+
+<p><strong>Un articol manifest publicat de AI Accounting Hub</strong> <em>Timp estimat de lectură: 40-50 de minute</em> <em>Categorie: Istorie profesională | Strategie de carieră | Tehnologie financiară</em></p>
+
+<hr>
+
+<h2 id="prolog">PROLOG: Patru Revoluții, Un Singur Tipar — Și Ce Ne &#206;nvață Despre Prezent</h2>
+
+<p>Există o &#238;ntrebare pe care orice contabil cu cel puțin zece ani de carieră și-a pus-o, măcar o dată, &#238;n primele luni după lansarea ChatGPT-ului: <em>„Ce facem acum?&quot;</em> &#206;ntrebarea pare nouă. Pare să răspundă unui moment unic, fără precedent, &#238;n care munca noastră intră &#238;ntr-un teritoriu necartografiat. Cei mai mulți dintre noi am tratat-o așa.</p>
+
+<p>Acest articol pornește de la o premisă diferită. <strong>&#206;ntrebarea nu este nouă.</strong> Profesia contabilă a mai trecut prin trei momente similare — &#238;n care părea că tehnologia va &#238;nlocui contabilul, &#238;n care o &#238;ntreagă generație profesională a trebuit să se reinventeze, &#238;n care vechile certitudini s-au topit. De fiecare dată, profesia a ieșit <em>mai puternică</em>, <em>mai valoroasă</em>, <em>mai bine plătită</em> dec&#226;t &#238;nainte. Dar de fiecare dată, mulți profesioniști competenți au rămas pe margine — pentru că nu au recunoscut tiparul la timp.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Și scopul nu e doar o lecție de istorie. Scopul este să vedem pattern-ul, tiparul care se repetă. Pentru că dacă &#238;nțelegi pattern-ul, poți anticipa ce urmează și te poți pregăti.&quot;</div>
+</div>
+
+<p>Acest articol este, &#238;n esența lui, un exercițiu de <strong>recunoaștere a tiparului</strong>. Vom parcurge cele patru faze ale evoluției profesiei contabile — Era Pre-Digitală, Era Microsoft Office, Era Digitalizării, Era AI — și vom extrage, din fiecare, lecțiile care se aplică <em>acum</em>. Vom vedea că panică inițială, scepticism profesional, adopție treptată și redefinire — <em>aceleași patru etape</em> — se repetă cu fiecare valent tehnologic. Vom vedea că viteza de adopție se accelerează: 10-15 ani pentru Excel, 5-7 ani pentru cloud / RPA, <strong>estimat 3-5 ani pentru AI</strong>. Și vom vedea că, de fiecare dată, <em>c&#226;știgătorii sunt cei care recunosc tiparul devreme</em>.</p>
+
+<hr>
+
+<h2 id="cap1">CAPITOLUL 1</h2>
+
+<h2 id="de-ce-o-analiza-istorica-nu-este-nostalgie-ci-diagnostic">De Ce o Analiză Istorică Nu Este Nostalgie, Ci Diagnostic</h2>
+
+<h3 id="hook-cum-recunosti-un-tipar-care-conteaza">Cum recunoști un tipar care contează</h3>
+
+<p>Există două tipuri de istorie. Există <em>istoria ca arhivă</em> — colecția de fapte, date, anecdote despre cum era „pe vremea aceea&quot;. Și există <em>istoria ca diagnostic</em> — citirea trecutului pentru a &#238;nțelege prezentul și a anticipa viitorul. Acest articol &#238;ncearcă riguros al doilea tip.</p>
+
+<p>Diferența contează. Un articol de tip <em>arhivă</em> spune: „&#206;n 1985 a fost lansat Excel pe Macintosh, &#238;n 1987 pe Windows, primul Pivot Table a apărut &#238;n 1994&quot;. Util, dar inert. Un articol de tip <em>diagnostic</em> spune: „Lansarea Excel-ului a urmat un tipar de adopție pe care &#238;l observăm acum, identic, &#238;n adopția AI — și iată cinci lecții acționabile pe care contabilul de azi le poate extrage din modul &#238;n care colegii săi din 1990 au reacționat&quot;.</p>
+
+<h3 id="cele-cinci-lectii-pe-care-le-vom-extrage">Cele cinci lecții pe care le vom extrage</h3>
+
+<p>Vom organiza analiza &#238;n jurul a cinci lecții acționabile, pe care le vom susține cu evidență empirică din fiecare fază istorică:</p>
+
+<ol>
+  <li><strong>Frica inițială este universală</strong> — și aproape &#238;ntotdeauna disproporționată față de pericolul real</li>
+  <li><strong>Scepticismul informat al profesioniștilor experimentați</strong> este sănătos <em>p&#226;nă la un punct</em>; după punctul respectiv, devine paralizant</li>
+  <li><strong>C&#226;știgătorii sunt early adopters disciplinați</strong> — nu primii care &#238;ncearcă orice unealtă nouă, ci primii care o evaluează rațional și o adoptă consistent</li>
+  <li><strong>Skill-urile vechi nu dispar; se reașează</strong> — calculul mental nu mai este competitiv cu Excel-ul, dar este &#238;n continuare util pentru sanity checks</li>
+  <li><strong>Profesia se redefinește, nu se restr&#226;nge</strong> — de fiecare dată, locul valorii adăugate s-a mutat „mai sus&quot; pe lanțul cognitiv, dar a generat și roluri noi</li>
+</ol>
+
+<h3 id="o-nota-metodologica">O notă metodologică</h3>
+
+<p>Pentru că vom face afirmații despre <em>c&#226;t de rapid</em> se accelerează adopția, trebuie să fim expliciți cu metodologia: vorbim despre <em>adopția generalizată &#238;n profesia contabilă</em>, nu despre <em>prima utilizare experimentală</em>. Excel a existat din 1985, dar a devenit cerință de angajare pentru contabili abia &#238;n jurul anilor 1995-2000 — adică 10-15 ani. Cloud-ul / RPA-ul a existat la nivel comercial din mijlocul anilor 2000, dar a devenit normă pentru contabilitatea de SMB-uri &#238;n Rom&#226;nia &#238;n jurul anilor 2015-2018 — adică 5-7 ani. AI generativ a explodat cu ChatGPT &#238;n noiembrie 2022; estimarea pentru momentul &#238;n care AI Literacy va fi cerință standard de angajare este 2026-2028 — adică <strong>3-5 ani</strong>.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX</strong><br>Acest <em>fenomen al accelerării</em> — &#238;n care fiecare revoluție se adoptă mai rapid dec&#226;t cea anterioară — nu este accidental. Are cauze structurale identificabile (infrastructură deja existentă, alfabetizare digitală deja instalată, presiune competitivă globalizată). Vom dedica un capitol &#238;ntreg analizei lui (Capitolul 7), pentru că este <em>cel mai important</em> singur factor care diferențiază prezentul de revoluțiile anterioare.</div>
+</div>
+
+<hr>
+
+<h2 id="cap2">CAPITOLUL 2</h2>
+
+<h2 id="faza-1-era-pre-digitala-inainte-de-1980-contabilitatea-ca-artizanat">Faza 1 — Era Pre-Digitală (&#238;nainte de 1980): Contabilitatea ca Artizanat</h2>
+
+<h3 id="hook-cum-arata-o-luna-de-munca-atunci-cand-o-luna-de-munca-insemna-o-luna-de-munca">Cum arăta o lună de muncă atunci c&#226;nd o lună de muncă &#238;nsemna o lună de muncă</h3>
+
+<p>Pentru a &#238;nțelege corect c&#226;t de mult s-a transformat profesia contabilă, trebuie să avem o imagine vie a punctului de plecare. Iar punctul de plecare nu este at&#226;t de departe cum credem: profesioniști care &#238;ncă lucrează activ astăzi (&#238;n special generația 60+) au &#238;nceput cariera &#238;n această eră.</p>
+
+<h3 id="realitatea-muncii-contabile-pre-1980">Realitatea muncii contabile pre-1980</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Pentru cei mai tineri dintre ascultătorii noștri, care poate n-au prins-o, imaginați-vă cum arăta munca unui contabil: totul era manual. Registre pe h&#226;rtie, calcule cu m&#226;na, uneori cu ajutorul unui calculator mecanic. Fiecare tranzacție scrisă de m&#226;nă, fiecare totalizare verificată prin calcul manual.&quot;</div>
+</div>
+
+<p>Iată anatomia operațională a meseriei &#238;n acea perioadă:</p>
+
+<ul>
+  <li><strong>Tot manual</strong>: registre pe h&#226;rtie, calcule cu m&#226;na, uneori cu ajutorul unui calculator mecanic</li>
+  <li><strong>Erori frecvente</strong> care necesitau recalculare completă — o singură greșeală de transcriere putea &#238;nsemna ore de muncă pierdute</li>
+  <li><strong>Rapoarte financiare pregătite săptăm&#226;ni &#238;ntregi</strong> — pentru o &#238;nchidere de bilanț anual, două săptăm&#226;ni era un termen optimist</li>
+  <li><strong>Closing-ul lunar = coșmar logistic</strong> — coordonarea fluxului de informații &#238;ntre departamente, oficii regionale, conturi bancare necesita planning aproape militar</li>
+  <li><strong>Capacitate limitată de analiză</strong> — practic puteai analiza doar ce puteai calcula manual; orice scenarii multiple erau prohibitive ca timp</li>
+</ul>
+
+<h3 id="skill-urile-vremii">Skill-urile vremii</h3>
+
+<p>Cerințele de competență ale unui contabil pre-1980 erau dramatic diferite:</p>
+
+<ul>
+  <li><strong>Scris lizibil</strong> — pentru că alți colegi (sau auditorii) trebuiau să poată citi ce ai notat</li>
+  <li><strong>Atenție extremă la detalii</strong> — fără opțiunea „undo&quot;</li>
+  <li><strong>Răbdare pentru sarcini repetitive</strong> — calculele lungi cereau o disciplină mentală care, retrospectiv, pare aproape monastică</li>
+  <li><strong>Cunoștințe solide de aritmetică</strong> — calcul mental rapid și fiabil era o competență de bază</li>
+  <li><strong>Organizare fizică a documentelor</strong> — bibliorafturi, dosare, arhive fizice; capacitatea de a regăsi un document din 1976 &#238;ntr-un dulap de patru metri cubi era o competență valorizată</li>
+</ul>
+
+<h3 id="valoarea-adaugata-inregistrarea-corecta">Valoarea adăugată: &#238;nregistrarea corectă</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Și care era valoarea adăugată a contabilului &#238;n acea perioadă? Pur și simplu &#238;nregistrarea și raportarea corectă a tranzacțiilor. Dacă puteai ține evidența fără erori, erai un contabil bun. Bara era acolo.&quot;</div>
+</div>
+
+<p>Această observație merită zăbovire. <em>Bara valorii adăugate era la nivelul corectitudinii operaționale</em>. Un contabil care &#238;nregistra fără erori, care reușea să producă o balanță echilibrată la sf&#226;rșit de lună, care păstra o arhivă regăsibilă — acela era profesionistul de &#238;ncredere. Analiza, interpretarea, advisory-ul — toate existau, dar erau opționale, suplimentare. Nucleul valorii era <em>acuratețea de execuție</em>.</p>
+
+<h3 id="reactia-la-prima-revolutie-tehnologica-frica-universala">Reacția la prima revoluție tehnologică — frica universală</h3>
+
+<p>Iar acum vine partea pe care o vom revedea, <em>literalmente identică</em>, la fiecare tranziție tehnologică ulterioară:</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Acum, ce s-a &#238;nt&#226;mplat c&#226;nd a venit prima revoluție tehnologică? Frică. &#171;O să ne ia calculatoarele locul de muncă!&#187; Sună familiar?&quot;<br>
+<strong>Alex:</strong> „Foarte familiar. Și exact asta e pattern-ul pe care vrem să-l evidențiem.&quot;</div>
+</div>
+
+<p>Această frică nu a fost nici irațională, nici rușinoasă. A fost o reacție umană naturală la o schimbare structurală. Dar a fost, retrospectiv, <em>disproporționată</em>. Calculatoarele nu au luat locul contabililor. Au luat locul calculelor manuale.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Lecția 1 din Era Pre-Digitală</strong><br><em>Frica de &#238;nlocuire este un sentiment uman natural, dar este un ghid prost pentru decizii profesionale.</em> Contabilii care au cedat fricii și au respins prima revoluție au fost cei care, peste un deceniu, s-au trezit fără capacitatea de a opera &#238;ntr-un mediu transformat. Cei care și-au depășit frica și au &#238;nvățat noile instrumente — chiar și cu reluctanță, chiar și &#238;ncet — au prosperat. Lecția se aplică <em>identic</em> azi, cu AI.</div>
+</div>
+
+<hr>
+
+<h2 id="cap3">CAPITOLUL 3</h2>
+
+<h2 id="faza-2-era-microsoft-office-1990-2010-contabilitatea-ca-analiza">Faza 2 — Era Microsoft Office (1990-2010): Contabilitatea ca Analiză</h2>
+
+<h3 id="hook-cum-o-foaie-de-calcul-a-redefinit-ce-inseamna-a-fi-competent">Cum o foaie de calcul a redefinit ce &#238;nseamnă „a fi competent&quot;</h3>
+
+<p>Lansarea Excel — 1985 pe Macintosh, 1987 pe Windows — nu a fost evenimentul. Evenimentul a fost <em>adopția lui generalizată</em>, care s-a &#238;nt&#226;mplat &#238;n profesia contabilă pe parcursul anilor &#39;90 și &#238;nceputul anilor 2000. Această perioadă, pe care o vom numi <em>Era Microsoft Office</em>, a redefinit fundamental ce &#238;nseamnă să fii contabil.</p>
+
+<h3 id="anatomia-revolutiei-excel">Anatomia revoluției Excel</h3>
+
+<p>Pentru a &#238;nțelege impactul, trebuie să vedem ce <em>adăugat concret</em> Excel-ul la munca contabilă:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Capacitate</th><th>Ce făcea posibil</th><th>C&#226;știg de productivitate</th></tr></thead>
+<tbody>
+<tr><td><strong>Automatizarea calculelor</strong> prin formule și funcții</td><td>Recalculare instantanee la modificarea unei valori</td><td>Eliminarea totală a erorilor de aritmetică</td></tr>
+<tr><td><strong>Pivot Tables</strong> (introduse &#238;n 1994)</td><td>Analiza rapidă a mii de r&#226;nduri de date pe multiple dimensiuni</td><td>Reducere de la zile la minute pentru rapoarte de sinteză</td></tr>
+<tr><td><strong>VLOOKUP</strong> și funcții de căutare</td><td>Consolidarea datelor din surse multiple</td><td>Eliminarea introducerii manuale duplicate</td></tr>
+<tr><td><strong>Grafice automate</strong></td><td>Vizualizarea instantanee a tendințelor</td><td>Comunicare cu management-ul fundamental schimbată</td></tr>
+<tr><td><strong>What-If Analysis</strong></td><td>Scenarii financiare &#238;n secunde</td><td>Planificare bugetară posibilă pentru prima dată la scară</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="software-urile-contabile-care-au-insotit-revolutia">Software-urile contabile care au &#238;nsoțit revoluția</h3>
+
+<p>Excel singur nu a fost suficient. &#206;n paralel cu el, a apărut o generație de software-uri contabile care au automatizat ce Excel singur nu putea: &#238;nregistrările duble, generarea automată de rapoarte fiscale, reconcilierea bancară semi-automată. La nivel internațional — QuickBooks, SAP. &#206;n Rom&#226;nia — <em>CIEL (1992), WinMENTOR (1999), SAGA (mijlocul anilor 2000)</em>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Și &#238;n paralel, au apărut software-urile contabile — Saga, WinMentor, Ciel &#238;n Rom&#226;nia, QuickBooks și SAP la nivel internațional. Acestea au automatizat &#238;nregistrările duble, generarea de rapoarte fiscale, reconcilierea bancară semi-automată. Practic, bazele de date au &#238;nlocuit registrele fizice.&quot;</div>
+</div>
+
+<p>(Pentru istoria detaliată a softurilor contabile rom&#226;nești și a fondatorilor lor, recomandăm articolul nostru <em>„Viitorul Profesiei: cum va arăta contabilitatea &#238;n 5–10 ani&quot;</em> din această serie.)</p>
+
+<h3 id="transformarea-fundamentala-a-rolului-de-la-calcul-la-analiza">Transformarea fundamentală a rolului — de la calcul la analiză</h3>
+
+<p>Aici se află momentul de inflexiune al &#238;ntregii discuții. Excel nu a făcut munca contabilului mai rapidă. <em>A schimbat natura muncii contabilului</em>.</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Dimensiune</th><th>&#206;nainte de Excel</th><th>După Excel</th></tr></thead>
+<tbody>
+<tr><td><strong>Activitatea dominantă</strong></td><td>Calcule manuale</td><td>Automatizare calcule</td></tr>
+<tr><td><strong>Verificare</strong></td><td>Re-verificare manuală</td><td>Verificare prin formule</td></tr>
+<tr><td><strong>Focus profesional</strong></td><td>Acuratețe prin repetare</td><td><strong>Analiză și interpretare</strong></td></tr>
+<tr><td><strong>Output principal</strong></td><td>Registre și rapoarte de bază</td><td><strong>Insight-uri, recomandări, forecast-uri</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Și aici e cheia: contabilul nu a fost &#238;nlocuit. Contabilul a fost augmentat, &#238;mbunătățit. A fost eliberat de munca mecanică de calcul și a putut să se concentreze pe ceea ce contează cu adevărat — &#238;nțelegerea datelor și comunicarea lor către management.&quot;</div>
+</div>
+
+<p>Această tranziție de la <em>operator de cifre</em> la <em>analist financiar</em> este probabil cea mai importantă transformare pe care a cunoscut-o profesia &#238;n secolul XX. Și a urmat, <em>exact</em>, tiparul pe care &#238;l vedem astăzi cu AI: instrumentul nou nu a eliminat profesionistul — l-a &#238;mpins „mai sus&quot; pe lanțul valorii.</p>
+
+<h3 id="skill-urile-noi-devenite-obligatorii">Skill-urile noi devenite obligatorii</h3>
+
+<p>Cerințele de competență s-au schimbat dramatic. La interviul de angajare, din anii 2000 &#238;ncoace, <em>un contabil care nu știa Excel nu era angajabil</em>:</p>
+
+<p><strong>Excel avansat — devenit standard de admisibilitate:</strong></p>
+
+<ul>
+  <li><em>Pivot Tables</em> — rezumare multi-dimensională</li>
+  <li><em>VLOOKUP / INDEX-MATCH</em> — consolidare date</li>
+  <li><em>IF statements</em> — logică condițională</li>
+  <li><em>Macro-uri VBA</em> — automatizare procese</li>
+</ul>
+
+<p><strong>Restul suitei Office — devenit standard de comunicare profesională:</strong></p>
+
+<ul>
+  <li><em>PowerPoint</em> — comunicare vizuală către management, board presentations, storytelling cu date financiare</li>
+  <li><em>Word</em> — rapoarte executive, memo-uri, documentație formală</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Și ce se &#238;nt&#226;mpla la interviul de angajare? Cerințele s-au schimbat complet. &#171;Skill-uri obligatorii: Excel avansat cu Pivot Tables și VLOOKUP, experiență cu Saga sau SAP, PowerPoint pentru prezentări executive.&#187; Dacă nu știai să faci un Pivot Table, practic nu erai angajabil.&quot;</div>
+</div>
+
+<h3 id="trei-studii-de-caz-concrete-cum-s-a-schimbat-o-saptamana-de-munca">Trei studii de caz concrete — cum s-a schimbat o săptăm&#226;nă de muncă</h3>
+
+<p>Pentru a face palpabilă transformarea, urmărim trei sarcini comune:</p>
+
+<p><strong>Reconcilierea bancară:</strong></p>
+
+<ul>
+  <li><em>&#206;nainte:</em> 4-6 ore, manual, cu risc mare de erori</li>
+  <li><em>Cu Excel:</em> 1-2 ore, formule pentru matching, evidențiere automată a discrepanțelor</li>
+  <li><strong>C&#226;știg: ~4&#215;</strong></li>
+</ul>
+
+<p><strong>Raportul financiar lunar:</strong></p>
+
+<ul>
+  <li><em>&#206;nainte:</em> 2-3 zile de compilare, calcule, verificare</li>
+  <li><em>Cu Excel + software contabil:</em> 4-6 ore, majoritatea automatizată, focus pe analiza varianțelor</li>
+  <li><strong>C&#226;știg: ~5&#215;</strong></li>
+</ul>
+
+<p><strong>Forecast-ul anual:</strong></p>
+
+<ul>
+  <li><em>&#206;nainte:</em> Aproape imposibil de făcut cu acuratețe — prea mulți parametri</li>
+  <li><em>Cu Excel:</em> Multiple scenarii (best case / worst case / likely case) &#238;n c&#226;teva ore</li>
+  <li><strong>C&#226;știg: de la „imposibil&quot; la „rutină&quot;</strong> (saltul calitativ, nu cantitativ)</li>
+</ul>
+
+<h3 id="statisticile-care-arata-cat-de-profunda-a-fost-adoptia">Statisticile care arată c&#226;t de profundă a fost adopția</h3>
+
+<p>Patru decenii mai t&#226;rziu, Excel răm&#226;ne coloana vertebrală a profesiei:</p>
+
+<ul>
+  <li><strong>65% din data analysts</strong> &#238;l folosesc <em>zilnic</em></li>
+  <li><strong>28,3% din accountants</strong> &#238;l consideră <em>tool-ul principal</em></li>
+  <li>Dar — și aici e partea care contează — <strong>57% din angajați au doar skill-uri Excel de bază sau deloc</strong></li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Iar statisticile arată c&#226;t de important a rămas Excel: 65% din data analysts &#238;l folosesc zilnic, 28% din accountants &#238;l consideră tool-ul principal. Dar — și asta e important — 57% din angajați au doar skill-uri de bază sau deloc. Deci chiar și &#238;n 2024, există un gap masiv de competență pe Excel.&quot;</div>
+</div>
+
+<h3 id="investitia-necesara-pentru-a-deveni-excel-fluent">Investiția necesară pentru a deveni Excel-fluent</h3>
+
+<p>Pentru a calibra corect așteptările despre AI Literacy, e util să vedem c&#226;t a costat (&#238;n ore de practică) să ajungi la diferite niveluri Excel:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Nivel</th><th>Ore de practică estimate</th></tr></thead>
+<tbody>
+<tr><td>Basic</td><td>20-40 ore</td></tr>
+<tr><td>Intermediate</td><td>100-200 ore</td></tr>
+<tr><td>Advanced</td><td>500+ ore</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Pentru un advanced user complet — capabil să construiască modele financiare complexe, dashboard-uri, automation prin VBA — investiția era de ordinul a <em>un an de practică serioasă</em>. Dar cei care au făcut investiția au prosperat.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Lecția 2 din Era Microsoft Office</strong><br><em>Investiția &#238;n skill-uri noi are un ROI exponențial — dar plătit pe orizonturi lungi.</em> Contabilii care au investit 500+ ore &#238;n Excel &#238;ntre 1995 și 2000 au cules beneficiile timp de 20-25 de ani. Contabilii care au am&#226;nat investiția p&#226;nă &#238;n 2005-2010 au pierdut 5-10 ani de avantaj competitiv. Aceeași logică se aplică acum cu AI — dar cu un orizont de plată mai scurt, pentru că tehnologia se mișcă mai rapid.</div>
+</div>
+
+<hr>
+
+<h2 id="cap4">CAPITOLUL 4</h2>
+
+<h2 id="faza-3-era-digitalizarii-2010-2023-contabilitatea-ca-proces-integrat">Faza 3 — Era Digitalizării (2010-2023): Contabilitatea ca Proces Integrat</h2>
+
+<h3 id="hook-cand-datele-scapa-de-geografie">C&#226;nd datele scapă de geografie</h3>
+
+<p>Era Microsoft Office a făcut calculul mai rapid. Era Digitalizării a făcut <em>colaborarea</em> mai rapidă. Pentru profesia contabilă, această tranziție — care s-a desfășurat aproximativ &#238;ntre 2010 și 2023 — a marcat trecerea de la <em>muncă pe fișier</em> la <em>muncă pe sistem integrat</em>. O tranziție mai puțin spectaculoasă dec&#226;t revoluția Excel, dar cu impact cumulativ semnificativ.</p>
+
+<h3 id="cele-cinci-componente-ale-erei-digitalizarii">Cele cinci componente ale Erei Digitalizării</h3>
+
+<p><strong>1. Cloud Accounting — software-ul scapă de hard disk.</strong> Trecerea de la software instalat local la platforme cloud (QuickBooks Online, Xero, Zoho, FreshBooks la nivel internațional; SmartBill, Keez, Saga Web &#238;n Rom&#226;nia) a adus:</p>
+
+<ul>
+  <li>Acces de oriunde, de pe orice dispozitiv</li>
+  <li>Colaborare &#238;n timp real &#238;ntre contabil și client</li>
+  <li>Integrări automate cu băncile (feed-uri de tranzacții)</li>
+  <li>Aplicații mobile pentru aprobarea cheltuielilor</li>
+  <li>Actualizări automate, fără reinstalări manuale</li>
+</ul>
+
+<p><strong>2. RPA (Robotic Process Automation) — roboți care imită oameni.</strong></p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Două tipuri: unattended RPA, care rulează autonom — de exemplu, importul extraselor bancare &#238;n fiecare noapte, fără intervenție umană — și attended RPA, asistenți digitali care lucrează alături de om.&quot;</div>
+</div>
+
+<p>Important: RPA-ul Erei Digitalizării a fost <em>bazat pe reguli rigide</em>. Dacă X, atunci Y. Nu g&#226;ndea, nu se adapta. Era automatizare <em>mecanică</em>, nu <em>inteligentă</em>.</p>
+
+<p><strong>3. e-Factura și SAF-T — digitalizarea forțată ANAF &#238;n Rom&#226;nia.</strong> Pentru profesia rom&#226;nească, această componentă a avut un impact specific. E-Factura (devenită treptat obligatorie &#238;ntre 2022 și 2024) și SAF-T (treptat obligatoriu pentru tot mai multe categorii de contribuabili) au redefinit fluxul de date contabile la nivel național.</p>
+
+<p><strong>4. OCR și AI incipient — citirea automată a documentelor.</strong> Soluții precum <em>Chronoscan</em> sau <em>CloudContaDoc</em> au &#238;nceput să facă scanare și extragere automată de date din facturi. Reducerea data entry-ului manual cu <strong>70-80%</strong> a fost o realitate operațională măsurabilă.</p>
+
+<p><strong>5. ERP-uri integrate — totul &#238;ntr-un singur loc.</strong> Centralizarea contabilității, gestiunii stocurilor, resurselor umane și v&#226;nzărilor &#238;ntr-un singur sistem — cu procese end-to-end și reporting &#238;n timp real. SAP, Oracle, Microsoft Dynamics, Charisma, alături de soluții mai mici.</p>
+
+<h3 id="impactul-masurabil-un-studiu-romanesc-concret">Impactul măsurabil — un studiu rom&#226;nesc concret</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Impactul a fost semnificativ: reducere drastică a timpului pe sarcini manuale, &#238;nchidere lunară &#238;n zile versus săptăm&#226;ni, conformitate fiscală &#238;mbunătățită, capacitate crescută de procesare a volumelor mari. Un studiu rom&#226;nesc arăta că introducerea manuală de date din extrase bancare &#238;n ERP lua &#238;ntre 5 și 8 ore &#238;n fiecare zi. Un robot face aceleași operațiuni &#238;n doar o oră. Organizația c&#226;știga &#238;n medie <strong>157 de zile pe an</strong> doar pe acest proces.&quot;</div>
+</div>
+
+<p>Această cifră — <em>157 de zile pe an</em>, pe un singur proces — captează esența Erei Digitalizării. C&#226;știgul cumulativ era enorm, dar venea din automatizarea de proces, nu din inteligență.</p>
+
+<h3 id="limitarile-care-au-persistat">Limitările care au persistat</h3>
+
+<p>Era Digitalizării a fost, retrospectiv, o pregătire pentru Era AI — nu transformarea finală. Limitările au fost specifice:</p>
+
+<ul>
+  <li><em>Necesita &#238;ncă input-uri corecte de la om</em> — RPA-ul nu poate corecta o eroare de input</li>
+  <li><em>Excepțiile necesitau intervenție manuală</em> — orice nu se &#238;ncadra &#238;n reguli ajungea la contabil</li>
+  <li><em>Configurarea inițială era complexă</em> — proiectele mari de RPA puteau dura luni</li>
+  <li><em>Adaptarea la schimbări legislative &#238;nsemna upgrade manual</em> — nu autonomă</li>
+  <li><em>Automatizarea era bazată pe reguli</em> — nu g&#226;ndea, nu se adapta singură</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Automatizarea era bazată pe reguli — dacă X, atunci Y. Nu g&#226;ndea, nu se adapta singură.&quot;</div>
+</div>
+
+<p>Această ultimă observație este cheia care explică de ce Era AI este <em>categorial diferită</em> de Era Digitalizării. RPA-ul vechi era <em>automatizare mecanică</em>; AI agentic este <em>automatizare cognitivă</em>. Diferența nu este de grad, ci de natură.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Lecția 3 din Era Digitalizării</strong><br><em>Adopția incrementală c&#226;știgă &#238;n fața tergiversării definitive.</em> Firmele care au adoptat cloud-ul și RPA-ul treptat, &#238;ncep&#226;nd din 2014-2016, au beneficiat din 2018-2020. Cele care au tergiversat „p&#226;nă se va vedea cum merge&quot; se trezesc azi cu un substrat tehnologic depășit, care le &#238;mpiedică să se conecteze la valul AI. Lecția pentru momentul prezent: nu trebuie să adopți AI-ul &#238;n &#238;ntregime m&#226;ine — dar trebuie să &#238;ncepi adopția <em>acum</em>, pe orice scară.</div>
+</div>
+
+<hr>
+
+<h2 id="cap5">CAPITOLUL 5</h2>
+
+<h2 id="faza-4-era-ai-2024-prezent-contabilitatea-ca-judecata-augmentata">Faza 4 — Era AI (2024-prezent): Contabilitatea ca Judecată Augmentată</h2>
+
+<h3 id="hook-de-la-daca-x-atunci-y-la-daca-x-gandeste-te-ce-y-ar-fi-cel-mai-potrivit">De la „dacă X, atunci Y&quot; la „dacă X, g&#226;ndește-te ce Y ar fi cel mai potrivit&quot;</h3>
+
+<p>Trecerea de la Era Digitalizării la Era AI nu este o continuare gradată. Este o ruptură categorială. Și pentru a o &#238;nțelege corect, trebuie &#238;ncepute cu schimbarea fundamentală de paradigmă: de la <em>automatizarea bazată pe reguli</em> (rigide, definite anterior, nu se adaptează) la <em>automatizarea inteligentă</em> (&#238;nvață din date, se adaptează, ia decizii).</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Și aici este schimbarea fundamentală de paradigmă. Trecem de la automatizarea bazată pe reguli la automatizarea inteligentă — sisteme care &#238;nvață din date, se adaptează, și iau decizii.&quot;</div>
+</div>
+
+<h3 id="cele-sase-capabilitati-noi-pe-care-le-aduce-ai">Cele șase capabilități noi pe care le aduce AI</h3>
+
+<p>Pentru a fi concreți, iată cele șase categorii noi de capabilități pe care AI le adaugă față de Era Digitalizării:</p>
+
+<h3 id="1-natural-language-processing-nlp">1. Natural Language Processing (NLP)</h3>
+
+<p>Sistemele AI pot <em>&#238;nțelege limbajul natural</em>: clauze contractuale, e-mailuri cu commitment-uri financiare, comunicări neformale. Pot extrage automat termeni relevanți pentru revenue recognition, pot identifica obligații financiare ascunse &#238;ntr-un schimb de e-mailuri.</p>
+
+<p><strong>Implicația pentru contabil:</strong> primul nivel de citire a unui contract complex poate fi delegat. Verificarea, interpretarea juridică și decizia răm&#226;n umane.</p>
+
+<h3 id="2-predictive-analytics">2. Predictive Analytics</h3>
+
+<p>Forecast de cash flow bazat pe pattern-uri istorice <em>plus</em> factori externi. Identificarea clienților cu risc de neplată. Previzionarea veniturilor și cheltuielilor cu acuratețe semnificativ crescută față de modelele clasice.</p>
+
+<p><strong>Implicația:</strong> advisory-ul către management devine <em>mai proactiv</em> — anticipezi problemele &#238;nainte să se materializeze.</p>
+
+<h3 id="3-anomaly-detection-si-fraud-prevention">3. Anomaly Detection și Fraud Prevention</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „A treia: Anomaly Detection și Fraud Prevention. Algoritmii de machine learning pot analiza TOATE tranzacțiile — nu doar un eșantion, ci toate — și pot detecta pattern-uri neobișnuite și genera alerte proactive.&quot;</div>
+</div>
+
+<p>Această schimbare — de la <em>sampling</em> la <em>populație totală</em> — este transformatoare. Auditorul tradițional verifica un eșantion reprezentativ; AI poate verifica <em>fiecare tranzacție</em>. Capacitatea de detectare a fraudei crește cu ordine de mărime.</p>
+
+<h3 id="4-audit-automat-si-continuu">4. Audit Automat și Continuu</h3>
+
+<p>Trecerea de la metode bazate pe eșantionare la <em>monitorizare continuă</em>. Testarea automată a controalelor. Identificarea instantanee a gap-urilor de conformitate. Acesta este nucleul a ceea ce se numește <em>Continuous Accounting</em> — și care va dezasambla, &#238;n următorii cinci ani, ritmul mensual al &#238;nchiderii contabile.</p>
+
+<h3 id="5-intelligent-document-processing">5. Intelligent Document Processing</h3>
+
+<p>Nu doar OCR (care citește text), ci AI care <em>&#238;nțelege contextul</em>:</p>
+
+<ul>
+  <li>Clasificare automată: „acesta este un invoice, acesta este un contract, acesta este un purchase order&quot;</li>
+  <li>Extragerea relațiilor &#238;ntre documente: „acest invoice corespunde acestui PO și acestei recepții&quot;</li>
+  <li>Identificarea documentelor incomplete sau inconsistente</li>
+</ul>
+
+<h3 id="6-conversational-ai-pentru-research">6. Conversational AI pentru Research</h3>
+
+<p>Probabil cea mai accesibilă dintre cele șase. <em>Poți interoga standardele contabile &#238;n limbaj natural</em>: „Care sunt condițiile pentru recunoașterea venitului conform IFRS 15 &#238;n cazul unui contract multi-element?&quot; Și primești un răspuns contextualizat, cu referințe — care, atenție, <em>trebuie verificat</em>, dar care economisește ore de research.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce Era AI nu este „&#238;ncă o digitalizare&quot;</strong><br>Era Digitalizării a <em>grăbit</em> munca pe care o făceam deja. Era AI face <em>categorii noi de muncă</em> posibile — analiza unei populații &#238;ntregi de tranzacții, citirea contextuală a unui contract, predictia unui risc &#238;nainte să se materializeze. Diferența este &#238;ntre <em>a face mai rapid același lucru</em> și <em>a face lucruri diferite</em>. Această distincție trebuie internalizată — pentru că determină nivelul de transformare la care ne putem aștepta.</div>
+</div>
+
+<h3 id="studiile-de-caz-big-4-ca-seismograf-al-schimbarii">Studiile de caz — Big 4 ca seismograf al schimbării</h3>
+
+<p>Pentru a calibra c&#226;t de serioasă este Era AI, datele Big 4 sunt cele mai elocvente:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Firma</th><th>Investiție AI</th><th>Detalii cheie</th></tr></thead>
+<tbody>
+<tr><td><strong>Deloitte</strong></td><td>Peste <strong>$1,4 miliarde</strong></td><td>70+ programe de &#238;nvățare GenAI, peste 100.000 profesioniști antrenați</td></tr>
+<tr><td><strong>PwC</strong></td><td>Peste <strong>$1 miliard</strong></td><td>Training intensiv &#238;n prompt engineering ca skill core</td></tr>
+<tr><td><strong>EY</strong></td><td>Platforma proprie EY.ai cu LLM dedicat (EYQ)</td><td>Roll-out la <strong>400.000 angajați &#238;n 150 de țări</strong></td></tr>
+<tr><td><strong>KPMG</strong></td><td>Parteneriat strategic Microsoft Azure + OpenAI</td><td>Cloud-based AI pentru analiza rapidă a volumelor mari</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Firmele mari au investit masiv. Deloitte: peste 1.4 miliarde de dolari, 70+ programe de &#238;nvățare GenAI, peste 100.000 de profesioniști antrenați. PwC: peste un miliard, cu training intensiv &#238;n prompt engineering ca skill de bază. EY: platforma EY.ai cu propriul LLM numit EYQ, rollout la 400.000 de angajați. KPMG: parteneriat cu Microsoft Azure și OpenAI.&quot;</div>
+</div>
+
+<p>Cumulul: aproximativ <strong>patru miliarde de dolari</strong> investiți de Big 4 &#238;n AI &#238;ntr-un interval de doi ani. Aceasta nu este speculație. Este <em>consemnarea unei viitoare realități pe care firmele cu cele mai bune capabilități de risk și strategy o cunosc deja</em>.</p>
+
+<h3 id="paradoxul-adoptiei-entuziasm-si-inactiune">Paradoxul adopției — entuziasm și inacțiune</h3>
+
+<p>Și aici intervine cel mai semnificativ paradox al perioadei prezente. Studiul <em>State of AI in Accounting 2024-2025</em> publicat de Karbon a evidențiat:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Atitudine</th><th>Procentaj</th></tr></thead>
+<tbody>
+<tr><td>Cred că AI va aduce schimbări substanțiale</td><td><strong>71%</strong></td></tr>
+<tr><td>Sunt intrigați sau excited de AI</td><td><strong>82%</strong></td></tr>
+<tr><td>Investesc activ &#238;n training</td><td><strong>doar 25%</strong></td></tr>
+<tr><td>&#206;ngrijorați de securitatea datelor</td><td><strong>76%</strong></td></tr>
+<tr><td>Preocupați de dileme etice și bias-uri</td><td><strong>49%</strong></td></tr>
+<tr><td>Cred că bookkeeping-ul va fi cea mai afectată funcție</td><td><strong>59%</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Mare entuziasm, acțiune limitată. Un gap strategic uriaș.&quot;</div>
+</div>
+
+<p>Vom dedica un capitol &#238;ntreg analizei acestui paradox (Capitolul 10), pentru că el este <em>cheia strategică a momentului prezent</em>.</p>
+
+<hr>
+
+<h2 id="cap6">CAPITOLUL 6</h2>
+
+<h2 id="anatomia-unei-revolutii-cele-cinci-faze-ale-fiecarei-tranzitii">Anatomia unei Revoluții — Cele Cinci Faze ale Fiecărei Tranziții</h2>
+
+<h3 id="hook-tiparul-ascuns-in-spatele-oricarei-adoptii-tehnologice">Tiparul ascuns &#238;n spatele oricărei adopții tehnologice</h3>
+
+<p>Acum că am parcurs cele patru faze ale evoluției profesiei contabile, putem extrage tiparul comun. <em>Fiecare</em> dintre cele patru tranziții — manual → Excel, Excel → Cloud / RPA, Cloud / RPA → AI — a urmat aceeași secvență de cinci faze psihosociale. Recunoașterea acestui tipar este, probabil, cea mai utilă unealtă conceptuală pe care o putem oferi profesionistului care se confruntă astăzi cu valul AI.</p>
+
+<h3 id="cele-cinci-faze-ale-unei-revolutii-tehnologice-profesionale">Cele cinci faze ale unei revoluții tehnologice profesionale</h3>
+
+<p><strong>Faza 1 — Anunțul și fascinația.</strong> Tehnologia nouă apare. C&#226;țiva early adopters o explorează experimental. Presa de specialitate &#238;i face publicitate. Comunitatea profesională o privește cu un amestec de fascinație și suspiciune.</p>
+
+<p><strong>Faza 2 — Frica de &#238;nlocuire.</strong> <em>„O să ne ia locul de muncă.&quot;</em> Această reacție apare &#238;n fiecare ciclu, fără excepție. A apărut la calculatoare. A apărut la Excel. A apărut la cloud / RPA. Apare acum la AI. Frica este universală pentru că este o reacție umană autentică la o schimbare structurală — nu o slăbiciune profesională.</p>
+
+<p><strong>Faza 3 — Scepticismul informat.</strong> Profesioniștii experimentați evaluează raționalul tehnologia și identifică <em>limitările reale</em>. Această fază este sănătoasă — fără ea, am adopta orice tehnologie hipsterică. Dar devine periculoasă c&#226;nd se prelungește dincolo de momentul &#238;n care limitările sunt depășite.</p>
+
+<p><strong>Faza 4 — Adopția treptată.</strong> Early adopters au validat tehnologia. Limitările inițiale au fost depășite. Restul profesiei &#238;ncepe să adopte, mai &#238;nt&#226;i cu reluctanță, apoi cu accelerare. Apar primele cerințe la angajare. Apar primele cursuri specializate. Apar primii „experți&quot; recunoscuți.</p>
+
+<p><strong>Faza 5 — Normalizarea.</strong> Tehnologia devine <em>cerință standard</em>. Cei care nu o cunosc devin neangajabili. <em>„Cum am trăit fără asta?&quot;</em> devine refrenul comun. Profesia se redefinește &#238;n jurul noii infrastructuri.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „E exact pattern-ul pe care l-am văzut cu fiecare revoluție anterioară: frică inițială, rezistență, apoi adopție treptată, și &#238;n final — &#171;cum am trăit fără asta?&#187;&quot;</div>
+</div>
+
+<h3 id="tabelul-comparativ-al-celor-patru-tranzitii">Tabelul comparativ al celor patru tranziții</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Tranziția</th><th>Faza 2 (Frica)</th><th>Faza 3 (Scepticism)</th><th>Faza 4 (Adopție)</th><th>Faza 5 (Normalizare)</th></tr></thead>
+<tbody>
+<tr><td><strong>Manual → Calculator (1970-1985)</strong></td><td>„Calculatoarele ne iau slujba&quot;</td><td>„Sunt prea scumpe&quot; / „Greșesc&quot;</td><td>Mid-1980s</td><td>Mid-1990s</td></tr>
+<tr><td><strong>Calculator → Excel (1985-2000)</strong></td><td>„Nu putem avea &#238;ncredere &#238;n formule&quot;</td><td>„Excel-ul nu e &#171;contabilitate adevărată&#187;&quot;</td><td>1995-2000</td><td>2005-2010</td></tr>
+<tr><td><strong>Local → Cloud (2010-2020)</strong></td><td>„Datele noastre nu vor fi sigure&quot;</td><td>„Cloud-ul cade c&#226;nd avem nevoie&quot;</td><td>2015-2020</td><td>2020-2023</td></tr>
+<tr><td><strong>Software clasic → AI (2022-?)</strong></td><td>„AI ne va &#238;nlocui&quot;</td><td>„AI halucinează / nu e suficient de bun&quot;</td><td><strong>2024-2027 (proiectat)</strong></td><td><strong>2027-2030 (proiectat)</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="unde-suntem-acum-in-mod-specific">Unde suntem acum, &#238;n mod specific?</h3>
+
+<p>Pentru AI, &#238;n aprilie 2026, ne aflăm la <em>granița dintre Faza 3 (scepticism informat) și Faza 4 (adopție treptată)</em>. Cele două sunt suprapuse — coexistă &#238;n același moment temporal, &#238;n profesioniști diferiți.</p>
+
+<p>Faptul că <strong>75% dintre contabili &#238;ncă nu investesc &#238;n training AI</strong> (conform studiului Karbon) indică prezența puternică a Fazei 3. Faptul că Big 4 au investit <strong>patru miliarde de dolari</strong> indică deja Faza 4 &#238;n segmentul de top.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Avantajul de a fi &#238;ntre Faza 3 și Faza 4</strong><br>Profesioniștii individuali care, &#238;n 2026, fac saltul de la Faza 3 la Faza 4 &#238;naintea cohortei lor obțin <strong>avantajul early adopter cu risc deja diminuat</strong>. Tehnologia este suficient de matură pentru a nu fi pierdere de timp. Dar adopția nu este &#238;ncă generalizată, deci avantajul competitiv este real. Această fereastră se &#238;nchide rapid — &#238;n 2-3 ani, va trece de la „avantaj&quot; la „prerequisite&quot;.</div>
+</div>
+
+<hr>
+
+<h2 id="cap7">CAPITOLUL 7</h2>
+
+<h2 id="accelerarea-de-ce-fiecare-revolutie-vine-mai-rapid-decat-cea-anterioara">Accelerarea — De Ce Fiecare Revoluție Vine Mai Rapid Dec&#226;t Cea Anterioară</h2>
+
+<h3 id="hook-fereastra-de-oportunitate-care-se-ingusteaza-la-fiecare-ciclu">Fereastra de oportunitate care se &#238;ngustează la fiecare ciclu</h3>
+
+<p>Există o caracteristică structurală a istoriei tehnologice pe care e crucial să o internalizăm. Cu fiecare ciclu de revoluție, <em>durata adopției generalizate se scurtează</em>. Ceea ce a durat 15 ani pentru Excel durează 5 ani pentru cloud / RPA, și — toate semnele indică — 3-5 ani pentru AI.</p>
+
+<h3 id="datele-care-sustin-afirmatia">Datele care susțin afirmația</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Și viteza de adopție se accelerează de la o revoluție la alta. Excel: 10-15 ani pentru adopție generalizată. Cloud și RPA: 5-7 ani. AI: estimăm 3-5 ani. Deci fereastra de oportunitate se micșorează. Cu c&#226;t &#238;ncepi mai devreme, cu at&#226;t avantajul tău e mai mare.&quot;</div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Revoluția</th><th>Durata p&#226;nă la adopție generalizată</th><th>Implicația pentru fereastra de oportunitate</th></tr></thead>
+<tbody>
+<tr><td><strong>Excel / Microsoft Office</strong></td><td>10-15 ani</td><td>Cei care au adoptat &#238;naintea cohortei au avut un avantaj de ~7 ani</td></tr>
+<tr><td><strong>Cloud / RPA</strong></td><td>5-7 ani</td><td>Avantaj de ~3 ani pentru early adopters</td></tr>
+<tr><td><strong>AI Agentic</strong></td><td><strong>3-5 ani estimat</strong></td><td><strong>Avantaj de ~1-2 ani pentru cei care &#238;ncep acum</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Tradus &#238;n termeni operaționali: dacă Excel-ul a permis 7 ani de avantaj competitiv pentru early adopters, AI permite — <em>probabil</em> — 1-2 ani. Fereastra este radical mai &#238;ngustă.</p>
+
+<h3 id="de-ce-se-intampla-asta-cinci-cauze-structurale">De ce se &#238;nt&#226;mplă asta? Cinci cauze structurale</h3>
+
+<p>&#206;nțelegerea cauzelor accelerării este importantă, pentru că ele explică de ce fenomenul este <em>cumulativ și ireversibil</em>:</p>
+
+<p><strong>Cauza 1: Infrastructura digitală deja există.</strong> Excel-ul a trebuit să aștepte ca PC-urile să devină accesibile financiar și ca contabilii să &#238;nvețe să folosească un mouse. AI-ul folosește calculatoare, conexiuni internet, browseri pe care contabilii deja &#238;i folosesc. <em>Substratul tehnologic este deja instalat</em>.</p>
+
+<p><strong>Cauza 2: Alfabetizarea digitală a profesiei a crescut dramatic.</strong> Contabilul mediu din 1990 nu mai folosise niciodată o foaie de calcul. Contabilul mediu din 2026 folosește zeci de aplicații, mai multe dispozitive, multiple sisteme cloud. <em>Curba de &#238;nvățare pentru un instrument nou este mult mai lină</em>.</p>
+
+<p><strong>Cauza 3: Modelele de adopție sunt cunoscute și replicabile.</strong> Big 4 nu inventează playbook-ul de adopție AI; aplică playbook-ul rafinat &#238;n transformările anterioare. Cursurile de formare sunt mai bune. Comunitățile de practică sunt mai dezvoltate. Erorile sunt cunoscute și evitabile. <em>&#206;nvățarea este mai eficientă</em>.</p>
+
+<p><strong>Cauza 4: Presiunea competitivă globalizată.</strong> &#206;n 1995, contabilul rom&#226;n concura cu alți contabili rom&#226;ni. &#206;n 2026, concurează (la nivel de servicii outsourced) cu profesioniști din toată lumea. <em>Dacă tu nu adopți AI, concurentul tău din altă țară o face — și devine mai ieftin</em>.</p>
+
+<p><strong>Cauza 5: AI-ul &#238;nsuși accelerează adopția AI-ului.</strong> Acesta este aspectul cel mai paradoxal. AI-ul ajută &#238;n chiar procesul de a &#238;nvăța AI. Cei care folosesc deja AI pentru a-și organiza &#238;nvățarea progresează mai rapid dec&#226;t cei care &#238;nvață <em>despre</em> AI fără a-l folosi. <em>Bucla de feedback pozitiv accelerează curba</em>.</p>
+
+<h3 id="implicatia-practica-fereastra-ta-personala">Implicația practică — fereastra ta personală</h3>
+
+<p>Pentru contabilul individual care citește acest articol, accelerarea &#238;nseamnă o singură realitate operațională: <strong>timpul disponibil pentru a-ți construi avantajul competitiv pe AI este mult mai scurt dec&#226;t a fost pentru Excel</strong>.</p>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Asta &#238;nseamnă că ceea ce pare imposibil astăzi poate fi realitate &#238;n c&#226;teva luni. Iar ceea ce pare revoluționar astăzi va fi banalitate &#238;n doi ani.&quot;</div>
+</div>
+
+<p>Practic:</p>
+
+<ul>
+  <li><em>Dacă &#238;ncepi &#238;n 2026:</em> ai ~2 ani de avantaj competitiv față de val</li>
+  <li><em>Dacă &#238;ncepi &#238;n 2027:</em> ai ~1 an</li>
+  <li><em>Dacă &#238;ncepi &#238;n 2028:</em> recuperezi g&#226;f&#226;ind, fără avantaj net</li>
+</ul>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Lecția 4 (cea mai importantă)</strong><br><em>Fereastra de oportunitate pentru AI Literacy se &#238;ngustează cu o viteză fără precedent &#238;n istoria profesiei.</em> Aceasta nu este o opinie alarmistă — este o consecință matematică a accelerării adopției. Profesioniștii care au beneficiat de avantaje multi-anuale prin Excel sau Cloud au putut să-și permită să fie <em>moderat</em> lenți &#238;n adopție. La AI, această luxurie nu mai există. Decizia ta de a &#238;ncepe (sau nu) acum <em>literalmente</em> &#238;ți afectează poziționarea pe piață &#238;n 2028.</div>
+</div>
+
+<hr>
+
+<h2 id="cap8">CAPITOLUL 8</h2>
+
+<h2 id="ce-nu-se-schimba-fundamentele-care-supravietuiesc-oricarei-tehnologii">Ce NU Se Schimbă — Fundamentele Care Supraviețuiesc Oricărei Tehnologii</h2>
+
+<h3 id="hook-profesia-contabila-are-530-de-ani-iar-nucleul-ei-este-acelasi">Profesia contabilă are 530 de ani — iar nucleul ei este același</h3>
+
+<p>&#206;n toată discuția despre transformare, accelerare, fereastră de oportunitate și AI Literacy, există un risc real de a uita ce <em>nu</em> se schimbă. Iar ce nu se schimbă este, paradoxal, <em>cea mai importantă parte a profesiei</em> — partea care explică de ce contabilii au supraviețuit cinci secole de transformări și vor supraviețui și acestuia.</p>
+
+<h3 id="cele-cinci-fundamente-care-nu-se-schimba">Cele cinci fundamente care nu se schimbă</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „Dar este foarte important să transmitem și ce NU se schimbă: fundamentele profesiei răm&#226;n. Principiile contabilității, judecata profesională, etica, relațiile cu clienții — astea nu le &#238;nlocuiește niciun AI. AI schimbă doar mai repede locul unde &#238;ncepe valoarea adăugată.&quot;</div>
+</div>
+
+<p><strong>1. Principiile contabilității.</strong> Logica double-entry, principiile recunoașterii veniturilor, regulile de evaluare a activelor și pasivelor — acestea sunt mature, validate, și nu se schimbă pentru că se schimbă instrumentele de calcul. Pacioli a definit principiile; ele răm&#226;n valabile <em>indiferent</em> de tool-ul care le aplică.</p>
+
+<p><strong>2. Judecata profesională.</strong> <em>Care este tratamentul corect al acestei tranzacții ambigue?</em> <em>Cum aplic IFRS 15 &#238;ntr-un caz cu opt clauze contractuale care interacționează?</em> <em>Această estimare este rezonabilă sau optimistă?</em> Acestea sunt &#238;ntrebări la care AI-ul poate aduce informație, poate sugera &#238;ncadrări, poate prezenta opțiuni — dar la care <em>răspunsul final, asumat profesional, răm&#226;ne uman</em>.</p>
+
+<p><strong>3. Etica.</strong> Trebuie să-i spui clientului că AI a contribuit? Pot folosi datele clientului &#238;ntr-un model AI cloud? Cum protejez datele c&#226;nd integrez AI &#238;ntr-un flux de lucru? Aceste &#238;ntrebări sunt etice, nu tehnice. Răspunsurile lor cer un cadru moral profesional pe care AI-ul nu &#238;l poate substitui.</p>
+
+<p><strong>4. Relațiile cu clienții.</strong> Capacitatea de a <em>asculta cu adevărat</em> ce spune un client (și ce nu spune); de a sesiza neliniștea ascunsă &#238;ntr-o &#238;ntrebare aparent tehnică; de a c&#226;știga și menține &#238;ncrederea pe termen lung — acestea sunt competențe profund umane. AI-ul poate genera un email perfect formatat, dar nu poate <em>avea grijă</em> de un client.</p>
+
+<p><strong>5. Răspunderea finală.</strong> C&#226;nd lucrurile merg prost — și uneori merg prost — <em>cineva</em> trebuie să &#238;și asume responsabilitatea. AI-ul nu poate. Cadrul profesional, regulator și juridic atribuie răspunderea contabilului uman. Asta nu se schimbă.</p>
+
+<h3 id="ce-inseamna-asta-pentru-juniori">Ce &#238;nseamnă asta pentru juniori</h3>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Exact. Un junior trebuie &#238;n continuare să-și &#238;nvețe meseria. Dar cu AI, poate accelera procesul și poate contribui cu valoare mai devreme.&quot;</div>
+</div>
+
+<p>Această observație — discretă, dar critică — merită zăbovire. Există un risc real ca generația care &#238;nvață contabilitate <em>cu AI de la &#238;nceput</em> să nu dezvolte fundamentele. Dacă AI-ul face toate reconcilierile, cum mai &#238;nțelegi tu mecanismele lor? Dacă AI-ul redactează toate journal entries, cum internalizezi tu logica double-entry?</p>
+
+<p>Răspunsul nu este să evite AI-ul. Răspunsul este să *<em>&#238;nvețe fundamentele </em>&#238;nainte<em> de delegarea lor AI-ului</em><em>. Junior-ul care face manual primele 200 de reconcilieri și apoi delegă restul AI-ului are </em>fundamente solide<em>. Junior-ul care delegă de la prima reconciliere are </em>un risc serios* de a-și construi cariera pe nisip.</p>
+
+<h3 id="tabelul-a-ceea-ce-se-schimba-si-a-ceea-ce-nu">Tabelul a ceea ce se schimbă și a ceea ce nu</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Se schimbă</th><th>Nu se schimbă</th></tr></thead>
+<tbody>
+<tr><td>Instrumentele de calcul</td><td>Principiile contabile</td></tr>
+<tr><td>Viteza de execuție</td><td>Necesitatea judecății profesionale</td></tr>
+<tr><td>Locul valorii adăugate</td><td>Cadrul etic al profesiei</td></tr>
+<tr><td>Skill-urile cerute</td><td>Importanța relațiilor cu clienții</td></tr>
+<tr><td>Volumele de date procesabile</td><td>Răspunderea finală</td></tr>
+<tr><td>Profilul rolurilor (juniori → AI Analyst)</td><td>Logica double-entry</td></tr>
+<tr><td>Comunicarea cu autoritățile</td><td>Onestitatea profesională</td></tr>
+<tr><td>Modul de organizare al firmei</td><td>Misiunea fundamentală: reprezentarea fidelă a realității economice</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Lecția 5 (cea mai liniștitoare)</strong><br>Profesia contabilă nu dispare. Se <em>redefinește</em>. Aceasta este o distincție importantă psihologic. Anxietatea privind „dispariția profesiei&quot; este <em>nefondată empiric</em> — toate datele istorice arată că, după fiecare revoluție tehnologică, profesia a ieșit <em>mai mare</em>, mai bine plătită, mai respectată. Anxietatea privind „necesitatea de a te adapta&quot; este <em>fondată empiric</em> — &#238;ntr-adevăr, va trebui să te adaptezi. Distincția dintre cele două anxietăți decide &#238;ntre <em>paralizie</em> și <em>acțiune</em>.</div>
+</div>
+
+<hr>
+
+<h2 id="cap9">CAPITOLUL 9</h2>
+
+<h2 id="big-4-pariul-de-patru-miliarde-de-dolari-pe-ai">Big 4 — Pariul de Patru Miliarde de Dolari pe AI</h2>
+
+<h3 id="hook-cum-citesti-o-piata-uitandu-te-la-cine-pariaza-mare">Cum citești o piață uit&#226;ndu-te la cine pariază mare</h3>
+
+<p>Există un test empiric simplu pentru a evalua dacă o tehnologie este <em>speculație de moment</em> sau <em>transformare structurală</em>: te uiți la cine investește, c&#226;t, și cu ce orizont. Speculatorii pariază mic și rapid. Transformatorii pariază mare și lung. &#206;n cazul AI-ului &#238;n contabilitate, datele Big 4 sunt sufocant de clare.</p>
+
+<h3 id="cifrele-consolidate">Cifrele consolidate</h3>
+
+<p>&#206;n articolul nostru anterior — <em>„Contextul Revoluției AI&quot;</em> — am analizat aceste cifre detaliat. Aici le sintetizăm &#238;ntr-un singur tabel pentru cititorul care vrea o referință rapidă:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Firma</th><th>Investiție &#238;n AI</th><th>Detalii operaționale</th></tr></thead>
+<tbody>
+<tr><td><strong>Deloitte</strong></td><td>$1,4+ miliarde</td><td>70+ programe de &#238;nvățare GenAI, peste 100.000 profesioniști antrenați. Utilizări: research automat, draft audit reports, analiza contractelor</td></tr>
+<tr><td><strong>PwC</strong></td><td>$1+ miliard</td><td>Training intensiv &#238;n prompt engineering ca skill <em>core</em> (nu opțional). Utilizări: due diligence automat, compliance checking, risk assessment</td></tr>
+<tr><td><strong>EY</strong></td><td>Platforma proprie EY.ai cu LLM dedicat (EYQ)</td><td>Roll-out la 400.000 angajați &#238;n 150 țări. 100.000+ credentials AI acordate. Utilizări: tax research, audit planning, client advisory</td></tr>
+<tr><td><strong>KPMG</strong></td><td>Parteneriat strategic Microsoft Azure + OpenAI</td><td>Cloud-based AI pentru analiza rapidă a volumelor mari. Utilizări: pattern recognition, forecast</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>Cumul aproximativ: peste $4 miliarde investiți &#238;n AI de Big 4 &#238;ntr-un interval de doi ani.</strong></p>
+
+<h3 id="trei-lecturi-strategice-pentru-contabilul-roman">Trei lecturi strategice pentru contabilul rom&#226;n</h3>
+
+<p><strong>Lectura 1 — Dovada validării:</strong> Big 4 nu pariază speculativ. Aceste firme au departamente &#238;ntregi de risk management, strategy, technology assessment. Investiția de patru miliarde nu este <em>„hai să vedem ce iese&quot;</em>. Este <em>consemnarea unei viitoare realități pe care firmele cu cele mai bune capabilități analitice au validat-o</em>.</p>
+
+<p><strong>Lectura 2 — Indicatorul de timing:</strong> Tehnologiile pe care Big 4 le adoptă astăzi devin <em>standard de piață &#238;n 2-4 ani</em>. Așa s-a &#238;nt&#226;mplat cu cloud-ul, cu RPA, cu data analytics. Un contabil independent care urmărește ce face Deloitte azi vede <em>ce va face piața rom&#226;nească &#238;n 2028-2030</em>.</p>
+
+<p><strong>Lectura 3 — Avertismentul competitiv:</strong> Pe segmentul de servicii standard (contabilitate de bază, conformitate fiscală, raportare regulamentară), concurența cu Big 4 va fi <em>imposibilă</em> peste c&#226;țiva ani — pentru că cost-ul lor marginal va tinde la zero. Strategia pentru o firmă mică nu este să concureze pe servicii standard cu Big 4. Este să se <em>poziționeze diferențiat</em>: specializare verticală, relație de proximitate, judecată profesională profundă pe care AI-ul nu o poate substitui ușor.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — De ce contează Big 4 pentru contabilul independent</strong><br>&#206;ntrebarea pe care orice contabil ar trebui să și-o pună privind cifrele Big 4 nu este „c&#226;știgă ei sau nu?&quot;. Este <strong>„cum se vor uita clienții la prețurile mele atunci c&#226;nd Big 4 va putea livra același serviciu cu cost marginal apropiat de zero?&quot;</strong> Răspunsul nu este să intri &#238;n război de prețuri — ar fi sinucidere. Răspunsul este să folosești tu &#238;nsuți AI-ul, ca să nu fii &#238;ntr-un raport 1-la-1 cu un junior asistat de tehnologie superioară.</div>
+</div>
+
+<hr>
+
+<h2 id="cap10">CAPITOLUL 10</h2>
+
+<h2 id="paradoxul-karbon-82-intrigati-25-investesc">Paradoxul Karbon — 82% Intrigați, 25% Investesc</h2>
+
+<h3 id="hook-diferenta-care-decide-cariere">Diferența care decide cariere</h3>
+
+<p>Studiul <em>State of AI in Accounting 2024-2025</em>, publicat de platforma Karbon, este unul dintre cele mai citate documente din literatura recentă a profesiei. Și pentru un motiv &#238;ntemeiat: prin contrastul brut dintre c&#226;teva cifre, el captează <em>problema strategică centrală</em> a profesiei contabile mai bine dec&#226;t multe analize lungi.</p>
+
+<h3 id="datele-esentiale-ale-studiului">Datele esențiale ale studiului</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Atitudine sau acțiune</th><th>Procentaj</th></tr></thead>
+<tbody>
+<tr><td>Cred că AI va aduce schimbări substanțiale</td><td>71%</td></tr>
+<tr><td>Sunt intrigați sau excited de AI</td><td><strong>82%</strong></td></tr>
+<tr><td>Investesc activ &#238;n training AI</td><td><strong>doar 25%</strong></td></tr>
+<tr><td>&#206;ngrijorați de securitatea datelor</td><td>76%</td></tr>
+<tr><td>Preocupați de dileme etice și bias-uri</td><td>49%</td></tr>
+<tr><td>Cred că bookkeeping-ul va fi cea mai afectată funcție</td><td>59%</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „82% sunt intrigați. Dar doar 25% investesc activ &#238;n training. 76% sunt &#238;ngrijorați de securitatea datelor, 49% de dileme etice, și 59% cred că bookkeeping-ul va fi cea mai afectată funcție.&quot;</div>
+</div>
+
+<p>Diferența <em>82% intrigați – 25% investesc = 57 de puncte procentuale</em>. Aceasta este, &#238;n psihologie, <em>gap-ul intenție-acțiune</em>. &#206;n management, este una dintre cele mai costisitoare patologii organizaționale. &#206;n contextul AI și contabilitate, este — paradoxal — <em>fereastra de oportunitate pentru cei care acționează</em>.</p>
+
+<h3 id="de-ce-exista-acest-paradox-patru-cauze-structurale">De ce există acest paradox? Patru cauze structurale</h3>
+
+<p>&#206;nțelegerea cauzelor este importantă, pentru că ele explică de ce — <em>&#238;n ciuda evidenței copleșitoare</em> — at&#226;t de mulți profesioniști răm&#226;n pe margine.</p>
+
+<p><strong>Cauza 1 — Suprasolicitare cognitivă.</strong> Contabilul mediu trăiește deja sub presiunea modificărilor legislative permanente, a deadline-urilor de raportare, a ANAF-ului. Adăugarea unei tehnologii noi care cere &#238;nvățare și experimentare se simte ca <em>&#238;ncă un task</em> peste un program deja saturat. Reacția este <em>am&#226;nare implicită</em>, nu refuz explicit.</p>
+
+<p><strong>Cauza 2 — Lipsa unui ROI clar pe termen scurt.</strong> Beneficiul AI-ului este <em>cumulativ și exponențial</em>, dar invizibil &#238;n prima săptăm&#226;nă de utilizare. Dacă investesti 10 ore &#238;n săptăm&#226;na 1, recuperezi puțin. Dacă persiști 3 luni, recuperezi enorm. Dar majoritatea oamenilor nu trec de săptăm&#226;na 2 — pentru că recompensa imediată nu se materializează.</p>
+
+<p><strong>Cauza 3 — Frica de greșeală profesională.</strong> Contabilul este antrenat să-și asume responsabilitatea pentru fiecare cifră semnată. Folosirea unui instrument care <em>„inventează&quot; ocazional</em> este, intuitiv, anatemă. Această frică este sănătoasă &#238;n principiu — dar paralizantă c&#226;nd duce la non-adopție totală.</p>
+
+<p><strong>Cauza 4 — Nivelul de &#238;ngrijorare privind securitatea datelor (76%).</strong> Această preocupare este <em>legitimă</em> — date confidențiale ale clienților sunt &#238;n joc. Dar adesea, profesioniștii nu disting &#238;ntre <em>&#238;ngrijorare validă</em> (care duce la adoptarea atentă, cu contracte de confidențialitate, cu instrumente enterprise) și <em>&#238;ngrijorare paralizantă</em> (care duce la non-adoptare totală).</p>
+
+<h3 id="de-ce-paradoxul-este-o-oportunitate">De ce paradoxul este o oportunitate</h3>
+
+<p>Iată unde devine interesant. Pentru profesionistul individual care citește acest articol, paradoxul Karbon <strong>nu este o problemă, este oportunitatea</strong>. Iată raționamentul:</p>
+
+<p>Dacă 75% dintre colegii tăi nu acționează, iar tu acționezi acum, ai <em>practic 2-3 ani avans</em> asupra valului de adopție masivă care va veni inevitabil. Acest avans se traduce &#238;n:</p>
+
+<ul>
+  <li><em>Avantaj competitiv personal</em> — clienți mai buni, prețuri mai bune, recunoaștere profesională</li>
+  <li><em>Posibilitate de repoziționare strategică</em> — devii „expertul AI&quot; &#238;n cercul tău profesional</li>
+  <li><em>Valoare de piață mai mare</em> — pe piața muncii, profesioniștii AI-fluent vor avea o primă semnificativă</li>
+</ul>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Cea mai costisitoare interpretare greșită</strong><br>Cea mai costisitoare interpretare greșită a paradoxului Karbon ar fi <em>„dacă majoritatea așteaptă, nu e &#238;ncă timpul&quot;</em>. <strong>Exact invers.</strong> Faptul că majoritatea așteaptă este motivul pentru care, dacă acționezi acum, <em>c&#226;știgi disproporționat</em>. Adopția masivă va veni — toate datele indică asta. &#206;ntrebarea este pe ce parte a curbei vrei să fii. Pe partea care a investit din timp și acum recoltează? Sau pe partea care recuperează g&#226;f&#226;ind, &#238;n 2028, &#238;n condiții deja saturate?</div>
+</div>
+
+<hr>
+
+<h2 id="cap11">CAPITOLUL 11</h2>
+
+<h2 id="de-la-a-sti-sa-calculezi-la-a-sti-sa-validezi-anatomia-ai-literacy">De la „A Ști să Calculezi&quot; la „A Ști să Validezi&quot; — Anatomia AI Literacy</h2>
+
+<h3 id="hook-schimbarea-contractului-de-baza-al-profesiei">Schimbarea contractului de bază al profesiei</h3>
+
+<p>Timp de cinci secole — de la <em>Summa de Arithmetica</em> a lui Luca Pacioli (1494) — <em>contractul fundamental</em> al profesiei contabile a fost: <em>„plătești pentru cifre corecte, calculate corect, raportate corect&quot;</em>. Valoarea contabilului consta &#238;n capacitatea de a produce un calcul corect.</p>
+
+<p>Era AI inversează acest contract. Calculele devin <em>abundente, ieftine, instantanee</em>. &#206;ntrebarea pe care clientul ar trebui să o pună (deși mulți &#238;ncă nu o pun explicit) devine: <em>„cine validează ce a calculat AI-ul?&quot;</em>. <strong>Validarea &#238;nlocuiește calculul ca centru de gravitație al profesiei.</strong></p>
+
+<h3 id="o-paralela-instructiva-cum-a-evoluat-competenta-principala-prin-ere">O paralelă instructivă: cum a evoluat „competența principală&quot; prin ere</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Era</th><th>Competența principală a contabilului</th></tr></thead>
+<tbody>
+<tr><td><strong>Pre-Digitală (&#238;nainte de 1980)</strong></td><td>A calcula corect manual</td></tr>
+<tr><td><strong>Microsoft Office (1990-2010)</strong></td><td>A construi modele și a interpreta rezultate</td></tr>
+<tr><td><strong>Digitalizării (2010-2023)</strong></td><td>A configura procese și a gestiona excepții</td></tr>
+<tr><td><strong>AI Agentic (2024+)</strong></td><td><strong>A valida output-urile AI și a aplica judecata profesională</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Această evoluție este nu <em>o degradare</em> a profesiei (cum o percep unii — „dacă AI face calculul, ce mai fac eu?&quot;), ci <em>o promovare</em> a ei. Profesia se mișcă mereu „mai sus&quot; pe lanțul cognitiv. Mai departe de mecanic, mai aproape de strategic.</p>
+
+<h3 id="cei-patru-piloni-ai-literacy">Cei patru piloni AI Literacy</h3>
+
+<p>&#206;n articolul nostru — <em>„Viitorul Profesiei: cum va arăta contabilitatea &#238;n 5–10 ani&quot;</em> — vom dezvolta pe larg cei patru piloni AI Literacy. Le sintetizăm aici:</p>
+
+<p><strong>Pilonul 1 — Prompt Engineering.</strong> Capacitatea de a formula &#238;ntrebări care produc răspunsuri utile. Această abilitate, care abia exista &#238;n 2022, a devenit, p&#226;nă &#238;n 2026, un skill cu manualele lui de bune practici, cu cursurile lui specializate, cu standardele lui de bună executare.</p>
+
+<p><strong>Pilonul 2 — Output Validation.</strong> Cea mai subestimată dintre cele patru abilități. Capacitatea de a recunoaște c&#226;nd AI-ul a produs ceva <em>plauzibil dar greșit</em> — ceea ce, &#238;n vocabularul profesiei, se numește <em>halucinație contabilă</em>.</p>
+
+<p><strong>Pilonul 3 — Process Design.</strong> Capacitatea de a integra AI-ul &#238;ntr-un flux de lucru — nu accidental, ci sistematic. Maparea proceselor existente, identificarea punctelor de inserție, construirea de checkpoints.</p>
+
+<p><strong>Pilonul 4 — Ethical Judgment.</strong> Setul de &#238;ntrebări fără precedent &#238;n profesie: trebuie să-i spui clientului că ai folosit AI? Cine răspunde dacă AI-ul a greșit? Pot folosi datele clientului &#238;ntr-un model AI public?</p>
+
+<h3 id="tabelul-comparativ-vechi-skill-uri-vs-noi-skill-uri">Tabelul comparativ — vechi skill-uri vs noi skill-uri</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Era pre-AI (p&#226;nă &#238;n 2022)</th><th>Era AI (2025+)</th></tr></thead>
+<tbody>
+<tr><td>Excel avansat (VLOOKUP, pivot tables, macros)</td><td>Bază — dar bază, nu diferențiator</td></tr>
+<tr><td>Cunoașterea legislației</td><td>Tot esențială — dar AI-ul deține și el o copie</td></tr>
+<tr><td>Atenție la detalii la introducerea datelor</td><td>AI-ul preia introducerea — atenția se mută la <em>validarea introducerii</em></td></tr>
+<tr><td>Viteza de calcul mental</td><td>Practic irelevantă</td></tr>
+<tr><td>Memorie pentru standarde</td><td>Auxiliară — <em>interogarea inteligentă</em> contează mai mult</td></tr>
+<tr><td>Comunicarea cu clientul</td><td><em>Esențială și amplificată</em> — AI nu o substituie</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th><strong>Skill-uri noi care abia existau &#238;n 2022</strong></th><th><strong>Importanță &#238;n 2026</strong></th></tr></thead>
+<tbody>
+<tr><td>Prompt Engineering</td><td>Critică</td></tr>
+<tr><td>AI Output Validation</td><td>Critică</td></tr>
+<tr><td>Process Design pentru fluxuri hibride om-AI</td><td>&#206;naltă</td></tr>
+<tr><td>&#206;nțelegerea conceptelor de Machine Learning</td><td>Mediu spre &#238;nalt</td></tr>
+<tr><td>Etica utilizării AI</td><td>&#206;naltă, &#238;n creștere</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="cum-se-compara-investitia-cu-excel-ul">Cum se compară investiția cu Excel-ul</h3>
+
+<p>Pentru a calibra realist investiția necesară, comparăm cu efortul istoric pentru Excel:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Nivel de competență</th><th>Excel (1995)</th><th>AI Literacy (2026)</th></tr></thead>
+<tbody>
+<tr><td>Basic</td><td>20-40 ore</td><td>10-20 ore (curba mai lină datorită alfabetizării digitale)</td></tr>
+<tr><td>Intermediate</td><td>100-200 ore</td><td>50-100 ore</td></tr>
+<tr><td>Advanced</td><td>500+ ore</td><td>200-400 ore (estimat)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Predicția de calibrare</strong><br>&#206;n anul 2000, <em>„I don&#39;t know Excel&quot;</em> era &#238;ncă o frază acceptabilă &#238;n multe medii contabile. &#206;n anul 2010, devenise inadmisibilă. Predicția fundamentată pentru anul 2030: <em><strong>„I don&#39;t know AI&quot; va fi exact ce era „I don&#39;t know Excel&quot; &#238;n 2010.</strong></em> Nu o limitare. O excludere de pe piața muncii. Cei care construiesc AI Literacy <em>acum</em> — &#238;n 2026 — vor avea o fereastră de 3-4 ani de avantaj competitiv față de val.</div>
+</div>
+
+<hr>
+
+<h2 id="cap12">CAPITOLUL 12</h2>
+
+<h2 id="viziunea-2030-o-zi-din-viata-unui-contabil-in-era-continuous-accounting">Viziunea 2030 — O Zi din Viața unui Contabil &#238;n Era Continuous Accounting</h2>
+
+<h3 id="hook-de-la-ritm-lunar-la-flux-continuu">De la ritm lunar la flux continuu</h3>
+
+<p>Viziunea pe care o construim aici a fost dezvoltată detaliat &#238;n articolele noastre anterioare din serie. Aici reluăm doar nucleul ei, pentru completitudinea acestui articol despre evoluția profesiei.</p>
+
+<p><strong>Conceptul cheie: Continuous Accounting.</strong> &#206;n contabilitatea episodică tradițională, ritmul muncii este <em>sincronizat cu calendarul gregorian</em> — ultima zi a lunii &#238;nseamnă &#238;nchidere, balanță, raportare. Continuous Accounting dezasamblează această ritmicitate. Reconcilierea, validarea, raportarea și controlul nu mai au loc <em>episodic</em>, ci <em>continuu</em> — zilnic sau chiar real-time. Cărțile sunt, &#238;n orice moment, materialiter &#238;nchise p&#226;nă &#238;n ziua precedentă.</p>
+
+<h3 id="andreea-9-mai-2030-bucuresti">Andreea, 9 mai 2030, București</h3>
+
+<p><strong>07:30 — Cafea, scroll-ul de dimineață.</strong> Andreea, 32 de ani, Senior Accountant, verifică pe telefon dashboard-ul de start de zi generat de agentul AI peste noapte. Nu mai sunt notificări de tip „lipsesc 47 facturi din clientul X&quot;. Sunt <em>insight-uri agregate</em>: 3 alerte de excepții la 2 clienți, o cerere de consultanță urgentă, un indicator de cash flow anormal care merită discuție.</p>
+
+<p><strong>09:00 — Ședință cu CFO-ul.</strong> Conversație de 45 de minute. Pregătirea n-a presupus „str&#226;ngerea cifrelor&quot; — agentul AI i-a furnizat un briefing complet. Andreea a petrecut 30 de minute <em>g&#226;ndind</em>, nu agreg&#226;nd. La ședință, ea nu prezintă cifre — prezintă <em>o decizie de luat</em>.</p>
+
+<p><strong>11:00 — Review pe excepții.</strong> Trei tranzacții marcate „necesită judecată profesională&quot;. Andreea decide pe baza istoricului contractual. Total timp: 35 de minute pentru ceea ce, &#238;n 2020, ar fi luat 3-4 ore.</p>
+
+<p><strong>13:00 — Mentorat junior.</strong> O sesiune cu un junior care a intrat acum 4 luni. Subiectul: <em>cum să interpretezi un raport de validare AI pe o reconciliere intercompany</em>. Mentoratul este mai conceptual, mai puțin tehnic. Mai dens cognitiv.</p>
+
+<p><strong>15:00 — Configurare client nou.</strong> &#206;mpreună cu un AI Accounting Analyst, configurează <em>fluxurile</em> pentru un client nou. &#206;n două ore, construiește un workflow pe care, &#238;n 2020, l-ar fi construit &#238;n două săptăm&#226;ni.</p>
+
+<p><strong>17:00 — Final de zi.</strong> A lucrat 8 ore. A interacționat cu 4 clienți. A coordonat 1 junior. A configurat 1 client nou. A produs <strong>0 minute de copy-paste</strong> &#238;ntre sisteme.</p>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Densitatea Cognitivă</strong><br>Ziua Andreei nu este <em>mai ușoară</em> dec&#226;t ziua contabilului din 2020. Este <em>mai densă</em>. Fiecare oră conține mai multe decizii, mai multă comunicare, mai mult judgment. Profesia, &#238;n 2030, este mai obositoare cognitiv, dar mai recompensată financiar și mai satisfăcătoare profesional. Cei care &#238;și fac procesarea repetitivă de date acum, &#238;n 2026, ratează deja antrenamentul pentru lumea care vine.</div>
+</div>
+
+<hr>
+
+<h2 id="cap13">CAPITOLUL 13</h2>
+
+<h2 id="cele-patru-faze-traduse-in-cronologia-romaneasca">Cele Patru Faze, Traduse &#238;n Cronologia Rom&#226;nească</h2>
+
+<h3 id="hook-aceeasi-poveste-in-accent-local">Aceeași poveste, &#238;n accent local</h3>
+
+<p>Cele patru faze ale evoluției profesiei contabile — pe care le-am parcurs p&#226;nă acum — au avut, &#238;n Rom&#226;nia, o cronologie <em>paralelă, dar comprimată</em>. Cunoașterea cronologiei autohtone este crucială pentru contabilul rom&#226;n, pentru că ea explică multe din particularitățile actuale ale profesiei.</p>
+
+<h3 id="tabelul-cronologic-international-vs-roman">Tabelul cronologic — internațional vs rom&#226;n</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Faza</th><th>Adopție internațională</th><th>Adopție rom&#226;nească</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td><strong>Pre-Digitală</strong></td><td>p&#226;nă &#238;n anii 1980</td><td>p&#226;nă la mijlocul anilor 1990</td><td>Rom&#226;nia a intrat &#238;n era digitală cu un decalaj de ~10 ani, din cauze istorice (tranziție post-comunistă)</td></tr>
+<tr><td><strong>Microsoft Office</strong></td><td>1985-2010</td><td>1995-2010</td><td>Adopție comprimată — 15 ani vs 25 ani — pentru că Rom&#226;nia a sărit peste etape</td></tr>
+<tr><td><strong>Digitalizării</strong></td><td>2010-2023</td><td>2014-2024</td><td>Decalaj redus la ~4 ani; e-Factura/SAF-T au accelerat tranziția &#238;n finalul perioadei</td></tr>
+<tr><td><strong>AI</strong></td><td>2022-prezent</td><td>2023-prezent</td><td><strong>Decalaj redus la 1 an</strong> — pentru prima dată, Rom&#226;nia este <em>aproape sincronă</em> cu valul global</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="reperele-autohtone-softurile-contabile">Reperele autohtone — softurile contabile</h3>
+
+<p>Pentru istoria detaliată a softurilor contabile rom&#226;nești, recomandăm articolul nostru <em>„Viitorul Profesiei: cum va arăta contabilitatea &#238;n 5–10 ani&quot;</em>. Aici redăm cronologia esențială:</p>
+
+<p><strong>Prima generație — softurile desktop autohtone (Faza Microsoft Office):</strong></p>
+
+<ul>
+  <li><strong>CIEL Rom&#226;nia (1992)</strong> — prima companie rom&#226;nească specializată &#238;n software financiar-contabil, peste 50.000 de utilizatori la maturitate</li>
+  <li><strong>WinMENTOR (1999)</strong> — dezvoltat la Iași, marele premiu BINARY 1999, ~23.500 de utilizatori individuali</li>
+  <li><strong>SAGA Software (mijlocul anilor 2000)</strong> — soluție gratuită care a devenit standard de facto pentru SMB-uri și PFA-uri</li>
+  <li><strong>TotalSoft / Charisma ERP (1994)</strong> — lider de piață ERP timp de cel puțin 5 ani consecutivi conform PAC</li>
+</ul>
+
+<p><strong>A doua generație — cloud accounting (Faza Digitalizării):</strong></p>
+
+<ul>
+  <li><strong>SmartBill (Sibiu, 2007)</strong> — facturare &#238;n cloud din 2014, contabilitate &#238;n cloud din 2017</li>
+  <li><strong>Keez.ro (București, 2018)</strong> — prima platformă completă de contabilitate online; <em>machine learning</em> de la lansare</li>
+  <li>Achizițiile Visma (gigant norvegian de 12+ miliarde $) — 50% SmartBill &#238;n 2019, integral &#238;n 2024-2025; majoritar Keez &#238;n 2021, integral 2024</li>
+</ul>
+
+<p><strong>A treia generație — AI agentic, &#238;n curs (Faza AI):</strong></p>
+
+<ul>
+  <li>Keez integrează <em>generative AI</em> din 2024 — printre primele firme de contabilitate din Rom&#226;nia cu acest salt</li>
+  <li>SmartBill integrează e-Factura cu rată de validare 99,9% — backend AI sofisticat</li>
+  <li>ERP-urile internaționale (SAP, Microsoft Dynamics, Oracle) integrează module AI native</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Maria:</strong> „Exact. Un junior trebuie &#238;n continuare să-și &#238;nvețe meseria. Dar cu AI, poate accelera procesul și poate contribui cu valoare mai devreme.&quot;</div>
+</div>
+
+<hr>
+
+<h2 id="cap14">CAPITOLUL 14</h2>
+
+<h2 id="de-ce-profesia-romana-are-un-avantaj-invizibil">De Ce Profesia Rom&#226;nă Are un Avantaj Invizibil</h2>
+
+<h3 id="hook-paradoxul-digitalizarii-fortate-anaf">Paradoxul digitalizării forțate ANAF</h3>
+
+<p>Există un paradox structural pe care prea puțini analiști &#238;l evidențiază: <strong>profesia contabilă din Rom&#226;nia are un avantaj de pornire &#238;n adopția AI pe care multe profesii din alte țări UE nu &#238;l au</strong>. Acest avantaj nu vine din vreun merit special al pieței rom&#226;nești — vine, paradoxal, din <em>constr&#226;ngerile birocratice impuse de ANAF</em>.</p>
+
+<h3 id="cele-patru-piese-ale-avantajului">Cele patru piese ale avantajului</h3>
+
+<p><strong>1. E-Factura — facturile devin XML standardizat.</strong> Devenită treptat obligatorie &#238;ntre 2022 și 2024, E-Factura a <em>eliminat OCR-ul</em> pentru tranzacțiile B2B/B2G. AI-ul nu mai trebuie să „ghicească&quot; layout-ul unei facturi PDF — primește un XML structurat, lizibil instant. Acuratețea extragerii datelor crește de la 85-95% (cu OCR) la practic 100%.</p>
+
+<p><strong>2. SAF-T — datele contabile sunt deja standardizate granular.</strong> Standard Audit File for Tax &#238;nseamnă că datele contabile sunt exportate &#238;ntr-un format predictibil, granular, lizibil mașinii. Pentru AI, acesta este <em>combustibilul ideal</em> pentru audit continuu.</p>
+
+<p><strong>3. e-Transport, RO e-TVA — ecosistemul digital ANAF.</strong> Adăugat la E-Factura și SAF-T, ecosistemul ANAF cuprinde declararea transporturilor cu risc fiscal, pre-completarea decontului de TVA, SPV (Spațiul Privat Virtual). Cumulul creează un <em>set de date național mult mai bogat și mai standardizat</em> dec&#226;t &#238;n multe alte țări UE.</p>
+
+<p><strong>4. Maturitatea cloud-ului contabil autohton.</strong> Faptul că Visma a achiziționat <em>at&#226;t</em> SmartBill <em>c&#226;t și</em> Keez nu este coincidență. Este un pariu strategic pe maturitatea pieței rom&#226;nești — <em>anterior</em> valului AI agentic.</p>
+
+<h3 id="implicatia-pentru-contabilul-roman">Implicația pentru contabilul rom&#226;n</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Mit popular</th><th>Realitate verificabilă</th></tr></thead>
+<tbody>
+<tr><td>„AI-ul abia ajunge &#238;n Rom&#226;nia&quot;</td><td>Keez folosește AI din 2018, SmartBill backend AI sofisticat</td></tr>
+<tr><td>„Trebuie să așteptăm valul american&quot;</td><td>Valul este deja aici, capitalizat de Visma (12 mld $)</td></tr>
+<tr><td>„Soluțiile sunt prea scumpe pentru piața noastră&quot;</td><td>Există tier-uri de la 30 EUR/lună</td></tr>
+<tr><td>„Limba rom&#226;nă e o barieră&quot;</td><td>Modelele AI principale lucrează decent &#238;n rom&#226;nă</td></tr>
+<tr><td>„Suntem &#238;n urma Europei&quot;</td><td>Pe digitalizare ANAF, suntem <em>&#238;naintea</em> multor țări UE</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout insight-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="cbody"><strong>💡 INSIGHT BOX — Avantajul invizibil</strong><br>Paradoxul: Rom&#226;nia, prin obligațiile birocratice ANAF de care toți s-au pl&#226;ns, a făcut, fără să-și propună, <em>digitalizarea forțată</em> care &#238;n alte țări ar fi durat un deceniu de inițiative voluntare. Pentru AI agentic, această infrastructură &#238;nseamnă <strong>un avantaj de plecare invizibil</strong>. Cei care recunosc asta nu se mai pl&#226;ng — se poziționează strategic.</div>
+</div>
+
+<h3 id="provocarile-care-raman-onestitate-intelectuala">Provocările care răm&#226;n — onestitate intelectuală</h3>
+
+<p>Nu este totul roz. Provocările locale specifice răm&#226;n reale:</p>
+
+<ul>
+  <li><em>Limba rom&#226;nă</em> — modelele AI lucrează decent, dar inferior celei engleze; necesită prompting bilingv pentru sarcini complexe</li>
+  <li><em>Ritmul de schimbare a legislației</em> — Codul Fiscal rom&#226;nesc se modifică cu o frecvență superioară mediei UE; AI-urile generaliste răm&#226;n &#238;n urmă</li>
+  <li><em>Fragmentarea ERP-urilor mici</em> — peste zeci de soluții locale, integrarea AI nu este uniformă</li>
+  <li><em>Cultura organizațională</em> — entuziasm la nivel de discurs, conservatorism la nivel de buget; adoptare reală &#238;ncă &#238;nt&#226;rziată &#238;n multe firme mici</li>
+</ul>
+
+<p>Aceste provocări nu anulează avantajul. Doar &#238;l calibrează. Strategia corectă pentru contabilul rom&#226;n: <em>exploatează avantajul (substratul ANAF + cloud autohton matur) + recunoaște provocările (limba, fragmentarea ERP) + acționează acum (&#238;nainte ca avantajul să fie comoditizat de competiție)</em>.</p>
+
+<hr>
+
+<h2 id="manifest">EPILOG</h2>
+
+<h2 id="de-ce-exista-ai-accounting-hub">De Ce Există AI Accounting Hub</h2>
+
+<h3 id="hook-tiparul-se-repeta-dar-comunitatea-decide-cum">Tiparul se repetă, dar comunitatea decide cum</h3>
+
+<p>Am parcurs &#238;mpreună cinci secole de profesie și patruzeci de ani de transformare tehnologică intensă. Am văzut tiparul care se repetă: frică inițială, scepticism informat, adopție treptată, normalizare, redefinire. Am văzut că, de fiecare dată, <em>c&#226;știgătorii sunt cei care recunosc tiparul devreme</em>. Am văzut că fereastra de oportunitate se &#238;ngustează la fiecare ciclu.</p>
+
+<p>Dar tiparul ne spune <em>ce</em> se &#238;nt&#226;mplă, nu <em>cum</em> să acționăm. Cum se acționează — cum se traduce &#238;nțelegerea istorică &#238;n decizii concrete de carieră — este <em>o muncă de comunitate</em>, nu de individ izolat.</p>
+
+<h3 id="cele-trei-convingeri-pe-care-construim-hub-ul">Cele trei convingeri pe care construim Hub-ul</h3>
+
+<p><strong>Convingerea 1: Tranziția nu se face singur.</strong> Nimeni nu are, individual, toate cunoștințele necesare. Avem nevoie de profesioniștii contabili care &#238;nțeleg substanța meseriei, de specialiștii AI care &#238;nțeleg tehnologia, de practicienii care au testat și au &#238;nvățat din erori. <em>Niciuna dintre aceste categorii nu deține singură răspunsul.</em> Comunitatea le poate uni.</p>
+
+<p><strong>Convingerea 2: Profesia rom&#226;nă merită un Hub propriu.</strong> Specificul rom&#226;nesc — limba, reglementarea, infrastructura ANAF, cultura organizațională — face ca importul direct de soluții străine să fie ineficient. Avem nevoie de un loc unde se discută adaptarea locală. Unde experiența firmei din Cluj se &#238;nt&#226;lnește cu cea a firmei din Constanța. Unde cazurile sunt &#238;n lei, nu &#238;n dolari, &#238;n Codul Fiscal rom&#226;nesc, nu &#238;n IRS.</p>
+
+<p><strong>Convingerea 3: Tranziția trebuie să fie incluzivă.</strong> Există un risc serios ca AI-ul să creeze o profesie cu două viteze: cei din firme mari, care au resurse pentru transformare, și cei din firme mici sau independenți, care răm&#226;n &#238;n urmă. <em>Nu acceptăm acest viitor cu două viteze.</em> Misiunea Hub-ului este să facă transformarea accesibilă tuturor profesioniștilor rom&#226;ni.</p>
+
+<h3 id="ce-oferim-concret">Ce oferim — concret</h3>
+
+<ul>
+  <li><strong>Resurse educaționale</strong> — ghiduri, articole (cum este cel pe care tocmai l-ai citit), podcast-uri, webinarii, studii de caz din experiența reală a comunității</li>
+  <li><strong>Spațiu de dialog profesional</strong> — un forum unde &#238;ntrebările tale găsesc răspunsuri din partea celor care au trecut prin aceleași dileme</li>
+  <li><strong>Curatoriat critic al instrumentelor</strong> — nu toate tool-urile AI sunt egale; Hub-ul filtrează zgomotul, recomandă ce funcționează, avertizează asupra ce nu</li>
+  <li><strong>Adaptare locală</strong> — tot conținutul este filtrat prin grila specificului rom&#226;nesc — Cod Fiscal, ANAF, ERP-uri locale, practică rom&#226;nească</li>
+  <li><strong>Networking</strong> — conectarea profesioniștilor &#238;ntre ei, pentru schimb de experiență, mentorat, colaborări</li>
+</ul>
+
+<div class="callout podcast-callout">
+  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+  <div class="cbody"><strong>🎙️ DIN PODCAST</strong><br><strong>Alex:</strong> „AI este următoarea transformare majoră. Nu reduce importanța contabilului bun — o redefinește. Contabilul viitorului va fi mai puțin operator de informație și mai mult arhitect de procese, gardian al datelor, evaluator critic al ieșirilor AI și partener real de business.&quot;</div>
+</div>
+
+<h3 id="apelul-nostru-in-lumina-paralelei-istorice">Apelul nostru — &#238;n lumina paralelei istorice</h3>
+
+<p>Tiparul istoric este clar: cei care au recunoscut Excel-ul ca transformare structurală &#238;n 1995 au prosperat 25 de ani. Cei care au recunoscut cloud-ul &#238;n 2014 au prosperat 10 ani. Cei care recunosc AI-ul <em>acum</em>, &#238;n 2026, vor prospera 3-5 ani de avantaj competitiv exclusiv — apoi vor avea avansul cumulat care se va păstra mult timp.</p>
+
+<p>Profesia se va schimba indiferent de noi. &#206;ntrebarea este <em>cine va fi la masa unde se decide cum se schimbă</em>. Vrem să fie c&#226;t mai mulți profesioniști rom&#226;ni la acea masă. Vrem ca acea masă să fie aici.</p>
+
+<p><strong>Bun venit la AI Accounting Hub.</strong></p>
+
+<hr>
+
+<p><em>Acest articol face parte dintr-o serie de cinci articole-manifest publicate pe site-ul AI Accounting Hub. Articolele se complementează — pentru o perspectivă completă, recomandăm parcurgerea &#238;ntregii serii.</em></p>
+
+<p><strong>Data publicării: 01 MAI 2026</strong> <strong>Versiunea: 1.0</strong></p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#istorie</a>
+          <a href="#" class="tag">#contabilitate</a>
+          <a href="#" class="tag">#strategie</a>
+          <a href="#" class="tag">#ai-literacy</a>
+        </div>
+        <span class="footer-mono">Articolul #002</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#prolog">PROLOG: Patru Revoluții, Un Singur Tipar — Și Ce Ne &#206;nvață Despre Prezent</a>
+        <a href="#cap1">CAPITOLUL 1: De Ce o Analiză Istorică Nu Este Nostalgie, Ci Diagnostic</a>
+        <a href="#cap2">CAPITOLUL 2: Faza 1 — Era Pre-Digitală (&#238;nainte de 1980): Contabilitatea ca Artizanat</a>
+        <a href="#cap3">CAPITOLUL 3: Faza 2 — Era Microsoft Office (1990-2010): Contabilitatea ca Analiză</a>
+        <a href="#cap4">CAPITOLUL 4: Faza 3 — Era Digitalizării (2010-2023): Contabilitatea ca Proces Integrat</a>
+        <a href="#cap5">CAPITOLUL 5: Faza 4 — Era AI (2024-prezent): Contabilitatea ca Judecată Augmentată</a>
+        <a href="#cap6">CAPITOLUL 6: Anatomia unei Revoluții — Cele Cinci Faze ale Fiecărei Tranziții</a>
+        <a href="#cap7">CAPITOLUL 7: Accelerarea — De Ce Fiecare Revoluție Vine Mai Rapid Dec&#226;t Cea Anterioară</a>
+        <a href="#cap8">CAPITOLUL 8: Ce NU Se Schimbă — Fundamentele Care Supraviețuiesc Oricărei Tehnologii</a>
+        <a href="#cap9">CAPITOLUL 9: Big 4 — Pariul de Patru Miliarde de Dolari pe AI</a>
+        <a href="#cap10">CAPITOLUL 10: Paradoxul Karbon — 82% Intrigați, 25% Investesc</a>
+        <a href="#cap11">CAPITOLUL 11: De la „A Ști să Calculezi&quot; la „A Ști să Validezi&quot; — Anatomia AI Literacy</a>
+        <a href="#cap12">CAPITOLUL 12: Viziunea 2030 — O Zi din Viața unui Contabil &#238;n Era Continuous Accounting</a>
+        <a href="#cap13">CAPITOLUL 13: Cele Patru Faze, Traduse &#238;n Cronologia Rom&#226;nească</a>
+        <a href="#cap14">CAPITOLUL 14: De Ce Profesia Rom&#226;nă Are un Avantaj Invizibil</a>
+        <a href="#manifest">EPILOG: De Ce Există AI Accounting Hub</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA (în loc de Articole conexe — la lansare avem un singur articol) -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Explorează restul hub-ului.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="index.html#podcast" class="related-card fade-in">
+        <div class="related-date">PODCAST · E01</div>
+        <h3>RO e-Factura: Între promisiunea digitalizării și realitatea din SPV</h3>
+        <p>Două gazde AI demontează promisiunile e-Factura: ce funcționează cu adevărat în SPV, unde sunt fricțiunile reale pe flux și ce ar trebui să facă acum o firmă de contabilitate ca să nu fie prinsă pe contrapicior.</p>
+        <span class="related-read">Ascultă episodul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html" class="related-card fade-in">
+        <div class="related-date">TOOL · ANAF</div>
+        <h3>Verificare CIF — site ANAF</h3>
+        <p>Interfață simplă peste API-ul public ANAF: introduci un CIF și primești nume firmă, stare activă și plătitor TVA. Rulează în browser.</p>
+        <span class="related-read">Deschide tool-ul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="contact.html" class="related-card fade-in">
+        <div class="related-date">CONTACT</div>
+        <h3>Ai o temă, un feedback sau un invitat de podcast?</h3>
+        <p>Colaborare, sugestii de articole sau invitați. Răspundem, de obicei, în 2-3 zile lucrătoare.</p>
+        <span class="related-read">Scrie-ne
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required placeholder="Ex. Ioana Popescu"></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required placeholder="ioana@firma.ro"></div>
+      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required placeholder="Scrie-ne ce te interesează..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+/* TOC active link on scroll */
+(function () {
+  const links = document.querySelectorAll('.toc a');
+  if (!links.length) return;
+  const ids = Array.from(links).map(a => a.getAttribute('href').slice(1));
+  const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  targets.forEach(t => io.observe(t));
+})();
+</script>
+</body>
+</html>

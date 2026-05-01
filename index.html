@@ -1,0 +1,3711 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI Accounting Hub — Unde Inteligența Artificială Întâlnește Contabilitatea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root {
+  /* Dark (default) — deep petrol/teal with cyan accents */
+  --bg-0: #07121a;
+  --bg-1: #0b1a25;
+  --bg-2: #112635;
+  --bg-card: rgba(15, 30, 42, 0.72);
+  --border: rgba(120, 200, 230, 0.12);
+  --border-strong: rgba(120, 200, 230, 0.28);
+  --fg: #e8f3f8;
+  --fg-muted: #8ba9b8;
+  --fg-dim: #5c7c8c;
+  --primary: #0f3d52;          /* deep petrol */
+  --primary-ink: #d8f4ff;
+  --accent: #22d3ee;           /* electric cyan */
+  --accent-2: #67e8f9;
+  --accent-warm: #f59e0b;
+  --glow: 0 0 40px rgba(34, 211, 238, 0.25);
+  --shadow-lg: 0 30px 60px -20px rgba(0, 0, 0, 0.6), 0 10px 30px -10px rgba(0,0,0,0.4);
+  --grid-line: rgba(120, 200, 230, 0.06);
+  --hero-overlay: linear-gradient(100deg, rgba(7,18,26,0.88) 0%, rgba(7,18,26,0.6) 40%, rgba(7,18,26,0.25) 65%, rgba(7,18,26,0.55) 100%);
+}
+[data-theme="light"] {
+  /* Unified light palette tuned to the hero image's soft gray-blue tone */
+  --bg-0: #cfd9e1;           /* page background — matches hero image */
+  --bg-1: #cfd9e1;           /* unified with bg-0 so footer/sections don't show as distinct bands */
+  --bg-2: #eaf0f5;           /* lighter — used for card surfaces */
+  --bg-card: rgba(234, 240, 245, 0.88);
+  --border: rgba(15, 61, 82, 0.14);
+  --border-strong: rgba(15, 61, 82, 0.26);
+  --fg: #0b1a25;
+  --fg-muted: #47667a;
+  --fg-dim: #7a94a3;
+  --primary: #0f3d52;
+  --primary-ink: #ffffff;
+  --accent: #0891b2;
+  --accent-2: #0e7490;
+  --accent-warm: #b45309;
+  --glow: 0 0 30px rgba(8, 145, 178, 0.18);
+  --shadow-lg: 0 20px 40px -20px rgba(15, 61, 82, 0.18), 0 6px 18px -6px rgba(15,61,82,0.10);
+  --grid-line: rgba(15, 61, 82, 0.05);
+  --hero-overlay: linear-gradient(100deg, rgba(207,217,225,0.92) 0%, rgba(207,217,225,0.55) 42%, rgba(207,217,225,0.15) 68%, rgba(207,217,225,0.4) 100%);
+}
+/* In light mode, header + footer + resources section use the unified page bg */
+[data-theme="light"] .header { background: color-mix(in oklab, var(--bg-0) 82%, transparent); }
+[data-theme="light"] footer { background: var(--bg-0); }
+[data-theme="light"] section.block#resurse { background: var(--bg-0) !important; }
+/* Soften the hero text panel in light mode so text reads as "above" the image, not a white box over it */
+[data-theme="light"] .hero-headline::after {
+  background: radial-gradient(ellipse 60% 80% at 28% 50%, color-mix(in oklab, var(--bg-0) 78%, transparent) 10%, color-mix(in oklab, var(--bg-0) 40%, transparent) 45%, transparent 82%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-0);
+  color: var(--fg);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 80%);
+}
+
+h1, h2, h3, h4 { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 600; letter-spacing: -0.02em; margin: 0; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* ============ HEADER ============ */
+.header {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  background: color-mix(in oklab, var(--bg-0) 72%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 16px 32px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; font-size: 16px; letter-spacing: -0.01em;
+}
+.logo-mark {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 120%);
+  display: grid; place-items: center;
+  color: #07121a; font-weight: 700; font-size: 15px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15), 0 4px 14px -4px color-mix(in oklab, var(--accent) 60%, transparent);
+  position: relative; overflow: hidden;
+}
+.logo-mark::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+  animation: shine 4s ease-in-out infinite;
+}
+@keyframes shine { 0%, 80%, 100% { transform: translateX(-120%); } 90% { transform: translateX(120%); } }
+.logo-mark svg { width: 20px; height: 20px; }
+.logo-text { display: flex; flex-direction: column; line-height: 1.05; }
+.logo-text small { font-size: 10px; font-weight: 400; color: var(--fg-muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+
+nav.primary { display: flex; gap: 4px; }
+nav.primary a {
+  padding: 8px 14px; border-radius: 8px;
+  font-size: 14px; font-weight: 500;
+  color: var(--fg-muted);
+  transition: all 0.2s ease;
+  position: relative;
+}
+nav.primary a:hover { color: var(--fg); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+nav.primary a.active { color: var(--accent); }
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  transition: all 0.25s ease;
+}
+.theme-toggle:hover { border-color: var(--border-strong); color: var(--accent); transform: rotate(20deg); }
+.theme-toggle svg { width: 18px; height: 18px; }
+[data-theme="dark"] .theme-toggle .sun { display: block; }
+[data-theme="dark"] .theme-toggle .moon { display: none; }
+[data-theme="light"] .theme-toggle .sun { display: none; }
+[data-theme="light"] .theme-toggle .moon { display: block; }
+
+.btn-contact {
+  padding: 10px 16px; border-radius: 10px;
+  font-size: 13px; font-weight: 600;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #07121a;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 20px -6px color-mix(in oklab, var(--accent) 60%, transparent);
+}
+.btn-contact:hover { transform: translateY(-1px); box-shadow: 0 10px 28px -6px color-mix(in oklab, var(--accent) 70%, transparent); }
+
+/* ============ MOBILE NAV ============ */
+.nav-toggle {
+  display: none;
+  width: 40px; height: 40px; border-radius: 10px;
+  place-items: center;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  transition: all 0.25s ease;
+}
+.nav-toggle:hover { border-color: var(--border-strong); color: var(--accent); }
+.nav-toggle svg { width: 18px; height: 18px; }
+.nav-toggle .icon-close { display: none; }
+.nav-toggle.open .icon-open { display: none; }
+.nav-toggle.open .icon-close { display: block; }
+.nav-drawer {
+  position: fixed;
+  top: 73px; left: 0; right: 0;
+  z-index: 49;
+  max-height: 0; overflow: hidden;
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--border-strong);
+  transition: max-height 0.35s ease, box-shadow 0.35s ease;
+}
+.nav-drawer.open {
+  max-height: 520px;
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,0.5);
+}
+.nav-drawer-inner { padding: 14px 20px 22px; }
+.nav-drawer a {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 15px; font-weight: 500;
+  color: var(--fg);
+  transition: background 0.2s, color 0.2s;
+}
+.nav-drawer a:hover { background: color-mix(in oklab, var(--accent) 8%, transparent); color: var(--accent); }
+.nav-drawer a + a { margin-top: 4px; }
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-0);
+  padding: 0 32px 36px;
+  max-width: 1100px;
+  min-height: calc(75vh - 30px);
+  margin: 0 auto;
+}
+.hero-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 75% 45%, color-mix(in oklab, var(--accent) 12%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, color-mix(in oklab, var(--primary) 35%, transparent) 0%, transparent 65%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 10%, transparent 90%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1100px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.55fr 1.45fr;
+  align-items: stretch;
+  gap: 0;
+  min-height: calc(75vh - 60px);
+}
+
+.hero-headline {
+  position: relative;
+  z-index: 3;
+  margin-right: -40px;
+  padding-right: 16px;
+  align-self: center;
+  /* Nudge the block up so it visually centers on the hero image
+     (the image is anchored top, so the geometric grid center sits below it). */
+  transform: translateY(-48px);
+}
+/* Soft fade panel behind the text, letting the image show through near the right edge */
+.hero-headline::after {
+  content: '';
+  position: absolute;
+  left: -40px; right: -40px; top: -40px; bottom: -40px;
+  background: radial-gradient(ellipse 65% 85% at 25% 50%, var(--bg-0) 20%, color-mix(in oklab, var(--bg-0) 80%, transparent) 50%, transparent 85%);
+  z-index: -1;
+  pointer-events: none;
+}
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+  padding: 5px 11px 5px 9px;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--bg-1) 40%, transparent);
+  backdrop-filter: blur(6px);
+}
+.hero-kicker .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 20%, transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 35%, transparent); }
+  50% { box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent) 0%, transparent); }
+}
+.hero-headline h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  /* 10% smaller than the previous 36-68 clamp */
+  font-size: clamp(32px, 4vw, 61px);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  margin: 0;
+  font-weight: 500;
+}
+.hero-headline h1 .w-1,
+.hero-headline h1 .w-2,
+.hero-headline h1 .w-3 { display: block; }
+.hero-headline h1 .w-1 {
+  font-weight: 300;
+  color: var(--fg-muted);
+  font-size: 0.42em;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+.hero-headline h1 .accent {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 55%, color-mix(in oklab, var(--accent) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 2px 30px color-mix(in oklab, var(--accent) 22%, transparent));
+}
+.hero-headline h1 .w-3 {
+  font-weight: 400;
+  font-size: 0.72em;
+  letter-spacing: -0.03em;
+  margin-top: 10px;
+  font-style: italic;
+  color: var(--fg);
+}
+.hero-headline h1 .slash {
+  color: var(--accent);
+  font-weight: 300;
+  font-style: normal;
+  margin-right: 8px;
+}
+
+/* Decorative hairline connecting text to image */
+.hero-connector {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  width: 120px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent) 50%, transparent);
+  transform: translateY(-50%);
+  opacity: 0.6;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Right column — the image (seamless fade on all sides) */
+.hero-visual {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-height: 420px;
+  max-height: calc(78vh);
+  margin-left: -60px;
+  margin-top: -8px;
+  overflow: hidden;
+  mask-image: radial-gradient(ellipse 70% 85% at 60% 55%, black 35%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0.4) 82%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 85% at 60% 55%, black 35%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0.4) 82%, transparent 100%);
+}
+.hero-visual::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 80%, color-mix(in oklab, var(--bg-0) 35%, transparent) 100%);
+  pointer-events: none;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('assets/hero-vf.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  filter: saturate(1.05) contrast(1.03);
+}
+[data-theme="light"] .hero-bg { filter: saturate(1.05) brightness(1.02); }
+
+/* Floating corner detail on the image side */
+.hero-tag {
+  position: absolute;
+  right: 24px; top: 24px;
+  z-index: 3;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--bg-0) 65%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  backdrop-filter: blur(10px);
+}
+.hero-tag svg { width: 12px; height: 12px; }
+
+/* Caption bottom-right of the image */
+.hero-caption {
+  position: absolute;
+  right: 20px; bottom: 20px;
+  z-index: 3;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-muted);
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-caption .bar { width: 24px; height: 1px; background: var(--accent); }
+
+/* Inter-section scroll cue (between sections, clickable) */
+.section-scroll {
+  display: flex;
+  justify-content: center;
+  padding: 0 32px 0;
+  /* Pulled up toward the previous section so the hint sits just under the
+     card's bottom edge and clearly suggests "more below". */
+  margin: -34px auto 0;
+  max-width: 990px;
+  position: relative;
+  z-index: 3;
+}
+.section-scroll a {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--fg-muted);
+  background: color-mix(in oklab, var(--bg-1) 50%, transparent);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  transition: color 0.22s ease, border-color 0.22s ease, background 0.22s ease, transform 0.22s ease;
+}
+.section-scroll a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+}
+.section-scroll a .arrow {
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  color: var(--accent);
+  animation: scrollBob 1.8s ease-in-out infinite;
+}
+.section-scroll a .arrow svg { width: 16px; height: 16px; }
+.section-scroll a:hover .arrow { animation-play-state: paused; transform: translateY(2px); }
+
+/* Scroll hint placed fully inside the article-card's top dark band so the
+   "SCROLL" text starts below the article's top edge (article overlaps the
+   hero by ~110 px via .featured-section margin-top: -110). */
+.hero-scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--fg-muted);
+  pointer-events: none;
+  opacity: 0.9;
+}
+.hero-scroll-hint .arrow {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--accent);
+  animation: scrollBob 1.8s ease-in-out infinite;
+}
+.hero-scroll-hint .arrow svg { width: 16px; height: 16px; }
+@keyframes scrollBob {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* Featured article section (below hero) */
+.featured-section {
+  position: relative; z-index: 2;
+  /* Pulls the article card up so it slightly overlaps the hero image bottom */
+  margin-top: -110px;
+  padding: 0 32px 20px;
+}
+.featured-section-inner {
+  max-width: 990px; margin: 0 auto;
+}
+.featured {
+  position: relative;
+  padding: 14px 28px 14px;
+  border-radius: 18px;
+  background: var(--bg-card);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-lg);
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.featured:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg), 0 0 0 1px color-mix(in oklab, var(--accent) 25%, transparent);
+}
+.featured:hover .featured-title-link h2 { color: var(--accent); }
+.featured:hover .btn-primary {
+  background: var(--accent-2);
+  box-shadow: 0 12px 30px -8px color-mix(in oklab, var(--accent) 80%, transparent);
+}
+.featured:hover .btn-primary svg { transform: translateX(3px); }
+.featured::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 12%, transparent) 0%, transparent 40%);
+  pointer-events: none;
+}
+.featured-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.featured-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent);
+}
+.featured-tag::before {
+  content: ''; width: 24px; height: 1px; background: var(--accent);
+}
+.featured-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim);
+}
+.featured h2 {
+  font-size: 28px; line-height: 1.06;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+  font-weight: 600;
+  transition: color 0.22s ease;
+}
+.featured-title-link { display: block; color: inherit; }
+.featured-title-link:hover h2 { color: var(--accent); }
+.featured-excerpt {
+  color: var(--fg-muted); font-size: 14px; line-height: 1.5;
+  margin-bottom: 10px;
+  padding-bottom: 0;
+  border-bottom: none;
+  min-height: 1.5em;
+}
+/* Generic typewriter caret for any element with data-typewriter while it's typing */
+[data-typewriter].is-typing::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 0.95em;
+  background: var(--accent);
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: caretBlink 0.7s step-end infinite;
+}
+[data-typewriter] { min-height: 1em; }
+.featured-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.featured-actions .btn { padding: 6px 14px; font-size: 12.5px; gap: 8px; border-radius: 8px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 9px 18px; border-radius: 9px;
+  font-size: 13.5px; font-weight: 600;
+  transition: all 0.22s ease;
+  border: 1px solid transparent;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #07121a;
+  box-shadow: 0 8px 24px -8px color-mix(in oklab, var(--accent) 70%, transparent);
+}
+.btn-primary:hover { background: var(--accent-2); transform: translateY(-1px); }
+.btn-primary svg { transition: transform 0.22s ease; }
+.btn-primary:hover svg { transform: translateX(3px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--border-strong);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ============ SECTION HEADERS ============ */
+section.block {
+  position: relative; z-index: 1;
+  padding: 44px 32px;
+}
+.block-inner { max-width: 990px; margin: 0 auto; }
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  max-width: 990px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-head-left { max-width: 680px; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::before {
+  content: ''; width: 28px; height: 1px; background: var(--accent);
+}
+.section-head h2 {
+  font-size: clamp(32px, 3.5vw, 48px);
+  line-height: 1.05; letter-spacing: -0.03em;
+  font-weight: 600;
+}
+.section-head p { color: var(--fg-muted); max-width: 520px; font-size: 15px; }
+.section-index {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--fg-dim);
+  white-space: nowrap;
+}
+
+/* ============ STAIRWAY LAYOUT (Explorează) ============ */
+.stairway {
+  max-width: 990px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0 36px;
+}
+.stair-row {
+  display: flex;
+  align-items: stretch;
+  gap: 26px;
+  padding: 10px 0;
+  transform: scale(0.82);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), margin 0.5s ease, filter 0.4s ease;
+  filter: saturate(0.85);
+  position: relative;
+  cursor: pointer;
+}
+.stair-row:hover,
+.stair-row.is-hot {
+  transform: scale(1);
+  filter: saturate(1);
+}
+.stair-row-1 {
+  justify-content: flex-start;
+  transform-origin: left center;
+  /* ~35% visible overlap — looser spacing makes mouse-tracking row-to-row easier */
+  margin-bottom: -130px;
+  padding-left: 0;
+  z-index: 1;
+}
+.stair-row-2 {
+  justify-content: center;
+  transform-origin: center center;
+  margin-bottom: -130px;
+  z-index: 2;
+}
+.stair-row-3 {
+  justify-content: flex-end;
+  transform-origin: right center;
+  /* same overlap as rows 1 & 2 — chains row-4 (community welcome) into the staircase */
+  margin-bottom: -130px;
+  padding-right: 0;
+  z-index: 3;
+}
+/* Hovered row pops to the very top of the stack so it overlaps neighbors cleanly */
+.stair-row:hover,
+.stair-row.is-hot { z-index: 6; }
+.stair-card-wrap {
+  flex: 0 0 494px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Side text — hidden initially, slides in opaque on row hover.
+   Sits at z-index 3 so when revealed it covers any card poking through above/below. */
+.stair-side {
+  flex: 0 1 470px;
+  max-width: 470px;
+  padding: 14px 22px;
+  background: var(--bg-0);
+  border-radius: 14px;
+  position: relative;
+  z-index: 3;
+  cursor: pointer;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-14px);
+  transition: opacity 0.32s ease, transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.stair-row-3 .stair-side {
+  transform: translateX(14px);
+  text-align: right;
+}
+.stair-row:hover .stair-side,
+.stair-row.is-hot .stair-side {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+.stair-side-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 10px;
+}
+.stair-side-label .line {
+  flex: 0 0 28px; height: 1px; background: var(--accent);
+}
+.stair-row-3 .stair-side-label { justify-content: flex-end; }
+.stair-side h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(19px, 2vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  margin-bottom: 8px;
+  color: var(--fg);
+  min-height: 1.18em;
+}
+.stair-side p {
+  font-size: 13.5px;
+  color: var(--fg-muted);
+  line-height: 1.5;
+  text-align: justify;
+  hyphens: auto;
+  margin: 0;
+}
+.stair-row-3 .stair-side p { margin-left: auto; }
+.stair-side .stair-side-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; color: var(--fg-dim);
+  letter-spacing: 0.05em;
+  margin-top: 6px;
+}
+/* Blinking caret while typing */
+.stair-side.is-typing h4::after,
+.stair-side.is-typing p::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 0.95em;
+  background: var(--accent);
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: caretBlink 0.7s step-end infinite;
+}
+.stair-side.is-typing p::after { display: none; }
+.stair-side.is-typing-p p::after { display: inline-block; }
+.stair-side.is-typing-p h4::after { display: none; }
+@keyframes caretBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Cards inside stairway — wider horizontally (~30%), same height as the previous landscape ratio */
+.stair-card-wrap .flip-card,
+.stair-card-wrap .podcast-card,
+.stair-card-wrap .mission-card {
+  aspect-ratio: 1.82 / 1;
+  width: 100%;
+}
+
+/* ============ INTERACTIVE CARDS (FLIP + PODCAST + MISSION) ============ */
+.middle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 990px;
+  margin: 0 auto;
+}
+
+/* Shared card hover — neon glow */
+.flip-card,
+.podcast-card,
+.mission-card {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.35s ease;
+}
+.flip-card:hover,
+.podcast-card:hover,
+.mission-card:hover {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 24px color-mix(in oklab, var(--accent) 50%, transparent),
+    0 0 56px color-mix(in oklab, var(--accent) 28%, transparent),
+    var(--shadow-lg);
+}
+/* Disable the vertical lift when inside the stairway (scale is handled by the row) */
+.stair-card-wrap .flip-card:hover,
+.stair-card-wrap .podcast-card:hover,
+.stair-card-wrap .mission-card:hover {
+  transform: none;
+}
+
+/* Hovering the side text propagates the neon glow to the sibling card */
+.stair-row:hover .flip-card,
+.stair-row:hover .podcast-card,
+.stair-row:hover .mission-card,
+.stair-row.is-hot .flip-card,
+.stair-row.is-hot .podcast-card,
+.stair-row.is-hot .mission-card {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 24px color-mix(in oklab, var(--accent) 50%, transparent),
+    0 0 56px color-mix(in oklab, var(--accent) 28%, transparent),
+    var(--shadow-lg);
+}
+/* Access buttons (flip-hint, mission-hint, play-btn) react when row is hovered */
+.stair-row:hover .flip-hint,
+.stair-row:hover .mission-hint,
+.stair-row.is-hot .flip-hint,
+.stair-row.is-hot .mission-hint {
+  color: var(--accent);
+}
+.stair-row:hover .flip-hint svg,
+.stair-row:hover .mission-hint svg,
+.stair-row.is-hot .flip-hint svg,
+.stair-row.is-hot .mission-hint svg {
+  transform: rotate(-25deg);
+}
+.stair-row:hover .play-btn,
+.stair-row.is-hot .play-btn {
+  background: var(--accent-2);
+  box-shadow: 0 12px 30px -8px color-mix(in oklab, var(--accent) 80%, transparent);
+}
+/* Community cards: hint pills react when row is hovered (full-width hot zone) */
+.stair-row:hover .welcome-card .cc-hint-cyan,
+.stair-row.is-hot .welcome-card .cc-hint-cyan {
+  background: var(--accent); color: #07121a; border-color: var(--accent);
+}
+.stair-row:hover .welcome-card.community-cta .cc-hint-warm,
+.stair-row.is-hot .welcome-card.community-cta .cc-hint-warm {
+  background: var(--accent-warm); color: #1a0f07; border-color: var(--accent-warm);
+}
+
+/* Flip card */
+.flip-card {
+  perspective: 1200px;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  border-radius: 18px;
+}
+.flip-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+}
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-face {
+  position: absolute; inset: 0;
+  border-radius: 18px;
+  padding: 24px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex; flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+}
+.flip-front {
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 0%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 60%),
+    linear-gradient(145deg, var(--bg-2) 0%, var(--bg-1) 100%);
+  justify-content: space-between;
+  transition: background 0.3s ease;
+}
+.flip-card:hover .flip-front {
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 0%, color-mix(in oklab, var(--accent) 24%, transparent), transparent 60%),
+    linear-gradient(145deg, var(--bg-2) 0%, var(--bg-1) 100%);
+}
+.flip-front::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, color-mix(in oklab, var(--accent) 4%, transparent) 0 1px, transparent 1px 24px);
+  pointer-events: none;
+}
+.flip-back {
+  background: linear-gradient(145deg, var(--primary) 0%, #0b2a3a 100%);
+  color: #e0f5ff;
+  transform: rotateY(180deg);
+  justify-content: space-between;
+}
+.flip-back::before {
+  content: '';
+  position: absolute; top: -30%; right: -20%;
+  width: 360px; height: 360px; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent) 30%, transparent) 0%, transparent 70%);
+  pointer-events: none;
+}
+.flip-meta {
+  font-family: 'Space Grotesk', sans-serif;
+  /* 15% smaller than the previous 28-40 pair */
+  font-size: clamp(24px, 2.9vw, 34px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex; flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  line-height: 1;
+  position: relative;
+  width: 100%;
+}
+.flip-meta em {
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+/* BUZZWORD — the dominant line, pushed inward from the left */
+.flip-meta .meta-l1 {
+  align-self: flex-start;
+  margin-left: 1.6em;
+}
+.flip-front .word {
+  position: relative;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(54px, 6.2vw, 88px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
+  overflow-wrap: break-word;
+}
+/* Multi-word terms (eg. "CONTEXT WINDOW") shrink so the bottom row stays clear */
+.flip-front .word.multi-word {
+  font-size: clamp(34px, 4.4vw, 56px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.flip-front .word.multi-word.is-long {
+  font-size: clamp(26px, 3.6vw, 42px);
+}
+.flip-card:hover .flip-front .word {
+  transform: scale(1.05);
+}
+/* Pronunciation moved to back face — kept rule for the back's small label if needed */
+.flip-hint {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--fg-muted);
+  font-family: 'JetBrains Mono', monospace;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--accent) 4%, transparent);
+  transition: all 0.25s ease;
+}
+.flip-card:hover .flip-hint {
+  background: var(--accent);
+  color: #07121a;
+  border-color: var(--accent);
+}
+.flip-hint svg { width: 14px; height: 14px; }
+.flip-back .back-top {
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.flip-back .back-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-2);
+  position: relative;
+}
+.flip-back .back-num {
+  display: none; /* numbering hidden — single-word state for now */
+}
+.flip-back h3 {
+  font-size: 22px; margin-bottom: 4px; font-weight: 600;
+  position: relative;
+}
+.flip-back .back-pronounce {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 400;
+  color: color-mix(in oklab, var(--accent-2) 80%, transparent);
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+  position: relative;
+}
+.flip-back .def {
+  font-size: 12.5px; line-height: 1.55; color: #bdd7e2;
+  position: relative; flex: 1;
+}
+.flip-back .use-case {
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 14px; margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent-2);
+  letter-spacing: 0.04em;
+}
+.flip-nav {
+  position: relative;
+  display: flex; gap: 6px; margin-top: 16px;
+}
+.flip-nav button {
+  padding: 6px 10px; border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #bdd7e2;
+  transition: all 0.2s;
+}
+.flip-nav button:hover { border-color: var(--accent-2); color: var(--accent-2); }
+
+/* Podcast card */
+.podcast-card {
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-1);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+}
+.podcast-hero {
+  position: relative;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 100%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 55%),
+    linear-gradient(135deg, var(--bg-2), var(--bg-1));
+  overflow: hidden;
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+.podcast-card:hover .podcast-hero {
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 100%, color-mix(in oklab, var(--accent) 26%, transparent), transparent 55%),
+    linear-gradient(135deg, var(--bg-2), var(--bg-1));
+}
+.podcast-hero::before {
+  content: '';
+  position: absolute; bottom: -40%; right: -10%;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent) 12%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.podcast-label {
+  font-family: 'JetBrains Mono', monospace;
+  /* +35% over the previous 10px */
+  font-size: 13.5px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.podcast-label .live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+.podcast-centerpiece {
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  width: 100%;
+}
+.podcast-hero h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(30px, 3.4vw, 42px);
+  letter-spacing: -0.025em; line-height: 1.05;
+  margin-bottom: 10px;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+}
+.podcast-card:hover .podcast-hero h3 { transform: scale(1.04); }
+.podcast-hero .show-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-muted);
+  letter-spacing: 0.03em;
+}
+.player {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: auto;
+  position: relative;
+  width: 100%;
+  text-align: left;
+}
+.play-btn {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--accent);
+  color: #07121a;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 24px -8px color-mix(in oklab, var(--accent) 70%, transparent);
+}
+.play-btn:hover { transform: scale(1.08); background: var(--accent-2); box-shadow: 0 12px 30px -8px color-mix(in oklab, var(--accent) 80%, transparent); }
+.podcast-card:hover .play-btn { transform: scale(1.06); background: var(--accent-2); }
+.play-btn.playing { background: var(--accent-2); }
+.player-info { flex: 1; min-width: 0; }
+.player-title {
+  font-size: 12px; font-weight: 600; margin-bottom: 5px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Mission card */
+.mission-card {
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 100%, color-mix(in oklab, var(--accent-warm) 14%, transparent), transparent 60%),
+    linear-gradient(145deg, var(--bg-2) 0%, var(--bg-1) 100%);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  aspect-ratio: 1 / 1;
+  padding: 24px;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+.mission-hint {
+  margin-top: auto;
+  color: var(--accent-warm);
+  border-color: color-mix(in oklab, var(--accent-warm) 30%, transparent);
+  background: color-mix(in oklab, var(--accent-warm) 6%, transparent);
+}
+.mission-card:hover .mission-hint {
+  background: var(--accent-warm);
+  color: #1a0f07;
+  border-color: var(--accent-warm);
+}
+.mission-card:hover {
+  border-color: var(--accent-warm) !important;
+  box-shadow:
+    0 0 0 1px var(--accent-warm),
+    0 0 24px color-mix(in oklab, var(--accent-warm) 50%, transparent),
+    0 0 56px color-mix(in oklab, var(--accent-warm) 28%, transparent),
+    var(--shadow-lg) !important;
+}
+.mission-heading { text-align: center; }
+.mission-heading br { display: block; }
+
+/* ============ COMMUNITY CARDS (welcome / cta) — same shape as the 3 stairway cards ============ */
+.community-card {
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  /* Stairway-friendly: same landscape ratio as buzzword/mission/podcast inside .stair-card-wrap */
+  aspect-ratio: 1.82 / 1;
+  padding: 20px 26px;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.35s ease;
+}
+/* Inside the stairway, the wrapper enforces the size — keep ratio consistent with the other 3 cards */
+.stair-card-wrap .welcome-card { aspect-ratio: 1.82 / 1; width: 100%; }
+/* Welcome card — cyan accent */
+.welcome-card {
+  background:
+    radial-gradient(ellipse 120% 80% at 0% 0%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 60%),
+    linear-gradient(145deg, var(--bg-2) 0%, var(--bg-1) 100%);
+}
+.welcome-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, color-mix(in oklab, var(--accent) 4%, transparent) 0 1px, transparent 1px 24px);
+  pointer-events: none;
+}
+.welcome-card:hover {
+  border-color: var(--accent) !important;
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 24px color-mix(in oklab, var(--accent) 50%, transparent),
+    0 0 56px color-mix(in oklab, var(--accent) 28%, transparent),
+    var(--shadow-lg) !important;
+}
+/* CTA card — warm accent (mirror of mission) */
+.community-cta {
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 100%, color-mix(in oklab, var(--accent-warm) 14%, transparent), transparent 60%),
+    linear-gradient(145deg, var(--bg-2) 0%, var(--bg-1) 100%);
+}
+.community-cta::before {
+  background-image: repeating-linear-gradient(-45deg, color-mix(in oklab, var(--accent-warm) 4%, transparent) 0 1px, transparent 1px 24px);
+}
+.community-cta:hover {
+  border-color: var(--accent-warm) !important;
+  box-shadow:
+    0 0 0 1px var(--accent-warm),
+    0 0 24px color-mix(in oklab, var(--accent-warm) 50%, transparent),
+    0 0 56px color-mix(in oklab, var(--accent-warm) 28%, transparent),
+    var(--shadow-lg) !important;
+}
+.community-card .mission-centerpiece { position: relative; }
+.community-card .cc-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 8px;
+  position: relative;
+}
+.welcome-card .cc-kicker { color: var(--accent); }
+.community-cta .cc-kicker { color: var(--accent-warm); }
+.community-card .mission-centerpiece {
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  width: 100%;
+}
+.community-card .mission-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0 0 10px;
+  background: linear-gradient(100deg, var(--accent) 0%, color-mix(in oklab, var(--accent) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 18px color-mix(in oklab, var(--accent) 25%, transparent));
+}
+.community-cta .mission-title {
+  background: linear-gradient(100deg, var(--accent-warm) 0%, color-mix(in oklab, var(--accent-warm) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 18px color-mix(in oklab, var(--accent-warm) 25%, transparent));
+}
+.community-card .mission-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(13px, 1.4vw, 16px);
+  font-weight: 500;
+  color: var(--fg-muted);
+  padding-top: 8px;
+  margin-bottom: 4px;
+  border-top: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+}
+.community-cta .mission-heading {
+  border-top-color: color-mix(in oklab, var(--accent-warm) 30%, transparent);
+}
+.community-card .cc-hint {
+  margin-top: auto;
+  position: relative;
+}
+.cc-hint-cyan { color: var(--accent); border-color: color-mix(in oklab, var(--accent) 30%, transparent); background: color-mix(in oklab, var(--accent) 6%, transparent); }
+.welcome-card:hover .cc-hint-cyan { background: var(--accent); color: #07121a; border-color: var(--accent); }
+.cc-hint-warm { color: var(--accent-warm); border-color: color-mix(in oklab, var(--accent-warm) 30%, transparent); background: color-mix(in oklab, var(--accent-warm) 6%, transparent); }
+.community-cta:hover .cc-hint-warm { background: var(--accent-warm); color: #1a0f07; border-color: var(--accent-warm); }
+
+/* Stairway rows 4 & 5 — extend the staircase past row 3 with same overlap pattern */
+.stair-row-4 {
+  justify-content: center;
+  transform-origin: center center;
+  margin-bottom: -130px;
+  z-index: 4;
+}
+.stair-row-5 {
+  justify-content: flex-start;
+  transform-origin: left center;
+  padding-left: 0;
+  z-index: 5;
+  margin-bottom: 0;   /* last row — no overlap below */
+}
+/* Side text on row 5 mirrors row 1 (card on left, side text on right) */
+.stair-row-5 .stair-card-wrap { flex: 0 0 494px; }
+/* Row hover-glow propagation: include the 2 community cards */
+.stair-row:hover .welcome-card,
+.stair-row.is-hot .welcome-card {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 24px color-mix(in oklab, var(--accent) 50%, transparent),
+    0 0 56px color-mix(in oklab, var(--accent) 28%, transparent),
+    var(--shadow-lg);
+}
+.stair-row:hover .welcome-card.community-cta,
+.stair-row.is-hot .welcome-card.community-cta {
+  border-color: var(--accent-warm);
+  box-shadow:
+    0 0 0 1px var(--accent-warm),
+    0 0 24px color-mix(in oklab, var(--accent-warm) 50%, transparent),
+    0 0 56px color-mix(in oklab, var(--accent-warm) 28%, transparent),
+    var(--shadow-lg);
+}
+/* Disable transform on community cards inside the stairway (row scale handles it) */
+.stair-card-wrap .welcome-card { transition: border-color 0.3s ease, box-shadow 0.35s ease; }
+.stair-card-wrap .welcome-card:hover { transform: none; }
+.mission-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(-45deg, color-mix(in oklab, var(--accent-warm) 4%, transparent) 0 1px, transparent 1px 24px);
+  pointer-events: none;
+}
+.mission-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-warm);
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+  margin-bottom: 18px;
+  width: 100%;
+  position: relative;
+}
+.mission-label::before,
+.mission-label::after {
+  content: ''; flex: 0 0 14px; height: 1px;
+  background: color-mix(in oklab, var(--accent-warm) 50%, transparent);
+}
+.mission-centerpiece {
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  width: 100%;
+  position: relative;
+}
+.mission-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(30px, 3.4vw, 42px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  color: var(--fg);
+  margin: 0 0 18px;
+  background: linear-gradient(100deg, var(--accent-warm) 0%, color-mix(in oklab, var(--accent-warm) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 18px color-mix(in oklab, var(--accent-warm) 25%, transparent));
+  transition: transform 0.3s ease;
+}
+.mission-card:hover .mission-title { transform: scale(1.03); }
+.mission-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(18px, 1.9vw, 22px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+  color: var(--fg-muted);
+  margin-bottom: 8px;
+  padding-top: 14px;
+  border-top: 1px solid color-mix(in oklab, var(--accent-warm) 30%, transparent);
+  transition: transform 0.3s ease;
+}
+.mission-card:hover .mission-heading { transform: scale(1.02); color: var(--fg); }
+.mission-sub {
+  font-size: 12.5px;
+  color: var(--fg-muted);
+  line-height: 1.5;
+  max-width: 260px;
+}
+.mission-links {
+  width: 100%;
+  display: grid; gap: 8px;
+  margin-top: auto;
+  position: relative;
+}
+.mission-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg-0) 40%, transparent);
+  color: var(--fg);
+  text-align: left;
+  transition: all 0.22s ease;
+}
+.mission-link:hover {
+  border-color: var(--accent-warm);
+  background: color-mix(in oklab, var(--accent-warm) 10%, var(--bg-0));
+  transform: translateX(2px);
+}
+.mission-link-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  background: color-mix(in oklab, var(--accent-warm) 14%, var(--bg-2));
+  border: 1px solid color-mix(in oklab, var(--accent-warm) 30%, transparent);
+  color: var(--accent-warm);
+}
+.mission-link-icon svg { width: 14px; height: 14px; }
+.mission-link-body {
+  flex: 1; min-width: 0;
+}
+.mission-link-kind {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 2px;
+}
+.mission-link-title {
+  font-size: 12.5px; font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mission-link-arrow {
+  color: var(--fg-dim);
+  flex-shrink: 0;
+  transition: transform 0.22s ease, color 0.22s ease;
+}
+.mission-link:hover .mission-link-arrow {
+  transform: translateX(3px);
+  color: var(--accent-warm);
+}
+.player-progress {
+  height: 4px; border-radius: 2px;
+  background: color-mix(in oklab, var(--fg) 10%, transparent);
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.player-progress-fill {
+  height: 100%; width: 34%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.3s linear;
+}
+.player-time {
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim);
+}
+
+/* ============ BUZZWORD card — front bottom row (prev / counter / archive) ============ */
+.flip-front-bottom {
+  position: relative;
+  width: 100%;
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px;
+}
+.bz-prev {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg-0) 50%, transparent);
+  color: var(--fg-muted);
+  transition: all 0.22s ease;
+  flex-shrink: 0;
+}
+.bz-prev svg { width: 14px; height: 14px; }
+.bz-prev:hover { border-color: var(--accent); color: var(--accent); }
+.bz-prev:disabled { opacity: 0.35; cursor: not-allowed; }
+.bz-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim);
+  letter-spacing: 0.08em;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+.bz-counter span { color: var(--accent); }
+.bz-archive {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11.5px; color: var(--fg-muted);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--accent) 4%, transparent);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.bz-archive svg { width: 12px; height: 12px; }
+.flip-card:hover .bz-archive { background: var(--accent); color: #07121a; border-color: var(--accent); }
+
+/* Back face — pronunciation + RO translation row */
+.flip-back .back-pron-row {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px;
+  margin-bottom: 14px;
+  position: relative;
+}
+.flip-back .back-ro {
+  font-size: 11.5px;
+  color: color-mix(in oklab, var(--accent-2) 90%, transparent);
+  letter-spacing: 0.02em;
+}
+.flip-back .def p { margin: 0 0 8px; font-size: 12.5px; line-height: 1.55; color: #bdd7e2; }
+.flip-back .def p:last-child { margin-bottom: 0; }
+.flip-back .def.is-typing::after {
+  content: '';
+  display: inline-block;
+  width: 2px; height: 0.95em;
+  background: var(--accent-2);
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: caretBlink 0.7s step-end infinite;
+}
+
+/* ============ MISSION CARD — flip-back face ============ */
+.mission-card.flip-card-host { perspective: 1200px; padding: 0; }
+.mission-card.flip-card-host .flip-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+}
+.mission-card.flip-card-host.flipped .flip-inner { transform: rotateY(180deg); }
+.mission-card.flip-card-host .flip-face {
+  position: absolute; inset: 0;
+  border-radius: 18px;
+  padding: 24px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.mission-card.flip-card-host .mission-front {
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+}
+.mission-card.flip-card-host .mission-back {
+  background: linear-gradient(145deg, #2a1a0d 0%, #1a0f07 100%);
+  color: #f5e1c9;
+  transform: rotateY(180deg);
+  justify-content: space-between;
+  text-align: left;
+}
+.mission-back-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 10px;
+}
+.mission-back-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px; line-height: 1.1; letter-spacing: -0.02em;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #fff;
+}
+.mission-back-body {
+  flex: 1; min-height: 0; overflow: auto;
+  padding-right: 4px;
+}
+.mission-back-body p {
+  font-size: 12.5px; line-height: 1.55;
+  color: color-mix(in oklab, #f5e1c9 85%, transparent);
+  margin: 0 0 8px;
+}
+.mission-back-body.is-typing::after {
+  content: '';
+  display: inline-block;
+  width: 2px; height: 0.95em;
+  background: var(--accent-warm);
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: caretBlink 0.7s step-end infinite;
+}
+.mission-back-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 12px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--accent-warm);
+  color: #1a0f07;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 600;
+  align-self: flex-start;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.mission-back-cta svg { width: 12px; height: 12px; transition: transform 0.22s ease; }
+.mission-back-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 22px -8px color-mix(in oklab, var(--accent-warm) 70%, transparent); }
+.mission-back-cta:hover svg { transform: translateX(3px); }
+
+/* ============ PODCAST CARD — flip-back face ============ */
+.podcast-card.flip-card-host { perspective: 1200px; padding: 0; overflow: visible; }
+.podcast-card.flip-card-host .flip-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+}
+.podcast-card.flip-card-host.flipped .flip-inner { transform: rotateY(180deg); }
+.podcast-card.flip-card-host .flip-face {
+  position: absolute; inset: 0;
+  border-radius: 18px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.podcast-card.flip-card-host .podcast-front { padding: 0; }
+.podcast-card.flip-card-host .podcast-back {
+  background: linear-gradient(145deg, #0d2a3b 0%, #091a27 100%);
+  color: #d6ecf6;
+  transform: rotateY(180deg);
+  padding: 24px;
+  justify-content: space-between;
+}
+.podcast-subtitle {
+  font-size: 12.5px; color: var(--fg-muted);
+  margin-top: 4px; margin-bottom: 8px;
+  font-style: italic;
+  line-height: 1.4;
+}
+.podcast-back-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+}
+.podcast-back-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px; line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #fff;
+}
+.podcast-back-body {
+  flex: 1; min-height: 0; overflow: auto;
+  padding-right: 4px;
+}
+.podcast-back-body p {
+  font-size: 12.5px; line-height: 1.55;
+  color: color-mix(in oklab, #d6ecf6 85%, transparent);
+  margin: 0 0 8px;
+}
+.podcast-back-body.is-typing::after {
+  content: '';
+  display: inline-block;
+  width: 2px; height: 0.95em;
+  background: var(--accent);
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: caretBlink 0.7s step-end infinite;
+}
+.podcast-back-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 12px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #07121a;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 600;
+  align-self: flex-start;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.podcast-back-cta svg { width: 12px; height: 12px; transition: transform 0.22s ease; }
+.podcast-back-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 22px -8px color-mix(in oklab, var(--accent) 70%, transparent); }
+.podcast-back-cta:hover svg { transform: translateX(3px); }
+
+/* Pilot-episode show-notes (fills card height until multi-episode archive is live) */
+.pilot-notes {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+.pilot-notes-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.pilot-notes p {
+  font-size: 13px; line-height: 1.6; color: var(--fg-muted);
+  margin-bottom: 18px;
+}
+.pilot-chapters {
+  list-style: none; padding: 0; margin: 0 0 18px;
+  display: grid; gap: 8px;
+}
+.pilot-chapters li {
+  display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: baseline;
+  font-size: 12.5px; color: var(--fg);
+  padding: 6px 0;
+  border-bottom: 1px dashed color-mix(in oklab, var(--border) 60%, transparent);
+}
+.pilot-chapters li:last-child { border-bottom: none; }
+.pilot-chapters .ts {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--fg-dim);
+  letter-spacing: 0.04em;
+}
+.pilot-upcoming {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  background: color-mix(in oklab, var(--accent) 7%, transparent);
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+}
+
+/* ============ CARD EXPAND / FLIP MODAL ============ */
+.cx-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(4, 8, 14, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 200;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease;
+  display: grid; place-items: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+}
+.cx-backdrop.open { opacity: 1; pointer-events: auto; }
+.cx-stage {
+  perspective: 1500px;
+  width: min(620px, 100%);
+  transform: scale(0.68);
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.cx-backdrop.grown .cx-stage { transform: scale(1); }
+.cx-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 0.65s cubic-bezier(0.75, 0, 0.25, 1);
+}
+.cx-backdrop.flipped .cx-card { transform: rotateY(180deg); }
+.cx-face {
+  position: absolute; inset: 0;
+  border-radius: 24px;
+  padding: 40px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+  box-shadow: 0 40px 80px -30px rgba(0,0,0,0.55);
+}
+.cx-front {
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 0%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 60%),
+    linear-gradient(145deg, var(--bg-2) 0%, var(--bg-1) 100%);
+  justify-content: space-between;
+}
+.cx-front::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, color-mix(in oklab, var(--accent) 4%, transparent) 0 1px, transparent 1px 24px);
+  pointer-events: none;
+}
+.cx-back {
+  background: linear-gradient(145deg, var(--primary) 0%, #0b2a3a 100%);
+  color: #e0f5ff;
+  transform: rotateY(180deg);
+  overflow-y: auto;
+  padding: 44px 40px 40px;
+}
+.cx-back.podcast { background: linear-gradient(145deg, #0d2a3b 0%, #091a27 100%); }
+.cx-back::before {
+  content: '';
+  position: absolute; top: -20%; right: -15%;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent) 24%, transparent) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cx-front .cx-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative;
+}
+.cx-front .cx-word {
+  position: relative;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(56px, 8vw, 88px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+.cx-front .cx-word .pronounce {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 400;
+  color: var(--fg-muted);
+  letter-spacing: 0.02em;
+  margin-top: 14px;
+}
+.cx-front .cx-hint {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--fg-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+.cx-front .cx-hint svg { width: 14px; height: 14px; }
+
+.cx-back .cx-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 14px;
+  position: relative;
+}
+.cx-back h3 {
+  font-size: 32px; margin-bottom: 16px; font-weight: 600;
+  position: relative;
+  letter-spacing: -0.02em;
+}
+.cx-back h3 .cx-pron {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 400;
+  color: color-mix(in oklab, var(--accent-2) 80%, transparent);
+  letter-spacing: 0.02em;
+  margin-left: 10px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+}
+.cx-back .cx-ro {
+  font-size: 12.5px;
+  color: color-mix(in oklab, var(--accent-2) 95%, transparent);
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+}
+.cx-back .cx-def p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.65; color: #d4e7f0; }
+.cx-back .cx-def p:last-child { margin-bottom: 0; }
+.cx-back .cx-def strong { color: #fff; font-weight: 600; }
+.cx-back .cx-def em { color: var(--accent-2); font-style: normal; }
+.cx-back .cx-examples {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.cx-back .cx-examples-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+}
+.cx-back .cx-examples ul {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 8px;
+}
+.cx-back .cx-examples li {
+  font-size: 12.5px; line-height: 1.55;
+  color: #b8d2e0;
+  padding-left: 14px;
+  position: relative;
+}
+.cx-back .cx-examples li::before {
+  content: '»'; position: absolute; left: 0;
+  color: var(--accent-2);
+}
+.cx-back .cx-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 22px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--accent-warm);
+  color: #1a0f07;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 600;
+  align-self: flex-start;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.cx-back .cx-cta svg { width: 14px; height: 14px; transition: transform 0.22s ease; }
+.cx-back .cx-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -8px color-mix(in oklab, var(--accent-warm) 70%, transparent); }
+.cx-back .cx-cta:hover svg { transform: translateX(3px); }
+.cx-back .cx-cta-cyan { background: var(--accent); color: #07121a; }
+.cx-back .cx-cta-cyan:hover { box-shadow: 0 12px 30px -8px color-mix(in oklab, var(--accent) 70%, transparent); }
+
+/* Multi-word term in the modal front (mirror of the small card behaviour) */
+.cx-front .cx-word.multi-word { font-size: clamp(40px, 6vw, 64px); letter-spacing: -0.02em; line-height: 1; }
+.cx-front .cx-word.multi-word.is-long { font-size: clamp(34px, 5vw, 54px); }
+
+/* Modal back face — buzzword nav anchored top-right (← newer · counter · older →).
+   Per spec: ← steps to NEWER (back toward current), → steps to OLDER (deeper into archive). */
+.cx-bz-nav-back {
+  position: absolute;
+  top: 22px; right: 22px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: color-mix(in oklab, #07121a 60%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent-2) 30%, transparent);
+  z-index: 4;
+  backdrop-filter: blur(8px);
+}
+.cx-bz-btn {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: none;
+  background: transparent;
+  color: color-mix(in oklab, var(--accent-2) 80%, transparent);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  padding: 0;
+}
+.cx-bz-btn svg { width: 14px; height: 14px; }
+.cx-bz-btn:hover:not(:disabled) { background: var(--accent-2); color: #07121a; }
+.cx-bz-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+.cx-bz-nav-back .cx-bz-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--accent-2);
+  letter-spacing: 0.06em;
+  padding: 0 6px;
+  min-width: 36px; text-align: center;
+}
+/* Reserve space on the back face's right side so the absolute-positioned nav
+   doesn't overlap the label/title (.cx-back already establishes a positioned
+   context — it's position:absolute via its parent .cx-face base class). */
+.cx-back { padding-right: 50px; }
+
+/* Scrollbar styling on the modal back when content overflows */
+.cx-back {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--accent-2) 60%, transparent) transparent;
+}
+.cx-back::-webkit-scrollbar { width: 8px; }
+.cx-back::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 4px; }
+.cx-back::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--accent-2) 50%, transparent);
+  border-radius: 4px;
+}
+.cx-back::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--accent-2) 75%, transparent);
+}
+.cx-back .cx-def {
+  font-size: 15px; line-height: 1.65; color: #bdd7e2;
+  position: relative;
+  margin-bottom: 20px;
+}
+.cx-back .cx-use {
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent-2);
+  letter-spacing: 0.04em;
+}
+.cx-back .cx-chapters {
+  list-style: none; padding: 0; margin: 0 0 16px;
+  display: grid; gap: 6px;
+  position: relative;
+}
+.cx-back .cx-chapters li {
+  display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: baseline;
+  font-size: 13px; color: #e0f5ff;
+  padding: 7px 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+}
+.cx-back .cx-chapters li:last-child { border-bottom: none; }
+.cx-back .cx-chapters .ts {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent-2);
+  letter-spacing: 0.04em;
+}
+.cx-back .ep-list {
+  list-style: none; padding: 0; margin: 10px 0 4px;
+  display: grid; gap: 8px;
+  position: relative;
+}
+.cx-back .ep-list li {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.cx-back .ep-list li:hover {
+  background: rgba(255,255,255,0.10);
+  border-color: color-mix(in oklab, var(--accent) 55%, transparent);
+}
+.cx-back .ep-play {
+  width: 34px; height: 34px; border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--accent);
+  color: #07121a;
+  display: grid; place-items: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.cx-back .ep-play:hover { background: var(--accent-2); transform: scale(1.08); }
+.cx-back .ep-play svg { width: 14px; height: 14px; }
+.cx-back .ep-body { flex: 1; min-width: 0; }
+.cx-back .ep-kind {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 3px;
+}
+.cx-back .ep-title {
+  font-size: 13.5px; line-height: 1.35; color: #e0f5ff;
+  font-weight: 500;
+}
+
+.cx-back .cx-upcoming {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: var(--accent-2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  position: relative;
+}
+
+.cx-close {
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--bg-1);
+  border: 1px solid var(--border-strong);
+  color: var(--fg);
+  display: grid; place-items: center;
+  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.5);
+  z-index: 10;
+  transition: all 0.2s;
+  transform: rotate(0deg);
+}
+.cx-close:hover { background: var(--accent); color: #07121a; transform: rotate(90deg); border-color: var(--accent); }
+.cx-close svg { width: 18px; height: 18px; }
+
+@media (max-width: 640px) {
+  .cx-stage { width: min(480px, 100%); }
+  .cx-face { padding: 26px; border-radius: 18px; }
+  .cx-back { padding: 30px 26px 26px; }
+  .cx-back h3 { font-size: 24px; }
+  .cx-front .cx-word { font-size: clamp(40px, 9vw, 64px); }
+  .cx-close { width: 38px; height: 38px; top: -14px; right: -14px; }
+  .cx-close svg { width: 15px; height: 15px; }
+}
+
+/* ============ RESOURCES CAROUSEL ============ */
+.resources-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 990px;
+  margin: 0 auto;
+}
+.resources-track-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  padding: 30px 0;
+  mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.resources-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+.carousel-nav {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-1);
+  color: var(--fg);
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  z-index: 2;
+}
+.carousel-nav:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 24px color-mix(in oklab, var(--accent) 40%, transparent);
+  transform: scale(1.06);
+}
+.carousel-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.carousel-nav svg { width: 20px; height: 20px; }
+
+/* ============ RESOURCES ============ */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 990px;
+  margin: 0 auto;
+}
+.resource {
+  position: relative;
+  flex: 0 0 320px;
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; flex-direction: column;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease, opacity 0.5s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+/* Light theme: give resource cards the same layered look as zone-2 cards */
+[data-theme="light"] .resource {
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 0%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 60%),
+    linear-gradient(145deg, var(--bg-2) 0%, color-mix(in oklab, var(--bg-2) 70%, var(--bg-0)) 100%);
+  border-color: var(--border-strong);
+  box-shadow: 0 6px 18px -10px rgba(15, 61, 82, 0.18);
+}
+.resources-track .resource {
+  transform: scale(0.78);
+  filter: blur(4px);
+  opacity: 0.4;
+}
+.resources-track .resource.is-adjacent {
+  transform: scale(0.88);
+  filter: blur(1.5px);
+  opacity: 0.75;
+}
+.resources-track .resource.is-active {
+  transform: scale(1);
+  filter: blur(0);
+  opacity: 1;
+  z-index: 2;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 0 40px color-mix(in oklab, var(--accent) 25%, transparent), var(--shadow-lg);
+}
+.resource::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 10%, transparent) 0%, transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.resource { transition: all 0.3s ease; cursor: pointer; }
+.resource:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-lg), 0 0 0 1px color-mix(in oklab, var(--accent) 25%, transparent); }
+.resource:hover::before { opacity: 1; }
+.resource h3 { transition: color 0.25s ease; }
+.resource:hover h3 { color: var(--accent); }
+.resource:hover .download-btn {
+  background: var(--accent-2);
+  letter-spacing: 0.08em;
+  box-shadow: 0 10px 24px -8px color-mix(in oklab, var(--accent) 70%, transparent);
+}
+.resource:hover .download-btn svg { transform: translateY(2px); }
+.resource-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 40px;
+}
+.resource-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: grid; place-items: center;
+  position: relative;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-2);
+}
+.resource-icon svg { width: 22px; height: 22px; }
+.resource.pdf .resource-icon { color: #fb7185; background: color-mix(in oklab, #fb7185 8%, var(--bg-2)); border-color: color-mix(in oklab, #fb7185 25%, transparent); }
+.resource.xls .resource-icon { color: #34d399; background: color-mix(in oklab, #34d399 8%, var(--bg-2)); border-color: color-mix(in oklab, #34d399 25%, transparent); }
+.resource.tool .resource-icon { color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, var(--bg-2)); border-color: color-mix(in oklab, var(--accent) 30%, transparent); }
+.resource-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg-dim);
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.resource h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 10px; }
+.resource p { font-size: 13px; color: var(--fg-muted); margin-bottom: 24px; line-height: 1.55; flex: 1; }
+.resource-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.resource-size {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim);
+}
+.download-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: 8px;
+  background: var(--accent);
+  color: #07121a;
+  font-size: 12px; font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.download-btn:hover { background: var(--accent-2); letter-spacing: 0.08em; }
+.download-btn svg { transition: transform 0.25s ease; }
+.download-btn:hover svg { transform: translateY(2px); }
+
+/* ============ FOOTER ============ */
+footer {
+  position: relative; z-index: 1;
+  padding: 72px 32px 32px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-1);
+}
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+.footer-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.footer-col a, .footer-col p { color: var(--fg-muted); font-size: 14px; display: block; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--accent); }
+.footer-brand .logo { margin-bottom: 20px; }
+.footer-brand p { font-size: 13px; color: var(--fg-muted); line-height: 1.6; }
+.footer-bottom {
+  padding-top: 28px;
+  display: flex; justify-content: center; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-legal {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 11px;
+  color: var(--fg-dim);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footer-legal a {
+  color: var(--fg-dim);
+  transition: color 0.2s;
+}
+.footer-legal a:hover { color: var(--accent); }
+.footer-legal .sep { color: var(--fg-dim); opacity: 0.5; }
+.footer-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+}
+
+/* ============ CONTACT MODAL ============ */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 100;
+  background: color-mix(in oklab, var(--bg-0) 75%, transparent);
+  backdrop-filter: blur(8px);
+  display: grid; place-items: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-backdrop.open { opacity: 1; pointer-events: auto; }
+.modal {
+  width: 100%; max-width: 520px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  padding: 36px;
+  transform: scale(0.94) translateY(12px);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+.modal-backdrop.open .modal { transform: scale(1) translateY(0); }
+.modal-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 36px; height: 36px; border-radius: 8px;
+  display: grid; place-items: center;
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.modal-close:hover { background: var(--bg-2); color: var(--fg); }
+.modal h3 { font-size: 28px; letter-spacing: -0.02em; margin-bottom: 8px; }
+.modal .modal-sub { color: var(--fg-muted); font-size: 14px; margin-bottom: 28px; }
+.field { margin-bottom: 18px; }
+.field label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg-dim); margin-bottom: 8px;
+}
+.field input, .field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: var(--bg-1); }
+.field textarea { resize: vertical; min-height: 110px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }
+.form-success {
+  display: none;
+  padding: 14px;
+  background: color-mix(in oklab, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+  border-radius: 10px;
+  color: var(--accent);
+  font-size: 13px;
+  margin-bottom: 18px;
+  align-items: center; gap: 10px;
+}
+.form-success.show { display: flex; }
+
+/* ============ TWEAKS PANEL ============ */
+.tweaks {
+  position: fixed; right: 20px; bottom: 20px; z-index: 200;
+  width: 280px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: var(--shadow-lg);
+  display: none;
+  font-family: 'Inter', sans-serif;
+}
+.tweaks.open { display: block; }
+.tweaks h5 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin: 0 0 14px; font-weight: 500;
+}
+.tweak-row { margin-bottom: 14px; }
+.tweak-row:last-child { margin-bottom: 0; }
+.tweak-row > label {
+  display: block;
+  font-size: 11px; color: var(--fg-muted); margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em;
+}
+.swatch-row { display: flex; gap: 6px; }
+.swatch {
+  flex: 1; height: 28px; border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.swatch:hover { transform: scale(1.05); }
+.swatch.active { border-color: var(--fg); }
+
+/* ============ RESPONSIVE ============
+   360px (mobile) / 768px (tablet) / 1280px+ (desktop)
+*/
+@media (max-width: 1280px) {
+  .hero { padding: 40px 24px 60px; }
+  .featured-section { padding: 0 24px 18px; }
+  section.block { padding: 40px 24px; }
+  .header-inner { padding: 16px 24px; }
+  footer { padding: 64px 24px 28px; }
+  .resources-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 1200px) and (min-width: 961px) {
+  .middle-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .flip-face { padding: 18px; }
+  .mission-card { padding: 18px; }
+  .flip-front .word { font-size: clamp(40px, 5.5vw, 64px); }
+  .podcast-hero h3 { font-size: clamp(24px, 3vw, 32px); }
+  .mission-title { font-size: clamp(22px, 2.8vw, 30px); }
+  .mission-heading { font-size: clamp(16px, 1.7vw, 19px); }
+  .stair-card-wrap { flex: 0 0 440px; }
+  .stair-side { flex: 0 1 360px; max-width: 360px; padding: 14px 18px; }
+  .stair-row-1 { padding-left: 24px; margin-bottom: -90px; }
+  .stair-row-2 { margin-bottom: -90px; }
+  .stair-row-3 { padding-right: 24px; }
+}
+@media (max-width: 960px) {
+  .stairway { padding: 4px 0 12px; }
+  .stair-row { flex-direction: column; gap: 14px; transform: scale(1); filter: none; margin: 0 0 22px; text-align: center; padding-left: 0; padding-right: 0; z-index: auto; align-items: center; }
+  .stair-row-1, .stair-row-2, .stair-row-3 { justify-content: center; align-items: center; transform-origin: center; padding-left: 0; padding-right: 0; margin-bottom: 22px; }
+  .stair-card-wrap .flip-card,
+  .stair-card-wrap .podcast-card,
+  .stair-card-wrap .mission-card { aspect-ratio: auto; min-height: 280px; }
+  /* Flip-card uses absolutely-positioned faces inside .flip-inner { height:100% },
+     which collapses without a definite parent height. Restore an aspect ratio
+     so the parent has a real computed height for the faces to fill. */
+  .stair-card-wrap .flip-card { aspect-ratio: 1 / 1; min-height: 0; }
+  /* Mobile order: text BEFORE card for both row 1 and row 3.
+     - Row 1 markup is card → side, so reverse it.
+     - Row 3 markup is side → card, so leave the natural order. */
+  .stair-row-1 { flex-direction: column-reverse; }
+  .stair-row-3 { flex-direction: column; }
+  .stair-row-1 .stair-side,
+  .stair-row-3 .stair-side { text-align: center; }
+  .stair-row-1 .stair-side-label,
+  .stair-row-3 .stair-side-label { justify-content: center; }
+  .stair-row-1 .stair-side p,
+  .stair-row-3 .stair-side p { margin-left: 0; text-align: center; }
+  .stair-card-wrap { flex: 0 0 auto; width: 100%; max-width: 420px; }
+  /* On touch / narrow viewports, side text is always visible */
+  .stair-side {
+    flex: 0 0 auto;
+    max-width: 560px;
+    width: 100%;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none !important;
+    align-self: auto;
+    overflow: visible;
+    padding: 0 4px;
+  }
+  .stair-row-3 .stair-side { transform: none !important; }
+  /* Buzzword card: centred meta on mobile so the title doesn't drift off-card */
+  .flip-meta { align-items: center; }
+  .flip-meta .meta-l1,
+  .flip-meta .meta-l2 { align-self: center; margin-left: 0; margin-right: 0; }
+  .resources-carousel { gap: 6px; }
+  .resources-track-wrap { padding: 16px 0; }
+  .carousel-nav { width: 38px; height: 38px; }
+  .resource { flex: 0 0 240px; padding: 22px; }
+  .resource-header { margin-bottom: 24px; }
+  .resource h3 { font-size: 17px; }
+}
+/* Touch / no-hover devices: always show side text */
+@media (hover: none) {
+  .stair-side {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+}
+@media (max-width: 960px) and (min-width: 641px) {
+  /* placeholder to preserve original rules below */
+}
+@media (max-width: 960px) {
+  .header-inner { padding: 14px 20px; gap: 12px; }
+  nav.primary { display: none; }
+  .nav-toggle { display: grid; }
+  .hero { padding: 24px 20px 32px; min-height: 0; margin: 0; overflow: hidden; }
+  .hero-inner { grid-template-columns: 1fr; gap: 18px; min-height: 0; }
+  .hero-scroll-hint { display: none; }
+  /* Cancel the desktop translateY that lifts the headline — on mobile it would
+     clip the first line ("Unde") above the visible hero area. */
+  .hero-headline { margin-right: 0; padding-right: 0; transform: none; }
+  .hero-headline::after { display: none; }
+  .hero-headline h1 { font-size: clamp(32px, 8vw, 50px); }
+  .hero-kicker { margin-bottom: 18px; }
+  .hero-visual { margin-left: 0; margin-top: 0; height: 240px; min-height: 0; max-height: none; mask-image: none; -webkit-mask-image: none; border-radius: 14px; border: 1px solid var(--border); }
+  .hero-visual::after { display: none; }
+  .hero-connector { display: none; }
+  /* No hero overlap on mobile — the article sits cleanly below the image */
+  .featured-section { margin-top: 18px; padding: 0 20px 16px; }
+  .featured { padding: 22px; border-radius: 16px; }
+  .featured h2 { font-size: 26px; }
+  .featured-excerpt { font-size: 14px; margin-bottom: 16px; }
+  .featured-meta { font-size: 10px; gap: 10px; margin-bottom: 22px; padding-bottom: 20px; }
+  /* Mobile inter-section scroll cue: undo desktop negative margin */
+  .section-scroll { margin-top: 12px; padding: 0 20px; }
+  section.block { padding: 28px 20px; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+  .section-head p { max-width: 100%; }
+  .middle-grid { grid-template-columns: 1fr; gap: 20px; max-width: 480px; }
+  .flip-card, .podcast-card, .mission-card { aspect-ratio: auto; min-height: 340px; }
+  .flip-face { padding: 30px; }
+  .flip-front .word { font-size: 64px; }
+  .podcast-hero { padding: 24px; }
+  .podcast-hero h3 { font-size: 24px; }
+  .resources-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; padding-bottom: 36px; }
+  footer { padding: 48px 20px 24px; }
+  .tweaks { left: 20px; right: 20px; width: auto; bottom: 80px; }
+}
+@media (max-width: 640px) {
+  .hero { padding: 20px 16px 24px; }
+  .hero-inner { gap: 14px; }
+  .hero-headline h1 { font-size: clamp(28px, 9vw, 40px); }
+  .hero-visual { height: 200px; }
+  .featured-section { margin-top: 14px; padding: 0 16px 10px; }
+  .featured { padding: 18px; }
+  .featured h2 { font-size: 22px; }
+  .featured-header { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 12px; }
+  .featured-actions { gap: 6px; }
+  .featured-actions .btn { flex: 1 1 auto; justify-content: center; }
+  .section-scroll { margin-top: 10px; padding: 0 16px; }
+  section.block { padding: 24px 16px; }
+  .resources-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .btn-contact span { display: none; }
+  .btn-contact { padding: 10px; }
+  .flip-card { min-height: 260px; }
+  .flip-face { padding: 22px; }
+  .flip-front .word { font-size: 52px; }
+  .flip-back h3 { font-size: 24px; }
+  .podcast-hero { padding: 20px; }
+  .player { gap: 14px; margin-top: 18px; }
+  .play-btn { width: 46px; height: 46px; }
+  .play-btn svg { width: 16px; height: 16px; }
+  /* Carousel: smaller cards so the active one fits comfortably */
+  .resource { flex: 0 0 220px; padding: 20px; }
+  .resources-track { gap: 16px; }
+  .resources-track-wrap { mask-image: none; -webkit-mask-image: none; padding: 12px 0; }
+  .carousel-nav { width: 34px; height: 34px; }
+  .carousel-nav svg { width: 16px; height: 16px; }
+}
+@media (max-width: 420px) {
+  .logo-text span { font-size: 14px; }
+  .logo-mark { width: 30px; height: 30px; }
+  .theme-toggle, .nav-toggle { width: 36px; height: 36px; }
+  .hero { padding: 16px 14px 20px; }
+  .hero-inner { gap: 12px; }
+  .hero-kicker { font-size: 9px; padding: 4px 9px 4px 8px; margin-bottom: 14px; }
+  .hero-headline h1 { font-size: 28px; line-height: 1; }
+  .hero-visual { height: 180px; }
+  .featured-section { margin-top: 10px; padding: 0 14px 8px; }
+  .featured h2 { font-size: 20px; }
+  .featured { padding: 16px; }
+  .featured-excerpt { font-size: 13px; }
+  section.block { padding: 20px 14px; }
+  .stair-card-wrap { max-width: 100%; }
+  .stair-card-wrap .flip-card,
+  .stair-card-wrap .podcast-card,
+  .stair-card-wrap .mission-card { min-height: 240px; }
+  .flip-front .word { font-size: 42px; }
+  .flip-back h3 { font-size: 22px; }
+  .flip-back .def { font-size: 13px; }
+  .flip-meta { font-size: clamp(20px, 6.4vw, 26px); }
+  .podcast-hero h3 { font-size: 18px; }
+  .podcast-label { font-size: 11px; }
+  .player-title { font-size: 12px; }
+  /* Resources carousel: tightest sizing for the smallest viewports */
+  .resource { flex: 0 0 200px; padding: 16px; }
+  .resource h3 { font-size: 15px; margin-bottom: 8px; }
+  .resource p { font-size: 12px; margin-bottom: 16px; }
+  .resource-header { margin-bottom: 18px; }
+  .resource-icon { width: 38px; height: 38px; }
+  .resource-icon svg { width: 18px; height: 18px; }
+  .resources-track { gap: 12px; }
+  .carousel-nav { width: 30px; height: 30px; }
+  .carousel-nav svg { width: 14px; height: 14px; }
+}
+
+/* ============ ANIMATIONS ============ */
+.fade-in {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ambient"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-headline">
+      <h1>
+        <span class="w-1">Unde</span>
+        <span class="w-2"><span class="accent">Inteligența<br>Artificială</span></span>
+        <span class="w-3"><span class="slash">/</span>întâlnește<br>contabilitatea</span>
+      </h1>
+      <div class="hero-connector"></div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-bg"></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span>scroll</span>
+    <span class="arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </span>
+  </div>
+</section>
+
+<!-- FEATURED ARTICLE (moved below hero) -->
+<section class="featured-section">
+  <div class="featured-section-inner">
+    <aside class="featured fade-in in">
+      <div class="featured-header">
+        <span class="featured-tag">Articolul Săptămânii</span>
+        <span class="featured-date">19 · 04 · 2026</span>
+      </div>
+      <a href="2026-05-01-Goana-dupa-promptul-perfect.html" class="featured-title-link"><h2>Goana după promptul perfect — plus shortcut-ul care schimbă jocul.</h2></a>
+      <p class="featured-excerpt" data-typewriter="Cele 7 ingrediente ale unui prompt bun — și scurtătura pe care o folosesc ca să nu le mai memorez." data-typewriter-trigger="hover">Cele 7 ingrediente ale unui prompt bun — și scurtătura pe care o folosesc ca să nu le mai memorez.</p>
+      <div class="featured-actions">
+        <a href="2026-05-01-Goana-dupa-promptul-perfect.html" class="btn btn-primary">
+          Citește articolul
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="arhiva.html" class="btn btn-ghost">Vezi arhiva</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- Inter-section scroll: featured → Explorează -->
+<div class="section-scroll" aria-hidden="false">
+  <a href="#articole" aria-label="Scroll la secțiunea Explorează">
+    <span>Explorează</span>
+    <span class="arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </span>
+  </a>
+</div>
+
+<!-- BUZZWORD + PODCAST -->
+<section class="block" id="articole">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Explorează</div>
+        <h2 data-typewriter="Un termen nou. Un episod nou. În fiecare săptămână.">Un termen nou. Un episod nou. În fiecare săptămână.</h2>
+      </div>
+    </div>
+
+    <div class="stairway">
+
+      <!-- ROW 1 — BUZZWORD (left) + explanation text (right) -->
+      <div class="stair-row stair-row-1">
+        <div class="stair-card-wrap">
+          <div class="flip-card" id="flip-card">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <div class="flip-meta">
+                  <span class="meta-l1">Buzzword-ul</span>
+                  <span class="meta-l2">Săptămânii</span>
+                </div>
+                <div class="word" id="word-front">CONTEXT WINDOW</div>
+                <div class="flip-hint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+                  Vezi definiția
+                </div>
+              </div>
+              <div class="flip-face flip-back">
+                <div class="back-top">
+                  <span class="back-label" id="word-back-label">FEREASTRA DE CONTEXT</span>
+                </div>
+                <h3 id="word-title">CONTEXT WINDOW</h3>
+                <div class="back-pron-row">
+                  <span class="back-pronounce" id="word-pronounce">/ con·text win·dow /   substantiv</span>
+                  <span class="back-ro" id="word-ro">🇷🇴 Fereastra de Context</span>
+                </div>
+                <div class="def" id="word-def">
+                  <p>Reprezintă „memoria de lucru” a modelului AI — cantitatea maximă de text pe care o poate menține activă în „minte” într-o singură interacțiune.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stair-side">
+          <div class="stair-side-label"><span class="line"></span>Vocabular AI</div>
+          <h4>Cuvinte și expresii de înțeles, nu doar de folosit.</h4>
+          <p>Un termen nou, în fiecare săptămână — din vocabularul specific AI pe care profesionistul contabil îl întâlnește tot mai des. Definiții scurte, exemple concrete din fluxurile reale, astfel încât conceptele să fie asimilate și integrate cu încredere în activitatea de zi cu zi.</p>
+          <div class="stair-side-mono">click pentru definiția completă</div>
+        </div>
+      </div>
+
+      <!-- ROW 2 — MISSION / HUB (centered, no side text) -->
+      <div class="stair-row stair-row-2">
+        <div class="stair-card-wrap">
+          <div class="mission-card" id="mission-card">
+            <div class="mission-centerpiece">
+              <h3 class="mission-title">Viitorul profesiei<br>contabile</h3>
+              <div class="mission-heading">Misiunea AI Accounting Hub</div>
+            </div>
+            <div class="flip-hint mission-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+              Vezi analiza
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 3 — PODCAST (right) + description text (left) -->
+      <div class="stair-row stair-row-3">
+        <div class="stair-side">
+          <div class="stair-side-label"><span class="line"></span>Podcast</div>
+          <h4>Două gazde. Analize ușor de digerat.</h4>
+          <p>Topicuri detaliate activ de doi gazde, într-un format conversațional — suficient de compact cât să se potrivească pe drumul de acasă la birou, la volan, în metrou sau în pauza de cafea. Fără filler, fără reclame, doar miezul discuției. (Powered by NotebookLM)</p>
+          <div class="stair-side-mono">click pentru lista episoadelor</div>
+        </div>
+        <div class="stair-card-wrap">
+          <div class="podcast-card" id="podcast-card">
+            <div class="podcast-hero">
+              <div class="podcast-label"><span class="live-dot"></span>Podcast · Episodul curent</div>
+              <div class="podcast-centerpiece">
+                <h3>RO e-Factura</h3>
+                <div class="podcast-subtitle">Între promisiunea digitalizării și realitatea din SPV</div>
+                <div class="show-meta">Sezonul 1 · Episodul curent</div>
+              </div>
+              <div class="player">
+                <button class="play-btn" id="play-btn" aria-label="Redă episodul">
+                  <svg id="play-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <div class="player-info">
+                  <div class="player-title">RO e-Factura · 24 min</div>
+                  <div class="player-progress"><div class="player-progress-fill" id="progress"></div></div>
+                  <div class="player-time"><span id="time-cur">00:00</span><span>24:00</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 4 — NOU ÎN COMUNITATE ? (centered like row 2 — mirrors mission for symmetry) -->
+      <div class="stair-row stair-row-4">
+        <div class="stair-card-wrap">
+          <div class="welcome-card community-card" id="welcome-card">
+            <div class="mission-centerpiece">
+              <div class="cc-kicker">// Pentru noii vizitatori</div>
+              <h3 class="mission-title">Nou în<br>comunitate ?</h3>
+              <div class="mission-heading">Cum extragi maximul din hub</div>
+            </div>
+            <div class="flip-hint cc-hint cc-hint-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+              Citește recomandarea
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 5 — SCRIE-NE / PROPUNERI COMUNITATE (left like row 1 — mirrors buzzword) -->
+      <div class="stair-row stair-row-5">
+        <div class="stair-card-wrap">
+          <div class="welcome-card community-card community-cta" id="cta-card">
+            <div class="mission-centerpiece">
+              <div class="cc-kicker">// Propuneri comunitate</div>
+              <h3 class="mission-title">Scrie-ne</h3>
+              <div class="mission-heading">Contribuie la hub</div>
+            </div>
+            <div class="flip-hint cc-hint cc-hint-warm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+              Vezi cum poți contribui
+            </div>
+          </div>
+        </div>
+        <div class="stair-side">
+          <div class="stair-side-label"><span class="line"></span>Comunitate</div>
+          <h4>Hub-ul crește din experiențele cititorilor.</h4>
+          <p>Ne interesează experiențele tale cu AI în contabilitate, propuneri de termeni pentru rubrica „Buzzword-ul săptămânii", subiecte pentru episoadele de podcast sau resurse de care ai avea nevoie. Răspundem fiecărui mesaj, în 2–3 zile lucrătoare. Toate contribuțiile publicate sunt creditate.</p>
+          <div class="stair-side-mono">click pentru detalii și formular</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Inter-section scroll: Explorează → Download zone -->
+<div class="section-scroll" aria-hidden="false">
+  <a href="#resurse" aria-label="Scroll la secțiunea Resurse">
+    <span>Resurse</span>
+    <span class="arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </span>
+  </a>
+</div>
+
+<!-- RESOURCES -->
+<section class="block" id="resurse" style="background: var(--bg-0); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Download zone</div>
+        <h2 data-typewriter="Resurse &amp; Tool-uri.">Resurse &amp; Tool-uri.</h2>
+        <p data-typewriter="Ghiduri PDF, template-uri Excel și unelte AI mici — testate pe flux real de contabilitate. Fără cont, fără newsletter, doar download.">Ghiduri PDF, template-uri Excel și unelte AI mici — testate pe flux real de contabilitate. Fără cont, fără newsletter, doar download.</p>
+      </div>
+    </div>
+
+    <div class="resources-carousel">
+      <button class="carousel-nav" id="carousel-prev" aria-label="Resursa anterioară">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="resources-track-wrap">
+        <div class="resources-track" id="resources-track">
+          <!-- injected -->
+        </div>
+      </div>
+      <button class="carousel-nav" id="carousel-next" aria-label="Resursa următoare">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact" class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CARD EXPAND MODAL (flip + zoom) -->
+<div class="cx-backdrop" id="cx-backdrop" role="dialog" aria-modal="true">
+  <div class="cx-stage">
+    <div class="cx-card">
+      <div class="cx-face cx-front" id="cx-front"></div>
+      <div class="cx-face cx-back" id="cx-back"></div>
+    </div>
+    <button class="cx-close" id="cx-close" aria-label="Închide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field">
+        <label for="f-name">Nume</label>
+        <input id="f-name" type="text" required placeholder="Ex. Ioana Popescu">
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" type="email" required placeholder="ioana@firma.ro">
+      </div>
+      <div class="field">
+        <label for="f-msg">Mesaj</label>
+        <textarea id="f-msg" required placeholder="Scrie-ne ce te interesează..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">
+          Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TWEAKS -->
+<div class="tweaks" id="tweaks">
+  <h5>// Tweaks</h5>
+  <div class="tweak-row">
+    <label>Paletă accent</label>
+    <div class="swatch-row" id="accent-swatches">
+      <div class="swatch" data-accent="cyan" style="background:linear-gradient(135deg,#22d3ee,#0ea5e9)"></div>
+      <div class="swatch" data-accent="teal" style="background:linear-gradient(135deg,#2dd4bf,#0d9488)"></div>
+      <div class="swatch" data-accent="violet" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)"></div>
+      <div class="swatch" data-accent="amber" style="background:linear-gradient(135deg,#fbbf24,#f59e0b)"></div>
+    </div>
+  </div>
+  <div class="tweak-row">
+    <label>Densitate grilă hero</label>
+    <div class="swatch-row">
+      <button class="swatch" data-grid="off" style="background:var(--bg-2);color:var(--fg);font-size:10px;font-family:'JetBrains Mono'">OFF</button>
+      <button class="swatch" data-grid="on" style="background:var(--bg-2);color:var(--fg);font-size:10px;font-family:'JetBrains Mono'">ON</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "teal",
+  "grid": "on"
+}/*EDITMODE-END*/;
+
+/* ========== MOBILE NAV ========== */
+(function () {
+  const headerInner = document.querySelector('.header-inner');
+  if (!headerInner) return;
+  const nav = headerInner.querySelector('nav.primary');
+  const actions = headerInner.querySelector('.header-actions');
+  if (!nav || !actions) return;
+  const btn = document.createElement('button');
+  btn.className = 'nav-toggle';
+  btn.setAttribute('aria-label', 'Deschide meniul');
+  btn.innerHTML = `
+    <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  `;
+  actions.insertBefore(btn, actions.firstChild);
+  const drawer = document.createElement('div');
+  drawer.className = 'nav-drawer';
+  drawer.innerHTML = '<div class="nav-drawer-inner">' + nav.innerHTML + '</div>';
+  document.body.appendChild(drawer);
+  const close = () => { drawer.classList.remove('open'); btn.classList.remove('open'); };
+  btn.addEventListener('click', () => {
+    const isOpen = drawer.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+  });
+  drawer.addEventListener('click', e => { if (e.target.tagName === 'A') close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 960) close(); });
+})();
+
+/* ========== THEME ========== */
+const themeToggle = document.getElementById('theme-toggle');
+const saved = localStorage.getItem('aiah-theme');
+if (saved) document.documentElement.setAttribute('data-theme', saved);
+themeToggle.addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('aiah-theme', next);
+});
+
+/* Hoisted modal element references — must exist before any code that
+   reads them (renderWord syncs the modal if it's open, so it needs them). */
+const cxBackdrop = document.getElementById('cx-backdrop');
+const cxFront = document.getElementById('cx-front');
+const cxBack = document.getElementById('cx-back');
+const cxClose = document.getElementById('cx-close');
+
+/* ========== BUZZWORD CARD ==========
+   Source of truth = assets/buzzwords.json (easy to edit). For local file://
+   testing where fetch fails, the same data is also embedded inline below as
+   FALLBACK_TERMS. Keep both in sync when adding new terms. */
+const FALLBACK_TERMS = [
+  {
+    id: 'llm',
+    term: 'LLM',
+    termFull: 'LARGE LANGUAGE MODEL',
+    pron: '/ el·el·em /',
+    type: 'substantiv',
+    ro: 'Modele Lingvistice de Mari Dimensiuni',
+    def: [
+      'Model de limbaj antrenat pe zeci de miliarde de cuvinte din cărți, articole, documentații tehnice și date structurate — capabil să înțeleagă contextul unei cereri și să genereze răspunsuri coerente, să extragă informații din documente nestructurate, să clasifice și să reformuleze text în limbaj profesional.',
+      'Spre deosebire de un motor de căutare care găsește documente existente sau de software-ul tradițional bazat pe reguli rigide („if-then”), un LLM generează răspunsuri noi pe baza tiparelor învățate. Nu stochează fapte ca o bază de date — raționează probabilistic asupra textului primit.',
+      'În practica contabilă, un LLM poate procesa simultan sute de documente cu formate diferite: facturi în PDF scanat, contracte în Word, extrase bancare în CSV — și poate extrage, normaliza și exporta datele fără intervenție manuală pentru fiecare document în parte.'
+    ],
+    examples: [
+      'extragere automată câmpuri din 200 facturi PDF → Excel structurat în < 5 min',
+      'Interpretarea contractelor: extragerea automată a clauzelor de reziliere, a termenelor de plată sau a penalităților din sute de contracte comerciale scanate.',
+      'Asistență în audit: generarea unei prime versiuni a raportului de audit prin sintetizarea notelor explicative și a balanțelor de verificare.'
+    ]
+  },
+  {
+    id: 'tokens',
+    term: 'TOKENS',
+    termFull: 'UNITATE DE PROCESARE TEXT',
+    pron: '/ to·ken /',
+    type: 'substantiv',
+    ro: 'Tokeni',
+    def: [
+      'Tokenii reprezintă unitatea de măsură fundamentală a „gândirii” unui model AI. Gândește-te la ei ca la atomii unui text: un token nu este egal cu un cuvânt — poate fi o silabă, un cuvânt întreg, un semn de punctuație sau chiar un spațiu. În limba română, din cauza diacriticelor și a cuvintelor compuse, raportul este aproximativ 1 cuvânt = 1,3–1,6 tokeni.',
+      'AI-ul nu „citește” propoziții, ci procesează fluxuri de tokeni. Tokenizarea este primul pas în orice procesare AI: textul tău este transformat într-o secvență de numere pe care modelul o poate analiza matematic. Cu cât un document are mai mulți tokeni, cu atât procesarea consumă mai multe resurse — și în cazul API-urilor comerciale, mai mult cost.',
+      'În lumea financiară, înțelegerea tokenilor este esențială deoarece aceștia determină atât costul (majoritatea API-urilor se plătesc la număr de tokeni), cât și limita de procesare a informației pe care o poți introduce o singură dată. Referință orientativă: 1.000 tokeni ≈ 750 cuvinte în engleză / ≈ 600 cuvinte în română.'
+    ],
+    examples: [
+      'o factură standard de 1 pagină = ~400–600 tokeni; procesarea a 1.000 facturi/lună = cost estimabil în avans',
+      'un contract de 10 pagini = ~5.000–7.000 tokeni — poate depăși limita unor modele mai mici, necesitând segmentare',
+      'optimizând promptul de extracție date de la 300 la 120 tokeni, costul per document scade cu ~60%'
+    ]
+  },
+  {
+    id: 'context-window',
+    term: 'CONTEXT WINDOW',
+    termFull: 'FEREASTRA DE CONTEXT',
+    pron: '/ con·text win·dow /',
+    type: 'substantiv',
+    ro: 'Fereastra de Context',
+    def: [
+      'Reprezintă „memoria de lucru” sau cantitatea maximă de text — măsurată în tokeni — pe care un model AI o poate menține activă în „minte” și procesa simultan într-o singură interacțiune. Include atât textul pe care îl trimiți tu (promptul, documentele atașate, istoricul conversației), cât și răspunsul pe care modelul îl generează.',
+      'Gândește-te la fereastra de context ca la memoria de lucru a modelului: tot ce nu încape în ea este pur și simplu invizibil. Dacă trimiți un document mai lung decât fereastra permite, modelul nu va citi documentul complet — va procesa doar ce îi încape. Dacă depășești această limită, modelul începe să „uite” primele informații furnizate, ceea ce poate duce la erori sau halucinații.',
+      'Modelele moderne au ferestre de context din ce în ce mai mari: de la 4.000 tokeni (GPT-3) la 200.000 tokeni (Claude) sau chiar 1 milion (Gemini 1.5 Pro) — ceea ce face posibilă procesarea unor dosare întregi de documente într-o singură cerere. Implicație directă în contabilitate: dimensiunea ferestrei determină câte documente poți procesa simultan și cât de mult context istoric poți păstra într-o conversație de lucru cu modelul.'
+    ],
+    examples: [
+      'dosar complet de achiziție — comandă + factură + aviz + contract — ~12 pagini / ~8.000 tokeni — încape într-o singură cerere pe modelele moderne',
+      'balanță anuală cu 500 de conturi exportată din ERP = ~15.000 tokeni — poate fi analizată integral fără segmentare',
+      'conversație lungă cu istoricul a 20 de mesaje despre reconciliere bancară: dacă depășești fereastra, modelul „uită” contextul inițial și răspunsurile devin inconsistente'
+    ]
+  }
+];
+
+let words = FALLBACK_TERMS.slice();   // start with the inline copy so first paint has full data
+let wordIdx = words.length - 1;        // newest = current
+const flipCard = document.getElementById('flip-card');
+
+const $wFront = document.getElementById('word-front');
+const $wLabel = document.getElementById('word-back-label');
+const $wTitle = document.getElementById('word-title');
+const $wPron  = document.getElementById('word-pronounce');
+const $wRo    = document.getElementById('word-ro');
+const $wDef   = document.getElementById('word-def');
+
+function renderWord() {
+  if (!words.length) return;
+  const w = words[wordIdx];
+  $wFront.textContent = w.term;
+  // Multi-word terms shrink so they fit the small card without overlapping the hint pill
+  const wordCount = w.term.trim().split(/\s+/).length;
+  $wFront.classList.toggle('multi-word', wordCount > 1);
+  $wFront.classList.toggle('is-long',  w.term.length > 14);
+
+  $wLabel.textContent = w.termFull || w.term;
+  $wTitle.textContent = w.term;
+  $wPron.textContent  = (w.pron || '') + (w.type ? '   ' + w.type : '');
+  $wRo.textContent    = '🇷🇴 ' + (w.ro || '');
+  $wDef.innerHTML     = (w.def || []).map(p => '<p>' + escapeHtml(p) + '</p>').join('');
+  // If the modal is currently open showing this card, refresh it too
+  if (cxBackdrop && cxBackdrop.classList.contains('open') && cxBack && !cxBack.classList.contains('podcast') && cxBack.dataset.kind === 'buzzword') {
+    populateBuzzwordModal(w);
+  }
+}
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+renderWord();
+
+/* Try fetching the JSON file too — overrides the inline copy if available
+   (so production deploys can ship updates by editing the JSON only). */
+fetch('assets/buzzwords.json')
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(data => {
+    if (data && Array.isArray(data.terms) && data.terms.length) {
+      words = data.terms;
+      wordIdx = words.length - 1;
+      renderWord();
+    }
+  })
+  .catch(() => { /* fallback already in place */ });
+
+/* Navigation between buzzword terms is now handled inside the modal back face
+   (top-right corner). No on-card buttons. */
+
+/* ========== CARD EXPAND MODAL (flip + zoom) ========== */
+/* (cxBackdrop / cxFront / cxBack / cxClose hoisted above for renderWord) */
+
+function populateBuzzwordModal(w) {
+  cxBack.classList.remove('podcast');
+  cxBack.dataset.kind = 'buzzword';
+  const wc = w.term.trim().split(/\s+/).length;
+  const wordCls = (wc > 1 ? ' multi-word' : '') + (w.term.length > 14 ? ' is-long' : '');
+  // Clean front face — just the term + pronunciation, no nav buttons here
+  cxFront.innerHTML = `
+    <div class="cx-meta">
+      <span>Buzzword-ul săptămânii</span>
+      <span>Definiție completă</span>
+    </div>
+    <div class="cx-word${wordCls}">
+      ${escapeHtml(w.term)}
+    </div>
+    <div class="cx-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+      Definiție completă
+    </div>
+  `;
+  const defHTML = (w.def || []).map(p => '<p>' + escapeHtml(p) + '</p>').join('');
+  const exHTML  = (w.examples || []).map(x => '<li>' + escapeHtml(x) + '</li>').join('');
+  /* Back face — nav buttons pinned in the top-right corner.
+     Per spec: ← steps NEWER (back toward current), → steps OLDER (anterior). */
+  const atNewest = wordIdx >= words.length - 1;
+  const atOldest = wordIdx <= 0;
+  cxBack.innerHTML = `
+    <div class="cx-bz-nav-back">
+      <button class="cx-bz-btn cx-bz-newer" type="button" aria-label="Către termenul mai nou" ${atNewest ? 'disabled' : ''}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="cx-bz-counter">${wordIdx + 1} / ${words.length}</span>
+      <button class="cx-bz-btn cx-bz-older" type="button" aria-label="Către termenul anterior" ${atOldest ? 'disabled' : ''}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="cx-label">${escapeHtml(w.termFull || w.term)}</div>
+    <h3>${escapeHtml(w.term)} <span class="cx-pron">${escapeHtml((w.pron || '') + (w.type ? '  ' + w.type : ''))}</span></h3>
+    <div class="cx-ro">🇷🇴 ${escapeHtml(w.ro || '')}</div>
+    <div class="cx-def">${defHTML}</div>
+    ${exHTML ? `<div class="cx-examples"><div class="cx-examples-title">Exemple practice</div><ul>${exHTML}</ul></div>` : ''}
+  `;
+  // Wire the back-face nav buttons
+  // ← (cx-bz-newer)  = step toward current (higher index)
+  // → (cx-bz-older)  = step into archive (lower index)
+  const $cxNewer = cxBack.querySelector('.cx-bz-newer');
+  const $cxOlder = cxBack.querySelector('.cx-bz-older');
+  if ($cxNewer) $cxNewer.addEventListener('click', (e) => { e.stopPropagation(); if (wordIdx < words.length - 1) { wordIdx++; renderWord(); } });
+  if ($cxOlder) $cxOlder.addEventListener('click', (e) => { e.stopPropagation(); if (wordIdx > 0)                { wordIdx--; renderWord(); } });
+}
+
+function openBuzzwordModal() {
+  if (!words.length) return;
+  populateBuzzwordModal(words[wordIdx]);
+  openCx();
+}
+
+function openMissionModal() {
+  cxBack.classList.remove('podcast');
+  cxFront.innerHTML = `
+    <div class="cx-meta">
+      <span>// Seria fondatoare — 5 părți</span>
+    </div>
+    <div class="cx-word" style="font-size: clamp(34px, 5.2vw, 52px); line-height: 1.05;">
+      Viitorul profesiei contabile
+    </div>
+    <div class="cx-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+      Vezi analiza completă
+    </div>
+  `;
+  cxBack.innerHTML = `
+    <div class="cx-label">// Misiunea AI Accounting Hub</div>
+    <h3>Viitorul profesiei contabile</h3>
+    <div class="cx-def">
+      <p>Cea mai completă analiză în limba română despre ce se întâmplă <strong>acum</strong> în profesia contabilă — busola strategică în era inteligenței artificiale.</p>
+      <p>Parcurgem împreună drumul de la geneza ChatGPT (nov. 2022) până la realitatea Agenților AI (aprilie 2026), explorând saltul de la tabele Pivot la <em>Prompt Engineering</em> și schițând arhitectura clară a profesiei contabile pentru următorii <strong>5–10 ani</strong>.</p>
+      <p>Mai mult decât o cronică — un plan de acțiune pentru noul contabil augmentat tehnologic.</p>
+    </div>
+    <a href="viitorul-profesiei.html" class="cx-cta">
+      Accesează seria completă
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  `;
+  openCx();
+}
+
+function openPodcastModal() {
+  cxBack.classList.add('podcast');
+  cxFront.innerHTML = `
+    <div class="cx-meta">
+      <span>Podcast · Episodul curent</span>
+      <span>24 min</span>
+    </div>
+    <div class="cx-word" style="font-size: clamp(34px, 5vw, 50px); line-height: 1.02;">
+      RO e-Factura
+      <span class="pronounce" style="display:block; font-style:italic; font-size:0.32em; margin-top:8px; color: var(--fg-muted); font-family: 'Inter', sans-serif; letter-spacing:0;">Între promisiunea digitalizării și realitatea din SPV</span>
+    </div>
+    <div class="cx-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+      Despre format
+    </div>
+  `;
+  cxBack.innerHTML = `
+    <div class="cx-label">// Format Podcast</div>
+    <h3>Două gazde · analize ușor de digerat</h3>
+    <div class="cx-def">
+      <p>Conversații conduse activ de două gazde AI (Powered by NotebookLM) — suficient de compacte cât să încapă într-o navetă acasă-job, la volan sau în metrou.</p>
+      <p>Fiecare episod ia un subiect din zona AI × Contabilitate și îl așază pe masă conversațional — fără filler, fără reclame, doar miezul discuției. Format gândit pentru profesioniștii care vor să intre în flux, să asculte 20–30 de minute și să iasă cu o perspectivă nouă.</p>
+    </div>
+    <a href="podcast.html" class="cx-cta cx-cta-cyan">
+      Accesează arhiva podcasturilor
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  `;
+  openCx();
+}
+
+function openWelcomeModal() {
+  cxBack.classList.remove('podcast');
+  cxBack.dataset.kind = 'welcome';
+  cxFront.innerHTML = `
+    <div class="cx-meta">
+      <span>// Pentru noii vizitatori</span>
+    </div>
+    <div class="cx-word" style="font-size: clamp(38px, 5.4vw, 56px); line-height: 1.02;">
+      Noi în comunitate
+    </div>
+    <div class="cx-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+      Citește recomandarea
+    </div>
+  `;
+  cxBack.innerHTML = `
+    <div class="cx-label">// Cum extragi maximul din hub</div>
+    <h3>Bine ai venit. Iată traseul recomandat.</h3>
+    <div class="cx-def">
+      <p>Primul tău popas — <strong>cardul „Buzzword-ul săptămânii"</strong>: un termen AI explicat în limba română, cu pronunție, traducere și exemple aplicate în contabilitate. Ideal ca să fii la curent cu vocabularul săptămână de săptămână.</p>
+      <p>Al doilea — <strong>„Viitorul profesiei contabile"</strong>: seria fondatoare în 5 părți. E sufletul hub-ului. Disponibilă în două formate: <em>podcast</em> (20–30 min, pentru navetă) și <em>articol manifest</em> (30–40 min, pentru weekend la cafea). Alegi ritmul tău.</p>
+      <p>Al treilea — <strong>„Podcast"</strong>: episodul curent al săptămânii (acum: RO e-Factura). Conversații între două gazde AI, fără filler, fără reclame.</p>
+      <p>În <strong>„Articolele"</strong> găsești analize practice — primul publicat: <em>Goana după promptul perfect</em>. În <strong>„Resurse"</strong> găsești ghiduri PDF, dashboard-uri Excel și mici tool-uri executabile, gata de download — fără cont, fără email, fără newsletter.</p>
+      <p>Recomandare: parcurge prima dată <em>seria fondatoare</em> în formatul tău preferat. Apoi revino săptămânal pentru buzzword + episodul podcast nou.</p>
+    </div>
+    <a href="viitorul-profesiei.html" class="cx-cta cx-cta-cyan">
+      Începe cu seria fondatoare
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  `;
+  openCx();
+}
+
+function openCtaModal() {
+  cxBack.classList.remove('podcast');
+  cxBack.dataset.kind = 'cta';
+  cxFront.innerHTML = `
+    <div class="cx-meta">
+      <span>// Propuneri comunitate</span>
+    </div>
+    <div class="cx-word" style="font-size: clamp(48px, 6.4vw, 76px); line-height: 1;">
+      Scrie-ne
+    </div>
+    <div class="cx-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+      Vezi cum poți contribui
+    </div>
+  `;
+  cxBack.innerHTML = `
+    <div class="cx-label">// Contribuie la hub</div>
+    <h3>AI Accounting Hub crește din experiențele cititorilor.</h3>
+    <div class="cx-def">
+      <p>Profesia contabilă din România trece printr-o tranziție rapidă, iar cele mai utile lecții apar pe teren — în cabinetele și departamentele financiare unde se experimentează cu AI zi de zi.</p>
+      <p>Te invităm să contribui:</p>
+      <p><strong>· Experiențe personale</strong> cu integrarea AI în fluxul tău de lucru — ce a funcționat, ce a deraiat, ce ai învățat.<br>
+         <strong>· Propuneri de termeni</strong> pentru rubrica „Buzzword-ul săptămânii" — concepte pe care le auzi tot mai des și pe care ți-ar fi util să le explicăm.<br>
+         <strong>· Subiecte de podcast</strong> sau întrebări la care vrei să răspundem într-un episod viitor.<br>
+         <strong>· Resurse cerute</strong> — ce template Excel, ce ghid PDF sau ce mic tool ți-ar simplifica săptămâna.</p>
+      <p>Răspundem fiecărui mesaj, în general în 2–3 zile lucrătoare. Toate contribuțiile publicate sunt creditate (cu nume sau anonim, după preferință).</p>
+    </div>
+    <a href="contact.html" class="cx-cta">
+      Deschide formularul de contact
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  `;
+  openCx();
+}
+
+function openCx() {
+  cxBackdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Sequence: backdrop fade → card flips → card grows
+  requestAnimationFrame(() => {
+    setTimeout(() => cxBackdrop.classList.add('flipped'), 120);
+    setTimeout(() => cxBackdrop.classList.add('grown'), 640);
+  });
+}
+
+function closeCx() {
+  cxBackdrop.classList.remove('grown');
+  setTimeout(() => cxBackdrop.classList.remove('flipped'), 300);
+  setTimeout(() => {
+    cxBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }, 900);
+}
+
+/* Click on any of the 3 stairway cards → centered modal expand (cx-backdrop).
+   Internal controls (play, prev/archive on buzzword) keep their own behaviour. */
+flipCard.addEventListener('click', (e) => {
+  if (e.target.closest('a, button, .flip-nav')) return;
+  openBuzzwordModal();
+});
+
+const podcastCardEl = document.getElementById('podcast-card');
+if (podcastCardEl) {
+  podcastCardEl.addEventListener('click', (e) => {
+    if (e.target.closest('#play-btn, a, button')) return;
+    openPodcastModal();
+  });
+}
+
+const missionCardEl = document.getElementById('mission-card');
+if (missionCardEl) {
+  missionCardEl.addEventListener('click', (e) => {
+    if (e.target.closest('a, button')) return;
+    openMissionModal();
+  });
+}
+
+const welcomeCardEl = document.getElementById('welcome-card');
+if (welcomeCardEl) {
+  welcomeCardEl.addEventListener('click', (e) => {
+    if (e.target.closest('a, button')) return;
+    openWelcomeModal();
+  });
+}
+
+const ctaCardEl = document.getElementById('cta-card');
+if (ctaCardEl) {
+  ctaCardEl.addEventListener('click', (e) => {
+    if (e.target.closest('a, button')) return;
+    openCtaModal();
+  });
+}
+
+/* Stairway rows: hover anywhere triggers card neon + typewriter side text;
+   click anywhere opens the sibling card */
+const supportsHover = window.matchMedia('(hover: hover)').matches;
+/* Below 960 px the rows stack vertically and the side text is rendered before
+   the card — there's no "reveal on hover" pattern at that layout, so skip the
+   typewriter setup entirely (text stays statically visible). This also covers
+   Chrome DevTools mobile emulation where (hover: hover) can still report true. */
+const isMobileLayout = window.matchMedia('(max-width: 960px)').matches;
+document.querySelectorAll('.stair-row').forEach((row) => {
+  const card = row.querySelector('.flip-card, .podcast-card, .mission-card, .welcome-card');
+  const side = row.querySelector('.stair-side');
+
+  // Click delegation — anywhere in the row opens the card
+  row.addEventListener('click', (e) => {
+    if (!card) return;
+    if (e.target.closest('a, button, .flip-nav, #play-btn')) return;
+    // ignore clicks on the card itself (it has its own handler)
+    if (e.target.closest('.flip-card, .podcast-card, .mission-card, .welcome-card')) return;
+    card.click();
+  });
+
+  if (!side) return;
+  const h4 = side.querySelector('h4');
+  const p = side.querySelector('p');
+  if (!h4 || !p) return;
+
+  // Touch / no-hover devices OR mobile layout: leave the text fully visible
+  if (!supportsHover || isMobileLayout) return;
+
+  // Cache the original text and start the side empty
+  const h4Text = h4.textContent;
+  const pText = p.textContent;
+  h4.textContent = '';
+  p.textContent = '';
+
+  let timer = null;
+  let typed = false;
+
+  function clearTimer() {
+    if (timer) { clearTimeout(timer); timer = null; }
+  }
+
+  function startTyping() {
+    clearTimer();
+    if (typed) return;
+    h4.textContent = '';
+    p.textContent = '';
+    side.classList.add('is-typing');
+    side.classList.remove('is-typing-p');
+    let i = 0;
+    const speedH = 22;   // ms per heading char
+    const speedP = 7;    // ms per paragraph char
+    function step() {
+      if (i < h4Text.length) {
+        h4.textContent = h4Text.slice(0, i + 1);
+        i++;
+        timer = setTimeout(step, speedH);
+      } else if (i < h4Text.length + pText.length) {
+        if (i === h4Text.length) {
+          side.classList.remove('is-typing');
+          side.classList.add('is-typing-p');
+        }
+        const j = i - h4Text.length;
+        p.textContent = pText.slice(0, j + 1);
+        i++;
+        timer = setTimeout(step, speedP);
+      } else {
+        side.classList.remove('is-typing', 'is-typing-p');
+        typed = true;
+        timer = null;
+      }
+    }
+    step();
+  }
+
+  function reset() {
+    clearTimer();
+    typed = false;
+    side.classList.remove('is-typing', 'is-typing-p');
+    h4.textContent = '';
+    p.textContent = '';
+  }
+
+  // Expose for the wide-band tracker below — it owns activation now,
+  // so a cursor sliding off the card sideways doesn't wipe the typed text.
+  row._stairTyping = { start: startTyping, reset };
+});
+
+/* Stairway: extend the hover hit-zone to the full viewport width.
+   Wherever the cursor sits horizontally on the page, the row whose vertical
+   band it's currently in gets activated (.is-hot). The CSS mirrors :hover
+   onto .is-hot, so visuals match. The typewriter on each row is driven from
+   here too (via row._stairTyping) — that way moving the cursor off the card
+   sideways doesn't wipe the typed text as long as the cursor's Y is still in
+   the row's band. */
+(function () {
+  const stairwayEl = document.querySelector('.stairway');
+  const stairRows = [...document.querySelectorAll('.stair-row')];
+  if (!stairwayEl || !stairRows.length || !supportsHover || isMobileLayout) return;
+
+  let activeRow = null;
+
+  function setActive(row) {
+    if (row === activeRow) return;
+    if (activeRow) {
+      activeRow.classList.remove('is-hot');
+      activeRow._stairTyping && activeRow._stairTyping.reset();
+    }
+    if (row) {
+      row.classList.add('is-hot');
+      row._stairTyping && row._stairTyping.start();
+    }
+    activeRow = row;
+  }
+
+  function onMove(e) {
+    const sway = stairwayEl.getBoundingClientRect();
+    if (e.clientY < sway.top || e.clientY > sway.bottom) {
+      setActive(null);
+      return;
+    }
+    /* Walk rows from last to first — when rows overlap due to the negative
+       row margins, the bottom-most row whose band still contains the cursor
+       is the visually front one, so it should win (matches the user's
+       "below-the-start-of-card-N → activate card-N" rule). */
+    let found = null;
+    for (let i = stairRows.length - 1; i >= 0; i--) {
+      const r = stairRows[i].getBoundingClientRect();
+      if (e.clientY >= r.top && e.clientY <= r.bottom) { found = stairRows[i]; break; }
+    }
+    setActive(found);
+  }
+
+  document.addEventListener('mousemove', onMove, { passive: true });
+  /* Drop the active row when the cursor leaves the document entirely */
+  document.addEventListener('mouseleave', () => setActive(null));
+})();
+
+cxClose.addEventListener('click', closeCx);
+cxBackdrop.addEventListener('click', (e) => { if (e.target === cxBackdrop) closeCx(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && cxBackdrop.classList.contains('open')) closeCx(); });
+
+/* ========== PLAYER (simulated) — doar episodul pilot E01 ========== */
+const playBtn = document.getElementById('play-btn');
+const playIcon = document.getElementById('play-icon');
+const progress = document.getElementById('progress');
+const timeCur = document.getElementById('time-cur');
+let playing = false;
+let pct = 0;
+let tick = null;
+playBtn.addEventListener('click', () => {
+  playing = !playing;
+  playBtn.classList.toggle('playing', playing);
+  playIcon.innerHTML = playing
+    ? '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>'
+    : '<path d="M8 5v14l11-7z"/>';
+  if (playing) {
+    tick = setInterval(() => {
+      pct = Math.min(100, pct + 0.15);
+      progress.style.width = pct + '%';
+      const totalSec = 22*60 + 40; // Pilot = 22:40
+      const curSec = Math.floor(totalSec * pct / 100);
+      timeCur.textContent = `${String(Math.floor(curSec/60)).padStart(2,'0')}:${String(curSec%60).padStart(2,'0')}`;
+      if (pct >= 100) { clearInterval(tick); playing = false; playBtn.classList.remove('playing'); playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>'; }
+    }, 300);
+  } else { clearInterval(tick); }
+});
+
+/* ========== RESOURCES CAROUSEL ========== */
+const resources = [
+  { type: 'tool', kind: 'Tool · API', title: 'Verificare CIF — site ANAF',
+    desc: 'Interfață simplă peste API-ul public ANAF pentru verificarea unui CIF: nume firmă, plătitor TVA, stare activă. Fără cont, fără newsletter.',
+    size: 'Browser · API ANAF' },
+  { type: 'xls', kind: 'Template · Excel', title: 'Jurnal de vânzări AI-ready',
+    desc: 'Structură standard pentru jurnalul de vânzări, pregătită pentru import automat în instrumente AI — coloane normalizate și validări.',
+    size: 'XLSX · 120 KB' },
+  { type: 'pdf', kind: 'Ghid · PDF', title: 'Prompt engineering pentru contabili',
+    desc: 'Colecție de prompturi testate pe flux real: reconciliere, clasificare cheltuieli, draft de memo și sumarizare contracte.',
+    size: 'PDF · 2.4 MB' },
+  { type: 'tool', kind: 'Tool · Web', title: 'Extractor facturi PDF → Excel',
+    desc: 'Drag-and-drop pentru facturi PDF. Extrage furnizor, CIF, total, TVA și le exportă într-un Excel gata pentru import.',
+    size: 'Browser · Fără upload server' },
+  { type: 'xls', kind: 'Template · Excel', title: 'Reconciliere bancară automată',
+    desc: 'Template cu formule și macro-uri pentru reconcilierea extraselor bancare cu jurnalul contabil — marcează automat diferențele.',
+    size: 'XLSM · 340 KB' },
+  { type: 'pdf', kind: 'Ghid · PDF', title: 'GDPR în era AI',
+    desc: 'Ce date poți și ce nu poți trimite în modele AI publice. Checklist practic și exemple concrete pentru firmele de contabilitate.',
+    size: 'PDF · 1.8 MB' },
+  { type: 'tool', kind: 'Tool · API', title: 'Generator declarații ANAF',
+    desc: 'Completează template-urile oficiale ANAF pornind de la un CSV — validare instantanee și export XML conform SAF-T.',
+    size: 'Browser · Export XML' },
+];
+const iconFor = (t) => ({
+  pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h1.5a1.5 1.5 0 0 1 0 3H9v-3zM9 16v3M14 13v6M14 13h2M14 16h1.5"/></svg>',
+  xls:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16M15 4v16"/></svg>',
+  tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>'
+}[t]);
+const resTrack = document.getElementById('resources-track');
+resTrack.innerHTML = resources.map(r => `
+  <div class="resource ${r.type}">
+    <div class="resource-header">
+      <div class="resource-icon">${iconFor(r.type)}</div>
+      <span class="resource-type">${r.kind}</span>
+    </div>
+    <h3>${r.title}</h3>
+    <p>${r.desc}</p>
+    <div class="resource-footer">
+      <span class="resource-size">${r.size}</span>
+      <button class="download-btn">
+        Download
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+      </button>
+    </div>
+  </div>`).join('');
+
+const resCards = [...resTrack.querySelectorAll('.resource')];
+let resIdx = Math.floor(resCards.length / 2);
+const resPrev = document.getElementById('carousel-prev');
+const resNext = document.getElementById('carousel-next');
+
+function updateCarousel() {
+  const n = resCards.length;
+  resCards.forEach((c, i) => {
+    const dist = Math.min(
+      Math.abs(i - resIdx),
+      Math.abs(i - resIdx - n),
+      Math.abs(i - resIdx + n)
+    );
+    c.classList.toggle('is-active', i === resIdx);
+    c.classList.toggle('is-adjacent', dist === 1);
+  });
+  const active = resCards[resIdx];
+  if (!active) return;
+  const wrap = resTrack.parentElement;
+  const offset = active.offsetLeft + active.offsetWidth / 2 - wrap.offsetWidth / 2;
+  resTrack.style.transform = `translateX(${-offset}px)`;
+}
+resPrev.addEventListener('click', () => { resIdx = (resIdx - 1 + resCards.length) % resCards.length; updateCarousel(); });
+resNext.addEventListener('click', () => { resIdx = (resIdx + 1) % resCards.length; updateCarousel(); });
+resCards.forEach((c, i) => c.addEventListener('click', (e) => {
+  if (i !== resIdx && !e.target.closest('.download-btn')) { resIdx = i; updateCarousel(); }
+}));
+window.addEventListener('resize', updateCarousel);
+requestAnimationFrame(updateCarousel);
+
+/* ========== CONTACT MODAL ========== */
+const backdrop = document.getElementById('modal-backdrop');
+const openContact = () => backdrop.classList.add('open');
+const closeContact = () => backdrop.classList.remove('open');
+document.getElementById('nav-contact').addEventListener('click', (e) => { e.preventDefault(); openContact(); });
+document.getElementById('modal-close').addEventListener('click', closeContact);
+document.getElementById('modal-cancel').addEventListener('click', closeContact);
+backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeContact(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeContact(); });
+document.getElementById('contact-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('form-success').classList.add('show');
+  setTimeout(() => { closeContact(); document.getElementById('form-success').classList.remove('show'); e.target.reset(); }, 1600);
+});
+
+/* ========== FADE-IN ON SCROLL ========== */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+/* ========== GENERIC TYPEWRITER (data-typewriter) ========== */
+/* Any element with `data-typewriter="..."` is cleared on load and types itself
+   out. Trigger is viewport intersection by default; mark
+   `data-typewriter-trigger="hover"` and the element waits for a hover on its
+   nearest .featured / .stair-row ancestor (and resets on mouseleave). */
+(function () {
+  const targets = document.querySelectorAll('[data-typewriter]');
+  if (!targets.length) return;
+
+  function setupOne(el) {
+    const full = el.getAttribute('data-typewriter');
+    el.textContent = '';
+    let timer = null;
+    let typed = false;
+    function clearTimer() { if (timer) { clearTimeout(timer); timer = null; } }
+    function start() {
+      clearTimer();
+      if (typed) return;
+      const isHeading = /^H[1-6]$/.test(el.tagName);
+      const speed = isHeading ? 28 : 9;
+      el.classList.add('is-typing');
+      let i = 0;
+      (function step() {
+        if (i >= full.length) {
+          el.classList.remove('is-typing');
+          typed = true;
+          timer = null;
+          return;
+        }
+        el.textContent = full.slice(0, ++i);
+        timer = setTimeout(step, speed);
+      })();
+    }
+    function reset() {
+      clearTimer();
+      typed = false;
+      el.classList.remove('is-typing');
+      el.textContent = '';
+    }
+    el._typewriter = { start, reset };
+  }
+
+  targets.forEach(setupOne);
+
+  // Auto-trigger on viewport entry for everything that isn't hover-gated
+  const auto = [...targets].filter(el => el.dataset.typewriterTrigger !== 'hover');
+  if (auto.length) {
+    const tio = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target._typewriter.start();
+          tio.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    auto.forEach(el => tio.observe(el));
+  }
+
+  // Hover-triggered: bind on the nearest card ancestor so the entire card
+  // surface is the trigger, not just the text element.
+  document.querySelectorAll('[data-typewriter][data-typewriter-trigger="hover"]').forEach(el => {
+    const host = el.closest('.featured, .stair-row') || el.parentElement;
+    if (!host) return;
+    host.addEventListener('mouseenter', () => el._typewriter.start());
+    host.addEventListener('mouseleave', () => el._typewriter.reset());
+  });
+})();
+
+/* ========== TWEAKS ========== */
+const accentMap = {
+  cyan:   { a: '#22d3ee', b: '#67e8f9', aLight: '#0891b2', bLight: '#0e7490' },
+  teal:   { a: '#2dd4bf', b: '#5eead4', aLight: '#0d9488', bLight: '#115e59' },
+  violet: { a: '#a78bfa', b: '#c4b5fd', aLight: '#7c3aed', bLight: '#5b21b6' },
+  amber:  { a: '#fbbf24', b: '#fcd34d', aLight: '#d97706', bLight: '#b45309' },
+};
+let curTweaks = { ...TWEAK_DEFAULTS };
+function applyAccent(name) {
+  const m = accentMap[name]; if (!m) return;
+  const root = document.documentElement;
+  const isLight = root.getAttribute('data-theme') === 'light';
+  root.style.setProperty('--accent', isLight ? m.aLight : m.a);
+  root.style.setProperty('--accent-2', isLight ? m.bLight : m.b);
+  document.querySelectorAll('#accent-swatches .swatch').forEach(s => s.classList.toggle('active', s.dataset.accent === name));
+}
+function applyGrid(val) {
+  document.querySelector('.hero-grid').style.display = val === 'off' ? 'none' : '';
+  document.querySelectorAll('.tweaks [data-grid]').forEach(b => b.classList.toggle('active', b.dataset.grid === val));
+}
+// Re-apply accent when theme flips
+const moReobs = new MutationObserver(() => applyAccent(curTweaks.accent));
+moReobs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+applyAccent(curTweaks.accent);
+applyGrid(curTweaks.grid);
+
+document.querySelectorAll('#accent-swatches .swatch').forEach(s => {
+  s.addEventListener('click', () => {
+    curTweaks.accent = s.dataset.accent;
+    applyAccent(curTweaks.accent);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { accent: curTweaks.accent } }, '*');
+  });
+});
+document.querySelectorAll('.tweaks [data-grid]').forEach(b => {
+  b.addEventListener('click', () => {
+    curTweaks.grid = b.dataset.grid;
+    applyGrid(curTweaks.grid);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { grid: curTweaks.grid } }, '*');
+  });
+});
+
+// Host protocol
+window.addEventListener('message', (e) => {
+  if (!e.data || typeof e.data !== 'object') return;
+  if (e.data.type === '__activate_edit_mode') document.getElementById('tweaks').classList.add('open');
+  if (e.data.type === '__deactivate_edit_mode') document.getElementById('tweaks').classList.remove('open');
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+</script>
+</body>
+</html>

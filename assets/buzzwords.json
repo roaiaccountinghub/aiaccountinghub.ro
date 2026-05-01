@@ -1,0 +1,59 @@
+{
+  "_comment": "Arhiva buzzword-urilor săptămânii. Ordinea în array = ordine cronologică (vechi → nou). Ultimul element este cel afișat implicit (săptămâna curentă). Pentru a adăuga un termen nou, adaugă un obiect la finalul array-ului.",
+  "terms": [
+    {
+      "id": "llm",
+      "term": "LLM",
+      "termFull": "LARGE LANGUAGE MODEL",
+      "pron": "/ el·el·em /",
+      "type": "substantiv",
+      "ro": "Modele Lingvistice de Mari Dimensiuni",
+      "def": [
+        "Model de limbaj antrenat pe zeci de miliarde de cuvinte din cărți, articole, documentații tehnice și date structurate — capabil să înțeleagă contextul unei cereri și să genereze răspunsuri coerente, să extragă informații din documente nestructurate, să clasifice și să reformuleze text în limbaj profesional.",
+        "Spre deosebire de un motor de căutare care găsește documente existente sau de software-ul tradițional bazat pe reguli rigide („if-then”), un LLM generează răspunsuri noi pe baza tiparelor învățate. Nu stochează fapte ca o bază de date — raționează probabilistic asupra textului primit.",
+        "În practica contabilă, un LLM poate procesa simultan sute de documente cu formate diferite: facturi în PDF scanat, contracte în Word, extrase bancare în CSV — și poate extrage, normaliza și exporta datele fără intervenție manuală pentru fiecare document în parte."
+      ],
+      "examples": [
+        "extragere automată câmpuri din 200 facturi PDF → Excel structurat în < 5 min",
+        "Interpretarea contractelor: extragerea automată a clauzelor de reziliere, a termenelor de plată sau a penalităților din sute de contracte comerciale scanate.",
+        "Asistență în audit: generarea unei prime versiuni a raportului de audit prin sintetizarea notelor explicative și a balanțelor de verificare."
+      ]
+    },
+    {
+      "id": "tokens",
+      "term": "TOKENS",
+      "termFull": "UNITATE DE PROCESARE TEXT",
+      "pron": "/ to·ken /",
+      "type": "substantiv",
+      "ro": "Tokeni",
+      "def": [
+        "Tokenii reprezintă unitatea de măsură fundamentală a „gândirii” unui model AI. Gândește-te la ei ca la atomii unui text: un token nu este egal cu un cuvânt — poate fi o silabă, un cuvânt întreg, un semn de punctuație sau chiar un spațiu. În limba română, din cauza diacriticelor și a cuvintelor compuse, raportul este aproximativ 1 cuvânt = 1,3–1,6 tokeni.",
+        "AI-ul nu „citește” propoziții, ci procesează fluxuri de tokeni. Tokenizarea este primul pas în orice procesare AI: textul tău este transformat într-o secvență de numere pe care modelul o poate analiza matematic. Cu cât un document are mai mulți tokeni, cu atât procesarea consumă mai multe resurse — și în cazul API-urilor comerciale, mai mult cost.",
+        "În lumea financiară, înțelegerea tokenilor este esențială deoarece aceștia determină atât costul (majoritatea API-urilor se plătesc la număr de tokeni), cât și limita de procesare a informației pe care o poți introduce o singură dată. Referință orientativă: 1.000 tokeni ≈ 750 cuvinte în engleză / ≈ 600 cuvinte în română."
+      ],
+      "examples": [
+        "o factură standard de 1 pagină = ~400–600 tokeni; procesarea a 1.000 facturi/lună = cost estimabil în avans",
+        "un contract de 10 pagini = ~5.000–7.000 tokeni — poate depăși limita unor modele mai mici, necesitând segmentare",
+        "optimizând promptul de extracție date de la 300 la 120 tokeni, costul per document scade cu ~60%"
+      ]
+    },
+    {
+      "id": "context-window",
+      "term": "CONTEXT WINDOW",
+      "termFull": "FEREASTRA DE CONTEXT",
+      "pron": "/ con·text win·dow /",
+      "type": "substantiv",
+      "ro": "Fereastra de Context",
+      "def": [
+        "Reprezintă „memoria de lucru” sau cantitatea maximă de text — măsurată în tokeni — pe care un model AI o poate menține activă în „minte” și procesa simultan într-o singură interacțiune. Include atât textul pe care îl trimiți tu (promptul, documentele atașate, istoricul conversației), cât și răspunsul pe care modelul îl generează.",
+        "Gândește-te la fereastra de context ca la memoria de lucru a modelului: tot ce nu încape în ea este pur și simplu invizibil. Dacă trimiți un document mai lung decât fereastra permite, modelul nu va citi documentul complet — va procesa doar ce îi încape. Dacă depășești această limită, modelul începe să „uite” primele informații furnizate, ceea ce poate duce la erori sau halucinații.",
+        "Modelele moderne au ferestre de context din ce în ce mai mari: de la 4.000 tokeni (GPT-3) la 200.000 tokeni (Claude) sau chiar 1 milion (Gemini 1.5 Pro) — ceea ce face posibilă procesarea unor dosare întregi de documente într-o singură cerere. Implicație directă în contabilitate: dimensiunea ferestrei determină câte documente poți procesa simultan și cât de mult context istoric poți păstra într-o conversație de lucru cu modelul."
+      ],
+      "examples": [
+        "dosar complet de achiziție — comandă + factură + aviz + contract — ~12 pagini / ~8.000 tokeni — încape într-o singură cerere pe modelele moderne",
+        "balanță anuală cu 500 de conturi exportată din ERP = ~15.000 tokeni — poate fi analizată integral fără segmentare",
+        "conversație lungă cu istoricul a 20 de mesaje despre reconciliere bancară: dacă depășești fereastra, modelul „uită” contextul inițial și răspunsurile devin inconsistente"
+      ]
+    }
+  ]
+}

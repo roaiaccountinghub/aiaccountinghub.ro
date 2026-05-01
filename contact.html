@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Contact — AI Accounting Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.contact-wrap {
+  display: flex;
+  justify-content: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Form (centered) */
+.contact-form-wrap {
+  width: 100%;
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 80% 100% at 100% 0%, color-mix(in oklab, var(--accent) 10%, transparent) 0%, transparent 50%),
+    var(--bg-1);
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+.contact-form-wrap h2 {
+  font-size: 28px; letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.contact-form-wrap .sub { color: var(--fg-muted); font-size: 14px; margin-bottom: 28px; line-height: 1.6; }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.gdpr-note {
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  font-size: 12px; color: var(--fg-muted); line-height: 1.55;
+  margin-bottom: 18px;
+  display: flex; gap: 10px;
+}
+.gdpr-note svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.form-submit-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  gap: 14px; flex-wrap: wrap;
+}
+.form-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+}
+
+/* FAQ */
+.faq { display: flex; flex-direction: column; gap: 10px; }
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-1);
+  transition: border-color 0.2s;
+  overflow: hidden;
+}
+.faq-item[open] { border-color: var(--border-strong); }
+.faq-item summary {
+  padding: 20px 24px;
+  list-style: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  font-weight: 500; font-size: 15px;
+  color: var(--fg);
+  transition: color 0.2s;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '';
+  width: 22px; height: 22px; flex-shrink: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 5v14M5 12h14'/></svg>");
+  background-size: contain; background-repeat: no-repeat;
+  transition: transform 0.3s ease;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary:hover { color: var(--accent); }
+.faq-item .answer {
+  padding: 0 24px 20px;
+  color: var(--fg-muted);
+  font-size: 14px; line-height: 1.7;
+}
+.faq-item .answer a { color: var(--accent); border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); }
+
+@media (max-width: 960px) {
+  .contact-form-wrap { padding: 28px; }
+  .contact-form-wrap h2 { font-size: 24px; }
+  .field-row { grid-template-columns: 1fr; }
+  .faq-item summary { padding: 18px 20px; font-size: 14px; }
+  .faq-item .answer { padding: 0 20px 18px; font-size: 13px; }
+}
+@media (max-width: 640px) {
+  .contact-form-wrap { padding: 22px; border-radius: 16px; }
+  .form-submit-row { flex-direction: column-reverse; align-items: stretch; gap: 12px; }
+  .form-submit-row .btn { justify-content: center; }
+  .form-hint { text-align: center; }
+}
+@media (max-width: 420px) {
+  .contact-form-wrap { padding: 18px; }
+  .contact-form-wrap h2 { font-size: 21px; }
+  .contact-form-wrap .sub { font-size: 13px; }
+  .gdpr-note { font-size: 11px; padding: 12px; }
+  .faq-item summary { padding: 16px; font-size: 13.5px; gap: 12px; }
+  .faq-item .answer { padding: 0 16px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="logo-text"><span>AI Accounting Hub</span></div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-ambient"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <span>Contact</span>
+    </div>
+    <div class="page-kicker"><span class="dot"></span>Scrie-ne</div>
+    <h1>Hai să stăm <span class="accent">de vorbă</span>.</h1>
+    <p class="page-lede">Colaborare, feedback, sugestii pentru resurse, o temă de articol, un invitat pentru podcast — suntem deschiși la toate. Răspundem de obicei în 2-3 zile lucrătoare.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="block" style="padding-top: 56px;">
+  <div class="block-inner">
+    <div class="contact-wrap">
+
+      <!-- Form (centered) -->
+      <div class="contact-form-wrap fade-in">
+        <h2>Trimite-ne un mesaj</h2>
+        <p class="sub">Descrie-ne pe scurt ce te interesează — te contactăm cu un răspuns relevant, nu cu un formular generic.</p>
+
+        <div class="form-success" id="form-success" style="margin-bottom: 20px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Mulțumim! Mesajul a fost trimis. Revenim cu un răspuns în câteva zile.
+        </div>
+
+        <form id="contact-form-page">
+          <div class="field-row">
+            <div class="field">
+              <label for="c-name">Nume</label>
+              <input id="c-name" type="text" required placeholder="Ioana Popescu">
+            </div>
+            <div class="field">
+              <label for="c-email">Email</label>
+              <input id="c-email" type="email" required placeholder="ioana@firma.ro">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="c-topic">Subiect</label>
+            <select id="c-topic">
+              <option>Întrebare generală</option>
+              <option>Sugestie articol / temă</option>
+              <option>Invitat în podcast</option>
+              <option>Colaborare / parteneriat</option>
+              <option>Feedback resurse</option>
+              <option>Altele</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="c-msg">Mesaj</label>
+            <textarea id="c-msg" required placeholder="Scrie-ne ce te interesează..." style="min-height: 160px;"></textarea>
+          </div>
+
+          <div class="gdpr-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Nu stocăm datele într-o bază de date. Mesajul ajunge direct pe email și este șters după răspuns. Niciun newsletter, niciun retargeting.</span>
+          </div>
+
+          <div class="form-submit-row">
+            <span class="form-hint">// Câmp obligatoriu: nume, email, mesaj</span>
+            <button type="submit" class="btn btn-primary">Trimite mesajul
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block" style="padding-top: 32px; padding-bottom: 120px;">
+  <div class="block-inner" style="max-width: 960px;">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Întrebări frecvente</div>
+        <h2>Înainte să ne scrii — poate răspunsul e deja aici.</h2>
+      </div>
+    </div>
+
+    <div class="faq">
+      <details class="faq-item">
+        <summary>Pot redistribui ghidurile și template-urile voastre în firma mea?</summary>
+        <div class="answer">Da — sunt oferite gratuit, fără licență restrictivă. Singura rugăminte: dacă le modifici substanțial și le publici mai departe, menționează sursa. Nu vindem nimic, deci nu este nimic „pirat".</div>
+      </details>
+      <details class="faq-item">
+        <summary>Acceptați articole de la colaboratori externi?</summary>
+        <div class="answer">Da, dacă ai experiență reală în contabilitate și ai testat un flux cu AI. Scrie-ne cu o schiță scurtă (200-300 de cuvinte) — nu trimite articolul complet înainte să discutăm unghiul editorial.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Oferiți consultanță plătită?</summary>
+        <div class="answer">Nu. Proiectul este „Community Resources", fără monetizare. Dacă ai nevoie de implementare sau audit, îți putem recomanda parteneri din rețeaua noastră — fără comision, doar informativ.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Ce se întâmplă cu datele mele din formular?</summary>
+        <div class="answer">Formularul trimite mesajul direct pe email (prin Formspree sau echivalent), fără să fie stocat într-o bază de date de pe acest site. Nu folosim cookies de tracking și nu te adăugăm în niciun newsletter. Mai multe în <a href="#">politica noastră de confidențialitate</a>.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Cum propun o temă pentru podcast?</summary>
+        <div class="answer">Scrie-ne în formularul de Contact cu titlul propus, de ce e relevant în 2026 și 2-3 puncte pe care le-ai aduce în discuție. Evităm temele prea generice — cerem unghiuri concrete.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Scrieți în engleză pentru piața internațională?</summary>
+        <div class="answer">Nu în acest moment. Focusul este explicit pe piața românească, cu referințe la legislația și practica locală. Eventual traducem selectiv în viitor, dar nu este o prioritate.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text"><span>AI Accounting Hub</span><small>aiaccountinghub.ro</small></div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script>
+document.getElementById('contact-form-page').addEventListener('submit', e => {
+  e.preventDefault();
+  const ok = document.getElementById('form-success');
+  ok.classList.add('show');
+  e.target.reset();
+  ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => ok.classList.remove('show'), 5000);
+});
+</script>
+</body>
+</html>

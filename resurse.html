@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Resurse & Tool-uri — AI Accounting Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* Resource toolbar */
+.res-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+  margin-bottom: 36px;
+}
+.res-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-1); }
+.res-tab {
+  padding: 10px 18px; border-radius: 8px;
+  font-size: 13px; font-weight: 500;
+  color: var(--fg-muted);
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s;
+}
+.res-tab svg { width: 14px; height: 14px; }
+.res-tab:hover { color: var(--fg); background: color-mix(in oklab, var(--accent) 6%, transparent); }
+.res-tab.active { background: var(--accent); color: #07121a; }
+.res-tab .n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; padding: 2px 6px; border-radius: 4px;
+  background: color-mix(in oklab, var(--fg) 10%, transparent);
+}
+.res-tab.active .n { background: rgba(7,18,26,0.2); color: #07121a; }
+
+.res-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.res-count span { color: var(--accent); }
+
+/* Featured banner */
+.res-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 20px;
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+  margin-bottom: 48px;
+  background: var(--bg-1);
+}
+.res-featured-body {
+  padding: 40px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+}
+.res-featured .tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.res-featured .tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+.res-featured h2 {
+  font-size: 32px; line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.res-featured p { color: var(--fg-muted); font-size: 14px; line-height: 1.6; margin-bottom: 22px; }
+.res-featured .meta {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim);
+  letter-spacing: 0.05em;
+  padding-bottom: 22px; margin-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.res-featured .meta .sep { opacity: 0.4; }
+.res-featured .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.res-featured-visual {
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 80% at 50% 50%, color-mix(in oklab, var(--accent) 20%, transparent) 0%, transparent 70%),
+    linear-gradient(135deg, var(--primary) 0%, #0b2a3a 100%);
+  min-height: 300px;
+  overflow: hidden;
+}
+.res-featured-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+}
+.res-featured-visual .badge {
+  position: absolute; left: 40px; top: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-2);
+  padding: 6px 10px;
+  border: 1px solid color-mix(in oklab, var(--accent-2) 40%, transparent);
+  border-radius: 999px;
+  background: rgba(7,18,26,0.4);
+}
+.res-featured-visual .icon-big {
+  position: absolute;
+  right: 40px; bottom: 40px;
+  width: 120px; height: 120px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 120%);
+  display: grid; place-items: center;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2), 0 20px 60px -20px rgba(34,211,238,0.4);
+  color: #07121a;
+}
+.res-featured-visual .icon-big svg { width: 52px; height: 52px; }
+.res-featured-visual .digits {
+  position: absolute;
+  left: 40px; right: 40px; top: 50%;
+  transform: translateY(-50%);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: color-mix(in oklab, var(--accent-2) 50%, transparent);
+  letter-spacing: 0.1em;
+}
+.res-featured-visual .digits span { padding: 6px 0; border-top: 1px solid color-mix(in oklab, var(--accent-2) 15%, transparent); }
+
+/* Category strips */
+.cat-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 48px;
+}
+.cat-card {
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; align-items: flex-start; gap: 16px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.cat-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--color-tint) 0%, transparent 45%);
+  opacity: 0.3;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.cat-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.cat-card:hover::before { opacity: 0.6; }
+.cat-card .cc-icon {
+  width: 44px; height: 44px; border-radius: 11px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  position: relative; z-index: 1;
+}
+.cat-card .cc-icon svg { width: 20px; height: 20px; }
+.cat-card.pdf { --color-tint: color-mix(in oklab, #fb7185 15%, transparent); }
+.cat-card.pdf .cc-icon { color: #fb7185; background: color-mix(in oklab, #fb7185 8%, var(--bg-2)); border-color: color-mix(in oklab, #fb7185 25%, transparent); }
+.cat-card.xls { --color-tint: color-mix(in oklab, #34d399 15%, transparent); }
+.cat-card.xls .cc-icon { color: #34d399; background: color-mix(in oklab, #34d399 8%, var(--bg-2)); border-color: color-mix(in oklab, #34d399 25%, transparent); }
+.cat-card.tool { --color-tint: color-mix(in oklab, var(--accent) 18%, transparent); }
+.cat-card.tool .cc-icon { color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, var(--bg-2)); border-color: color-mix(in oklab, var(--accent) 30%, transparent); }
+.cat-card .cc-body { position: relative; z-index: 1; }
+.cat-card h3 { font-size: 17px; margin-bottom: 4px; }
+.cat-card p { font-size: 13px; color: var(--fg-muted); margin-bottom: 8px; line-height: 1.5; }
+.cat-card .count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em;
+}
+
+@media (max-width: 1100px) {
+  .cat-strip { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cat-card { padding: 20px; gap: 14px; }
+  .cat-card .cc-icon { width: 40px; height: 40px; }
+}
+@media (max-width: 960px) {
+  .res-featured { grid-template-columns: 1fr; }
+  .res-featured-body { padding: 28px; }
+  .res-featured h2 { font-size: 26px; }
+  .res-featured-visual { min-height: 220px; }
+  .res-featured-visual .icon-big { width: 88px; height: 88px; right: 28px; bottom: 28px; border-radius: 18px; }
+  .res-featured-visual .icon-big svg { width: 38px; height: 38px; }
+  .res-featured-visual .badge { left: 28px; top: 28px; }
+  .res-featured-visual .digits { left: 28px; right: 28px; gap: 6px; }
+  .cat-strip { grid-template-columns: repeat(2, 1fr); }
+  .res-toolbar { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .res-tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
+  .res-tab { flex-shrink: 0; }
+}
+@media (max-width: 640px) {
+  .res-featured-body { padding: 22px; }
+  .res-featured h2 { font-size: 22px; }
+  .res-featured .meta { font-size: 10px; gap: 8px; }
+  .res-featured-visual { min-height: 180px; }
+  .res-featured-visual .digits { grid-template-columns: repeat(2, 1fr); }
+  .res-featured-visual .digits span:nth-child(n+5) { display: none; }
+  .cat-strip { grid-template-columns: 1fr; gap: 12px; margin-bottom: 36px; }
+  .cat-card { padding: 18px; }
+}
+@media (max-width: 420px) {
+  .res-featured-body { padding: 18px; }
+  .res-featured h2 { font-size: 20px; }
+  .res-featured-visual .icon-big { width: 64px; height: 64px; right: 20px; bottom: 20px; }
+  .res-featured-visual .icon-big svg { width: 28px; height: 28px; }
+  .res-featured-visual .badge { left: 20px; top: 20px; font-size: 9px; }
+  .res-featured-visual .digits { left: 20px; right: 20px; }
+  .res-tab { padding: 8px 12px; font-size: 12px; }
+  .res-tab svg { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="logo-text"><span>AI Accounting Hub</span></div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-ambient"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <span>Resurse</span>
+    </div>
+    <div class="page-kicker"><span class="dot"></span>Download zone</div>
+    <h1>Resurse &amp; <span class="accent">Tool-uri</span>.</h1>
+    <p class="page-lede">Ghiduri PDF, template-uri Excel și unelte AI mici — testate pe flux real de contabilitate. Fără cont, fără newsletter, doar download.</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top: 56px;">
+  <div class="block-inner">
+
+    <!-- Featured -->
+    <div class="res-featured fade-in">
+      <div class="res-featured-body">
+        <span class="tag">Resursa lunii</span>
+        <h2>Verificare CIF — site ANAF</h2>
+        <p>Interfață simplă peste API-ul public ANAF pentru verificarea unui CIF: nume firmă, plătitor TVA, stare activă. Fără cont, fără newsletter — doar introduci CIF-ul și primești răspunsul.</p>
+        <div class="meta">
+          <span>Tool · API</span>
+          <span class="sep">·</span>
+          <span>Rulează în browser</span>
+          <span class="sep">·</span>
+          <span>Sursa: API ANAF</span>
+        </div>
+        <div class="actions">
+          <a href="#" class="btn btn-primary" download>Download
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="res-featured-visual">
+        <span class="badge">// API · ANAF</span>
+        <div class="digits">
+          <span>CIF</span><span>TVA</span><span>SEDIU</span><span>STARE</span>
+          <span>INACTIV</span><span>SPLIT</span><span>IMPOZIT</span><span>UPDATE</span>
+        </div>
+        <div class="icon-big">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 type-zones: PDF / Excel / Tools -->
+    <div class="res-types">
+      <a href="#zone-pdf" class="res-type-pill" data-type="pdf">
+        <span class="rt-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h1.5a1.5 1.5 0 0 1 0 3H9v-3zM9 16v3M14 13v6M14 13h2M14 16h1.5"/></svg>
+        </span>
+        <span class="rt-body">
+          <span class="rt-label">Format PDF</span>
+          <span class="rt-title">Ghiduri</span>
+          <span class="rt-desc">Materiale de citit — checklist-uri, ghiduri practice, cheat-sheets.</span>
+        </span>
+      </a>
+      <a href="#zone-xls" class="res-type-pill" data-type="xls">
+        <span class="rt-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16M15 4v16"/></svg>
+        </span>
+        <span class="rt-body">
+          <span class="rt-label">Format Excel</span>
+          <span class="rt-title">Dashboard-uri &amp; template-uri</span>
+          <span class="rt-desc">Foi de calcul cu formule și macro-uri — gata să le conectezi la datele tale.</span>
+        </span>
+      </a>
+      <a href="#zone-tool" class="res-type-pill" data-type="tool">
+        <span class="rt-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>
+        </span>
+        <span class="rt-body">
+          <span class="rt-label">Format Tool</span>
+          <span class="rt-title">Mici unelte executabile</span>
+          <span class="rt-desc">Aplicații-mici care rulează direct în browser — fără instalare.</span>
+        </span>
+      </a>
+    </div>
+
+    <!-- PDF zone -->
+    <div class="res-zone" id="zone-pdf">
+      <div class="res-zone-head">
+        <div class="res-zone-label rz-pdf">// Format PDF</div>
+        <h2>Ghiduri</h2>
+        <p>Materiale concise, gata de printat sau de salvat pe telefon. Citești în 10–20 minute, aplici în aceeași zi.</p>
+      </div>
+      <div class="resources-grid" id="grid-pdf"></div>
+    </div>
+
+    <!-- Excel zone -->
+    <div class="res-zone" id="zone-xls">
+      <div class="res-zone-head">
+        <div class="res-zone-label rz-xls">// Format Excel</div>
+        <h2>Dashboard-uri &amp; template-uri</h2>
+        <p>Foi de calcul cu structură pre-validată, formule și macro-uri. Înlocuiești datele tale și ai output-ul dorit.</p>
+      </div>
+      <div class="resources-grid" id="grid-xls"></div>
+    </div>
+
+    <!-- Tools zone -->
+    <div class="res-zone" id="zone-tool">
+      <div class="res-zone-head">
+        <div class="res-zone-label rz-tool">// Format Tool</div>
+        <h2>Mici unelte executabile</h2>
+        <p>Tool-uri ușoare care rulează direct în browser — fără cont, fără server, fără upload. Datele rămân la tine.</p>
+      </div>
+      <div class="resources-grid" id="grid-tool"></div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.res-types {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 36px 0 56px;
+}
+.res-type-pill {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  transition: all 0.25s ease;
+}
+.res-type-pill:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow-lg); }
+.rt-ic {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+}
+.rt-ic svg { width: 18px; height: 18px; }
+.res-type-pill[data-type="pdf"] .rt-ic { color: #fb7185; background: color-mix(in oklab, #fb7185 8%, var(--bg-2)); border-color: color-mix(in oklab, #fb7185 25%, transparent); }
+.res-type-pill[data-type="xls"] .rt-ic { color: #34d399; background: color-mix(in oklab, #34d399 8%, var(--bg-2)); border-color: color-mix(in oklab, #34d399 25%, transparent); }
+.res-type-pill[data-type="tool"] .rt-ic { color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, var(--bg-2)); border-color: color-mix(in oklab, var(--accent) 30%, transparent); }
+.rt-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.rt-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg-dim);
+}
+.rt-title { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--fg); }
+.rt-desc { font-size: 12.5px; color: var(--fg-muted); line-height: 1.5; margin-top: 2px; }
+
+.res-zone { margin-top: 56px; scroll-margin-top: 90px; }
+.res-zone-head {
+  text-align: left;
+  padding-bottom: 22px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  max-width: 720px;
+}
+.res-zone-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.rz-pdf  { color: #fb7185; }
+.rz-xls  { color: #34d399; }
+.rz-tool { color: var(--accent); }
+.res-zone-head h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 600; letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.res-zone-head p { color: var(--fg-muted); font-size: 14.5px; line-height: 1.6; max-width: 580px; }
+
+@media (max-width: 960px) {
+  .res-types { grid-template-columns: 1fr; gap: 12px; margin: 28px 0 40px; }
+  .res-type-pill { padding: 16px; }
+  .res-zone { margin-top: 40px; }
+}
+</style>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text"><span>AI Accounting Hub</span><small>aiaccountinghub.ro</small></div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required></div>
+      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+const RESOURCES = [
+  /* ===== PDF ===== */
+  { type: 'pdf', kind: 'Ghid · PDF', title: 'Prompt engineering pentru contabili',
+    desc: 'Cele 7 ingrediente ale unui prompt bun + meta-promptul pe care îl folosesc zilnic. Format A4, 12 pagini, gata de printat.',
+    size: 'PDF · 2.4 MB', cta: 'În curând' },
+  { type: 'pdf', kind: 'Ghid · PDF', title: 'GDPR în era AI',
+    desc: 'Ce date poți și ce nu poți trimite în modele AI publice. Checklist practic și exemple concrete pentru firmele de contabilitate.',
+    size: 'PDF · 1.8 MB', cta: 'În curând' },
+  { type: 'pdf', kind: 'Cheat-sheet · PDF', title: 'Vocabular AI — fișa A4',
+    desc: 'Toți buzzword-ii din zona AI traduși și exemplificați pe contabilitate, condensat pe o singură pagină pentru imprimat la birou.',
+    size: 'PDF · 540 KB', cta: 'În curând' },
+
+  /* ===== EXCEL ===== */
+  { type: 'xls', kind: 'Template · Excel', title: 'Jurnal de vânzări AI-ready',
+    desc: 'Structură standard pentru jurnalul de vânzări, pregătită pentru import automat în instrumente AI — coloane normalizate și validări.',
+    size: 'XLSX · 120 KB', cta: 'În curând' },
+  { type: 'xls', kind: 'Dashboard · Excel', title: 'Reconciliere bancară automată',
+    desc: 'Template cu formule și macro-uri pentru reconcilierea extraselor bancare cu jurnalul contabil — marchează automat diferențele.',
+    size: 'XLSM · 340 KB', cta: 'În curând' },
+  { type: 'xls', kind: 'Dashboard · Excel', title: 'Tablou de bord financiar lunar',
+    desc: 'Dashboard pre-construit pentru raportarea lunară către administrator: lichiditate, marjă brută, cash conversion. Doar conectezi datele.',
+    size: 'XLSM · 480 KB', cta: 'În curând' },
+
+  /* ===== TOOLS ===== */
+  { type: 'tool', kind: 'Tool · API', title: 'Verificare CIF — site ANAF',
+    desc: 'Interfață simplă peste API-ul public ANAF: introduci un CIF și primești nume firmă, plătitor TVA, stare activă. Rulează în browser, fără cont.',
+    size: 'Browser · API ANAF', cta: 'Deschide tool-ul' },
+  { type: 'tool', kind: 'Tool · Web', title: 'Extractor facturi PDF → Excel',
+    desc: 'Drag-and-drop pentru facturi PDF. Extrage furnizor, CIF, total, TVA și le exportă într-un Excel gata pentru import.',
+    size: 'Browser · Fără upload server', cta: 'În curând' },
+  { type: 'tool', kind: 'Tool · API', title: 'Generator declarații ANAF',
+    desc: 'Completează template-urile oficiale ANAF pornind de la un CSV — validare instantanee și export XML conform SAF-T.',
+    size: 'Browser · Export XML', cta: 'În curând' }
+];
+
+const iconFor = (t) => ({
+  pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h1.5a1.5 1.5 0 0 1 0 3H9v-3zM9 16v3M14 13v6M14 13h2M14 16h1.5"/></svg>',
+  xls:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16M15 4v16"/></svg>',
+  tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>'
+}[t]);
+
+function cardHTML(r) {
+  return `
+    <div class="resource ${r.type} fade-in in">
+      <div class="resource-header">
+        <div class="resource-icon">${iconFor(r.type)}</div>
+        <span class="resource-type">${r.kind}</span>
+      </div>
+      <h3>${r.title}</h3>
+      <p>${r.desc}</p>
+      <div class="resource-footer">
+        <span class="resource-size">${r.size}</span>
+        <button class="download-btn">${r.cta || 'Download'}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        </button>
+      </div>
+    </div>`;
+}
+
+function render() {
+  ['pdf', 'xls', 'tool'].forEach(t => {
+    const grid = document.getElementById('grid-' + t);
+    if (!grid) return;
+    const items = RESOURCES.filter(r => r.type === t);
+    grid.innerHTML = items.map(cardHTML).join('');
+  });
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
+    document.querySelectorAll('.res-zone .fade-in').forEach(el => io.observe(el));
+  }
+}
+
+render();
+</script>
+</body>
+</html>
