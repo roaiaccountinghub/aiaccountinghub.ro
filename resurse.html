@@ -529,6 +529,30 @@ const iconFor = (t) => ({
 }[t]);
 
 function cardHTML(r) {
+  // Verificăm dacă avem un link (suportăm atât 'link' cât și 'href' din codul tău)
+  const downloadUrl = r.link || r.href;
+  
+  // Generăm partea de acțiune (buton sau link)
+  let actionHtml = '';
+  
+  if (downloadUrl) {
+    // Dacă există link, generăm link-ul de download cu iconiță
+    const fileName = downloadUrl.split('/').pop();
+    actionHtml = `
+      <a href="${downloadUrl}" download="${fileName}" class="download-btn" style="text-decoration: none;">
+        ${r.cta || 'Download'}
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>
+        </svg>
+      </a>`;
+  } else {
+    // Dacă NU există link (e "În curând"), afișăm doar textul fără iconiță de download
+    actionHtml = `
+      <button class="download-btn" disabled style="opacity: 0.6; cursor: default;">
+        ${r.cta || 'În curând'}
+      </button>`;
+  }
+
   return `
     <div class="resource ${r.type} fade-in in">
       <div class="resource-header">
@@ -539,14 +563,7 @@ function cardHTML(r) {
       <p>${r.desc}</p>
       <div class="resource-footer">
         <span class="resource-size">${r.size}</span>
-        <a href="${r.link}" download="${r.link.split('/').pop()}" class="download-btn" style="text-decoration: none;">
-          ${r.cta || 'Download'}
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <path d="M7 10l5 5 5-5"/>
-            <path d="M12 15V3"/>
-          </svg>
-        </a>
+        ${actionHtml}
       </div>
     </div>`;
 }
