@@ -517,10 +517,11 @@ const EPISODES = [
     epNum: 1,
     season: 's1',
     seasonLabel: 'Sezonul 1',
-    title: 'RO e-Factura: Între promisiunea digitalizării și realitatea din SPV',
-    excerpt: 'Două gazde AI demontează promisiunile e-Factura: ce funcționează cu adevărat în SPV, unde sunt fricțiunile reale pe flux și ce ar trebui să facă acum o firmă de contabilitate ca să nu fie prinsă pe contrapicior.',
+    title: 'RO e-Factura: Când ANAF vede viitorul prin AI, iar tu ești blocat în UI-ul anului 2007',
+    excerpt: 'Două gazde AI demontează promisiunile e-Factura: Avem unul dintre cele mai impresionante sisteme fiscale digitale din Europa pe partea de back-end, cu AI propriu deja în uz, și o interfață pentru contribuabili care a rămas în 2007.',
     duration: '24 min',
-    tags: ['#e-factura', '#anaf', '#digital']
+    tags: ['#e-factura', '#anaf', '#digital'],
+    spotifyId: '5enoAz2nrHLOOLg80JDcsW'
   },
 ];
 
@@ -585,7 +586,11 @@ function render() {
   noRes.classList.toggle('show', all.length === 0);
 
   listEl.innerHTML = all.map(e => `
-    <a href="index.html#podcast" class="episode-item fade-in">
+    <div class="episode-item fade-in sp-trigger"
+         data-spotify="${e.spotifyId || ''}"
+         data-title="${e.ep} — ${e.title.replace(/"/g,'&quot;')}"
+         role="button" tabindex="0"
+         aria-label="Ascultă pe Spotify: ${e.title}">
       <div class="episode-num"><span class="ep">${e.ep}</span>${e.duration}</div>
       <div class="episode-body">
         <div class="season">${e.seasonLabel}</div>
@@ -597,10 +602,10 @@ function render() {
           <span>${e.tags.join(' ')}</span>
         </div>
       </div>
-      <div class="episode-play" aria-label="Redă episodul">
+      <button type="button" class="episode-play" aria-label="Redă pe Spotify · ${e.ep}">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-    </a>`).join('');
+      </button>
+    </div>`).join('');
 
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
