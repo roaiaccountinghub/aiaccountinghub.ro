@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vibe coding pentru contabili — AI Accounting Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ ARTICLE PAGE ============ */
+.article-wrap {
+  position: relative; z-index: 1;
+  max-width: 1360px; margin: 0 auto;
+  padding: 64px 32px 96px;
+  display: grid;
+  grid-template-columns: 1fr 720px 1fr;
+  gap: 48px;
+}
+.article-side { position: relative; }
+.article-side.left { justify-self: end; }
+.article-side .sticky {
+  position: sticky; top: 96px;
+  padding: 20px 0;
+}
+.toc {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-1);
+}
+.toc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 14px;
+}
+.toc a {
+  display: block;
+  font-size: 13px; color: var(--fg-muted);
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid var(--border);
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.toc a:hover { color: var(--accent); border-color: var(--accent); }
+.toc a.active { color: var(--accent); border-color: var(--accent); }
+
+.article-main { position: relative; }
+
+.article-meta-top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.article-meta-top .sep { opacity: 0.4; }
+.article-category {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+.article-main h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.article-main h1 .accent {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 55%, color-mix(in oklab, var(--accent) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.article-lede {
+  font-size: 19px; line-height: 1.55; color: var(--fg-muted);
+  margin-bottom: 36px;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+}
+
+.author-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  display: grid; place-items: center;
+  color: #07121a; font-weight: 700; font-size: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+  flex-shrink: 0;
+}
+.author-info { flex: 1; min-width: 0; }
+.author-name { font-size: 14px; font-weight: 600; }
+.author-role { font-size: 12px; color: var(--fg-muted); }
+.share-row { display: flex; gap: 8px; }
+.share-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn svg { width: 15px; height: 15px; }
+
+.article-cover {
+  position: relative;
+  margin: 0 -32px 48px;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 360px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.article-cover-bg {
+  position: absolute; inset: 0;
+  background-image: url('assets/hero-vf.png');
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05) brightness(0.92);
+}
+.article-cover::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--bg-0) 80%, transparent) 100%);
+}
+.article-cover-caption {
+  position: absolute; left: 24px; bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-muted);
+  letter-spacing: 0.08em;
+  z-index: 2;
+}
+
+/* Prose */
+.prose {
+  font-size: 17px; line-height: 1.75;
+  color: var(--fg);
+}
+.prose p { margin: 0 0 22px; }
+.prose h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px; line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 56px 0 20px;
+  scroll-margin-top: 100px;
+}
+.prose h2::before {
+  content: '§'; color: var(--accent);
+  font-weight: 400;
+  margin-right: 12px;
+  opacity: 0.6;
+}
+.prose h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; line-height: 1.25; letter-spacing: -0.01em;
+  font-weight: 600;
+  margin: 36px 0 14px;
+  scroll-margin-top: 100px;
+}
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { color: var(--accent); font-style: normal; font-family: 'Space Grotesk', sans-serif; }
+.prose a { color: var(--accent); border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); transition: all 0.2s; }
+.prose a:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.prose ul, .prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose li { margin-bottom: 10px; }
+.prose li::marker { color: var(--accent); }
+.prose blockquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  border-radius: 0 12px 12px 0;
+  font-size: 18px;
+  color: var(--fg);
+  font-style: italic;
+}
+.prose blockquote cite {
+  display: block;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-style: normal;
+  color: var(--fg-muted); letter-spacing: 0.05em;
+}
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88em;
+  padding: 2px 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent);
+}
+.prose pre {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.6;
+}
+.prose pre code {
+  background: none; border: none; padding: 0; color: var(--fg);
+}
+.callout {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 14px;
+}
+.callout .ic {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center;
+  background: color-mix(in oklab, var(--accent) 15%, transparent);
+  color: var(--accent);
+}
+.callout .ic svg { width: 16px; height: 16px; }
+.callout .cbody { font-size: 14px; line-height: 1.6; color: var(--fg); }
+.callout .cbody strong { color: var(--accent); }
+
+/* End of article */
+.article-end {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+.author-card {
+  margin: 72px 0 0;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.author-card .author-avatar { width: 64px; height: 64px; font-size: 20px; }
+.author-card h3 { font-size: 20px; margin-bottom: 6px; }
+.author-card .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; margin-bottom: 12px; }
+.author-card p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+
+/* Related */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.related-card {
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; flex-direction: column;
+  transition: all 0.3s ease;
+}
+.related-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.related-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.related-card h3 { font-size: 18px; line-height: 1.25; margin-bottom: 10px; }
+.related-card p { font-size: 13px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.related-read {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+}
+
+/* Stat block - specific la articolul ăsta */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 32px 0;
+}
+.stat-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+}
+.stat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--fg-muted);
+  letter-spacing: 0.05em;
+}
+@media (max-width: 720px) {
+  .stat-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="article-meta-top">
+      <span class="article-category">Vibe Coding</span>
+      <span>1 mai 2026</span>
+      <span class="sep">·</span>
+      <span>10 min citire</span>
+    </div>
+
+    <h1>Vibe coding pentru contabili — cum am construit un tool <span class="accent">fără să scriu o linie de cod</span>.</h1>
+    <p class="article-lede">
+      Povestea unui weekend în care 8.000 de CIF-uri s-au verificat în 80 de secunde la ANAF — fără developer, fără ofertă, fără factură. Doar un dialog răbdător cu AI-ul.
+    </p>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">01.05.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// Vibe coding · ANAF bulk check tool</div>
+    </div>
+
+    <div class="prose">
+
+      <p>
+        Imaginează-ți situația: Ai nevoie să actualizezi baza de date internă de furnizori și trebuie să verifici dacă toți partenerii sunt încă plătitori de TVA, dacă vreunul e declarat inactiv, dacă cineva a intrat în <em>TVA la încasare</em> și — pentru că suntem în 2026 — dacă figurează în registrul RO e-Factura. Termenul: ieri.
+      </p>
+
+      <p>
+        Pe site-ul ANAF poți verifica un CIF. Apoi încă unul. Apoi încă unul. La al 50-lea începi să te întrebi dacă există vreo soluție mai inteligentă. La al 200-lea descoperi că <strong>există</strong> — ANAF expune un serviciu web pentru verificare bulk, până la 100 de CUI-uri într-un singur request. Doar că serviciul e gândit pentru <em>programatori</em>, nu pentru contabili. Aici ar fi trebuit să se termine povestea.
+      </p>
+
+      <p>
+        Nu s-a terminat. Pentru că între tine și un developer, în 2026, stă AI-ul. Iar termenul tehnic pentru ce am făcut weekend-ul trecut se cheamă <em>vibe coding</em>: descrii în limbaj natural ce vrei, AI-ul scrie codul, tu testezi, rafinezi, rulezi. Rezultatul: un mic executabil <code>.exe</code> care procesează 8.000 de CIF-uri în 80 de secunde, rulează pe orice PC cu Windows și nu a costat decât câteva ore de răbdare.
+      </p>
+
+      <h2 id="s-problema">Problema — 8.000 de rânduri și un singur câmp</h2>
+
+      <p>
+        Verificarea unui CIF e simplă. Resurse există cu duiumul: <a href="https://mfinante.gov.ro" target="_blank" rel="noopener">mfinante.gov.ro</a>, registrul ANAF al plătitorilor de TVA, registrul TVA la încasare, registrul contribuabililor inactivi, registrul RO e-Factura. Pe rând, una câte una, fiecare cu propriul câmp de input și propriul rezultat.
+      </p>
+
+      <p>
+        Dacă lucrezi cu un soft localizat pe specific românesc — gen <strong>SAGA</strong> — funcția e deja inclusă: bagi fișierul, scoți rezultatul. Sfârșit. Dar dacă firma ta lucrează pe un ERP extern (SAP, Oracle, Microsoft Dynamics) sau pe un CRM care n-a auzit de codul fiscal românesc, verificările trebuie făcute <em>extern</em>. Manual. Pentru fiecare. La 8.000 de rânduri devine, hai să-i spunem cu eufemism, neproductiv.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Notă tehnică pentru cei curioși:</strong> ANAF expune endpointul public <code>https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva</code>, care acceptă maxim 100 de CUI-uri pe request și un request pe secundă. Răspunsul vine în format JSON și conține tot ce te interesează: denumire, stare societate, plătitor TVA, TVA la încasare, split TVA, RO e-Factura, adresă și multe altele. E generos — doar că trebuie să știi cum să îl interoghezi.
+        </div>
+      </div>
+
+      <h2 id="s-inainte">Înainte de AI — brief, cotație, factură</h2>
+
+      <p>
+        În urmă cu trei ani, scenariul ar fi fost predictibil. Cauți un developer prin cunoștințe sau pe LinkedIn. Îi explici, pe larg, ce vrei. Aștepți o ofertă. Negociezi. Semnezi. Aștepți două săptămâni. Primești un MVP care nu face exact ce voiai. Mai aștepți câteva runde de feedback. Plătești. Speri ca developerul să mai fie disponibil când apare bug-ul de la ANAF de la prima actualizare.
+      </p>
+
+      <p>
+        Pentru o problemă recurentă a unei firme mari, calculul ține. Pentru o firmă mică, costul nu se justifică. Așa că majoritatea s-au resemnat să verifice manual.
+      </p>
+
+      <h2 id="s-vibe">Acum se cheamă vibe coding</h2>
+
+      <p>
+        Termenul a fost popularizat la începutul lui 2025 de Andrej Karpathy (fost Tesla, fost OpenAI). Ideea e simplă: <strong>vorbești cu AI-ul ca și cum ai vorbi cu un junior developer paralel cu tine pe ecran</strong>. Îi spui ce vrei, el scrie codul, tu rulezi. Dacă ceva nu merge, îi spui ce nu merge. El corectează. Repeți până funcționează.
+      </p>
+
+      <p>
+        Diferența față de programarea clasică: nu trebuie să cunoști sintaxa limbajului. Diferența față de no-code (Zapier, Make, Bubble): nu ești limitat de ce a vrut platforma să îți pună la dispoziție. Diferența față de „cere unui prieten dev să te ajute": prietenul tău dev nu răspunde duminică la 23:14.
+      </p>
+
+      <blockquote>
+        Vibe coding nu e magie. E o conversație lungă și uneori frustrantă cu un colaborator care știe sintaxa pe care n-o știi tu — DAR care e MEREU disponibil.
+        <cite>— observație după aproximativ 60 de iterații</cite>
+      </blockquote>
+
+      <h2 id="s-disclaimer">Disclaimer onest — nu sunt programator</h2>
+
+      <p>
+        Înainte să te entuziasmezi: <strong>n-am background tehnic</strong>. Știu să scriu o formulă în Excel, înțeleg vag ce e o variabilă și am instalat odată Python ca să rulez un script primit de la cineva — operațiune care a durat două ore și o căutare pe Google. Atât.
+      </p>
+
+      <p>
+        Și totuși, weekend-ul trecut am ieșit din zona „contabil cu Excel" și am ajuns cu un fișier <code>verificare_anaf.exe</code> de 18 MB, pe care îl pot trimite oricui prin e-mail sau WeTransfer și care merge dintr-un dublu-click. Nu pentru că am învățat să programez între timp. Ci pentru că am învățat să <em>iterez</em> — exact ce am scris în <a href="articol-001-prompting.html">articolul anterior despre prompting</a>.
+      </p>
+
+      <p>
+        Promisiunea vibe coding-ului nu e că oricine devine inginer software peste noapte. Promisiunea e că <strong>bariera de intrare pentru a-ți construi propriile tool-uri interne a scăzut dramatic</strong>. Nu vei putea concura cu produse comerciale ... dar nici nu trebuie. Tu rezolvi nevoia ta, pe șurubul ăla particular pe care nimeni n-o să îți facă produs comercial.
+      </p>
+
+      <h2 id="s-procesul">Procesul — în iterații, cum altfel</h2>
+
+      <p>
+        Iată traseul real, fără înfrumusețări. Dacă te aștepți la „un singur prompt", nu există așa ceva. Dar nu există nici „300 de iterații" — adevărul e undeva la mijloc, suficient de aproape de cel mai bun raport timp/rezultat pe care l-am văzut într-un proiect IT.
+      </p>
+
+      <h3>Iterația 1 — punctul de plecare</h3>
+      <p>
+        I-am dat AI-ului documentația ANAF a serviciului web (cea publică, de la <code>webservicesp.anaf.ro</code>) și i-am spus, simplu:
+      </p>
+      <pre><code>Sunt contabil, fără cunoștințe de programare. Am atașat
+documentația serviciului ANAF de verificare CIF în bulk.
+Vreau un script Python care:
+  - primește o listă de CIF-uri
+  - le trimite la ANAF respectând limita de 100 per request
+  - extrage denumirea, statusul TVA și starea societății
+  - le scrie într-un fișier Excel
+
+Explică-mi ce trebuie să instalez și cum să rulez.</code></pre>
+      <p>
+        AI-ul a livrat un script de ~40 de linii și instrucțiuni pas-cu-pas pentru instalare. L-am rulat. A mers din prima pe 5 CIF-uri. Pe 100 a crăpat — depășise limita de un request pe secundă.
+      </p>
+
+      <h3>Iterația 2 — limitele ANAF</h3>
+      <p>
+        I-am spus: <em>„Crapă pe pachete de peste 100 de CIF-uri. ANAF mi-a dat eroare 429"</em>. AI-ul a explicat: e limita de rate (un request pe secundă) și a rescris codul cu un <code>time.sleep(1.1)</code> între pachete și un mecanism de retry pentru erori temporare. Cele 40 de linii de cod deveniseră 80. Mergea.
+      </p>
+
+      <h3>Iterația 3 — CIF-urile murdare</h3>
+      <p>
+        Datele reale n-au fost niciodată curate. În fișierul meu, același CIF apărea ca <code>RO 12345678</code>, <code>ro12345678</code>, <code>12345678</code>, sau cu spații, puncte, virgule. ANAF cere doar cifre. I-am spus AI-ului: <em>„Adaugă o funcție care curăță CIF-ul: scoate prefixul RO, spațiile, caracterele non-numerice, și păstrează doar cifrele"</em>. Două minute mai târziu, eram în iterația 3.
+      </p>
+
+      <h3>Iterația 4–7 — interfața grafică</h3>
+      <p>
+        Aici am stat cel mai mult. Voiam să nu mai rulez scriptul din linie de comandă. Voiam o fereastră normală, cu butoane.
+      </p>
+      <p>
+        I-am cerut AI-ului o interfață <code>tkinter</code> (mi-a sugerat el că e cea mai simplă opțiune nativă în Python). În câteva runde am ajuns la:
+      </p>
+      <ul>
+        <li>câmp pentru verificare individuală (un singur CIF)</li>
+        <li>buton de încărcare fișier Excel pentru verificare bulk</li>
+        <li>bară de progres care arată câte pachete s-au procesat</li>
+        <li>preview cu primele 10 rezultate, actualizat în timp real</li>
+        <li>buton de export Excel cu rezultatele complete</li>
+      </ul>
+
+      <h3>Iterația 8 — împachetarea în .exe</h3>
+      <p>
+        Ultima problemă: nu pot trimite cuiva un script Python și să îi cer să instaleze Python, pip, dependințe etc. Soluția: <code>PyInstaller</code>, o unealtă care împachetează tot — Python, librării, codul tău — într-un singur executabil. AI-ul mi-a dat comanda exactă, am rulat-o, am primit fișierul <code>.exe</code>. L-am dat unui coleg care nu are Python pe PC. A mers din prima.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Despre iterații, sincer:</strong> n-am ținut contul exact, dar am avut undeva între 50 și 70 de schimburi de mesaje cu AI-ul. Cele mai multe au fost rapide („merge", „crapă", „prea mic textul", „pune și o coloană pentru cod CAEN"). Dar fără momente de frustrare reală.
+        </div>
+      </div>
+
+      <h2 id="s-tool">Tool-ul, în practică</h2>
+
+      <p>
+        Aplicația finală face exact două lucruri, ambele bine. <strong>Single check</strong> — pentru când vrei să verifici un CIF rapid, fără Excel, fără bătaie de cap. <strong>Bulk check</strong> — pentru când ai o listă lungă, încarci un Excel, aștepți și exporți rezultatul.
+      </p>
+
+      <p>
+        Pentru fiecare CIF, tool-ul scoate: denumirea firmei, status plătitor TVA, status TVA la încasare, status inactiv/reactiv, status split TVA, status RO e-Factura, adresă completă, cod CAEN și multe altele. Adică <em>tot</em> ce expune ANAF, fără să mai fii nevoit să intri pe trei portaluri diferite.
+      </p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">8.000</div>
+          <div class="stat-lbl">// CIF-uri într-un test real</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">~80 sec</div>
+          <div class="stat-lbl">// timp total procesare</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">100/req</div>
+          <div class="stat-lbl">// limita ANAF, respectată</div>
+        </div>
+      </div>
+
+      <p>
+        Cifrele sunt valabile <em>când și ANAF-ul cooperează</em>. Pentru că, după cum bine știți, în ultima perioadă serviciile ANAF petrec mai mult timp în mentenanță decât în producție. Tool-ul are mecanisme de retry pentru erorile temporare, dar nu poate să facă magie când serverul de la ANAF e pur și simplu picat. La fel ca toți cei care folosesc serviciile fiscale digitale: așteptăm.
+      </p>
+
+      <h2 id="s-lectii">Lecții pentru contabili</h2>
+
+      <p>
+        N-am scris articolul ca să te conving să devii „programator de weekend". L-am scris pentru câteva observații care cred că merită reținute, indiferent dacă vei construi un tool sau nu.
+      </p>
+
+      <ol>
+        <li>
+          <strong>Bariera tehnică nu mai e ce era.</strong> Acum trei ani, articolul ăsta nu se putea scrie. Acum e o întrebare de zile, nu de luni. Asta înseamnă că <em>tu</em>, contabilul, decizi ce tool-uri îți construiești singur.
+        </li>
+        <li>
+          <strong>Iterația e totul.</strong> Exact ca la prompting (vezi <a href="articol-001-prompting.html">articolul anterior</a>): primul răspuns e draft. Nu abandonezi — rafinezi. La cod e și mai evident, pentru că ai feedback imediat: rulează sau crapă.
+        </li>
+        <li>
+          <strong>Nu reinventezi roata.</strong> Dacă lucrezi pe SAGA și softul are deja funcția — folosește-o. Tool-ul ăsta e pentru cazurile în care ești pe ERP extern și ANAF nu e prezent în soft. Nu confunda „pot construi tool-ul" cu „trebuie să construiesc tool-ul".
+        </li>
+        <li>
+          <strong>Testează, mai ales pe date reale.</strong> Un tool care merge perfect pe 10 CIF-uri poate să crape spectaculos pe 100. Nu pune niciodată în producție ceva ce nu ai testat la scara la care îl vei folosi.
+        </li>
+        <li>
+          <strong>AI scrie codul, dar tu validezi rezultatul.</strong> Profesia noastră e construită pe verificare. Aplicația ta e ca o balanță: nu o tipărești fără să o verifici. Compară 20 de rezultate cu verificarea manuală. Dacă se potrivesc — gata. Dacă nu — ai descoperit ceva.
+        </li>
+      </ol>
+
+      <h2 id="s-concluzie">Închiderea exercițiului</h2>
+
+      <p>
+        Nu confunda asta cu sfârșitul programatorilor profesioniști. Tool-ul ăsta n-ar trece nici primul code review într-o firmă serioasă. Dar nici nu trebuie. E o aplicație internă, pentru o nevoie internă, construită de cineva care înțelege <em>problema</em> mai bine decât oricine altcineva — pentru că o trăiește la birou, în fiecare zi.
+      </p>
+
+      <p>
+        La raftul cu acronime contabile am adăugat ieri <strong>CISO — Context In, Smart Out</strong>. Adăugăm acum un al doilea rafter: <strong>V&V — Vibe & Verify</strong>. Vorbești cu AI-ul, descrii problema, primești soluția. Apoi <em>verifici</em>, exact ca pe orice cifră care îți trece prin mână. Pentru că la sfârșitul zilei, indiferent cine scrie codul, semnătura de pe raport rămâne tot a ta.
+      </p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#vibe-coding</a>
+          <a href="#" class="tag">#anaf</a>
+          <a href="#" class="tag">#automatizare</a>
+          <a href="#" class="tag">#python</a>
+          <a href="#" class="tag">#tva</a>
+        </div>
+        <span class="footer-mono">Articolul #002</span>
+      </div>
+
+      <!-- Author bio -->
+      <div class="author-card">
+        <div class="author-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+        </div>
+        <div>
+          <h3>AI Accounting Hub</h3>
+          <div class="role">aiaccountinghub.ro</div>
+          <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot — fără bariere, fără taxe, fără reclame.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s-problema">Problema — 8.000 de rânduri</a>
+        <a href="#s-inainte">Înainte de AI</a>
+        <a href="#s-vibe">Acum se cheamă vibe coding</a>
+        <a href="#s-disclaimer">Disclaimer onest</a>
+        <a href="#s-procesul">Procesul, în iterații</a>
+        <a href="#s-tool">Tool-ul, în practică</a>
+        <a href="#s-lectii">Lecții pentru contabili</a>
+        <a href="#s-concluzie">Închiderea exercițiului</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="articol-001-prompting.html" class="related-card fade-in">
+        <div class="related-date">PROMPTING · #001</div>
+        <h3>Goana după promptul perfect</h3>
+        <p>7 reguli pentru a vorbi cu AI ca un profesionist — și shortcut-ul pe care îl folosesc ca să nu trebuiască să mi le amintesc pe toate.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html" class="related-card fade-in">
+        <div class="related-date">TOOL · ANAF</div>
+        <h3>Verificare CIF — bulk &amp; single</h3>
+        <p>Tool-ul descris în articol, gata de descărcat. Rulează din dublu-click pe orice PC cu Windows. Sursa codului e disponibilă pe GitHub.</p>
+        <span class="related-read">Deschide tool-ul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="contact.html" class="related-card fade-in">
+        <div class="related-date">CONTACT</div>
+        <h3>Ai o temă, un feedback sau un invitat de podcast?</h3>
+        <p>Colaborare, sugestii de articole sau invitați. Răspundem, de obicei, în 2-3 zile lucrătoare.</p>
+        <span class="related-read">Scrie-ne
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii contabili români care explorează intersecția dintre AI și finanțe.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="arhiva.html">Arhivă</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="disclaimer">Respectăm confidențialitatea. Acest site nu stochează date cu caracter personal conform politicii noastre GDPR. Singurul cookie folosit reține preferința ta de temă (Light/Dark).</p>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required placeholder="Ex. Ioana Popescu"></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required placeholder="ioana@firma.ro"></div>
+      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required placeholder="Scrie-ne ce te interesează..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+/* TOC active link on scroll */
+(function () {
+  const links = document.querySelectorAll('.toc a');
+  if (!links.length) return;
+  const ids = Array.from(links).map(a => a.getAttribute('href').slice(1));
+  const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  targets.forEach(t => io.observe(t));
+})();
+</script>
+</body>
+</html>

@@ -299,6 +299,36 @@
   background:
     radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 6%, transparent), transparent 60%),
     var(--bg-1);
+  /* play | body | ep-num */
+  grid-template-columns: 52px 1fr 80px;
+  cursor: pointer;
+}
+/* Play button: prominent + leftmost for manifest items */
+.manifest-list .episode-play {
+  width: 44px; height: 44px;
+  background: color-mix(in oklab, var(--accent) 15%, var(--bg-2));
+  border-color: color-mix(in oklab, var(--accent) 50%, transparent);
+  color: var(--accent);
+}
+.manifest-list .episode-item:hover .episode-play {
+  background: var(--accent);
+  color: #07121a;
+  box-shadow: 0 0 20px -4px color-mix(in oklab, var(--accent) 60%, transparent);
+}
+/* Article link inside manifest meta */
+.ep-read-link {
+  color: var(--accent-warm);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.ep-read-link:hover { text-decoration: underline; }
+/* Mobile: show play button; hide ep-num column */
+@media (max-width: 720px) {
+  .manifest-list .episode-play { display: grid !important; }
+  .manifest-list .episode-item { grid-template-columns: 44px 1fr; }
+  .manifest-list .episode-num { display: none; }
 }
 </style>
 
@@ -462,7 +492,9 @@
   }
 
   // Delegate clicks on any element with .sp-trigger[data-spotify]
+  // Exception: .ep-read-link inside manifest cards navigates to the article
   document.addEventListener('click', (e) => {
+    if (e.target.closest('.ep-read-link')) return;
     const trigger = e.target.closest('.sp-trigger[data-spotify]');
     if (!trigger) return;
     e.preventDefault();
@@ -595,13 +627,21 @@ document.getElementById('sort').addEventListener('change', e => { state.sort = e
 
 render();
 
-/* Render the 5-part manifest series — order is fixed, never filtered/sorted */
+/* Render the 5-part manifest series — order is fixed, never filtered/sorted.
+   Clicking anywhere on the card (title, body, play btn) opens Spotify modal.
+   The small "Citește articolul" link navigates to the article instead. */
 (function renderManifest() {
   const el = document.getElementById('manifest-list');
   if (!el) return;
   el.innerHTML = MANIFEST.map(m => `
-    <a href="${m.href || '#'}" class="episode-item fade-in">
-      <div class="episode-num"><span class="ep">${m.ep}</span>${m.duration}</div>
+    <div class="episode-item fade-in sp-trigger"
+         data-spotify="${m.spotifyId}"
+         data-title="${m.part} — ${m.title.replace(/"/g,'&quot;')}"
+         role="button" tabindex="0"
+         aria-label="Ascultă pe Spotify: ${m.title}">
+      <button type="button" class="episode-play" aria-label="Redă pe Spotify · ${m.part}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
       <div class="episode-body">
         <div class="season">${m.part}</div>
         <h3>${m.title}</h3>
@@ -609,18 +649,13 @@ render();
         <div class="meta">
           <span>${m.duration}</span>
           <span class="sep">·</span>
-          <span>Serie manifest</span>
-          <span class="sep">·</span>
           <span>🎧 Spotify</span>
+          <span class="sep">·</span>
+          <a href="${m.href}" class="ep-read-link" onclick="event.stopPropagation()">Citește articolul →</a>
         </div>
       </div>
-      <button type="button" class="episode-play sp-trigger"
-              data-spotify="${m.spotifyId}"
-              data-title="${m.part} — ${m.title.replace(/"/g,'&quot;')}"
-              aria-label="Ascultă pe Spotify · ${m.part}">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-    </a>`).join('');
+      <div class="episode-num"><span class="ep">${m.ep}</span>${m.duration}</div>
+    </div>`).join('');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     el.querySelectorAll('.fade-in').forEach(el => io.observe(el));

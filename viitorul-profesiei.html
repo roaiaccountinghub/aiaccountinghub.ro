@@ -194,6 +194,15 @@
 /* Tighter page header — no lede paragraph below the H1 */
 .page-header { padding-bottom: 36px; }
 
+/* Podcast zone: play button comes FIRST (markup order already reflects this now) */
+.zone-list-podcast .zone-play {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+}
+/* Podcast list items: cursor indicates interactivity */
+.zone-list-podcast li { cursor: pointer; }
+.zone-list-podcast a.sp-trigger { flex: 1; }
+
 @media (max-width: 960px) {
   .mission-wrap { padding: 40px 20px 64px; }
   .mission-intro { padding: 24px; margin-bottom: 36px; }
@@ -292,34 +301,34 @@
       <p class="zone-blurb">Conversație dinamică între două gazde. Ideal pentru naveta zilnică, mașină sau metrou. Intri în flux, asculți, ieși cu o perspectivă nouă.</p>
       <ul class="zone-list zone-list-podcast">
         <li>
-          <a href="podcast.html#manifest"><span class="num">Partea 1</span><span class="lbl">Contextul Revoluției AI: de la ChatGPT la AI Agents</span></a>
           <button type="button" class="zone-play sp-trigger" data-spotify="4k0YbxKWkKNWGpKFJ3JklL" data-title="Partea 1 — Contextul Revoluției AI: de la ChatGPT la AI Agents" aria-label="Ascultă pe Spotify · Partea 1">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
+          <a href="#" class="sp-trigger" data-spotify="4k0YbxKWkKNWGpKFJ3JklL" data-title="Partea 1 — Contextul Revoluției AI: de la ChatGPT la AI Agents"><span class="num">Partea 1</span><span class="lbl">Contextul Revoluției AI: de la ChatGPT la AI Agents</span></a>
         </li>
         <li>
-          <a href="podcast.html#manifest"><span class="num">Partea 2</span><span class="lbl">Evoluția Contabilității: de la registre pe hârtie la era AI</span></a>
           <button type="button" class="zone-play sp-trigger" data-spotify="0hb9PUgaN6QNCN37qLwzPt" data-title="Partea 2 — Evoluția Contabilității: de la registre pe hârtie la era AI" aria-label="Ascultă pe Spotify · Partea 2">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
+          <a href="#" class="sp-trigger" data-spotify="0hb9PUgaN6QNCN37qLwzPt" data-title="Partea 2 — Evoluția Contabilității: de la registre pe hârtie la era AI"><span class="num">Partea 2</span><span class="lbl">Evoluția Contabilității: de la registre pe hârtie la era AI</span></a>
         </li>
         <li>
-          <a href="podcast.html#manifest"><span class="num">Partea 3</span><span class="lbl">Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering</span></a>
           <button type="button" class="zone-play sp-trigger" data-spotify="3FfSF66urjapVHvrPlOi6T" data-title="Partea 3 — Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering" aria-label="Ascultă pe Spotify · Partea 3">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
+          <a href="#" class="sp-trigger" data-spotify="3FfSF66urjapVHvrPlOi6T" data-title="Partea 3 — Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering"><span class="num">Partea 3</span><span class="lbl">Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering</span></a>
         </li>
         <li>
-          <a href="podcast.html#manifest"><span class="num">Partea 4</span><span class="lbl">Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani</span></a>
           <button type="button" class="zone-play sp-trigger" data-spotify="1OFGHOtAYGsBjZJHUsRHgD" data-title="Partea 4 — Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani" aria-label="Ascultă pe Spotify · Partea 4">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
+          <a href="#" class="sp-trigger" data-spotify="1OFGHOtAYGsBjZJHUsRHgD" data-title="Partea 4 — Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani"><span class="num">Partea 4</span><span class="lbl">Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani</span></a>
         </li>
         <li>
-          <a href="podcast.html#manifest"><span class="num">Partea 5</span><span class="lbl">Misiunea AI Accounting Hub</span></a>
           <button type="button" class="zone-play sp-trigger" data-spotify="7IsybDIfyJawn5Hv3PZG97" data-title="Partea 5 — Misiunea AI Accounting Hub" aria-label="Ascultă pe Spotify · Partea 5">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
+          <a href="#" class="sp-trigger" data-spotify="7IsybDIfyJawn5Hv3PZG97" data-title="Partea 5 — Misiunea AI Accounting Hub"><span class="num">Partea 5</span><span class="lbl">Misiunea AI Accounting Hub</span></a>
         </li>
       </ul>
       <a href="podcast.html#manifest" class="zone-cta">
