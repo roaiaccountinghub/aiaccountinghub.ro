@@ -38,10 +38,17 @@
   window.addEventListener('resize', () => { if (window.innerWidth > 960) close(); });
 })();
 
-/* ========== THEME TOGGLE (persisted) ========== */
+/* ========== THEME TOGGLE (persisted + OS preference) ========== */
 (function () {
   const saved = localStorage.getItem('aiah-theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
+  if (saved) {
+    /* Utilizatorul a ales manual — respectăm alegerea lui */
+    document.documentElement.setAttribute('data-theme', saved);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    /* Prima vizită, fără preferință salvată — urmăm setarea OS/browser */
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+  /* Altfel: rămâne dark-ul hardcodat în HTML — default-ul site-ului */
   const btn = document.getElementById('theme-toggle');
   if (btn) {
     btn.addEventListener('click', () => {
