@@ -273,7 +273,7 @@
           <span>Sursa: API ANAF</span>
         </div>
         <div class="actions">
-          <a href="#" class="btn btn-primary" download>Download
+          <a href="downloads/AnafCIFChecker.zip" class="btn btn-primary" download="AnafCIFChecker.zip">Download
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
           </a>
         </div>
@@ -512,7 +512,8 @@ const RESOURCES = [
   /* ===== TOOLS ===== */
   { type: 'tool', kind: 'Tool · API', title: 'Verificare CIF — site ANAF',
     desc: 'Interfață simplă peste API-ul public ANAF: introduci un CIF și primești nume firmă, plătitor TVA, stare activă. Rulează în browser, fără cont.',
-    size: 'Browser · API ANAF', cta: 'Deschide tool-ul' },
+    size: 'ZIP · Tool browser', cta: 'Download',
+    href: 'downloads/AnafCIFChecker.zip' },
   { type: 'tool', kind: 'Tool · Web', title: 'Extractor facturi PDF → Excel',
     desc: 'Drag-and-drop pentru facturi PDF. Extrage furnizor, CIF, total, TVA și le exportă într-un Excel gata pentru import.',
     size: 'Browser · Fără upload server', cta: 'În curând' },
@@ -538,9 +539,14 @@ function cardHTML(r) {
       <p>${r.desc}</p>
       <div class="resource-footer">
         <span class="resource-size">${r.size}</span>
-        <button class="download-btn">${r.cta || 'Download'}
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-        </button>
+        <a href="${r.link}" download="${r.link.split('/').pop()}" class="download-btn" style="text-decoration: none;">
+          ${r.cta || 'Download'}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <path d="M7 10l5 5 5-5"/>
+            <path d="M12 15V3"/>
+          </svg>
+        </a>
       </div>
     </div>`;
 }
