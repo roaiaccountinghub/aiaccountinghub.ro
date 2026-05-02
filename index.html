@@ -2185,6 +2185,15 @@ section.block {
 .download-btn:hover { background: var(--accent-2); letter-spacing: 0.08em; }
 .download-btn svg { transition: transform 0.25s ease; }
 .download-btn:hover svg { transform: translateY(2px); }
+.res-soon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg-dim);
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  white-space: nowrap;
+}
 
 /* ============ FOOTER ============ */
 footer {
@@ -3485,7 +3494,7 @@ if (playBtn) {
 const resources = [
   { type: 'tool', kind: 'Tool · API', title: 'Verificare CIF — site ANAF',
     desc: 'Interfață simplă peste API-ul public ANAF pentru verificarea unui CIF: nume firmă, plătitor TVA, stare activă. Fără cont, fără newsletter.',
-    size: 'Browser · API ANAF' },
+    size: 'Browser · API ANAF', href: 'downloads/AnafCIFChecker.zip' },
   { type: 'xls', kind: 'Template · Excel', title: 'Jurnal de vânzări AI-ready',
     desc: 'Structură standard pentru jurnalul de vânzări, pregătită pentru import automat în instrumente AI — coloane normalizate și validări.',
     size: 'XLSX · 120 KB' },
@@ -3511,7 +3520,14 @@ const iconFor = (t) => ({
   tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>'
 }[t]);
 const resTrack = document.getElementById('resources-track');
-resTrack.innerHTML = resources.map(r => `
+resTrack.innerHTML = resources.map(r => {
+  const action = r.href
+    ? `<a href="${r.href}" download="${r.href.split('/').pop()}" class="download-btn" onclick="event.stopPropagation()">
+        Download
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+      </a>`
+    : `<span class="res-soon">În curând</span>`;
+  return `
   <div class="resource ${r.type}">
     <div class="resource-header">
       <div class="resource-icon">${iconFor(r.type)}</div>
@@ -3521,12 +3537,10 @@ resTrack.innerHTML = resources.map(r => `
     <p>${r.desc}</p>
     <div class="resource-footer">
       <span class="resource-size">${r.size}</span>
-      <button class="download-btn">
-        Download
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-      </button>
+      ${action}
     </div>
-  </div>`).join('');
+  </div>`;
+}).join('');
 
 const resCards = [...resTrack.querySelectorAll('.resource')];
 let resIdx = Math.floor(resCards.length / 2);
@@ -3553,7 +3567,8 @@ function updateCarousel() {
 resPrev.addEventListener('click', () => { resIdx = (resIdx - 1 + resCards.length) % resCards.length; updateCarousel(); });
 resNext.addEventListener('click', () => { resIdx = (resIdx + 1) % resCards.length; updateCarousel(); });
 resCards.forEach((c, i) => c.addEventListener('click', (e) => {
-  if (i !== resIdx && !e.target.closest('.download-btn')) { resIdx = i; updateCarousel(); }
+  if (e.target.closest('.download-btn, a.download-btn')) return; /* let download link fire naturally */
+  if (i !== resIdx) { resIdx = i; updateCarousel(); }
 }));
 window.addEventListener('resize', updateCarousel);
 requestAnimationFrame(updateCarousel);

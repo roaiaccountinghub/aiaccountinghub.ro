@@ -128,6 +128,17 @@
 }
 .res-featured-visual .digits span { padding: 6px 0; border-top: 1px solid color-mix(in oklab, var(--accent-2) 15%, transparent); }
 
+/* "În curând" badge on resource cards */
+.res-soon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg-dim);
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
 /* Category strips */
 .cat-strip {
   display: grid;
@@ -529,32 +540,15 @@ const iconFor = (t) => ({
 }[t]);
 
 function cardHTML(r) {
-  // Verificăm dacă avem un link (suportăm atât 'link' cât și 'href' din codul tău)
-  const downloadUrl = r.link || r.href;
-  
-  // Generăm partea de acțiune (buton sau link)
-  let actionHtml = '';
-  
-  if (downloadUrl) {
-    // Dacă există link, generăm link-ul de download cu iconiță
-    const fileName = downloadUrl.split('/').pop();
-    actionHtml = `
-      <a href="${downloadUrl}" download="${fileName}" class="download-btn" style="text-decoration: none;">
-        ${r.cta || 'Download'}
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>
-        </svg>
-      </a>`;
-  } else {
-    // Dacă NU există link (e "În curând"), afișăm doar textul fără iconiță de download
-    actionHtml = `
-      <button class="download-btn" disabled style="opacity: 0.6; cursor: default;">
-        ${r.cta || 'În curând'}
-      </button>`;
-  }
-
+  const downloadUrl = r.href || r.link;
+  const action = downloadUrl
+    ? `<a href="${downloadUrl}" download="${downloadUrl.split('/').pop()}" class="download-btn">
+        Download
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+      </a>`
+    : `<span class="res-soon">În curând</span>`;
   return `
-    <div class="resource ${r.type} fade-in in">
+    <div class="resource ${r.type} fade-in">
       <div class="resource-header">
         <div class="resource-icon">${iconFor(r.type)}</div>
         <span class="resource-type">${r.kind}</span>
@@ -563,7 +557,7 @@ function cardHTML(r) {
       <p>${r.desc}</p>
       <div class="resource-footer">
         <span class="resource-size">${r.size}</span>
-        ${actionHtml}
+        ${action}
       </div>
     </div>`;
 }
@@ -572,12 +566,16 @@ function render() {
   ['pdf', 'xls', 'tool'].forEach(t => {
     const grid = document.getElementById('grid-' + t);
     if (!grid) return;
-    const items = RESOURCES.filter(r => r.type === t);
-    grid.innerHTML = items.map(cardHTML).join('');
+    grid.innerHTML = RESOURCES.filter(r => r.type === t).map(cardHTML).join('');
   });
+  /* Fade-in on scroll — or immediately if IO not supported */
   if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
     document.querySelectorAll('.res-zone .fade-in').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.res-zone .fade-in').forEach(el => el.classList.add('in'));
   }
 }
 
