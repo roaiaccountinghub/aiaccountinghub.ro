@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RO e-Factura: ANAF, AI și UI-ul din 2007 — AI Accounting Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ ARTICLE PAGE ============ */
+.article-wrap {
+  position: relative; z-index: 1;
+  max-width: 1360px; margin: 0 auto;
+  padding: 64px 32px 96px;
+  display: grid;
+  grid-template-columns: 1fr 720px 1fr;
+  gap: 48px;
+}
+.article-side { position: relative; }
+.article-side.left { justify-self: end; }
+.article-side .sticky {
+  position: sticky; top: 96px;
+  padding: 20px 0;
+}
+.toc {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-1);
+}
+.toc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 14px;
+}
+.toc a {
+  display: block;
+  font-size: 13px; color: var(--fg-muted);
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid var(--border);
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.toc a:hover { color: var(--accent); border-color: var(--accent); }
+.toc a.active { color: var(--accent); border-color: var(--accent); }
+
+.article-main {
+  position: relative;
+  /* Critical for mobile: grid items default to min-width: auto (their content's
+     intrinsic min size). The <pre> code blocks below have long unbreakable
+     lines, which would otherwise force the grid item — and the prose with it —
+     wider than the viewport, clipping all the regular paragraph text. */
+  min-width: 0;
+}
+/* Same defence one level deeper: keep prose locked to its parent column */
+.article-main .prose,
+.article-main .prose pre,
+.article-main .prose img { max-width: 100%; }
+.article-main .prose pre { box-sizing: border-box; }
+
+.article-meta-top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.article-meta-top .sep { opacity: 0.4; }
+.article-category {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+.article-main h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.article-main h1 .accent {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 55%, color-mix(in oklab, var(--accent) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.article-lede {
+  font-size: 19px; line-height: 1.55; color: var(--fg-muted);
+  margin-bottom: 36px;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+}
+
+.author-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  display: grid; place-items: center;
+  color: #07121a; font-weight: 700; font-size: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+  flex-shrink: 0;
+}
+.author-info { flex: 1; min-width: 0; }
+.author-name { font-size: 14px; font-weight: 600; }
+.author-role { font-size: 12px; color: var(--fg-muted); }
+.share-row { display: flex; gap: 8px; }
+.share-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn svg { width: 15px; height: 15px; }
+
+.article-cover {
+  position: relative;
+  margin: 0 -32px 48px;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 360px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.article-cover-bg {
+  position: absolute; inset: 0;
+  background-image: url('assets/hero-vf.png');
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05) brightness(0.92);
+}
+.article-cover::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--bg-0) 80%, transparent) 100%);
+}
+.article-cover-caption {
+  position: absolute; left: 24px; bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-muted);
+  letter-spacing: 0.08em;
+  z-index: 2;
+}
+
+/* Prose */
+.prose {
+  font-size: 17px; line-height: 1.75;
+  color: var(--fg);
+  /* Prevent any unbreakable string from forcing horizontal overflow on mobile */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.prose p { margin: 0 0 22px; }
+.prose h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px; line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 56px 0 20px;
+  scroll-margin-top: 100px;
+}
+.prose h2::before {
+  content: '§'; color: var(--accent);
+  font-weight: 400;
+  margin-right: 12px;
+  opacity: 0.6;
+}
+.prose h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; line-height: 1.25; letter-spacing: -0.01em;
+  font-weight: 600;
+  margin: 36px 0 14px;
+  scroll-margin-top: 100px;
+}
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { color: var(--accent); font-style: normal; font-family: 'Space Grotesk', sans-serif; }
+.prose a { color: var(--accent); border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); transition: all 0.2s; }
+.prose a:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.prose ul, .prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose li { margin-bottom: 10px; }
+.prose li::marker { color: var(--accent); }
+.prose blockquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  border-radius: 0 12px 12px 0;
+  font-size: 18px;
+  color: var(--fg);
+  font-style: italic;
+}
+.prose blockquote cite {
+  display: block;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-style: normal;
+  color: var(--fg-muted); letter-spacing: 0.05em;
+}
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88em;
+  padding: 2px 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent);
+}
+.prose pre {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.6;
+}
+.prose pre code {
+  background: none; border: none; padding: 0; color: var(--fg);
+}
+.callout {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 14px;
+}
+.callout .ic {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center;
+  background: color-mix(in oklab, var(--accent) 15%, transparent);
+  color: var(--accent);
+}
+.callout .ic svg { width: 16px; height: 16px; }
+.callout .cbody { font-size: 14px; line-height: 1.6; color: var(--fg); }
+.callout .cbody strong { color: var(--accent); }
+
+/* End of article */
+.article-end {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+.author-card {
+  margin: 72px 0 0;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.author-card .author-avatar { width: 64px; height: 64px; font-size: 20px; }
+.author-card h3 { font-size: 20px; margin-bottom: 6px; }
+.author-card .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; margin-bottom: 12px; }
+.author-card p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+
+/* Related */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.related-card {
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; flex-direction: column;
+  transition: all 0.3s ease;
+}
+.related-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.related-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.related-card h3 { font-size: 18px; line-height: 1.25; margin-bottom: 10px; }
+.related-card p { font-size: 13px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.related-read {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.related-read svg { transition: transform 0.2s; }
+.related-card:hover .related-read svg { transform: translateX(4px); }
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .article-wrap { grid-template-columns: 1fr; max-width: 760px; padding: 48px 24px 72px; }
+  .article-side { display: none; }
+}
+@media (max-width: 960px) {
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .article-cover { margin: 0 0 36px; height: 280px; }
+}
+@media (max-width: 720px) {
+  .article-wrap { padding: 28px 16px 48px; }
+  /* Match the mobile container padding so the cover doesn't push out beyond
+     the viewport (the desktop -32px margin assumed 32px container padding). */
+  .article-cover { height: 220px; margin: 0 -16px 24px; border-radius: 14px; }
+  .article-cover-caption { left: 16px; bottom: 14px; font-size: 10px; }
+  .article-main h1 { font-size: clamp(26px, 7.5vw, 34px); }
+  .article-lede { font-size: 16px; padding-left: 14px; }
+  .author-row { flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .share-row { width: 100%; justify-content: flex-end; }
+  .prose { font-size: 16px; line-height: 1.7; overflow-wrap: break-word; word-wrap: break-word; }
+  .prose h2 { font-size: 22px; margin: 36px 0 14px; }
+  .prose h2::before { margin-right: 8px; }
+  .prose h3 { font-size: 18px; margin: 26px 0 12px; }
+  .prose blockquote { margin: 22px 0; padding: 14px 16px; font-size: 15px; border-radius: 0 10px 10px 0; }
+  .prose pre { padding: 12px; font-size: 12px; border-radius: 10px; }
+  .callout { flex-direction: column; gap: 10px; padding: 16px; }
+  .author-card { flex-direction: column; gap: 16px; padding: 22px; margin-top: 48px; }
+  .author-card .author-avatar { width: 52px; height: 52px; font-size: 18px; }
+  .article-end { gap: 16px; padding-top: 24px; margin-top: 36px; }
+  .related-grid { grid-template-columns: 1fr; gap: 14px; }
+  .related-card { padding: 20px; }
+}
+@media (max-width: 420px) {
+  .article-wrap { padding: 22px 14px 40px; }
+  .article-cover { margin: 0 -14px 22px; height: 190px; }
+  .article-main h1 { font-size: 24px; line-height: 1.06; }
+  .article-lede { font-size: 14.5px; padding-left: 12px; margin-bottom: 28px; }
+  .article-meta-top { gap: 8px; font-size: 10px; margin-bottom: 18px; }
+  .article-meta-top .sep { display: none; }
+  .prose { font-size: 15px; line-height: 1.65; }
+  .prose p { margin-bottom: 18px; }
+  .prose h2 { font-size: 19px; margin: 28px 0 12px; }
+  .prose h2::before { display: none; }
+  .prose h3 { font-size: 16px; margin: 22px 0 10px; }
+  .prose blockquote { padding: 12px 14px; font-size: 14px; }
+  .prose ul, .prose ol { padding-left: 20px; }
+  .tags-row { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="article-meta-top">
+      <span class="article-category">Opinie</span>
+      <span>02 mai 2026</span>
+      <span class="sep">·</span>
+      <span>9 min citire</span>
+    </div>
+
+    <h1>RO e-Factura: când ANAF vede viitorul prin AI, iar tu ești blocat în <span class="accent">UI-ul anului 2007</span>.</h1>
+    <p class="article-lede">
+      Sistemul național RO e-Factura are un backend impresionant și un stat care folosește deja datele algoritmic. Dar contabilul care vrea să exporte un simplu Excel cu facturile lunii lovește o interfață rămasă cu un deceniu în urmă. Recunoaștere, critică și o solicitare publică concretă.
+    </p>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">02.05.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// RO e-Factura · backend vs. front-end</div>
+    </div>
+
+    <div class="prose">
+      <p>
+        Sistemul național RO e-Factura este, fără exagerare, primul mare proiect de digitalizare al statului român dus până la capăt. Backend-ul livrează la o scară pe care, sincer, puțini o anticipau. Și totuși, în 2026, contabilul care vrea pur și simplu să exporte un raport cu facturile lunii se lovește de o interfață care pare împrumutată dintr-un alt deceniu. Articolul de față este, în egală măsură, o recunoaștere a reușitei tehnice și o solicitare publică de a închide ultimul kilometru — cel care ajunge la utilizator.
+      </p>
+
+      <h2 id="s0">Cifrele care nu mai pot fi ignorate</h2>
+      <p>
+        Înainte de orice critică, merită spus răspicat: RO e-Factura <strong>funcționează</strong>. Și nu „funcționează" în sensul defensiv al cuvântului, ci la o scară industrială.
+      </p>
+      <p>
+        Contorul live publicat de Ministerul Finanțelor pe <code>mfinante.gov.ro/web/efactura</code> arată, la momentul redactării, cifre care depășesc orice așteptare rezonabilă pentru un sistem public lansat în formă obligatorie acum patru ani:
+      </p>
+      <ul>
+        <li><strong>Peste 2,12 miliarde de facturi</strong> procesate de la lansare. Două miliarde, cu „M" mare. Pentru o țară de 19 milioane de locuitori, asta înseamnă peste 110 facturi pe cap de locuitor trecute prin sistem.</li>
+        <li><strong>78,9 milioane de facturi în relația B2G</strong> — către instituții publice.</li>
+        <li><strong>1,12 miliarde de facturi B2C</strong> — segmentul care, după doar un an și ceva de obligativitate, a depășit deja jumătate din volumul total. O dovadă directă a cât de masiv este fluxul de tranzacții către consumatorul final.</li>
+        <li><strong>Peste 4 milioane de facturi pe zi</strong>, în medie, în regim curent. Adică aproximativ <strong>2.000 de facturi pe minut</strong>, fără vârfuri.</li>
+        <li><strong>419 milioane de facturi doar în primele patru luni din 2026</strong> — o medie zilnică de aproximativ 3,5 milioane, semnificativ peste ținta inițială de „un milion pe zi" anunțată în 2024.</li>
+      </ul>
+      <p>
+        Cei care încă mai folosesc reflexul comod „nu funcționează sistemul" au de explicat aceste cifre. Pentru că pe partea de back-end și API, ANAF chiar livrează — și o face zilnic, neîntrerupt, cu o stabilitate care contrazice prejudecățile.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Notă editorială.</strong> Toate cifrele de volum citate în acest articol provin din contorul live oficial publicat de Ministerul Finanțelor la <code>mfinante.gov.ro/web/efactura</code>. Recomandăm verificarea actualizată direct la sursă — datele se mișcă în timp real.
+        </div>
+      </div>
+
+      <h2 id="s1">Singurul proiect de digitalizare dus până la capăt</h2>
+      <p>
+        Lansat în martie 2020 de Ministerul Finanțelor și ANAF, cu inspirație din modelul italian, sistemul a urcat treptele așteptate: obligatoriu pentru produse cu risc fiscal ridicat și B2G din iulie 2022, universal pe B2B din ianuarie 2024, extins pe B2C în 2025. Iar 2026, prin OUG 89/2025 — celebra „OUG trenuleț" de la finalul lui decembrie —, este <strong>anul de consolidare</strong>: orice tranzacție economică din România trece prin RO e-Factura, inclusiv facturile către nerezidenți cu cod de TVA în România și cele emise de persoane fizice din activități economice.
+      </p>
+      <p>
+        Ne-am obișnuit cu titluri despre proiecte abandonate la jumătate, cu sisteme care nu vorbesc între ele, cu platforme care funcționează doar dacă te rogi frumos. RO e-Factura, cu toate problemele ei, este în producție, e obligatorie pentru toată lumea, prelucrează volume uriașe în fiecare zi, și <strong>nu mai e marșarier</strong>. Următoarele platforme — e-TVA, e-Transport, bonul fiscal digital, SAF-T — sunt construite pe această fundație și vor moșteni atât virtuțile, cât și problemele.
+      </p>
+
+      <h2 id="s2">Cadoul ascuns: standardizarea care face AI-ul posibil</h2>
+      <p>
+        Cea mai importantă moștenire a sistemului nu este, paradoxal, cea fiscală. Este <strong>standardizarea datelor</strong>.
+      </p>
+      <p>
+        Înainte de e-Factura, orice firmă care voia să aplice algoritmi de inteligență artificială pe documentele primite — pentru clasificare, reconciliere, detectare de anomalii — pornea de la un teanc de PDF-uri pe mail, scan-uri imperfecte, poze din telefon și o doză sănătoasă de OCR. În orice flux serios, OCR-ul ratează între 3% și 5% din documente, ceea ce la un volum de 10.000 de facturi pe lună înseamnă 300–500 de documente revizuite manual. Exact munca pe care voiai să o automatizezi.
+      </p>
+      <p>
+        Cu RO e-Factura, situația se schimbă fundamental. Factura ajunge la destinatar ca <strong>fișier XML structurat</strong>, conform standardului european <code>RO_CIUS</code> bazat pe <code>EN 16931</code>. CUI furnizor, CUI client, dată, valoare netă, TVA, IBAN, cod CAEN — toate câmpurile, în aceleași locuri, cu aceleași denumiri, citibile direct de orice algoritm. Nu mai vorbim de „95% acuratețe", vorbim de <strong>100% procesabil</strong>.
+      </p>
+      <p>
+        Pentru ecosistemul AI din contabilitatea românească, asta este schimbarea decisivă: <strong>puntea către date curate există deja, gratuit, prin lege</strong>. Nimeni nu mai trebuie să antreneze modele OCR pentru fiecare format de furnizor.
+      </p>
+
+      <h2 id="s3">Declarațiile oficiale: AI-ul este deja la lucru</h2>
+      <p>
+        Pe partea de stat, folosirea inteligenței artificiale pe aceste date standardizate nu este o promisiune de viitor. Este o realitate confirmată public, la cel mai înalt nivel.
+      </p>
+      <p>
+        În <strong>octombrie 2025</strong>, ministrul Finanțelor <strong>Alexandru Nazare</strong> declara, la un eveniment Profit.ro, că ANAF dispune deja de un software care integrează 11 baze de date, are componentă de inteligență artificială și urmărește mai mulți indicatori de risc fiscal. Conform declarațiilor sale, soluția este „state-of-the-art" și este folosită activ în prezent — nu plănuită, nu testată, ci în uz operațional. Ministrul a confirmat și ținta de finalizare a digitalizării integrale a ANAF până la sfârșitul anului 2026, în linie cu jaloanele PNRR.
+      </p>
+      <p>
+        O lună mai târziu, în <strong>noiembrie 2025</strong>, consilierul prezidențial <strong>Radu Burnete</strong> explica la Digi24 mecanismul, în termeni concreți. ANAF are deja toate datele digitale relevante — e-Factura, e-Transport, declarații TVA, formulare fiscale. Pasul care produce salt calitativ este interconectarea bazelor și aplicarea algoritmilor de inteligență artificială pentru analiza lor. Citez succint: <em>„odată ce folosești inteligență artificială, vezi anomalii"</em>. Exemplul oferit a fost direct: o sută de restaurante cu aceeași cifră de afaceri și același număr de angajați, dintre care cinci plătesc TVA de trei ori mai puțin — sistemul le semnalează automat și ghidează inspectorii fiscali către ele.
+      </p>
+      <p>
+        În același tablou intră și mecanismele instituționale recente care presupun analiză automată la scară: <strong>registrul special de analiză de risc fiscal</strong> introdus prin Ordinul ANAF 2229/2025 (Monitorul Oficial, 30 septembrie 2025), procedurile electronice asociate formularului 800 din SPV (operaționale din 24 februarie 2026) și mecanismul de amendă de <strong>15% din valoarea facturii</strong> — aplicabil în B2B atât emitentului care nu transmite prin sistem, cât și destinatarului care înregistrează factura primită prin alte canale. Niciuna dintre aceste pârghii nu ar fi operaționalizabilă fără capacitate analitică la scara de miliarde de documente.
+      </p>
+
+      <h2 id="s4">De la algoritm la cont blocat</h2>
+      <p>
+        Efectele acestei capacități analitice se văd în cifrele de colectare. Conform datelor ANAF transmise Agerpres în aprilie 2026, instituția a încasat <strong>27,26 miliarde de lei prin executare silită în 2025</strong> — o creștere de aproape 27% față de cele 21,53 miliarde înregistrate în 2024. Numărul somațiilor a urcat la <strong>3,2 milioane</strong>, față de circa 3 milioane în anul precedent. Sunt creșteri pe care simpla extindere a bazei de contribuabili nu le explică.
+      </p>
+      <p>
+        Mecanismul prin care aceste sume ajung efectiv la bugetul de stat este, în mare parte, automatizat. Sistemul <strong>e-Popriri</strong>, lansat în 2021 și complet operațional astăzi, transmite zilnic — electronic, fără intervenție umană la nivelul actului — adresele de înființare a popririi către toate băncile la care debitorul are conturi deschise. Conturile sunt blocate în aceeași zi, sumele sunt transferate în 3-5 zile lucrătoare.
+      </p>
+      <p>
+        Aici intră în scenă și o instituție pe care orice contabil o cunoaște prea bine: <em>terțul poprit</em>. Nu doar conturile debitorului direct sunt vizate, ci și sumele datorate acestuia de către clienții, partenerii sau angajatorul lui — orice terț care, juridic, are de plată către persoana urmărită. Conform unor <strong>voci constante din comunitatea fiscală și din piață</strong>, identificarea automată a terților popriți relevanți — adică a entităților care, conform datelor centralizate ANAF, au de virat sume către un anumit debitor — este una dintre aplicațiile concrete ale capacității analitice nou-instaurate. Datele standardizate din e-Factura, încrucișate cu raportările bancare și cu declarațiile fiscale ale partenerilor, oferă un peisaj suficient de complet pentru ca această identificare să fie nu doar fezabilă, ci eficientă la scară.
+      </p>
+      <p>
+        Cu alte cuvinte, fluxul „factură standardizată → analiză algoritmică → identificare risc → executare silită automatizată" funcționează. Și produce 27 de miliarde de lei într-un singur an.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Notă de transparență.</strong> Folosirea AI pentru analiza de risc fiscal și pentru detecția de anomalii este confirmată oficial prin declarațiile autorităților citate mai sus. Aplicarea specifică pentru identificarea automată a terților popriți circulă în comunitatea fiscală ca informație de piață și nu a fost, până la momentul redactării, confirmată oficial printr-un comunicat ANAF. O menționăm distinct, pentru că standardul informațional contează.
+        </div>
+      </div>
+
+      <h2 id="s5">Și apoi, deschizi interfața</h2>
+      <p>
+        Acesta este tabloul de pe partea statului. Backend la scara de miliarde, AI confirmat oficial de ministrul Finanțelor și de consilierul prezidențial, executări silite electronice care au produs 27 de miliarde de lei într-un an. Și apoi, treci pe partea contribuabilului. Aici se rupe filmul.
+      </p>
+      <p>
+        Ai în spate cea mai mare bază de date fiscale standardizate din istoria României. Ai un API public, documentat, gratuit, la <code>webservicesp.anaf.ro</code>. Ai validare europeană, semnătură digitală, indecși de încărcare care îți confirmă fiecare document. Ai un sistem care procesează 2.000 de facturi pe minut.
+      </p>
+      <p>
+        Și ești un contabil care vrea, simplu, să facă o reconciliere între facturile din ERP și cele din RO e-Factura pentru luna trecută.
+      </p>
+      <p>Ce găsești în interfață?</p>
+      <ul>
+        <li><strong>Filtrarea pică.</strong> La firme cu volume rezonabile — și prin „rezonabile" nu înțelegem multinaționale, ci orice retailer mediu, orice distribuitor, orice firmă cu zeci de mii de tranzacții lunar — încercarea de a filtra <strong>chiar și pentru o singură zi</strong> întoarce frecvent eroare de vizualizare, listă incompletă sau pagina pică pur și simplu.</li>
+        <li><strong>Exportul lipsește.</strong> Dacă, prin minune, reușești să filtrezi, nu există nicio opțiune de a descărca rezultatul ca listă completă cu coloanele de bază — furnizor, CUI, număr factură, dată, valori totale. Header report-ul, acel Excel banal pe care îl ai by-default în orice ERP modern din ultimii 15 ani, nu există.</li>
+        <li><strong>Descărcarea de XML-uri se face individual.</strong> Câte un fișier pe rând. Pentru o lună cu mii de facturi, nu este o opțiune; este o glumă proastă.</li>
+        <li><strong>Câmpurile vizibile sunt minime.</strong> Numărul de înregistrare ANAF, data, câteva detalii de bază. Pentru reconciliere reală — degeaba. Pentru o evidență de management — degeaba.</li>
+      </ul>
+      <p>
+        Stăm pe un munte de date standardizate, valide, semnate digital de Ministerul Finanțelor — și ca să le scoatem din interfață în formă utilizabilă, ne întoarcem la API. Adică tot la programare, tot la dezvoltatori, tot la soluții terțe pe care contabilul mediu nu le are.
+      </p>
+
+      <h2 id="s6">Ironia care doare</h2>
+      <p>
+        Comunitatea de AI și automatizare din contabilitatea românească are, în sfârșit, datele de care avea nevoie. Există, deja pe piață, soluții care extrag prin API, construiesc o interfață decentă peste, permit filtrare, export și interogări de tipul „dă-mi top 10 furnizori cu cele mai mari întârzieri în luna trecută". Vor mai veni. E un spațiu sănătos de inovație.
+      </p>
+
+      <blockquote>
+        Statul a construit autostrada, dar a uitat să facă bretelele de acces.
+      </blockquote>
+
+      <p>
+        Pentru un contabil care nu are platformă terță conectată, nu are dezvoltator, nu are buget pentru o soluție comercială, sistemul național RO e-Factura — la care contribuie obligatoriu prin lege — este, pe partea de utilizare directă, aproape inaccesibil în mod productiv.
+      </p>
+      <p>
+        Iar asta nu este o problemă tehnică complicată. Filtrare care nu pică pentru intervale de o zi, export CSV/Excel cu coloanele de bază, paginare funcțională — sunt feature-uri pe care orice junior dezvoltator le livrează într-o săptămână. Sunt <strong>feature-uri standard din 2007 încoace</strong>. Nu este vorba de un capriciu UX modern; este vorba despre minimul funcțional al unei aplicații web pentru utilizator final.
+      </p>
+
+      <h2 id="s7">Solicitare publică</h2>
+      <p>
+        Dintr-un sentiment care îmbină recunoașterea sinceră a reușitei tehnice cu frustrarea zilnică a oamenilor care folosesc sistemul, formulăm public, către <strong>Ministerul Finanțelor și ANAF</strong>, următoarele:
+      </p>
+      <ol>
+        <li><strong>Recunoaștem și apreciem</strong> investiția masivă în back-end, API și capacitatea analitică a sistemului RO e-Factura. Cifrele vorbesc de la sine. Este un succes tehnic real, care plasează România între statele cu cea mai matură infrastructură de e-invoicing din Europa.</li>
+        <li><strong>Solicităm</strong>, cu aceeași seriozitate, alocarea de resurse pentru reformarea interfeței de utilizator a sistemului, cu prioritate pe trei funcționalități:
+          <ul>
+            <li><strong>Filtrare stabilă</strong> pe intervale uzuale (zi, săptămână, lună), fără căderi de pagină.</li>
+            <li><strong>Export tabular</strong> (Excel/CSV) al rezultatului filtrării, conținând coloanele esențiale pentru reconciliere: furnizor, CUI, serie și număr factură, dată emitere, valori (net, TVA, total), index de încărcare.</li>
+            <li><strong>Descărcare în masă</strong> a XML-urilor pentru un set filtrat, nu doar individual.</li>
+          </ul>
+        </li>
+        <li><strong>Solicităm</strong>, de asemenea, comunicarea publică a unui calendar — fie el și provizoriu — pentru aceste îmbunătățiri. Comunitatea profesioniștilor din contabilitate are nevoie de previzibilitate; absența unui orizont oficial alimentează frustrarea și încurajează soluții parțiale, fragmentate.</li>
+      </ol>
+      <p>
+        Aceste trei puncte nu sunt cereri ambițioase. Sunt minimul rezonabil pentru ca sistemul să fie utilizabil de către cei care îl alimentează zilnic cu date, cu efort, sub sancțiunea legii.
+      </p>
+
+      <h2 id="s8">În loc de concluzie</h2>
+      <p>
+        RO e-Factura demonstrează că România poate construi infrastructură digitală de mare anvergură. Dovada e cuantificabilă, publicată live, verificabilă de oricine. Este un activ național real.
+      </p>
+      <p>
+        Dar un sistem de stat care procesează miliarde de tranzacții și nu permite, în 2026, exportul unui simplu Excel cu facturile lunii este un sistem care își subutilizează propria valoare. Diferența dintre <strong>infrastructură de clasă mondială</strong> și <strong>infrastructură accesibilă</strong> se măsoară exact în acești câțiva kilometri finali — kilometrii UI-ului.
+      </p>
+      <p>
+        Statul român a făcut partea grea. A mai rămas partea ușoară. Ar fi păcat să nu o facă.
+      </p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#e-factura</a>
+          <a href="#" class="tag">#anaf</a>
+          <a href="#" class="tag">#digitalizare</a>
+          <a href="#" class="tag">#api</a>
+          <a href="#" class="tag">#ux</a>
+        </div>
+        <span class="footer-mono">Articolul #008</span>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s0">Cifrele care nu mai pot fi ignorate</a>
+        <a href="#s1">Singurul proiect dus până la capăt</a>
+        <a href="#s2">Cadoul ascuns: standardizarea</a>
+        <a href="#s3">Declarațiile oficiale</a>
+        <a href="#s4">De la algoritm la cont blocat</a>
+        <a href="#s5">Și apoi, deschizi interfața</a>
+        <a href="#s6">Ironia care doare</a>
+        <a href="#s7">Solicitare publică</a>
+        <a href="#s8">În loc de concluzie</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Explorează restul hub-ului.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="index.html#podcast" class="related-card fade-in">
+        <div class="related-date">PODCAST · E02</div>
+        <h3>RO e-Factura: între promisiunea digitalizării și realitatea din SPV</h3>
+        <p>Episodul-sursă al acestui articol. Discuție extinsă despre standardizare, API, termenele 2026 și interfața SPV — cu nuanțe care n-au încăput în articol.</p>
+        <span class="related-read">Ascultă episodul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-05-01-Goana-dupa-promptul-perfect.html" class="related-card fade-in">
+        <div class="related-date">ARTICOL · #001</div>
+        <h3>Goana după promptul perfect — plus shortcut-ul care schimbă jocul</h3>
+        <p>Cele 7 ingrediente ale unui prompt bun aplicat în zona financiar-contabilă, plus scurtătura prin care AI-ul îți construiește singur promptul.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="contact.html" class="related-card fade-in">
+        <div class="related-date">CONTACT</div>
+        <h3>Susții solicitarea publică? Ai o perspectivă de adăugat?</h3>
+        <p>Contabili, dezvoltatori, contribuabili — orice voce care întărește apelul către Ministerul Finanțelor și ANAF e binevenită.</p>
+        <span class="related-read">Scrie-ne
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required placeholder="Ex. Ioana Popescu"></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required placeholder="ioana@firma.ro"></div>
+      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required placeholder="Scrie-ne ce te interesează..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+/* TOC active link on scroll */
+(function () {
+  const links = document.querySelectorAll('.toc a');
+  if (!links.length) return;
+  const ids = Array.from(links).map(a => a.getAttribute('href').slice(1));
+  const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  targets.forEach(t => io.observe(t));
+})();
+</script>
+</body>
+</html>
