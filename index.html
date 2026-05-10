@@ -3178,8 +3178,10 @@ function escapeHtml(s) {
 }
 
 /* Load buzzword terms from JSON. Production deploys ship updates by editing
-   the JSON file only. */
-fetch('assets/buzzwords.json')
+   the JSON file only. `cache: 'no-cache'` forces revalidation on every load
+   so weekly term updates show up on mobile (Safari iOS caches JSON aggressively
+   without it). Server returns 304 Not Modified when JSON is unchanged. */
+fetch('assets/buzzwords.json', { cache: 'no-cache' })
   .then(r => r.ok ? r.json() : Promise.reject())
   .then(data => {
     if (data && Array.isArray(data.terms) && data.terms.length) {
