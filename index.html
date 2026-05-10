@@ -2731,28 +2731,28 @@ footer {
         </div>
         <div class="stair-card-wrap">
           <div class="podcast-card sp-trigger" id="podcast-card"
-               data-spotify="5enoAz2nrHLOOLg80JDcsW"
-               data-title="E01 — RO e-Factura: Când ANAF vede viitorul prin AI, iar tu ești blocat în UI-ul anului 2007"
+               data-spotify="0hZnb2nnOPdCrLTqVicq80"
+               data-title="E02 — Agentul AI nu știe să țină un secret"
                role="button" tabindex="0"
-               aria-label="Ascultă pe Spotify: RO e-Factura">
+               aria-label="Ascultă pe Spotify: Agentul AI nu știe să țină un secret">
             <div class="podcast-hero">
               <div class="podcast-label"><span class="live-dot"></span>Podcast · Episodul curent</div>
               <div class="podcast-centerpiece">
-                <h3>RO e-Factura</h3>
-                <div class="podcast-subtitle">Când ANAF vede viitorul prin AI, iar tu ești blocat în UI-ul anului 2007</div>
-                <div class="show-meta">Sezonul 1 · Episodul curent</div>
+                <h3>Agentul AI nu știe să țină un secret</h3>
+                <div class="podcast-subtitle">Riscurile nevăzute ale automatizării și cum să le eviți</div>
+                <div class="show-meta">Sezonul 2 · E02</div>
               </div>
               <div class="player">
                 <button class="play-btn sp-trigger" id="play-btn"
-                        data-spotify="5enoAz2nrHLOOLg80JDcsW"
-                        data-title="E01 — RO e-Factura: Când ANAF vede viitorul prin AI, iar tu ești blocat în UI-ul anului 2007"
-                        aria-label="Redă pe Spotify · RO e-Factura">
+                        data-spotify="0hZnb2nnOPdCrLTqVicq80"
+                        data-title="E02 — Agentul AI nu știe să țină un secret"
+                        aria-label="Redă pe Spotify · Agentul AI nu știe să țină un secret">
                   <svg id="play-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                 </button>
                 <div class="player-info">
-                  <div class="player-title">RO e-Factura · 24 min</div>
+                  <div class="player-title">Agentul AI nu știe să țină un secret · 17 min</div>
                   <div class="player-progress"><div class="player-progress-fill" id="progress"></div></div>
-                  <div class="player-time"><span id="time-cur">00:00</span><span>24:00</span></div>
+                  <div class="player-time"><span id="time-cur">00:00</span><span>17:40</span></div>
                 </div>
               </div>
             </div>
@@ -2767,7 +2767,7 @@ footer {
             <div class="mission-centerpiece">
               <div class="cc-kicker">// Pentru noii vizitatori</div>
               <h3 class="mission-title">Nou în<br>comunitate ?</h3>
-              <div class="mission-heading">Cum extragi maximul din hub</div>
+              <div class="mission-heading">Cum extragi maxim din hub</div>
             </div>
             <div class="flip-hint cc-hint cc-hint-cyan">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
@@ -3139,68 +3139,12 @@ const cxBack = document.getElementById('cx-back');
 const cxClose = document.getElementById('cx-close');
 
 /* ========== BUZZWORD CARD ==========
-   Source of truth = assets/buzzwords.json (easy to edit). For local file://
-   testing where fetch fails, the same data is also embedded inline below as
-   FALLBACK_TERMS. Keep both in sync when adding new terms. */
-const FALLBACK_TERMS = [
-  {
-    id: 'llm',
-    term: 'LLM',
-    termFull: 'LARGE LANGUAGE MODEL',
-    pron: '/ el·el·em /',
-    type: 'substantiv',
-    ro: 'Modele Lingvistice de Mari Dimensiuni',
-    def: [
-      'Model de limbaj antrenat pe zeci de miliarde de cuvinte din cărți, articole, documentații tehnice și date structurate — capabil să înțeleagă contextul unei cereri și să genereze răspunsuri coerente, să extragă informații din documente nestructurate, să clasifice și să reformuleze text în limbaj profesional.',
-      'Spre deosebire de un motor de căutare care găsește documente existente sau de software-ul tradițional bazat pe reguli rigide („if-then”), un LLM generează răspunsuri noi pe baza tiparelor învățate. Nu stochează fapte ca o bază de date — raționează probabilistic asupra textului primit.',
-      'În practica contabilă, un LLM poate procesa simultan sute de documente cu formate diferite: facturi în PDF scanat, contracte în Word, extrase bancare în CSV — și poate extrage, normaliza și exporta datele fără intervenție manuală pentru fiecare document în parte.'
-    ],
-    examples: [
-      'extragere automată câmpuri din 200 facturi PDF → Excel structurat în < 5 min',
-      'Interpretarea contractelor: extragerea automată a clauzelor de reziliere, a termenelor de plată sau a penalităților din sute de contracte comerciale scanate.',
-      'Asistență în audit: generarea unei prime versiuni a raportului de audit prin sintetizarea notelor explicative și a balanțelor de verificare.'
-    ]
-  },
-  {
-    id: 'tokens',
-    term: 'TOKENS',
-    termFull: 'UNITATE DE PROCESARE TEXT',
-    pron: '/ to·ken /',
-    type: 'substantiv',
-    ro: 'Tokeni',
-    def: [
-      'Tokenii reprezintă unitatea de măsură fundamentală a „gândirii” unui model AI. Gândește-te la ei ca la atomii unui text: un token nu este egal cu un cuvânt — poate fi o silabă, un cuvânt întreg, un semn de punctuație sau chiar un spațiu. În limba română, din cauza diacriticelor și a cuvintelor compuse, raportul este aproximativ 1 cuvânt = 1,3–1,6 tokeni.',
-      'AI-ul nu „citește” propoziții, ci procesează fluxuri de tokeni. Tokenizarea este primul pas în orice procesare AI: textul tău este transformat într-o secvență de numere pe care modelul o poate analiza matematic. Cu cât un document are mai mulți tokeni, cu atât procesarea consumă mai multe resurse — și în cazul API-urilor comerciale, mai mult cost.',
-      'În lumea financiară, înțelegerea tokenilor este esențială deoarece aceștia determină atât costul (majoritatea API-urilor se plătesc la număr de tokeni), cât și limita de procesare a informației pe care o poți introduce o singură dată. Referință orientativă: 1.000 tokeni ≈ 750 cuvinte în engleză / ≈ 600 cuvinte în română.'
-    ],
-    examples: [
-      'o factură standard de 1 pagină = ~400–600 tokeni; procesarea a 1.000 facturi/lună = cost estimabil în avans',
-      'un contract de 10 pagini = ~5.000–7.000 tokeni — poate depăși limita unor modele mai mici, necesitând segmentare',
-      'optimizând promptul de extracție date de la 300 la 120 tokeni, costul per document scade cu ~60%'
-    ]
-  },
-  {
-    id: 'context-window',
-    term: 'CONTEXT WINDOW',
-    termFull: 'FEREASTRA DE CONTEXT',
-    pron: '/ con·text win·dow /',
-    type: 'substantiv',
-    ro: 'Fereastra de Context',
-    def: [
-      'Reprezintă „memoria de lucru” sau cantitatea maximă de text — măsurată în tokeni — pe care un model AI o poate menține activă în „minte” și procesa simultan într-o singură interacțiune. Include atât textul pe care îl trimiți tu (promptul, documentele atașate, istoricul conversației), cât și răspunsul pe care modelul îl generează.',
-      'Gândește-te la fereastra de context ca la memoria de lucru a modelului: tot ce nu încape în ea este pur și simplu invizibil. Dacă trimiți un document mai lung decât fereastra permite, modelul nu va citi documentul complet — va procesa doar ce îi încape. Dacă depășești această limită, modelul începe să „uite” primele informații furnizate, ceea ce poate duce la erori sau halucinații.',
-      'Modelele moderne au ferestre de context din ce în ce mai mari: de la 4.000 tokeni (GPT-3) la 200.000 tokeni (Claude) sau chiar 1 milion (Gemini 1.5 Pro) — ceea ce face posibilă procesarea unor dosare întregi de documente într-o singură cerere. Implicație directă în contabilitate: dimensiunea ferestrei determină câte documente poți procesa simultan și cât de mult context istoric poți păstra într-o conversație de lucru cu modelul.'
-    ],
-    examples: [
-      'dosar complet de achiziție — comandă + factură + aviz + contract — ~12 pagini / ~8.000 tokeni — încape într-o singură cerere pe modelele moderne',
-      'balanță anuală cu 500 de conturi exportată din ERP = ~15.000 tokeni — poate fi analizată integral fără segmentare',
-      'conversație lungă cu istoricul a 20 de mesaje despre reconciliere bancară: dacă depășești fereastra, modelul „uită” contextul inițial și răspunsurile devin inconsistente'
-    ]
-  }
-];
+   Source of truth = assets/buzzwords.json, loaded via fetch on page load.
+   For local development, run a static server (VS Code "Live Server" extension)
+   — opening index.html via file:// blocks fetch and the card stays empty. */
 
-let words = FALLBACK_TERMS.slice();   // start with the inline copy so first paint has full data
-let wordIdx = words.length - 1;        // newest = current
+let words = [];
+let wordIdx = -1;
 const flipCard = document.getElementById('flip-card');
 
 const $wFront = document.getElementById('word-front');
@@ -3233,10 +3177,8 @@ function escapeHtml(s) {
   return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-renderWord();
-
-/* Try fetching the JSON file too — overrides the inline copy if available
-   (so production deploys can ship updates by editing the JSON only). */
+/* Load buzzword terms from JSON. Production deploys ship updates by editing
+   the JSON file only. */
 fetch('assets/buzzwords.json')
   .then(r => r.ok ? r.json() : Promise.reject())
   .then(data => {
@@ -3246,7 +3188,7 @@ fetch('assets/buzzwords.json')
       renderWord();
     }
   })
-  .catch(() => { /* fallback already in place */ });
+  .catch(err => console.warn('Buzzword data unavailable:', err));
 
 /* Navigation between buzzword terms is now handled inside the modal back face
    (top-right corner). No on-card buttons. */
@@ -3345,11 +3287,11 @@ function openPodcastModal() {
   cxFront.innerHTML = `
     <div class="cx-meta">
       <span>Podcast · Episodul curent</span>
-      <span>24 min</span>
+      <span>~25 min</span>
     </div>
-    <div class="cx-word" style="font-size: clamp(34px, 5vw, 50px); line-height: 1.02;">
-      RO e-Factura
-      <span class="pronounce" style="display:block; font-style:italic; font-size:0.32em; margin-top:8px; color: var(--fg-muted); font-family: 'Inter', sans-serif; letter-spacing:0;">Între promisiunea digitalizării și realitatea din SPV</span>
+    <div class="cx-word" style="font-size: clamp(28px, 4vw, 44px); line-height: 1.02;">
+      Agentul AI nu știe să țină un secret
+      <span class="pronounce" style="display:block; font-style:italic; font-size:0.32em; margin-top:8px; color: var(--fg-muted); font-family: 'Inter', sans-serif; letter-spacing:0;">Riscurile nevăzute ale automatizării și cum să le eviți</span>
     </div>
     <div class="cx-hint">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
@@ -3392,7 +3334,7 @@ function openWelcomeModal() {
     <div class="cx-def">
       <p>Primul tău popas — <strong>cardul „Buzzword-ul săptămânii"</strong>: un termen AI explicat în limba română, cu pronunție, traducere și exemple aplicate în contabilitate. Ideal ca să fii la curent cu vocabularul săptămână de săptămână.</p>
       <p>Al doilea — <strong>„Viitorul profesiei contabile"</strong>: seria fondatoare în 5 părți. E sufletul hub-ului. Disponibilă în două formate: <em>podcast</em> (20–30 min, pentru navetă) și <em>articol manifest</em> (30–40 min, pentru weekend la cafea). Alegi ritmul tău.</p>
-      <p>Al treilea — <strong>„Podcast"</strong>: episodul curent al săptămânii (acum: RO e-Factura). Conversații între două gazde AI, fără filler, fără reclame.</p>
+      <p>Al treilea — <strong>„Podcast"</strong>: episodul curent al săptămânii (acum: Agentul AI nu știe să țină un secret). Conversații între două gazde AI, fără filler, fără reclame.</p>
       <p>În <strong>„Articolele"</strong> găsești analize practice — primul publicat: <em>Goana după promptul perfect</em>. În <strong>„Resurse"</strong> găsești ghiduri PDF, dashboard-uri Excel și mici tool-uri executabile, gata de download — fără cont, fără email, fără newsletter.</p>
       <p>Recomandare: parcurge prima dată <em>seria fondatoare</em> în formatul tău preferat. Apoi revino săptămânal pentru buzzword + episodul podcast nou.</p>
     </div>

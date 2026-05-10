@@ -54,6 +54,78 @@
         "balanță anuală cu 500 de conturi exportată din ERP = ~15.000 tokeni — poate fi analizată integral fără segmentare",
         "conversație lungă cu istoricul a 20 de mesaje despre reconciliere bancară: dacă depășești fereastra, modelul „uită” contextul inițial și răspunsurile devin inconsistente"
       ]
+    },
+    {
+      "id": "chatbot-vs-ai-assistant",
+      "term": "CHATBOT vs AI ASSISTANT",
+      "termFull": "BOT CONVERSAȚIONAL vs ASISTENT INTELIGENT",
+      "pron": "/ ceat·bot vs ei·ai a·sis·tent /",
+      "type": "substantiv",
+      "ro": "Bot Conversațional vs Asistent Inteligent",
+      "def": [
+        "Un chatbot clasic este un program care răspunde după un arbore predefinit de reguli: utilizatorul alege o opțiune din meniu sau scrie un cuvânt-cheie, iar botul returnează un răspuns scriptat. Nu „înțelege” întrebarea — o asociază cu un șablon. Un AI Assistant, în schimb, este construit pe un LLM și interpretează cererea în limbaj natural, raționează asupra contextului și generează un răspuns nou, adaptat situației specifice.",
+        "Diferența practică se vede în flexibilitate: un chatbot bancar te poate ghida prin pași standardizați („Apasă 1 pentru sold”), dar nu poate analiza un extras de cont. Un AI Assistant primește același extras în PDF, identifică tranzacțiile suspecte, le grupează pe categorii și îți explică în limbaj clar de ce ar trebui să le verifici. Chatbot-ul lucrează cu meniuri; asistentul lucrează cu documente, contexte și raționamente.",
+        "În practica contabilă, distincția este esențială atunci când alegi un tool: un chatbot pe site-ul ANAF e util pentru întrebări frecvente bine delimitate, dar un AI Assistant integrat în fluxul tău de lucru poate prelua o cerere de tipul „compară bugetul cu execuția pe ultimele 6 luni și identifică abaterile peste 10%” — sarcină imposibilă pentru un bot bazat pe reguli."
+      ],
+      "examples": [
+        "Chatbot pe site-ul unei bănci: răspunde la „Care e programul sucursalei?” dar nu poate interpreta un extras de cont încărcat de utilizator.",
+        "AI Assistant integrat în software-ul de contabilitate: primește cererea „identifică toți furnizorii cu plăți întârziate peste 30 de zile” și execută analiza pe baza datelor curente.",
+        "Soluție hibridă: chatbot-ul preia întrebările simple (status factură, sold cont), iar pentru cereri complexe escaladează automat la un AI Assistant care are acces la întreaga bază de date."
+      ]
+    },
+    {
+      "id": "ai-models",
+      "term": "AI MODELS",
+      "termFull": "VARIANTE DE MODELE ÎN ACELAȘI ECOSISTEM",
+      "pron": "/ ei·ai mo·dels /",
+      "type": "substantiv",
+      "ro": "Modele AI / Variante de Capacitate",
+      "def": [
+        "Modelele AI sunt „motoarele” care alimentează asistenții inteligenți. Fiecare furnizor major de AI oferă o familie de modele cu capacități, viteze și costuri diferite — nu un singur „creier”, ci o gamă din care alegi în funcție de sarcină. Anthropic are Claude Haiku 4.5 (rapid și economic), Sonnet 4.6 (echilibrat) și Opus 4.7 (cel mai capabil). OpenAI are GPT-5.3 Instant, GPT-5.4 Thinking și GPT-5.5 Pro. Google are Gemini 3 Flash, Pro și Ultra. Toate funcționează pe aceeași interfață, dar produc rezultate diferite la același prompt.",
+        "Logica este simplă: modelele mici sunt rapide și ieftine, dar superficiale; modelele mari raționează mai profund, dar consumă mai mult timp și costă de 5–10 ori mai mult per token. Diferența nu e doar de „inteligență” — ține de capacitatea de a urmări instrucțiuni complexe, de a menține coerența pe documente lungi și de a evita erorile pe sarcini cu mulți pași. Un model mic poate categorisi 1.000 de tranzacții în câteva secunde; un model mare poate audita un dosar fiscal complet și semnala riscuri ascunse.",
+        "În practica contabilă, alegerea modelului devine o decizie strategică de cost-eficiență. Folosirea modelului flagship pentru sarcini banale înseamnă bani aruncați; folosirea modelului mic pentru analize complexe înseamnă rezultate slabe care necesită refacere. Profesionistul matur învață să ruteze inteligent: model mic pentru extracție și clasificare, model mare pentru interpretare și decizie."
+      ],
+      "examples": [
+        "Categorizarea automată a 5.000 de cheltuieli lunare pe centre de cost → Claude Haiku 4.5 sau GPT-5.3 Instant — rapid și ~10× mai ieftin decât modelele mari.",
+        "Redactarea unui raport de audit pe o entitate complexă cu sinteză din 50 de documente → Claude Opus 4.7 sau GPT-5.5 Pro — capacitate superioară de raționament și coerență pe text lung.",
+        "Strategie hibridă într-un workflow: modelul mic preprocesează și extrage datele structurate, apoi pasează rezultatul către modelul mare pentru analiza finală — cost total redus cu 60–70%."
+      ]
+    },
+    {
+      "id": "prompt",
+      "term": "PROMPT",
+      "termFull": "INSTRUCȚIUNE DATĂ MODELULUI AI",
+      "pron": "/ prompt /",
+      "type": "substantiv",
+      "ro": "Prompt / Instrucțiune",
+      "def": [
+        "Promptul este textul complet pe care îl trimiți unui model AI ca să obții un răspuns: include sarcina (ce vrei să facă), contextul (informațiile relevante), constrângerile (reguli de respectat) și formatul dorit al răspunsului. Nu este o simplă „întrebare” ca într-un motor de căutare — este o instrucțiune structurată care orientează modul în care modelul își alocă atenția și raționamentul.",
+        "Calitatea promptului determină direct calitatea răspunsului. Un prompt vag de tipul „analizează această factură” produce un rezultat generic; un prompt structurat care specifică „extrage furnizor, CUI, data emiterii, valoare fără TVA, valoare TVA, total — returnează în format JSON” produce date direct utilizabile în sistemul informatic. Aceeași diferență ca între o solicitare verbală neformală făcută unui coleg și un brief scris cu cerințe clare.",
+        "În practica contabilă, promptul devine un activ reutilizabil: un prompt bine construit pentru închiderea lunară poate fi rulat de zeci de ori cu rezultate consistente. Echipele performante își construiesc o bibliotecă internă de prompturi standardizate — pentru reconciliere, pentru extragere date, pentru sinteza notelor explicative — exact așa cum își standardizează template-urile de documente."
+      ],
+      "examples": [
+        "Prompt slab: „verifică factura asta” → răspuns vag, neutilizabil într-un proces automat.",
+        "Prompt bine construit: „Extrage din factura atașată: furnizor, CUI, număr factură, dată emitere, dată scadență, valoare netă, TVA, total. Returnează exclusiv în format JSON. Dacă un câmp lipsește, marchează-l cu null.” → output direct integrabil în ERP.",
+        "Template reutilizabil pentru închiderea lunară: un singur prompt parametrizat aplicat pe toate cele 15 entități din grup, generând rapoarte cu structură identică în loc de variații manuale între contabili."
+      ]
+    },
+    {
+      "id": "generative-ai",
+      "term": "GENERATIVE AI",
+      "termFull": "INTELIGENȚĂ ARTIFICIALĂ GENERATIVĂ",
+      "pron": "/ ge·ne·ra·tiv ei·ai /",
+      "type": "substantiv",
+      "ro": "AI Generativ",
+      "def": [
+        "Generative AI este categoria de modele care creează conținut nou — text, imagini, audio, video, cod, tabele — pornind de la o instrucțiune în limbaj natural. Spre deosebire de AI-ul tradițional care doar clasifică sau prezice pe baza datelor existente (de ex. detectarea fraudei într-o tranzacție), AI-ul generativ produce ieșiri originale care nu existau înainte: un raport, o ilustrație, o melodie, un script video.",
+        "Există modalități diferite de generare, fiecare cu modele specializate. Text-to-text: Claude, ChatGPT, Gemini — generează text din instrucțiuni. Text-to-image: Midjourney, DALL-E, Imagen — produc imagini din descrieri. Text-to-video: Veo, Runway — generează clipuri video scurte. Text-to-audio: ElevenLabs, Suno — sintetizează voce sau muzică. Modelele multimodale combină aceste capacități: pot primi un PDF cu grafice și genera atât o sinteză text, cât și o reprezentare vizuală nouă.",
+        "În practica contabilă și financiară, AI-ul generativ schimbă natura livrabilului: în loc să producă manual rapoarte standardizate, profesionistul descrie ce vrea și modelul generează prima versiune — text, tabel, prezentare sau chiar materiale video de training pentru echipă. Munca se mută de la execuție la regie: ce să se genereze, cu ce constrângeri, pentru ce audiență."
+      ],
+      "examples": [
+        "Generarea automată a rapoartelor lunare către clienți: pe baza balanței exportate din ERP, modelul generează un raport narativ personalizat pe specificul activității fiecărui client.",
+        "Transformarea unei proceduri scrise în material video de training: text-to-video creează un clip de 90 de secunde din procedura de aprobare a notelor de cheltuieli — util pentru onboarding-ul echipei.",
+        "Briefing audio din raportul financiar trimestrial: text-to-audio generează un rezumat de 5 minute pe care managerul îl ascultă în mașină în drum spre ședința consiliului."
+      ]
     }
   ]
 }
