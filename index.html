@@ -2417,6 +2417,9 @@ footer {
   .stair-row-3 .stair-side p,
   .stair-row-5 .stair-side p { margin-left: 0; text-align: center; }
   .stair-card-wrap { flex: 0 0 auto; width: 100%; max-width: 420px; }
+  /* Override desktop fixed 494px flex-basis on row-5 — on mobile it becomes
+     a forced height in column layout, creating ~300px of empty space below the card. */
+  .stair-row-5 .stair-card-wrap { flex: 0 0 auto; }
   /* On touch / narrow viewports, side text is always visible */
   .stair-side {
     flex: 0 0 auto;
@@ -2613,12 +2616,6 @@ footer {
     <div class="hero-visual">
       <div class="hero-bg"></div>
     </div>
-  </div>
-  <div class="hero-scroll-hint" aria-hidden="true">
-    <span>scroll</span>
-    <span class="arrow">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-    </span>
   </div>
 </section>
 
@@ -3408,6 +3405,29 @@ flipCard.addEventListener('click', (e) => {
   if (e.target.closest('a, button, .flip-nav')) return;
   openBuzzwordModal();
 });
+
+/* Auto-open buzzword card from URL: ?open=buzzword
+   Used when sharing direct links — opens the card flipped on the latest term.
+   Waits for the async JSON fetch to populate `words` before triggering. */
+function autoOpenBuzzwordFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('open') !== 'buzzword') return;
+  if (!flipCard) return;
+
+  let attempts = 0;
+  const maxAttempts = 50; // 50 × 100ms = 5s max wait
+  const waitForData = setInterval(() => {
+    attempts++;
+    if (words.length > 0) {
+      clearInterval(waitForData);
+      flipCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => flipCard.click(), 500);
+    } else if (attempts >= maxAttempts) {
+      clearInterval(waitForData);
+    }
+  }, 100);
+}
+window.addEventListener('load', autoOpenBuzzwordFromURL);
 
 const podcastCardEl = document.getElementById('podcast-card');
 if (podcastCardEl) {
