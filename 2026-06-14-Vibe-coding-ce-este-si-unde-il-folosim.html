@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vibe coding — ce este, de unde vine și unde îl folosim în contabilitate — AI Accounting Hub</title>
+<meta name="description" content="De la un tweet viral la Collins Word of the Year: ce înseamnă vibe coding, cum l-am folosit deja pentru verificări ANAF și unde mai poate ajunge în lumea contabilă.">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Vibe coding — ce este, de unde vine și unde îl folosim în contabilitate">
+<meta property="og:description" content="De la un tweet viral la Collins Word of the Year: ce înseamnă vibe coding, cum l-am folosit deja pentru verificări ANAF și unde mai poate ajunge în lumea contabilă.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vibe coding — ce este, de unde vine și unde îl folosim în contabilitate">
+<meta name="twitter:description" content="De la un tweet viral la Collins Word of the Year: ce înseamnă vibe coding, cum l-am folosit deja pentru verificări ANAF și unde mai poate ajunge în lumea contabilă.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ ARTICLE PAGE ============ */
+.article-wrap {
+  position: relative; z-index: 1;
+  max-width: 1360px; margin: 0 auto;
+  padding: 64px 32px 96px;
+  display: grid;
+  grid-template-columns: 1fr 720px 1fr;
+  gap: 48px;
+}
+.article-side { position: relative; }
+.article-side.left { justify-self: end; }
+.article-side .sticky {
+  position: sticky; top: 96px;
+  padding: 20px 0;
+}
+.toc {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-1);
+}
+.toc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 14px;
+}
+.toc a {
+  display: block;
+  font-size: 13px; color: var(--fg-muted);
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid var(--border);
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.toc a:hover { color: var(--accent); border-color: var(--accent); }
+.toc a.active { color: var(--accent); border-color: var(--accent); }
+
+.article-main {
+  position: relative;
+  min-width: 0;
+}
+.article-main .prose,
+.article-main .prose pre,
+.article-main .prose img { max-width: 100%; }
+.article-main .prose pre { box-sizing: border-box; }
+
+.article-meta-top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.article-meta-top .sep { opacity: 0.4; }
+.article-category {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+.article-main h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.article-main h1 .accent {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 55%, color-mix(in oklab, var(--accent) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.article-lede {
+  font-size: 19px; line-height: 1.55; color: var(--fg-muted);
+  margin-bottom: 36px;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+}
+
+.author-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  display: grid; place-items: center;
+  color: #07121a; font-weight: 700; font-size: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+  flex-shrink: 0;
+}
+.author-info { flex: 1; min-width: 0; }
+.author-name { font-size: 14px; font-weight: 600; }
+.author-role { font-size: 12px; color: var(--fg-muted); }
+.share-row { display: flex; gap: 8px; }
+.share-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn svg { width: 15px; height: 15px; }
+
+.article-cover {
+  position: relative;
+  margin: 0 -32px 48px;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 360px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.article-cover-bg {
+  position: absolute; inset: 0;
+  background-image: url('assets/hero-vf.png');
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05) brightness(0.92);
+}
+.article-cover::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--bg-0) 80%, transparent) 100%);
+}
+.article-cover-caption {
+  position: absolute; left: 24px; bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-muted);
+  letter-spacing: 0.08em;
+  z-index: 2;
+}
+
+/* Prose */
+.prose {
+  font-size: 17px; line-height: 1.75;
+  color: var(--fg);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.prose p { margin: 0 0 22px; }
+.prose h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px; line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 56px 0 20px;
+  scroll-margin-top: 100px;
+}
+.prose h2::before {
+  content: '§'; color: var(--accent);
+  font-weight: 400;
+  margin-right: 12px;
+  opacity: 0.6;
+}
+.prose h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; line-height: 1.25; letter-spacing: -0.01em;
+  font-weight: 600;
+  margin: 36px 0 14px;
+  scroll-margin-top: 100px;
+}
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { color: var(--accent); font-style: normal; font-family: 'Space Grotesk', sans-serif; }
+.prose a { color: var(--accent); border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); transition: all 0.2s; }
+.prose a:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.prose ul, .prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose li { margin-bottom: 10px; }
+.prose li::marker { color: var(--accent); }
+.prose blockquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  border-radius: 0 12px 12px 0;
+  font-size: 18px;
+  color: var(--fg);
+  font-style: italic;
+}
+.prose blockquote cite {
+  display: block;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-style: normal;
+  color: var(--fg-muted); letter-spacing: 0.05em;
+}
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88em;
+  padding: 2px 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent);
+}
+.prose pre {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.6;
+}
+.prose pre code {
+  background: none; border: none; padding: 0; color: var(--fg);
+}
+.callout {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 14px;
+}
+.callout .ic {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center;
+  background: color-mix(in oklab, var(--accent) 15%, transparent);
+  color: var(--accent);
+}
+.callout .ic svg { width: 16px; height: 16px; }
+.callout .cbody { font-size: 14px; line-height: 1.6; color: var(--fg); }
+.callout .cbody strong { color: var(--accent); }
+
+/* End of article */
+.article-end {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+.author-card {
+  margin: 72px 0 0;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.author-card .author-avatar { width: 64px; height: 64px; font-size: 20px; }
+.author-card h3 { font-size: 20px; margin-bottom: 6px; }
+.author-card .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; margin-bottom: 12px; }
+.author-card p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+
+/* Related */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.related-card {
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; flex-direction: column;
+  transition: all 0.3s ease;
+}
+.related-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.related-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.related-card h3 { font-size: 18px; line-height: 1.25; margin-bottom: 10px; }
+.related-card p { font-size: 13px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.related-read {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+}
+
+/* Stat block */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 32px 0;
+}
+.stat-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+}
+.stat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--fg-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Comparison table */
+.compare-table {
+  width: 100%;
+  margin: 28px 0;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.compare-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--border);
+}
+.compare-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child {
+  font-weight: 600;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1200px) {
+  .article-wrap { grid-template-columns: 1fr; max-width: 760px; padding: 48px 24px 72px; }
+  .article-side { display: none; }
+}
+@media (max-width: 960px) {
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .article-cover { margin: 0 0 36px; height: 280px; }
+}
+@media (max-width: 720px) {
+  .article-wrap { padding: 28px 16px 48px; }
+  .article-cover { height: 220px; margin: 0 -16px 24px; border-radius: 14px; }
+  .article-cover-caption { left: 16px; bottom: 14px; font-size: 10px; }
+  .article-main h1 { font-size: clamp(26px, 7.5vw, 34px); }
+  .article-lede { font-size: 16px; padding-left: 14px; }
+  .author-row { flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .share-row { width: 100%; justify-content: flex-end; }
+  .prose { font-size: 16px; line-height: 1.7; overflow-wrap: break-word; word-wrap: break-word; }
+  .prose h2 { font-size: 22px; margin: 36px 0 14px; }
+  .prose h2::before { margin-right: 8px; }
+  .prose h3 { font-size: 18px; margin: 26px 0 12px; }
+  .prose blockquote { margin: 22px 0; padding: 14px 16px; font-size: 15px; border-radius: 0 10px 10px 0; }
+  .prose pre { padding: 12px; font-size: 12px; border-radius: 10px; }
+  .callout { flex-direction: column; gap: 10px; padding: 16px; }
+  .author-card { flex-direction: column; gap: 16px; padding: 22px; margin-top: 48px; }
+  .author-card .author-avatar { width: 52px; height: 52px; font-size: 18px; }
+  .article-end { gap: 16px; padding-top: 24px; margin-top: 36px; }
+  .related-grid { grid-template-columns: 1fr; gap: 14px; }
+  .related-card { padding: 20px; }
+  .stat-grid { grid-template-columns: 1fr; }
+  .compare-table { font-size: 13px; }
+  .compare-table th, .compare-table td { padding: 10px 10px; }
+}
+@media (max-width: 420px) {
+  .article-wrap { padding: 22px 14px 40px; }
+  .article-cover { margin: 0 -14px 22px; height: 190px; }
+  .article-main h1 { font-size: 24px; line-height: 1.06; }
+  .article-lede { font-size: 14.5px; padding-left: 12px; margin-bottom: 28px; }
+  .article-meta-top { gap: 8px; font-size: 10px; margin-bottom: 18px; }
+  .article-meta-top .sep { display: none; }
+  .prose { font-size: 15px; line-height: 1.65; }
+  .prose p { margin-bottom: 18px; }
+  .prose h2 { font-size: 19px; margin: 28px 0 12px; }
+  .prose h2::before { display: none; }
+  .prose h3 { font-size: 16px; margin: 22px 0 10px; }
+  .prose blockquote { padding: 12px 14px; font-size: 14px; }
+  .prose ul, .prose ol { padding-left: 20px; }
+  .tags-row { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="article-meta-top">
+      <span class="article-category">Vibe Coding</span>
+      <span>14 iunie 2026</span>
+      <span class="sep">·</span>
+      <span>14 min citire</span>
+    </div>
+
+    <h1>Vibe coding — ce este, de unde vine și <span class="accent">unde îl folosim în contabilitate</span></h1>
+    <p class="article-lede">
+      Un tweet scris într-o duminică seara a devenit Cuvântul Anului 2025 în dicționarul Collins. Între timp, noi l-am folosit deja ca să construim un tool de verificare CIF-uri la ANAF. Iată ce e vibe coding, de ce contează pentru contabili și ce poți construi cu el — fără să fii programator.
+    </p>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">14.06.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// Vibe coding · de la tweet la tool contabil</div>
+    </div>
+
+    <div class="prose">
+
+      <h2 id="s-ce-este">Ce este vibe coding — pe scurt</h2>
+
+      <p>
+        Dacă ar fi să explicăm termenul în limbaj contabil: <em>vibe coding</em> este ca și cum ai avea un junior developer în echipă, disponibil 24/7, care nu cere salariu, nu întârzie la deadline și acceptă orice revizie — chiar și a opta. Tu îi explici ce vrei în limba română (sau engleză, sau franceză), el scrie codul, tu rulezi, testezi, corectezi. Repeți până funcționează.
+      </p>
+
+      <p>
+        Dacă vrei o analogie și mai aproape de birou: gândește-te la relația dintre un director financiar și un consultant extern. Directorul știe <strong>ce</strong> vrea — un raport, o reconciliere, o verificare. Consultantul știe <strong>cum</strong> să o facă tehnic. Diferența e că acum consultantul e un model AI, conversația se întâmplă într-o fereastră de chat, iar livrarea vine în minute, nu în săptămâni.
+      </p>
+
+      <p>
+        Formal, definiția Collins Dictionary (care l-a ales <strong>Cuvântul Anului 2025</strong>) sună așa: <em>vibe coding</em> este o metodă de programare asistată de AI care permite unei persoane să creeze o aplicație software folosind limbaj natural, fără a fi nevoie să înțeleagă codul subiacent.
+      </p>
+
+      <h2 id="s-origine">De unde vine termenul</h2>
+
+      <p>
+        Pe 2 februarie 2025, <strong>Andrej Karpathy</strong> — co-fondator OpenAI, fost director AI la Tesla, unul dintre cei mai influenți cercetători din domeniul inteligenței artificiale — a postat pe X (fostul Twitter) o observație care părea o notă de subsol scrisă de la duș:
+      </p>
+
+      <blockquote>
+        There's a new kind of coding I call "vibe coding", where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because the LLMs are getting too good.
+        <cite>— Andrej Karpathy, 2 februarie 2025</cite>
+      </blockquote>
+
+      <p>
+        Karpathy descria cum construia aplicații web vorbind cu AI-ul prin dictare vocală (SuperWhisper), apăsând „Accept All" fără să mai citească codul generat, și făcând copy-paste la mesajele de eroare — fără comentarii — până când totul funcționa. Rezumatul lui: <em>„I just see stuff, say stuff, run stuff, and copy paste stuff, and it mostly works."</em>
+      </p>
+
+      <p>
+        Postarea a acumulat peste <strong>4,5 milioane de vizualizări</strong>. În săptămânile care au urmat, termenul a fost preluat de The New York Times, The Guardian, Ars Technica. Merriam-Webster l-a adăugat ca termen trending în martie 2025. În noiembrie, Collins Dictionary l-a desemnat Cuvântul Anului 2025, bătând termeni precum <em>aura farming</em> și <em>taskmasking</em>.
+      </p>
+
+      <p>
+        Ironia: Karpathy a recunoscut ulterior că postarea a fost „a shower of thoughts throwaway tweet" — un gând aruncat fără așteptări. Un an mai târziu, termenul definea o întreagă mișcare în industria software.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Analogie contabilă:</strong> Dacă termenul ți se pare abstract, gândește-te la el ca la <em>externalizarea serviciilor contabile</em>, dar în sens invers. În loc să externalizezi contabilitatea către o firmă, externalizezi programarea către un AI. Tu rămâi responsabil de rezultat — exact ca atunci când semnezi pe o balanță pe care a pregătit-o altcineva.
+        </div>
+      </div>
+
+      <h2 id="s-cum">Cum funcționează — workflow-ul</h2>
+
+      <p>
+        Procesul arată familiar pentru oricine a lucrat vreodată iterativ (adică pentru orice contabil care a trecut prin cel puțin o închidere de lună):
+      </p>
+
+      <ol>
+        <li><strong>Descrii obiectivul</strong> în limbaj natural — „Vreau un script care verifică o listă de CIF-uri la ANAF și îmi scoate rezultatul în Excel"</li>
+        <li><strong>AI-ul generează codul</strong> — un fișier Python, un macro VBA, sau orice altceva e potrivit</li>
+        <li><strong>Rulezi și observi</strong> — merge? Crăpă? Rezultatul e corect?</li>
+        <li><strong>Dai feedback</strong> — „Merge, dar adaugă și coloana de cod CAEN" sau „Crapă pe CIF-urile cu prefix RO"</li>
+        <li><strong>Repeți</strong> — ciclul continuă până soluția face exact ce ai nevoie</li>
+      </ol>
+
+      <p>
+        Dacă asta îți sună ca un <em>ciclu de revizuire</em> pe un set de situații financiare — ai dreptate. Structura e aceeași: draft, review, feedback, corecție, aprobare. Doar că în loc de cifre din balanță, lucrezi cu linii de cod pe care nici nu trebuie să le citești.
+      </p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">4,5M+</div>
+          <div class="stat-lbl">// vizualizări tweet original</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">6.700%</div>
+          <div class="stat-lbl">// creștere căutări Google 2025</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">63%</div>
+          <div class="stat-lbl">// utilizatori sunt non-developeri</div>
+        </div>
+      </div>
+
+      <h2 id="s-anaf">Primul proiect finalizat — verificare CIF-uri ANAF</h2>
+
+      <p>
+        Am scris deja <a href="2026-05-02-Vibe-coding-in-contabilitate.html">în detaliu despre acest proiect</a>, dar merită recapitulat aici ca dovadă de concept. Problema era simplă și universală: verificarea a mii de coduri fiscale la ANAF — plătitor TVA, TVA la încasare, status activ/inactiv, RO e-Factura — fără să stai ore întregi pe site-ul ANAF, câte un CIF pe rând.
+      </p>
+
+      <p>
+        Soluția: un dialog iterativ cu AI-ul, în care am descris nevoia, am primit cod Python, l-am testat, am corectat erorile prin copy-paste la mesajele de eroare, am adăugat o interfață grafică, și am împachetat totul într-un fișier <code>.exe</code> care rulează din dublu-click pe orice PC cu Windows.
+      </p>
+
+      <p>
+        Rezultatul: <strong>8.000 de CIF-uri procesate în ~80 de secunde</strong>. Cost: zero lei, câteva ore de weekend. Developer necesar: niciunul. Cunoștințe de programare: aproape zero — doar răbdare și capacitatea de a descrie ce vrei clar, în cuvinte.
+      </p>
+
+      <p>
+        Asta e esența vibe coding-ului în contabilitate: nu construiești software comercial. Construiești <em>unelte interne</em>, pentru probleme specifice, pe care nimeni nu le va transforma vreodată în produs de raft — pentru că piața e prea mică sau nevoia e prea particulară. Exact ca un template Excel pe care ți-l faci singur, doar că acum poți face și un <code>.exe</code>.
+      </p>
+
+      <h2 id="s-unde">Unde mai poate fi folosit — dincolo de ANAF</h2>
+
+      <p>
+        Tool-ul ANAF a fost primul proiect. Dar odată ce înțelegi logica — descrii, generezi, testezi, rafinezi — posibilitățile se extind natural. Iată câteva direcții concrete, toate relevante pentru un departament financiar-contabil:
+      </p>
+
+      <h3>Design de website sau aplicație web</h3>
+      <p>
+        Instrumente precum <strong>Lovable</strong>, <strong>v0</strong> (Vercel) sau chiar <strong>Claude Artifacts</strong> îți permit să descrii un website sau o interfață web și să primești cod funcțional în câteva minute. Pentru un contabil, asta poate însemna un mini-portal intern pentru echipă, un formular de colectare date de la clienți, sau o pagină de prezentare pentru serviciile firmei. Nu e nevoie să angajezi un web designer pentru un site de prezentare.
+      </p>
+
+      <h3>Aplicații standalone în Python, transformate în executabile</h3>
+      <p>
+        Aceasta e probabil cea mai puternică direcție pentru profesioniștii contabili. Descrii aplicația, AI-ul generează cod Python, iar la final împachetezi totul cu <code>PyInstaller</code> într-un singur fișier <code>.exe</code>. Rezultatul: un executabil pe care îl trimiți prin e-mail sau WeTransfer colegilor, fără ca ei să instaleze Python sau orice alt program. Dublu-click și merge.
+      </p>
+      <p>
+        Exemple practice: un tool de reconciliere automată între două fișiere Excel, un convertor de extrase bancare din PDF în Excel structurat, un generator de rapoarte din fișiere CSV exportate din ERP, o aplicație de calcul dobânzi sau penalități, un validator de facturi electronice.
+      </p>
+
+      <h3>Aplicații mobile</h3>
+      <p>
+        Cu instrumente ca <strong>Replit</strong> sau <strong>Bolt</strong>, poți construi și aplicații mobile — de exemplu, un calculator de diurnă, un tracker de cheltuieli pentru deplasări, sau un formular de aprobare note de cheltuieli. Nu pentru a concura cu aplicațiile comerciale, ci pentru a rezolva o nevoie internă specifică, rapid și fără buget IT.
+      </p>
+
+      <h3>Macrocomenzi VBA în Excel</h3>
+      <p>
+        Mulți contabili folosesc deja Excel la capacitate maximă, dar puțini scriu propriile macrocomenzi. Prin vibe coding, poți descrie în limbaj natural ce vrei — „vreau un macro care compară cele două foi din acest workbook, evidențiază diferențele și le listează pe o a treia foaie" — iar AI-ul generează codul VBA. E deosebit de util pentru reconcilieri repetitive, formatări standardizate de rapoarte, sau validări automate de date.
+      </p>
+
+      <h3>Dashboard-uri Excel cu populare automată din fișiere sursă</h3>
+      <p>
+        Puți cere AI-ului să genereze cod VBA sau Power Query care trage automat date din mai multe fișiere Excel sursă (balanțe lunare, jurnale, extrase) și le consolidează într-un dashboard centralizat. Rezultatul: un raport actualizat cu un singur click, fără copy-paste manual din cinci fișiere diferite în fiecare lună.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Regulă de bază:</strong> Dacă faci ceva repetitiv în Excel de mai mult de trei ori pe lună, probabil că poți automatiza prin vibe coding. Nu va fi perfect din prima. Dar va fi <em>al tău</em>, adaptat exact pe procesul tău, și va funcționa chiar și pe mașina colegului care n-a auzit de Python.
+        </div>
+      </div>
+
+      <h2 id="s-python">De ce Python bate macro-urile Excel la volume mari</h2>
+
+      <p>
+        Aici e un punct tehnic care merită câteva rânduri, pentru că afectează direct contabilii care lucrează cu volume mari de date.
+      </p>
+
+      <p>
+        Când rulezi un <strong>macro VBA în Excel</strong>, datele sunt procesate prin interfața Excel — adică prin aplicația grafică, cu celulele, formulele și formatările ei. Asta înseamnă că Excel trebuie să deschidă fișierele, să le randeze vizual, să recalculeze formulele, și abia apoi să execute operația ta. Pe un fișier de 500 de rânduri, diferența e invizibilă. Pe unul de 200.000 de rânduri, Excel se mișcă ca prin melasă — sau se blochează complet.
+      </p>
+
+      <p>
+        <strong>Python</strong>, în schimb, procesează datele <em>direct în memoria RAM</em>, fără interfață grafică. Folosind librării precum <code>pandas</code> sau <code>openpyxl</code>, Python citește fișierul Excel, îl încarcă într-o structură de date în memorie, execută operațiile (comparare, filtrare, reconciliere, calcule), și scrie rezultatul într-un fișier nou. Totul se întâmplă „în spate" — fără fereastră deschisă, fără randare, fără recalculare de formule.
+      </p>
+
+      <p>
+        În practică, o reconciliere care în Excel (cu macro VBA) durează 15-20 de minute pe 300.000 de rânduri, în Python se termină în <strong>sub 30 de secunde</strong>. Pentru departamentele financiare care lucrează cu volume mari — importuri de tranzacții, reconcilieri bancare, potriviri inter-companii — diferența nu e academică. E diferența dintre „terminăm închiderea la 18:00" și „terminăm închiderea la 22:00".
+      </p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Criteriu</th>
+            <th>Macro VBA (Excel)</th>
+            <th>Script Python (.exe)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Procesare date</td>
+            <td>Prin interfața Excel (vizual)</td>
+            <td>Direct în RAM (fără UI)</td>
+          </tr>
+          <tr>
+            <td>300K rânduri</td>
+            <td>15–20 minute (sau crash)</td>
+            <td>Sub 30 secunde</td>
+          </tr>
+          <tr>
+            <td>Necesită Excel deschis</td>
+            <td>Da</td>
+            <td>Nu</td>
+          </tr>
+          <tr>
+            <td>Distribuire către colegi</td>
+            <td>Fișier .xlsm + macro-uri activate</td>
+            <td>Fișier .exe — dublu-click</td>
+          </tr>
+          <tr>
+            <td>Versiuni Excel diferite</td>
+            <td>Pot apărea incompatibilități</td>
+            <td>Funcționează independent</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 id="s-artefacte">Artefacte AI — aplicații direct în fereastra de chat</h2>
+
+      <p>
+        Există și o variantă și mai rapidă de vibe coding, care nu necesită nici măcar instalarea unui fișier: <em>artefactele AI</em>. Atât Claude (Anthropic) cât și ChatGPT (OpenAI) permit generarea de mini-aplicații interactive direct în fereastra de conversație.
+      </p>
+
+      <p>
+        Concret: descrii ce vrei — „un calculator de dobândă penalizatoare conform Codului Fiscal" sau „un formular de estimare impozit pe dividende" — și AI-ul generează o aplicație funcțională chiar în interfața de chat. O poți folosi imediat, fără download, fără instalare.
+      </p>
+
+      <p>
+        Dezavantajul: artefactele trăiesc în fereastra de chat. Nu le poți distribui ușor colegilor (decât prin link, dacă platforma permite), nu funcționează offline, și nu le poți personaliza la fel de profund ca un executabil standalone. Sunt excelente pentru <em>prototipare rapidă</em> sau <em>uz personal</em>, dar pentru tool-uri care trebuie să circule în echipă, aplicațiile standalone rămân opțiunea mai solidă.
+      </p>
+
+      <h2 id="s-siguranta">Siguranța datelor — intern vs. extern</h2>
+
+      <p>
+        Iată partea pe care n-o putem ocoli: securitatea. Și aici trebuie să fim riguroși, exact ca la orice altă decizie profesională.
+      </p>
+
+      <p>
+        Când vorbim de vibe coding, mai ales în contabilitate, apare o distincție importantă: <strong>cine a scris codul?</strong>
+      </p>
+
+      <p>
+        Dacă primești un fișier <code>.exe</code> de pe internet — un tool gratuit, un „ajutor" de pe un forum — nu ai nicio garanție despre ce face acel executabil în spate. Poate funcționa corect. Dar poate, în paralel, să trimită datele tale undeva, să acceseze fișiere pe care nu i le-ai dat, sau să instaleze ceva fără să observi. Un fișier executabil este, prin natura sa, o cutie neagră: rulează cod compilat pe care nu îl poți citi sau audita fără unelte specializate.
+      </p>
+
+      <p>
+        Când <strong>dezvolți tu</strong> aplicația prin vibe coding, situația e diferită. Codul sursă este vizibil — îl poți citi (sau cere AI-ului să ți-l explice linie cu linie). Știi exact ce librării folosește, ce fișiere accesează, unde trimite datele (sau, mai important, unde <em>nu</em> le trimite). Poți rula codul pe o mașină fără internet și verifica dacă funcționează în regim offline complet.
+      </p>
+
+      <p>
+        Asta nu înseamnă că un tool dezvoltat intern e automat sigur. Dar înseamnă că <strong>ai control și vizibilitate</strong> — ceea ce, în profesia noastră, contează enorm. E diferența dintre a semna un document pe care l-ai citit și a semna unul pe care nu l-ai deschis niciodată.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Recomandare practică:</strong> Niciodată să nu rulezi un <code>.exe</code> descărcat de pe internet pe un computer cu date sensibile ale clienților fără o verificare prealabilă. Dacă ai nevoie de un tool, e mai sigur să îl construiești tu prin vibe coding — cel puțin ai controlul complet asupra codului sursă. Iar dacă primești un executabil de la un coleg, cere-i și codul sursă.
+        </div>
+      </div>
+
+      <h2 id="s-avantaje">De ce local bate cloud — pentru tool-uri interne</h2>
+
+      <p>
+        Aplicațiile construite local prin vibe coding au câteva avantaje concrete față de artefactele din chat sau soluțiile cloud, mai ales în contextul unui birou contabil:
+      </p>
+
+      <ul>
+        <li><strong>Funcționează offline</strong> — nu depind de conexiunea la internet sau de disponibilitatea unui server extern. Datele rămân pe mașina ta.</li>
+        <li><strong>Sunt ușor de distribuit</strong> — un fișier <code>.exe</code> trimis pe e-mail sau pus pe server-ul intern e accesibil oricui din echipă, fără cont, fără login, fără abonament.</li>
+        <li><strong>Datele nu părăsesc organizația</strong> — spre deosebire de un artefact care rulează în browser-ul conectat la un server extern, aplicația locală procesează totul pe calculatorul utilizatorului.</li>
+        <li><strong>Pot fi personalizate continuu</strong> — dacă apare o cerință nouă (un câmp în plus, o validare diferită), redeschizi conversația cu AI-ul, descrii modificarea, generezi o nouă versiune.</li>
+        <li><strong>Nu au costuri recurente</strong> — odată construit, tool-ul funcționează la infinit. Fără abonament lunar, fără „free tier" care expiră.</li>
+      </ul>
+
+      <p>
+        Artefactele AI rămân excelente pentru testare rapidă și uz personal. Dar pentru tool-uri care intră în fluxul de lucru al echipei, varianta standalone e mai robustă, mai sigură și mai ușor de gestionat.
+      </p>
+
+      <h2 id="s-concluzie">Închiderea exercițiului</h2>
+
+      <p>
+        Vibe coding nu e revoluția pe care o promite titlul dintr-un articol de pe Medium. Dar nici nu e un trend de sezon. E o competență nouă — sau, mai precis, o extensie a unei competențe vechi: capacitatea de a-ți articula nevoia suficient de clar încât cineva (acum, ceva) să o poată implementa. Contabilii fac asta de ani de zile cu consultanții, cu firmele de IT, cu colegii din departamentul tehnic. Diferența e că acum „consultantul" e disponibil non-stop, acceptă orice brief, și livrează în minute.
+      </p>
+
+      <p>
+        Karpathy a pus termenul pe o postare pe social media. Collins l-a pus în dicționar. Noi l-am pus în producție — cu un tool de verificare CIF-uri care funcționează zilnic, fără incident, de câteva luni. Nu e nimic spectaculos. Dar funcționează. Iar în contabilitate, <em>funcționează</em> este cel mai bun review posibil.
+      </p>
+
+      <p>
+        Dacă vrei să încerci: alege o problemă mică, repetitivă, pe care o rezolvi manual de prea mult timp. Deschide o conversație cu un model AI. Descrie problema. Iterează. Și nu uita ultima regulă, cea pe care Karpathy n-a menționat-o niciodată, dar pe care orice contabil o știe din instinct: <strong>verifică rezultatul</strong>.
+      </p>
+
+      <blockquote>
+        Vibe coding nu înlocuiește programatorii, la fel cum Excel n-a înlocuit contabilii. Dar le dă contabililor un instrument pe care înainte îl aveau doar programatorii: capacitatea de a-și construi propriile unelte.
+      </blockquote>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#vibe-coding</a>
+          <a href="#" class="tag">#python</a>
+          <a href="#" class="tag">#automatizare</a>
+          <a href="#" class="tag">#excel</a>
+          <a href="#" class="tag">#securitate</a>
+          <a href="#" class="tag">#anaf</a>
+        </div>
+        <span class="footer-mono">Articolul #008</span>
+      </div>
+
+      <!-- Author bio -->
+      <div class="author-card">
+        <div class="author-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+        </div>
+        <div>
+          <h3>AI Accounting Hub</h3>
+          <div class="role">aiaccountinghub.ro</div>
+          <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot — fără bariere, fără taxe, fără reclame.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s-ce-este">Ce este vibe coding</a>
+        <a href="#s-origine">De unde vine termenul</a>
+        <a href="#s-cum">Cum funcționează</a>
+        <a href="#s-anaf">Primul proiect — ANAF</a>
+        <a href="#s-unde">Unde mai poate fi folosit</a>
+        <a href="#s-python">Python vs. macro Excel</a>
+        <a href="#s-artefacte">Artefacte AI</a>
+        <a href="#s-siguranta">Siguranța datelor</a>
+        <a href="#s-avantaje">Local vs. cloud</a>
+        <a href="#s-concluzie">Închiderea exercițiului</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-05-02-Vibe-coding-in-contabilitate.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · MAI 2026</div>
+        <h3>Vibe coding pentru contabili — tool ANAF CIF</h3>
+        <p>Povestea completă a primului proiect: cum am construit un tool de verificare bulk CIF-uri fără să scriu o linie de cod.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-05-01-Goana-dupa-promptul-perfect.html" class="related-card fade-in">
+        <div class="related-date">PROMPTING · MAI 2026</div>
+        <h3>Goana după promptul perfect</h3>
+        <p>7 reguli pentru a vorbi cu AI ca un profesionist — și shortcut-ul pe care îl folosesc ca să nu trebuiască să mi le amintesc pe toate.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html" class="related-card fade-in">
+        <div class="related-date">RESURSE</div>
+        <h3>Tool-uri și descărcări</h3>
+        <p>ANAF CIF Checker și alte tool-uri construite prin vibe coding, gata de descărcat și folosit.</p>
+        <span class="related-read">Deschide resursele
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii contabili români care explorează intersecția dintre AI și finanțe.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="arhiva.html">Arhivă</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="disclaimer">Respectăm confidențialitatea. Acest site nu stochează date cu caracter personal conform politicii noastre GDPR. Singurul cookie folosit reține preferința ta de temă (Light/Dark).</p>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required placeholder="Ex. Ioana Popescu"></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required placeholder="ioana@firma.ro"></div>
+      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required placeholder="Scrie-ne ce te interesează..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+/* TOC active link on scroll */
+(function () {
+  const links = document.querySelectorAll('.toc a');
+  if (!links.length) return;
+  const ids = Array.from(links).map(a => a.getAttribute('href').slice(1));
+  const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  targets.forEach(t => io.observe(t));
+})();
+</script>
+</body>
+</html>
