@@ -145,15 +145,18 @@
 }
 .res-featured-visual .digits span { padding: 6px 0; border-top: 1px solid color-mix(in oklab, var(--accent-2) 15%, transparent); }
 
-/* "În curând" badge on resource cards */
+/* "În curând" badge on resource cards — filled amber pill so it's clearly visible
+   and distinct from the cyan download button */
 .res-soon {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--fg-dim);
-  padding: 6px 10px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #fbbf24;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in oklab, #fbbf24 45%, transparent);
+  background: color-mix(in oklab, #fbbf24 14%, var(--bg-2));
+  border-radius: 8px;
   white-space: nowrap;
+  box-shadow: 0 4px 12px -6px color-mix(in oklab, #fbbf24 40%, transparent);
 }
 
 /* Category strips */
@@ -516,9 +519,10 @@
 <script>
 const RESOURCES = [
   /* ===== PDF ===== */
-  { type: 'pdf', kind: 'Ghid · PDF', title: 'Prompt engineering pentru contabili',
-    desc: 'Cele 7 ingrediente ale unui prompt bun + meta-promptul pe care îl folosesc zilnic. Format A4, 12 pagini, gata de printat.',
-    size: 'PDF · 2.4 MB', cta: 'În curând' },
+  { type: 'pdf', kind: 'Cheat sheet · PPTX', title: 'Cei 7 pași pentru promptul perfect',
+    desc: 'Cele 7 ingrediente ale unui prompt bun + meta-promptul shortcut, sintetizate într-un cheat sheet vizual. Gata de printat sau de păstrat pe desktop. Însoțește articolul „Goana după promptul perfect".',
+    size: 'PPTX · 47 KB', cta: 'Download',
+    href: 'downloads/Cei_7_pasi_pentru_promptul_perfect.pptx' },
   { type: 'pdf', kind: 'Ghid · PDF', title: 'GDPR în era AI',
     desc: 'Ce date poți și ce nu poți trimite în modele AI publice. Checklist practic și exemple concrete pentru firmele de contabilitate.',
     size: 'PDF · 1.8 MB', cta: 'În curând' },

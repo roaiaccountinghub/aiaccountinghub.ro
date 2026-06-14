@@ -368,6 +368,29 @@
   .related-grid { grid-template-columns: 1fr; gap: 14px; }
   .related-card { padding: 20px; }
 }
+/* Cheat sheet download CTA — override .prose a color (would otherwise paint button text cyan-on-cyan) */
+.prose .cheatsheet-download {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 18px; border-radius: 10px;
+  background: var(--accent);
+  color: #07121a;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1px solid color-mix(in oklab, var(--accent) 60%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--accent) 60%, transparent); /* neutralise .prose a underline */
+  box-shadow: 0 8px 24px -10px color-mix(in oklab, var(--accent) 60%, transparent);
+  transition: all 0.22s ease;
+}
+.prose .cheatsheet-download:hover {
+  background: var(--accent-2);
+  color: #07121a;
+  letter-spacing: 0.09em;
+  transform: translateY(-1px);
+}
+.prose .cheatsheet-download svg { transition: transform 0.25s ease; }
+.prose .cheatsheet-download:hover svg { transform: translateY(2px); }
+
 @media (max-width: 420px) {
   .article-wrap { padding: 22px 14px 40px; }
   .article-cover { margin: 0 -14px 22px; height: 190px; }
@@ -492,7 +515,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
         </div>
         <div class="cbody">
-          <strong>Notă editorială.</strong> Dacă te grăbești, poți trece direct la secțiunea „Shortcut-ul" de la finalul articolului. Dar recomand să parcurgi și cele 7 puncte — te ajută să înțelegi ce rafinezi după ce AI îți generează promptul.
+          <strong>Notă editorială.</strong> Dacă te grăbești, poți trece direct la secțiunea „Shortcut-ul" de la finalul articolului. Dar recomand să parcurgi și cele 7 puncte — te ajută să înțelegi ce rafinezi după ce AI îți generează promptul. La final găsești și un <strong>cheat sheet descărcabil</strong> care rezumă cele 7 ingrediente — perfect de tipărit sau de păstrat la îndemână.
         </div>
       </div>
 
@@ -649,6 +672,29 @@
         FIFO, LIFO ... adăugăm o metodă nouă la raft: <strong>CISO — Context In, Smart Out</strong>. Dacă dai context, specifici ce vrei și iterezi cu răbdare, AI-ul devine cel mai disciplinat colaborator din firmă. Fără ore suplimentare, fără reclamații și fără cereri de concediu în luna bilanțului.
       </p>
 
+      <h2 id="s12">Cheat sheet — descarcă Ghidul vizual</h2>
+      <p>
+        Pentru cei care vor să aibă cele 7 ingrediente la îndemână — pe ecran sau la imprimantă — am pregătit un <strong>ghid sintetizat</strong> care rezumă structura completă, cu exemple aplicate pe contabilitate și meta-promptul shortcut.
+      </p>
+      <p>
+        L-am pus în atașament ca <strong>PPT</strong>, ca să-l poată adapta oricine vrea la propriul flux de lucru — schimbi exemplele cu specificul firmei tale, adaugi pași proprii și ai propriul cheat sheet, gata de distribuit echipei.
+      </p>
+      <div class="callout cheatsheet-cta" style="align-items:center;">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Cei 7 pași pentru promptul perfect</strong> — Ghid vizual cu structura și exemple, gata de printat, de adaptat sau de păstrat pe desktop.
+          <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+            <a href="downloads/Cei_7_pasi_pentru_promptul_perfect.pptx" class="cheatsheet-download" download="Cei_7_pasi_pentru_promptul_perfect.pptx">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+              Descarcă Ghidul sintetizat
+            </a>
+            <span style="font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--fg-dim); letter-spacing:0.08em; text-transform:uppercase;">PPTX · 47 KB</span>
+          </div>
+        </div>
+      </div>
+
       <div class="article-end">
         <div class="tags-row">
           <a href="#" class="tag">#prompting</a>
@@ -679,6 +725,7 @@
         <a href="#s9">Recapitulare</a>
         <a href="#s10">Shortcut-ul</a>
         <a href="#s11">Concluzie</a>
+        <a href="#s12">Cheat sheet (download)</a>
       </nav>
     </div>
   </aside>
