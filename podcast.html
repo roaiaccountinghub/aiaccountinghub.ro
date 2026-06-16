@@ -718,7 +718,9 @@ render();
   const all = [...EPISODES, ...MANIFEST];
   const ep  = all.find(e => e.spotifyId === id);
   const title = ep ? (ep.ep ? ep.ep + ' — ' + ep.title : ep.title) : 'Episod podcast';
-  setTimeout(() => { if (window.openSpotifyModal) window.openSpotifyModal(id, title); }, 400);
+  window.addEventListener('load', function () {
+    setTimeout(() => { if (window.openSpotifyModal) window.openSpotifyModal(id, title); }, 300);
+  });
 })();
 </script>
 </body>
