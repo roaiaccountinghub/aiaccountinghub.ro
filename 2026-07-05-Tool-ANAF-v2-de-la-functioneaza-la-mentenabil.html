@@ -1,0 +1,1013 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tool-ul ANAF, versiunea 2 — de la „funcționează” la „rezistă în timp” — AI Accounting Hub</title>
+<meta name="description" content="Primul nostru executabil verifica CIF-uri la ANAF și mergea perfect. Punându-i codul înapoi în fața AI-ului, am aflat de ce „merge” nu e același lucru cu „e bine făcut”. Povestea versiunii 2: configurare externă, fișiere editabile, jurnal de rulare și maturizarea tehnică a non-programatorului.">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Tool-ul ANAF, versiunea 2 — de la „funcționează” la „rezistă în timp”">
+<meta property="og:description" content="Primul nostru executabil verifica CIF-uri la ANAF și mergea perfect. Punându-i codul înapoi în fața AI-ului, am aflat de ce „merge” nu e același lucru cu „e bine făcut”. Povestea trecerii la versiunea 2.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tool-ul ANAF, versiunea 2 — de la „funcționează” la „rezistă în timp”">
+<meta name="twitter:description" content="Cum experimentarea cu vibe coding ne-a făcut conștienți de ce avem cu adevărat nevoie tehnic: mentenabilitate, configurare externă, jurnal de rulare și instrucțiuni complete. Tool-ul, gata de descărcat.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ ARTICLE PAGE ============ */
+.article-wrap {
+  position: relative; z-index: 1;
+  max-width: 1360px; margin: 0 auto;
+  padding: 64px 32px 96px;
+  display: grid;
+  grid-template-columns: 1fr 720px 1fr;
+  gap: 48px;
+}
+.article-side { position: relative; }
+.article-side.left { justify-self: end; }
+.article-side .sticky {
+  position: sticky; top: 96px;
+  padding: 20px 0;
+}
+.toc {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-1);
+}
+.toc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 14px;
+}
+.toc a {
+  display: block;
+  font-size: 13px; color: var(--fg-muted);
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid var(--border);
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.toc a:hover { color: var(--accent); border-color: var(--accent); }
+.toc a.active { color: var(--accent); border-color: var(--accent); }
+
+.article-main {
+  position: relative;
+  min-width: 0;
+}
+.article-main .prose,
+.article-main .prose pre,
+.article-main .prose img { max-width: 100%; }
+.article-main .prose pre { box-sizing: border-box; }
+
+.article-meta-top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.article-meta-top .sep { opacity: 0.4; }
+.article-category {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+.article-main h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.article-main h1 .accent {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 55%, color-mix(in oklab, var(--accent) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.article-lede {
+  font-size: 19px; line-height: 1.55; color: var(--fg-muted);
+  margin-bottom: 36px;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+}
+
+.author-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  display: grid; place-items: center;
+  color: #07121a; font-weight: 700; font-size: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+  flex-shrink: 0;
+}
+.author-info { flex: 1; min-width: 0; }
+.author-name { font-size: 14px; font-weight: 600; }
+.author-role { font-size: 12px; color: var(--fg-muted); }
+.share-row { display: flex; gap: 8px; }
+.share-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn svg { width: 15px; height: 15px; }
+
+.article-cover {
+  position: relative;
+  margin: 0 -32px 48px;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 360px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.article-cover-bg {
+  position: absolute; inset: 0;
+  background-image: url('assets/hero-vf.png');
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05) brightness(0.92);
+}
+.article-cover::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--bg-0) 80%, transparent) 100%);
+}
+.article-cover-caption {
+  position: absolute; left: 24px; bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-muted);
+  letter-spacing: 0.08em;
+  z-index: 2;
+}
+
+/* Prose */
+.prose {
+  font-size: 17px; line-height: 1.75;
+  color: var(--fg);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.prose p { margin: 0 0 22px; }
+.prose h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px; line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 56px 0 20px;
+  scroll-margin-top: 100px;
+}
+.prose h2::before {
+  content: '§'; color: var(--accent);
+  font-weight: 400;
+  margin-right: 12px;
+  opacity: 0.6;
+}
+.prose h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; line-height: 1.25; letter-spacing: -0.01em;
+  font-weight: 600;
+  margin: 36px 0 14px;
+  scroll-margin-top: 100px;
+}
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { color: var(--accent); font-style: normal; font-family: 'Space Grotesk', sans-serif; }
+.prose a { color: var(--accent); border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); transition: all 0.2s; }
+.prose a:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.prose ul, .prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose li { margin-bottom: 10px; }
+.prose li::marker { color: var(--accent); }
+.prose blockquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  border-radius: 0 12px 12px 0;
+  font-size: 18px;
+  color: var(--fg);
+  font-style: italic;
+}
+.prose blockquote cite {
+  display: block;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-style: normal;
+  color: var(--fg-muted); letter-spacing: 0.05em;
+}
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88em;
+  padding: 2px 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent);
+}
+.prose pre {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.6;
+}
+.prose pre code {
+  background: none; border: none; padding: 0; color: var(--fg);
+}
+.callout {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 14px;
+}
+.callout .ic {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center;
+  background: color-mix(in oklab, var(--accent) 15%, transparent);
+  color: var(--accent);
+}
+.callout .ic svg { width: 16px; height: 16px; }
+.callout .cbody { font-size: 14px; line-height: 1.6; color: var(--fg); }
+.callout .cbody strong { color: var(--accent); }
+
+/* End of article */
+.article-end {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+.author-card {
+  margin: 72px 0 0;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
+    var(--bg-1);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.author-card .author-avatar { width: 64px; height: 64px; font-size: 20px; }
+.author-card h3 { font-size: 20px; margin-bottom: 6px; }
+.author-card .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; margin-bottom: 12px; }
+.author-card p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+
+/* Related */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.related-card {
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  display: flex; flex-direction: column;
+  transition: all 0.3s ease;
+}
+.related-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.related-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.related-card h3 { font-size: 18px; line-height: 1.25; margin-bottom: 10px; }
+.related-card p { font-size: 13px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.related-read {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+}
+
+/* Stat block */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 32px 0;
+}
+.stat-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+}
+.stat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--fg-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Comparison table */
+.compare-table {
+  width: 100%;
+  margin: 28px 0;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.compare-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--border);
+}
+.compare-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child {
+  font-weight: 600;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1200px) {
+  .article-wrap { grid-template-columns: 1fr; max-width: 760px; padding: 48px 24px 72px; }
+  .article-side { display: none; }
+}
+@media (max-width: 960px) {
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .article-cover { margin: 0 0 36px; height: 280px; }
+}
+@media (max-width: 720px) {
+  .article-wrap { padding: 28px 16px 48px; }
+  .article-cover { height: 220px; margin: 0 -16px 24px; border-radius: 14px; }
+  .article-cover-caption { left: 16px; bottom: 14px; font-size: 10px; }
+  .article-main h1 { font-size: clamp(26px, 7.5vw, 34px); }
+  .article-lede { font-size: 16px; padding-left: 14px; }
+  .author-row { flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .share-row { width: 100%; justify-content: flex-end; }
+  .prose { font-size: 16px; line-height: 1.7; overflow-wrap: break-word; word-wrap: break-word; }
+  .prose h2 { font-size: 22px; margin: 36px 0 14px; }
+  .prose h2::before { margin-right: 8px; }
+  .prose h3 { font-size: 18px; margin: 26px 0 12px; }
+  .prose blockquote { margin: 22px 0; padding: 14px 16px; font-size: 15px; border-radius: 0 10px 10px 0; }
+  .prose pre { padding: 12px; font-size: 12px; border-radius: 10px; }
+  .callout { flex-direction: column; gap: 10px; padding: 16px; }
+  .author-card { flex-direction: column; gap: 16px; padding: 22px; margin-top: 48px; }
+  .author-card .author-avatar { width: 52px; height: 52px; font-size: 18px; }
+  .article-end { gap: 16px; padding-top: 24px; margin-top: 36px; }
+  .related-grid { grid-template-columns: 1fr; gap: 14px; }
+  .related-card { padding: 20px; }
+  .stat-grid { grid-template-columns: 1fr; }
+  .compare-table { font-size: 13px; }
+  .compare-table th, .compare-table td { padding: 10px 10px; }
+}
+@media (max-width: 420px) {
+  .article-wrap { padding: 22px 14px 40px; }
+  .article-cover { margin: 0 -14px 22px; height: 190px; }
+  .article-main h1 { font-size: 24px; line-height: 1.06; }
+  .article-lede { font-size: 14.5px; padding-left: 12px; margin-bottom: 28px; }
+  .article-meta-top { gap: 8px; font-size: 10px; margin-bottom: 18px; }
+  .article-meta-top .sep { display: none; }
+  .prose { font-size: 15px; line-height: 1.65; }
+  .prose p { margin-bottom: 18px; }
+  .prose h2 { font-size: 19px; margin: 28px 0 12px; }
+  .prose h2::before { display: none; }
+  .prose h3 { font-size: 16px; margin: 22px 0 10px; }
+  .prose blockquote { padding: 12px 14px; font-size: 14px; }
+  .prose ul, .prose ol { padding-left: 20px; }
+  .tags-row { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="article-meta-top">
+      <span class="article-category">Vibe Coding</span>
+      <span>5 iulie 2026</span>
+      <span class="sep">·</span>
+      <span>15 min citire</span>
+    </div>
+
+    <h1>Tool-ul ANAF, versiunea 2 — de la <span class="accent">„funcționează” la „rezistă în timp”</span></h1>
+    <p class="article-lede">
+      Primul nostru executabil verifica mii de CIF-uri la ANAF în câteva secunde și mergea impecabil. Apoi am făcut un experiment simplu: i-am dat codul înapoi aceluiași model AI și l-am rugat să-l critice ca un developer senior. Răspunsul ne-a învățat ceva ce nu știam să cerem la început — diferența dintre un tool care merge azi și unul construit ca să nu se strice mâine.
+    </p>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">05.07.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// ANAF CIF Checker · v1 → v2</div>
+    </div>
+
+    <div class="prose">
+
+      <h2 id="s-punct-plecare">Punctul de plecare — un tool care funcționează</h2>
+
+      <p>
+        Acum 2 luni am scris <a href="2026-05-02-Vibe-coding-in-contabilitate.html">povestea primului nostru tool construit prin vibe coding</a>: un verificator de CIF-uri la ANAF. Îi dai un fișier Excel cu coduri fiscale, el interoghează serviciul web ANAF și îți întoarce, pentru fiecare firmă, statusul de plătitor TVA, TVA la încasare, starea de activ/inactiv, RO e-Factura, adresa, codul CAEN și restul câmpurilor. Două fișiere Python: unul cu logica de comunicare cu ANAF, unul cu interfața grafică în Tkinter. Împachetat cu PyInstaller într-un singur <code>.exe</code>.
+      </p>
+
+      <p>
+        Și funcționa. <strong>8.000 de CIF-uri în aproximativ 80 de secunde</strong>, respectând regulile ANAF — maximum 100 de coduri pe cerere, maximum o cerere pe secundă, cu reîncercări automate când serverul dă timeout. Pentru un task pe care înainte îl făceai manual, câte un CIF pe rând pe site-ul ANAF, era diferența dintre o după-amiază pierdută și o pauză de cafea.
+      </p>
+
+      <p>
+        Aici se termină de obicei povestea de succes. Tool-ul merge, problema e rezolvată, treci mai departe. Dar pe măsură ce l-am folosit zi de zi, au început să apară întrebări incomode. <em>Ce se întâmplă dacă ANAF schimbă adresa serviciului?</em> <em>De ce trebuie să recompilez tot executabilul ca să schimb o singură setare?</em> <em>De ce colegul primește o avertizare roșie de securitate când deschide fișierul?</em> Niciuna dintre aceste întrebări nu era despre „merge sau nu merge”. Toate erau despre altceva — un strat pe care, la prima versiune, nici nu știam că trebuie să-l cer.
+      </p>
+
+      <h2 id="s-critic">AI-ul ca cel mai răbdător critic</h2>
+
+      <p>
+        Am făcut un experiment care a costat zero lei și cinci minute. Am luat cele două fișiere Python — exact codul pe care AI-ul îl scrisese pentru mine — și i le-am dat înapoi, cu o singură instrucțiune: <em>„Ești un developer senior care face code review. Spune-mi tot ce e impractic, fragil sau greu de întreținut în acest cod. Nu mă menaja.”</em>
+      </p>
+
+      <p>
+        Răspunsul a fost mai util decât mi-aș fi dorit. Pentru că, vezi tu, când ceri AI-ului să <strong>construiască</strong> ceva, primești soluția cea mai directă care rezolvă problema descrisă. Când îi ceri să <strong>critice</strong>, primești toate lucrurile pe care nu ai știut să le ceri. E aceeași asimetrie pe care o cunoaște orice contabil: e mai ușor să întocmești o balanță decât să revizuiești una făcută de altcineva și să-i găsești fisurile. Revizia cere o altă pălărie.
+      </p>
+
+      <p>
+        Și exact asta e ideea care merită reținută din tot articolul: <em>modelul AI care îți scrie codul poate fi, în aceeași conversație, cel mai bun critic constructiv al lui.</em> Nu obosește, nu se supără că îi pui la îndoială munca, nu are ego de protejat. Îi pui codul în față, îl întrebi „ce ai face altfel” și primești un audit pe care un consultant l-ar factura cu câteva sute de euro.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Truc practic:</strong> După ce un model AI îți construiește un tool, deschide o conversație nouă, lipește codul și cere-i explicit un <em>code review critic</em>, ca și cum ar fi scris de altcineva. Conversația nouă îl ajută să nu-și „apere” propria muncă. Vei primi exact lista de slăbiciuni pe care n-ai știut să le anticipezi.
+        </div>
+      </div>
+
+      <h2 id="s-lectia-1">Lecția #1: „hardcoded” — bomba cu ceas</h2>
+
+      <p>
+        Cel mai important cusur — și cel pe care îl bănuiam deja — se numește, în jargon, <em>hardcoding</em>. Înseamnă că valori care s-ar putea schimba în viitor sunt scrise direct în corpul programului, fixe, ca și cum n-ar urma să se schimbe niciodată. În codul nostru, prima linie relevantă arăta așa:
+      </p>
+
+      <pre><code>API_URL = "https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva"
+
+MAX_CUIS_PER_REQUEST = 100
+MIN_SECONDS_BETWEEN_REQUESTS = 1.0
+MAX_ATTEMPTS = 3</code></pre>
+
+      <p>
+        Uită-te o secundă la acel <code>v9</code> din adresă. Acel „9” înseamnă că serviciul ANAF a fost rescris de cel puțin nouă ori. Cu alte cuvinte, avem dovada scrisă, chiar în cod, că adresa <strong>se schimbă periodic</strong>. În ziua în care ANAF publică un <code>v10</code> și retrage <code>v9</code>, executabilul nostru nu dă o eroare elegantă — pur și simplu nu mai întoarce niciun rezultat, iar utilizatorul nu are nici cea mai vagă idee de ce. Tool-ul devine, peste noapte, un fișier inutil.
+      </p>
+
+      <p>
+        Și nu e doar adresa. Maparea câmpurilor din răspunsul ANAF — denumire, cod CAEN, status TVA, adresă sediu și încă vreo cincizeci de câmpuri — e și ea scrisă manual, linie cu linie, în cod. Dacă ANAF adaugă un câmp nou (cum a făcut, de exemplu, când a introdus statusul RO e-Factura), tool-ul îl ignoră complet, pentru că nimeni nu i-a spus să-l caute. Datele vin de la ANAF, dar se pierd pe drum.
+      </p>
+
+      <p>
+        Lecția tehnică, tradusă pentru un contabil: <strong>nu amesteca datele care se schimbă cu logica ce nu se schimbă.</strong> E exact principiul pentru care nu scrii cota de TVA direct în formula din fiecare celulă, ci o pui într-o celulă separată la care toate formulele se uită. Când cota se schimbă, modifici un singur loc. La fel ar trebui să funcționeze și un tool: adresa ANAF, limitele, maparea câmpurilor — toate ar trebui să stea într-un <em>fișier de configurare separat</em>, ușor de actualizat, nu îngropate în cod și sigilate într-un executabil.
+      </p>
+
+      <h2 id="s-lectia-2">Lecția #2: interfața nu înseamnă doar „să meargă”</h2>
+
+      <p>
+        A doua observație a privit interfața. Tkinter — biblioteca grafică folosită la v1 — ne-a dat exact minimul: o fereastră fixă, două butoane, o bară de progres și o zonă de text în care se afișau primele zece rânduri ca text simplu. Funcțional, dar rigid. Nu poți sorta rezultatele, nu poți filtra, nu poți alege ce coloane vrei la export, nu poți selecta data la care interoghezi ANAF, nu poți decide dacă vrei rezultatul în Excel sau în CSV. Tot ce poți face e ce a prevăzut programul, exact așa cum a prevăzut-o.
+      </p>
+
+      <p>
+        Mai era și o problemă de transparență a erorilor. Ca să nu sperie utilizatorul cu mesaje tehnice, v1 prindea orice eroare și afișa un politicos <em>„A apărut o eroare neașteptată”</em>. Bine intenționat, dar inutil: când ceva chiar se strica, nici utilizatorul, nici noi nu aveam idee <em>ce</em> anume. Nu exista niciun jurnal, niciun fișier de log pe care să-l deschizi și să vezi ce s-a întâmplat. În contabilitate i-am spune pistă de audit. Aici, pista lipsea cu desăvârșire.
+      </p>
+
+      <blockquote>
+        O interfață bună nu e cea care arată bine. E cea care nu te leagă de mâini când vrei să faci ceva ce autorul n-a anticipat — și care îți spune adevărul când ceva nu merge.
+      </blockquote>
+
+      <h2 id="s-lectia-3">Lecția #3: executabilul nesemnat și problema încrederii</h2>
+
+      <p>
+        Al treilea cusur nu e despre cod, ci despre <em>distribuție</em> — și e cel care a creat cele mai multe fricțiuni în practică. Când împachetezi un program Python într-un <code>.exe</code> și îl trimiți unui coleg, Windows îl întâmpină cu un ecran albastru de avertizare: <em>„Windows protected your PC”</em>. Motivul e că fișierul nu e <strong>semnat digital</strong>.
+      </p>
+
+      <p>
+        O semnătură digitală de cod e, în esență, un certificat care confirmă cine a creat aplicația și garantează că fișierul n-a fost modificat după aceea. Funcționează ca ștampila și semnătura de pe un document oficial: nu garantează că documentul e corect, dar garantează cine și-l asumă. Fără ea, sistemul de reputație al Windows (SmartScreen) tratează fișierul ca pe un necunoscut și pune utilizatorul în gardă — vizual și în scris.
+      </p>
+
+      <p>
+        Pentru un tool intern, asta înseamnă că fiecare coleg trebuie să apese „Run anyway” și să ignore o avertizare care, pe bună dreptate, îl face nervos. Iar instinctul corect al unui om care lucrează cu date sensibile e tocmai să <em>nu</em> deschidă fișiere care declanșează astfel de alarme. Certificatele de semnare a codului există, dar costă bani și presupun un proces de verificare — o decizie pe care, pentru un tool de weekend, trebuie să o cântărești conștient. Important e că, la v1, nici nu știam că această problemă există până când nu am lovit-o.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>De reținut:</strong> Avertizarea Windows la un <code>.exe</code> nesemnat nu e un capriciu — e exact reflexul de prudență pe care îl vrem cu toții când lucrăm cu date de clienți. Soluția nu e să-i înveți pe colegi să ignore alarma, ci să alegi un mod de distribuție în care alarma nici nu apare.
+        </div>
+      </div>
+
+      <h2 id="s-maturizare">De la cusururi la cerințe — maturizarea tehnică</h2>
+
+      <p>
+        Iată momentul în care experimentul devine interesant. Niciuna dintre cele trei lecții nu mi-ar fi trecut prin cap <em>înainte</em> să construiesc v1. Nu știam să cer „configurare externă” pentru că nu trăisem încă spaima că ANAF schimbă adresa. Nu știam să cer „tabel interactiv” pentru că nu mă lovisem încă de un preview de text pe care nu-l puteam sorta. Nu știam de semnarea codului până când un coleg nu m-a sunat speriat de ecranul albastru.
+      </p>
+
+      <p>
+        Asta e maturizarea tehnică a non-programatorului, și se întâmplă în ordinea inversă față de cum predau manualele. Nu înveți întâi teoria și apoi construiești. Construiești ceva care merge, te lovești de limitele lui în uz real, și abia atunci înțelegi <em>de ce</em> există conceptele pe care developerii le iau de la sine: separarea configurației de cod, mentenabilitatea, degradarea elegantă, pista de audit, lanțul de încredere. Fiecare a încetat să fie jargon abstract și a devenit răspunsul la o durere concretă pe care o simțisem deja.
+      </p>
+
+      <p>
+        Vibe coding-ul accelerează această maturizare tocmai pentru că reduce costul fiecărei iterații aproape la zero. Când o versiune nouă te costă o conversație, nu o săptămână de muncă, îți permiți să greșești, să descoperi ce-ți lipsește și să ceri mai bine data viitoare. AI-ul scrie codul; experiența îți scrie ție specificațiile.
+      </p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Ce am pățit la v1</th>
+            <th>Principiul tehnic învățat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Adresa ANAF e fixă în cod (<code>v9</code>)</td>
+            <td>Separă configurația de logică — datele schimbătoare în fișier extern</td>
+          </tr>
+          <tr>
+            <td>Câmpuri ANAF noi sunt ignorate</td>
+            <td>Mentenabilitate — codul trebuie să tolereze schimbări fără rescriere</td>
+          </tr>
+          <tr>
+            <td>Preview rigid, fără sortare/filtrare</td>
+            <td>UX-ul nu e cosmetică — e libertatea utilizatorului de a-și controla datele</td>
+          </tr>
+          <tr>
+            <td>„A apărut o eroare neașteptată”</td>
+            <td>Pistă de audit — un jurnal care îți spune ce și unde s-a stricat</td>
+          </tr>
+          <tr>
+            <td>Avertizare Windows la fiecare deschidere</td>
+            <td>Lanț de încredere — modul de livrare contează la fel de mult ca tool-ul</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 id="s-v2">Versiunea 2 — același Tkinter, alt mod de a gândi</h2>
+
+      <p>
+        Cu lista de cerințe scrisă de propria experiență, ne-am întors la AI cu o comandă mult mai matură decât prima dată. Nu „fă-mi un tool care verifică CIF-uri”, ci: separă configurarea de cod, semnalează-mi ce nu recunoști, ține un jurnal, lasă-mă să aleg ce exportă. Am rămas, deocamdată, la Tkinter și la formula executabilului — tocmai ca să fie clar că saltul nu vine din schimbarea tehnologiei, ci din schimbarea cerințelor. Același instrument, rescris aproape complet, pe alte principii.
+      </p>
+
+      <h3>Configurarea iese din cod: <code>config.json</code></h3>
+      <p>
+        Schimbarea cea mai importantă. Adresa serviciului ANAF, limitele de viteză, timeout-urile și numărul de reîncercări nu mai stau în cod, ci într-un fișier <code>config.json</code> pe care aplicația îl creează automat, lângă executabil, la prima rulare. Când ANAF trece la <code>v10</code>, deschizi fișierul, schimbi o linie, salvezi. Fără recompilare, fără redistribuit un executabil nou către toată lumea.
+      </p>
+
+      <pre><code>// config.json — editabil fără să atingi codul
+{
+  "api_url": "https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva",
+  "max_cuiuri_per_request": 100,
+  "secunde_intre_requesturi": 1.0,
+  "timeout_conectare": 10,
+  "timeout_citire": 30,
+  "incercari_maxime": 3
+}</code></pre>
+
+      <p>
+        Și nici nu trebuie să umbli în fișier dacă nu vrei: aplicația are un buton <em>„Configurare”</em> care editează aceleași setări dintr-un dialog, plus un buton <em>„Test conexiune”</em> care îți spune pe loc dacă serviciul ANAF răspunde la adresa configurată. Exact celula cu cota de TVA din analogia de mai devreme — un singur loc de adevăr, la vedere.
+      </p>
+
+      <h3>Câmpurile ANAF, într-un al doilea fișier editabil: <code>fields.json</code></h3>
+      <p>
+        Maparea celor peste cincizeci de câmpuri din răspunsul ANAF — care la v1 era scrisă manual, linie cu linie, în cod — stă acum într-un fișier <code>fields.json</code>, organizat pe grupuri logice (date generale, TVA, TVA la încasare, inactiv/reactiv, adrese), cu denumiri prietenoase pentru coloanele din export și cu presetări rapide („Esențial”, „TVA”).
+      </p>
+
+      <p>
+        Iar aici v2 face ceva ce v1 nici nu putea concepe: răspunsul ANAF e citit <em>dinamic</em>, nu după o listă fixă. Dacă ANAF adaugă mâine un câmp nou — cum a făcut cu statusul RO e-Factura — aplicația îl observă și îți afișează o avertizare cu exemplele de câmpuri necunoscute. Le adaugi în <code>fields.json</code> cu un editor de text și apar la următorul export. Datele nu se mai pierd pe drum; cel mult așteaptă să le dai un nume. Există și suport pentru <em>alias</em>: dacă ANAF redenumește un câmp, păstrezi denumirea veche în export fără să atingi codul.
+      </p>
+
+      <h3>Pista de audit: <code>anaf_tool.log</code></h3>
+      <p>
+        „A apărut o eroare neașteptată” a rămas la v1. Versiunea 2 scrie un jurnal local, <code>anaf_tool.log</code>, în care se văd loturile procesate, reîncercările și erorile, cu tipul lor exact. Când ceva nu merge, nu mai ghicești — deschizi jurnalul și citești. Pista de audit care lipsea cu desăvârșire există acum, fișier lângă aplicație.
+      </p>
+
+      <h3>Interfața nu te mai leagă de mâini</h3>
+      <p>
+        Tot Tkinter, dar regândit în jurul utilizatorului. Poți verifica un singur CIF, o listă lipită direct în aplicație (separată prin virgulă, spațiu sau linie nouă) sau un fișier — Excel <em>și</em> CSV de data asta, cu alegerea coloanei care conține CIF-urile, nu obligatoriu prima. Poți selecta <strong>data interogării</strong> — utilă când vrei statusul firmei la data facturii, nu la data de azi. Alegi ce câmpuri intră în export, iar rezultatul iese în Excel formatat (antet colorat, filtre, primul rând înghețat) <em>sau</em> CSV, la alegere. Preview-ul e un tabel adevărat, cu o sută de rânduri și un sumar: câte verificate, câte găsite, câte cu probleme. În plus, CIF-urile sunt curățate automat din formatele uzuale (<code>RO14399840</code>, <code>14399840.0</code>) și trecute printr-o validare informativă a cifrei de control.
+      </p>
+
+      <h3>Instrucțiuni complete, livrate cu tool-ul</h3>
+      <p>
+        Poate cel mai puțin spectaculos upgrade, dar cel care schimbă cel mai mult viața celui care primește tool-ul: v2 vine cu un <strong>ghid de utilizare complet</strong> — mod de interogare, formatul fișierelor acceptate, cum funcționează presetările de câmpuri, ce înseamnă fiecare status, limitele serviciului ANAF, ce fișiere creează aplicația la rulare. La v1, „documentația” era un mesaj pe chat către coleg. Un tool pe care îl poate folosi cineva fără să te sune nu e un moft — e diferența dintre o sculă personală și o resursă de echipă.
+      </p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-lbl">// fișiere externe editabile: config + fields</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">v9 → v10</div>
+          <div class="stat-lbl">// schimbare ANAF = o linie editată, zero recompilare</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1</div>
+          <div class="stat-lbl">// jurnal de rulare = pista de audit</div>
+        </div>
+      </div>
+
+      <h2 id="s-comparatie">v1 față de v2, pe scurt</h2>
+
+      <p>
+        Pus cap la cap, saltul nu e despre „mai multe funcții”. E despre rezistența în timp — capacitatea tool-ului de a supraviețui unei schimbări la ANAF, de a fi întreținut fără durere și de a fi folosit de un coleg fără să te sune.
+      </p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Criteriu</th>
+            <th>v1 (Tkinter + .exe)</th>
+            <th>v2 (Tkinter + fișiere externe)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parametri ANAF</td>
+            <td>Hardcoded în cod</td>
+            <td><code>config.json</code> extern + dialog în aplicație</td>
+          </tr>
+          <tr>
+            <td>ANAF schimbă adresa</td>
+            <td>Tool inutilizabil, recompilare</td>
+            <td>Editezi o linie în config, test conexiune pe loc</td>
+          </tr>
+          <tr>
+            <td>Câmpuri noi de la ANAF</td>
+            <td>Ignorate, în tăcere</td>
+            <td>Detectate și semnalate; le adaugi în <code>fields.json</code></td>
+          </tr>
+          <tr>
+            <td>Input</td>
+            <td>Doar Excel, obligatoriu prima coloană</td>
+            <td>CIF unic, listă lipită, Excel sau CSV, coloana la alegere</td>
+          </tr>
+          <tr>
+            <td>Data interogării</td>
+            <td>Doar ziua curentă</td>
+            <td>Orice dată — ex. data facturii</td>
+          </tr>
+          <tr>
+            <td>Rezultate</td>
+            <td>Preview text, 10 rânduri</td>
+            <td>Tabel real, 100 rânduri + sumar găsite/probleme</td>
+          </tr>
+          <tr>
+            <td>Export</td>
+            <td>Doar Excel, coloane fixe</td>
+            <td>Excel formatat sau CSV, câmpuri la alegere, presetări</td>
+          </tr>
+          <tr>
+            <td>Erori</td>
+            <td>Mesaj generic, fără log</td>
+            <td>Jurnal <code>anaf_tool.log</code>, mesaje cu cauza exactă</td>
+          </tr>
+          <tr>
+            <td>Documentație</td>
+            <td>Inexistentă</td>
+            <td>Ghid complet de utilizare, livrat cu tool-ul</td>
+          </tr>
+          <tr>
+            <td>Transparența codului</td>
+            <td>Doar executabilul</td>
+            <td>Sursele Python incluse, pentru audit sau modificare</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 id="s-nuanta">O nuanță onestă — ce nu rezolvă v2</h2>
+
+      <p>
+        Ca să rămânem riguroși: din cele trei lecții, v2 le închide pe primele două. A treia — executabilul nesemnat — rămâne deschisă. v2 e tot un <code>.exe</code> împachetat cu PyInstaller, deci ecranul albastru de la SmartScreen apare în continuare la prima deschidere. Nu am ascuns problema; am ales să o tratăm prin transparență, nu prin certificat.
+      </p>
+
+      <p>
+        Concret: arhiva pe care o distribuim conține, pe lângă executabil, și <strong>folderul cu cele două fișiere Python sursă</strong>. Oricine — în primul rând departamentul IT al firmei — poate citi codul rând cu rând <em>înainte</em> de a aproba utilizarea: ce adrese accesează, ce fișiere scrie, ce nu face. Iar utilizatorii mai tehnici pot merge mai departe: modifică codul după propriile nevoi și îl împachetează singuri, prin Python și PyInstaller, într-un executabil nou, construit pe mașina lor, din surse pe care le-au citit. Nu e semnătură digitală, dar e ceva ce o semnătură nu oferă: posibilitatea de a verifica <em>ce face</em> programul, nu doar cine îl semnează.
+      </p>
+
+      <p>
+        Și mai e ceva: configurarea externă mută o parte din responsabilitate spre cel care editează fișierul. Cu putere de configurare vine și posibilitatea de a strica setarea greșind o linie — de aceea aplicația recreează fișierele cu valori implicite dacă lipsesc și îți spune în jurnal când un fișier e invalid. Maturizarea tehnică nu înseamnă să elimini riscul, ci să-l muți într-un loc unde îl poți vedea și controla — exact ca în contabilitate, unde nu elimini judecata profesională, ci o documentezi.
+      </p>
+
+      <p>
+        Cât despre soluția care face avertizarea Windows să dispară cu totul — aplicația care rulează în browser, fără executabil, fără instalare — ea există și e pasul firesc al seriei. Îi dedicăm integral <strong>articolul următor</strong>: același tool, rescris pentru web.
+      </p>
+
+      <h2 id="s-concluzie">Închiderea exercițiului</h2>
+
+      <p>
+        Primul tool ne-a rezolvat o problemă. Al doilea ne-a învățat o disciplină. Între cele două versiuni n-am devenit programatori — și nici nu e nevoie. Am devenit ceva mai util pentru un contabil: oameni care știu să <em>ceară</em> mai bine. Care, înainte să apese „construiește”, se întreabă ce se schimbă în timp, ce vrea utilizatorul de fapt, și cum ajunge tool-ul în mâinile altora fără să sperie pe nimeni.
+      </p>
+
+      <p>
+        Iar instrumentul care ne-a dus acolo a fost același care scrisese codul. I l-am pus înapoi în față și l-am rugat să fie dur. A fost. Asta e poate cea mai subevaluată superputere a vibe coding-ului: modelul AI nu e doar mâna care construiește, ci și ochiul care revizuiește. Cel mai bun critic constructiv pe care îl ai e exact cel care ți-a scris prima versiune — trebuie doar să-i ceri să-și schimbe pălăria.
+      </p>
+
+      <blockquote>
+        Un tool care „merge” rezolvă problema de azi. Un tool care „rezistă” o rezolvă și pe cea de peste șase luni, când ANAF schimbă o adresă și tu nici nu observi. Diferența dintre cele două nu se învață din manual — se învață construind primul și ascultând ce-ți spune al doilea.
+      </blockquote>
+
+      <h2 id="s-download">Descarcă tool-ul</h2>
+
+      <p>
+        Versiunea 2 înlocuiește prima variantă în secțiunea de resurse — face tot ce făcea v1, plus tot ce ai citit mai sus. Arhiva conține executabilul <code>Verificare_CIF_ANAF.exe</code>, fișierele editabile <code>config.json</code> și <code>fields.json</code>, ghidul complet de utilizare, documentația tehnică a serviciului web ANAF și folderul cu cele două fișiere Python sursă — pentru auditul departamentului IT înainte de utilizare sau pentru cei care vor să adapteze codul și să-și construiască propriul executabil.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>ANAF CIF Checker v2</strong> — verificare bulk și single CIF direct din API-ul public ANAF, cu configurare externă, câmpuri la alegere și jurnal de rulare. Rulează din dublu-click pe orice PC cu Windows, fără instalare, fără cont. Sursele Python sunt în arhivă.
+          <br style="margin-bottom: 10px;">
+          <a href="downloads/AnafCIFChecker_v2.zip" download="AnafCIFChecker_v2.zip" style="font-weight:600;">↓ Descarcă AnafCIFChecker_v2.zip</a> &nbsp;·&nbsp; <a href="resurse.html">Vezi toate resursele →</a>
+        </div>
+      </div>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#vibe-coding</a>
+          <a href="#" class="tag">#anaf</a>
+          <a href="#" class="tag">#python</a>
+          <a href="#" class="tag">#mentenabilitate</a>
+          <a href="#" class="tag">#configurare-externa</a>
+          <a href="#" class="tag">#automatizare</a>
+        </div>
+        <span class="footer-mono">Articolul #015</span>
+      </div>
+
+      <!-- Author bio -->
+      <div class="author-card">
+        <div class="author-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+        </div>
+        <div>
+          <h3>AI Accounting Hub</h3>
+          <div class="role">aiaccountinghub.ro</div>
+          <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot — fără bariere, fără taxe, fără reclame.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s-punct-plecare">Punctul de plecare</a>
+        <a href="#s-critic">AI-ul ca critic</a>
+        <a href="#s-lectia-1">Lecția #1: hardcoded</a>
+        <a href="#s-lectia-2">Lecția #2: interfața</a>
+        <a href="#s-lectia-3">Lecția #3: exe nesemnat</a>
+        <a href="#s-maturizare">Maturizarea tehnică</a>
+        <a href="#s-v2">Versiunea 2 în detaliu</a>
+        <a href="#s-comparatie">v1 vs. v2</a>
+        <a href="#s-nuanta">Ce nu rezolvă v2</a>
+        <a href="#s-concluzie">Închiderea exercițiului</a>
+        <a href="#s-download">Descarcă tool-ul</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · IUNIE 2026</div>
+        <h3>Vibe coding — ce este și unde îl folosim</h3>
+        <p>De la un tweet viral la Cuvântul Anului Collins: ce înseamnă vibe coding și unde poate ajunge în lumea contabilă.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-05-02-Vibe-coding-in-contabilitate.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · MAI 2026</div>
+        <h3>Vibe coding pentru contabili — tool ANAF CIF</h3>
+        <p>Povestea completă a primului proiect: cum am construit verificatorul bulk de CIF-uri fără să scriu o linie de cod.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html" class="related-card fade-in">
+        <div class="related-date">RESURSE</div>
+        <h3>Tool-uri și descărcări</h3>
+        <p>ANAF CIF Checker și alte tool-uri construite prin vibe coding, gata de folosit.</p>
+        <span class="related-read">Deschide resursele
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler" digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Închide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-title">Trimite-ne un mesaj</h3>
+    <div class="form-success" id="form-success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mulțumim! Mesajul a fost trimis.
+    </div>
+    <form id="contact-form">
+      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required placeholder="Ex. Ioana Popescu"></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required placeholder="ioana@firma.ro"></div>
+      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required placeholder="Scrie-ne ce te interesează..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
+        <button type="submit" class="btn btn-primary">Trimite
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+/* TOC active link on scroll */
+(function () {
+  const links = document.querySelectorAll('.toc a');
+  if (!links.length) return;
+  const ids = Array.from(links).map(a => a.getAttribute('href').slice(1));
+  const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  targets.forEach(t => io.observe(t));
+})();
+</script>
+</body>
+</html>
+   
