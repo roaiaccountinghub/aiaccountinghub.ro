@@ -294,8 +294,8 @@
     <div class="res-featured fade-in">
       <div class="res-featured-body">
         <span class="tag">Resursa lunii</span>
-        <h2>Verificare CIF — site ANAF</h2>
-        <p>Interfață simplă peste API-ul public ANAF pentru verificarea unui CIF: nume firmă, plătitor TVA, stare activă. Fără cont, fără newsletter — doar introduci CIF-ul și primești răspunsul.</p>
+        <h2>Verificare CIF — ANAF (v2)</h2>
+        <p>Verificare bulk și single CIF direct din API-ul public ANAF: nume firmă, plătitor TVA, stare activă și altele. Versiunea 2 adaugă configurare externă, câmpuri la alegere și jurnal de rulare — plus sursele Python în arhivă. Fără cont, fără instalare.</p>
         <div class="meta">
           <span>Tool · API</span>
           <span class="sep">·</span>
@@ -304,10 +304,11 @@
           <span>Sursa: API ANAF</span>
         </div>
         <div class="actions">
-          <a href="downloads/AnafCIFChecker.zip" class="btn btn-primary" download="AnafCIFChecker.zip">Download
+          <a href="downloads/AnafCIFChecker_v2.zip" class="btn btn-primary" download="AnafCIFChecker_v2.zip">Descarcă v2
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
           </a>
         </div>
+        <p style="font-size:13px; color:var(--fg-muted); margin-top:12px;">Recomandăm versiunea 2. Ai nevoie de varianta inițială? <a href="downloads/AnafCIFChecker.zip" download="AnafCIFChecker.zip">Descarcă v1</a>.</p>
       </div>
       <div class="res-featured-visual">
         <span class="badge">// API · ANAF</span>
@@ -542,10 +543,10 @@ const RESOURCES = [
     size: 'XLSM · 480 KB', cta: 'În curând' },
 
   /* ===== TOOLS ===== */
-  { type: 'tool', kind: 'Tool · API', title: 'Verificare CIF — site ANAF',
-    desc: 'Interfață simplă peste API-ul public ANAF: introduci un CIF și primești nume firmă, plătitor TVA, stare activă. Rulează în browser, fără cont.',
-    size: 'ZIP · Tool browser', cta: 'Download',
-    href: 'downloads/AnafCIFChecker.zip' },
+  { type: 'tool', kind: 'Tool · API', title: 'Verificare CIF — ANAF (v2)',
+    desc: 'Verificare bulk și single CIF direct din API-ul public ANAF. Versiunea 2 (recomandată): configurare externă, câmpuri la alegere, jurnal de rulare și sursele Python în arhivă.',
+    size: 'ZIP · Tool Windows', cta: 'Descarcă v2',
+    href: 'downloads/AnafCIFChecker_v2.zip' },
   { type: 'tool', kind: 'Tool · Web', title: 'Extractor BF travel PDF, imagini → Excel',
     desc: 'Drag-and-drop pentru BF scanate PDF, imagini. Extrage furnizor, CIF, total, TVA și le exportă într-un Excel gata pentru import.',
     size: 'Browser · Fără upload server', cta: 'În curând' },
