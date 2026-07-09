@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Arhiva Buzzword — AI Accounting Hub</title>
+<meta name="description" content="Toți termenii AI explicați pe AI Accounting Hub — definiții în limba română, pronunție, traducere și exemple aplicate în contabilitate.">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aiaccountinghub.ro/buzzword.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Arhiva Buzzword — AI Accounting Hub">
+<meta property="og:description" content="Toți termenii AI explicați pe AI Accounting Hub — definiții în limba română, pronunție, traducere și exemple aplicate în contabilitate.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ BUZZWORD ARCHIVE ============ */
+.archive-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  margin-bottom: 36px;
+}
+.search-box {
+  flex: 1 1 280px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+.search-box:focus-within { border-color: var(--accent); }
+.search-box svg { width: 16px; height: 16px; color: var(--fg-muted); flex-shrink: 0; }
+.search-box input {
+  flex: 1; border: none; background: none; outline: none;
+  color: var(--fg); font-family: inherit; font-size: 14px;
+}
+.search-box input::placeholder { color: var(--fg-dim); }
+
+.sort-group {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.sort-group select {
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--fg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.archive-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim);
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.archive-count span { color: var(--accent); }
+
+/* Letter group headers (alphabetical view) */
+.letter-head {
+  display: flex; align-items: center; gap: 14px;
+  margin: 26px 0 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px; font-weight: 600;
+  color: var(--accent);
+}
+.letter-head::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border);
+}
+.letter-head:first-child { margin-top: 0; }
+
+/* Term item — accordion card */
+.term-list { display: flex; flex-direction: column; gap: 14px; }
+.term-item {
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: 90px;
+}
+.term-item:hover { border-color: var(--border-strong); box-shadow: var(--shadow-lg); }
+.term-item.open { border-color: color-mix(in oklab, var(--accent) 40%, var(--border)); }
+
+.term-head {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  padding: 22px 26px;
+  background: none; border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--fg);
+  font-family: inherit;
+}
+.term-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+.term-num .n {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px; color: var(--accent);
+  font-weight: 500; line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.term-main { min-width: 0; }
+.term-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 7px;
+}
+.term-label::before { content: ''; width: 18px; height: 1px; background: var(--accent); }
+.term-badge {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--accent);
+  font-size: 9px; letter-spacing: 0.1em;
+}
+.term-main h3 {
+  font-size: 21px; line-height: 1.15; letter-spacing: -0.01em;
+  font-weight: 600; margin-bottom: 7px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.term-sub {
+  display: flex; flex-wrap: wrap; gap: 6px 16px;
+  font-size: 12.5px; color: var(--fg-muted);
+}
+.term-sub .pron { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--fg-dim); font-style: italic; }
+.term-chev {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  flex-shrink: 0;
+  transition: all 0.25s;
+}
+.term-item:hover .term-chev { border-color: var(--accent); color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, transparent); }
+.term-chev svg { transition: transform 0.3s; }
+.term-item.open .term-chev svg { transform: rotate(180deg); }
+
+/* Expanded body */
+.term-body { display: none; padding: 0 26px 26px calc(72px + 24px + 26px); }
+.term-item.open .term-body { display: block; }
+.term-body .def p { font-size: 14px; line-height: 1.65; color: var(--fg-muted); margin-bottom: 12px; }
+.term-examples {
+  margin-top: 18px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.term-examples-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.term-examples ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.term-examples li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13px; line-height: 1.6; color: var(--fg-muted);
+}
+.term-examples li::before {
+  content: '›';
+  position: absolute; left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+.term-actions { margin-top: 16px; display: flex; gap: 10px; }
+.term-permalink {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; letter-spacing: 0.06em;
+  color: var(--fg-dim);
+  padding: 7px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.term-permalink:hover { border-color: var(--accent); color: var(--accent); }
+.term-permalink svg { width: 12px; height: 12px; }
+
+.no-results {
+  padding: 64px 24px;
+  text-align: center;
+  border: 1px dashed var(--border-strong);
+  border-radius: 14px;
+  color: var(--fg-muted);
+  font-size: 14px;
+  display: none;
+}
+.no-results.show { display: block; }
+
+@media (max-width: 960px) {
+  .archive-toolbar { padding: 16px; gap: 12px; }
+  .sort-group { flex-basis: 100%; justify-content: space-between; }
+}
+@media (max-width: 720px) {
+  .term-head { grid-template-columns: 1fr; gap: 10px; padding: 18px 20px; }
+  .term-num { display: flex; align-items: baseline; gap: 10px; }
+  .term-num .n { font-size: 20px; margin-bottom: 0; }
+  .term-chev { display: none; }
+  .term-body { padding: 0 20px 22px 20px; }
+  .term-main h3 { font-size: 18px; }
+  .search-box { flex-basis: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="logo-text"><span>AI Accounting Hub</span></div>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-ambient"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <span>Buzzword</span>
+    </div>
+    <div class="page-kicker"><span class="dot"></span>Vocabular AI</div>
+    <h1>Arhiva <span class="accent">Buzzword</span>.</h1>
+    <p class="page-lede">Toți termenii explicați până acum, într-un singur loc — cu pronunție, traducere și exemple aplicate în contabilitate. Caută un termen sau răsfoiește lista alfabetic ori cronologic.</p>
+  </div>
+</section>
+
+<!-- ARCHIVE -->
+<section class="block" style="padding-top: 56px;">
+  <div class="block-inner">
+
+    <div class="archive-toolbar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" id="search" placeholder="Caută un termen... (ex: token, context, prompt)">
+      </div>
+      <div class="sort-group">
+        <span>Ordine</span>
+        <select id="sort">
+          <option value="new">Cele mai noi</option>
+          <option value="old">Cele mai vechi</option>
+          <option value="az">Alfabetic A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="archive-count"><span id="count">0</span> <span id="count-label">TERMENI</span></div>
+
+    <div class="term-list" id="term-list"></div>
+
+    <div class="no-results" id="no-results">
+      Nu am găsit niciun termen pentru căutarea ta. Încearcă alt cuvânt-cheie — sau <a href="contact.html" style="color: var(--accent);">propune-ne termenul</a> și îl explicăm într-o ediție viitoare.
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text"><span>AI Accounting Hub</span><small>aiaccountinghub.ro</small></div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari interesați de integrarea AI în procesele contabile. Evoluție fără zgomot.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim resurse fără bariere: fără conturi, fără taxe și fără reclame.</p>
+        <p>Doar conținut esențial pentru dezvoltarea fiecărui profesionist financiar, oferit gratuit și fără „filler” digital.</p>
+        <p>Construim un spațiu de învățare curat, pentru profesioniștii care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Conținut</h4>
+        <a href="arhiva.html">Articole</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="buzzword.html">Buzzword</a>
+        <a href="resurse.html">Resurse</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script>
+/* ========== BUZZWORD ARCHIVE ==========
+   Source of truth = assets/buzzwords.json — același fișier folosit de cardul
+   de pe homepage. Ordinea în array = cronologică (vechi → nou); ultimul
+   element = termenul săptămânii curente. */
+
+let TERMS = [];
+const state = { q: '', sort: 'new' };
+
+const listEl  = document.getElementById('term-list');
+const countEl = document.getElementById('count');
+const noRes   = document.getElementById('no-results');
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* Căutare insensibilă la diacritice: „fereastra" găsește „Fereastra de Context" */
+const norm = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+function filtered() {
+  let arr = TERMS.map((t, i) => ({ ...t, _idx: i }));
+  if (state.q) {
+    /* Căutare doar în titlu (denumire + denumire completă) și traducerea RO */
+    const q = norm(state.q);
+    arr = arr.filter(t => norm(
+      t.term + ' ' + (t.termFull || '') + ' ' + (t.ro || '')
+    ).includes(q));
+  }
+  if (state.sort === 'az')  arr.sort((a, b) => a.term.localeCompare(b.term, 'ro'));
+  if (state.sort === 'new') arr.sort((a, b) => b._idx - a._idx);
+  if (state.sort === 'old') arr.sort((a, b) => a._idx - b._idx);
+  return arr;
+}
+
+function termHTML(t) {
+  const isCurrent = t._idx === TERMS.length - 1;
+  const defHTML = (t.def || []).map(p => '<p>' + esc(p) + '</p>').join('');
+  const exHTML  = (t.examples || []).map(x => '<li>' + esc(x) + '</li>').join('');
+  return `
+    <article class="term-item" id="${esc(t.id)}">
+      <button class="term-head" type="button" aria-expanded="false">
+        <div class="term-num"><span class="n">#${String(t._idx + 1).padStart(2, '0')}</span>termen</div>
+        <div class="term-main">
+          <div class="term-label">${esc(t.termFull || t.term)}${isCurrent ? '<span class="term-badge">Săptămâna curentă</span>' : ''}</div>
+          <h3>${esc(t.term)}</h3>
+          <div class="term-sub">
+            <span>🇷🇴 ${esc(t.ro || '')}</span>
+            <span class="pron">${esc((t.pron || '') + (t.type ? ' · ' + t.type : ''))}</span>
+          </div>
+        </div>
+        <div class="term-chev">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </button>
+      <div class="term-body">
+        <div class="def">${defHTML}</div>
+        ${exHTML ? `<div class="term-examples"><div class="term-examples-title">Exemple practice</div><ul>${exHTML}</ul></div>` : ''}
+        <div class="term-actions">
+          <button class="term-permalink" type="button" data-id="${esc(t.id)}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Copiază link direct
+          </button>
+        </div>
+      </div>
+    </article>`;
+}
+
+function render() {
+  const arr = filtered();
+  countEl.textContent = arr.length;
+  const label = document.getElementById('count-label');
+  if (label) label.textContent = arr.length === 1 ? 'TERMEN' : 'TERMENI';
+  noRes.classList.toggle('show', arr.length === 0);
+
+  if (state.sort === 'az' && !state.q) {
+    /* Vizualizare alfabetică: grupare pe litere */
+    let html = '', letter = '';
+    arr.forEach(t => {
+      const L = norm(t.term).charAt(0).toUpperCase();
+      if (L !== letter) { letter = L; html += `<div class="letter-head">${L}</div>`; }
+      html += termHTML(t);
+    });
+    listEl.innerHTML = html;
+  } else {
+    listEl.innerHTML = arr.map(termHTML).join('');
+  }
+}
+
+/* Accordion + permalink (delegare — lista se re-randează la filtrare) */
+listEl.addEventListener('click', e => {
+  const perma = e.target.closest('.term-permalink');
+  if (perma) {
+    const url = location.origin + location.pathname + '#' + perma.dataset.id;
+    history.replaceState(null, '', '#' + perma.dataset.id);
+    if (navigator.clipboard) navigator.clipboard.writeText(url);
+    const old = perma.innerHTML;
+    perma.innerHTML = perma.innerHTML.replace('Copiază link direct', 'Link copiat ✓');
+    setTimeout(() => { perma.innerHTML = old; }, 1400);
+    return;
+  }
+  const head = e.target.closest('.term-head');
+  if (!head) return;
+  const item = head.closest('.term-item');
+  const open = item.classList.toggle('open');
+  head.setAttribute('aria-expanded', String(open));
+});
+
+document.getElementById('search').addEventListener('input', e => { state.q = e.target.value.trim(); render(); });
+document.getElementById('sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
+
+/* Deep link: buzzword.html#context-window → deschide și derulează la termen */
+function openFromHash() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+  const item = document.getElementById(id);
+  if (!item) return;
+  item.classList.add('open');
+  const head = item.querySelector('.term-head');
+  if (head) head.setAttribute('aria-expanded', 'true');
+  item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+window.addEventListener('hashchange', openFromHash);
+
+fetch('assets/buzzwords.json', { cache: 'no-cache' })
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(data => {
+    if (data && Array.isArray(data.terms) && data.terms.length) {
+      TERMS = data.terms;
+      render();
+      openFromHash();
+    }
+  })
+  .catch(err => console.warn('Buzzword data unavailable:', err));
+</script>
+</body>
+</html>

@@ -1885,17 +1885,20 @@ section.block {
 .cx-front .cx-word.multi-word { font-size: clamp(40px, 6vw, 64px); letter-spacing: -0.02em; line-height: 1; }
 .cx-front .cx-word.multi-word.is-long { font-size: clamp(34px, 5vw, 54px); }
 
-/* Modal back face — buzzword nav anchored top-right (← newer · counter · older →).
+/* Modal back face — top bar: search · nav (← newer · counter · older →) · archive link.
    Per spec: ← steps to NEWER (back toward current), → steps to OLDER (deeper into archive). */
+.cx-bz-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
+  margin-bottom: 18px;
+}
 .cx-bz-nav-back {
-  position: absolute;
-  top: 22px; right: 22px;
   display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 8px;
   border-radius: 999px;
   background: color-mix(in oklab, #07121a 60%, transparent);
   border: 1px solid color-mix(in oklab, var(--accent-2) 30%, transparent);
-  z-index: 4;
+  flex-shrink: 0;
   backdrop-filter: blur(8px);
 }
 .cx-bz-btn {
@@ -1918,10 +1921,81 @@ section.block {
   padding: 0 6px;
   min-width: 36px; text-align: center;
 }
-/* Reserve space on the back face's right side so the absolute-positioned nav
-   doesn't overlap the label/title (.cx-back already establishes a positioned
-   context — it's position:absolute via its parent .cx-face base class). */
+/* Right-side breathing room on the back face (kept from the old absolute-nav
+   layout so the content column width stays unchanged). */
 .cx-back { padding-right: 50px; }
+
+/* Buzzword search box — jumps directly to any term from inside the modal */
+.cx-bz-search {
+  position: relative;
+  display: flex; align-items: center; gap: 8px;
+  flex: 0 1 190px;
+  min-width: 0;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent-2) 25%, transparent);
+  background: color-mix(in oklab, #07121a 45%, transparent);
+  transition: border-color 0.2s;
+}
+.cx-bz-search:focus-within { border-color: var(--accent-2); }
+.cx-bz-search svg { width: 13px; height: 13px; color: var(--accent-2); opacity: 0.75; flex-shrink: 0; }
+.cx-bz-search input {
+  flex: 1; min-width: 0;
+  background: none; border: none; outline: none;
+  color: #dff0f7;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.03em;
+}
+.cx-bz-search input::placeholder { color: color-mix(in oklab, #bdd7e2 40%, transparent); }
+.cx-bz-search-results {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+  display: none; flex-direction: column;
+  max-height: 240px; overflow-y: auto;
+  background: #0a1720;
+  border: 1px solid color-mix(in oklab, var(--accent-2) 30%, transparent);
+  border-radius: 14px;
+  z-index: 6;
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6);
+}
+.cx-bz-search-results.open { display: flex; }
+.cx-bz-search-results button {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  width: 100%; padding: 11px 16px;
+  background: none; border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #dff0f7;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.02em;
+  text-align: left; cursor: pointer;
+  transition: background 0.15s;
+}
+.cx-bz-search-results button:last-child { border-bottom: none; }
+.cx-bz-search-results button:hover { background: color-mix(in oklab, var(--accent-2) 12%, transparent); }
+.cx-bz-search-results button span { color: color-mix(in oklab, #bdd7e2 55%, transparent); font-size: 11px; }
+.cx-bz-search-results .cx-bz-noresult {
+  padding: 12px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px; color: color-mix(in oklab, #bdd7e2 50%, transparent);
+}
+/* Link către pagina de arhivă completă (buzzword.html) */
+.cx-bz-archive-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent-2) 30%, transparent);
+  color: var(--accent-2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px; letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.cx-bz-archive-link svg { width: 13px; height: 13px; transition: transform 0.2s; }
+.cx-bz-archive-link:hover { background: var(--accent-2); color: #07121a; }
+.cx-bz-archive-link:hover svg { transform: translateX(3px); }
+@media (max-width: 720px) {
+  .cx-bz-search { flex-basis: 100%; }
+}
 
 /* Scrollbar styling on the modal back when content overflows */
 .cx-back {
@@ -2865,6 +2939,7 @@ footer {
         <h4>Conținut</h4>
         <a href="arhiva.html">Articole</a>
         <a href="podcast.html">Podcast</a>
+        <a href="buzzword.html">Buzzword</a>
         <a href="resurse.html">Resurse</a>
         <a href="contact.html">Contact</a>
       </div>
@@ -3223,14 +3298,25 @@ function populateBuzzwordModal(w) {
   const atNewest = wordIdx >= words.length - 1;
   const atOldest = wordIdx <= 0;
   cxBack.innerHTML = `
-    <div class="cx-bz-nav-back">
-      <button class="cx-bz-btn cx-bz-newer" type="button" aria-label="Către termenul mai nou" ${atNewest ? 'disabled' : ''}>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <span class="cx-bz-counter">${wordIdx + 1} / ${words.length}</span>
-      <button class="cx-bz-btn cx-bz-older" type="button" aria-label="Către termenul anterior" ${atOldest ? 'disabled' : ''}>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
+    <div class="cx-bz-topbar">
+      <div class="cx-bz-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" placeholder="Caută un termen..." aria-label="Caută un termen">
+        <div class="cx-bz-search-results"></div>
+      </div>
+      <div class="cx-bz-nav-back">
+        <button class="cx-bz-btn cx-bz-newer" type="button" aria-label="Către termenul mai nou" ${atNewest ? 'disabled' : ''}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <span class="cx-bz-counter">${wordIdx + 1} / ${words.length}</span>
+        <button class="cx-bz-btn cx-bz-older" type="button" aria-label="Către termenul anterior" ${atOldest ? 'disabled' : ''}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <a class="cx-bz-archive-link" href="buzzword.html">
+        Arhiva completă
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
     <div class="cx-label">${escapeHtml(w.termFull || w.term)}</div>
     <h3>${escapeHtml(w.term)} <span class="cx-pron">${escapeHtml((w.pron || '') + (w.type ? '  ' + w.type : ''))}</span></h3>
@@ -3245,6 +3331,33 @@ function populateBuzzwordModal(w) {
   const $cxOlder = cxBack.querySelector('.cx-bz-older');
   if ($cxNewer) $cxNewer.addEventListener('click', (e) => { e.stopPropagation(); if (wordIdx < words.length - 1) { wordIdx++; renderWord(); } });
   if ($cxOlder) $cxOlder.addEventListener('click', (e) => { e.stopPropagation(); if (wordIdx > 0)                { wordIdx--; renderWord(); } });
+
+  // Search box — jump direct la orice termen; potrivirea ignoră diacriticele
+  // și caută doar în denumire, denumirea completă și traducerea RO.
+  const $bzSearch  = cxBack.querySelector('.cx-bz-search input');
+  const $bzResults = cxBack.querySelector('.cx-bz-search-results');
+  const bzNorm = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  if ($bzSearch && $bzResults) {
+    $bzSearch.addEventListener('click', (e) => e.stopPropagation());
+    $bzSearch.addEventListener('input', () => {
+      const q = bzNorm($bzSearch.value.trim());
+      if (!q) { $bzResults.classList.remove('open'); $bzResults.innerHTML = ''; return; }
+      const hits = words.map((t, i) => ({ t, i }))
+        .filter(({ t }) => bzNorm(t.term + ' ' + (t.termFull || '') + ' ' + (t.ro || '')).includes(q))
+        .slice(0, 8);
+      $bzResults.innerHTML = hits.length
+        ? hits.map(({ t, i }) => `<button type="button" data-i="${i}"><strong>${escapeHtml(t.term)}</strong><span>${escapeHtml(t.ro || '')}</span></button>`).join('')
+        : '<div class="cx-bz-noresult">Niciun termen găsit</div>';
+      $bzResults.classList.add('open');
+    });
+    $bzResults.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const b = e.target.closest('button[data-i]');
+      if (!b) return;
+      wordIdx = +b.dataset.i;
+      renderWord();
+    });
+  }
 }
 
 function openBuzzwordModal() {
