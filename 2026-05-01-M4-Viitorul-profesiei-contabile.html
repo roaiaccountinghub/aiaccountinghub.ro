@@ -458,6 +458,13 @@
         <span>AI Accounting Hub</span>
       </div>
     </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="contact.html">Contact</a>
+    </nav>
     <div class="header-actions">
       <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
@@ -484,6 +491,14 @@
 
   <!-- MAIN COLUMN -->
   <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Viitorul profesiei</span>
+    </div>
+
     <div class="article-meta-top">
       <span class="article-category">Manifest</span>
       <span>2026</span>
@@ -495,6 +510,30 @@
     <p class="article-lede">
       De la Caligrafia Registrelor la Arhitectura de Procese și Agenți AI (2026-2030)
     </p>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#prolog">PROLOG: Momentul în care tăcerea registrului devine zgomot de procesor</a>
+        <a href="#cap1">CAPITOLUL 1: Trei revoluții și o discontinuitate (1985 → 2010 → 2024)</a>
+        <a href="#cap2">CAPITOLUL 2: De ce AI Agentic nu este „încă un Excel mai deștept&quot;</a>
+        <a href="#cap3">CAPITOLUL 3: Anatomia Transformării: Trei Orizonturi de Timp până în 2030</a>
+        <a href="#cap4">CAPITOLUL 4: Ce Dispare, Ce Rămâne, Ce Apare</a>
+        <a href="#cap5">CAPITOLUL 5: Workflow-ul Reinventat — Două Studii de Caz Concrete</a>
+        <a href="#cap6">CAPITOLUL 6: Anatomia Rolurilor: Cine Câștigă, Cine Pierde, Cine se Reinventează</a>
+        <a href="#cap7">CAPITOLUL 7: AI Accounting Analyst — Primul Rol Nativ-AI al Profesiei</a>
+        <a href="#cap8">CAPITOLUL 8: De la „Historian&quot; la „Strategic Advisor&quot;</a>
+        <a href="#cap9">CAPITOLUL 9: De la „A Ști să Calculezi&quot; la „A Ști să Validezi&quot; — Anatomia AI Literacy</a>
+        <a href="#cap10">CAPITOLUL 10: Anatomia AI Literacy pentru Contabilul Român — Adaptare Locală</a>
+        <a href="#cap11">CAPITOLUL 11: O Zi din Viața Unui Contabil în 2030 — O Narațiune Viitoare</a>
+        <a href="#cap12">CAPITOLUL 12: Continuous Accounting — Sfârșitul Închiderii Lunare</a>
+        <a href="#cap13">CAPITOLUL 13: Cele Cinci Riscuri pe Care Nu le Putem Ignora</a>
+        <a href="#cap14">CAPITOLUL 14: E-Factura, SAF-T și Paradoxul Digitalizării Forțate</a>
+        <a href="#cap15">CAPITOLUL 15: De Ce Piața Românească Nu Poate Copia Modelul American</a>
+        <a href="#cap16">CAPITOLUL 16: Roadmap-ul Personal — Plan de Acțiune pe Patru Orizonturi</a>
+        <a href="#manifest">EPILOG: Manifestul AI Accounting Hub — De Ce Avem Nevoie de o Comunitate Acum</a>
+      </nav>
+    </details>
 
     <div class="author-row">
       <div class="author-avatar">
@@ -1980,30 +2019,6 @@
   </div>
 </footer>
 
-<!-- CONTACT MODAL -->
-<div class="modal-backdrop" id="modal-backdrop">
-  <div class="modal" role="dialog" aria-labelledby="modal-title">
-    <button class="modal-close" id="modal-close" aria-label="Închide">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <h3 id="modal-title">Trimite-ne un mesaj</h3>
-    <div class="form-success" id="form-success">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-      Mulțumim! Mesajul a fost trimis.
-    </div>
-    <form id="contact-form">
-      <div class="field"><label for="f-name">Nume</label><input id="f-name" type="text" required placeholder="Ex. Ioana Popescu"></div>
-      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required placeholder="ioana@firma.ro"></div>
-      <div class="field"><label for="f-msg">Mesaj</label><textarea id="f-msg" required placeholder="Scrie-ne ce te interesează..."></textarea></div>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-ghost" id="modal-cancel">Anulează</button>
-        <button type="submit" class="btn btn-primary">Trimite
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
 
 <script src="assets/site.js"></script>
 <script>

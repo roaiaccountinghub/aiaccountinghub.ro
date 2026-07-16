@@ -59,32 +59,6 @@
   }
 })();
 
-/* ========== CONTACT MODAL ========== */
-(function () {
-  const backdrop = document.getElementById('modal-backdrop');
-  if (!backdrop) return;
-  const open = () => backdrop.classList.add('open');
-  const close = () => backdrop.classList.remove('open');
-  document.querySelectorAll('[data-open-contact]').forEach(el => {
-    el.addEventListener('click', e => { e.preventDefault(); open(); });
-  });
-  const closeBtn = document.getElementById('modal-close');
-  const cancelBtn = document.getElementById('modal-cancel');
-  if (closeBtn) closeBtn.addEventListener('click', close);
-  if (cancelBtn) cancelBtn.addEventListener('click', close);
-  backdrop.addEventListener('click', e => { if (e.target === backdrop) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-  const form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const ok = document.getElementById('form-success');
-      if (ok) ok.classList.add('show');
-      setTimeout(() => { close(); if (ok) ok.classList.remove('show'); e.target.reset(); }, 1600);
-    });
-  }
-})();
-
 /* ========== FADE-IN ON SCROLL ========== */
 /* Threshold is `0` (fires the moment any pixel is visible) instead of 0.15 —
    on a small mobile viewport, a tall element like a full article body never
@@ -157,5 +131,16 @@
         window.print();
       });
     }
+  });
+})();
+
+/* ========== CUPRINS MOBIL (paginile de articol) ==========
+   Acordeonul <details class="toc-mobile"> se închide singur după ce
+   cititorul alege o secțiune, ca să nu acopere conținutul. */
+(function () {
+  const det = document.querySelector('details.toc-mobile');
+  if (!det) return;
+  det.addEventListener('click', (e) => {
+    if (e.target.closest('a')) det.open = false;
   });
 })();
