@@ -416,7 +416,9 @@ section.block {
 .download-btn svg { transition: transform 0.25s ease; }
 .download-btn:hover svg { transform: translateY(2px); }
 
-/* ============ FOOTER ============ */
+/* ============ FOOTER (unificat pe toate paginile) ============
+   Stânga: descrierea brand — lată, aliniată la stânga (fără justify).
+   Dreapta: navigarea „Conținut" ca grilă 2 coloane cu iconițe. */
 footer.site-footer {
   position: relative; z-index: 1;
   padding: 56px 32px 32px;
@@ -427,8 +429,9 @@ footer.site-footer {
 .footer-inner { max-width: 990px; margin: 0 auto; }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.7fr 1fr;
-  gap: 56px;
+  /* descrierea ocupă tot spațiul disponibil; grila de navigare stă compactă în dreapta */
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 48px;
   padding-bottom: 32px;
   border-bottom: 1px solid var(--border);
   align-items: start;
@@ -441,20 +444,30 @@ footer.site-footer {
   margin-bottom: 16px;
   font-weight: 500;
 }
-/* Links column: stacked, one per line */
-.footer-col:not(.footer-brand) a {
-  color: var(--fg-muted); font-size: 14px;
-  display: block;
-  margin: 0 0 8px;
-  transition: color 0.2s;
+/* Navigare: grilă 2 coloane cu iconițe */
+.footer-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(128px, 1fr));
+  gap: 10px;
 }
-.footer-col:not(.footer-brand) a:hover { color: var(--accent); }
+.footer-nav-grid a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px; color: var(--fg-muted);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.footer-nav-grid a svg { width: 15px; height: 15px; color: var(--accent); flex-shrink: 0; }
+.footer-nav-grid a:hover {
+  color: var(--fg);
+  border-color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+}
 .footer-brand .logo { margin-bottom: 18px; }
 .footer-brand p {
   font-size: 13.5px; color: var(--fg-muted); line-height: 1.7;
   margin: 0 0 10px;
-  text-align: justify;
-  hyphens: auto;
 }
 .footer-brand p:last-of-type { margin-bottom: 0; }
 .footer-bottom {
@@ -546,7 +559,6 @@ footer.site-footer {
   .resource-header { margin-bottom: 28px; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; padding-bottom: 28px; }
   footer.site-footer { padding: 40px 20px 24px; }
-  .footer-brand p { text-align: left; }
   .page-header { padding: 56px 20px 48px; }
   .page-header h1 { font-size: clamp(32px, 7vw, 56px); }
   .breadcrumb { margin-bottom: 14px; }

@@ -144,3 +144,20 @@
     if (e.target.closest('a')) det.open = false;
   });
 })();
+
+/* ========== CUPRINS LATERAL: evidențiere secțiune curentă (scroll-spy) ==========
+   Rulează doar pe paginile care au un cuprins (.toc) — pe restul iese imediat. */
+(function () {
+  const links = document.querySelectorAll('.toc a');
+  if (!links.length) return;
+  const ids = Array.from(links).map(a => a.getAttribute('href').slice(1));
+  const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  targets.forEach(t => io.observe(t));
+})();
