@@ -161,3 +161,23 @@
   }, { rootMargin: '-40% 0px -55% 0px' });
   targets.forEach(t => io.observe(t));
 })();
+
+/* ========== Event tracking (Cloudflare Worker + D1) ==========
+   Contoare agregate pentru interacțiuni pe care Cloudflare Web Analytics nu le
+   vede (modale, termeni buzzword, episoade). Fire-and-forget, fără date personale. */
+window.aiahTrack = function (name) {
+  if (!name) return;
+  try {
+    fetch("https://aiah-backend.aiaccountinghub.workers.dev/event", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: name }),
+      keepalive: true
+    }).catch(function () {});
+  } catch (e) {}
+};
+/* Declanșator simplu prin atribut: <element data-track="nume"> */
+document.addEventListener("click", function (e) {
+  var el = e.target && e.target.closest ? e.target.closest("[data-track]") : null;
+  if (el) window.aiahTrack(el.getAttribute("data-track"));
+});

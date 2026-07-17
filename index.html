@@ -2740,6 +2740,7 @@ section.block {
     e.preventDefault();
     e.stopPropagation();
     open(trigger.dataset.spotify, trigger.dataset.title);
+    if (window.aiahTrack) window.aiahTrack('podcast:' + trigger.dataset.spotify);
   });
 
   closeBtn.addEventListener('click', close);
@@ -2818,6 +2819,7 @@ fetch('assets/buzzwords.json', { cache: 'no-cache' })
 /* (cxBackdrop / cxFront / cxBack / cxClose hoisted above for renderWord) */
 
 function populateBuzzwordModal(w) {
+  if (window.aiahTrack && w && w.id) window.aiahTrack('buzzword:' + w.id);
   cxBack.classList.remove('podcast');
   cxBack.dataset.kind = 'buzzword';
   const wc = w.term.trim().split(/\s+/).length;
@@ -3099,6 +3101,7 @@ const missionCardEl = document.getElementById('mission-card');
 if (missionCardEl) {
   missionCardEl.addEventListener('click', (e) => {
     if (e.target.closest('a, button')) return;
+    if (window.aiahTrack) window.aiahTrack('modal:misiune');
     openMissionModal();
   });
 }
@@ -3107,6 +3110,7 @@ const welcomeCardEl = document.getElementById('welcome-card');
 if (welcomeCardEl) {
   welcomeCardEl.addEventListener('click', (e) => {
     if (e.target.closest('a, button')) return;
+    if (window.aiahTrack) window.aiahTrack('modal:comunitate');
     openWelcomeModal();
   });
 }
@@ -3115,6 +3119,7 @@ const ctaCardEl = document.getElementById('cta-card');
 if (ctaCardEl) {
   ctaCardEl.addEventListener('click', (e) => {
     if (e.target.closest('a, button')) return;
+    if (window.aiahTrack) window.aiahTrack('modal:contact');
     openCtaModal();
   });
 }

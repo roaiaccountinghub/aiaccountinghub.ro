@@ -7,7 +7,16 @@
   var API = "https://aiah-backend.aiaccountinghub.workers.dev";
 
   var mount = document.getElementById("article-rating");
-  if (!mount) return;
+  if (!mount) {
+    // Auto-montare: la finalul articolului, dacă nu există un mount explicit
+    var host = document.querySelector(".article-main") ||
+      document.querySelector("article") ||
+      document.querySelector(".article-wrap");
+    if (!host) return;
+    mount = document.createElement("div");
+    mount.id = "article-rating";
+    host.appendChild(mount);
+  }
 
   var articleId = mount.getAttribute("data-article") ||
     (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
