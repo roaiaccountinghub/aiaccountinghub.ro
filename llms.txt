@@ -1,0 +1,22 @@
+# AI Accounting Hub
+
+> Resurse în limba română despre intersecția dintre inteligența artificială
+> și profesia contabilă: analize, ghiduri practice, instrumente gratuite
+> (verificare CIF ANAF, automatizări fiscale) și un podcast dedicat
+> contabililor care vor să rămână relevanți în era AI.
+
+## Pagini principale
+
+- [Arhiva articolelor](https://aiaccountinghub.ro/arhiva.html): toate articolele publicate, în ordine cronologică
+- [Resurse](https://aiaccountinghub.ro/resurse.html): instrumente descărcabile gratuite pentru contabili (verificare CIF ANAF, prompturi)
+- [Buzzword](https://aiaccountinghub.ro/buzzword.html): glosar de termeni AI explicați pe înțelesul profesioniștilor contabili
+- [Podcast](https://aiaccountinghub.ro/podcast.html): episoade audio despre AI în contabilitate
+- [Viitorul profesiei](https://aiaccountinghub.ro/viitorul-profesiei.html): program de pregătire pentru era AI
+
+## Articole reprezentative
+
+- [Vibe coding — ce este și unde îl folosim](https://aiaccountinghub.ro/2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html): definiție, origine și aplicații practice în contabilitate
+- [RO e-Factura — când ANAF vede viitorul prin AI](https://aiaccountinghub.ro/2026-05-04-RO-e-Factura-cand-ANAF-vede-viitorul-prin-AI.html): analiza digitalizării fiscale românești
+- [AI Literacy România — cifrele care ne plasează ultimii](https://aiaccountinghub.ro/2026-05-17-AI-Literacy-Romania-cifrele-care-ne-plaseaza-ultimii.html): date statistice despre alfabetizarea AI
+- [Agentul AI nu știe să țină un secret](https://aiaccountinghub.ro/2026-05-09-Agentul-AI-nu-stie-sa-tina-un-secret.html): confidențialitatea datelor în lucrul cu asistenții AI
+- [Tool ANAF v2 — de la funcționează la mentenabil](https://aiaccountinghub.ro/2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html): construirea unui instrument real de verificare fiscală

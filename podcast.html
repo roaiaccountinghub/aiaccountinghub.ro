@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Podcast — AI Accounting Hub</title>
 <meta name="description" content="Episoade audio despre AI și contabilitate. Conversații cu profesioniști despre digitalizare și viitorul profesiei în România.">
+<link rel="canonical" href="https://aiaccountinghub.ro/podcast.html">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aiaccountinghub.ro/podcast.html">
@@ -501,6 +502,7 @@
 
   function open(epId, title) {
     if (!epId) return;
+    if (window.aiahTrack) window.aiahTrack('podcast:' + epId);
     titleEl.textContent = title || 'Episod podcast';
     iframeBox.innerHTML =
       '<iframe style="border-radius:12px" ' +
