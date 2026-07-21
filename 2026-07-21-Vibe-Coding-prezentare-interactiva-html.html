@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vibe Coding pentru prezentări — o pagină interactivă în loc de slide-uri — AI Accounting Hub</title>
+<meta name="description" content="Cum am înlocuit un PowerPoint cu o pagină HTML care rulează în browser, se trimite ca un fișier și e, în același timp, un MVP funcțional — avantaje, limite și securitate.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-07-21-Vibe-Coding-prezentare-interactiva-html.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-07-21-Vibe-Coding-prezentare-interactiva-html.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Vibe Coding pentru prezentări — o pagină interactivă în loc de slide-uri">
+<meta property="og:description" content="Cum am înlocuit un PowerPoint plictisitor cu o pagină HTML care rulează în browser, se trimite ca un fișier și e, în același timp, un MVP funcțional. Plus limitele și partea de securitate.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vibe Coding pentru prezentări — o pagină interactivă în loc de slide-uri">
+<meta name="twitter:description" content="O pagină HTML în loc de PowerPoint: interactivă, se trimite ca un fișier, e și prototip. Avantaje, limite, securitate.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vibe Coding pentru prezentări — o pagină interactivă în loc de slide-uri",
+  "description": "Cum am înlocuit un PowerPoint cu o pagină HTML care rulează în browser, se trimite ca un fișier și e, în același timp, un MVP funcțional — avantaje, limite și securitate.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-07-21",
+  "dateModified": "2026-07-21",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-07-21-Vibe-Coding-prezentare-interactiva-html.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+
+<!-- Date structurate (JSON-LD) — Întrebări frecvente (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "De ce HTML pentru o prezentare, în loc de PowerPoint?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pentru că e formatul pe care AI-ul îl generează cel mai bine și pe care orice browser îl deschide fără instalări. Un singur fișier .html se trimite ca un atașament, rulează pe orice sistem de operare și, spre deosebire de un slide, poate reacționa: calculează, se animează, răspunde la click."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce este un MVP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MVP vine de la Minimum Viable Product — în română, produs minim viabil. E cea mai simplă versiune funcțională a unei idei: nu produsul finit, ci exact atât cât să demonstreze că ideea merge și să poată fi testată de cineva."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Este sigur să deschizi un fișier HTML primit de la altcineva?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depinde de sursă. O pagină HTML e cod care se execută la deschidere, deci merită aceeași prudență ca orice atașament. Avantajul e că e text lizibil: poți verifica dacă face apeluri de rețea sau poți cere unui AI să verifice codul. O pagină pe care ai citit-o și care nu iese în rețea e mai transparentă decât un fișier Office cu macro-uri ascunse."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Când merită o pagină HTML în locul unui PowerPoint?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Doar când interactivitatea chiar adaugă ceva — un calculator, un prototip pe care audiența îl apasă. Pentru un status de trei bullet-uri, un deck clasic e mai rapid, e editabil de oricine și are mod prezentator. Pagina HTML își merită efortul când vrei ca oamenii să pună mâna pe idee, nu doar să se uite la ea."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Vibe Coding pentru prezentări</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Vibe Coding</span>
+      <span>21 iulie 2026</span>
+      <span class="sep">·</span>
+      <span>9 min citire</span>
+    </div>
+
+    <h1>Vibe Coding pentru prezentări: cum am renunțat la slide-uri pentru o pagină care <span class="accent">rulează în browser</span>.</h1>
+    <p class="article-lede">
+      Trebuia să pregătesc o prezentare despre vibe coding și nu voiam încă un teanc de slide-uri pe care nimeni nu le ține minte. Răspunsul, venit la un brainstorming cu Claude, n-a fost un fișier <code>.ppt</code>.
+    </p>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s-ppt">Slide-ul prăfuit</a>
+        <a href="#s-idee">Ideea: o pagină, nu un .ppt</a>
+        <a href="#s-html">De ce HTML?</a>
+        <a href="#s-construit">Ce am construit, concret</a>
+        <a href="#s-mvp">Ce e un MVP și ce poți construi?</a>
+        <a href="#s-slabe">Unde nu bate HTML PowerPoint-ul?</a>
+        <a href="#s-securitate">Cât de sigur e HTML?</a>
+        <a href="#s-concluzie">Ce rămâne</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">21.07.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// vibe coding · prezentări interactive</div>
+    </div>
+
+    <div class="prose">
+      <h2 id="s-ppt">Slide-ul prăfuit</h2>
+      <p>Știu formatul pe de rost. Un titlu sus, trei-patru bullet-uri dedesubt, poate o iconiță ca să nu pară gol, click pe „slide următor". L-am folosit de sute de ori și, cinstit, cele mai multe prezentări pe care le-am făcut — sau la care am stat în sală — s-au evaporat din memoria tuturor înainte să ajungem la parcare.</p>
+      <p>Problema nu e PowerPoint. E că un slide <strong>îți arată o poză cu ideea</strong>, dar nu te lasă niciodată să pui mâna pe ea. Când tema însăși e „cu AI îți poți construi singur unelte", un slide cu bullet-uri devine ironic: vorbești despre lucruri interactive... pe un mediu complet static. Voiam ca oamenii din sală să <em>facă</em> ceva, nu doar să se uite.</p>
+
+      <h2 id="s-idee">Ideea: o pagină, nu un .ppt</h2>
+      <p>Am deschis o discuție cu Claude exact cu întrebarea asta — „cum fac prezentarea mai puțin plictisitoare?". La un moment dat, în loc să-mi propună un alt template de slide-uri, mi-a propus altceva: o <strong>pagină HTML care se deschide local, direct în browser</strong>. Un singur fișier. Dublu-click și pornește. Se trimite prin e-mail sau pe chat ca orice atașament. Rulează pe laptopul colegului care n-are Office, pe telefon, pe orice.</p>
+      <p>Și, spre deosebire de un slide, o pagină poate să <strong>reacționeze</strong>: să calculeze ceva, să se animeze, să răspundă când dai click. Nu mai prezinți despre interactivitate — o pui direct în mâinile audienței. În câteva iterații de brainstorming, direcția era clară. Nu mai făceam un deck. Făceam o pagină.</p>
+      <blockquote>Un slide îți arată o poză cu ideea. O pagină HTML îți dă ideea în mână — funcțională, chiar în timp ce o prezinți.</blockquote>
+
+      <h2 id="s-html">De ce HTML?</h2>
+      <p>Pe scurt: pentru că e formatul pe care AI-ul îl scrie cel mai bine și pe care orice browser îl deschide fără instalări. HTML e limba în care e scris jumătate din internet, deci e și cea pe care un model AI o generează cel mai fluent și cel mai corect. Nu-i ceri ceva exotic — îi ceri exact lucrul pe care se pricepe cel mai bine.</p>
+      <p>Iar HTML plus puțin CSS și JavaScript e, la propriu, o <strong>pânză albă</strong>: nu are un format fix de „slide", nu are șabloane obligatorii, nu are margini. Îi descrii ce vrei și îți desenează pe ea orice — un tabel, o animație, un calculator, un joculeț — fără să-i dai tu pensulele. Un <code>.pptx</code> te ține în cutia de slide-uri. O pagină goală nu te ține în nimic.</p>
+      <blockquote>Pentru un model AI, HTML e o pânză albă: îl rogi, iar el desenează pe ea orice îi ceri — fără să-i explici cum se ține pensula.
+        <cite>// și, ca bonus, într-un format pe care orice browser îl deschide fără să instalezi nimic</cite>
+      </blockquote>
+      <div class="deliv-grid">
+        <div class="deliv-card">
+          <div class="deliv-head"><span class="deliv-idx">01</span><h4>Un singur fișier</h4></div>
+          <p>Pagină, animații, calculatoare, jocuri — toate într-un <code>.html</code>. Îl trimiți ca un atașament și se deschide oriunde, fără dependențe.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="deliv-head"><span class="deliv-idx">02</span><h4>Zero instalări</h4></div>
+          <p>Nicio licență Office, niciun cont, niciun viewer. Dublu-click în browser — inclusiv pe mașina colegului care n-a auzit de PowerPoint.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="deliv-head"><span class="deliv-idx">03</span><h4>Interactiv, nu static</h4></div>
+          <p>Un calculator care chiar calculează, o animație pe care o parcurgi pas cu pas. Audiența face, nu doar privește.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="deliv-head"><span class="deliv-idx">04</span><h4>Iterație rapidă</h4></div>
+          <p>„Fă accentul albastru, mai adaugă un pas, scoate jocul al treilea." AI-ul modifică în secunde, în aceeași conversație.</p>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div><div class="stat-num">1</div><div class="stat-lbl">fișier .html, self-contained — se trimite ca orice atașament</div></div>
+        <div><div class="stat-num">0</div><div class="stat-lbl">instalări, licențe sau conturi ca să-l deschizi</div></div>
+        <div><div class="stat-num">orice</div><div class="stat-lbl">browser, pe orice sistem de operare, inclusiv pe telefon</div></div>
+      </div>
+
+      <h2 id="s-construit">Ce am construit, concret</h2>
+      <p>Ca să nu rămână la teorie, iată exact ce a ieșit — prezentarea despre vibe coding pentru departamentul financiar-contabil, cap-coadă o singură pagină:</p>
+      <ol>
+        <li><strong>Un calculator TVA, nu un titlu.</strong> În loc de slide-ul de intro, un prompt se scrie singur pe ecran și, din el, se materializează un calculator de TVA funcțional (cotele României, 2026). Audiența tastează o sumă și vede pe loc net / TVA / total. În primele 30 de secunde, ideea e deja demonstrată: asta nu e un slide, calculează.</li>
+        <li><strong>Ciclul de revizuire, ca animație.</strong> Cei cinci pași ai vibe coding-ului — descrii → generează → rulezi → dai feedback → repeți — nu ca listă cu bullet-uri, ci ca un ciclu animat pe care îl parcurgi pas cu pas. Un contabil recunoaște imediat: e același ciclu de revizuire pe care îl face oricum.</li>
+        <li><strong>Dulapul cu dosare.</strong> Șase direcții practice — aplicații <code>.exe</code> standalone, macro-uri VBA, dashboard-uri Excel, artefacte AI, aplicații web, aplicații mobile — ca șase dosare într-un dulap. Tragi de un sertar ca să-l deschizi. Tactil, nu un tabel plictisitor.</li>
+        <li><strong>Arcade-ul Contabilului.</strong> Trei jocuri mici cu umor de breaslă — Dodge-ul Contabilului, Inspecția nu așteaptă, Whack-a-Deadline — construite tot prin aceeași metodă. Buget IT: zero lei. Dovada că pânza chiar n-are margini.</li>
+        <li><strong>Poanta finală.</strong> Ultima secțiune spune ce bănuia deja toată sala: tot ce tocmai au văzut — pagina, animațiile, calculatorul, jocurile — a fost vibe-codat. Nicio linie de cod scrisă de mână. Mesajul se prezintă singur.</li>
+      </ol>
+      <p>Meta-gluma e că prezentarea despre vibe coding a fost ea însăși vibe-codată. Nu e un artificiu — e chiar argumentul: dacă asta se poate face descriind în română ce vrei, ce mai putem automatiza din ce facem noi zi de zi?</p>
+
+      <h2 id="s-mvp">Ce e un MVP și ce poți construi?</h2>
+      <p><strong>MVP</strong> vine de la <strong>Minimum Viable Product</strong> — în română, „produs minim viabil". E cea mai simplă versiune funcțională a unei idei: nu produsul finit, ci exact atât cât să demonstreze că ideea merge și să poată fi testată de cineva. Iar aici e partea care depășește „prezentare frumoasă": aceeași pagină care e slide-ul tău poate fi, în același timp, un MVP pe care oamenii îl <strong>apasă</strong>, cu date de test, chiar în ședință. Nu mai arăți un screenshot static și zece bullet-uri — arăți lucrul care funcționează.</p>
+      <p>Concret, iată ce poți pune în fața cuiva sub formă de pagină HTML care chiar merge:</p>
+      <ul>
+        <li><strong>Un dashboard.</strong> Un tablou de bord cu indicatorii tăi — cash-flow, vechimea creanțelor, execuția bugetară — cu grafice și filtre pe care le apeși, populat cu date de test. Colegul vede exact cum ar arăta raportul lunar, nu o descriere a lui.</li>
+        <li><strong>O aplicație internă mică.</strong> Un calculator de dobânzi și penalități conform Codului Fiscal, un convertor de extrase, un validator de CIF-uri — unealta rulează, nu o promiți.</li>
+        <li><strong>Un formular de colectare date.</strong> Chestionarul de onboarding pentru un client nou sau formularul de aprobare a notelor de cheltuieli — cu câmpurile și validările reale, ca să vezi cum se completează înainte să-l construiască cineva „de-adevăratelea".</li>
+        <li><strong>Un mini-portal sau o pagină de prezentare.</strong> Un punct intern de acces la proceduri și tool-uri, sau o pagină care prezintă un serviciu — structura și navigația, testabile pe loc.</li>
+        <li><strong>Un raport interactiv pentru management.</strong> În loc de PDF static, o pagină în care conducerea schimbă o ipoteză (curs valutar, prag, scenariu) și vede cifrele recalculându-se — util exact când vrei o decizie, nu o lectură.</li>
+      </ul>
+      <p>Pentru un contabil care pledează în fața IT-ului sau a conducerii pentru o unealtă internă, un MVP HTML care merge bate zece slide-uri descriptive. De-riscă discuția: toată lumea se uită la același lucru concret, nu la interpretarea fiecăruia despre cum ar arăta. Nu întâmplător instrumentele care au făcut vibe coding-ul popular — <code>Claude Artifacts</code>, <code>v0</code>, <code>Lovable</code> — scot exact acest tip de output. HTML e limba comună a prototipurilor.</p>
+      <blockquote>Prezentarea și produsul devin același artefact. Nu mai descrii dashboard-ul propus — îl dai colegilor să apese pe el.</blockquote>
+
+      <h2 id="s-slabe">Unde nu bate HTML PowerPoint-ul?</h2>
+      <p>Ar fi necinstit să prezint numai partea luminoasă. Direcția asta are limite reale, și e bine să le știi înainte să arunci PowerPoint pe geam. Pe fiecare criteriu, „câștigătorul" e marcat cu <strong>✓</strong>:</p>
+      <table class="compare-table">
+        <thead>
+          <tr><th>Criteriu</th><th>PowerPoint</th><th>Pagină HTML</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Interactivitate</td><td>Statică; click = slide următor</td><td>✓ Calculatoare, animații, jocuri care rulează</td></tr>
+          <tr><td>Distribuție</td><td>Fișier + are nevoie de Office / viewer</td><td>✓ Un fișier; orice browser îl deschide</td></tr>
+          <tr><td>Editabil de colegi</td><td>✓ Da, oricine cu Office</td><td>Doar prin cod (sau cerându-i AI-ului)</td></tr>
+          <tr><td>Șablon de brand</td><td>✓ Master corporate gata făcut</td><td>Îl reconstruiești (sau îi dai AI-ului tokenii)</td></tr>
+          <tr><td>Mod prezentator / note</td><td>✓ Nativ</td><td>Nu; ți-l construiești tu</td></tr>
+          <tr><td>Prototip funcțional</td><td>Nu; doar imagini</td><td>✓ Da — aceeași pagină e și MVP</td></tr>
+          <tr><td>Export la print / PDF</td><td>✓ Simplu, previzibil</td><td>Fițos; animațiile nu se traduc în handout</td></tr>
+        </tbody>
+      </table>
+      <p>Pe scurt: un coleg poate corecta o virgulă pe un slide de PowerPoint în cinci secunde. Pe pagina ta HTML, nu — dacă nu știe cod (sau nu cere unui AI). N-are șablonul corporate gata, n-are mod prezentator cu note și cronometru, iar la print animațiile devin capturi statice. Și, foarte practic: pentru un status de trei bullet-uri, un deck clasic e pur și simplu mai rapid. Pagina HTML își merită efortul <strong>doar când interactivitatea chiar adaugă ceva.</strong> Nu tot ce poate fi o pagină merită să fie o pagină.</p>
+
+      <h2 id="s-securitate">Cât de sigur e HTML?</h2>
+      <p>Depinde de sursă — și e punctul pe care un departament financiar nu are voie să-l sară. Diferența fundamentală: un <code>.pptx</code> e, în esență, <strong>date</strong>; o pagină HTML e <strong>cod care se execută</strong> în clipa în care o deschizi. JavaScript-ul din ea rulează în browserul tău, imediat. Browserele moderne izolează destul de bine fișierele locale — n-au acces la disc, sunt restricționate — dar codul <em>poate</em> încă să facă apeluri de rețea (deci să trimită afară ce tastezi în el), să încarce resurse externe, să pună un formular fals de login sau să te redirecteze.</p>
+      <p>Traducerea pentru un contabil: o pagină HTML primită de la cineva în care <strong>nu ai încredere</strong> merită exact prudența pe care o ai deja față de orice atașament. Vestea bună e că, spre deosebire de un binar, codul unei pagini e <strong>text simplu, lizibil</strong> — poți să-l verifici, sau să-i ceri unui AI să-l verifice pentru tine. Iată lista mea de igienă, pe care o aplic la orice pagină pe care o construiesc și o trimit mai departe:</p>
+      <ul class="checklist">
+        <li><strong>Self-contained, testul avionului.</strong> Fără scripturi externe, fără CDN-uri. Pune laptopul pe airplane mode și deschide pagina — dacă arată și funcționează la fel, nu trimite nimic afară.</li>
+        <li><strong>Zero formulare care postează în afară.</strong> Un calculator calculează local; nimic din ce tastezi nu pleacă de pe mașină. Dacă o pagină „de prezentare" vrea să trimită date undeva, e un semnal.</li>
+        <li><strong>Fonturi de sistem sau încorporate.</strong> Onest: pagina mea încă trage fonturile de la Google — deci „sună acasă" la deschidere și are nevoie de internet. Pentru o variantă complet offline, le încorporezi în fișier.</li>
+        <li><strong>Cere AI-ului să citească codul.</strong> „Verifică dacă pagina asta face vreun apel de rețea în afară." E o transparență pe care un <code>.pptx</code> binar nu ți-o oferă niciodată.</li>
+        <li><strong>Regula veche rămâne.</strong> Deschizi HTML doar de la cine ai încredere, ca orice atașament. Iar unele companii blochează <code>.html</code> pe e-mail — s-ar putea să-l arhivezi <code>.zip</code> sau să-l pui pe un drive intern.</li>
+      </ul>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Nuanța corectă:</strong> o pagină HTML pe care ai citit-o și care nu iese în rețea e, de fapt, mai transparentă decât un fișier Office binar cu macro-uri ascunse. Riscul nu e formatul în sine — e să deschizi cod necunoscut fără să te uiți la el. Diferența dintre util și expunere e un singur pas: să știi ce face fișierul înainte să dai dublu-click.
+        </div>
+      </div>
+
+      <h2 id="s-concluzie">Ce rămâne</h2>
+      <p>N-am înlocuit PowerPoint și nici n-a fost nevoie. Pentru multe ședințe, un deck clasic rămâne unealta potrivită — rapid, editabil de oricine, cu note de prezentator. Dar am descoperit că, atunci când vreau ca oamenii să <strong>pună mâna</strong> pe idee, nu doar să se uite la ea, o pagină HTML face ceva ce un slide nu poate: o duce de la „poză cu ideea" la „ideea, funcțională, în mâna ta".</p>
+      <p>Iar partea care contează pentru mine, ca de fiecare dată: nimic din toate astea n-a cerut să devin programator. Am descris în română ce voiam, am iterat, am verificat rezultatul — inclusiv, mai ales, ce trimite sau nu trimite pagina în rețea. Restul l-a desenat AI-ul pe pânza aia albă. Iar la final, singurul lucru pe care nu-l deleg rămâne același: eu decid ce pleacă mai departe și îmi asum ce poartă numele meu.</p>
+      <blockquote>Vibe coding-ul nu înlocuiește programatorii, la fel cum Excel n-a înlocuit contabilii. Dar le dă contabililor un instrument pe care înainte îl aveau doar programatorii: capacitatea de a-și construi propriile unelte — și propriile prezentări.</blockquote>
+      <p>Prezentarea despre care am scris — pagina cu tot cu calculator, animații, dulapul cu dosare și arcade — o găsești mai jos, într-un singur fișier, exact cum le-am obișnuit deja pe colege și pe colegi: descarci arhiva, o dezarhivezi și deschizi pagina local în browser, apoi deschide-i codul și vezi cum e făcută.</p>
+
+      <div class="callout" style="align-items:center;">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Prezentarea „Vibe Coding", un singur fișier HTML</strong> — hero cu calculator TVA funcțional, ciclul de revizuire animat, dulapul cu șase dosare de aplicații și arcade-ul cu trei jocuri. Deschide-o local în browser; nu instalezi și nu creezi niciun cont.
+          <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+            <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Vibe-coding-prezentare.zip" class="cheatsheet-download" download="Vibe-coding-prezentare.zip">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+              Descarcă prezentarea (.zip)
+            </a>
+            <span style="font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--fg-dim); letter-spacing:0.08em; text-transform:uppercase;">ZIP · 22 KB · conține 1 fișier .html</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#vibe-coding</a>
+          <a href="#" class="tag">#html</a>
+          <a href="#" class="tag">#prezentari</a>
+          <a href="#" class="tag">#mvp</a>
+          <a href="#" class="tag">#securitate</a>
+          <a href="#" class="tag">#claude</a>
+        </div>
+        <span class="footer-mono">Articolul #016</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-07-21-Vibe-Coding-prezentare-interactiva-html"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s-ppt">Slide-ul prăfuit</a>
+        <a href="#s-idee">Ideea: o pagină, nu un .ppt</a>
+        <a href="#s-html">De ce HTML?</a>
+        <a href="#s-construit">Ce am construit, concret</a>
+        <a href="#s-mvp">Ce e un MVP?</a>
+        <a href="#s-slabe">Unde nu bate HTML PowerPoint-ul?</a>
+        <a href="#s-securitate">Cât de sigur e HTML?</a>
+        <a href="#s-concluzie">Ce rămâne</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- RELATED -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="podcast.html?play=4ag71LYvnsQLYcyg4w6XYl" class="related-card fade-in">
+        <div class="related-date">PODCAST · E04</div>
+        <h3>Același subiect, în format audio</h3>
+        <p>Discuția despre vibe coding și cum îți construiești propriile unelte descriind în română ce vrei — acum și ca episod de podcast, de ascultat pe drum sau la birou.</p>
+        <span class="related-read">Ascultă episodul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · IUL 2026</div>
+        <h3>Tool-ul ANAF, versiunea 2</h3>
+        <p>Cum AI-ul care îți scrie codul poate fi, în aceeași conversație, cel mai bun critic constructiv al lui.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · IUN 2026</div>
+        <h3>Vibe coding — ce este și unde îl folosim</h3>
+        <p>Definiția, originea termenului și primele aplicații concrete în contabilitate — de la verificări ANAF la automatizări.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>
