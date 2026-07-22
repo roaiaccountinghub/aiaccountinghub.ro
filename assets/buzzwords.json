@@ -126,6 +126,132 @@
         "Transformarea unei proceduri scrise în material video de training: text-to-video creează un clip de 90 de secunde din procedura de aprobare a notelor de cheltuieli — util pentru onboarding-ul echipei.",
         "Briefing audio din raportul financiar trimestrial: text-to-audio generează un rezumat de 5 minute pe care managerul îl ascultă în mașină în drum spre ședința consiliului."
       ]
+    },
+    {
+      "id": "inteligenta-artificiala",
+      "term": "INTELIGENȚĂ ARTIFICIALĂ (AI)",
+      "termFull": "ARTIFICIAL INTELLIGENCE — TERMENUL-UMBRELĂ",
+      "pron": "/ ar·ti·fi·șăl in·te·li·gens /",
+      "type": "substantiv",
+      "ro": "Inteligență Artificială",
+      "def": [
+        "Inteligența artificială este domeniul care construiește sisteme informatice capabile să execute sarcini care, în mod tradițional, cereau inteligență umană: înțelegerea limbajului, recunoașterea tiparelor, luarea deciziilor, planificarea. Este termenul-umbrelă sub care intră tot restul vocabularului AI — machine learning, LLM-uri, agenți, AI generativ. Spre deosebire de software-ul clasic, care execută reguli scrise explicit de un programator, un sistem AI își derivă comportamentul din tipare învățate din date.",
+        "În practică, „AI” acoperă o gamă foarte largă: de la filtrul de spam din email și scoringul de credit, până la asistenții conversaționali moderni. Capcana este că termenul e folosit adesea ca etichetă de marketing — nu tot ce se numește „AI” raționează sau înțelege ceva; multe produse folosesc reguli simple sau statistici clasice. Distincția utilă pentru un profesionist: întreabă ce învață sistemul din date și ce decizii ia efectiv singur.",
+        "Pentru profesia contabilă, AI nu este o unealtă unică, ci o familie de capabilități: citirea documentelor scanate, extragerea datelor din facturi, clasificarea tranzacțiilor, sinteza rapoartelor, detectarea anomaliilor. Înțelegerea termenilor din spatele etichetei „AI” te ajută să evaluezi ofertele furnizorilor de software și să separi capabilitățile reale de promisiunile de marketing."
+      ],
+      "examples": [
+        "Sistemul de scoring al unei bănci care evaluează automat cererile de credit pe baza istoricului financiar — AI „clasic”, predictiv, existent cu mult înainte de ChatGPT.",
+        "Un asistent conversațional care primește balanța de verificare și răspunde la întrebarea „ce conturi au variații neobișnuite față de luna trecută?” — AI generativ modern.",
+        "La evaluarea unui software contabil „cu AI”: cere furnizorului să demonstreze concret ce sarcini automatizează și cu ce rată de eroare, nu doar eticheta de marketing."
+      ]
+    },
+    {
+      "id": "multimodal-ai",
+      "term": "MULTIMODAL AI",
+      "termFull": "AI CARE PROCESEAZĂ MAI MULTE TIPURI DE DATE SIMULTAN",
+      "pron": "/ mul·ti·mo·dal ei·ai /",
+      "type": "substantiv",
+      "ro": "AI Multimodal",
+      "def": [
+        "AI-ul multimodal este modelul care procesează simultan mai multe tipuri de input — text, imagine, audio, tabel, video — în aceeași conversație și cu aceeași înțelegere a contextului. Primele LLM-uri lucrau exclusiv cu text; un model multimodal „vede” o factură scanată, „citește” nota explicativă atașată și „ascultă” înregistrarea ședinței, tratându-le ca pe un singur context de lucru.",
+        "Diferența față de soluțiile mai vechi: nu mai e nevoie de o conversie prealabilă (OCR separat pentru imagini, transcriere separată pentru audio) — modelul integrează direct modalitățile. Nuanța importantă: performanța poate diferi între modalități; un model excelent pe text poate greși la citirea unui tabel complex dintr-o imagine de calitate slabă, deci verificarea rămâne necesară pe documentele critice.",
+        "Pentru practica financiar-contabilă, multimodalitatea elimină pași întregi de pregătire a datelor: trimiți direct fotografia chitanței, PDF-ul scanat al contractului sau captura de ecran din ERP, fără conversii intermediare. Dosarele mixte — scanuri, poze, tabele, corespondență — devin procesabile într-o singură cerere."
+      ],
+      "examples": [
+        "Fotografia unei chitanțe de protocol trimisă direct din telefon: modelul extrage suma, data, TVA-ul și propune încadrarea contabilă, fără OCR separat.",
+        "Analiza unui raport anual în PDF care combină text, tabele și grafice: modelul citește graficul evoluției veniturilor și îl confruntă cu cifrele din tabele.",
+        "Workflow de deconturi: angajații trimit poze ale bonurilor pe un canal dedicat, modelul multimodal le transformă automat în înregistrări structurate pentru validare."
+      ]
+    },
+    {
+      "id": "frontier-model",
+      "term": "FRONTIER MODEL",
+      "termFull": "MODEL DE FRONTIERĂ — VÂRFUL DE CAPABILITATE AL MOMENTULUI",
+      "pron": "/ fran·tir mo·del /",
+      "type": "substantiv",
+      "ro": "Model de Frontieră",
+      "def": [
+        "Frontier model desemnează cele mai avansate modele disponibile la un moment dat — cele care împing „frontiera” capabilităților AI. Termenul e relativ și alunecos: modelul de frontieră de azi devine standardul banal de peste un an. Laboratoarele mari (Anthropic, OpenAI, Google DeepMind) concurează permanent pentru această poziție cu modelele lor flagship.",
+        "Termenul are și o dimensiune de reglementare: tocmai pentru că sunt cele mai puternice, modelele de frontieră sunt ținta principală a cerințelor de siguranță și evaluare — testare înainte de lansare, raportare a riscurilor, praguri de putere de calcul care declanșează obligații suplimentare (logică prezentă și în EU AI Act pentru modelele cu risc sistemic). Cu cât modelul e mai capabil, cu atât plasa de siguranță cerută e mai deasă.",
+        "Pentru un profesionist financiar, relevanța e dublă: pe de o parte, modelele de frontieră aduc primele capabilitățile noi (raționament fiscal mai fiabil, analiză de documente mai lungi); pe de altă parte, sunt cele mai scumpe și nu întotdeauna necesare. Regula practică: testează sarcinile critice pe modelul de frontieră, apoi verifică dacă un model mai ieftin le rezolvă la fel de bine."
+      ],
+      "examples": [
+        "O speță fiscală complexă cu legislație contradictorie: modelul de frontieră o descâlcește corect, modelul mediu produce un răspuns plauzibil dar incomplet — diferența justifică costul pe sarcinile critice.",
+        "Politica firmei de audit: rapoartele către clienți trec prin modelul de frontieră, sarcinile interne de rutină prin modele standard — echilibru cost/calitate.",
+        "La fiecare generație nouă de modele, refă testele interne: sarcini care ieri cereau modelul de frontieră devin azi rezolvabile cu modelul mediu, la o fracțiune din cost."
+      ]
+    },
+    {
+      "id": "reasoning-models",
+      "term": "REASONING MODELS / LRM",
+      "termFull": "LARGE REASONING MODELS — MODELE CARE „GÂNDESC” ÎNAINTE SĂ RĂSPUNDĂ",
+      "pron": "/ ri·zo·ning mo·dels /",
+      "type": "substantiv",
+      "ro": "Modele de Raționament",
+      "def": [
+        "Modelele de raționament sunt LLM-uri care, înainte de a da răspunsul final, parcurg intern un proces de „gândire” pas cu pas: descompun problema, explorează variante, își verifică propriile calcule și abia apoi formulează concluzia. Diferența față de un LLM clasic e ca între un coleg care răspunde din reflex și unul care ia o foaie de hârtie și face calculul înainte să se pronunțe.",
+        "Practic, aceste modele „cheltuiesc” tokeni suplimentari pe raționament intern — de aceea sunt mai lente și mai scumpe per cerere, dar semnificativ mai precise la matematică, cod, analiză multi-pas și probleme cu multe constrângeri. Capcana de evitat: pentru întrebări simple, modelul de raționament e risipă — plătești minute de „gândire” pentru un răspuns pe care un model rapid îl dă în 2 secunde.",
+        "În practica financiară, modelele de raționament strălucesc exact acolo unde LLM-urile clasice greșeau: calcule fiscale în mai mulți pași, reconcilieri cu multe excepții, verificarea coerenței între documente. Regula de rutare: sarcini de extragere și redactare → model rapid; sarcini cu calcul și logică înlănțuită → model de raționament."
+      ],
+      "examples": [
+        "Calculul impactului fiscal al unei restructurări cu 5 scenarii alternative: modelul de raționament parcurge fiecare scenariu pas cu pas și compară rezultatele coerent.",
+        "Reconcilierea unui sold divergent: modelul „gândește” prin cele 12 tranzacții suspecte, elimină ipotezele una câte una și identifică dubla înregistrare.",
+        "Workflow optimizat: modelul rapid extrage datele din documente, apoi modelul de raționament face doar verificarea aritmetică și logică finală — precizie mare, cost controlat."
+      ]
+    },
+    {
+      "id": "agi",
+      "term": "AGI",
+      "termFull": "ARTIFICIAL GENERAL INTELLIGENCE — INTELIGENȚĂ ARTIFICIALĂ GENERALĂ",
+      "pron": "/ ei·gi·ai /",
+      "type": "substantiv",
+      "ro": "Inteligență Artificială Generală",
+      "def": [
+        "AGI desemnează un AI ipotetic cu inteligență generală la nivel uman: capabil să învețe și să execute orice sarcină cognitivă pe care o poate face un om — nu doar domeniile pe care a fost antrenat. Modelele actuale, oricât de impresionante, sunt considerate „înguste” prin comparație: exceptionale la unele sarcini, surprinzător de slabe la altele.",
+        "Capcana termenului: nu există o definiție acceptată unanim și nici un test-arbitru — fiecare laborator și cercetător trasează linia altfel, de la „poate face munca economică medie” la „egalează omul în orice”. De aceea afirmațiile „AGI vine în X ani” trebuie citite cu scepticism profesional: se dezbate inclusiv ce anume ar trebui să vină. Termenul are însă greutate reală în strategie și investiții — misiunile declarate ale marilor laboratoare sunt formulate în jurul lui.",
+        "Pentru un profesionist financiar, AGI e un termen de context strategic, nu de operațiuni: apare în discuții despre viitorul profesiilor, în rapoarte de investiții și în dezbaterea publică. Poziția practică sănătoasă: planifică pe baza capacităților demonstrabile ale modelelor de azi, nu pe baza promisiunilor despre AGI."
+      ],
+      "examples": [
+        "Într-un raport de analiză a unei companii AI, „progres către AGI” apare ca justificare de evaluare — semnal să separi capabilitățile actuale de aspirații.",
+        "Discuție de planificare a carierei în profesie: indiferent de calendarul AGI, sarcinile repetitive se automatizează deja — competența de supervizare a AI devine diferențiatorul.",
+        "Test de luciditate la conferințe: când auzi „AGI”, întreabă „cu ce definiție?” — răspunsurile diferite arată cât de nedecantat e termenul."
+      ]
+    },
+    {
+      "id": "superintelligence-asi",
+      "term": "SUPERINTELLIGENCE / ASI",
+      "termFull": "ARTIFICIAL SUPERINTELLIGENCE — DINCOLO DE NIVELUL UMAN",
+      "pron": "/ su·per·in·te·li·gens /",
+      "type": "substantiv",
+      "ro": "Superinteligență Artificială",
+      "def": [
+        "Superinteligența (ASI) este nivelul ipotetic la care un AI ar depăși inteligența umană în practic toate domeniile — știință, strategie, creativitate, persuasiune. Dacă AGI înseamnă „la nivel uman”, ASI înseamnă „dincolo de ce poate orice om sau grup de oameni”. Rămâne un concept speculativ: nu există azi nimic apropiat de așa ceva.",
+        "Termenul contează pentru că a migrat din filosofie în strategia industriei: laboratoare majore și-au declarat public superinteligența drept obiectiv, iar în jurul ei se poartă dezbaterea serioasă despre siguranță — cum controlezi un sistem mai capabil decât cei care îl supraveghează? De aici investițiile în cercetarea de aliniere și apelurile la reglementare internațională.",
+        "Pentru comunitatea financiar-contabilă, ASI e un termen de cultură generală profesională: apare în presa economică, în tezele de investiții și în discuțiile despre riscuri pe termen lung. Utilitatea practică imediată e să-l recunoști ca vocabular de viziune și risc, nu ca descriere a vreunui produs pe care îl poți cumpăra."
+      ],
+      "examples": [
+        "Un fond de investiții își justifică expunerea pe sectorul AI prin „cursa către superinteligență” — semnal de teză speculativă, de evaluat critic ca orice narativ de piață.",
+        "În dezbaterea despre reglementare, ASI apare ca argument pentru praguri de siguranță la modelele de frontieră — context util când citești despre EU AI Act.",
+        "La o prezentare către board: distinge clar între automatizările AI concrete din firmă (reale, măsurabile) și scenariile ASI din presă (speculative)."
+      ]
+    },
+    {
+      "id": "alignment",
+      "term": "ALIGNMENT",
+      "termFull": "ALINIERE — AI-UL SĂ VREA CE VREM NOI",
+      "pron": "/ a·lain·ment /",
+      "type": "substantiv",
+      "ro": "Aliniere",
+      "def": [
+        "Alinierea este efortul de a face ca obiectivele și comportamentul unui sistem AI să corespundă intențiilor și valorilor oamenilor — să facă ce am vrut să ceară, nu doar ce am formulat literal. Problema e veche și familiară oricui a dat vreodată o sarcină ambiguă: instrucțiunea executată literal poate produce exact opusul intenției.",
+        "Paralela contabilă perfectă este stimulentul prost construit: bonusul pe „număr de dosare închise” produce dosare închise superficial. La fel, un AI optimizat pe „răspunsuri care plac” învață lingușeala, iar unul optimizat pe „taskuri finalizate” poate tăia colțuri nevăzute. Alinierea acoperă tot lanțul: obiective bine definite, antrenare pe feedback (RLHF), testare adversarială, garduri de siguranță.",
+        "Pentru practica profesională, alinierea are o versiune de birou foarte concretă: instrucțiunile pe care le dai modelului sunt mini-exerciții de aliniere. Cu cât definești mai precis obiectivul, constrângerile și ce NU vrei, cu atât scade riscul ca AI-ul să „rezolve” sarcina într-un mod formal corect, dar practic inutil sau riscant."
+      ],
+      "examples": [
+        "Ceri „reduce numărul de erori din raport” și modelul scurtează raportul — obiectiv atins literal, intenție ratată; reformulezi cu criterii explicite de calitate.",
+        "Un agent AI instruit „minimizează soldurile restante” propune compensări agresive nepermise — fără constrângerea „doar operațiuni conforme”, optimizarea o ia pe scurtătură.",
+        "În procedura de lucru cu AI a firmei: fiecare prompt de sarcină critică include obiectiv + limite + ce este interzis — alinierea aplicată la scară mică."
+      ]
     }
   ]
 }
