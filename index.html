@@ -1697,9 +1697,11 @@ section.block {
 
 /* Modal back face — top bar: search · nav (← newer · counter · older →) · archive link.
    Per spec: ← steps to NEWER (back toward current), → steps to OLDER (deeper into archive). */
+/* Un singur rând, mereu: căutarea e singura care se strânge, așa că trecerea
+   de la „9 / 14" la „10 / 14" nu mai împinge „Arhiva completă" pe rândul doi. */
 .cx-bz-topbar {
   display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 10px;
+  flex-wrap: nowrap; gap: 8px;
   margin-bottom: 18px;
 }
 .cx-bz-nav-back {
@@ -1728,8 +1730,11 @@ section.block {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px; color: var(--accent-2);
   letter-spacing: 0.06em;
-  padding: 0 6px;
-  min-width: 36px; text-align: center;
+  padding: 0 4px;
+  /* lățime fixă = contorul nu se lățește la două cifre (10 / 14) */
+  min-width: 46px; text-align: center;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 /* Right-side breathing room on the back face (kept from the old absolute-nav
    layout so the content column width stays unchanged). */
@@ -1739,9 +1744,9 @@ section.block {
 .cx-bz-search {
   position: relative;
   display: flex; align-items: center; gap: 8px;
-  flex: 0 1 190px;
+  flex: 1 1 120px;
   min-width: 0;
-  padding: 7px 12px;
+  padding: 7px 11px;
   border-radius: 999px;
   border: 1px solid color-mix(in oklab, var(--accent-2) 25%, transparent);
   background: color-mix(in oklab, #07121a 45%, transparent);
@@ -1804,7 +1809,9 @@ section.block {
 .cx-bz-archive-link:hover { background: var(--accent-2); color: #07121a; }
 .cx-bz-archive-link:hover svg { transform: translateX(3px); }
 @media (max-width: 720px) {
-  .cx-bz-search { flex-basis: 100%; }
+  /* pe ecran îngust nu încap toate trei pe un rând — căutarea trece sus */
+  .cx-bz-topbar { flex-wrap: wrap; }
+  .cx-bz-search { flex: 1 1 100%; }
 }
 
 /* Scrollbar styling on the modal back when content overflows */
@@ -2806,6 +2813,58 @@ const $wPron  = document.getElementById('word-pronounce');
 const $wRo    = document.getElementById('word-ro');
 const $wDef   = document.getElementById('word-def');
 
+/* ---- Auto-fit al termenului în card ----------------------------------------
+   Clasele CSS (.multi-word / .is-long) dau dimensiunea de pornire; fitTerm o
+   reduce apoi exact cât e nevoie pentru ca (1) niciun cuvânt să nu depășească
+   lățimea cardului — deci termenii lungi de un singur cuvânt (ALIGNMENT,
+   SUPERINTELLIGENCE) nu mai rup rândul — și (2) blocul să nu depășească pe
+   verticală spațiul liber dintre header și pastila de hint. */
+const _fitProbe = document.createElement('span');
+_fitProbe.setAttribute('aria-hidden', 'true');
+_fitProbe.style.cssText = 'position:fixed;left:-9999px;top:0;white-space:pre;visibility:hidden;pointer-events:none;';
+document.body.appendChild(_fitProbe);
+
+function fitTerm(el, minPx) {
+  if (!el) return;
+  el.style.fontSize = '';
+  const avail = el.clientWidth;
+  if (!avail) return;
+  const cs = getComputedStyle(el);
+  const base = parseFloat(cs.fontSize);
+  ['fontFamily', 'fontWeight', 'fontStyle', 'letterSpacing', 'textTransform'].forEach(p => { _fitProbe.style[p] = cs[p]; });
+  _fitProbe.style.fontSize = base + 'px';
+  // 1. lățime: cel mai lat cuvânt trebuie să încapă (0.96 = marjă pentru
+  //    hover-ul care scalează cardul la 1.05)
+  let widest = 0;
+  el.textContent.trim().split(/\s+/).forEach(word => {
+    _fitProbe.textContent = word;
+    widest = Math.max(widest, _fitProbe.getBoundingClientRect().width);
+  });
+  let size = base;
+  if (widest > avail * 0.96) {
+    size = Math.max(minPx, Math.floor(base * (avail * 0.96 / widest) * 10) / 10);
+    el.style.fontSize = size + 'px';
+  }
+  // 2. înălțime: scade până când blocul intră în spațiul rămas din față
+  const face = el.parentElement;
+  if (!face) return;
+  const fcs = getComputedStyle(face);
+  let free = face.clientHeight - parseFloat(fcs.paddingTop) - parseFloat(fcs.paddingBottom);
+  Array.from(face.children).forEach(ch => { if (ch !== el) free -= ch.getBoundingClientRect().height; });
+  let guard = 0;
+  while (free > 0 && el.scrollHeight > free && size > minPx && guard++ < 60) {
+    size = Math.max(minPx, size - 2);
+    el.style.fontSize = size + 'px';
+  }
+}
+
+function fitCardTerm() { fitTerm($wFront, 22); }
+function fitModalTerm() { fitTerm(cxFront && cxFront.querySelector('.cx-word'), 24); }
+window.addEventListener('resize', () => { fitCardTerm(); fitModalTerm(); });
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => { fitCardTerm(); fitModalTerm(); });
+}
+
 function renderWord() {
   if (!words.length) return;
   const w = words[wordIdx];
@@ -2814,6 +2873,7 @@ function renderWord() {
   const wordCount = w.term.trim().split(/\s+/).length;
   $wFront.classList.toggle('multi-word', wordCount > 1);
   $wFront.classList.toggle('is-long',  w.term.length > 14);
+  requestAnimationFrame(fitCardTerm);
 
   $wLabel.textContent = w.termFull || w.term;
   $wTitle.textContent = w.term;
@@ -2870,6 +2930,7 @@ function populateBuzzwordModal(w) {
       Definiție completă
     </div>
   `;
+  requestAnimationFrame(fitModalTerm);
   const defHTML = (w.def || []).map(p => '<p>' + escapeHtml(p) + '</p>').join('');
   const exHTML  = (w.examples || []).map(x => '<li>' + escapeHtml(x) + '</li>').join('');
   /* Back face — nav buttons pinned in the top-right corner.
