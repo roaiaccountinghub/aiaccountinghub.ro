@@ -1,0 +1,174 @@
+/* ============================================================
+   PODCAST PLAYER PROPRIU — stiluri (varianta „Capitole")
+   Prefix .ppl- pentru a nu intra în coliziune cu restul site-ului.
+   Folosește tokenii din styles.css (--accent, --fg, etc.).
+   ============================================================ */
+
+.ppl-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(4, 8, 14, 0.72);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  z-index: 250; opacity: 0; pointer-events: none;
+  transition: opacity 0.32s ease;
+  display: grid; place-items: center; padding: 24px; overflow-y: auto;
+}
+.ppl-backdrop[hidden] { display: none; }
+.ppl-backdrop.open { opacity: 1; pointer-events: auto; }
+
+.ppl-card {
+  position: relative; width: min(680px, 100%);
+  background: linear-gradient(145deg, #0d2a3b 0%, #091a27 100%);
+  border: 1px solid color-mix(in oklab, var(--accent) 28%, transparent);
+  border-radius: 18px; padding: 22px 24px 20px;
+  box-shadow: 0 40px 80px -30px rgba(0,0,0,0.55);
+  transform: scale(0.94);
+  transition: transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.ppl-backdrop.open .ppl-card { transform: scale(1); }
+
+.ppl-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: #d4e7f0; cursor: pointer; transition: all 0.22s ease; z-index: 3;
+}
+.ppl-close svg { width: 15px; height: 15px; }
+.ppl-close:hover { background: var(--accent); color: #07121a; border-color: var(--accent); }
+
+/* ---------- Header: selector de episod ---------- */
+.ppl-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; padding-right: 44px; }
+.ppl-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); white-space: nowrap;
+}
+.ppl-picker { position: relative; flex: 1; min-width: 0; }
+.ppl-picker select {
+  -webkit-appearance: none; appearance: none; width: 100%; cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; color: #fff;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border-strong);
+  border-radius: 10px; padding: 9px 38px 9px 13px;
+  text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+}
+.ppl-picker select:hover { border-color: var(--accent); }
+.ppl-picker select:focus-visible { outline: 2px solid color-mix(in oklab, var(--accent) 55%, transparent); outline-offset: 1px; }
+.ppl-picker .ppl-caret { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--accent); width: 15px; height: 15px; }
+.ppl-picker option, .ppl-picker optgroup { background: #0b1a25; color: var(--fg); }
+
+.ppl-sub {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--fg-dim);
+  letter-spacing: 0.06em; margin: 2px 0 16px; min-height: 13px;
+}
+
+/* ---------- Corp: split undă | capitole ---------- */
+.ppl-split { display: grid; gap: 22px; align-items: stretch; }
+.ppl-card.ppl-has-chapters .ppl-split { grid-template-columns: 1.08fr 1fr; }
+.ppl-card:not(.ppl-has-chapters) .ppl-split { grid-template-columns: 1fr; }
+.ppl-card:not(.ppl-has-chapters) .ppl-chaps { display: none; }
+
+/* Stânga: imagine + undă subțire + comenzi */
+.ppl-stage { display: flex; flex-direction: column; min-height: 210px; }
+.ppl-artwork {
+  flex: 1 1 auto; min-height: 120px; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border); background: rgba(0,0,0,0.25);
+}
+.ppl-art-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Undă subțire sub imagine — mișcare abia perceptibilă */
+.ppl-wave { display: flex; align-items: center; justify-content: center; gap: 2px; width: 100%; cursor: pointer; }
+.ppl-wave-thin { height: 26px; margin-top: 12px; flex: 0 0 auto; }
+.ppl-wave i {
+  flex: 1 1 0; min-width: 0; max-width: 4px; border-radius: 2px;
+  background: var(--fg-dim); opacity: 0.3; transform-origin: center; transition: opacity 0.2s;
+}
+.ppl-wave i.on { background: linear-gradient(180deg, var(--accent-2), var(--accent)); opacity: 0.95; box-shadow: 0 0 6px -2px color-mix(in oklab, var(--accent) 55%, transparent); }
+.ppl-wave-thin i.cur { animation: ppl-wv-thin 1.5s ease-in-out infinite; }
+@keyframes ppl-wv-thin { 0%,100% { transform: scaleY(0.78); } 50% { transform: scaleY(1); } }
+@keyframes ppl-wv { 0%,100% { transform: scaleY(0.5); } 50% { transform: scaleY(1); } }
+
+/* Transport: skip-10, play, skip+10, viteză — pe aceeași linie */
+.ppl-transport { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
+.ppl-tbtn {
+  position: relative; display: grid; place-items: center;
+  width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border-strong);
+  color: var(--fg); transition: all 0.2s;
+}
+.ppl-tbtn:hover { border-color: var(--accent); color: var(--accent); }
+.ppl-tbtn svg { width: 21px; height: 21px; }
+.ppl-tbtn .ppl-n { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; top: 54%; left: 50%; transform: translate(-50%, -38%); }
+.ppl-tbtn.ppl-play {
+  width: 58px; height: 58px; background: var(--accent); border-color: var(--accent); color: #07121a;
+  box-shadow: 0 0 28px -6px color-mix(in oklab, var(--accent) 60%, transparent);
+}
+.ppl-tbtn.ppl-play:hover { background: var(--accent-2); color: #07121a; }
+.ppl-tbtn.ppl-play svg { width: 25px; height: 25px; }
+.ppl-speed {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--fg);
+  padding: 8px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border-strong);
+  display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; min-width: 46px; justify-content: center;
+}
+.ppl-speed:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Dreapta: capitole (fără durată per capitol) */
+.ppl-chapters-head { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 10px; display: flex; justify-content: space-between; }
+.ppl-chapters-head b { color: var(--accent); font-weight: 500; }
+.ppl-chapters { list-style: none; margin: 0; padding: 0 4px 0 0; display: flex; flex-direction: column; gap: 1px; overflow-y: auto; max-height: 240px; }
+.ppl-chapters::-webkit-scrollbar { width: 5px; }
+.ppl-chapters::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+.ppl-chapters li {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 11px; align-items: center;
+  padding: 9px 11px; border-radius: 9px; cursor: pointer; position: relative;
+  color: var(--fg-muted); transition: background 0.2s;
+}
+.ppl-chapters li:hover { background: rgba(255,255,255,0.03); color: var(--fg); }
+.ppl-chapters li.active { background: color-mix(in oklab, var(--accent) 9%, transparent); color: var(--fg); }
+.ppl-chapters li.active::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px; border-radius: 2px; background: var(--accent); }
+.ppl-ch-time { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); font-variant-numeric: tabular-nums; min-width: 38px; }
+.ppl-ch-name { font-size: 13px; line-height: 1.35; }
+.ppl-chapters li.active .ppl-ch-name { font-weight: 500; }
+.ppl-ch-eq { display: none; gap: 2px; align-items: flex-end; height: 11px; }
+.ppl-chapters li.active .ppl-ch-eq { display: flex; }
+.ppl-ch-eq b { width: 2px; background: var(--accent); border-radius: 1px; animation: ppl-wv 1s ease-in-out infinite; }
+.ppl-ch-eq b:nth-child(2) { animation-delay: 0.22s; }
+.ppl-ch-eq b:nth-child(3) { animation-delay: 0.44s; }
+
+/* ---------- Bara de derulare — jos, toată lățimea ---------- */
+.ppl-scrubber { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+.ppl-scrub-row { display: flex; align-items: center; gap: 12px; }
+.ppl-scrub-row .ppl-t { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-muted); font-variant-numeric: tabular-nums; flex-shrink: 0; min-width: 40px; }
+.ppl-scrub-row .ppl-t.r { text-align: right; color: var(--fg-dim); }
+.ppl-track { position: relative; flex: 1; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.09); cursor: pointer; }
+.ppl-track .ppl-fill { position: absolute; inset: 0 auto 0 0; width: 0%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); pointer-events: none; }
+.ppl-track .ppl-knob { position: absolute; top: 50%; left: 0%; width: 14px; height: 14px; border-radius: 50%; background: #fff; transform: translate(-50%, -50%); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 28%, transparent); pointer-events: none; }
+.ppl-track .ppl-tick { position: absolute; top: 50%; width: 2px; height: 9px; transform: translate(-50%, -50%); background: rgba(255,255,255,0.32); border-radius: 2px; pointer-events: none; }
+
+/* ---------- Subsol: credit NotebookLM + link Spotify ---------- */
+.ppl-foot { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.ppl-credit {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: color-mix(in oklab, #d4e7f0 45%, transparent);
+}
+.ppl-foot .ppl-dot { color: color-mix(in oklab, #d4e7f0 28%, transparent); }
+.ppl-spotify {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: color-mix(in oklab, #d4e7f0 55%, transparent); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
+}
+.ppl-spotify:hover { color: var(--accent); }
+.ppl-spotify svg { width: 13px; height: 13px; }
+
+/* ---------- Mobil ---------- */
+@media (max-width: 600px) {
+  .ppl-card { padding: 20px 16px 16px; }
+  .ppl-card.ppl-has-chapters .ppl-split { grid-template-columns: 1fr; }
+  .ppl-chapters { max-height: 190px; }
+  .ppl-stage { min-height: 120px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ppl-wave i.cur, .ppl-ch-eq b { animation: none; }
+  .ppl-card, .ppl-backdrop { transition: none; }
+}
