@@ -21,7 +21,7 @@
 
   var SPEEDS = [1, 1.25, 1.5, 1.75, 2];
   var WAVE_BARS = 72;
-  var DEFAULT_IMG = 'assets/hero-video-poster.jpg';  // imagine implicită (poți pune ep.image per episod)
+  var DEFAULT_IMG = 'assets/imagine_podcast.webp';   // imagine implicită (poți pune ep.image per episod)
   var LS_PREFIX = "ppl-pos-";      // localStorage: poziția de redare per episod
   var SAVE_EVERY = 5;              // salvează poziția la fiecare N secunde
 
@@ -78,10 +78,10 @@
             '<div class="ppl-artwork"><img class="ppl-art-img" alt="Gazdele podcastului AI Accounting Hub"></div>' +
             '<div class="ppl-wave ppl-wave-thin" role="slider" tabindex="0" aria-label="Undă — apasă pentru a derula"></div>' +
             '<div class="ppl-transport">' +
-              '<button class="ppl-tbtn ppl-back" type="button" aria-label="Înapoi 10 secunde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6V3L8 7l4 4V8a5 5 0 1 1-5 5"/></svg><span class="ppl-n">10</span></button>' +
+              '<button class="ppl-tbtn ppl-back" type="button" aria-label="Înapoi 10 secunde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a7 7 0 1 1-6.9 5.8"/><path d="M12 2 8.4 5 12 8"/></svg><span class="ppl-n">10</span></button>' +
               '<button class="ppl-tbtn ppl-play" type="button" aria-label="Redă"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>' +
-              '<button class="ppl-tbtn ppl-fwd" type="button" aria-label="Înainte 10 secunde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6V3l4 4-4 4V8a5 5 0 1 0 5 5"/></svg><span class="ppl-n">10</span></button>' +
-              '<button class="ppl-speed" type="button" aria-label="Viteză de redare">1&times;</button>' +
+              '<button class="ppl-tbtn ppl-fwd" type="button" aria-label="Înainte 10 secunde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a7 7 0 1 0 6.9 5.8"/><path d="M12 2 15.6 5 12 8"/></svg><span class="ppl-n">10</span></button>' +
+              '<div class="ppl-speed-wrap"><select class="ppl-speed" aria-label="Viteză de redare"><option value="0.75">0.75&times;</option><option value="1" selected>1&times;</option><option value="1.25">1.25&times;</option><option value="1.5">1.5&times;</option><option value="1.75">1.75&times;</option><option value="2">2&times;</option></select><svg class="ppl-speed-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>' +
             '</div>' +
           '</div>' +
           '<div class="ppl-chaps">' +
@@ -151,7 +151,9 @@
       var mix = 0.5 * Math.abs(Math.sin(i * 0.35 + rnd() * 2)) + 0.3 * Math.abs(Math.sin(i * 0.9 + 1.3)) + 0.2 * rnd();
       var taper = Math.pow(Math.sin(Math.PI * i / (WAVE_BARS - 1)), 0.55);
       var h = Math.max(8, Math.round((0.30 + 0.70 * mix) * taper * 100));
-      html += '<i style="height:' + h + '%"></i>';
+      var del = (-rnd() * 1.4).toFixed(2);          // fază proprie
+      var dur = (0.65 + rnd() * 0.9).toFixed(2);     // ritm propriu
+      html += '<i style="height:' + h + '%;--d:' + del + 's;--t:' + dur + 's"></i>';
     }
     els.wave.innerHTML = html;
     state.lastOn = -1;
@@ -193,6 +195,20 @@
     var lis = els.chaps.children;
     for (var j = 0; j < lis.length; j++) lis[j].classList.toggle('active', j === idx);
   }
+  /* Liniuțe pe bara de derulare = începuturi de capitol */
+  function renderTicks() {
+    var old = els.track.querySelectorAll('.ppl-tick');
+    for (var i = 0; i < old.length; i++) old[i].remove();
+    var ep = state.ep, d = els.audio.duration;
+    if (!ep || !ep.chapters || !ep.chapters.length || !isFinite(d) || !d) return;
+    ep.chapters.forEach(function (c) {
+      if (c.t <= 0) return;
+      var tick = document.createElement('span');
+      tick.className = 'ppl-tick';
+      tick.style.left = (c.t / d * 100) + '%';
+      els.track.insertBefore(tick, els.knob);
+    });
+  }
 
   /* ---------- Media Session ---------- */
   function setupMediaSession(ep) {
@@ -202,16 +218,17 @@
         title: ep.ep + ' — ' + ep.title,
         artist: 'AI Accounting Hub',
         album: ep.group || 'Podcast',
-        artwork: [{ src: location.origin + '/assets/og-image.png', sizes: '512x512', type: 'image/png' }]
+        artwork: [{ src: location.origin + '/assets/podcast-artwork.jpg', sizes: '1080x1080', type: 'image/jpeg' }]
       });
       var A = els.audio;
       navigator.mediaSession.setActionHandler('play', function () { A.play(); });
       navigator.mediaSession.setActionHandler('pause', function () { A.pause(); });
-      navigator.mediaSession.setActionHandler('seekbackward', function () { A.currentTime = Math.max(0, A.currentTime - 10); });
-      navigator.mediaSession.setActionHandler('seekforward', function () { A.currentTime = Math.min(A.duration || 1e9, A.currentTime + 10); });
-      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) A.currentTime = d.seekTime; });
-      navigator.mediaSession.setActionHandler('previoustrack', function () { step(-1); });
-      navigator.mediaSession.setActionHandler('nexttrack', function () { step(1); });
+      navigator.mediaSession.setActionHandler('seekbackward', function (d) { seekTo(A.currentTime - (d && d.seekOffset ? d.seekOffset : 10)); });
+      navigator.mediaSession.setActionHandler('seekforward', function (d) { seekTo(A.currentTime + (d && d.seekOffset ? d.seekOffset : 10)); });
+      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) seekTo(d.seekTime); });
+      // Fără previoustrack/nexttrack: eliberăm sloturile ca sistemul să afișeze butoanele de skip ±10s
+      try { navigator.mediaSession.setActionHandler('previoustrack', null); } catch (e) {}
+      try { navigator.mediaSession.setActionHandler('nexttrack', null); } catch (e) {}
     } catch (e) { /* unele browsere nu suportă toate acțiunile */ }
   }
   function updatePositionState() {
@@ -237,7 +254,7 @@
     els.dur.textContent = '…';
     setFill(0);
     els.audio.src = ep.audioUrl;
-    els.audio.playbackRate = SPEEDS[state.speedIdx];
+    els.audio.playbackRate = parseFloat(els.speed.value) || 1;
     els.audio.load();
     setupMediaSession(ep);
     // resume + autoplay se fac în 'loadedmetadata'
@@ -257,6 +274,19 @@
     els.fill.style.width = pct + '%';
     els.knob.style.left = pct + '%';
   }
+  /* Seek robust pentru fMP4: dacă săritura aterizează prea devreme (fragmentul
+     nu e încă încărcat), reîncearcă automat până nimerește poziția cerută. */
+  function seekTo(t) {
+    var A = els.audio;
+    if (!isFinite(A.duration)) { A.currentTime = t; return; }
+    t = Math.max(0, Math.min(t, A.duration - 0.3));
+    A.currentTime = t;
+    var tries = 0;
+    (function verify() {
+      if (tries++ > 24) return;
+      if (A.currentTime < t - 1.2) { A.currentTime = t; setTimeout(verify, 220); }
+    })();
+  }
   function savePos() {
     var A = els.audio; if (!state.ep || !isFinite(A.duration)) return;
     try {
@@ -268,7 +298,7 @@
     var A = els.audio; if (!state.ep) return;
     try {
       var v = parseFloat(localStorage.getItem(LS_PREFIX + state.ep.id));
-      if (v && v > 5 && isFinite(A.duration) && v < A.duration - 5) A.currentTime = v;
+      if (v && v > 5 && isFinite(A.duration) && v < A.duration - 5) seekTo(v);
     } catch (e) {}
   }
   function setPlayIcon(playing) {
@@ -299,15 +329,11 @@
   /* ---------- Legături de evenimente ---------- */
   function seekFromClientX(clientX) {
     var r = els.track.getBoundingClientRect();
-    var frac = (clientX - r.left) / r.width;
+    var frac = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
     var A = els.audio;
-    if (isFinite(A.duration)) A.currentTime = Math.max(0, Math.min(1, frac)) * A.duration;
-  }
-  function seekFromWave(clientX) {
-    var r = els.wave.getBoundingClientRect();
-    var frac = (clientX - r.left) / r.width;
-    var A = els.audio;
-    if (isFinite(A.duration)) A.currentTime = Math.max(0, Math.min(1, frac)) * A.duration;
+    // feedback vizual instant (nu așteptăm timeupdate) → derulare fluidă pe mobil
+    setFill(frac);
+    if (isFinite(A.duration)) { state.seekReq = frac * A.duration; els.cur.textContent = fmt(state.seekReq); A.currentTime = state.seekReq; }
   }
 
   function wire() {
@@ -318,38 +344,41 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && els.back && !els.back.hidden) close(); });
 
     els.play.addEventListener('click', function () { if (A.paused) A.play(); else A.pause(); });
-    els.backBtn.addEventListener('click', function () { A.currentTime = Math.max(0, A.currentTime - 10); });
-    els.fwdBtn.addEventListener('click', function () { A.currentTime = Math.min(A.duration || 1e9, A.currentTime + 10); });
-    els.speed.addEventListener('click', function () {
-      state.speedIdx = (state.speedIdx + 1) % SPEEDS.length;
-      A.playbackRate = SPEEDS[state.speedIdx];
-      els.speed.innerHTML = SPEEDS[state.speedIdx] + '&times;';
+    els.backBtn.addEventListener('click', function () { seekTo(A.currentTime - 10); });
+    els.fwdBtn.addEventListener('click', function () { seekTo(A.currentTime + 10); });
+    els.speed.addEventListener('change', function () {
+      A.playbackRate = parseFloat(els.speed.value) || 1;
       updatePositionState();
     });
 
     els.select.addEventListener('change', function () { load(els.select.value, true); });
 
     // scrubber
-    els.track.addEventListener('click', function (e) { seekFromClientX(e.clientX); });
     els.track.addEventListener('pointerdown', function (e) {
       state.seeking = true; els.track.setPointerCapture(e.pointerId); seekFromClientX(e.clientX);
     });
     els.track.addEventListener('pointermove', function (e) { if (state.seeking) seekFromClientX(e.clientX); });
-    els.track.addEventListener('pointerup', function () { state.seeking = false; });
+    function endSeek() { if (!state.seeking) return; state.seeking = false; if (state.seekReq != null) seekTo(state.seekReq); }
+    els.track.addEventListener('pointerup', endSeek);
+    els.track.addEventListener('pointercancel', endSeek);
 
     // undă = derulare
-    els.wave.addEventListener('click', function (e) { seekFromWave(e.clientX); });
+    els.wave.addEventListener('click', function (e) {
+      var r = els.wave.getBoundingClientRect();
+      if (isFinite(A.duration)) seekTo(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * A.duration);
+    });
 
     // capitole = sari la timp
     els.chaps.addEventListener('click', function (e) {
       var li = e.target.closest('li[data-t]'); if (!li) return;
-      A.currentTime = parseFloat(li.getAttribute('data-t')) || 0;
+      seekTo(parseFloat(li.getAttribute('data-t')) || 0);
       if (A.paused) A.play();
     });
 
     // audio events
     A.addEventListener('loadedmetadata', function () {
       els.dur.textContent = fmt(A.duration);
+      renderTicks();
       restorePos();
       updatePositionState();
       if (state.pendingPlay) { state.pendingPlay = false; A.play().catch(function () {}); }
@@ -361,9 +390,9 @@
       els.cur.textContent = fmt(t);
       if (t - state.saveT >= SAVE_EVERY) { state.saveT = t; savePos(); }
     });
-    A.addEventListener('play', function () { setPlayIcon(true); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; updatePositionState(); });
-    A.addEventListener('pause', function () { setPlayIcon(false); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'; savePos(); });
-    A.addEventListener('ended', function () { setPlayIcon(false); try { localStorage.removeItem(LS_PREFIX + state.ep.id); } catch (e) {} });
+    A.addEventListener('play', function () { setPlayIcon(true); els.wave.classList.add('playing'); els.card.classList.add('playing'); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; updatePositionState(); });
+    A.addEventListener('pause', function () { setPlayIcon(false); els.wave.classList.remove('playing'); els.card.classList.remove('playing'); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'; savePos(); });
+    A.addEventListener('ended', function () { setPlayIcon(false); els.wave.classList.remove('playing'); els.card.classList.remove('playing'); try { localStorage.removeItem(LS_PREFIX + state.ep.id); } catch (e) {} });
     A.addEventListener('ratechange', updatePositionState);
 
     window.addEventListener('beforeunload', savePos);

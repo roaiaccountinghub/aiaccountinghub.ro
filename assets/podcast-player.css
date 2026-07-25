@@ -72,18 +72,22 @@
   flex: 1 1 auto; min-height: 120px; border-radius: 12px; overflow: hidden;
   border: 1px solid var(--border); background: rgba(0,0,0,0.25);
 }
-.ppl-art-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ppl-art-img { width: 100%; height: 100%; object-fit: cover; display: block; will-change: transform; }
+/* Efect subtil „Ken Burns" (zoom+pan lent) doar cât timp se redă */
+.ppl-card.playing .ppl-art-img { animation: ppl-kenburns 26s ease-in-out infinite alternate; }
+@keyframes ppl-kenburns { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.09) translate(-1.2%, 0.8%); } }
 
 /* Undă subțire sub imagine — mișcare abia perceptibilă */
 .ppl-wave { display: flex; align-items: center; justify-content: center; gap: 2px; width: 100%; cursor: pointer; }
-.ppl-wave-thin { height: 26px; margin-top: 12px; flex: 0 0 auto; }
+.ppl-wave-thin { height: 32px; margin-top: 12px; flex: 0 0 auto; }
 .ppl-wave i {
   flex: 1 1 0; min-width: 0; max-width: 4px; border-radius: 2px;
   background: var(--fg-dim); opacity: 0.3; transform-origin: center; transition: opacity 0.2s;
 }
 .ppl-wave i.on { background: linear-gradient(180deg, var(--accent-2), var(--accent)); opacity: 0.95; box-shadow: 0 0 6px -2px color-mix(in oklab, var(--accent) 55%, transparent); }
-.ppl-wave-thin i.cur { animation: ppl-wv-thin 1.5s ease-in-out infinite; }
-@keyframes ppl-wv-thin { 0%,100% { transform: scaleY(0.78); } 50% { transform: scaleY(1); } }
+/* Când se redă: fiecare bară pulsează cu ritm/fază proprie → pare că urmărește sunetul */
+.ppl-wave.playing i { animation: ppl-eq var(--t, 1.1s) ease-in-out infinite; animation-delay: var(--d, 0s); }
+@keyframes ppl-eq { 0% { transform: scaleY(0.32); } 50% { transform: scaleY(1); } 100% { transform: scaleY(0.32); } }
 @keyframes ppl-wv { 0%,100% { transform: scaleY(0.5); } 50% { transform: scaleY(1); } }
 
 /* Transport: skip-10, play, skip+10, viteză — pe aceeași linie */
@@ -96,20 +100,27 @@
 }
 .ppl-tbtn:hover { border-color: var(--accent); color: var(--accent); }
 .ppl-tbtn svg { width: 21px; height: 21px; }
-.ppl-tbtn .ppl-n { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; top: 54%; left: 50%; transform: translate(-50%, -38%); }
+/* Butoane skip: săgeată mai mare (dublu) și subțire, ca să nu atingă cifra „10" */
+.ppl-back, .ppl-fwd { width: 50px; height: 50px; }
+.ppl-back svg, .ppl-fwd svg { width: 34px; height: 34px; stroke-width: 1.4; }
+.ppl-tbtn .ppl-n { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 7px; font-weight: 700; top: 52%; left: 50%; transform: translate(-50%, -50%); letter-spacing: -0.04em; }
 .ppl-tbtn.ppl-play {
   width: 58px; height: 58px; background: var(--accent); border-color: var(--accent); color: #07121a;
   box-shadow: 0 0 28px -6px color-mix(in oklab, var(--accent) 60%, transparent);
 }
 .ppl-tbtn.ppl-play:hover { background: var(--accent-2); color: #07121a; }
 .ppl-tbtn.ppl-play svg { width: 25px; height: 25px; }
+.ppl-speed-wrap { position: relative; display: inline-flex; align-items: center; }
 .ppl-speed {
+  -webkit-appearance: none; appearance: none; cursor: pointer;
   font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--fg);
-  padding: 8px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap;
   background: rgba(255,255,255,0.04); border: 1px solid var(--border-strong);
-  display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; min-width: 46px; justify-content: center;
+  border-radius: 999px; padding: 8px 26px 8px 12px; transition: all 0.2s;
 }
 .ppl-speed:hover { border-color: var(--accent); color: var(--accent); }
+.ppl-speed:focus-visible { outline: 2px solid color-mix(in oklab, var(--accent) 55%, transparent); outline-offset: 1px; }
+.ppl-speed option { background: #0b1a25; color: var(--fg); }
+.ppl-speed-caret { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--accent); width: 12px; height: 12px; }
 
 /* Dreapta: capitole (fără durată per capitol) */
 .ppl-chapters-head { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 10px; display: flex; justify-content: space-between; }
@@ -139,10 +150,11 @@
 .ppl-scrub-row { display: flex; align-items: center; gap: 12px; }
 .ppl-scrub-row .ppl-t { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-muted); font-variant-numeric: tabular-nums; flex-shrink: 0; min-width: 40px; }
 .ppl-scrub-row .ppl-t.r { text-align: right; color: var(--fg-dim); }
-.ppl-track { position: relative; flex: 1; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.09); cursor: pointer; }
+.ppl-track { position: relative; flex: 1; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.09); cursor: pointer; touch-action: none; }
+.ppl-track::before { content: ''; position: absolute; inset: -12px 0; }
 .ppl-track .ppl-fill { position: absolute; inset: 0 auto 0 0; width: 0%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); pointer-events: none; }
 .ppl-track .ppl-knob { position: absolute; top: 50%; left: 0%; width: 14px; height: 14px; border-radius: 50%; background: #fff; transform: translate(-50%, -50%); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 28%, transparent); pointer-events: none; }
-.ppl-track .ppl-tick { position: absolute; top: 50%; width: 2px; height: 9px; transform: translate(-50%, -50%); background: rgba(255,255,255,0.32); border-radius: 2px; pointer-events: none; }
+.ppl-track .ppl-tick { position: absolute; top: 50%; width: 2px; height: 10px; transform: translate(-50%, -50%); background: #0b1a25; box-shadow: 0 0 0 1px rgba(255,255,255,0.35); border-radius: 1px; pointer-events: none; }
 
 /* ---------- Subsol: credit NotebookLM + link Spotify ---------- */
 .ppl-foot { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
@@ -169,6 +181,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ppl-wave i.cur, .ppl-ch-eq b { animation: none; }
+  .ppl-wave.playing i, .ppl-ch-eq b, .ppl-card.playing .ppl-art-img { animation: none; }
   .ppl-card, .ppl-backdrop { transition: none; }
 }
