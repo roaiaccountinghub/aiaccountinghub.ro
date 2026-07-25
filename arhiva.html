@@ -65,6 +65,8 @@
 }
 .chip:hover { border-color: var(--border-strong); color: var(--fg); }
 .chip.active { background: var(--accent); color: #07121a; border-color: var(--accent); }
+.chip[data-cat="pick"]:hover { border-color: color-mix(in oklab, var(--accent-warm) 55%, transparent); color: var(--accent-warm); }
+.chip[data-cat="pick"].active { background: var(--accent-warm); color: #1a1206; border-color: var(--accent-warm); }
 
 .sort-group {
   display: flex; align-items: center; gap: 10px;
@@ -131,6 +133,17 @@
   margin-bottom: 8px;
 }
 .article-item .cat::before { content: ''; width: 18px; height: 1px; background: var(--accent); }
+.pick-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-left: 2px;
+  padding: 2px 7px 3px;
+  border-radius: 5px;
+  font-size: 9.5px; letter-spacing: 0.1em;
+  color: var(--accent-warm);
+  border: 1px solid color-mix(in oklab, var(--accent-warm) 32%, transparent);
+  background: color-mix(in oklab, var(--accent-warm) 10%, transparent);
+}
+.pick-badge svg { width: 9px; height: 9px; flex-shrink: 0; }
 .article-item h3 { font-size: 20px; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 8px; font-weight: 600; }
 .article-item p { font-size: 13px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 12px; }
 .article-item .meta {
@@ -215,6 +228,7 @@
       <a href="podcast.html">Podcast</a>
       <a href="buzzword.html">Buzzword</a>
       <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="header-actions">
@@ -253,6 +267,7 @@
       </div>
       <div class="chips" id="chips">
         <button class="chip active" data-cat="all">Toate</button>
+        <button class="chip" data-cat="pick" title="Recomandarea editorului">Recomandate</button>
         <button class="chip" data-cat="opinie">Opinie</button>
         <button class="chip" data-cat="analiza">Analiză</button>
         <button class="chip" data-cat="ghid">Ghid</button>
@@ -358,6 +373,7 @@
           <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
           <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
           <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
           <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
         </div>
       </div>
@@ -380,15 +396,15 @@ const ARTICLES = [
     title: 'Adoptare vs. adaptare: ce înseamnă, de fapt, să lucrezi cu AI în contabilitate',
     excerpt: 'Poți deschide un chatbot în fiecare zi și, în tot acest timp, să lucrezi exact ca acum trei ani. Un raport Deloitte pune degetul pe rană: adoptarea AI e ușor de demonstrat și de simulat, adaptarea nu. Am tradus cele trei comportamente umane care fac diferența — judecată, experimentare și gândire independentă — în limbaj de contabil, cu exemple practice.',
     read: '9 min', tags: ['#adoptare-ai', '#adaptare', '#deloitte', '#judecata-profesionala', '#contabilitate', '#viitorul-muncii'], href: '2026-07-24-adoptare-vs-adaptare-ai-contabilitate.html' },
-  { date: '2026-07-21', day: '21', month: 'IULIE', cat: 'opinie', catLabel: 'Vibe Coding',
+  { date: '2026-07-21', day: '21', month: 'IULIE', cat: 'opinie', catLabel: 'Vibe Coding', pick: true,
     title: 'Vibe Coding pentru prezentări: o pagină interactivă în loc de slide-uri',
     excerpt: 'Trebuia să pregătesc o prezentare despre vibe coding și nu voiam încă un teanc de slide-uri. Cum am înlocuit PowerPoint-ul cu o pagină HTML care rulează în browser, se trimite ca un fișier și e, în același timp, un prototip funcțional (MVP) — cu avantajele, limitele și partea de securitate.',
     read: '9 min', tags: ['#vibe-coding', '#html', '#prezentari', '#mvp', '#securitate', '#claude'], href: '2026-07-21-Vibe-Coding-prezentare-interactiva-html.html' },
-  { date: '2026-07-05', day: '05', month: 'IULIE', cat: 'opinie', catLabel: 'Vibe Coding',
+  { date: '2026-07-05', day: '05', month: 'IULIE', cat: 'opinie', catLabel: 'Vibe Coding', pick: true,
     title: 'Tool-ul ANAF, versiunea 2 — de la „funcționează” la „rezistă în timp”',
     excerpt: 'Primul nostru executabil verifica CIF-uri la ANAF și mergea perfect. Punându-i codul înapoi în fața AI-ului, am aflat de ce „merge” nu e același lucru cu „e bine făcut”. Povestea versiunii 2: configurare externă, fișiere editabile, jurnal de rulare și maturizarea tehnică a non-programatorului.',
     read: '15 min', tags: ['#vibe-coding', '#anaf', '#mentenanta', '#config', '#python'], href: '2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html' },
-  { date: '2026-07-04', day: '04', month: 'IULIE', cat: 'analiza', catLabel: 'Agenți AI',
+  { date: '2026-07-04', day: '04', month: 'IULIE', cat: 'analiza', catLabel: 'Agenți AI', pick: true,
     title: 'Short Friday, o analiză fiscală cu zece livrabile — cum am pus o echipă întreagă de agenți AI la treabă',
     excerpt: 'OPANAF 828/2026 a rescris din temelii dosarul prețurilor de transfer chiar înainte de weekend. Povestea unei zile de vineri în care un agent orchestrator și opt subagenți AI, rulați pe modelul Fable, au produs zece livrabile — de la analiza completă la un podcast — până luni dimineața.',
     read: '11 min', tags: ['#agenti-ai', '#preturi-de-transfer', '#opanaf', '#fable', '#automatizare'], href: '2026-07-04-Short-Friday-analiza-fiscala-zece-livrabile.html' },
@@ -404,7 +420,7 @@ const ARTICLES = [
     title: 'Evaluarea investițiilor în Inteligență Artificială: Cloud Enterprise sau On-Premise? Modele AI care garantează confidențialitatea datelor financiare',
     excerpt: 'Cum evaluezi investiția în AI pentru cabinetul tău: comparație între planurile Cloud Enterprise (ChatGPT, Gemini, Claude) și alternativele on-premise (Gemma 4, Llama, Qwen). Prețuri mai 2026 și recomandări practice.',
     read: '14 min', tags: ['#enterprise', '#onpremise', '#Gemma', '#Claude', '#ChatGPT', '#Gemini', '#pricing'], href: '2026-05-12-Evaluarea-investitiilor-in-Inteligenta-Artificiala.html' },
-  { date: '2026-05-09', day: '09', month: 'MAI', cat: 'opinie', catLabel: 'Confidentialitatea datelor',
+  { date: '2026-05-09', day: '09', month: 'MAI', cat: 'opinie', catLabel: 'Confidentialitatea datelor', pick: true,
     title: 'Agentul AI nu știe să țină un secret: Riscurile nevăzute ale automatizării și cum să le eviți',
     excerpt: 'Scurt ghid contabil despre securitatea și confidențialitatea datelor: cum să folosești AI-ul fără să trimiți datele clienților tăi pe internet.',
     read: '14 min', tags: ['#confidentialitate', '#GDPR', '#CECCAR', '#AI', '#compliance', '#anonimizare'], href: '2026-05-09-Agentul-AI-nu-stie-sa-tina-un-secret.html' },
@@ -416,7 +432,7 @@ const ARTICLES = [
     title: 'Vibe coding pentru contabili — cum am construit un tool fără să scriu o linie de cod',
     excerpt: 'Povestea unui weekend în care 8.000 de CIF-uri s-au verificat în 80 de secunde la ANAF — fără developer, fără ofertă, fără factură. Doar un dialog răbdător cu AI-ul.',
     read: '10 min', tags: ['#vibe-coding', '#anaf', '#automatizare'], href: '2026-05-02-Vibe-coding-in-contabilitate.html' },
-  { date: '2026-05-01', day: '01', month: 'MAI', cat: 'opinie', catLabel: 'Prompting',
+  { date: '2026-05-01', day: '01', month: 'MAI', cat: 'opinie', catLabel: 'Prompting', pick: true,
     title: 'Goana după promptul perfect — plus shortcut-ul care schimbă jocul',
     excerpt: 'Cele 7 ingrediente ale unui prompt bun — și scurtătura pe care o folosesc ca să nu le mai memorez.',
     read: '12 min', tags: ['#prompting', '#workflow'], href: '2026-05-01-Goana-dupa-promptul-perfect.html' }
@@ -448,6 +464,9 @@ const MANIFEST = [
 
 const state = { cat: 'all', q: '', sort: 'new', page: 1, perPage: 8 };
 
+/* Badge „Recomandarea editorului" — afisat pe articolele cu pick: true */
+const PICK_BADGE = `<span class="pick-badge" title="Recomandarea editorului"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.72-4.9 4.6 1.35 6.42L12 16.8l-5.95 3.2L7.4 13.58 2.5 8.98l6.6-.72z"/></svg>Recomandat</span>`;
+
 const listEl = document.getElementById('article-list');
 const countEl = document.getElementById('count');
 const noRes = document.getElementById('no-results');
@@ -455,7 +474,9 @@ const loadMore = document.getElementById('load-more');
 
 function filtered() {
   let arr = ARTICLES.slice();
-  if (state.cat !== 'all') arr = arr.filter(a => a.cat === state.cat);
+  /* 'pick' nu e categorie, ci eticheta transversala „Recomandarea editorului" */
+  if (state.cat === 'pick') arr = arr.filter(a => a.pick);
+  else if (state.cat !== 'all') arr = arr.filter(a => a.cat === state.cat);
   if (state.q) {
     const q = state.q.toLowerCase();
     arr = arr.filter(a => (a.title + ' ' + a.excerpt + ' ' + a.tags.join(' ')).toLowerCase().includes(q));
@@ -477,7 +498,7 @@ function render() {
     <a href="${a.href || '#'}" class="article-item fade-in">
       <div class="date"><span class="day">${a.day}</span>${a.month} · ${a.date.slice(0,4)}</div>
       <div class="body">
-        <div class="cat">${a.catLabel}</div>
+        <div class="cat">${a.catLabel}${a.pick ? PICK_BADGE : ''}</div>
         <h3>${a.title}</h3>
         <p>${a.excerpt}</p>
         <div class="meta">
@@ -538,6 +559,7 @@ loadMore.addEventListener('click', () => { state.page++; render(); });
 // Ascunde chip-urile pentru categoriile fără articole (evită „no results" înșelător)
 (function pruneEmptyChips() {
   const cats = new Set(ARTICLES.map(a => a.cat));
+  if (ARTICLES.some(a => a.pick)) cats.add('pick');
   document.querySelectorAll('.chip').forEach(c => {
     if (c.dataset.cat !== 'all' && !cats.has(c.dataset.cat)) c.style.display = 'none';
   });

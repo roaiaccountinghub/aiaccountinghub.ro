@@ -1,0 +1,1953 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<!--
+  ═════════════════════════════════════════════════════════════════════
+  WHACK-A-DEADLINE · Arcade-ul Contabilului
+  AI Accounting Hub · aiaccountinghub.ro
+  Nume de fișier sugerat: arcade-whack-a-deadline.html
+
+  Un singur fișier, complet autonom: tot CSS-ul în <style>, tot JS-ul
+  în <script>. Zero librării, zero build, zero fetch. Singura resursă
+  externă: fonturile Google (cu fallback de sistem dacă nu se încarcă).
+
+  Jocul e gândit să ruleze DE PE SITE. Butonul „Salvează jocul pe desktop”
+  creează doar o scurtătură (prompt PWA sau fișier .url) — NU există
+  service worker, deci nu se cachează nimic pentru joc offline.
+
+  Același „schelet” de arcadă ca la Dodge-ul Contabilului: aceeași
+  paletă, HUD, overlay-uri, motor de sunet WebAudio și sistem de
+  particule / juice. Se schimbă doar mecanica (whack-a-mole) și grafica.
+  ═════════════════════════════════════════════════════════════════════
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0B0F17">
+<meta name="description" content="Mini-joc arcade: lovește termenele care țâșnesc din sertare, dar ferește-te de pauze și concedii. 45 de secunde de reflexe contabile. Din Arcade-ul Contabilului, pe AI Accounting Hub.">
+<title>Whack-a-Deadline — Arcade-ul Contabilului · AI Accounting Hub</title>
+
+<!-- Fonturi (singura resursă externă permisă; fallback de sistem în CSS) -->
+<link rel="manifest" href="manifest-arcade-whack.json">
+<!-- captăm devreme evenimentul de instalare; butonul de salvare îl folosește -->
+<script>window.__pwaPrompt=null;addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__pwaPrompt=e;});</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ════════════════ 1. DESIGN SYSTEM (paleta comună a arcadei) ════════════════ */
+:root{
+  --bg:#0B0F17; --surface:#141B29; --surface-2:#1B2435;
+  --line:rgba(255,255,255,.08);
+  --brand:#2E75B6; --brand-bright:#4A9EE8;
+  --ok:#3FB68B; --warn:#E0A24E; --danger:#ff8b85;
+  --text:#E7EEF6; --muted:#93A1B5;
+  --f-titlu:"Space Grotesk", Inter, system-ui, sans-serif;
+  --f-text:Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+html{height:100%}
+body{
+  min-height:100dvh; display:flex; flex-direction:column;
+  color:var(--text); font-family:var(--f-text); line-height:1.5;
+  background:
+    radial-gradient(1100px 520px at 72% -8%, rgba(46,117,182,.12), transparent 60%),
+    radial-gradient(900px 460px at 8% 108%, rgba(63,182,139,.06), transparent 55%),
+    var(--bg);
+  overflow-x:hidden; overscroll-behavior-y:none;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ════════════════ 2. ANTET + SUBSOL ════════════════ */
+header{ width:min(1060px, 100% - 24px); margin:14px auto 0; position:relative; }
+.inapoi{
+  position:absolute; right:0; top:4px; color:var(--muted); text-decoration:none;
+  font-size:.82rem; border:1px solid var(--line); padding:4px 10px; border-radius:99px;
+  transition:color .2s, border-color .2s;
+}
+.inapoi:hover{ color:var(--text); border-color:rgba(255,255,255,.25) }
+.eyebrow{
+  font-family:var(--f-mono); font-size:.68rem; letter-spacing:.22em; font-weight:700;
+  color:var(--brand-bright); text-transform:uppercase;
+}
+header h1{ font-family:var(--f-titlu); font-weight:700; font-size:clamp(1.35rem, 3vw, 2rem); margin-top:2px; }
+.sub{ color:var(--muted); font-size:.92rem; max-width:60ch; }
+footer{
+  margin-top:auto; padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  text-align:center; color:var(--muted); font-size:.78rem;
+}
+footer b{ color:var(--text); font-weight:600 }
+
+/* ════════════════ 3. CABINETUL DE ARCADĂ ════════════════ */
+.cabinet{
+  width:min(1060px, 100% - 24px); margin:10px auto 6px;
+  background:linear-gradient(180deg, var(--surface), var(--surface-2));
+  border:1px solid var(--line); border-radius:18px; padding:10px;
+  box-shadow:0 24px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05);
+  user-select:none; -webkit-user-select:none;
+}
+.hud{
+  display:flex; align-items:center; gap:14px;
+  font-family:var(--f-mono); padding:2px 6px 10px;
+}
+.stat{ display:flex; flex-direction:column; line-height:1.15; }
+.etich{ font-size:.6rem; letter-spacing:.14em; color:var(--muted); font-weight:700 }
+.val{ font-size:1.25rem; font-weight:800; font-variant-numeric:tabular-nums }
+.stat.rec .val{ color:var(--warn); font-size:1.02rem }
+.stat.rec.nou .val{ color:var(--brand-bright); text-shadow:0 0 14px rgba(74,158,232,.65) }
+.spat{ flex:1 }
+.burn{ display:flex; align-items:center; gap:8px }
+.bara{
+  width:clamp(84px, 15vw, 170px); height:10px; border-radius:99px; overflow:hidden;
+  background:#0a0e16; border:1px solid var(--line);
+}
+.bara i{
+  display:block; height:100%; width:0%;
+  background:linear-gradient(90deg, #2f9d78, var(--ok));
+  transition:width .18s linear, background .35s;
+}
+.bara.avert i{ background:linear-gradient(90deg, #c9882e, var(--warn)) }
+.bara.pericol i{ background:linear-gradient(90deg, #e0554d, var(--danger)); animation:pulsBara .8s infinite }
+.pct{ font-size:.78rem; font-weight:700; color:var(--muted); min-width:4ch; text-align:right }
+.btnMic{
+  width:40px; height:40px; border-radius:10px; border:1px solid var(--line);
+  background:var(--surface-2); color:var(--text); font-size:1rem; cursor:pointer;
+  transition:transform .12s, border-color .2s; touch-action:manipulation;
+}
+.btnMic:hover{ border-color:rgba(255,255,255,.25) }
+.btnMic:active{ transform:scale(.92) }
+
+.ecran{
+  position:relative; width:100%; border-radius:12px; overflow:hidden;
+  background:#0a0e16; border:1px solid var(--line);
+  height:clamp(300px, calc(100dvh - 264px), 620px);
+}
+canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:none; cursor:pointer; }
+
+/* ════════════════ 4. OVERLAY-URI ════════════════ */
+.overlay{
+  position:absolute; inset:0; z-index:5; display:flex; align-items:center; justify-content:center;
+  background:rgba(8,11,18,.58); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px);
+  opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s;
+  padding:10px;
+}
+.overlay.activ{ opacity:1; visibility:visible }
+.panou{
+  background:linear-gradient(180deg, rgba(27,36,53,.94), rgba(20,27,41,.96));
+  border:1px solid var(--line); border-radius:16px; text-align:center;
+  padding:20px 24px; width:min(96%, 540px); max-height:100%; overflow-y:auto;
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+  transform:translateY(10px) scale(.96); transition:transform .3s cubic-bezier(.2,1.4,.4,1);
+}
+.overlay.activ .panou{ transform:none }
+.titluOverlay{
+  font-family:var(--f-titlu); font-size:clamp(1.4rem, 4vw, 1.9rem); font-weight:700;
+  animation:plutire 3.4s ease-in-out infinite;
+}
+.descriere{ color:var(--muted); font-size:.9rem; margin:8px auto 0; max-width:46ch }
+.legenda{
+  display:flex; flex-wrap:wrap; gap:6px 14px; justify-content:center;
+  font-size:.8rem; color:var(--muted); margin-top:12px;
+}
+.legenda b{ color:var(--text) }
+.tastele{ margin-top:10px; font-size:.8rem; color:var(--muted) }
+.tastele.principal{ color:var(--text); font-weight:600 }
+kbd{
+  font-family:var(--f-mono); font-size:.72rem; background:#0a0e16; padding:2px 7px;
+  border-radius:6px; border:1px solid var(--line); border-bottom-width:2px;
+}
+.record{ font-family:var(--f-mono); font-size:.8rem; color:var(--warn); margin-top:12px }
+.eyebrowOv{ font-family:var(--f-mono); font-size:.66rem; letter-spacing:.2em; font-weight:800; color:var(--danger) }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:var(--f-titlu); font-weight:700; font-size:1rem;
+  border-radius:12px; border:1px solid transparent; cursor:pointer;
+  padding:12px 24px; min-height:48px; margin-top:14px;
+  transition:transform .14s, box-shadow .2s, border-color .2s; touch-action:manipulation;
+}
+.btn:active{ transform:scale(.95) }
+.btnPrimar{
+  background:linear-gradient(135deg, var(--brand), var(--brand-bright)); color:#fff;
+  box-shadow:0 8px 26px rgba(46,117,182,.4);
+}
+.btnPrimar:hover{ box-shadow:0 10px 32px rgba(74,158,232,.55) }
+.btnSecundar{ background:var(--surface-2); color:var(--text); border-color:var(--line) }
+.btnSecundar:hover{ border-color:rgba(255,255,255,.25) }
+.btnCompact{ padding:8px 16px; min-height:40px; font-size:.85rem; margin-top:0 }
+.randButoane{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center }
+.randButoane .btn{ margin-top:16px }
+
+.scorFinal{ margin-top:14px; line-height:1.1 }
+.scorFinal .nr{
+  font-family:var(--f-mono); font-weight:800; font-size:clamp(2.4rem, 7vw, 3.4rem);
+  color:var(--brand-bright);
+}
+.scorFinal .etichetaScor{ display:block; font-size:.78rem; color:var(--muted); letter-spacing:.06em }
+.recordNou{
+  display:inline-block; margin-top:12px; padding:8px 18px; border-radius:99px;
+  font-family:var(--f-titlu); font-weight:700; color:#1b1405;
+  background:linear-gradient(135deg, #f4c95d, var(--warn));
+  animation:pop .6s cubic-bezier(.2,1.7,.35,1), lucire 1.5s ease-in-out .6s infinite;
+}
+.mic{ font-size:.76rem; color:var(--muted); font-family:var(--f-mono) }
+#finStat{ margin-top:8px }
+.top5{ margin-top:14px }
+.top5 h3{
+  font-family:var(--f-mono); font-size:.68rem; letter-spacing:.2em; color:var(--muted); font-weight:700;
+}
+.top5 ol{ list-style:none; margin-top:6px; font-family:var(--f-mono); font-size:.84rem }
+.top5 li{
+  display:flex; justify-content:space-between; gap:14px; padding:3px 12px; border-radius:8px;
+}
+.top5 li b{ color:var(--text); font-weight:700 }
+.top5 li span{ color:var(--muted) }
+.top5 li.evidentiat{ background:rgba(74,158,232,.14) }
+.top5 li.evidentiat span{ color:var(--brand-bright) }
+#finInitiale{ margin-top:14px; font-size:.86rem }
+#inInitiale{
+  width:5.2ch; text-align:center; font-family:var(--f-mono); font-weight:800; font-size:1.2rem;
+  text-transform:uppercase; color:var(--brand-bright); letter-spacing:.2em;
+  background:#0a0e16; border:1px solid var(--line); border-radius:10px; padding:7px 4px;
+  margin:0 8px;
+}
+#inInitiale:focus{ outline:2px solid var(--brand-bright); outline-offset:1px }
+.ascuns{ display:none !important }
+
+/* ════════════════ 5. OVERLAY „ROTEȘTE TELEFONUL” ════════════════ */
+.rotire{
+  position:fixed; inset:0; z-index:60; background:rgba(8,11,18,.97);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;
+  text-align:center; padding:20px; opacity:0; visibility:hidden; transition:.25s;
+}
+.rotire.activ{ opacity:1; visibility:visible }
+.rotire p{ font-family:var(--f-titlu); font-weight:700; font-size:1.15rem }
+.rotire .mic{ font-family:var(--f-text); color:var(--muted) }
+.telefon{
+  width:46px; height:78px; border:3px solid var(--brand-bright); border-radius:10px;
+  animation:roteste 1.8s ease-in-out infinite;
+}
+
+/* ════════════════ 6. ANIMAȚII ════════════════ */
+@keyframes pop{ 0%{transform:scale(.3)} 65%{transform:scale(1.15)} 100%{transform:scale(1)} }
+@keyframes lucire{ 0%,100%{box-shadow:0 0 12px rgba(244,201,93,.35)} 50%{box-shadow:0 0 30px rgba(244,201,93,.75)} }
+@keyframes plutire{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+@keyframes pulsBara{ 0%,100%{opacity:1} 50%{opacity:.55} }
+@keyframes roteste{ 0%,18%{transform:rotate(0)} 55%,82%{transform:rotate(90deg)} 100%{transform:rotate(90deg)} }
+@keyframes hudPop{ 0%{transform:scale(1)} 40%{transform:scale(1.28)} 100%{transform:scale(1)} }
+.valPop{ animation:hudPop .28s ease }
+
+/* ════════════════ 7. RESPONSIVE ════════════════ */
+@media (max-width:720px){
+  header h1{ font-size:1.25rem }
+  .sub{ font-size:.8rem }
+  .hud{ gap:9px }
+  .val{ font-size:1.05rem }
+  .etich{ font-size:.54rem }
+}
+/* Mobil în landscape: pagina devine practic „full-screen joc” */
+@media (max-height:540px) and (orientation:landscape){
+  header{ margin-top:4px; display:flex; align-items:baseline; gap:10px }
+  header h1{ font-size:.95rem }
+  .eyebrow, .sub{ display:none }
+  .inapoi{ position:static; margin-left:auto; padding:2px 8px; font-size:.72rem }
+  footer{ display:none }
+  .cabinet{ margin:4px auto; padding:6px; border-radius:12px; width:calc(100% - 12px) }
+  .hud{ padding:0 2px 6px }
+  .btnMic{ width:36px; height:36px }
+  .ecran{ height:max(230px, calc(100dvh - 108px)) }
+  .panou{ padding:12px 16px }
+  .descriere{ margin-top:4px; font-size:.8rem }
+  .btn{ margin-top:10px; min-height:44px; padding:9px 20px }
+  .titluOverlay{ font-size:1.2rem }
+  .scorFinal{ margin-top:8px }
+  .scorFinal .nr{ font-size:2rem }
+  .recordNou{ margin-top:8px; padding:6px 14px; font-size:.9rem }
+  .legenda{ margin-top:8px; font-size:.75rem }
+  .top5{ margin-top:10px }
+  .top5 li{ padding:2px 10px; font-size:.78rem }
+}
+/* Mișcare redusă: oprim animațiile decorative CSS */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.001s !important }
+}
+:focus-visible{ outline:2px solid var(--brand-bright); outline-offset:2px }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="eyebrow">Arcade-ul Contabilului</div>
+    <h1>Whack-a-Deadline</h1>
+    <p class="sub">Termenele țâșnesc din sertare. Lovește-le înainte să dispară — dar nu strica pauza de cafea. Ai 45 de secunde.</p>
+  </div>
+  <a class="inapoi" href="arcade.html">‹ Înapoi la arcade</a>
+</header>
+
+<main class="cabinet">
+  <!-- HUD -->
+  <div class="hud">
+    <div class="stat"><span class="etich">PUNCTE</span><span class="val" id="hudPuncte">0</span></div>
+    <div class="stat rec" id="hudRec"><span class="etich">RECORD</span><span class="val" id="hudRecord">0</span></div>
+    <div class="spat"></div>
+    <div class="burn">
+      <span class="etich">TIMP</span>
+      <div class="bara" id="hudBara"><i id="hudBaraFill"></i></div>
+      <span class="pct" id="hudPct">45s</span>
+    </div>
+    <button class="btnMic" id="btnSunet" type="button" aria-label="Sunet pornit/oprit" aria-pressed="false">🔊</button>
+    <button class="btnMic" id="btnPauza" type="button" aria-label="Pauză">⏸</button>
+  </div>
+
+  <!-- ECRANUL DE JOC -->
+  <div class="ecran" id="ecran">
+    <canvas id="panza" aria-label="Whack-a-Deadline — zonă de joc" role="img"></canvas>
+
+    <!-- Overlay INTRO -->
+    <div class="overlay activ" id="ovIntro" role="dialog" aria-modal="true" aria-labelledby="titluIntro">
+      <div class="panou">
+        <h2 class="titluOverlay" id="titluIntro">Whack-a-Deadline</h2>
+        <p class="descriere">Sertarele scuipă termene la nesfârșit. Lovește fiecare termen cât e afară.
+        Dar atenție: uneori apare o pauză binemeritată — pe aceea o lași în pace.</p>
+        <div class="legenda">
+          <div>🗂️ Termen — <b>+10p</b></div>
+          <div>🏖️ Pauză / concediu — <b>−15p</b> dacă o lovești</div>
+          <div>Termen ratat — <b>−5p</b></div>
+        </div>
+        <div class="tastele" id="ctrlTaste"><kbd>Click</kbd> pe termene · <kbd>P</kbd> pauză · <kbd>M</kbd> sunet</div>
+        <div class="tastele" id="ctrlTactil">👆 Atinge termenele care ies din sertare</div>
+        <p class="record ascuns" id="introRecord"></p>
+        <button class="btn btnPrimar" id="btnJoaca" type="button">▶ Joacă</button>
+      </div>
+    </div>
+
+    <!-- Overlay PAUZĂ -->
+    <div class="overlay" id="ovPauza" role="dialog" aria-modal="true" aria-labelledby="titluPauza">
+      <div class="panou">
+        <h2 class="titluOverlay" id="titluPauza">Pauză de cafea ☕</h2>
+        <p class="descriere">Termenele așteaptă în sertare. Nu pentru mult timp.</p>
+        <div class="randButoane">
+          <button class="btn btnPrimar" id="btnContinua" type="button">▶ Continuă</button>
+          <button class="btn btnSecundar" id="btnRestartPauza" type="button">↻ De la capăt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay GAME OVER -->
+    <div class="overlay" id="ovSfarsit" role="dialog" aria-modal="true" aria-labelledby="titluFin">
+      <div class="panou">
+        <div class="eyebrowOv" id="finEyebrow">TIMP EXPIRAT · 45s</div>
+        <h2 class="titluOverlay" id="titluFin">Senior</h2>
+        <p class="descriere" id="finMesaj"></p>
+        <p class="mic" id="finStat"></p>
+        <div class="scorFinal">
+          <span class="nr" id="finScor">0</span>
+          <span class="etichetaScor" id="finScorEticheta">puncte</span>
+        </div>
+        <div class="recordNou ascuns" id="finRecordNou">🏆 RECORD NOU!</div>
+        <p class="record" id="finRecord"></p>
+        <div id="finInitiale" class="ascuns">
+          Ai intrat în Top 5! Inițialele tale:
+          <input id="inInitiale" maxlength="3" autocomplete="off" spellcheck="false" aria-label="Inițiale pentru top 5">
+          <button class="btn btnSecundar btnCompact" id="btnSalveazaTop" type="button">Salvează</button>
+        </div>
+        <div class="randButoane">
+          <button class="btn btnPrimar" id="btnIncaOData" type="button">↻ Încă o dată</button>
+          <button class="btn btnSecundar" id="btnProvoaca" type="button">📋 Provoacă un coleg</button>
+          <button class="btn btnSecundar" id="btnSalvJoc" type="button">💾 Salvează jocul pe desktop</button>
+        </div>
+        <div class="top5" id="finTop5"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <b>AI Accounting Hub</b> · aiaccountinghub.ro · vibe-codat între două deadline-uri
+</footer>
+
+<!-- Overlay portrait -->
+<div class="rotire" id="ovRotire">
+  <div class="telefon"></div>
+  <p>🔄 Rotește telefonul pe orizontală</p>
+  <p class="mic">Sertarele se lovesc mai bine în landscape. Jocul continuă automat.</p>
+</div>
+
+<noscript><p style="text-align:center;padding:20px">Jocul are nevoie de JavaScript. Ca și contabilitatea de cafea.</p></noscript>
+
+<script>
+'use strict';
+(() => {
+
+/* ════════════════════════ 1. UTILITARE ════════════════════════ */
+const TAU = Math.PI * 2;
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const lerp  = (a, b, t) => a + (b - a) * t;
+const rand  = (a, b) => a + Math.random() * (b - a);
+const alege = arr => arr[Math.floor(Math.random() * arr.length)];
+const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+const easeInCubic  = t => t * t * t;
+const easeOutBack  = t => { const c = 1.70158; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+
+const mqMiscareRedusa = matchMedia('(prefers-reduced-motion: reduce)');
+const redus = () => mqMiscareRedusa.matches;
+
+/* dreptunghi rotunjit manual (fără dependență de ctx.roundRect) */
+function rr(c, x, y, w, h, r){
+  r = Math.min(r, w / 2, h / 2);
+  c.beginPath();
+  c.moveTo(x + r, y);
+  c.arcTo(x + w, y, x + w, y + h, r);
+  c.arcTo(x + w, y + h, x, y + h, r);
+  c.arcTo(x, y + h, x, y, r);
+  c.arcTo(x, y, x + w, y, r);
+  c.closePath();
+}
+function elipsa(c, x, y, rx, ry){ c.beginPath(); c.ellipse(x, y, rx, ry, 0, 0, TAU); }
+
+/* gramatica românească pentru puncte: „un punct”, „7 puncte”, „42 de puncte” */
+function puncteText(n){
+  if (n === 1) return 'un punct';
+  const r = n % 100;
+  return (r >= 1 && r <= 19) ? `${n} puncte` : `${n} de puncte`;
+}
+
+/* ════════════════════════ 2. DEPOZIT (localStorage protejat) ════════════════════════ */
+const Depozit = {
+  ia(cheie, altfel){
+    try { const v = localStorage.getItem(cheie); return v === null ? altfel : JSON.parse(v); }
+    catch (e) { return altfel; }
+  },
+  pune(cheie, val){ try { localStorage.setItem(cheie, JSON.stringify(val)); } catch (e) {} }
+};
+/* record & top5 sunt per-joc; mut & inițiale sunt comune întregii arcade */
+const K = { record:'whackDeadline_record', top5:'whackDeadline_top5', mut:'arcadeContabil_mut', initiale:'arcadeContabil_initiale' };
+
+/* ════════════════════════ 3. BALANS (păstrat din card) + TEXTE ════════════════════════ */
+const BAL = {
+  durata: 45,                  // secunde — durată fixă
+  pPunct: 10,                  // termen lovit
+  pCapcana: -15,               // capcană lovită
+  pRatat: -5,                  // termen dispărut nelovit
+  procCapcana: 0.22,           // ~22% din apariții sunt capcane
+  probProrogare: 0.5,          // șansa ca un termen ratat să se prorogeze (o singură dată)
+  spawnStart: 0.92, spawnMin: 0.40,   // interval între apariții (s)
+  stayStart: 1.55, stayMin: 0.72,     // cât stă un element afară (s)
+  activiStart: 2, activiEnd: 5,       // câte elemente pot fi afară simultan
+  urcareDur: 0.15, retragereDur: 0.18,
+  tensiune: 10                 // ultimele N secunde = final frenetic
+};
+
+/* termene — de lovit (+10) */
+const TERMENE = [
+  { emoji:'🗂️', label:'D406 azi!' },
+  { emoji:'🧾', label:'D394!' },
+  { emoji:'🖋️', label:'Decl. 100' },
+  { emoji:'📊', label:'Bilanț!' },
+  { emoji:'⚡', label:'e-Factura: 5 zile' },
+  { emoji:'🚚', label:'Intrastat' },
+  { emoji:'👥', label:'D112 mâine' },
+  { emoji:'💶', label:'Decont TVA' }
+];
+/* capcane — NU se lovesc (−15) */
+const CAPCANE = [
+  { emoji:'🏖️', label:'Ziua ta liberă' },
+  { emoji:'✈️', label:'Concediul planificat' },
+  { emoji:'🥪', label:'Pauza de prânz' },
+  { emoji:'☕', label:'Pauza de cafea' }
+];
+const MESAJE_RATAT   = ['S-a prorogat prin ordin de ministru!', 'S-a amânat… dar reapare imediat.', 'Prorogat! Îl prinzi în alt sertar.'];
+const REPLICI_CAPCANA = ['Era concediul tău!', 'Auu, pauza de prânz…', 'Ai ștampilat propria zi liberă.', 'ANAF mulțumește pentru sârguință.'];
+const REPLICI_TERMEN  = ['Achitat!', 'Depus la timp!', 'Bifat!', 'Rezolvat!', 'Semnat și ștampilat!'];
+
+const RANGURI = [
+  { prag: 60,       nume:'Stagiar cu potențial', desc:'Termenele încă te lovesc primele. Dar înveți repede.' },
+  { prag: 150,      nume:'Senior',               desc:'Îți mai scapă câte un D394 — cine n-a pățit-o?' },
+  { prag: Infinity, nume:'Expert',               desc:'ANAF ar trebui să te angajeze să le scrii calendarul.' }
+];
+function rangPentru(scor){ return RANGURI.find(r => scor < r.prag); }
+
+const FONT_MONO  = '"JetBrains Mono", ui-monospace, Consolas, monospace';
+const FONT_TITLU = '"Space Grotesk", Inter, sans-serif';
+const FONT_EMOJI = '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Twemoji Mozilla",sans-serif';
+
+/* ════════════════════════ 4. REFERINȚE DOM ════════════════════════ */
+const $ = id => document.getElementById(id);
+const ecranEl = $('ecran'), panza = $('panza'), ctx = panza.getContext('2d');
+const hudPuncte = $('hudPuncte'), hudRecord = $('hudRecord'), hudRec = $('hudRec');
+const hudBara = $('hudBara'), hudBaraFill = $('hudBaraFill'), hudPct = $('hudPct');
+const btnSunet = $('btnSunet'), btnPauza = $('btnPauza');
+const ovIntro = $('ovIntro'), ovPauza = $('ovPauza'), ovSfarsit = $('ovSfarsit'), ovRotire = $('ovRotire');
+const btnJoaca = $('btnJoaca'), btnContinua = $('btnContinua'), btnRestartPauza = $('btnRestartPauza');
+const btnIncaOData = $('btnIncaOData'), btnProvoaca = $('btnProvoaca'), btnSalveazaTop = $('btnSalveazaTop');
+const finEyebrow = $('finEyebrow'), finMesaj = $('finMesaj'), finStat = $('finStat'),
+      finScor = $('finScor'), finScorEticheta = $('finScorEticheta'),
+      finRecordNou = $('finRecordNou'), finRecord = $('finRecord'),
+      finInitiale = $('finInitiale'), inInitiale = $('inInitiale'), finTop5 = $('finTop5'),
+      introRecord = $('introRecord'), ctrlTaste = $('ctrlTaste'), ctrlTactil = $('ctrlTactil');
+
+/* ════════════════════════ 5. STARE GLOBALĂ ════════════════════════ */
+const LH = 540;                 // înălțimea logică a scenei (constantă)
+const PODEA = 505;              // linia podelei în coordonate logice
+let LW = 960, sc = 1, dpr = 1, cssW = 0, cssH = 0;
+
+let stare = 'intro';            // intro | joc | numaratoare | pauza | terminare | sfarsit
+let ramas = BAL.durata;         // secunde rămase
+let timpGlobal = 0;             // ceas continuu, pentru animații ambientale
+let scor = 0;
+let record = Depozit.ia(K.record, 0);
+let finalScor = 0, vechiRecord = 0, esteRecordNou = false;
+let statLovite = 0, statRatate = 0, statCapcane = 0;   // pentru linia de statistici
+let serie = 0;                  // serie de termene lovite la rând (doar pentru juice)
+
+let celule = [];                // cele 9 sertare
+let gridInfo = { lipFrac: 0.58, over: 12, gapY: 16 };
+let obiecteZbor = [];           // documente prorogate în zbor
+let stampile = [];              // loviturile de ștampilă (slam)
+let particule = [];             // efecte (hârtii, scântei, praf, confetti, unde…)
+let texte = [];                 // scoruri / mesaje plutitoare
+let motes = [];                 // fire de praf ambientale
+let aburi = [];                 // aburul cănii decorative
+
+let camX = 0;                   // micro-parallax
+let tremur = 0, hitStop = 0, blitzRosu = 0, blitzVerde = 0;
+let cronSpawn = 0.7, cronTicFinal = 0;
+let numCifra = 3, numT = 0;     // numărătoarea de reluare
+let termT = 0;                  // cronometrul secvenței de final
+let anunt10 = false;
+let pauzatDeRotire = false;
+let demoCron = 0;               // ritmul „AI-ului” din intro
+let tactil = matchMedia('(pointer: coarse)').matches || (navigator.maxTouchPoints || 0) > 0;
+let atinsVreodata = false;
+let trebuieRedim = true;
+
+/* ════════════════════════ 6. AUDIO (WebAudio, 8-bit, generat în cod) ════════════════════════ */
+const Sunet = (() => {
+  let ac = null, master = null, bufferZgomot = null;
+  let mut = !!Depozit.ia(K.mut, false);
+
+  function init(){
+    if (ac) return true;
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return false;
+      ac = new AC();
+      master = ac.createGain();
+      master.gain.value = 0.16;           // volum discret, potrivit pentru birou
+      master.connect(ac.destination);
+    } catch (e) { ac = null; return false; }
+    return true;
+  }
+  /* pornit doar după prima interacțiune (politica de autoplay) */
+  function activeaza(){
+    if (!init()) return;
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+  }
+  function ton(frecv, dur, opt = {}){
+    if (!ac || mut) return;
+    const { tip = 'square', vol = 0.6, la = 0, glisando = 0 } = opt;
+    const t0 = ac.currentTime + la;
+    const osc = ac.createOscillator(), g = ac.createGain();
+    osc.type = tip;
+    osc.frequency.setValueAtTime(frecv, t0);
+    if (glisando) osc.frequency.exponentialRampToValueAtTime(Math.max(20, glisando), t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(vol, t0 + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(g); g.connect(master);
+    osc.start(t0); osc.stop(t0 + dur + 0.03);
+  }
+  function zgomot(dur, opt = {}){
+    if (!ac || mut) return;
+    const { vol = 0.4, la = 0, filtru = 1200, tipFiltru = 'lowpass' } = opt;
+    if (!bufferZgomot){
+      const n = Math.floor(ac.sampleRate * 0.5);
+      bufferZgomot = ac.createBuffer(1, n, ac.sampleRate);
+      const d = bufferZgomot.getChannelData(0);
+      for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+    }
+    const t0 = ac.currentTime + la;
+    const src = ac.createBufferSource(); src.buffer = bufferZgomot; src.loop = true;
+    const f = ac.createBiquadFilter(); f.type = tipFiltru; f.frequency.value = filtru;
+    const g = ac.createGain();
+    g.gain.setValueAtTime(vol, t0);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    src.connect(f); f.connect(g); g.connect(master);
+    src.start(t0); src.stop(t0 + dur + 0.03);
+  }
+  return {
+    activeaza,
+    get mut(){ return mut; },
+    set mut(v){ mut = v; Depozit.pune(K.mut, v); },
+    click(){ ton(660, 0.05, { vol: .4 }); },
+    start(){ [523, 659, 784].forEach((f, i) => ton(f, .09, { la: i * .07 })); },
+    stampila(){ ton(150, .05, { tip: 'square', vol: .3 }); zgomot(.05, { vol: .12, filtru: 1400 }); },
+    punct(){ ton(784, .05, { vol: .4 }); ton(1245, .09, { la: .04, vol: .4 }); zgomot(.04, { vol: .06, filtru: 5200, tipFiltru: 'highpass', la: .02 }); },
+    capcana(){ zgomot(.22, { vol: .5, filtru: 900 }); ton(165, .24, { tip: 'sawtooth', glisando: 55, vol: .5 }); },
+    ratat(){ ton(210, .16, { tip: 'sine', glisando: 120, vol: .38 }); },
+    prorogare(){ zgomot(.18, { vol: .14, filtru: 2600, tipFiltru: 'bandpass' }); ton(440, .18, { tip: 'triangle', glisando: 900, vol: .38 }); },
+    tic(){ ton(880, 0.05, { vol: .35 }); },
+    etapa(){ ton(988, .06, { vol: .35 }); ton(1319, .09, { la: .06, vol: .35 }); },
+    ticFinal(){ ton(1046, .06, { tip: 'square', vol: .4 }); },
+    timpExpirat(){ ton(392, .5, { tip: 'sawtooth', glisando: 174, vol: .4 }); zgomot(.5, { vol: .16, filtru: 500, la: .05 }); },
+    gameOver(){ [523, 440, 349, 294].forEach((f, i) => ton(f, .16, { la: i * .12, tip: 'triangle' })); },
+    recordNou(){ [523, 659, 784, 1047, 1319].forEach((f, i) => ton(f, .1, { la: i * .08 })); }
+  };
+})();
+
+/* ════════════════════════ 7. HAPTIC ════════════════════════ */
+function vibreaza(model){
+  if (Sunet.mut) return;                       // mute = și fără vibrații
+  try { if (navigator.vibrate) navigator.vibrate(model); } catch (e) {}
+}
+
+/* ════════════════════════ 8. INPUT (mouse / atingere + tastatură) ════════════════════════ */
+function punctLogic(ev){
+  const r = panza.getBoundingClientRect();
+  const x = (ev.clientX - r.left) * (cssW / r.width) / sc + camX;
+  const y = (ev.clientY - r.top)  * (cssH / r.height) / sc;
+  return { x, y };
+}
+function legaInput(){
+  document.addEventListener('keydown', ev => {
+    Sunet.activeaza();
+    const tag = ev.target && ev.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;   // nu deranjăm inițialele
+    switch (ev.code) {
+      case 'KeyP': case 'Escape': comutaPauza(); ev.preventDefault(); break;
+      case 'KeyM': comutaSunet(); ev.preventDefault(); break;
+      case 'Space': case 'Enter':
+        if (ovIntro.classList.contains('activ')) { porneste(); ev.preventDefault(); }
+        else if (ovSfarsit.classList.contains('activ')) { btnIncaOData.click(); ev.preventDefault(); }
+        else if (ovPauza.classList.contains('activ')) { btnContinua.click(); ev.preventDefault(); }
+        else if (ev.code === 'Space') ev.preventDefault();
+        break;
+    }
+  });
+
+  panza.addEventListener('pointerdown', ev => {
+    Sunet.activeaza();
+    if (ev.pointerType === 'touch') { tactil = true; atinsVreodata = true; }
+    if (stare === 'joc') lovireLaPunct(punctLogic(ev));
+    ev.preventDefault();
+  });
+  panza.addEventListener('contextmenu', ev => ev.preventDefault());
+
+  /* pauză automată când fereastra pierde focusul / tab-ul devine invizibil */
+  window.addEventListener('blur', pauzaAutomata);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pauzaAutomata();
+    else Sunet.activeaza();
+  });
+}
+function pauzaAutomata(){
+  if (stare === 'joc' || stare === 'numaratoare') { stare = 'pauza'; arata(ovPauza); btnPauza.textContent = '▶'; }
+}
+
+/* ════════════════════════ 9. CANVAS, SCALARE & GRILĂ ════════════════════════ */
+function redimensioneaza(){
+  cssW = Math.max(1, ecranEl.clientWidth - 2);   // -2: bordura .ecran
+  cssH = Math.max(1, ecranEl.clientHeight - 2);
+  dpr = clamp(window.devicePixelRatio || 1, 1, 2.5);
+  panza.width = Math.round(cssW * dpr);
+  panza.height = Math.round(cssH * dpr);
+  sc = cssH / LH;
+  LW = cssW / sc;
+  cacheCarduri.clear();
+  construiesteGrila();
+  construiesteFundal();
+  construiesteViniete();
+  initMotes();
+}
+new ResizeObserver(() => { trebuieRedim = true; }).observe(ecranEl);
+window.addEventListener('orientationchange', () => { trebuieRedim = true; verificaRotire(); });
+window.addEventListener('resize', verificaRotire);
+
+/* dispunerea celor 9 sertare, responsivă la lățimea logică */
+function construiesteGrila(){
+  const cols = 3, rows = 3;
+  const zonaX0 = clamp(LW * 0.09, 34, 150);
+  const zonaX1 = LW - zonaX0;
+  const zonaTop = 118;               // sub cronometrul circular
+  const zonaBot = PODEA - 4;
+  const gapX = clamp((zonaX1 - zonaX0) * 0.028, 8, 26);
+  const gapY = clamp((zonaBot - zonaTop) * 0.05, 8, 22);
+  const cw = (zonaX1 - zonaX0 - gapX * (cols - 1)) / cols;
+  const ch = (zonaBot - zonaTop - gapY * (rows - 1)) / rows;
+  gridInfo = { lipFrac: 0.58, over: Math.min(gapY * 0.5, 14), gapY, cw, ch, x0: zonaX0, y0: zonaTop, gapX, cols, rows };
+
+  const vechi = celule;              // păstrăm conținutul sertarelor peste redimensionare
+  celule = [];
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++){
+    const i = r * cols + c;
+    const x = zonaX0 + c * (cw + gapX);
+    const y = zonaTop + r * (ch + gapY);
+    const cel = { i, r, c, x, y, w: cw, h: ch, cx: x + cw / 2, cy: y + ch / 2, item: (vechi[i] ? vechi[i].item : null) };
+    celule.push(cel);
+  }
+  cacheCarduri.clear();
+}
+
+/* sprite-uri de „glow” pre-randate (evităm shadowBlur pe bucla fierbinte) */
+function faGlow(rgb){
+  const d = 96, cv = document.createElement('canvas'); cv.width = cv.height = d;
+  const g = cv.getContext('2d');
+  const gr = g.createRadialGradient(d/2, d/2, 2, d/2, d/2, d/2);
+  gr.addColorStop(0, `rgba(${rgb},.55)`); gr.addColorStop(.55, `rgba(${rgb},.16)`); gr.addColorStop(1, `rgba(${rgb},0)`);
+  g.fillStyle = gr; g.fillRect(0, 0, d, d);
+  return cv;
+}
+const GLOW = { brand: faGlow('74,158,232'), cald: faGlow('224,162,78'), rosu: faGlow('255,90,80'), verde: faGlow('63,182,139') };
+
+let vinNeagra = null, vinRosie = null;
+function construiesteViniete(){
+  const w = Math.max(2, Math.round(panza.width / 2)), h = Math.max(2, Math.round(panza.height / 2));
+  vinNeagra = document.createElement('canvas'); vinNeagra.width = w; vinNeagra.height = h;
+  let c = vinNeagra.getContext('2d');
+  let g = c.createRadialGradient(w/2, h/2, Math.min(w,h)*.42, w/2, h/2, Math.max(w,h)*.72);
+  g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.5)');
+  c.fillStyle = g; c.fillRect(0, 0, w, h);
+  vinRosie = document.createElement('canvas'); vinRosie.width = w; vinRosie.height = h;
+  c = vinRosie.getContext('2d');
+  g = c.createRadialGradient(w/2, h/2, Math.min(w,h)*.36, w/2, h/2, Math.max(w,h)*.74);
+  g.addColorStop(0, 'rgba(255,60,50,0)'); g.addColorStop(1, 'rgba(255,60,50,.5)');
+  c.fillStyle = g; c.fillRect(0, 0, w, h);
+}
+
+/* ════════════════════════ 10. CARDURILE ELEMENTELOR (pre-randate) ════════════════════════ */
+const cacheCarduri = new Map();
+/* măsură verticală vizibilă a unui card (deasupra buzei sertarului) */
+function vizibilCard(){ const g = gridInfo; return g.ch * g.lipFrac + g.over; }
+
+function faItemCard(cfg, tip){
+  const cheie = tip + '|' + cfg.label;
+  let card = cacheCarduri.get(cheie);
+  if (card) return card;
+
+  const q = Math.max(1, sc * dpr);
+  const iw = gridInfo.cw * 0.92;
+  const Vh = vizibilCard();                 // înălțimea zonei vizibile
+  const baza = 10;                          // „coada” ce se ascunde în sertar
+  const ih = Vh + baza;
+
+  const cv = document.createElement('canvas');
+  cv.width = Math.ceil(iw * q); cv.height = Math.ceil(ih * q);
+  const c = cv.getContext('2d'); c.scale(q, q);
+
+  const eTermen = tip === 'termen';
+  /* corpul cardului (document/dosar care iese din sertar) */
+  const g = c.createLinearGradient(0, 0, 0, ih);
+  if (eTermen){ g.addColorStop(0, '#f4f7fc'); g.addColorStop(1, '#d7dfeb'); }
+  else        { g.addColorStop(0, '#e9f6ef'); g.addColorStop(1, '#cfeadd'); }
+  c.fillStyle = g; rr(c, 1, 1, iw - 2, ih - 2, 8); c.fill();
+  c.strokeStyle = 'rgba(0,0,0,.22)'; c.lineWidth = 1.4; rr(c, 1, 1, iw - 2, ih - 2, 8); c.stroke();
+  c.strokeStyle = 'rgba(255,255,255,.6)'; c.lineWidth = 1;
+  c.beginPath(); c.moveTo(6, 3.5); c.lineTo(iw - 6, 3.5); c.stroke();
+
+  /* banda de sus, colorată după tip (indiciul corect / greșit) */
+  const banda = eTermen ? '#c8463b' : '#2f9d78';
+  const bandaH = Math.max(14, Vh * 0.16);
+  c.fillStyle = banda; rr(c, 1, 1, iw - 2, bandaH, 8); c.fill();
+  c.fillStyle = 'rgba(0,0,0,.18)'; c.fillRect(1, bandaH - 3, iw - 2, 3);
+  c.fillStyle = '#fff'; c.font = `800 ${Math.round(bandaH * 0.56)}px ${FONT_MONO}`;
+  c.textAlign = 'center'; c.textBaseline = 'middle';
+  c.fillText(eTermen ? 'TERMEN' : 'PAUZĂ', iw / 2, bandaH / 2 + 0.5);
+
+  /* emoji-ul, mare și centrat */
+  const emY = bandaH + (Vh - bandaH) * 0.40;
+  const emSize = Math.min(iw * 0.5, (Vh - bandaH) * 0.62);
+  c.font = `${emSize}px ${FONT_EMOJI}`;
+  c.textAlign = 'center'; c.textBaseline = 'middle';
+  c.fillText(cfg.emoji, iw / 2, emY);
+
+  /* eticheta (mono), micșorată / împărțită ca să încapă */
+  const maxw = iw - 12;
+  let fs = Math.min(14, Vh * 0.15);
+  c.font = `800 ${fs}px ${FONT_MONO}`;
+  let linii = [cfg.label];
+  while (c.measureText(cfg.label).width > maxw && fs > 9){ fs--; c.font = `800 ${fs}px ${FONT_MONO}`; }
+  if (c.measureText(cfg.label).width > maxw){          // împarte pe două rânduri
+    const cuv = cfg.label.split(' ');
+    if (cuv.length > 1){
+      let mij = Math.ceil(cuv.length / 2);
+      linii = [cuv.slice(0, mij).join(' '), cuv.slice(mij).join(' ')];
+    }
+  }
+  const labelY = bandaH + (Vh - bandaH) * (linii.length > 1 ? 0.78 : 0.82);
+  c.fillStyle = eTermen ? '#1a2233' : '#184a38';
+  linii.forEach((ln, k) => c.fillText(ln, iw / 2, labelY + (k - (linii.length - 1) / 2) * (fs + 2)));
+
+  card = { img: cv, w: iw, h: ih, Vh, baza };
+  cacheCarduri.set(cheie, card);
+  return card;
+}
+
+/* ════════════════════════ 11. FUNDALUL: BIROUL (parallax, pre-randat) ════════════════════════ */
+const fundal = { marja: 90, W: 0, perete: null, podea: null, luminite: [], ceas: null, cana: null };
+function rngFabrica(seed){ let s = seed >>> 0; return () => ((s = Math.imul(48271, s) % 2147483647) & 0x7fffffff) / 2147483647; }
+
+function construiesteFundal(){
+  if (cssW < 10) return;
+  const q = Math.max(0.5, sc * dpr);
+  const W = LW + fundal.marja * 2;
+  fundal.W = W; fundal.luminite = []; fundal.ceas = null; fundal.cana = null;
+  const rnd = rngFabrica(90731);
+
+  /* ── peretele (0..470) ── */
+  const per = document.createElement('canvas');
+  per.width = Math.ceil(W * q); per.height = Math.ceil(470 * q);
+  const p = per.getContext('2d'); p.scale(q, q);
+  let g = p.createLinearGradient(0, 0, 0, 470);
+  g.addColorStop(0, '#182134'); g.addColorStop(1, '#121826');
+  p.fillStyle = g; p.fillRect(0, 0, W, 470);
+  /* tavan + neoane */
+  p.fillStyle = '#0d1220'; p.fillRect(0, 0, W, 26);
+  for (let x = 130; x < W - 60; x += 300){
+    const gl = p.createRadialGradient(x + 45, 30, 4, x + 45, 30, 70);
+    gl.addColorStop(0, 'rgba(207,231,255,.16)'); gl.addColorStop(1, 'rgba(207,231,255,0)');
+    p.fillStyle = gl; p.fillRect(x - 40, 10, 170, 110);
+    p.fillStyle = '#cfe7ff'; rr(p, x, 22, 90, 5, 2); p.fill();
+  }
+  p.fillStyle = '#0c101b'; p.fillRect(0, 432, W, 38);
+  p.fillStyle = 'rgba(255,255,255,.05)'; p.fillRect(0, 432, W, 2);
+
+  /* segmente repetate: fereastră + decor între ferestre */
+  let seg = 0;
+  for (let x0 = 20; x0 + 460 < W + 260; x0 += 540, seg++){
+    desenFereastra(p, x0 + 20, 44, 300, 210, seg === 0, rnd);
+    const dx = x0 + 372;
+    if (seg % 3 === 0) desenCeasSiCalendar(p, dx, 78);
+    else if (seg % 3 === 1) desenPosterSiNotite(p, dx, 74, rnd);
+    else desenRaftBibliorafturi(p, dx, 84);
+  }
+  fundal.perete = per;
+
+  /* ── podeaua (430..540) ── */
+  const pod = document.createElement('canvas');
+  pod.width = Math.ceil(W * q); pod.height = Math.ceil(110 * q);
+  const f = pod.getContext('2d'); f.scale(q, q); f.translate(0, -430);
+  g = f.createLinearGradient(0, 430, 0, 540);
+  g.addColorStop(0, '#131b2d'); g.addColorStop(1, '#0b101c');
+  f.fillStyle = g; f.fillRect(0, 430, W, 110);
+  f.fillStyle = 'rgba(255,255,255,.06)'; f.fillRect(0, 430, W, 2);
+  f.strokeStyle = 'rgba(255,255,255,.028)'; f.lineWidth = 1;
+  for (let x = -80; x < W + 80; x += 46){
+    f.beginPath(); f.moveTo(x, 430); f.lineTo(x + 60, 540); f.stroke();
+  }
+  fundal.podea = pod;
+}
+function desenFereastra(p, x, y, w, h, cuLuna, rnd){
+  p.fillStyle = '#243352'; rr(p, x - 8, y - 8, w + 16, h + 16, 10); p.fill();
+  const cer = p.createLinearGradient(0, y, 0, y + h);
+  cer.addColorStop(0, '#0a1226'); cer.addColorStop(1, '#1a2440');
+  p.fillStyle = cer; p.fillRect(x, y, w, h);
+  p.fillStyle = 'rgba(231,238,246,.7)';
+  for (let i = 0; i < 24; i++){
+    const sx = x + rnd() * w, sy = y + rnd() * h * .5;
+    p.globalAlpha = .25 + rnd() * .55; p.fillRect(sx, sy, 1.4, 1.4);
+  }
+  p.globalAlpha = 1;
+  if (cuLuna){
+    const lx = x + w * .74, ly = y + 40;
+    const gl = p.createRadialGradient(lx, ly, 4, lx, ly, 44);
+    gl.addColorStop(0, 'rgba(223,232,242,.5)'); gl.addColorStop(1, 'rgba(223,232,242,0)');
+    p.fillStyle = gl; p.beginPath(); p.arc(lx, ly, 44, 0, TAU); p.fill();
+    p.fillStyle = '#dfe8f2'; p.beginPath(); p.arc(lx, ly, 15, 0, TAU); p.fill();
+    p.fillStyle = 'rgba(150,165,185,.5)';
+    p.beginPath(); p.arc(lx - 5, ly - 3, 3, 0, TAU); p.fill();
+    p.beginPath(); p.arc(lx + 4, ly + 5, 2.2, 0, TAU); p.fill();
+  }
+  p.fillStyle = '#101a30';
+  let bx = x;
+  while (bx < x + w){
+    const bw = 26 + rnd() * 34, bh = 46 + rnd() * 70;
+    p.fillRect(bx, y + h - bh, Math.min(bw, x + w - bx), bh); bx += bw + 4;
+  }
+  p.fillStyle = '#16223a';
+  bx = x - 6; let celMaiInalt = null;
+  while (bx < x + w){
+    const bw = 34 + rnd() * 40, bh = 76 + rnd() * 96;
+    const rw = Math.min(bw, x + w - bx);
+    if (rw > 8){
+      p.fillRect(bx, y + h - bh, rw, bh);
+      if (!celMaiInalt || bh > celMaiInalt.bh) celMaiInalt = { bx, bw: rw, bh };
+      for (let i = 0; i < 6; i++){
+        const wx = bx + 4 + rnd() * (rw - 8), wy = y + h - bh + 6 + rnd() * (bh - 12);
+        const cul = rnd() < .6 ? '224,162,78' : '133,181,231';
+        if (rnd() < .3) fundal.luminite.push({ x: wx, y: wy, cul, vit: .3 + rnd() * .9, faza: rnd() * TAU });
+        else { p.fillStyle = `rgba(${cul},.8)`; p.fillRect(wx, wy, 2.2, 2.6); p.fillStyle = '#16223a'; }
+      }
+    }
+    bx += bw + 5;
+  }
+  if (celMaiInalt){
+    const ax = celMaiInalt.bx + celMaiInalt.bw / 2, ay = y + h - celMaiInalt.bh;
+    p.strokeStyle = '#1d2a45'; p.lineWidth = 2;
+    p.beginPath(); p.moveTo(ax, ay); p.lineTo(ax, ay - 18); p.stroke();
+    fundal.luminite.push({ x: ax, y: ay - 19, cul: '255,90,80', vit: 2.4, faza: 0 });
+  }
+  p.fillStyle = '#243352';
+  p.fillRect(x + w / 2 - 3, y, 6, h);
+  p.fillRect(x, y + h / 2 - 3, w, 6);
+  p.fillStyle = '#2b3c60'; rr(p, x - 14, y + h + 6, w + 28, 10, 4); p.fill();
+}
+function desenCeasSiCalendar(p, x, y){
+  fundal.ceas = { x: x + 34, y: y + 6, r: 26 };
+  p.fillStyle = '#202c46'; p.beginPath(); p.arc(x + 34, y + 6, 29, 0, TAU); p.fill();
+  p.fillStyle = '#dfe6f0'; p.beginPath(); p.arc(x + 34, y + 6, 25, 0, TAU); p.fill();
+  p.strokeStyle = '#31415f'; p.lineWidth = 1.4;
+  for (let i = 0; i < 12; i++){
+    const a = i / 12 * TAU;
+    p.beginPath();
+    p.moveTo(x + 34 + Math.cos(a) * 20, y + 6 + Math.sin(a) * 20);
+    p.lineTo(x + 34 + Math.cos(a) * 23, y + 6 + Math.sin(a) * 23);
+    p.stroke();
+  }
+  p.fillStyle = '#eef1f6'; rr(p, x + 4, y + 52, 60, 72, 4); p.fill();
+  p.fillStyle = '#c0392b'; rr(p, x + 4, y + 52, 60, 18, 4); p.fill();
+  p.fillStyle = '#eef1f6'; p.fillRect(x + 4, y + 62, 60, 8);
+  p.fillStyle = '#fff'; p.font = `700 9px ${FONT_MONO}`; p.textAlign = 'center'; p.textBaseline = 'middle';
+  p.fillText('CLOSING', x + 34, y + 61);
+  p.fillStyle = '#1a2233'; p.font = `800 30px ${FONT_MONO}`;
+  p.fillText('31', x + 34, y + 96);
+  p.fillStyle = '#93A1B5'; p.font = `700 7px ${FONT_MONO}`;
+  p.fillText('din nou', x + 34, y + 114);
+}
+function desenPosterSiNotite(p, x, y, rnd){
+  p.fillStyle = '#223049'; rr(p, x, y, 96, 74, 4); p.fill();
+  p.fillStyle = '#0e1524'; rr(p, x + 5, y + 5, 86, 64, 2); p.fill();
+  p.strokeStyle = '#3FB68B'; p.lineWidth = 2;
+  p.beginPath(); p.moveTo(x + 12, y + 56);
+  p.lineTo(x + 32, y + 44); p.lineTo(x + 48, y + 50); p.lineTo(x + 66, y + 26); p.lineTo(x + 84, y + 16);
+  p.stroke();
+  p.fillStyle = '#93A1B5'; p.font = `700 8px ${FONT_MONO}`; p.textAlign = 'left'; p.textBaseline = 'alphabetic';
+  p.fillText('TAXE', x + 12, y + 18);
+  const culori = ['#e8d06b', '#8fd3b6', '#e8a2a0', '#a9c6ec'];
+  for (let i = 0; i < 6; i++){
+    const nx = x + 14 + (i % 3) * 26, ny = y + 88 + Math.floor(i / 3) * 26;
+    p.save(); p.translate(nx, ny); p.rotate((rnd() - .5) * .3);
+    p.fillStyle = culori[i % culori.length]; p.fillRect(-10, -10, 20, 20);
+    p.fillStyle = 'rgba(0,0,0,.25)';
+    p.fillRect(-6, -4, 12, 1.4); p.fillRect(-6, 0, 12, 1.4); p.fillRect(-6, 4, 8, 1.4);
+    p.restore();
+  }
+}
+function desenRaftBibliorafturi(p, x, y){
+  p.fillStyle = '#1b2536'; rr(p, x - 6, y + 44, 116, 8, 2); p.fill();
+  const culori = ['#2E75B6', '#3FB68B', '#E0A24E', '#b0524c', '#4A9EE8', '#7d6bb0', '#3FB68B'];
+  for (let i = 0; i < 7; i++){
+    const bx = x + i * 15;
+    p.fillStyle = culori[i % culori.length];
+    rr(p, bx, y + 6, 12, 38, 2); p.fill();
+    p.fillStyle = 'rgba(0,0,0,.28)'; p.fillRect(bx, y + 12, 12, 5);
+    p.fillStyle = 'rgba(255,255,255,.75)'; p.font = `700 6px ${FONT_MONO}`;
+    p.textAlign = 'center'; p.textBaseline = 'middle';
+    p.fillText(`'${19 + i}`, bx + 6, y + 32);
+  }
+  /* o cană decorativă pe raft — de la ea urcă abur */
+  const cx = x + 96, cy = y + 34;
+  p.fillStyle = '#c0574f'; rr(p, cx, cy, 16, 16, 2); p.fill();
+  p.fillStyle = '#a8443d'; p.fillRect(cx, cy + 3, 16, 3);
+  p.strokeStyle = '#c0574f'; p.lineWidth = 2.4;
+  p.beginPath(); p.arc(cx + 19, cy + 8, 4.6, -1.1, 1.1); p.stroke();
+  fundal.cana = { x: cx + 8, y: cy };
+}
+function initMotes(){
+  motes = [];
+  for (let i = 0; i < 16; i++)
+    motes.push({ x: rand(0, LW), y: rand(30, LH - 60), vx: rand(-6, 6), vy: rand(-3, 3), r: rand(.7, 1.8), a: rand(.04, .1) });
+}
+
+/* ════════════════════════ 12. PARTICULE, TEXTE ════════════════════════ */
+const MAX_PARTICULE = () => redus() ? 130 : 340;
+function emite(n, gen){
+  const cap = MAX_PARTICULE();
+  for (let i = 0; i < n; i++){
+    if (particule.length >= cap) particule.shift();
+    particule.push(gen(i));
+  }
+}
+function pHartie(x, y, viteza = 1, marime = 1, cul){
+  return { tip: 'hartie', x, y, vx: rand(-130, 130) * viteza, vy: rand(-260, -40) * viteza, g: 620,
+           rot: rand(0, TAU), rotV: rand(-9, 9), w: rand(4, 9) * marime, h: rand(5, 11) * marime,
+           cul: cul || alege(['#e8ecf4', '#dfe4ee', '#f2d9d7']), t: 0, dur: rand(.5, 1), ecranSp: false };
+}
+function pScanteie(x, y, cul = '255,170,90'){
+  const a = rand(0, TAU), v = rand(120, 420);
+  return { tip: 'scanteie', x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 60, g: 300,
+           cul, t: 0, dur: rand(.2, .45), ecranSp: false };
+}
+function pPraf(x, y, marime = 1){
+  return { tip: 'praf', x, y, vx: rand(-40, 40), vy: rand(-58, -12), g: -40,
+           r: rand(3, 7) * marime, cul: '147,161,181', t: 0, dur: rand(.4, .8), ecranSp: false };
+}
+function pUnda(x, y, cul, r1 = 60){
+  return { tip: 'unda', x, y, r0: 6, r1, cul, t: 0, dur: .4, ecranSp: false };
+}
+function pConfeti(x, y){
+  return { tip: 'confeti', x, y, vx: rand(-70, 70), vy: rand(30, 130), g: 240,
+           rot: rand(0, TAU), rotV: rand(-7, 7), w: rand(4, 7), h: rand(6, 11),
+           cul: alege(['#4A9EE8', '#3FB68B', '#E0A24E', '#ff8b85', '#c9a2ff', '#e7eef6']),
+           faza: rand(0, TAU), t: 0, dur: rand(2.6, 3.8), ecranSp: true };
+}
+function actualizeazaParticule(dt){
+  for (let i = particule.length - 1; i >= 0; i--){
+    const p = particule[i];
+    p.t += dt;
+    if (p.t >= p.dur){ particule.splice(i, 1); continue; }
+    if (p.tip === 'unda') continue;
+    p.vy += (p.g || 0) * dt;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    if (p.rotV) p.rot += p.rotV * dt;
+    if (p.tip === 'confeti') p.x += Math.sin(p.faza + p.t * 6) * 36 * dt;
+  }
+}
+function deseneazaParticule(ecranSp){
+  for (const p of particule){
+    if (!!p.ecranSp !== ecranSp) continue;
+    const viata = 1 - p.t / p.dur;
+    if (p.tip === 'hartie' || p.tip === 'confeti'){
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.min(1, viata * 2);
+      ctx.fillStyle = p.cul; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    } else if (p.tip === 'praf'){
+      ctx.globalAlpha = viata * .3;
+      ctx.fillStyle = `rgb(${p.cul})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (1.6 - viata * .6), 0, TAU); ctx.fill();
+    } else if (p.tip === 'scanteie'){
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalAlpha = viata;
+      ctx.strokeStyle = `rgba(${p.cul},.9)`; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - p.vx * .022, p.y - p.vy * .022); ctx.stroke();
+      ctx.globalCompositeOperation = 'source-over';
+    } else if (p.tip === 'unda'){
+      const pr = p.t / p.dur;
+      ctx.globalAlpha = (1 - pr) * .6;
+      ctx.strokeStyle = `rgba(${p.cul},.9)`; ctx.lineWidth = 3 * (1 - pr);
+      ctx.beginPath(); ctx.arc(p.x, p.y, lerp(p.r0, p.r1, easeOutCubic(pr)), 0, TAU); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+/* texte plutitoare: mici (în lume) și banner-e mari (pe ecran) */
+function textPlutitor(txt, cul, x, y){
+  texte.push({ txt, cul, x, y, t: 0, dur: 1, mare: false });
+}
+function banner(txt, cul){
+  texte.push({ txt, cul, x: 0, y: 0, t: 0, dur: 1.6, mare: true });
+}
+function actualizeazaTexte(dt){
+  for (let i = texte.length - 1; i >= 0; i--){
+    texte[i].t += dt;
+    if (texte[i].t >= texte[i].dur) texte.splice(i, 1);
+  }
+}
+function deseneazaTexte(mare){
+  for (const t of texte){
+    if (t.mare !== mare) continue;
+    const pr = t.t / t.dur;
+    const alfa = pr < .6 ? 1 : 1 - (pr - .6) / .4;
+    ctx.globalAlpha = alfa;
+    if (t.mare){
+      const s = easeOutBack(Math.min(1, t.t / .3));
+      ctx.save();
+      ctx.translate(LW / 2, LH * .28);
+      ctx.scale(s, s);
+      ctx.font = `800 26px ${FONT_TITLU}`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineWidth = 5; ctx.strokeStyle = 'rgba(8,11,18,.85)';
+      ctx.strokeText(t.txt, 0, 0);
+      ctx.fillStyle = t.cul; ctx.fillText(t.txt, 0, 0);
+      ctx.restore();
+    } else {
+      const y = t.y - easeOutCubic(pr) * 46;
+      ctx.font = `800 16px ${FONT_MONO}`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(8,11,18,.8)';
+      ctx.strokeText(t.txt, t.x, y);
+      ctx.fillStyle = t.cul; ctx.fillText(t.txt, t.x, y);
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+function confetiRecord(nr){
+  for (let i = 0; i < nr; i++){
+    if (particule.length >= 500) break;
+    particule.push(pConfeti(rand(0, LW), rand(-220, -10)));
+  }
+}
+
+/* ════════════════════════ 13. ELEMENTE (moles) & SPAWN ════════════════════════ */
+const REZERVAT = { rezervat: true };        // sentinelă pentru celula țintă a unei prorogări
+
+function dPace(){ return clamp((BAL.durata - ramas) / BAL.durata, 0, 1); }
+function stayCurent(){ return lerp(BAL.stayStart, BAL.stayMin, dPace()) * rand(.85, 1.15); }
+function maxActivi(){ return Math.round(lerp(BAL.activiStart, BAL.activiEnd, dPace())); }
+function intervalSpawn(){ return lerp(BAL.spawnStart, BAL.spawnMin, dPace()) * rand(.82, 1.2); }
+
+let ultimLabel = '';
+function alegeCfg(tip){
+  const sursa = tip === 'termen' ? TERMENE : CAPCANE;
+  let cfg;
+  do { cfg = alege(sursa); } while (cfg.label === ultimLabel && sursa.length > 1);
+  ultimLabel = cfg.label;
+  return cfg;
+}
+function celuleLibere(){ return celule.filter(c => c.item === null); }
+function numarActive(){ return celule.reduce((n, c) => n + (c.item ? 1 : 0), 0); }
+
+function creeazaItem(cel, tip, cfg, prorogat){
+  return {
+    tip, cfg, prorogat: !!prorogat,
+    faza: 'urcare', t: 0, rise: 0, stay: stayCurent(),
+    scala: 1, scalaV: 0, lovit: false
+  };
+}
+function nasteElement(demo){
+  const libere = celuleLibere();
+  if (!libere.length) return;
+  const cel = alege(libere);
+  const tip = (!demo && Math.random() < BAL.procCapcana) ? 'capcana'
+            : (demo && Math.random() < 0.14) ? 'capcana' : 'termen';
+  cel.item = creeazaItem(cel, tip, alegeCfg(tip), false);
+  faItemCard(cel.item.cfg, tip);            // pre-randăm cardul
+  emite(3, () => pPraf(cel.cx, cel.y + cel.h * gridInfo.lipFrac, .7));
+}
+function actualizeazaSpawn(dt, demo){
+  cronSpawn -= dt;
+  if (cronSpawn <= 0){
+    if (numarActive() < maxActivi()) nasteElement(demo);
+    cronSpawn = demo ? rand(.5, .9) : intervalSpawn();
+  }
+}
+
+/* rezolvarea unui element care se retrage nelovit */
+function rezolvaRetras(cel, demo){
+  const it = cel.item;
+  cel.item = null;
+  if (it.tip !== 'termen') return;          // capcanele evitate: fără penalizare
+  /* prorogare: reapare într-un alt sertar în loc să conteze ca ratat */
+  if (!it.prorogat && !demo && Math.random() < BAL.probProrogare){
+    const libere = celuleLibere();
+    const tinte = libere.filter(c => c !== cel);
+    if (tinte.length){
+      const dest = alege(tinte);
+      dest.item = REZERVAT;
+      obiecteZbor.push({ cfg: it.cfg, from: { x: cel.cx, y: cel.y + cel.h * .2 }, dest, t: 0, dur: .55 });
+      banner(alege(MESAJE_RATAT), '#E0A24E');
+      Sunet.prorogare();
+      return;
+    }
+  }
+  /* ratat de tot */
+  scor = Math.max(0, scor + BAL.pRatat);
+  statRatate++; serie = 0;
+  if (!demo){
+    textPlutitor('−5', '#93A1B5', cel.cx, cel.y + cel.h * .3);
+    Sunet.ratat(); actualizeazaPuncteHUD();
+    tremur = Math.min(tremur + 1.5, 5);
+  }
+}
+function actualizeazaElemente(dt, demo){
+  for (const cel of celule){
+    const it = cel.item;
+    if (!it || it.rezervat) continue;
+    /* arc elastic squash & stretch */
+    it.scalaV += (1 - it.scala) * 180 * dt; it.scalaV *= Math.exp(-11 * dt); it.scala += it.scalaV * dt;
+
+    if (it.faza === 'urcare'){
+      it.rise = Math.min(1, it.rise + dt / BAL.urcareDur);
+      if (it.rise >= 1){ it.rise = 1; it.faza = 'stat'; it.t = 0; it.scala = 1.12; }
+    } else if (it.faza === 'stat'){
+      it.t += dt;
+      if (it.t >= it.stay){ it.faza = 'retragere'; it.t = 0; }
+    } else if (it.faza === 'retragere'){
+      it.rise -= dt / BAL.retragereDur;
+      if (it.rise <= 0){ rezolvaRetras(cel, demo); }
+    } else if (it.faza === 'lovit'){
+      it.t += dt;
+      if (it.t >= 0.16) cel.item = null;
+    }
+  }
+}
+
+/* ════════════════════════ 14. LOVIREA (ștampila) ════════════════════════ */
+function celulaLa(x, y){
+  const over = gridInfo.over;
+  for (const cel of celule){
+    const gx = cel.x - 4, gw = cel.w + 8;
+    const gyTop = cel.y - over - 8, gh = (cel.y + cel.h) - gyTop + 6;
+    if (x >= gx && x <= gx + gw && y >= gyTop && y <= gyTop + gh) return cel;
+  }
+  return null;
+}
+function esteLovibil(it){ return it && !it.rezervat && it.faza !== 'lovit' && it.rise > 0.32; }
+
+function lovireLaPunct(p){
+  const cel = celulaLa(p.x, p.y);
+  if (!cel){ return; }
+  const it = cel.item;
+  if (esteLovibil(it)){
+    if (it.tip === 'termen') lovesteTermen(cel);
+    else                     lovesteCapcana(cel);
+  } else {
+    /* lovitură în gol — doar praf, fără penalizare */
+    adaugaStampila(cel.cx, cel.cy - gridInfo.over * .4, 'gol');
+    emite(4, () => pPraf(cel.cx, cel.cy, .7));
+    Sunet.stampila(); vibreaza(8);
+  }
+}
+function lovesteTermen(cel){
+  const it = cel.item;
+  it.faza = 'lovit'; it.t = 0; it.scala = 0.7;
+  scor += BAL.pPunct; statLovite++; serie++;
+  const yv = cel.y + cel.h * .2;
+  adaugaStampila(cel.cx, yv, 'ok');
+  emite(12, () => pScanteie(cel.cx, yv, '63,182,139'));
+  emite(6, () => pHartie(cel.cx, yv, .8, .8, '#dfe4ee'));
+  particule.push(pUnda(cel.cx, yv, '63,182,139', 64));
+  textPlutitor('+10', '#3FB68B', cel.cx, yv);
+  if (serie > 0 && serie % 5 === 0) banner(`Serie de ${serie}!`, '#4A9EE8');
+  else if (Math.random() < .3) textPlutitor(alege(REPLICI_TERMEN), '#3FB68B', cel.cx, yv - 22);
+  hitStop = redus() ? .02 : .05;
+  tremur = Math.min(tremur + 2.4, 8);
+  blitzVerde = .12;
+  Sunet.stampila(); Sunet.punct(); vibreaza(18);
+  actualizeazaPuncteHUD();
+}
+function lovesteCapcana(cel){
+  const it = cel.item;
+  it.faza = 'lovit'; it.t = 0; it.scala = 0.7;
+  scor = Math.max(0, scor + BAL.pCapcana); statCapcane++; serie = 0;
+  const yv = cel.y + cel.h * .2;
+  adaugaStampila(cel.cx, yv, 'rau');
+  emite(14, () => pScanteie(cel.cx, yv, '255,90,80'));
+  particule.push(pUnda(cel.cx, yv, '255,90,80', 70));
+  textPlutitor('−15', '#ff8b85', cel.cx, yv);
+  textPlutitor(alege(REPLICI_CAPCANA), '#ff8b85', cel.cx, yv - 24);
+  hitStop = redus() ? .03 : .09;
+  tremur = Math.min(tremur + 12, 18);
+  blitzRosu = .3;
+  Sunet.stampila(); Sunet.capcana(); vibreaza([50, 40, 60]);
+  actualizeazaPuncteHUD();
+}
+function adaugaStampila(x, y, tip){
+  stampile.push({ x, y, t: 0, dur: .38, tip, impact: false });
+  if (stampile.length > 6) stampile.shift();
+}
+
+/* ════════════════════════ 15. LOGICA DE JOC ════════════════════════ */
+function arata(ov){ ov.classList.add('activ'); }
+function ascunde(ov){ ov.classList.remove('activ'); }
+
+function reset(){
+  ramas = BAL.durata; scor = 0; serie = 0;
+  statLovite = 0; statRatate = 0; statCapcane = 0;
+  for (const c of celule) c.item = null;
+  obiecteZbor = []; stampile = []; particule = []; texte = [];
+  cronSpawn = .6; cronTicFinal = 0; anunt10 = false;
+  tremur = 0; hitStop = 0; blitzRosu = 0; blitzVerde = 0; termT = 0;
+  hudPuncte.textContent = '0';
+  hudRecord.textContent = record;
+  hudRec.classList.remove('nou');
+  setTimpHUD();
+}
+function porneste(){
+  ascunde(ovIntro); ascunde(ovSfarsit); ascunde(ovPauza);
+  reset();
+  stare = 'joc';
+  btnPauza.textContent = '⏸';
+  banner('Începe sesiunea!', '#3FB68B');
+  Sunet.start();
+}
+function comutaPauza(){
+  if (stare === 'joc' || stare === 'numaratoare'){
+    stare = 'pauza'; arata(ovPauza); btnPauza.textContent = '▶'; Sunet.click();
+  } else if (stare === 'pauza' && !ovRotire.classList.contains('activ')){
+    ascunde(ovPauza); reiaCuNumaratoare(); Sunet.click();
+  }
+}
+function reiaCuNumaratoare(){
+  stare = 'numaratoare'; numCifra = 3; numT = 0; btnPauza.textContent = '⏸';
+  Sunet.tic();
+}
+function actualizeazaNumaratoare(dt){
+  numT += dt;
+  if (numT >= .5){
+    numCifra--; numT = 0;
+    if (numCifra <= 0){ stare = 'joc'; }
+    else Sunet.tic();
+  }
+}
+/* secvența de final: banner „timp expirat”, scurt slow-mo, apoi overlay */
+function incepeTerminare(){
+  stare = 'terminare'; termT = 0;
+  banner('TIMP EXPIRAT!', '#E0A24E');
+  Sunet.timpExpirat(); vibreaza([60, 40, 120]);
+  tremur = 10;
+}
+function actualizeazaTerminare(dt){
+  termT += dt;
+  const dtLume = dt * (termT < .5 ? .35 : 1);
+  actualizeazaElemente(dtLume, true);
+  actualizeazaZbor(dtLume);
+  actualizeazaStampile(dt);
+  actualizeazaParticule(dt);
+  actualizeazaTexte(dt);
+  if (termT >= 1.1 && stare === 'terminare') arataSfarsit();
+}
+function arataSfarsit(){
+  stare = 'sfarsit';
+  finalScor = scor;
+  vechiRecord = record;
+  esteRecordNou = finalScor > record;
+  if (esteRecordNou){
+    record = finalScor;
+    Depozit.pune(K.record, record);
+    confetiRecord(redus() ? 50 : 130);
+    setTimeout(() => Sunet.recordNou(), 350);
+    vibreaza([60, 40, 60, 40, 140]);
+  } else {
+    setTimeout(() => Sunet.gameOver(), 200);
+  }
+  hudRecord.textContent = record;
+
+  const rang = rangPentru(finalScor);
+  finEyebrow.textContent = `TIMP EXPIRAT · ${BAL.durata}s`;
+  $('titluFin').textContent = rang.nume;
+  finMesaj.textContent = rang.desc;
+  finStat.textContent = `Termene lovite: ${statLovite} · Ratate: ${statRatate} · Capcane: ${statCapcane}`;
+  finScor.textContent = finalScor;
+  finScorEticheta.textContent = finalScor === 1 ? 'punct' : 'puncte';
+  finRecordNou.classList.toggle('ascuns', !esteRecordNou);
+  finRecord.textContent = esteRecordNou
+    ? (vechiRecord > 0 ? `Vechiul record: ${puncteText(vechiRecord)}` : 'Primul tău record. Se afișează la avizier.')
+    : `Record personal: ${puncteText(record)}`;
+
+  const seCalifica = finalScor > 0 && calificaTop5(finalScor);
+  finInitiale.classList.toggle('ascuns', !seCalifica);
+  if (seCalifica) inInitiale.value = (Depozit.ia(K.initiale, '') || '').slice(0, 3);
+  randeazaTop5(null);
+  arata(ovSfarsit);
+  try { (seCalifica ? inInitiale : btnIncaOData).focus({ preventScroll: true }); } catch (e) {}
+}
+/* top 5 local */
+function top5(){ const t = Depozit.ia(K.top5, []); return Array.isArray(t) ? t : []; }
+function calificaTop5(s){
+  const t = top5();
+  return t.length < 5 || s > t[t.length - 1].s;
+}
+function salveazaInTop5(){
+  let nume = (inInitiale.value || '').toUpperCase().replace(/[^A-Z0-9ĂÎÂȘȚ]/g, '').slice(0, 3);
+  if (!nume) nume = 'EU';
+  Depozit.pune(K.initiale, nume);
+  const t = top5();
+  const intrare = { n: nume, s: finalScor };
+  t.push(intrare);
+  t.sort((a, b) => b.s - a.s);
+  const taiat = t.slice(0, 5);
+  Depozit.pune(K.top5, taiat);
+  finInitiale.classList.add('ascuns');
+  randeazaTop5(taiat.indexOf(intrare));
+  Sunet.etapa();
+  try { btnIncaOData.focus({ preventScroll: true }); } catch (e) {}
+}
+function randeazaTop5(pozitiaNoua){
+  const t = top5();
+  if (!t.length){ finTop5.innerHTML = ''; return; }
+  const randuri = t.map((r, i) =>
+    `<li${i === pozitiaNoua ? ' class="evidentiat"' : ''}><b>${i + 1}. ${escapeHTML(r.n)}</b><span>${puncteText(r.s)}</span></li>`
+  ).join('');
+  finTop5.innerHTML = `<h3>TOP 5 · BIROUL TĂU</h3><ol>${randuri}</ol>`;
+}
+function escapeHTML(s){ return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c])); }
+
+/* provocarea colegilor: Web Share pe mobil, clipboard pe desktop */
+async function provoacaColeg(){
+  const text = `Am făcut ${puncteText(finalScor)} la Whack-a-Deadline pe Arcade-ul Contabilului — bate-mă: aiaccountinghub.ro`;
+  if (navigator.share){
+    try { await navigator.share({ text }); return; }
+    catch (e) { if (e && e.name === 'AbortError') return; }
+  }
+  let ok = false;
+  try { await navigator.clipboard.writeText(text); ok = true; }
+  catch (e) {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      ok = document.execCommand('copy');
+      ta.remove();
+    } catch (e2) {}
+  }
+  const vechi = btnProvoaca.textContent;
+  btnProvoaca.textContent = ok ? '✔ Copiat! Dă-l mai departe.' : 'Nu s-a putut copia 😅';
+  setTimeout(() => { btnProvoaca.textContent = vechi; }, 1800);
+}
+/* overlay-ul „rotește telefonul” */
+function verificaRotire(){
+  const portret = matchMedia('(orientation: portrait)').matches &&
+                  tactil && Math.min(innerWidth, innerHeight) < 920;
+  ovRotire.classList.toggle('activ', portret);
+  if (portret && (stare === 'joc' || stare === 'numaratoare')){
+    stare = 'pauza'; pauzatDeRotire = true;
+  } else if (!portret && pauzatDeRotire){
+    pauzatDeRotire = false;
+    if (stare === 'pauza'){ ascunde(ovPauza); reiaCuNumaratoare(); }
+  }
+}
+
+/* documentele prorogate în zbor */
+function actualizeazaZbor(dt){
+  for (let i = obiecteZbor.length - 1; i >= 0; i--){
+    const z = obiecteZbor[i];
+    z.t += dt;
+    if (z.t >= z.dur){
+      /* sosire: elementul reapare în sertarul destinație */
+      if (z.dest.item === REZERVAT || z.dest.item === null){
+        z.dest.item = creeazaItem(z.dest, 'termen', z.cfg, true);
+        emite(4, () => pPraf(z.dest.cx, z.dest.y + z.dest.h * gridInfo.lipFrac, .7));
+      }
+      obiecteZbor.splice(i, 1);
+    }
+  }
+}
+function actualizeazaStampile(dt){
+  for (let i = stampile.length - 1; i >= 0; i--){
+    const s = stampile[i];
+    s.t += dt;
+    const p = s.t / s.dur;
+    if (!s.impact && p >= 0.28){
+      s.impact = true;
+      if (s.tip === 'gol') emite(3, () => pPraf(s.x, s.y + 6, .6));
+    }
+    if (s.t >= s.dur) stampile.splice(i, 1);
+  }
+}
+/* jaloane de ritm + HUD */
+function verificaJaloane(dt){
+  if (!anunt10 && ramas <= BAL.tensiune){
+    anunt10 = true;
+    banner('Ultimele 10 secunde!', '#E0A24E');
+    Sunet.etapa();
+  }
+  /* bipuri de tensiune în ultimele secunde */
+  if (ramas <= 5){
+    cronTicFinal -= dt;
+    if (cronTicFinal <= 0){ Sunet.ticFinal(); cronTicFinal = 1; if (!redus()) tremur = Math.max(tremur, 1.4); }
+  }
+}
+function setTimpHUD(){
+  const frac = clamp(ramas / BAL.durata, 0, 1);
+  hudBaraFill.style.width = (frac * 100) + '%';
+  hudPct.textContent = Math.ceil(ramas) + 's';
+  hudBara.classList.toggle('avert', ramas <= 15 && ramas > BAL.tensiune);
+  hudBara.classList.toggle('pericol', ramas <= BAL.tensiune);
+}
+function actualizeazaPuncteHUD(){
+  hudPuncte.textContent = scor;
+  hudPuncte.classList.remove('valPop'); void hudPuncte.offsetWidth; hudPuncte.classList.add('valPop');
+  if (scor > record){
+    if (!hudRec.classList.contains('nou')){
+      hudRec.classList.add('nou');
+      Sunet.etapa();
+      textPlutitor('Record depășit!', '#4A9EE8', LW / 2, LH * .5);
+    }
+    hudRecord.textContent = scor;
+  }
+}
+/* „AI-ul” din intro: lovește termenele afară, evită capcanele */
+function actualizeazaAIDemo(dt){
+  demoCron -= dt;
+  if (demoCron > 0) return;
+  demoCron = rand(.32, .62);
+  const tinte = celule.filter(c => esteLovibil(c.item) && c.item.tip === 'termen');
+  if (!tinte.length) return;
+  if (Math.random() < .12) return;               // ratează din când în când, ca un om
+  const cel = alege(tinte);
+  const it = cel.item;
+  it.faza = 'lovit'; it.t = 0; it.scala = 0.7;
+  const yv = cel.y + cel.h * .2;
+  adaugaStampila(cel.cx, yv, 'ok');
+  emite(10, () => pScanteie(cel.cx, yv, '63,182,139'));
+  particule.push(pUnda(cel.cx, yv, '63,182,139', 60));
+  textPlutitor('+10', '#3FB68B', cel.cx, yv);
+}
+function actualizeazaAmbient(dt){
+  for (const mt of motes){
+    mt.x += mt.vx * dt; mt.y += mt.vy * dt;
+    if (mt.x < -10) mt.x = LW + 10; if (mt.x > LW + 10) mt.x = -10;
+    if (mt.y < 20) mt.y = LH - 40; if (mt.y > LH - 20) mt.y = 30;
+  }
+  if (fundal.cana){
+    fundal.cana.cron = (fundal.cana.cron || rand(0, 1.4)) - dt;
+    if (fundal.cana.cron <= 0){
+      fundal.cana.cron = rand(1.1, 1.9);
+      if (aburi.length < 12) aburi.push({ x: fundal.cana.x, y: fundal.cana.y, t: 0, dur: rand(1.4, 2), faza: rand(0, TAU) });
+    }
+  }
+  for (let i = aburi.length - 1; i >= 0; i--){
+    aburi[i].t += dt;
+    if (aburi[i].t >= aburi[i].dur) aburi.splice(i, 1);
+  }
+}
+function actualizeazaLume(dt, demo){
+  if (demo) actualizeazaAIDemo(dt);
+  actualizeazaSpawn(dt, demo);
+  actualizeazaElemente(dt, demo);
+  actualizeazaZbor(dt);
+  actualizeazaStampile(dt);
+  actualizeazaParticule(dt);
+  actualizeazaTexte(dt);
+}
+
+/* ════════════════════════ 16. HUD & BUTOANE ════════════════════════ */
+function comutaSunet(){
+  Sunet.mut = !Sunet.mut;
+  btnSunet.textContent = Sunet.mut ? '🔇' : '🔊';
+  btnSunet.setAttribute('aria-pressed', String(Sunet.mut));
+  if (!Sunet.mut){ Sunet.activeaza(); Sunet.click(); }
+}
+function pregatesteIntro(){
+  if (record > 0){
+    introRecord.textContent = `Recordul tău: ${puncteText(record)}`;
+    introRecord.classList.remove('ascuns');
+  }
+  hudRecord.textContent = record;
+  if (matchMedia('(pointer: coarse)').matches) ctrlTactil.classList.add('principal');
+  else ctrlTaste.classList.add('principal');
+  btnSunet.textContent = Sunet.mut ? '🔇' : '🔊';
+  btnSunet.setAttribute('aria-pressed', String(Sunet.mut));
+}
+function leagaButoane(){
+  btnJoaca.addEventListener('click', () => { Sunet.activeaza(); Sunet.click(); porneste(); });
+  btnIncaOData.addEventListener('click', () => { Sunet.click(); porneste(); });
+  btnContinua.addEventListener('click', () => { if (stare === 'pauza'){ ascunde(ovPauza); reiaCuNumaratoare(); Sunet.click(); } });
+  btnRestartPauza.addEventListener('click', () => { Sunet.click(); porneste(); });
+  btnPauza.addEventListener('click', () => comutaPauza());
+  btnSunet.addEventListener('click', () => comutaSunet());
+  btnProvoaca.addEventListener('click', provoacaColeg);
+  btnSalveazaTop.addEventListener('click', salveazaInTop5);
+  inInitiale.addEventListener('keydown', ev => { if (ev.key === 'Enter'){ salveazaInTop5(); ev.preventDefault(); } });
+  /* re-randăm cardurile după ce se încarcă fonturile (etichete crocante) */
+  if (document.fonts && document.fonts.ready)
+    document.fonts.ready.then(() => { cacheCarduri.clear(); construiesteFundal(); }).catch(() => {});
+}
+
+/* ════════════════════════ 17. RANDAREA SCENEI ════════════════════════ */
+function deseneazaFundalScena(){
+  const oxP = -fundal.marja - camX * .35;
+  const oxF = -fundal.marja - camX;
+  if (fundal.perete) ctx.drawImage(fundal.perete, oxP, 0, fundal.W, 470);
+  /* ferestrele orașului clipesc */
+  for (const L of fundal.luminite){
+    const a = .25 + .75 * Math.max(0, Math.sin(timpGlobal * L.vit + L.faza));
+    ctx.fillStyle = `rgba(${L.cul},${a.toFixed(2)})`;
+    ctx.fillRect(L.x + oxP, L.y, 2.2, 2.6);
+  }
+  /* ceasul de perete cu limbile live */
+  if (fundal.ceas){
+    const c = fundal.ceas, cx = c.x + oxP, cy = c.y;
+    ctx.strokeStyle = '#1a2233'; ctx.lineCap = 'round';
+    let a = timpGlobal / 720 * TAU - Math.PI / 2 + 4.9;
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * c.r * .5, cy + Math.sin(a) * c.r * .5); ctx.stroke();
+    a = timpGlobal / 60 * TAU - Math.PI / 2;
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * c.r * .72, cy + Math.sin(a) * c.r * .72); ctx.stroke();
+    a = timpGlobal / 6 * TAU - Math.PI / 2;
+    ctx.strokeStyle = '#c0392b'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * c.r * .8, cy + Math.sin(a) * c.r * .8); ctx.stroke();
+  }
+  /* aburul cănii de pe raft */
+  for (const a of aburi){
+    const pr = a.t / a.dur;
+    ctx.globalAlpha = (1 - pr) * .32;
+    ctx.strokeStyle = '#cfe0f0'; ctx.lineWidth = 1.4; ctx.lineCap = 'round';
+    const y = a.y - pr * 24;
+    ctx.beginPath();
+    ctx.moveTo(a.x + oxP + Math.sin(a.faza + pr * 5) * 3, y);
+    ctx.quadraticCurveTo(a.x + oxP + Math.sin(a.faza + pr * 5 + 1) * 4, y - 5, a.x + oxP + Math.sin(a.faza + pr * 5 + 2) * 3, y - 9);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+  if (fundal.podea) ctx.drawImage(fundal.podea, oxF, 430, fundal.W, 110);
+  /* firele de praf */
+  ctx.fillStyle = '#cfe0f0';
+  for (const mt of motes){ ctx.globalAlpha = mt.a; ctx.beginPath(); ctx.arc(mt.x - camX * .7, mt.y, mt.r, 0, TAU); ctx.fill(); }
+  ctx.globalAlpha = 1;
+}
+
+/* materialul cabinetului (lemn/metal) */
+const CAB = { fata: '#2a3852', fataSus: '#33445f', gaura: '#0a0f19', gauraJos: '#111a2b', umbra: 'rgba(0,0,0,.5)' };
+
+function deseneazaCabinetSpate(){
+  const g = gridInfo;
+  /* placa de fundal a cabinetului */
+  const px = g.x0 - 16, py = g.y0 - g.over - 12;
+  const pw = (g.cw + g.gapX) * g.cols - g.gapX + 32;
+  const ph = (g.ch + g.gapY) * g.rows - g.gapY + g.over + 26;
+  const grad = ctx.createLinearGradient(0, py, 0, py + ph);
+  grad.addColorStop(0, '#202c42'); grad.addColorStop(1, '#18202f');
+  ctx.fillStyle = grad; rr(ctx, px, py, pw, ph, 16); ctx.fill();
+  ctx.strokeStyle = 'rgba(0,0,0,.4)'; ctx.lineWidth = 2; rr(ctx, px, py, pw, ph, 16); ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.lineWidth = 1; rr(ctx, px + 2, py + 2, pw - 4, ph - 4, 14); ctx.stroke();
+  /* plăcuță „TERMENE” sus */
+  ctx.fillStyle = 'rgba(74,158,232,.14)'; rr(ctx, px + pw / 2 - 52, py - 2, 104, 14, 6); ctx.fill();
+  ctx.fillStyle = '#8fb6dd'; ctx.font = `800 9px ${FONT_MONO}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('SERTARELE CU TERMENE', px + pw / 2, py + 5.5);
+
+  /* gaura fiecărui sertar (recesul întunecat) */
+  for (const cel of celule){
+    const g2 = ctx.createLinearGradient(0, cel.y, 0, cel.y + cel.h);
+    g2.addColorStop(0, CAB.gaura); g2.addColorStop(1, CAB.gauraJos);
+    ctx.fillStyle = g2; rr(ctx, cel.x, cel.y, cel.w, cel.h, 10); ctx.fill();
+    /* umbră interioară sus */
+    ctx.save(); rr(ctx, cel.x, cel.y, cel.w, cel.h, 10); ctx.clip();
+    const su = ctx.createLinearGradient(0, cel.y, 0, cel.y + cel.h * .5);
+    su.addColorStop(0, 'rgba(0,0,0,.55)'); su.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = su; ctx.fillRect(cel.x, cel.y, cel.w, cel.h * .5);
+    ctx.restore();
+    ctx.strokeStyle = 'rgba(0,0,0,.5)'; ctx.lineWidth = 1.5; rr(ctx, cel.x, cel.y, cel.w, cel.h, 10); ctx.stroke();
+  }
+}
+function deseneazaCabinetFata(){
+  /* buza frontală a fiecărui sertar — ocluzează baza documentelor */
+  for (const cel of celule){
+    const lipY = cel.y + cel.h * gridInfo.lipFrac;
+    const h = (cel.y + cel.h) - lipY;
+    const grad = ctx.createLinearGradient(0, lipY, 0, lipY + h);
+    grad.addColorStop(0, CAB.fataSus); grad.addColorStop(1, CAB.fata);
+    ctx.fillStyle = grad;
+    rr(ctx, cel.x - 1, lipY, cel.w + 2, h + 3, 8); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,.10)'; ctx.fillRect(cel.x + 4, lipY + 1.5, cel.w - 8, 1.6);   // muchia superioară
+    ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.fillRect(cel.x + 4, lipY + h - 2, cel.w - 8, 2);
+    /* mânerul sertarului */
+    ctx.fillStyle = '#5a6b86'; rr(ctx, cel.cx - 12, lipY + h * .42, 24, Math.max(4, h * .22), 3); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,.12)'; rr(ctx, cel.cx - 12, lipY + h * .42, 24, 1.6, 1); ctx.fill();
+  }
+}
+function deseneazaElemente(){
+  const g = gridInfo;
+  for (const cel of celule){
+    const it = cel.item;
+    if (!it || it.rezervat) continue;
+    const card = faItemCard(it.cfg, it.tip);
+    const lipY = cel.y + cel.h * g.lipFrac;
+    const upTop = cel.y - g.over;                      // sus, când e complet ridicat
+    const downTop = cel.y + cel.h;                     // ascuns sub buză
+    const ease = it.faza === 'urcare' ? easeOutBack(it.rise) : it.rise;
+    const topY = lerp(downTop, upTop, clamp(ease, 0, 1.1));
+    ctx.save();
+    /* clip la deschiderea sertarului + zona de deasupra (ca să nu depășească) */
+    ctx.beginPath();
+    ctx.rect(cel.x - 6, cel.y - g.over - 10, cel.w + 12, (lipY - (cel.y - g.over)) + 12);
+    ctx.clip();
+    ctx.translate(cel.cx, topY + card.Vh / 2);
+    const sq = it.faza === 'lovit' ? clamp(1 - it.t / 0.16, 0, 1) : 1;   // strivire la lovire
+    ctx.scale(1 / it.scala * (it.faza === 'lovit' ? (0.6 + sq * 0.4) : 1), it.scala * (it.faza === 'lovit' ? sq : 1));
+    if (it.faza === 'lovit') ctx.globalAlpha = sq;
+    const dw = card.w, dh = card.h;
+    ctx.drawImage(card.img, -dw / 2, -card.Vh / 2, dw, dh);
+    ctx.restore();
+  }
+}
+function deseneazaZbor(){
+  for (const z of obiecteZbor){
+    const card = faItemCard(z.cfg, 'termen');
+    const p = z.t / z.dur;
+    const x = lerp(z.from.x, z.dest.cx, p);
+    const y = lerp(z.from.y, z.dest.y + z.dest.h * .3, p) - Math.sin(p * Math.PI) * 130;
+    ctx.save();
+    ctx.translate(x, y); ctx.rotate(p * TAU * 1.2);
+    const s = .7;
+    ctx.globalAlpha = .95;
+    ctx.drawImage(card.img, -card.w * s / 2, -card.Vh * s / 2, card.w * s, card.h * s);
+    ctx.restore();
+    ctx.globalAlpha = 1;
+    /* mică dâră */
+    if (!redus() && Math.random() < .6) emite(1, () => pHartie(x, y, .5, .6, '#e8ecf4'));
+  }
+}
+function deseneazaStampile(){
+  for (const s of stampile){
+    const p = s.t / s.dur;
+    /* slam: coboară până la impact, apoi se ridică */
+    let off;
+    if (p < 0.28) off = lerp(-78, 0, easeOutCubic(p / 0.28));
+    else          off = lerp(0, -96, easeInCubic((p - 0.28) / 0.72));
+    const alfa = p < 0.28 ? 1 : clamp(1 - (p - 0.28) / 0.72, 0, 1);
+    const y = s.y + off;
+    const pad = s.tip === 'ok' ? '#3FB68B' : s.tip === 'rau' ? '#ff5a50' : '#7d8aa0';
+    ctx.save();
+    ctx.translate(s.x, y);
+    ctx.globalAlpha = alfa;
+    /* antebrațul/mânerul (personalitate: mâna contabilului) */
+    ctx.strokeStyle = '#2E75B6'; ctx.lineWidth = 13; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(6, -66); ctx.lineTo(0, -18); ctx.stroke();
+    ctx.strokeStyle = '#f2c9a2'; ctx.lineWidth = 11;
+    ctx.beginPath(); ctx.moveTo(1, -22); ctx.lineTo(0, -8); ctx.stroke();
+    /* corpul ștampilei (mâner lemn + cap) */
+    ctx.fillStyle = '#6b4a2f'; rr(ctx, -7, -28, 14, 16, 4); ctx.fill();
+    ctx.fillStyle = '#8a6440'; rr(ctx, -7, -28, 14, 5, 3); ctx.fill();
+    ctx.fillStyle = '#1b2536'; rr(ctx, -13, -13, 26, 9, 3); ctx.fill();     // gât metalic
+    ctx.fillStyle = pad; rr(ctx, -15, -5, 30, 8, 3); ctx.fill();            // tușiera
+    ctx.fillStyle = 'rgba(255,255,255,.25)'; rr(ctx, -15, -5, 30, 2, 2); ctx.fill();
+    ctx.restore();
+    /* inelul de impact */
+    if (s.impact && p < 0.5){
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalAlpha = (0.5 - p) * 1.4;
+      ctx.drawImage(s.tip === 'rau' ? GLOW.rosu : s.tip === 'ok' ? GLOW.verde : GLOW.brand,
+                    s.x - 40, s.y - 40, 80, 80);
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    }
+  }
+}
+function deseneazaCronometru(){
+  const cx = LW / 2, cy = 58, R = 30;
+  const frac = clamp(ramas / BAL.durata, 0, 1);
+  const col = ramas > 15 ? '63,182,139' : ramas > BAL.tensiune ? '224,162,78' : '255,90,80';
+  const puls = ramas <= BAL.tensiune && !redus() ? 1 + 0.05 * Math.sin(timpGlobal * 9) : 1;
+  ctx.save();
+  ctx.lineCap = 'round';
+  ctx.lineWidth = 7;
+  ctx.strokeStyle = 'rgba(255,255,255,.10)';
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.stroke();
+  if (ramas <= BAL.tensiune){
+    ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .5;
+    ctx.drawImage(GLOW.rosu, cx - 44, cy - 44, 88, 88);
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  }
+  ctx.strokeStyle = `rgb(${col})`;
+  ctx.beginPath(); ctx.arc(cx, cy, R * puls, -Math.PI / 2, -Math.PI / 2 + frac * TAU); ctx.stroke();
+  ctx.fillStyle = `rgb(${col})`;
+  ctx.font = `800 ${Math.round(R * 0.92)}px ${FONT_MONO}`;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(Math.ceil(ramas), cx, cy + 1);
+  ctx.fillStyle = 'rgba(147,161,181,.9)'; ctx.font = `700 8px ${FONT_MONO}`;
+  ctx.fillText('SECUNDE', cx, cy + R + 9);
+  ctx.restore();
+}
+function deseneazaNumaratoare(){
+  ctx.fillStyle = 'rgba(8,11,18,.45)';
+  ctx.fillRect(-20, -20, LW + 40, LH + 40);
+  const s = easeOutBack(Math.min(1, numT / .3));
+  ctx.save();
+  ctx.translate(LW / 2, LH / 2 - 20);
+  ctx.scale(s, s);
+  ctx.font = `800 110px ${FONT_MONO}`;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.lineWidth = 10; ctx.strokeStyle = 'rgba(8,11,18,.9)';
+  ctx.strokeText(numCifra, 0, 0);
+  ctx.fillStyle = '#4A9EE8'; ctx.fillText(numCifra, 0, 0);
+  ctx.restore();
+}
+function deseneaza(){
+  if (cssW < 4) return;
+  let jx = 0, jy = 0;
+  if (tremur > 0 && !redus()){
+    jx = rand(-1, 1) * tremur * .55;
+    jy = rand(-1, 1) * tremur * .38;
+  }
+  ctx.setTransform(dpr * sc, 0, 0, dpr * sc, jx * dpr * sc, jy * dpr * sc);
+  ctx.clearRect(-30, -30, LW + 60, LH + 60);
+
+  deseneazaFundalScena();
+
+  /* stratul de joc, cu micro-parallax */
+  ctx.save();
+  ctx.translate(-camX, 0);
+  deseneazaCabinetSpate();
+  deseneazaElemente();
+  deseneazaCabinetFata();
+  deseneazaZbor();
+  deseneazaStampile();
+  deseneazaParticule(false);
+  deseneazaTexte(false);
+  ctx.restore();
+
+  deseneazaCronometru();
+  deseneazaParticule(true);       // confetti (spațiu-ecran)
+  deseneazaTexte(true);
+  if (stare === 'numaratoare') deseneazaNumaratoare();
+
+  /* viniete și flash-uri, în spațiul dispozitivului */
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  if (vinNeagra){ ctx.globalAlpha = .8; ctx.drawImage(vinNeagra, 0, 0, panza.width, panza.height); ctx.globalAlpha = 1; }
+  if (ramas <= BAL.tensiune && stare === 'joc' && vinRosie){
+    const a = redus() ? .22 : .14 + .12 * Math.sin(timpGlobal * 5);
+    ctx.globalAlpha = Math.max(0, a);
+    ctx.drawImage(vinRosie, 0, 0, panza.width, panza.height);
+    ctx.globalAlpha = 1;
+  }
+  if (blitzRosu > 0){
+    ctx.fillStyle = `rgba(255,70,60,${(blitzRosu * .5).toFixed(3)})`;
+    ctx.fillRect(0, 0, panza.width, panza.height);
+  }
+  if (blitzVerde > 0){
+    ctx.fillStyle = `rgba(63,182,139,${(blitzVerde * .28).toFixed(3)})`;
+    ctx.fillRect(0, 0, panza.width, panza.height);
+  }
+}
+
+/* ════════════════════════ 18. BUCLA PRINCIPALĂ + INIT ════════════════════════ */
+let tPrec = performance.now();
+function cadru(acum){
+  requestAnimationFrame(cadru);
+  if (trebuieRedim){ trebuieRedim = false; redimensioneaza(); }
+  let dtReal = Math.min((acum - tPrec) / 1000, .05);
+  tPrec = acum;
+  timpGlobal += dtReal;
+
+  let dt = dtReal;
+  if (hitStop > 0){ hitStop -= dtReal; dt = 0; }   // freeze-frame: lumea îngheață, camera nu
+  tremur = Math.max(0, tremur - dtReal * 34);
+  blitzRosu = Math.max(0, blitzRosu - dtReal * 1.6);
+  blitzVerde = Math.max(0, blitzVerde - dtReal * 2.4);
+
+  /* micro-camera: legănare lentă + reacție la tremur */
+  camX = Math.sin(timpGlobal * 0.22) * (redus() ? 2 : 6);
+
+  if (stare === 'joc'){
+    ramas = Math.max(0, ramas - dt);
+    actualizeazaLume(dt, false);
+    verificaJaloane(dtReal);
+    setTimpHUD();
+    if (ramas <= 0) incepeTerminare();
+  } else if (stare === 'intro'){
+    actualizeazaLume(dt, true);
+  } else if (stare === 'terminare'){
+    actualizeazaTerminare(dt);
+  } else if (stare === 'sfarsit'){
+    actualizeazaElemente(dtReal, true);
+    actualizeazaZbor(dtReal);
+    actualizeazaStampile(dtReal);
+    actualizeazaParticule(dtReal);
+    actualizeazaTexte(dtReal);
+  } else if (stare === 'numaratoare'){
+    actualizeazaNumaratoare(dtReal);
+    actualizeazaStampile(dtReal);
+    actualizeazaParticule(dtReal);
+    actualizeazaTexte(dtReal);
+  }
+  actualizeazaAmbient(dtReal);
+  deseneaza();
+}
+
+/* cârlig minuscul pentru verificări automate (inofensiv, nedocumentat în UI) */
+window.__arcadeTest = {
+  stare: () => stare,
+  scor: () => scor,
+  ramas: () => Math.ceil(ramas),
+  activi: () => numarActive(),
+  forteazaFinal: () => { if (stare === 'joc'){ ramas = 0; incepeTerminare(); } },
+  setRamas: v => { if (typeof v === 'number' && stare === 'joc') ramas = clamp(v, 0, BAL.durata); return ramas; }
+};
+
+/* pornirea */
+legaInput();
+leagaButoane();
+pregatesteIntro();
+redimensioneaza();
+trebuieRedim = false;
+verificaRotire();
+requestAnimationFrame(cadru);
+
+})();
+</script>
+
+<!-- ======= „Salvează jocul pe desktop” =======
+     Chrome/Edge: promptul nativ de instalare → iconiță pe desktop + fereastră
+     proprie, dar jocul tot de pe site (fără service worker ⇒ fără joc offline).
+     Alte browsere: descarcă o scurtătură .url (Windows) / .webloc (Mac). -->
+<script>
+'use strict';
+(function () {
+  var btn = document.getElementById('btnSalvJoc');
+  if (!btn) return;
+
+  var eticheta = btn.textContent;
+  var ocupat = false;
+
+  function mesaj(txt) {
+    if (ocupat) return;
+    ocupat = true;
+    btn.textContent = txt;
+    setTimeout(function () { btn.textContent = eticheta; ocupat = false; }, 2600);
+  }
+
+  addEventListener('appinstalled', function () {
+    window.__pwaPrompt = null;
+    mesaj('\u2713 Salvat pe desktop');
+  });
+
+  /* nume de fișier curățat de caracterele interzise de Windows */
+  function numeFisier() {
+    var brut = (document.title.split('\u2014')[0] || 'Joc').trim();
+    var interzise = ':*?"<>|/' + String.fromCharCode(92);
+    var ok = [];
+    for (var i = 0; i < brut.length; i++) {
+      var c = brut.charAt(i);
+      if (interzise.indexOf(c) === -1) ok.push(c);
+    }
+    return ok.join('');
+  }
+
+  /* Scurtătură descărcabilă — merge în orice browser, fără API-uri speciale */
+  function descarcaScurtatura() {
+    var url = location.origin + location.pathname;
+    var CRLF = String.fromCharCode(13, 10);
+    var LF = String.fromCharCode(10);
+    var peMac = /Mac|iPhone|iPad/i.test(navigator.userAgent);
+    var continut, fisier;
+
+    if (peMac) {
+      continut = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">',
+        '<plist version="1.0"><dict><key>URL</key><string>' + url + '</string></dict></plist>'
+      ].join(LF);
+      fisier = numeFisier() + '.webloc';
+    } else {
+      continut = ['[InternetShortcut]', 'URL=' + url, 'IconIndex=0', ''].join(CRLF);
+      fisier = numeFisier() + '.url';
+    }
+
+    try {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([continut], { type: 'text/plain' }));
+      a.download = fisier;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      mesaj('\u2713 Scurt\u0103tur\u0103 desc\u0103rcat\u0103');
+    } catch (e) {
+      mesaj('Nu s-a putut salva');
+    }
+  }
+
+  btn.addEventListener('click', function () {
+    var p = window.__pwaPrompt;
+    if (p && typeof p.prompt === 'function') {
+      try {
+        p.prompt();
+        if (p.userChoice && p.userChoice.then) {
+          p.userChoice.then(function (r) {
+            if (r && r.outcome === 'accepted') window.__pwaPrompt = null;
+          }).catch(function () {});
+        }
+      } catch (e) {
+        descarcaScurtatura();
+      }
+    } else {
+      descarcaScurtatura();
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "id": "/arcade-inspectia-nu-asteapta.html",
+  "name": "Inspecția nu așteaptă — Arcade-ul Contabilului",
+  "short_name": "Inspecția",
+  "description": "Aleargă prin birou și adună documente — inspectorul ANAF e în spatele tău.",
+  "start_url": "/arcade-inspectia-nu-asteapta.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0B0F17",
+  "theme_color": "#0B0F17",
+  "lang": "ro",
+  "icons": [
+    {
+      "src": "/assets/icons/arcade-inspectia-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/arcade-inspectia-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/arcade-inspectia-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

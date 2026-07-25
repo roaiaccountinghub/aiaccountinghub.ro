@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Arcade-ul Contabilului — AI Accounting Hub</title>
+<meta name="description" content="Trei mini-jocuri arcade despre viața fiscală, vibe-codate între două deadline-uri. Dovada că un contabil poate construi lucruri reale cu AI. Fără instalare, merg și pe telefon.">
+<link rel="canonical" href="https://aiaccountinghub.ro/arcade.html">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aiaccountinghub.ro/arcade.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Arcade-ul Contabilului — AI Accounting Hub">
+<meta property="og:description" content="Trei mini-jocuri arcade despre viața fiscală, vibe-codate între două deadline-uri. Dovada că un contabil poate construi lucruri reale cu AI.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Arcade-ul Contabilului — AI Accounting Hub">
+<meta name="twitter:description" content="Trei mini-jocuri arcade despre viața fiscală, vibe-codate între două deadline-uri.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ============ ARCADE — INTRO EDITORIAL ============ */
+.arcade-intro { padding-top: 56px; padding-bottom: 24px; }
+.arcade-intro .block-inner { max-width: 760px; }
+.intro-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.arcade-intro h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 600; letter-spacing: -0.02em; line-height: 1.15;
+  margin-bottom: 18px; text-wrap: balance;
+}
+.arcade-intro h2 .accent-warm { color: var(--accent-warm); }
+.arcade-intro p {
+  color: var(--fg-muted); font-size: 15.5px; line-height: 1.68;
+  margin-bottom: 16px;
+}
+.arcade-intro p strong { color: var(--fg); font-weight: 600; }
+.arcade-intro p:last-of-type { margin-bottom: 0; }
+/* global e `a { color: inherit; text-decoration: none }` — linkul din text are nevoie de stil propriu */
+.arcade-intro p a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.arcade-intro p a:hover { color: var(--accent-2); text-decoration-color: var(--accent-2); }
+
+/* specs — mici insigne despre cum sunt construite */
+.arcade-specs {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 28px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.arcade-specs .spec {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.04em;
+  color: var(--fg-muted);
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  background: var(--bg-1);
+}
+.arcade-specs .spec svg { width: 13px; height: 13px; color: var(--accent); flex-shrink: 0; }
+
+/* ============ ARCADE — CABINETE (lista de jocuri) ============ */
+.cab-list { display: flex; flex-direction: column; gap: 22px; }
+.cab {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 0;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cab:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+/* „ecranul" cabinetului — dark constant, ca un CRT, indiferent de temă */
+.cab-screen {
+  position: relative;
+  min-height: 220px;
+  background: #0a0e16;
+  border-right: 1px solid var(--border);
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.cab-screen .glow { position: absolute; inset: 0; }
+.cab-screen .scan {
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,0.16) 3px 4px);
+  opacity: 0.7;
+}
+.cab-screen .emoji {
+  position: relative; z-index: 1;
+  font-size: 62px;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.6));
+}
+.cab-genre {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: #cfe0f0;
+  background: rgba(10,14,22,0.66);
+  border: 1px solid rgba(255,255,255,0.14);
+  padding: 5px 10px; border-radius: 99px;
+  backdrop-filter: blur(4px);
+}
+.cab-hi {
+  position: absolute; bottom: 12px; right: 14px; z-index: 2;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em;
+  color: #E0A24E;
+}
+/* fiecare joc — altă culoare de glow pe ecran */
+.cab.dodge   .cab-screen .glow { background: radial-gradient(140px 110px at 62% 30%, rgba(74,158,232,0.42), transparent 70%); }
+.cab.runner  .cab-screen .glow { background: radial-gradient(140px 110px at 62% 30%, rgba(63,182,139,0.40), transparent 70%); }
+.cab.whack   .cab-screen .glow { background: radial-gradient(140px 110px at 62% 30%, rgba(224,162,78,0.42), transparent 70%); }
+
+.cab-body { padding: 26px 28px; display: flex; flex-direction: column; }
+.cab-body h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 23px; font-weight: 600; letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.cab-pitch { color: var(--fg); font-size: 14.5px; line-height: 1.55; margin-bottom: 18px; }
+.cab-notes { display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px; }
+.cab-notes .note-dt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+.cab-notes .note-dd { color: var(--fg-muted); font-size: 13.5px; line-height: 1.6; }
+.cab-foot {
+  margin-top: auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.cab-ctrl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-dim); letter-spacing: 0.03em;
+  min-width: 0;
+}
+.cab-play {
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.04em; text-transform: uppercase; font-size: 12.5px;
+}
+
+@media (max-width: 760px) {
+  .cab { grid-template-columns: 1fr; }
+  .cab-screen { min-height: 150px; border-right: none; border-bottom: 1px solid var(--border); }
+  .cab-screen .emoji { font-size: 50px; }
+  .cab-body { padding: 22px; }
+  .cab-body h3 { font-size: 20px; }
+  .cab-foot { flex-direction: column; align-items: stretch; gap: 12px; }
+  .cab-play { justify-content: center; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="logo-text"><span>AI Accounting Hub</span></div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html" class="active">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-ambient"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <span>Arcade</span>
+    </div>
+    <div class="page-kicker"><span class="dot"></span>Pauză între două deadline-uri</div>
+    <h1>Arcade-ul <span class="accent">Contabilului</span>.</h1>
+    <p class="page-lede">Trei mini-jocuri despre viața fiscală, vibe-codate într-o seară. Fără instalare, fără cont, merg și pe telefon. Apeși „Joacă" și gata.</p>
+  </div>
+</section>
+
+<!-- INTRO EDITORIAL -->
+<section class="block arcade-intro">
+  <div class="block-inner">
+    <div class="intro-label">// De unde a apărut un arcade pe un site de contabilitate</div>
+    <h2>Totul a pornit de la o prezentare despre <span class="accent-warm">vibe coding</span>. La final erau trei joculețe demonstrative — iar colegii nu s-au mai oprit din jucat.</h2>
+    <p>Prezentarea era ea însăși un exercițiu de vibe coding: în loc de un teanc de slide-uri, o singură pagină HTML care rulează în browser și se trimite ca un fișier. <a href="2026-07-21-Vibe-Coding-prezentare-interactiva-html.html">Am scris pe larg despre ea aici</a>. La final am pus, ca bonus, trei mini-jocuri construite prin aceeași metodă — le-am descris în română, AI-ul a scris codul.</p>
+    <p>Bonusul a furat scena. Colegii s-au distrat copios cu ele, au rămas după prezentare să-și bată recordurile, iar prima întrebare de a doua zi n-a fost despre HTML, ci <strong>„mai ai și altele?"</strong></p>
+    <p>Așa că le-am scos din prezentare, le-am rescris ca pagini de sine stătătoare și le-am adus aici, permanent. N-au altă miză: sunt pentru destindere — trei minute de pauză între două deadline-uri. Fiecare are mai jos o descriere scurtă: ce e, care e scopul și de ce a ieșit exact așa.</p>
+
+    <div class="arcade-specs">
+      <span class="spec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        Un singur fișier HTML
+      </span>
+      <span class="spec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+        Fără instalare, fără cont
+      </span>
+      <span class="spec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20"/><path d="M5.5 6.5h.01M8.5 6.5h.01"/></svg>
+        Se joacă direct în browser
+      </span>
+      <span class="spec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        Optimizat pentru telefon
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- CABINETE -->
+<section class="block" style="padding-top: 24px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Alege-ți jocul</div>
+        <h2>Trei cabinete.</h2>
+      </div>
+      <div class="section-index">03 — jocuri</div>
+    </div>
+
+    <div class="cab-list">
+
+      <!-- 1 · DODGE-UL CONTABILULUI -->
+      <article class="cab dodge fade-in">
+        <div class="cab-screen">
+          <div class="glow"></div>
+          <span class="cab-genre">Schivă · Survival</span>
+          <span class="emoji">📄</span>
+          <span class="cab-hi">HI · zile</span>
+          <div class="scan"></div>
+        </div>
+        <div class="cab-body">
+          <h3>Dodge-ul Contabilului</h3>
+          <p class="cab-pitch">Ferește-te de ploaia de ordonanțe de urgență. Fiecare secundă în picioare = o zi de sănătate mintală.</p>
+          <div class="cab-notes">
+            <div>
+              <div class="note-dt">Despre joc</div>
+              <div class="note-dd">Un contabil prins sub un cer din care cad ordonanțe. Te miști stânga-dreapta, prinzi cafele (viteză) și consultanți fiscali (scut) și îți ții bara de burnout sub 100%. Cât reziști?</div>
+            </div>
+            <div>
+              <div class="note-dt">De ce l-am construit așa</div>
+              <div class="note-dd">Voiam cel mai simplu control posibil — o singură axă de mișcare — dar care să spună o glumă adevărată: legislația chiar cade mai repede decât o poți citi. Dificultatea crește exact ca volumul de OUG-uri: constant, fără pauză.</div>
+            </div>
+          </div>
+          <div class="cab-foot">
+            <span class="cab-ctrl">← → / A D · atingere pe telefon</span>
+            <a class="cab-play btn btn-primary" href="arcade-dodge-ul-contabilului.html" data-track="arcade_play_dodge">Joacă ▶</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 · INSPECȚIA NU AȘTEAPTĂ -->
+      <article class="cab runner fade-in">
+        <div class="cab-screen">
+          <div class="glow"></div>
+          <span class="cab-genre">Endless Runner</span>
+          <span class="emoji">🏃</span>
+          <span class="cab-hi">HI · metri</span>
+          <div class="scan"></div>
+        </div>
+        <div class="cab-body">
+          <h3>Inspecția nu așteaptă</h3>
+          <p class="cab-pitch">Control neanunțat, fix în ziua de closing. Aleargă prin birou, sari peste obstacole și adună documente — inspectorul ANAF e chiar în spatele tău.</p>
+          <div class="cab-notes">
+            <div>
+              <div class="note-dt">Despre joc</div>
+              <div class="note-dd">Un runner nesfârșit prin birou: sari peste bibliorafturi și dulapuri, aduni documentele care-ți mențin bara de răbdare. Documentul adaugă, obstacolul te încetinește — iar dacă ajungi la zero, inspectorul te-a prins.</div>
+            </div>
+            <div>
+              <div class="note-dt">De ce l-am construit așa</div>
+              <div class="note-dd">Genul „runner" transmite perfect senzația unei inspecții: nu poți opri, poți doar fi pregătit. Documentele adunate sunt dosarul complet; obstacolele, surprizele pe care nu le-ai anticipat. Ritmul accelerează exact cât să te țină ușor în priză.</div>
+            </div>
+          </div>
+          <div class="cab-foot">
+            <span class="cab-ctrl">Spațiu / ↑ / click — săritură</span>
+            <a class="cab-play btn btn-primary" href="arcade-inspectia-nu-asteapta.html" data-track="arcade_play_inspectia">Joacă ▶</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 · WHACK-A-DEADLINE -->
+      <article class="cab whack fade-in">
+        <div class="cab-screen">
+          <div class="glow"></div>
+          <span class="cab-genre">Whack-a-mole · Reflexe</span>
+          <span class="emoji">🗂️</span>
+          <span class="cab-hi">HI · puncte</span>
+          <div class="scan"></div>
+        </div>
+        <div class="cab-body">
+          <h3>Whack-a-Deadline</h3>
+          <p class="cab-pitch">Termenele țâșnesc din sertare. Lovește-le înainte să dispară — dar nu strica pauza de concediu. Ai 45 de secunde.</p>
+          <div class="cab-notes">
+            <div>
+              <div class="note-dt">Despre joc</div>
+              <div class="note-dd">Clasicul „whack-a-mole", dar sertarele scot termene-limită. Le lovești pentru puncte (+10); un termen ratat te costă puțin (−5). Iar dacă lovești din greșeală pauza / concediul, pierzi mai mult (−15). Patruzeci și cinci de secunde de reflexe pure.</div>
+            </div>
+            <div>
+              <div class="note-dt">De ce l-am construit așa</div>
+              <div class="note-dd">Un joc scurt, cu miză imediată, pentru pauza de 45 de secunde dintre două task-uri. Regula „nu lovi concediul" e acolo intenționat: chiar și când alergi după termene, odihna rămâne sfântă — altfel ajungi în primul joc.</div>
+            </div>
+          </div>
+          <div class="cab-foot">
+            <span class="cab-ctrl">Click / atingere pe termene</span>
+            <a class="cab-play btn btn-primary" href="arcade-whack-a-deadline.html" data-track="arcade_play_whack">Joacă ▶</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text"><span>AI Accounting Hub</span><small>aiaccountinghub.ro</small></div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

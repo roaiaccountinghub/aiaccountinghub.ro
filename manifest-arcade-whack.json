@@ -1,0 +1,33 @@
+{
+  "id": "/arcade-whack-a-deadline.html",
+  "name": "Whack-a-Deadline — Arcade-ul Contabilului",
+  "short_name": "Whack-a-Deadline",
+  "description": "Lovește termenele înainte să dispară. Ai 45 de secunde.",
+  "start_url": "/arcade-whack-a-deadline.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0B0F17",
+  "theme_color": "#0B0F17",
+  "lang": "ro",
+  "icons": [
+    {
+      "src": "/assets/icons/arcade-whack-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/arcade-whack-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/arcade-whack-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

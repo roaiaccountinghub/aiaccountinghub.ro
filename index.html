@@ -446,49 +446,58 @@ section.block {
   flex-direction: column;
   padding: 12px 0 36px;
 }
+/* ── ZIGZAG PE 2 POZIȚII (stânga / dreapta), cu suprapunere colț la colț ──
+   Geometrie: card 570 px, scală 0,85, carduri trase 30 px spre centru.
+   Suprapunerea rezultată = 2 × 0,85 × (30 + 570) − 990 ≈ 30 px pe orizontală.
+   Pe verticală: −84,7 px = înălțimea vizibilă a rândului (253,3) minus pasul dorit (40). */
 .stair-row {
   display: flex;
   align-items: stretch;
   gap: 26px;
   padding: 10px 0;
-  transform: scale(0.82);
+  transform: scale(0.85);
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), margin 0.5s ease, filter 0.4s ease;
   filter: saturate(0.85);
   position: relative;
   cursor: pointer;
+  margin-bottom: -84.7px;
 }
+.stair-row:last-child { margin-bottom: 0; }
 .stair-row:hover,
 .stair-row.is-hot {
   transform: scale(1);
   filter: saturate(1);
 }
-.stair-row-1 {
+/* Rândurile impare: cardul la stânga, textul la dreapta */
+.stair-row-1,
+.stair-row-3,
+.stair-row-5 {
   justify-content: flex-start;
   transform-origin: left center;
-  /* ~35% visible overlap — looser spacing makes mouse-tracking row-to-row easier */
-  margin-bottom: -130px;
-  padding-left: 0;
-  z-index: 1;
+  padding-left: 30px;
 }
-.stair-row-2 {
-  justify-content: center;
-  transform-origin: center center;
-  margin-bottom: -130px;
-  z-index: 2;
-}
-.stair-row-3 {
+/* Rândurile pare: cardul la dreapta, textul la stânga */
+.stair-row-2,
+.stair-row-4,
+.stair-row-6 {
   justify-content: flex-end;
   transform-origin: right center;
-  /* same overlap as rows 1 & 2 — chains row-4 (community welcome) into the staircase */
-  margin-bottom: -130px;
-  padding-right: 0;
-  z-index: 3;
+  padding-right: 30px;
 }
-/* Hovered row pops to the very top of the stack so it overlaps neighbors cleanly */
+/* STIVUIRE INVERSATĂ — 1 peste 2, 2 peste 3 … ca o scară privită din lateral.
+   Astfel textul unui rând rămâne deasupra cardului de sub el, deci nu mai e tăiat. */
+.stair-row-1 { z-index: 6; }
+.stair-row-2 { z-index: 5; }
+.stair-row-3 { z-index: 4; }
+.stair-row-4 { z-index: 3; }
+.stair-row-5 { z-index: 2; }
+.stair-row-6 { z-index: 1; }
+/* Rândul activ trece peste TOATE celelalte (și peste cel de deasupra, și peste
+   cel de dedesubt), ca textul care se scrie să se vadă complet */
 .stair-row:hover,
-.stair-row.is-hot { z-index: 6; }
+.stair-row.is-hot { z-index: 30; }
 .stair-card-wrap {
-  flex: 0 0 494px;
+  flex: 0 0 570px;
   position: relative;
   z-index: 2;
 }
@@ -496,9 +505,10 @@ section.block {
 /* Side text — hidden initially, slides in opaque on row hover.
    Sits at z-index 3 so when revealed it covers any card poking through above/below. */
 .stair-side {
-  flex: 0 1 470px;
-  max-width: 470px;
-  padding: 14px 22px;
+  /* umple spațiul rămas: 990 − 30 (tragere) − 570 (card) − 26 (gap) ≈ 364 px */
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 14px 20px;
   background: var(--bg-0);
   border-radius: 14px;
   position: relative;
@@ -514,7 +524,9 @@ section.block {
   transform: translateX(-14px);
   transition: opacity 0.32s ease, transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.stair-row-3 .stair-side {
+.stair-row-2 .stair-side,
+.stair-row-4 .stair-side,
+.stair-row-6 .stair-side {
   transform: translateX(14px);
   text-align: right;
 }
@@ -534,7 +546,9 @@ section.block {
 .stair-side-label .line {
   flex: 0 0 28px; height: 1px; background: var(--accent);
 }
-.stair-row-3 .stair-side-label { justify-content: flex-end; }
+.stair-row-2 .stair-side-label,
+.stair-row-4 .stair-side-label,
+.stair-row-6 .stair-side-label { justify-content: flex-end; }
 .stair-side h4 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(19px, 2vw, 24px);
@@ -553,7 +567,9 @@ section.block {
   hyphens: auto;
   margin: 0;
 }
-.stair-row-3 .stair-side p { margin-left: auto; }
+.stair-row-2 .stair-side p,
+.stair-row-4 .stair-side p,
+.stair-row-6 .stair-side p { margin-left: auto; }
 .stair-side .stair-side-mono {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10.5px; color: var(--fg-dim);
@@ -598,11 +614,28 @@ section.block {
   50% { opacity: 0; }
 }
 
-/* Cards inside stairway — wider horizontally (~30%), same height as the previous landscape ratio */
+/* ── Cardul de podcast ÎN SCARĂ ──
+   Cardul are înălțime fixă (raport 2,05) și `overflow: hidden`, iar titlul
+   episodului e lung: la dimensiunile implicite playerul de jos rămânea tăiat.
+   Limitele de mai jos se aplică DOAR în scară; cardul din alte contexte rămâne
+   neschimbat. */
+.stair-card-wrap .podcast-hero { padding: 20px 24px; }
+.stair-card-wrap .podcast-label { font-size: 12px; margin-bottom: 10px; }
+.stair-card-wrap .podcast-hero h3 {
+  font-size: clamp(19px, 2.05vw, 27px);
+  line-height: 1.08;
+  margin-bottom: 6px;
+}
+.stair-card-wrap .podcast-subtitle { font-size: 12px; margin-top: 2px; margin-bottom: 6px; }
+.stair-card-wrap .podcast-hero .show-meta { font-size: 10.5px; }
+.stair-card-wrap .play-btn { width: 42px; height: 42px; }
+
+/* Cards inside stairway — alungite (2,05) ca să se suprapună colț la colț pe zigzag,
+   la aceeași înălțime ca înainte (secțiunea nu se lungește) */
 .stair-card-wrap .flip-card,
 .stair-card-wrap .podcast-card,
 .stair-card-wrap .mission-card {
-  aspect-ratio: 1.82 / 1;
+  aspect-ratio: 2.05 / 1;
   width: 100%;
 }
 
@@ -1005,7 +1038,7 @@ section.block {
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.35s ease;
 }
 /* Inside the stairway, the wrapper enforces the size — keep ratio consistent with the other 3 cards */
-.stair-card-wrap .welcome-card { aspect-ratio: 1.82 / 1; width: 100%; }
+.stair-card-wrap .welcome-card { aspect-ratio: 2.05 / 1; width: 100%; }
 /* Welcome card — cyan accent */
 .welcome-card {
   background:
@@ -1096,22 +1129,41 @@ section.block {
 .cc-hint-warm { color: var(--accent-warm); border-color: color-mix(in oklab, var(--accent-warm) 30%, transparent); background: color-mix(in oklab, var(--accent-warm) 6%, transparent); }
 .community-cta:hover .cc-hint-warm { background: var(--accent-warm); color: #1a0f07; border-color: var(--accent-warm); }
 
-/* Stairway rows 4 & 5 — extend the staircase past row 3 with same overlap pattern */
-.stair-row-4 {
-  justify-content: center;
-  transform-origin: center center;
-  margin-bottom: -130px;
-  z-index: 4;
+/* ── Alternanța de culoare pe scară ──
+   Cardurile 2, 4 și 6 sunt aurii, 1, 3 și 5 clasice (cyan). `.is-warm` aplică
+   tratamentul auriu pe orice card de comunitate (identic cu `.community-cta`). */
+.welcome-card.is-warm {
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 100%, color-mix(in oklab, var(--accent-warm) 14%, transparent), transparent 60%),
+    linear-gradient(145deg, var(--bg-2) 0%, var(--bg-1) 100%);
 }
-.stair-row-5 {
-  justify-content: flex-start;
-  transform-origin: left center;
-  padding-left: 0;
-  z-index: 5;
-  margin-bottom: 0;   /* last row — no overlap below */
+.welcome-card.is-warm::before {
+  background-image: repeating-linear-gradient(-45deg, color-mix(in oklab, var(--accent-warm) 4%, transparent) 0 1px, transparent 1px 24px);
 }
-/* Side text on row 5 mirrors row 1 (card on left, side text on right) */
-.stair-row-5 .stair-card-wrap { flex: 0 0 494px; }
+.welcome-card.is-warm:hover,
+.stair-row:hover .welcome-card.is-warm,
+.stair-row.is-hot .welcome-card.is-warm {
+  border-color: var(--accent-warm) !important;
+  box-shadow:
+    0 0 0 1px var(--accent-warm),
+    0 0 24px color-mix(in oklab, var(--accent-warm) 50%, transparent),
+    0 0 56px color-mix(in oklab, var(--accent-warm) 28%, transparent),
+    var(--shadow-lg) !important;
+}
+.welcome-card.is-warm .cc-kicker { color: var(--accent-warm); }
+.welcome-card.is-warm .mission-title {
+  background: linear-gradient(100deg, var(--accent-warm) 0%, color-mix(in oklab, var(--accent-warm) 60%, var(--fg)) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 18px color-mix(in oklab, var(--accent-warm) 25%, transparent));
+}
+.welcome-card.is-warm .mission-heading { border-top-color: color-mix(in oklab, var(--accent-warm) 30%, transparent); }
+.stair-row:hover .welcome-card.is-warm .cc-hint-warm,
+.stair-row.is-hot .welcome-card.is-warm .cc-hint-warm {
+  background: var(--accent-warm); color: #1a0f07; border-color: var(--accent-warm);
+}
+/* Cardul Arcade e un link — anulăm stilurile implicite de ancoră */
+a.community-card { text-decoration: none; color: inherit; }
 /* Row hover-glow propagation: include the 2 community cards */
 .stair-row:hover .welcome-card,
 .stair-row.is-hot .welcome-card {
@@ -1665,6 +1717,17 @@ section.block {
 .cx-back .cx-def p:last-child { margin-bottom: 0; }
 .cx-back .cx-def strong { color: #fff; font-weight: 600; }
 .cx-back .cx-def em { color: var(--accent-2); font-style: normal; }
+/* Typewriter caret for the definition — a real inline element (not a ::after)
+   because it has to hop from paragraph to paragraph as each one finishes, and
+   a pseudo-element can't be relocated across separate elements at runtime. */
+.cx-def .tw-caret {
+  display: inline-block;
+  width: 2px; height: 0.95em;
+  background: var(--accent-2);
+  vertical-align: -3px;
+  margin-left: 2px;
+  animation: caretBlink 0.7s step-end infinite;
+}
 .cx-back .cx-examples {
   margin-top: 18px;
   padding-top: 14px;
@@ -2143,43 +2206,39 @@ section.block {
   .podcast-hero h3 { font-size: clamp(24px, 3vw, 32px); }
   .mission-title { font-size: clamp(22px, 2.8vw, 30px); }
   .mission-heading { font-size: clamp(16px, 1.7vw, 19px); }
-  .stair-card-wrap { flex: 0 0 440px; }
-  .stair-side { flex: 0 1 360px; max-width: 360px; padding: 14px 18px; }
-  .stair-row-1 { padding-left: 24px; margin-bottom: -90px; }
-  .stair-row-2 { margin-bottom: -90px; }
-  .stair-row-3 { padding-right: 24px; }
+  /* Scara își păstrează geometria; sub 1038 px containerul se îngustează singur,
+     iar textul lateral (flex: 1 1 auto) se strânge odată cu el. */
+  .stair-side { padding: 14px 14px; }
+  .stair-row-1, .stair-row-3, .stair-row-5 { padding-left: 18px; }
+  .stair-row-2, .stair-row-4, .stair-row-6 { padding-right: 18px; }
 }
 @media (max-width: 960px) {
   .stairway { padding: 4px 0 12px; }
   .stair-row { flex-direction: column; gap: 14px; transform: scale(1); filter: none; margin: 0 0 22px; text-align: center; padding-left: 0; padding-right: 0; z-index: auto; align-items: center; }
-  .stair-row-1, .stair-row-2, .stair-row-3 { justify-content: center; align-items: center; transform-origin: center; padding-left: 0; padding-right: 0; margin-bottom: 22px; }
+  .stair-row-1, .stair-row-2, .stair-row-3,
+  .stair-row-4, .stair-row-5, .stair-row-6 { justify-content: center; align-items: center; transform-origin: center; padding-left: 0; padding-right: 0; margin-bottom: 22px; }
   .stair-card-wrap .flip-card,
   .stair-card-wrap .podcast-card,
   .stair-card-wrap .mission-card { aspect-ratio: auto; min-height: 280px; }
+  /* pe mobil cardurile de comunitate rămân la proporția de dinainte (2,05 e prea turtit) */
+  .stair-card-wrap .welcome-card { aspect-ratio: 1.82 / 1; }
   /* Flip-card uses absolutely-positioned faces inside .flip-inner { height:100% },
      which collapses without a definite parent height. Restore an aspect ratio
      so the parent has a real computed height for the faces to fill. */
   .stair-card-wrap .flip-card { aspect-ratio: 1 / 1; min-height: 0; }
-  /* Mobile order: text BEFORE card for rows 1, 3, 5.
-     - Row 1: markup is card → side → reverse to show text first.
-     - Row 3: markup is side → card → natural order already correct.
-     - Row 5: markup is card → side → reverse to show text first. */
-  .stair-row-1 { flex-direction: column-reverse; }
-  .stair-row-3 { flex-direction: column; }
+  /* Mobile order: textul ÎNAINTEA cardului, pe toate rândurile.
+     - Rândurile impare (1, 3, 5): markup card → text ⇒ column-reverse.
+     - Rândurile pare (2, 4, 6): markup text → card ⇒ ordinea e deja bună. */
+  .stair-row-1,
+  .stair-row-3,
   .stair-row-5 { flex-direction: column-reverse; }
-  .stair-row-1 .stair-side,
-  .stair-row-3 .stair-side,
-  .stair-row-5 .stair-side { text-align: center; }
-  .stair-row-1 .stair-side-label,
-  .stair-row-3 .stair-side-label,
-  .stair-row-5 .stair-side-label { justify-content: center; }
-  .stair-row-1 .stair-side p,
-  .stair-row-3 .stair-side p,
-  .stair-row-5 .stair-side p { margin-left: 0; text-align: center; }
+  .stair-row-2,
+  .stair-row-4,
+  .stair-row-6 { flex-direction: column; }
+  .stair-row .stair-side { text-align: center; }
+  .stair-row .stair-side-label { justify-content: center; }
+  .stair-row .stair-side p { margin-left: 0; text-align: center; }
   .stair-card-wrap { flex: 0 0 auto; width: 100%; max-width: 420px; }
-  /* Override desktop fixed 494px flex-basis on row-5 — on mobile it becomes
-     a forced height in column layout, creating ~300px of empty space below the card. */
-  .stair-row-5 .stair-card-wrap { flex: 0 0 auto; }
   /* On touch / narrow viewports, side text is always visible */
   .stair-side {
     flex: 0 0 auto;
@@ -2192,7 +2251,7 @@ section.block {
     overflow: visible;
     padding: 0 4px;
   }
-  .stair-row-3 .stair-side { transform: none !important; }
+  .stair-row .stair-side { transform: none !important; }
   /* Buzzword card: centred meta on mobile so the title doesn't drift off-card */
   .flip-meta { align-items: center; }
   .flip-meta .meta-l1,
@@ -2360,6 +2419,7 @@ section.block {
       <a href="podcast.html">Podcast</a>
       <a href="buzzword.html">Buzzword</a>
       <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="header-actions">
@@ -2477,30 +2537,31 @@ section.block {
         </div>
       </div>
 
-      <!-- ROW 2 — MISSION / HUB (centered, no side text) -->
+      <!-- ROW 2 — NOU ÎN COMUNITATE (dreapta, auriu) + text (stânga) -->
       <div class="stair-row stair-row-2">
+        <div class="stair-side">
+          <div class="stair-side-label"><span class="line"></span>Ghid de start</div>
+          <h4>Nu știi de unde să începi? De aici.</h4>
+          <p>Un parcurs scurt prin hub: ce articol citești întâi, ce episod asculți pe drum și ce resursă descarci ca să ai un câștig imediat în munca ta de zi cu zi.</p>
+          <div class="stair-side-mono">click pentru recomandare</div>
+        </div>
         <div class="stair-card-wrap">
-          <div class="mission-card" id="mission-card">
+          <div class="welcome-card community-card is-warm" id="welcome-card">
             <div class="mission-centerpiece">
-              <h3 class="mission-title">Viitorul profesiei<br>contabile</h3>
-              <div class="mission-heading">Misiunea AI Accounting Hub</div>
+              <div class="cc-kicker">// Pentru noii vizitatori</div>
+              <h3 class="mission-title">Nou în<br>comunitate ?</h3>
+              <div class="mission-heading">Cum extragi maxim din hub</div>
             </div>
-            <div class="flip-hint mission-hint">
+            <div class="flip-hint cc-hint cc-hint-warm">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
-              Vezi analiza
+              Citește recomandarea
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ROW 3 — PODCAST (right) + description text (left) -->
+      <!-- ROW 3 — PODCAST (stânga) + text (dreapta) -->
       <div class="stair-row stair-row-3">
-        <div class="stair-side">
-          <div class="stair-side-label"><span class="line"></span>Podcast</div>
-          <h4>Două gazde. Analize ușor de digerat.</h4>
-          <p>Topicuri detaliate activ de doi gazde, într-un format conversațional — suficient de compact cât să se potrivească pe drumul de acasă la birou, la volan, în metrou sau în pauza de cafea. Fără filler, fără reclame, doar miezul discuției. (Powered by NotebookLM)</p>
-          <div class="stair-side-mono">click pentru lista episoadelor</div>
-        </div>
         <div class="stair-card-wrap">
           <div class="podcast-card sp-trigger" id="podcast-card"
                data-spotify="4ag71LYvnsQLYcyg4w6XYl"
@@ -2530,27 +2591,68 @@ section.block {
             </div>
           </div>
         </div>
+        <div class="stair-side">
+          <div class="stair-side-label"><span class="line"></span>Podcast</div>
+          <h4>Două gazde. Analize ușor de digerat.</h4>
+          <p>Format conversațional, suficient de compact cât să se potrivească pe drumul spre birou, în metrou sau în pauza de cafea. Fără filler, fără reclame, doar miezul discuției. (Powered by NotebookLM)</p>
+          <div class="stair-side-mono">click pentru lista episoadelor</div>
+        </div>
       </div>
 
-      <!-- ROW 4 — NOU ÎN COMUNITATE ? (centered like row 2 — mirrors mission for symmetry) -->
+      <!-- ROW 4 — MISIUNEA AI (dreapta, auriu) + text (stânga) -->
       <div class="stair-row stair-row-4">
+        <div class="stair-side">
+          <div class="stair-side-label"><span class="line"></span>Analiza fondatoare</div>
+          <h4>De ce există hub-ul și încotro merge profesia.</h4>
+          <p>Seria în cinci părți: contextul revoluției AI, evoluția contabilității, competențele care contează de acum înainte și scenariile plauzibile pentru 2030–2035.</p>
+          <div class="stair-side-mono">click pentru analiza completă</div>
+        </div>
         <div class="stair-card-wrap">
-          <div class="welcome-card community-card" id="welcome-card">
+          <div class="mission-card" id="mission-card">
             <div class="mission-centerpiece">
-              <div class="cc-kicker">// Pentru noii vizitatori</div>
-              <h3 class="mission-title">Nou în<br>comunitate ?</h3>
-              <div class="mission-heading">Cum extragi maxim din hub</div>
+              <h3 class="mission-title">Viitorul profesiei<br>contabile</h3>
+              <div class="mission-heading">Misiunea AI Accounting Hub</div>
             </div>
-            <div class="flip-hint cc-hint cc-hint-cyan">
+            <div class="flip-hint mission-hint">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
-              Citește recomandarea
+              Vezi analiza
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ROW 5 — SCRIE-NE / PROPUNERI COMUNITATE (left like row 1 — mirrors buzzword) -->
+      <!-- ROW 5 — ARCADE-UL CONTABILULUI (stânga, clasic) + text (dreapta) -->
       <div class="stair-row stair-row-5">
+        <div class="stair-card-wrap">
+          <a href="arcade.html" class="welcome-card community-card" id="arcade-card" data-track="arcade_card_home"
+             aria-label="Arcade-ul Contabilului — trei mini-jocuri arcade">
+            <div class="mission-centerpiece">
+              <div class="cc-kicker">// Joacă</div>
+              <h3 class="mission-title">Arcade-ul<br>Contabilului</h3>
+              <div class="mission-heading">Trei joculețe vibe-codate</div>
+            </div>
+            <span class="flip-hint cc-hint cc-hint-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+              Intră în arcade
+            </span>
+          </a>
+        </div>
+        <div class="stair-side">
+          <div class="stair-side-label"><span class="line"></span>Joacă</div>
+          <h4>Trei joculețe vibe-codate între două deadline-uri.</h4>
+          <p>Dovada că un contabil poate construi lucruri reale cu AI — și cât de departe merge ideea. Fără instalare, fără cont, merg direct în browser și pe telefon.</p>
+          <div class="stair-side-mono">click pentru cele trei jocuri</div>
+        </div>
+      </div>
+
+      <!-- ROW 6 — SCRIE-NE / PROPUNERI COMUNITATE (dreapta, auriu) + text (stânga) -->
+      <div class="stair-row stair-row-6">
+        <div class="stair-side">
+          <div class="stair-side-label"><span class="line"></span>Comunitate</div>
+          <h4>Hub-ul crește din experiențele cititorilor.</h4>
+          <p>Propuneri de termeni pentru „Buzzword-ul săptămânii", subiecte pentru podcast sau resurse de care ai avea nevoie. Răspundem fiecărui mesaj în 2–3 zile lucrătoare, iar contribuțiile publicate sunt creditate.</p>
+          <div class="stair-side-mono">click pentru detalii și formular</div>
+        </div>
         <div class="stair-card-wrap">
           <div class="welcome-card community-card community-cta" id="cta-card">
             <div class="mission-centerpiece">
@@ -2563,12 +2665,6 @@ section.block {
               Vezi cum poți contribui
             </div>
           </div>
-        </div>
-        <div class="stair-side">
-          <div class="stair-side-label"><span class="line"></span>Comunitate</div>
-          <h4>Hub-ul crește din experiențele cititorilor.</h4>
-          <p>Ne interesează experiențele tale cu AI în contabilitate, propuneri de termeni pentru rubrica „Buzzword-ul săptămânii", subiecte pentru episoadele de podcast sau resurse de care ai avea nevoie. Răspundem fiecărui mesaj, în 2–3 zile lucrătoare. Toate contribuțiile publicate sunt creditate.</p>
-          <div class="stair-side-mono">click pentru detalii și formular</div>
         </div>
       </div>
 
@@ -2640,6 +2736,7 @@ section.block {
           <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
           <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
           <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
           <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
         </div>
       </div>
@@ -2673,6 +2770,59 @@ section.block {
 
 <script src="assets/podcast-data.js"></script>
 <script src="assets/podcast-player.js"></script>
+
+<script>
+/* ═══════ Durata reală a episodului de pe cardul „Podcast” ═══════
+   În marcaj, durata e scrisă de mână (o estimare). Aici o înlocuim cu durata
+   citită din fișierul audio al episodului — aceeași sursă pe care o folosește
+   playerul. Cererea e doar pentru metadate și pornește după încărcarea paginii,
+   ca să nu concureze cu resursele importante. Dacă pică (rețea, format), textul
+   scris de mână rămâne neatins. */
+(function () {
+  var card = document.getElementById('podcast-card');
+  if (!card || !window.PODCAST_EPISODES) return;
+
+  var id = card.getAttribute('data-spotify');
+  var ep = null;
+  for (var i = 0; i < window.PODCAST_EPISODES.length; i++) {
+    if (window.PODCAST_EPISODES[i].id === id) { ep = window.PODCAST_EPISODES[i]; break; }
+  }
+  if (!ep || !ep.audioUrl) return;
+
+  var elTitlu = card.querySelector('.player-title');
+  var elTotal = card.querySelector('.player-time span:last-child');
+  if (!elTitlu && !elTotal) return;
+
+  function mmss(sec) {
+    var m = Math.floor(sec / 60), s = Math.round(sec % 60);
+    if (s === 60) { m += 1; s = 0; }
+    return m + ':' + (s < 10 ? '0' + s : s);
+  }
+
+  function aplica(sec) {
+    if (!isFinite(sec) || sec <= 0) return;
+    if (elTotal) elTotal.textContent = mmss(sec);
+    if (elTitlu) {
+      /* înlocuiește doar coada „· NN min”, păstrând titlul episodului */
+      var minute = Math.max(1, Math.round(sec / 60));
+      elTitlu.textContent = elTitlu.textContent.replace(/\s*·\s*\d+\s*min\s*$/, '') + ' · ' + minute + ' min';
+    }
+  }
+
+  function citeste() {
+    try {
+      var a = new Audio();
+      a.preload = 'metadata';
+      a.addEventListener('loadedmetadata', function () { aplica(a.duration); a.src = ''; });
+      a.addEventListener('error', function () { /* păstrăm valoarea din marcaj */ });
+      a.src = ep.audioUrl;
+    } catch (e) { /* păstrăm valoarea din marcaj */ }
+  }
+
+  if ('requestIdleCallback' in window) requestIdleCallback(citeste, { timeout: 4000 });
+  else addEventListener('load', function () { setTimeout(citeste, 1200); });
+})();
+</script>
 
 
 <script>
@@ -2796,6 +2946,78 @@ fetch('assets/buzzwords.json', { cache: 'no-cache' })
 /* ========== CARD EXPAND MODAL (flip + zoom) ========== */
 /* (cxBackdrop / cxFront / cxBack / cxClose hoisted above for renderWord) */
 
+/* Buzzword definition — types itself out on every (re)render of the modal
+   back face: first open, prev/next term, or a search jump. All three funnel
+   through populateBuzzwordModal(), so calling this there covers every case.
+   No hover/scroll branching needed like the stairway effect — this is driven
+   by clicks, so the same code runs identically on desktop and mobile.
+
+   Duration is fixed rather than a fixed chars/sec rate: definitions range
+   from ~860 to ~1450 characters, and someone clicking through several terms
+   in a row shouldn't wait proportionally longer on the long ones. Timing
+   rides performance.now() via requestAnimationFrame rather than a setTimeout
+   chain — a per-char setTimeout drifts badly at this length (the browser's
+   minimum delay stretches it well past the intended duration). */
+let cxDefRaf = null;
+const CX_DEF_DURATION_MS = 2400;
+
+function typeCxDef(container) {
+  if (cxDefRaf) { cancelAnimationFrame(cxDefRaf); cxDefRaf = null; }
+  if (!container) return;
+
+  // Split each paragraph into a typed span + an untyped remainder that's only
+  // painted transparent (not removed) — so the paragraph keeps its final
+  // height from frame one and nothing below .cx-def (the examples list)
+  // shifts while the text writes itself out.
+  const segs = [...container.querySelectorAll('p')].map((p) => {
+    const text = p.textContent;
+    const done = document.createElement('span');
+    const rest = document.createElement('span');
+    done.className = 'tw-done';
+    rest.className = 'tw-rest';
+    rest.textContent = text;
+    p.textContent = '';
+    p.append(done, rest);
+    return { text, done, rest };
+  });
+  const total = segs.reduce((n, s) => n + s.text.length, 0);
+  if (!total) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    segs.forEach((s) => { s.done.textContent = s.text; s.rest.textContent = ''; });
+    return;
+  }
+
+  const caret = document.createElement('span');
+  caret.className = 'tw-caret';
+  segs[0].done.after(caret);
+  let caretAt = 0;
+
+  const t0 = performance.now();
+  function frame(now) {
+    const count = Math.min(total, Math.round(((now - t0) / CX_DEF_DURATION_MS) * total));
+    let left = count;
+    for (let i = 0; i < segs.length; i++) {
+      const n = Math.min(left, segs[i].text.length);
+      segs[i].done.textContent = segs[i].text.slice(0, n);
+      segs[i].rest.textContent = segs[i].text.slice(n);
+      left -= n;
+      const finished = n === segs[i].text.length;
+      if (!finished || i === segs.length - 1) {
+        const target = finished ? segs.length : i; // finished + last paragraph → drop the caret
+        if (target !== caretAt) {
+          caretAt = target;
+          if (target < segs.length) segs[target].done.after(caret);
+          else caret.remove();
+        }
+        if (!finished) break;
+      }
+    }
+    cxDefRaf = count < total ? requestAnimationFrame(frame) : null;
+  }
+  cxDefRaf = requestAnimationFrame(frame);
+}
+
 function populateBuzzwordModal(w) {
   if (window.aiahTrack && w && w.id) window.aiahTrack('buzzword:' + w.id);
   cxBack.classList.remove('podcast');
@@ -2850,6 +3072,7 @@ function populateBuzzwordModal(w) {
     <div class="cx-def">${defHTML}</div>
     ${exHTML ? `<div class="cx-examples"><div class="cx-examples-title">Exemple practice</div><ul>${exHTML}</ul></div>` : ''}
   `;
+  typeCxDef(cxBack.querySelector('.cx-def'));
   // Wire the back-face nav buttons
   // ← (cx-bz-newer)  = step toward current (higher index)
   // → (cx-bz-older)  = step into archive (lower index)
@@ -2910,7 +3133,7 @@ function openMissionModal() {
     <div class="cx-label">// Misiunea AI Accounting Hub</div>
     <h3>Viitorul profesiei contabile</h3>
     <div class="cx-def">
-      <p>Cea mai completă analiză în limba română despre ce se întâmplă <strong>acum</strong> în profesia contabilă — busola strategică în era inteligenței artificiale.</p>
+      <p>O analiză extinsă în limba română despre ce se întâmplă <strong>acum</strong> în profesia contabilă — busola strategică în era inteligenței artificiale.</p>
       <p>Parcurgem împreună drumul de la geneza ChatGPT (nov. 2022) până la realitatea Agenților AI (aprilie 2026), explorând saltul de la tabele Pivot la <em>Prompt Engineering</em> și schițând arhitectura clară a profesiei contabile pentru următorii <strong>5–10 ani</strong>.</p>
       <p>Mai mult decât o cronică — un plan de acțiune pentru noul contabil augmentat tehnologic.</p>
     </div>
@@ -2973,13 +3196,14 @@ function openWelcomeModal() {
     <h3>Bine ai venit. Iată traseul recomandat.</h3>
     <div class="cx-def">
       <p>Primul tău popas — <strong>cardul „Buzzword-ul săptămânii"</strong>: un termen AI explicat în limba română, cu pronunție, traducere și exemple aplicate în contabilitate. Ideal ca să fii la curent cu vocabularul săptămână de săptămână.</p>
-      <p>Al doilea — <strong>„Viitorul profesiei contabile"</strong>: seria fondatoare în 5 părți. E sufletul hub-ului. Disponibilă în două formate: <em>podcast</em> (20–30 min, pentru navetă) și <em>articol manifest</em> (30–40 min, pentru weekend la cafea). Alegi ritmul tău.</p>
-      <p>Al treilea — <strong>„Podcast"</strong>: episodul curent al săptămânii (acum: Prezentări financiare interactive prin fișiere HTML). Conversații între două gazde AI, fără filler, fără reclame.</p>
-      <p>În <strong>„Articolele"</strong> găsești analize practice — primul publicat: <em>Goana după promptul perfect</em>. În <strong>„Resurse"</strong> găsești ghiduri PDF, dashboard-uri Excel și mici tool-uri executabile, gata de download — fără cont, fără email, fără newsletter.</p>
-      <p>Recomandare: parcurge prima dată <em>seria fondatoare</em> în formatul tău preferat. Apoi revino săptămânal pentru buzzword + episodul podcast nou.</p>
+      <p>Al doilea — <strong>„Articolul săptămânii"</strong>: analiza pusă în capul paginii, cea pe care merită s-o citești dacă ai timp pentru una singură. Restul stau în <strong>arhiva de articole</strong> — analize practice, cu exemple din fluxuri reale de lucru, pe care le poți căuta și filtra după subiect.</p>
+      <p>Al treilea — <strong>„Podcast"</strong>: episodul curent, o conversație între două gazde AI. E gândit pentru momentele când mâinile sunt ocupate, dar mintea nu — drumul spre birou și înapoi, naveta, pauza de cafea. Fără filler, fără reclame: îl pornești, asculți 20–30 de minute și ieși cu o perspectivă nouă.</p>
+      <p>În <strong>„Resurse"</strong> găsești ghiduri PDF, dashboard-uri Excel și mici tool-uri executabile, gata de download — fără cont, fără email, fără newsletter.</p>
+      <p>Iar pentru momentele de liniște, când ai timp de citit pe îndelete — <strong>„Viitorul profesiei contabile"</strong>, seria fondatoare în 5 părți. E sufletul hub-ului și cere puțină reflecție, nu consum rapid. Disponibilă în două formate: <em>podcast</em> (20–30 min de parte) și <em>articol manifest</em> (30–40 min). Alegi ritmul tău.</p>
+      <p>Pe scurt: săptămânal treci pentru buzzword, articolul nou și episodul de podcast. Seria fondatoare o păstrezi pentru un weekend fără grabă — merită citită cap-coadă.</p>
     </div>
     <a href="viitorul-profesiei.html" class="cx-cta cx-cta-cyan">
-      Începe cu seria fondatoare
+      Vezi seria fondatoare
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </a>
   `;
