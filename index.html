@@ -575,6 +575,24 @@ section.block {
 .stair-side.is-typing p::after { display: none; }
 .stair-side.is-typing-p p::after { display: inline-block; }
 .stair-side.is-typing-p h4::after { display: none; }
+/* Scroll-driven variant (mobile): the untyped remainder stays in the flow,
+   just painted transparent, so the box keeps its final height and nothing
+   below it jumps while the text writes itself out. The caret therefore has to
+   ride the typed span instead of sitting at the element's end. */
+.tw-rest { color: transparent; }
+.stair-side.tw-scroll.is-typing h4::after,
+.stair-side.tw-scroll.is-typing-p p::after { display: none; }
+.stair-side.tw-scroll.is-typing h4 .tw-done::after,
+.stair-side.tw-scroll.is-typing-p p .tw-done::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 0.95em;
+  background: var(--accent);
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: caretBlink 0.7s step-end infinite;
+}
 @keyframes caretBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
@@ -3221,6 +3239,123 @@ document.querySelectorAll('.stair-row').forEach((row) => {
   document.addEventListener('mousemove', onMove, { passive: true });
   /* Drop the active row when the cursor leaves the document entirely */
   document.addEventListener('mouseleave', () => setActive(null));
+})();
+
+/* Stairway on mobile: there's no cursor to hover with, so scroll drives the
+   typewriter instead — a side text writes itself out when it scrolls into view
+   and rewinds when it leaves, so coming back to it replays the effect.
+   The copy always stays in the DOM (the untyped part is only painted
+   transparent via .tw-rest), so it remains readable for crawlers and screen
+   readers even if this block never runs, and the layout never shifts. */
+(function () {
+  if (!isMobileLayout) return;
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /* Rates, not per-char delays: the run is timed off the clock and drawn on
+     animation frames, so it lasts the same ~2.3s whether the phone is quick or
+     struggling. A setTimeout chain drifts badly here — the browser's minimum
+     timeout stretches a 4 ms/char paragraph to roughly double that. */
+  const HEAD_CPS = 55;   // heading chars per second
+  const PARA_CPS = 200;  // paragraph chars per second (these run ~270 chars)
+
+  /* Split an element into "typed so far" + "not yet typed" halves. Adjacent
+     inline spans keep the text flowing as one run, so line breaks and the
+     justified paragraph stay exactly where they'd be when finished. */
+  function split(el) {
+    const text = el.textContent;
+    const done = document.createElement('span');
+    const rest = document.createElement('span');
+    done.className = 'tw-done';
+    rest.className = 'tw-rest';
+    rest.textContent = text;
+    el.textContent = '';
+    el.append(done, rest);
+    return { text, done, rest };
+  }
+
+  function draw(t, n) {
+    t.done.textContent = t.text.slice(0, n);
+    t.rest.textContent = t.text.slice(n);
+  }
+
+  const engines = new Map();
+
+  document.querySelectorAll('.stair-row').forEach((row) => {
+    const side = row.querySelector('.stair-side');
+    if (!side) return;
+    const h4 = side.querySelector('h4');
+    const p = side.querySelector('p');
+    if (!h4 || !p) return;
+
+    side.classList.add('tw-scroll');
+    const head = split(h4);
+    const para = split(p);
+    let raf = null;
+
+    function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+    function rewind() {
+      stop();
+      side.classList.remove('is-typing', 'is-typing-p');
+      draw(head, 0);
+      draw(para, 0);
+    }
+
+    function start() {
+      stop();
+      draw(head, 0);
+      draw(para, 0);
+      side.classList.add('is-typing');
+      side.classList.remove('is-typing-p');
+
+      const headMs = (head.text.length / HEAD_CPS) * 1000;
+      const t0 = performance.now();
+
+      function frame(now) {
+        const t = now - t0;
+        if (t < headMs) {
+          draw(head, Math.floor((t / 1000) * HEAD_CPS));
+          raf = requestAnimationFrame(frame);
+          return;
+        }
+        /* Heading finished — hand the caret over to the paragraph */
+        if (side.classList.contains('is-typing')) {
+          draw(head, head.text.length);
+          side.classList.remove('is-typing');
+          side.classList.add('is-typing-p');
+        }
+        const n = Math.floor(((t - headMs) / 1000) * PARA_CPS);
+        if (n < para.text.length) {
+          draw(para, n);
+          raf = requestAnimationFrame(frame);
+        } else {
+          draw(para, para.text.length);
+          side.classList.remove('is-typing', 'is-typing-p');
+          raf = null;
+        }
+      }
+      raf = requestAnimationFrame(frame);
+    }
+
+    rewind();
+    engines.set(side, { start, rewind });
+  });
+
+  if (!engines.size) return;
+
+  /* Observe the side text itself, not the whole row — the row also holds the
+     card and can be taller than the viewport, which would make a percentage
+     threshold unreachable. */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const eng = engines.get(entry.target);
+      if (!eng) return;
+      if (entry.isIntersecting) eng.start(); else eng.rewind();
+    });
+  }, { threshold: 0.4 });
+
+  engines.forEach((_, side) => io.observe(side));
 })();
 
 cxClose.addEventListener('click', closeCx);
