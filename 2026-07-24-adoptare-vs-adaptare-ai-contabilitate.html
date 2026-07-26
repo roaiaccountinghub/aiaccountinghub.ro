@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Adoptare vs. adaptare: ce înseamnă, de fapt, să lucrezi cu AI în contabilitate — AI Accounting Hub</title>
 <meta name="description" content="Am citit un articol Deloitte despre trecerea de la adoptarea AI la adaptarea la AI. L-am tradus în limbaj de contabil: judecată, experimentare și gândire independentă, cu exemple practice din munca de zi cu zi.">
-<link rel="canonical" href="https://aiaccountinghub.ro/2026-07-24-adoptare-vs-adaptare-ai-contabilitate.html">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-07-24-Adoptare-vs-adaptare-ai-contabilitate.html">
 <!-- Open Graph -->
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://aiaccountinghub.ro/2026-07-24-adoptare-vs-adaptare-ai-contabilitate.html">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-07-24-Adoptare-vs-adaptare-ai-contabilitate.html">
 <meta property="og:site_name" content="AI Accounting Hub">
 <meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Adoptare vs. adaptare: ce înseamnă, de fapt, să lucrezi cu AI în contabilitate">
-<meta property="og:description" content="Adoptarea e ușor de demonstrat și ușor de simulat. Adaptarea se vede în trei comportamente. Le-am tradus din raportul Deloitte în munca reală de contabil.">
+<meta property="og:description" content="Adoptarea e ușor de demonstrat și ușor de simulat. Adaptarea se vede în trei comportamente. Le-am transpus din raportul Deloitte în munca reală de contabil.">
 <meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -71,6 +71,29 @@
 @media (max-width: 960px) { .article-cover { height: 370px; } }
 @media (max-width: 720px) { .article-cover { height: 290px; } }
 @media (max-width: 420px) { .article-cover { height: 250px; } }
+
+/* Comparație „în oglindă" — carduri responsive în loc de tabel */
+.vs-grid { margin: 32px 0; display: grid; gap: 16px; }
+.vs-pair {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+  background: var(--bg-1);
+}
+.vs-side { padding: 18px 20px; font-size: 15px; line-height: 1.62; }
+.vs-side.adopt { color: var(--fg-muted); border-right: 1px solid var(--border); }
+.vs-side.adapt { background: color-mix(in oklab, var(--accent) 7%, transparent); color: var(--fg); }
+.vs-tag {
+  display: block; font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.vs-side.adopt .vs-tag { color: var(--fg-dim); }
+.vs-side.adapt .vs-tag { color: var(--accent); }
+.vs-side.adapt strong { color: var(--fg); }
+@media (max-width: 720px) {
+  .vs-pair { grid-template-columns: 1fr; }
+  .vs-side.adopt { border-right: none; border-bottom: 1px solid var(--border); }
+}
 </style>
 <!-- Cloudflare Web Analytics -->
 <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
@@ -87,7 +110,7 @@
   "datePublished": "2026-07-24",
   "dateModified": "2026-07-24",
   "inLanguage": "ro",
-  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-07-24-adoptare-vs-adaptare-ai-contabilitate.html",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-07-24-Adoptare-vs-adaptare-ai-contabilitate.html",
   "author": {
     "@type": "Organization",
     "name": "AI Accounting Hub"
@@ -257,12 +280,12 @@
 
     <div class="article-cover">
       <div class="article-cover-bg" style="background-image:url('assets/adoptare-vs-adaptare-hero.webp')"></div>
-      <div class="article-cover-caption">// adoptare vs. adaptare · AI în contabilitate</div>
+      <div class="article-cover-caption">// Adoptare vs. adaptare · AI în contabilitate</div>
     </div>
 
     <div class="prose">
 
-      <p>Zilele trecute am citit un articol publicat de Deloitte care mi-a rămas în cap mai mult decât se cade unui raport de consultanță. Titlul lui e simplu: <em>de la adoptarea AI la adaptarea la AI</em>. Ideea centrală e și mai simplă — și exact de aceea incomodă.</p>
+      <p>Zilele trecute am citit un articol publicat de Deloitte care a reconfirmat ceea ce mulți dintre noi intuiam deja, fără să punem în cuvinte. Titlul lui e simplu: <em>de la adoptarea AI la adaptarea la AI</em>. Ideea centrală e simplă și exact de aceea incomodă.</p>
 
       <div class="callout">
         <div class="ic">
@@ -273,7 +296,7 @@
         </div>
       </div>
 
-      <p>Argumentul Deloitte pornește de la o observație care sună a benchmarking corporate, dar descrie perfect propriul nostru birou. Accesul la instrumente AI a crescut cu 50% într-un singur an, spun ei, dar sub 60% dintre cei care au acces le folosesc efectiv în fluxul zilnic de muncă, iar 84% dintre organizații nu au reproiectat nimic — nici joburile, nici procesele — în jurul acestor instrumente. Cu alte cuvinte: toată lumea a primit cheia, aproape nimeni n-a intrat în casă.</p>
+      <p>Argumentul Deloitte pornește de la o observație care sună a benchmarking corporate, dar descrie perfect multe dintre birourile de lucru. Accesul la instrumente AI a crescut cu 50% într-un singur an, spun ei, dar sub 60% dintre cei care au acces le folosesc efectiv în fluxul zilnic de muncă, iar 84% dintre organizații nu au reproiectat nimic — nici joburile, nici procesele — în jurul acestor instrumente. Cu alte cuvinte: toată lumea a primit cheia, aproape nimeni n-a intrat în casă.</p>
 
       <p>Diferența dintre a primi cheia și a te muta efectiv în casă e, pe scurt, diferența dintre <strong>adoptare</strong> și <strong>adaptare</strong>. Și e o diferență pe care noi, contabilii din România, o simțim deja pe pielea noastră, chiar dacă n-o numim așa.</p>
 
@@ -283,32 +306,24 @@
 
       <p>Adaptarea răspunde la o întrebare mult mai incomodă: <em>ai folosit instrumentul ca să lucrezi altfel?</em> Deloitte o formulează memorabil — adoptarea îți spune că cineva a deschis ușa, dar nu-ți spune nimic despre ce a devenit acea persoană de partea cealaltă a ușii. Valoarea reală a AI nu stă blocată într-un buton care așteaptă să fie apăsat. Stă în spațiul dintre om și mașină: în felul în care înveți să gândești alături de ea, s-o contrazici, să experimentezi cu ea și, în final, să-ți reconstruiești propriul mod de a lucra.</p>
 
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Adoptare</th>
-            <th>Adaptare</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ai cerut AI-ului să-ți explice o speță de TVA la încasare.</td>
-            <td>Ai verificat răspunsul în Codul fiscal, ai găsit unde a scăpat o excepție și ți-ai construit un mod fix de a pune întrebarea data viitoare.</td>
-          </tr>
-          <tr>
-            <td>Ai generat un draft de politică de prețuri de transfer.</td>
-            <td>Ai refăcut întregul flux de documentare — de la colectarea datelor la structura dosarului — pentru că AI a scos la iveală ce colectai prost.</td>
-          </tr>
-          <tr>
-            <td>Ai folosit AI să-ți scrie un e-mail către client.</td>
-            <td>Ai încetat să mai scrii manual categoria întreagă de e-mailuri recurente și ți-ai făcut un mic șablon reutilizabil.</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="vs-grid">
+        <div class="vs-pair">
+          <div class="vs-side adopt"><span class="vs-tag">Adoptare</span>Ai cerut AI-ului să-ți explice o speță de TVA la încasare.</div>
+          <div class="vs-side adapt"><span class="vs-tag">Adaptare</span>Ai verificat răspunsul în Codul fiscal, ai găsit unde a scăpat o excepție și ți-ai construit un mod fix de a pune întrebarea data viitoare.</div>
+        </div>
+        <div class="vs-pair">
+          <div class="vs-side adopt"><span class="vs-tag">Adoptare</span>Ai generat un draft de politică de prețuri de transfer.</div>
+          <div class="vs-side adapt"><span class="vs-tag">Adaptare</span>Ai reconstruit dosarul de prețuri de transfer ca șablon reutilizabil — cu secțiunile, sursele și analiza de comparabilitate structurate o dată, astfel încât anul viitor pornești de la el, nu de la zero.</div>
+        </div>
+        <div class="vs-pair">
+          <div class="vs-side adopt"><span class="vs-tag">Adoptare</span>Ai folosit AI să-ți scrie un e-mail către client.</div>
+          <div class="vs-side adapt"><span class="vs-tag">Adaptare</span>Ai încetat să mai scrii manual categoria întreagă de e-mailuri recurente și ți-ai făcut un mic șablon reutilizabil.</div>
+        </div>
+      </div>
 
-      <p>Prima coloană e ușor de raportat și ușor de simulat. A doua coloană e cea care contează — și e exact cea pe care programele de „transformare digitală” o ratează de fiecare dată, pentru că nu știu s-o măsoare.</p>
+      <p>Prima variantă e ușor de raportat și ușor de simulat. A doua e cea care contează — și e exact cea pe care programele de „transformare digitală” o ratează de fiecare dată, pentru că nu știu s-o măsoare.</p>
 
-      <blockquote>Adoptarea întreabă: <em>ai folosit-o?</em> Adaptarea întreabă: <em>ai folosit-o ca să obții un rezultat pe care nu-l puteai obține altfel?</em></blockquote>
+      <blockquote>Adoptarea întreabă: <em>ai folosit AI?</em> Adaptarea întreabă: <em>ai folosit AI ca să obții un rezultat pe care nu-l puteai obține altfel?</em></blockquote>
 
       <h2 id="s-piloni">Cei trei piloni ai adaptării</h2>
 
@@ -352,7 +367,7 @@
       <div class="example">
         <span class="lbl">Exemplu practic</span>
         <p>Un contabil care <strong>adoptă</strong> folosește AI-ul pentru o singură sarcină — să zicem, redactarea unei note explicative — și atât, oricât de bine ar face-o.</p>
-        <p>Un contabil care <strong>se adaptează</strong> testează ipoteze: <em>„Ce-ar fi dacă i-aș da AI-ului balanța ca să-mi semnaleze conturile cu variații neobișnuite înainte de închidere?” „Ce-ar fi dacă mi-aș construi un mic instrument care verifică un CIF în baza ANAF fără să știu programare?”</em> Unele idei eșuează. Dar fiecare experiment documentat lărgește harta a ceea ce e posibil.</p>
+        <p>Un contabil care <strong>se adaptează</strong> testează ipoteze: <em>„Ce-ar fi dacă aș construi cu AI un mic checklist de verificări pre-închidere, pe care apoi îl rulez eu pe balanță, fără să dau modelului cifrele reale?” „Ce-ar fi dacă mi-aș construi un mic instrument care verifică un CIF în baza ANAF fără să știu programare?”</em> Unele idei eșuează. Dar fiecare experiment documentat lărgește harta a ceea ce e posibil.</p>
       </div>
 
       <p>Al doilea exemplu nu e ipotetic — e chiar traseul pe care mulți dintre noi l-am parcurs deja, de la „nu știu să scriu o linie de cod” la „am construit un instrument care chiar merge”. Asta <em>este</em> experimentare adaptativă. Iar caracteristica ei nu e succesul fiecărei încercări, ci disponibilitatea de a încerca.</p>
@@ -364,7 +379,7 @@
         <li><strong>Nudge-uri mici, cu miză mică.</strong> De multe ori bariera nu e rezistența, ci incertitudinea: omul nu știe cu ce să înceapă sau se teme să nu pară incompetent.</li>
       </ul>
 
-      <p>Și un avertisment care ține de deontologia noastră: experimentarea trebuie să vină cu <em>guardrails</em>. Deloitte dă exemplul BBVA, unde principiul stabilit de sus e clar — AI-ul generativ e asistent, nu agent autonom; orice rezultat cere validare umană înainte să atingă un sistem. Pentru noi, care lucrăm cu date financiare și fiscale sensibile, regula e și mai strictă: experimentează pe date anonimizate sau fictive, niciodată pe datele reale ale clientului într-un instrument necontrolat. Adaptarea inteligentă și confidențialitatea nu se exclud — se condiționează reciproc.</p>
+      <p>Și un avertisment care ține de deontologia noastră: experimentarea trebuie să vină cu <em>bariere</em>. Deloitte dă exemplul BBVA, unde principiul stabilit de sus e clar — AI-ul generativ e asistent, nu agent autonom; orice rezultat cere validare umană înainte să atingă un sistem. Pentru noi, care lucrăm cu date financiare și fiscale sensibile, regula e și mai strictă: experimentează pe date anonimizate sau fictive, niciodată pe datele reale ale clientului într-un instrument necontrolat. Adaptarea inteligentă și confidențialitatea nu se exclud — se condiționează reciproc.</p>
 
       <h2 id="s-gandire">3 · Gândirea independentă: cum îți protejezi partea pe care AI n-o poate replica?</h2>
 
@@ -378,14 +393,14 @@
 
       <div class="example">
         <span class="lbl">Exemplu practic</span>
-        <p><strong>Adoptare:</strong> primești de la AI trei scenarii de optimizare fiscală și îl alegi pe cel recomandat.</p>
-        <p><strong>Adaptare:</strong> citești cele trei scenarii ca punct de plecare, apoi întrebi ce ratează toate trei. Aduci contextul pe care modelul nu-l avea — istoricul clientului, apetitul lui la risc, un control recent în domeniu — și formulezi a patra variantă. AI-ul ți-a dat materia primă; reîncadrarea a fost a ta.</p>
+        <p><strong>Adoptare:</strong> ceri AI-ului trei formate de raport lunar pentru conducere și îl alegi pe cel mai arătos.</p>
+        <p><strong>Adaptare:</strong> citești cele trei formate ca punct de plecare, apoi întrebi ce indicator lipsește din toate. Aduci contextul pe care modelul nu-l avea — ce decizie chinuie conducerea acum, ce a cerut ea data trecută, unde se ascund riscurile reale — și construiești un al patrulea raport, croit pe întrebarea lor, nu pe un șablon. AI-ul ți-a dat materia primă; reîncadrarea a fost a ta.</p>
       </div>
 
       <p>Cum protejezi practic această gândire, când calendarul e plin și 43% dintre profesioniști spun (tot în datele Deloitte) că lipsa de timp e cea mai mare barieră în adaptare? Câteva măsuri concrete, aplicabile și individual, nu doar la nivel de firmă:</p>
       <ul class="checklist">
         <li><strong>Blochează timp de „muncă profundă”</strong> în calendar, fără notificări — pentru spețele care chiar cer gândire, nu execuție.</li>
-        <li><strong>Introdu deliberat frecare</strong> când te prinzi în tiparul „prompt-and-accept”: înainte să dai mai departe un rezultat AI, oprește-te și întreabă ce idee <em>nu</em> ar fi generat modelul.</li>
+        <li><strong>Adaugă un pas de verificare voit</strong> când te prinzi în tiparul „prompt-and-accept”: înainte să dai mai departe un rezultat AI, oprește-te și întreabă ce idee <em>nu</em> ar fi generat modelul.</li>
         <li><strong>Nu te grăbi să umpli</strong> timpul eliberat prin automatizare cu și mai multă muncă de rutină. Spațiul acela liber e resursa, nu risipa.</li>
         <li><strong>Măsoară impactul, nu volumul.</strong> A recompensa cantitatea de muncă — sau chiar cantitatea de utilizare AI — duce la risipă și la oboseală, nu la valoare.</li>
       </ul>
@@ -396,7 +411,7 @@
 
       <p>Pentru noi, ca profesie, întrebarea nu e „câți colegi au deschis luna asta asistentul AI”. Întrebarea e dacă, de partea cealaltă a ușii, gândim mai bine, verificăm mai atent, experimentăm mai curajos și ne păstrăm exact acea judecată pe care niciun model lingvistic nu o poate semna în locul nostru.</p>
 
-      <blockquote>Organizațiile — și contabilii — care vor conduce în era AI nu vor fi neapărat cei cu cele mai mari rate de adoptare. Vor fi cei care au folosit AI ca să construiască ceva mai durabil: capacitatea de a gândi cu judecată, de a experimenta fără frică și de a face munca profundă pe care niciun model n-o poate replica.</blockquote>
+      <blockquote>Organizațiile — și contabilii — care vor conduce în era AI nu vor fi neapărat cei cu cele mai mari rate de adoptare. Vor fi cei care au folosit AI ca să construiască ceva mai durabil: capacitatea de a gândi critic, de a experimenta fără frică și de a face munca profundă pe care niciun model n-o poate replica.</blockquote>
 
       <h2 id="s-concluzie">Ce rămâne</h2>
 
@@ -414,7 +429,7 @@
         <span class="footer-mono">Articolul #017</span>
       </div>
 
-      <div id="article-rating" data-article="2026-07-24-adoptare-vs-adaptare-ai-contabilitate"></div>
+      <div id="article-rating" data-article="2026-07-24-Adoptare-vs-adaptare-ai-contabilitate"></div>
 
     </div>
   </article>
