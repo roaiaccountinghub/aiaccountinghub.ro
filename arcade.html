@@ -436,13 +436,13 @@
 
 <!-- ═══ Acțiunile din carduri: „Salvează jocul” și „Provoacă un coleg” ═══
      Promptul de instalare aparține paginii jocului (manifestul lui), nu acestei
-     pagini. De aceea: pe desktop descărcăm o scurtătură (merge direct), iar pe
-     telefon deschidem jocul cu #salveaza, unde butonul e chiar în ecranul de start. -->
+     pagini — arcade.html nu declară niciun manifest. De aceea „Salvează jocul”
+     deschide jocul cu #salveaza, unde butonul din ecranul de start declanșează
+     instalarea nativă. Rezerva cu fișier .url există în pagina fiecărui joc,
+     pentru browserele fără suport de instalare. -->
 <script>
 'use strict';
 (function () {
-  var tactil = matchMedia('(pointer: coarse)').matches;
-
   function mesaj(btn, txt) {
     if (btn.getAttribute('data-ocupat')) return;
     btn.setAttribute('data-ocupat', '1');
@@ -475,42 +475,16 @@
   });
 
   /* ───── Salvează jocul ───── */
-  function descarcaScurtatura(btn) {
-    var url = adresa(btn), nume = btn.getAttribute('data-nume');
-    var CRLF = String.fromCharCode(13, 10), LF = String.fromCharCode(10);
-    var peMac = /Mac|iPhone|iPad/i.test(navigator.userAgent);
-    var interzise = ':*?"<>|/' + String.fromCharCode(92);
-    var curat = '';
-    for (var i = 0; i < nume.length; i++) {
-      if (interzise.indexOf(nume.charAt(i)) === -1) curat += nume.charAt(i);
-    }
-    var continut, fisier;
-    if (peMac) {
-      continut = ['<?xml version="1.0" encoding="UTF-8"?>',
-        '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">',
-        '<plist version="1.0"><dict><key>URL</key><string>' + url + '</string></dict></plist>'].join(LF);
-      fisier = curat + '.webloc';
-    } else {
-      continut = ['[InternetShortcut]', 'URL=' + url, 'IconIndex=0', ''].join(CRLF);
-      fisier = curat + '.url';
-    }
-    try {
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob([continut], { type: 'text/plain' }));
-      a.download = fisier;
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-      mesaj(btn, '\u2713 Scurt\u0103tur\u0103 desc\u0103rcat\u0103');
-    } catch (e) {
-      mesaj(btn, 'Nu s-a putut salva');
-    }
-  }
-
   Array.prototype.forEach.call(document.querySelectorAll('.cab-salv'), function (btn) {
     btn.addEventListener('click', function () {
-      if (tactil) { location.href = btn.getAttribute('data-joc') + '#salveaza'; return; }
-      descarcaScurtatura(btn);
+      /* Același drum pe telefon și pe desktop: ducem utilizatorul în pagina
+         jocului, unde butonul de salvare declanșează promptul nativ de
+         instalare. Hub-ul nu poate instala el un joc — `beforeinstallprompt`
+         aparține paginii curente și manifestului ei, iar arcade.html nu are
+         manifest. Înainte, pe desktop se descărca un fișier .url; Edge îl
+         bloca („this type of file can harm your device"), iar chiar și deschis
+         era doar un tab, fără iconiță și fără fereastră proprie. */
+      location.href = btn.getAttribute('data-joc') + '#salveaza';
     });
   });
 })();

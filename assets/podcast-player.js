@@ -54,7 +54,7 @@
 
   /* ---------- Construiește modalul (o singură dată) ---------- */
   var els = {};
-  var state = { ep: null, speedIdx: 0, lastOn: -1, saveT: 0, seeking: false, pickerOpen: false };
+  var state = { ep: null, speedIdx: 0, lastOn: -1, saveT: 0, seeking: false, pickerOpen: false, speedOpen: false };
 
   function build() {
     var back = document.createElement('div');
@@ -89,7 +89,16 @@
               '<button class="ppl-tbtn ppl-back" type="button" aria-label="Înapoi 10 secunde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a7 7 0 1 1-6.9 5.8"/><path d="M12 2 8.4 5 12 8"/></svg><span class="ppl-n">10</span></button>' +
               '<button class="ppl-tbtn ppl-play" type="button" aria-label="Redă"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>' +
               '<button class="ppl-tbtn ppl-fwd" type="button" aria-label="Înainte 10 secunde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a7 7 0 1 0 6.9 5.8"/><path d="M12 2 15.6 5 12 8"/></svg><span class="ppl-n">10</span></button>' +
-              '<div class="ppl-speed-wrap"><select class="ppl-speed" aria-label="Viteză de redare"><option value="0.75">0.75&times;</option><option value="1" selected>1&times;</option><option value="1.25">1.25&times;</option><option value="1.5">1.5&times;</option><option value="1.75">1.75&times;</option><option value="2">2&times;</option></select><svg class="ppl-speed-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>' +
+              '<div class="ppl-speed-wrap">' +
+                '<select class="ppl-speed" aria-label="Viteză de redare"><option value="0.75">0.75&times;</option><option value="1" selected>1&times;</option><option value="1.25">1.25&times;</option><option value="1.5">1.5&times;</option><option value="1.75">1.75&times;</option><option value="2">2&times;</option></select>' +
+                '<svg class="ppl-speed-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>' +
+                /* Selector propriu de viteză, vizibil doar pe mobil — vezi podcast-player.css */
+                '<button class="ppl-sbtn" type="button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="ppl-slist" aria-label="Viteză de redare">' +
+                  '<span class="ppl-sbtn-label">1&times;</span>' +
+                  '<svg class="ppl-sbtn-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>' +
+                '</button>' +
+                '<div class="ppl-slist" id="ppl-slist" role="listbox" aria-label="Viteze de redare"></div>' +
+              '</div>' +
             '</div>' +
           '</div>' +
           '<div class="ppl-chaps">' +
@@ -123,6 +132,10 @@
     els.backBtn = back.querySelector('.ppl-back');
     els.fwdBtn = back.querySelector('.ppl-fwd');
     els.speed = back.querySelector('.ppl-speed');
+    els.speedWrap = back.querySelector('.ppl-speed-wrap');
+    els.sbtn = back.querySelector('.ppl-sbtn');
+    els.sbtnLabel = back.querySelector('.ppl-sbtn-label');
+    els.slist = back.querySelector('.ppl-slist');
     els.chaps = back.querySelector('.ppl-chapters');
     els.chCount = back.querySelector('.ppl-ch-count');
     els.cur = back.querySelector('.ppl-cur');
@@ -134,6 +147,8 @@
     els.audio = back.querySelector('.ppl-audio');
 
     buildDropdown();
+    buildSpeedList();
+    syncSpeedPicker();
     wire();
   }
 
@@ -199,6 +214,59 @@
   }
   function moveOpt(from, dir) {
     var opts = [].slice.call(els.clist.querySelectorAll('.ppl-copt'));
+    var i = opts.indexOf(from);
+    var next = opts[Math.max(0, Math.min(opts.length - 1, (i < 0 ? 0 : i) + dir))];
+    if (next) { next.focus(); next.scrollIntoView({ block: 'nearest' }); }
+  }
+
+  /* ---------- Selector propriu de viteză (activ doar pe mobil) ----------
+     Aceeași problemă și aceeași soluție ca la episoade: pe Android lista unui
+     <select> nativ e desenată de sistem, cu fontul lui și fără culorile noastre.
+     Opțiunile se citesc din <select>, ca să nu existe două liste de viteze; la
+     alegere setăm valoarea în select și lansăm 'change', deci calculul lui
+     playbackRate rămâne într-un singur loc (handlerul din wire()). */
+  function buildSpeedList() {
+    var html = '';
+    for (var i = 0; i < els.speed.options.length; i++) {
+      var o = els.speed.options[i];
+      html += '<div class="ppl-sopt" role="option" tabindex="-1" aria-selected="false"' +
+              ' data-val="' + esc(o.value) + '">' + esc(o.textContent) + '</div>';
+    }
+    els.slist.innerHTML = html;
+  }
+  function openSpeedPicker() {
+    if (state.speedOpen) return;
+    state.speedOpen = true;
+    els.speedWrap.classList.add('ppl-speed-open');
+    els.sbtn.setAttribute('aria-expanded', 'true');
+    var sel = els.slist.querySelector('.ppl-sopt[aria-selected="true"]') || els.slist.querySelector('.ppl-sopt');
+    if (sel) { sel.focus(); sel.scrollIntoView({ block: 'nearest' }); }
+  }
+  function closeSpeedPicker(refocus) {
+    if (!state.speedOpen) return;
+    state.speedOpen = false;
+    els.speedWrap.classList.remove('ppl-speed-open');
+    els.sbtn.setAttribute('aria-expanded', 'false');
+    if (refocus) els.sbtn.focus();
+  }
+  function pickSpeed(val) {
+    closeSpeedPicker(true);
+    els.speed.value = val;
+    els.speed.dispatchEvent(new Event('change'));
+  }
+  /* Ține eticheta și rândul marcat în sincron cu <select> — inclusiv când viteza
+     e schimbată din select-ul nativ, pe desktop. */
+  function syncSpeedPicker() {
+    var v = els.speed.value;
+    var opts = els.slist.querySelectorAll('.ppl-sopt');
+    for (var i = 0; i < opts.length; i++) {
+      var activ = opts[i].getAttribute('data-val') === v;
+      opts[i].setAttribute('aria-selected', activ ? 'true' : 'false');
+      if (activ) els.sbtnLabel.textContent = opts[i].textContent;
+    }
+  }
+  function moveSopt(from, dir) {
+    var opts = [].slice.call(els.slist.querySelectorAll('.ppl-sopt'));
     var i = opts.indexOf(from);
     var next = opts[Math.max(0, Math.min(opts.length - 1, (i < 0 ? 0 : i) + dir))];
     if (next) { next.focus(); next.scrollIntoView({ block: 'nearest' }); }
@@ -383,6 +451,7 @@
   function close() {
     if (!els.back) return;
     closePicker(false);
+    closeSpeedPicker(false);
     savePos();
     els.audio.pause();
     els.back.classList.remove('open');
@@ -411,6 +480,7 @@
     els.fwdBtn.addEventListener('click', function () { seekTo(A.currentTime + 10); });
     els.speed.addEventListener('change', function () {
       A.playbackRate = parseFloat(els.speed.value) || 1;
+      syncSpeedPicker();
       updatePositionState();
     });
 
@@ -439,9 +509,34 @@
       else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pickEpisode(o.getAttribute('data-id')); }
       else if (e.key === 'Tab') closePicker(false);
     });
-    // tap oriunde altundeva în card închide lista
+
+    /* Selectorul propriu de viteză (mobil) — vezi openSpeedPicker() */
+    els.sbtn.addEventListener('click', function () {
+      if (state.speedOpen) closeSpeedPicker(true); else openSpeedPicker();
+    });
+    els.sbtn.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); openSpeedPicker(); }
+    });
+    els.slist.addEventListener('click', function (e) {
+      var o = e.target.closest('.ppl-sopt');
+      if (o) pickSpeed(o.getAttribute('data-val'));
+    });
+    els.slist.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { e.stopPropagation(); closeSpeedPicker(true); return; }
+      var o = e.target.closest('.ppl-sopt');
+      if (!o) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); moveSopt(o, 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); moveSopt(o, -1); }
+      else if (e.key === 'Home') { e.preventDefault(); moveSopt(o, -999); }
+      else if (e.key === 'End') { e.preventDefault(); moveSopt(o, 999); }
+      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pickSpeed(o.getAttribute('data-val')); }
+      else if (e.key === 'Tab') closeSpeedPicker(false);
+    });
+
+    // tap oriunde altundeva în card închide listele deschise
     els.card.addEventListener('click', function (e) {
       if (state.pickerOpen && !e.target.closest('.ppl-picker')) closePicker(false);
+      if (state.speedOpen && !e.target.closest('.ppl-speed-wrap')) closeSpeedPicker(false);
     });
 
     // scrubber

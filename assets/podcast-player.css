@@ -116,11 +116,17 @@
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
     padding: 9px 10px 4px;
   }
-  /* Un rând per episod: titlul lung se taie cu „…", nu se rupe pe mai multe linii. */
+  /* Două rânduri per episod: la ~276px de lăţime un singur rând tăia titlul pe
+     la 35 de caractere, iar E01 și M01–M04 deveneau greu de deosebit. Cu
+     line-clamp pe 2 se vede practic titlul întreg, iar „…" apare doar la cele
+     mai lungi. `-webkit-box` e forma cerută de line-clamp; e suportată în toate
+     browserele actuale, inclusiv Chrome pe Android. */
   .ppl-copt {
     font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600;
-    color: #d4e7f0; border-radius: 8px; padding: 10px; cursor: pointer;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    line-height: 1.3;
+    color: #d4e7f0; border-radius: 8px; padding: 9px 10px; cursor: pointer;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+    overflow: hidden;
   }
   .ppl-copt[aria-selected="true"] {
     background: color-mix(in oklab, var(--accent) 18%, transparent); color: #fff;
@@ -149,9 +155,14 @@
   border: 1px solid var(--border); background: rgba(0,0,0,0.25);
 }
 .ppl-art-img { width: 100%; height: 100%; object-fit: cover; display: block; will-change: transform; }
-/* Efect subtil „Ken Burns" (zoom+pan lent) doar cât timp se redă */
-.ppl-card.playing .ppl-art-img { animation: ppl-kenburns 26s ease-in-out infinite alternate; }
-@keyframes ppl-kenburns { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.09) translate(-1.2%, 0.8%); } }
+/* Efect „Ken Burns" (zoom+pan lent) doar cât timp se redă.
+   Calibrat la ~1,2 px/s: 26s/scale 1.09/ease-in-out dădeau 0,36 px/s în medie și
+   doar 0,08 px/s în primele secunde — sub pragul la care ochiul percepe o derivă
+   lentă (~1–3 px/s), deci efectul exista dar era invizibil. `linear` contează la
+   fel de mult ca durata: ease-in-out ținea imaginea aproape nemișcată exact la
+   început, când te uiți la ea. */
+.ppl-card.playing .ppl-art-img { animation: ppl-kenburns 14s linear infinite alternate; }
+@keyframes ppl-kenburns { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.12) translate(-1.2%, 0.8%); } }
 
 /* Undă subțire sub imagine — mișcare abia perceptibilă */
 .ppl-wave { display: flex; align-items: center; justify-content: center; gap: 2px; width: 100%; cursor: pointer; }
@@ -197,6 +208,53 @@
 .ppl-speed:focus-visible { outline: 2px solid color-mix(in oklab, var(--accent) 55%, transparent); outline-offset: 1px; }
 .ppl-speed option { background: #0b1a25; color: var(--fg); }
 .ppl-speed-caret { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--accent); width: 12px; height: 12px; }
+
+/* ---------- Selector propriu de viteză — DOAR pe mobil (≤640px) ----------
+   Același motiv ca la lista de episoade: pe Android lista unui <select> nativ e
+   desenată de sistem, cu fontul lui, ignorând complet stilul paginii. Butonul
+   închis păstrează exact forma pastilei de acum (mono 12px, colţuri rotunde),
+   iar lista se deschide în SUS: comenzile de transport stau în jumătatea de jos
+   a cardului, unde dedesubt urmează bara de derulare și subsolul. */
+.ppl-sbtn, .ppl-slist { display: none; }
+
+@media (max-width: 640px) {
+  .ppl-speed-wrap > .ppl-speed,
+  .ppl-speed-wrap > .ppl-speed-caret { display: none; }
+
+  .ppl-sbtn {
+    display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+    color: var(--fg);
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border-strong);
+    border-radius: 999px; padding: 8px 10px 8px 12px; transition: all 0.2s;
+  }
+  .ppl-sbtn-caret { width: 12px; height: 12px; flex-shrink: 0; color: var(--accent); transition: transform 0.2s ease; }
+  .ppl-speed-open .ppl-sbtn { border-color: var(--accent); color: var(--accent); }
+  .ppl-speed-open .ppl-sbtn-caret { transform: rotate(180deg); }
+
+  .ppl-speed-open .ppl-slist {
+    display: block;
+    position: absolute; left: 50%; transform: translateX(-50%);
+    bottom: calc(100% + 6px); z-index: 6;
+    min-width: 100%;
+    background: #0b1a25;
+    border: 1px solid color-mix(in oklab, var(--accent) 34%, transparent);
+    border-radius: 12px; padding: 5px;
+    box-shadow: 0 -18px 40px -16px rgba(0,0,0,0.75);
+  }
+  .ppl-sopt {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+    color: #d4e7f0; text-align: center; white-space: nowrap;
+    border-radius: 8px; padding: 9px 14px; cursor: pointer;
+  }
+  .ppl-sopt[aria-selected="true"] {
+    background: color-mix(in oklab, var(--accent) 18%, transparent); color: #fff;
+  }
+  .ppl-sopt:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--accent) 55%, transparent);
+    outline-offset: -2px;
+  }
+}
 
 /* Dreapta: capitole (fără durată per capitol) */
 .ppl-chapters-head { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 10px; display: flex; justify-content: space-between; }

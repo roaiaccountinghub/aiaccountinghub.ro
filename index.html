@@ -717,7 +717,14 @@ section.block {
 .flip-card {
   cursor: pointer;
   border-radius: 18px;
+  /* Fundalul și bordura stau pe .flip-face, nu pe card. Înălțimea cardului o dă
+     însă aspect-ratio (desktop) sau min-height (mobil), iar fața creștea doar
+     cât conținutul ei — rămâneau ~90px transparenți jos pe desktop și ~76px pe
+     mobil, singurul card din cele șase cu problema asta. Flex + flex:1 pe față
+     o face să umple cardul, ca la celelalte (toate sunt deja display:flex). */
+  display: flex;
 }
+.flip-card > .flip-face { flex: 1; min-height: 0; }
 /* Single static face — no flip-in-place anymore (click opens the shared
    modal instead), so this is just a normal-flow box, not an absolutely
    positioned face stacked against a sibling. */
@@ -1937,6 +1944,15 @@ section.block {
   }
   .cx-face { padding: 26px; border-radius: 18px; }
   .cx-back { padding: 30px 26px 26px; }
+  /* Bara de derulare, mereu vizibilă pe mobil — e singurul semn că mai există
+     text sub marginea cardului. Readucem `scrollbar-width` și `scrollbar-color`
+     la `auto`, pentru că din Chrome 121 o valoare non-inițială a oricăreia
+     dintre ele face ca regulile `.cx-back::-webkit-scrollbar` (mai sus, 8px cu
+     degetar cyan) să fie ignorate — iar `thin` dădea o bară suprapusă, lată de
+     0px, care se ascunde singură după derulare. Cu ambele pe `auto`, stilul
+     ::-webkit redevine activ și bara ocupă spațiu, deci rămâne afișată.
+     Pe desktop nu schimbăm nimic: acolo bara subțire e în regulă. */
+  .cx-back { scrollbar-width: auto; scrollbar-color: auto; }
   .cx-back h3 { font-size: 24px; }
   .cx-front .cx-word { font-size: clamp(40px, 9vw, 64px); }
   .cx-close { width: 38px; height: 38px; top: -14px; right: -14px; }

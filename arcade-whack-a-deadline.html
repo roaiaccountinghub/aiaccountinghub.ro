@@ -1435,19 +1435,25 @@ function randeazaTop5(pozitiaNoua){
 }
 function escapeHTML(s){ return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c])); }
 
-/* provocarea colegilor: Web Share pe mobil, clipboard pe desktop */
+/* provocarea colegilor: Web Share pe mobil, clipboard pe desktop.
+   Linkul e adresa jocului, nu domeniul: colegul aterizează direct în joc.
+   `url` se trimite separat de `text` (WhatsApp, Messenger etc. îl lipesc
+   singure la final) ca să nu apară de două ori; pe desktop, unde nu există
+   navigator.share, îl adăugăm manual la ce ajunge în clipboard. */
 async function provoacaColeg(){
-  const text = `Am făcut ${puncteText(finalScor)} la Whack-a-Deadline pe Arcade-ul Contabilului — bate-mă: aiaccountinghub.ro`;
+  const url = location.origin + location.pathname;
+  const text = `Am făcut ${puncteText(finalScor)} la Whack-a-Deadline pe Arcade-ul Contabilului — bate-mă:`;
   if (navigator.share){
-    try { await navigator.share({ text }); return; }
+    try { await navigator.share({ title: 'Whack-a-Deadline', text, url }); return; }
     catch (e) { if (e && e.name === 'AbortError') return; }
   }
+  const textCuLink = text + ' ' + url;
   let ok = false;
-  try { await navigator.clipboard.writeText(text); ok = true; }
+  try { await navigator.clipboard.writeText(textCuLink); ok = true; }
   catch (e) {
     try {
       const ta = document.createElement('textarea');
-      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      ta.value = textCuLink; ta.style.position = 'fixed'; ta.style.opacity = '0';
       document.body.appendChild(ta); ta.select();
       ok = document.execCommand('copy');
       ta.remove();
