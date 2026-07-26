@@ -715,24 +715,16 @@ section.block {
 
 /* Flip card */
 .flip-card {
-  perspective: 1200px;
-  aspect-ratio: 1 / 1;
   cursor: pointer;
   border-radius: 18px;
 }
-.flip-inner {
-  position: relative;
-  width: 100%; height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
-}
-.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+/* Single static face — no flip-in-place anymore (click opens the shared
+   modal instead), so this is just a normal-flow box, not an absolutely
+   positioned face stacked against a sibling. */
 .flip-face {
-  position: absolute; inset: 0;
+  position: relative;
   border-radius: 18px;
   padding: 24px;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   display: flex; flex-direction: column;
   align-items: center;
   text-align: center;
@@ -755,19 +747,6 @@ section.block {
   content: '';
   position: absolute; inset: 0;
   background-image: repeating-linear-gradient(45deg, color-mix(in oklab, var(--accent) 4%, transparent) 0 1px, transparent 1px 24px);
-  pointer-events: none;
-}
-.flip-back {
-  background: linear-gradient(145deg, var(--primary) 0%, #0b2a3a 100%);
-  color: #e0f5ff;
-  transform: rotateY(180deg);
-  justify-content: space-between;
-}
-.flip-back::before {
-  content: '';
-  position: absolute; top: -30%; right: -20%;
-  width: 360px; height: 360px; border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in oklab, var(--accent) 30%, transparent) 0%, transparent 70%);
   pointer-events: none;
 }
 .flip-meta {
@@ -837,46 +816,6 @@ section.block {
   border-color: var(--accent);
 }
 .flip-hint svg { width: 14px; height: 14px; }
-.flip-back .back-top {
-  position: relative;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-.flip-back .back-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--accent-2);
-  position: relative;
-}
-.flip-back .back-num {
-  display: none; /* numbering hidden — single-word state for now */
-}
-.flip-back h3 {
-  font-size: 22px; margin-bottom: 4px; font-weight: 600;
-  position: relative;
-}
-.flip-back .back-pronounce {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; font-weight: 400;
-  color: color-mix(in oklab, var(--accent-2) 80%, transparent);
-  letter-spacing: 0.02em;
-  margin-bottom: 12px;
-  position: relative;
-}
-.flip-back .def {
-  font-size: 12.5px; line-height: 1.55; color: #bdd7e2;
-  position: relative; flex: 1;
-}
-.flip-back .use-case {
-  position: relative;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 14px; margin-top: 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; color: var(--accent-2);
-  letter-spacing: 0.04em;
-}
 .flip-nav {
   position: relative;
   display: flex; gap: 6px; margin-top: 16px;
@@ -1162,8 +1101,6 @@ section.block {
 .stair-row.is-hot .welcome-card.is-warm .cc-hint-warm {
   background: var(--accent-warm); color: #1a0f07; border-color: var(--accent-warm);
 }
-/* Cardul Arcade e un link — anulăm stilurile implicite de ancoră */
-a.community-card { text-decoration: none; color: inherit; }
 /* Row hover-glow propagation: include the 2 community cards */
 .stair-row:hover .welcome-card,
 .stair-row.is-hot .welcome-card {
@@ -1356,29 +1293,6 @@ a.community-card { text-decoration: none; color: inherit; }
 }
 .bz-archive svg { width: 12px; height: 12px; }
 .flip-card:hover .bz-archive { background: var(--accent); color: #07121a; border-color: var(--accent); }
-
-/* Back face — pronunciation + RO translation row */
-.flip-back .back-pron-row {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px;
-  margin-bottom: 14px;
-  position: relative;
-}
-.flip-back .back-ro {
-  font-size: 11.5px;
-  color: color-mix(in oklab, var(--accent-2) 90%, transparent);
-  letter-spacing: 0.02em;
-}
-.flip-back .def p { margin: 0 0 8px; font-size: 12.5px; line-height: 1.55; color: #bdd7e2; }
-.flip-back .def p:last-child { margin-bottom: 0; }
-.flip-back .def.is-typing::after {
-  content: '';
-  display: inline-block;
-  width: 2px; height: 0.95em;
-  background: var(--accent-2);
-  vertical-align: -2px;
-  margin-left: 2px;
-  animation: caretBlink 0.7s step-end infinite;
-}
 
 /* ============ MISSION CARD — flip-back face ============ */
 .mission-card.flip-card-host { perspective: 1200px; padding: 0; }
@@ -2222,10 +2136,6 @@ a.community-card { text-decoration: none; color: inherit; }
   .stair-card-wrap .mission-card { aspect-ratio: auto; min-height: 280px; }
   /* pe mobil cardurile de comunitate rămân la proporția de dinainte (2,05 e prea turtit) */
   .stair-card-wrap .welcome-card { aspect-ratio: 1.82 / 1; }
-  /* Flip-card uses absolutely-positioned faces inside .flip-inner { height:100% },
-     which collapses without a definite parent height. Restore an aspect ratio
-     so the parent has a real computed height for the faces to fill. */
-  .stair-card-wrap .flip-card { aspect-ratio: 1 / 1; min-height: 0; }
   /* Mobile order: textul ÎNAINTEA cardului, pe toate rândurile.
      - Rândurile impare (1, 3, 5): markup card → text ⇒ column-reverse.
      - Rândurile pare (2, 4, 6): markup text → card ⇒ ordinea e deja bună. */
@@ -2317,7 +2227,6 @@ a.community-card { text-decoration: none; color: inherit; }
   .flip-card { min-height: 260px; }
   .flip-face { padding: 22px; }
   .flip-front .word { font-size: 52px; }
-  .flip-back h3 { font-size: 24px; }
   .podcast-hero { padding: 20px; }
   .player { gap: 14px; margin-top: 18px; }
   .play-btn { width: 46px; height: 46px; }
@@ -2345,8 +2254,6 @@ a.community-card { text-decoration: none; color: inherit; }
   .stair-card-wrap .podcast-card,
   .stair-card-wrap .mission-card { min-height: 240px; }
   .flip-front .word { font-size: 42px; }
-  .flip-back h3 { font-size: 22px; }
-  .flip-back .def { font-size: 13px; }
   .flip-meta { font-size: clamp(20px, 6.4vw, 26px); }
   .podcast-hero h3 { font-size: 18px; }
   .podcast-label { font-size: 11px; }
@@ -2501,30 +2408,15 @@ a.community-card { text-decoration: none; color: inherit; }
       <div class="stair-row stair-row-1">
         <div class="stair-card-wrap">
           <div class="flip-card" id="flip-card">
-            <div class="flip-inner">
-              <div class="flip-face flip-front">
-                <div class="flip-meta">
-                  <span class="meta-l1">Buzzword-ul</span>
-                  <span class="meta-l2">Săptămânii</span>
-                </div>
-                <div class="word" id="word-front">CONTEXT WINDOW</div>
-                <div class="flip-hint">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
-                  Vezi definiția
-                </div>
+            <div class="flip-face flip-front">
+              <div class="flip-meta">
+                <span class="meta-l1">Buzzword-ul</span>
+                <span class="meta-l2">Săptămânii</span>
               </div>
-              <div class="flip-face flip-back">
-                <div class="back-top">
-                  <span class="back-label" id="word-back-label">FEREASTRA DE CONTEXT</span>
-                </div>
-                <h3 id="word-title">CONTEXT WINDOW</h3>
-                <div class="back-pron-row">
-                  <span class="back-pronounce" id="word-pronounce">/ con·text win·dow /   substantiv</span>
-                  <span class="back-ro" id="word-ro">🇷🇴 Fereastra de Context</span>
-                </div>
-                <div class="def" id="word-def">
-                  <p>Reprezintă „memoria de lucru” a modelului AI — cantitatea maximă de text pe care o poate menține activă în „minte” într-o singură interacțiune.</p>
-                </div>
+              <div class="word" id="word-front">CONTEXT WINDOW</div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+                Vezi definiția
               </div>
             </div>
           </div>
@@ -2624,7 +2516,7 @@ a.community-card { text-decoration: none; color: inherit; }
       <!-- ROW 5 — ARCADE-UL CONTABILULUI (stânga, clasic) + text (dreapta) -->
       <div class="stair-row stair-row-5">
         <div class="stair-card-wrap">
-          <a href="arcade.html" class="welcome-card community-card" id="arcade-card" data-track="arcade_card_home"
+          <div class="welcome-card community-card" id="arcade-card"
              aria-label="Arcade-ul Contabilului — trei mini-jocuri arcade">
             <div class="mission-centerpiece">
               <div class="cc-kicker">// Joacă</div>
@@ -2635,7 +2527,7 @@ a.community-card { text-decoration: none; color: inherit; }
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
               Intră în arcade
             </span>
-          </a>
+          </div>
         </div>
         <div class="stair-side">
           <div class="stair-side-label"><span class="line"></span>Joacă</div>
@@ -2843,11 +2735,6 @@ let wordIdx = -1;
 const flipCard = document.getElementById('flip-card');
 
 const $wFront = document.getElementById('word-front');
-const $wLabel = document.getElementById('word-back-label');
-const $wTitle = document.getElementById('word-title');
-const $wPron  = document.getElementById('word-pronounce');
-const $wRo    = document.getElementById('word-ro');
-const $wDef   = document.getElementById('word-def');
 
 /* ---- Auto-fit al termenului în card ----------------------------------------
    Clasele CSS (.multi-word / .is-long) dau dimensiunea de pornire; fitTerm o
@@ -2911,11 +2798,6 @@ function renderWord() {
   $wFront.classList.toggle('is-long',  w.term.length > 14);
   requestAnimationFrame(fitCardTerm);
 
-  $wLabel.textContent = w.termFull || w.term;
-  $wTitle.textContent = w.term;
-  $wPron.textContent  = (w.pron || '') + (w.type ? '   ' + w.type : '');
-  $wRo.textContent    = '🇷🇴 ' + (w.ro || '');
-  $wDef.innerHTML     = (w.def || []).map(p => '<p>' + escapeHtml(p) + '</p>').join('');
   // If the modal is currently open showing this card, refresh it too
   if (cxBackdrop && cxBackdrop.classList.contains('open') && cxBack && !cxBack.classList.contains('podcast') && cxBack.dataset.kind === 'buzzword') {
     populateBuzzwordModal(w);
@@ -3213,6 +3095,38 @@ function openWelcomeModal() {
   openCx();
 }
 
+function openArcadeModal() {
+  cxBack.classList.remove('podcast');
+  cxBack.dataset.kind = 'arcade';
+  cxFront.innerHTML = `
+    <div class="cx-meta">
+      <span>// Joacă</span>
+    </div>
+    <div class="cx-word" style="font-size: clamp(34px, 5vw, 52px); line-height: 1.05;">
+      Arcade-ul Contabilului
+    </div>
+    <div class="cx-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+      Intră în arcade
+    </div>
+  `;
+  cxBack.innerHTML = `
+    <div class="cx-label">// Trei joculețe vibe-codate</div>
+    <h3>De la bonus de prezentare, la joc permanent</h3>
+    <div class="cx-def">
+      <p>Totul a pornit de la o prezentare despre vibe coding. La final erau trei joculețe demonstrative — iar colegii nu s-au mai oprit din jucat.</p>
+      <p>Prezentarea era ea însăși un exercițiu de vibe coding: în loc de un teanc de slide-uri, o singură pagină HTML care rulează în browser și se trimite ca un fișier. La final am pus, ca bonus, trei mini-jocuri construite prin aceeași metodă — le-am descris în română, AI-ul a scris codul.</p>
+      <p>Bonusul a furat scena. Colegii s-au distrat copios cu ele, au rămas după prezentare să-și bată recordurile, iar prima întrebare de a doua zi n-a fost despre HTML, ci „mai ai și altele?"</p>
+      <p>Așa că le-am scos din prezentare, le-am rescris ca pagini de sine stătătoare și le-am adus aici, permanent. N-au altă miză: sunt pentru destindere — trei minute de pauză între două deadline-uri. Fiecare are mai jos o descriere scurtă: ce e, care e scopul și de ce a ieșit exact așa.</p>
+    </div>
+    <a href="arcade.html" class="cx-cta cx-cta-cyan">
+      Intră în arcade
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  `;
+  openCx();
+}
+
 function openCtaModal() {
   cxBack.classList.remove('podcast');
   cxBack.dataset.kind = 'cta';
@@ -3318,6 +3232,15 @@ if (welcomeCardEl) {
     if (e.target.closest('a, button')) return;
     if (window.aiahTrack) window.aiahTrack('modal:comunitate');
     openWelcomeModal();
+  });
+}
+
+const arcadeCardEl = document.getElementById('arcade-card');
+if (arcadeCardEl) {
+  arcadeCardEl.addEventListener('click', (e) => {
+    if (e.target.closest('a, button')) return;
+    if (window.aiahTrack) window.aiahTrack('modal:arcade');
+    openArcadeModal();
   });
 }
 
