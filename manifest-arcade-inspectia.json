@@ -4,7 +4,7 @@
   "short_name": "Inspecția",
   "description": "Aleargă prin birou și adună documente — inspectorul ANAF e în spatele tău.",
   "start_url": "/arcade-inspectia-nu-asteapta.html",
-  "scope": "/",
+  "scope": "/arcade-inspectia-nu-asteapta.html",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0B0F17",

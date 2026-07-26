@@ -332,6 +332,9 @@ details.top5[open] summary::after{ content:'\25B4' }
   .panou.dublu .colAct .btn .l{ display:inline }
   .panou.dublu .colAct .btn .l + .l::before{ content:' ' }
 }
+/* butonul de salvare, evidențiat când vii din arcade cu #salveaza */
+@keyframes pulsSalv{ 0%,100%{ box-shadow:0 0 0 0 rgba(74,158,232,.5) } 50%{ box-shadow:0 0 0 9px rgba(74,158,232,0) } }
+.btn-salv.evidentiat{ border-color:var(--brand-bright); color:var(--brand-bright); animation:pulsSalv 1.5s ease-out infinite }
 :focus-visible{ outline:2px solid var(--brand-bright); outline-offset:2px }
 </style>
 </head>
@@ -383,6 +386,7 @@ details.top5[open] summary::after{ content:'\25B4' }
         </div>
         <div class="colAct">
           <button class="btn btnPrimar" id="btnJoaca" type="button">▶ Joacă</button>
+          <button class="btn btnSecundar btn-salv" type="button" aria-label="Salvează jocul" title="Salvează o scurtătură către joc"><span class="l">💾 Salvează</span><span class="l">jocul</span></button>
         </div>
       </div>
     </div>
@@ -423,7 +427,7 @@ details.top5[open] summary::after{ content:'\25B4' }
         <div class="colAct">
           <button class="btn btnPrimar" id="btnIncaOData" type="button" aria-label="Încă o dată"><span class="l">↻ Încă</span><span class="l">o dată</span></button>
           <button class="btn btnSecundar" id="btnProvoaca" type="button" aria-label="Provoacă un coleg"><span class="l">📋 Provoacă</span><span class="l">un coleg</span></button>
-          <button class="btn btnSecundar" id="btnSalvJoc" type="button" aria-label="Salvează jocul pe desktop" title="Salvează o scurtătură către joc pe desktop"><span class="l">💾 Salvează</span><span class="l">jocul</span></button>
+          <button class="btn btnSecundar btn-salv" id="btnSalvJoc" type="button" aria-label="Salvează jocul pe desktop" title="Salvează o scurtătură către joc pe desktop"><span class="l">💾 Salvează</span><span class="l">jocul</span></button>
         </div>
       </div>
     </div>
@@ -1933,22 +1937,21 @@ requestAnimationFrame(cadru);
 <script>
 'use strict';
 (function () {
-  var btn = document.getElementById('btnSalvJoc');
-  if (!btn) return;
+  var butoane = document.querySelectorAll('.btn-salv');
+  if (!butoane.length) return;
 
-  var eticheta = btn.innerHTML;   /* butonul are acum textul pe doua randuri (span.l) */
-  var ocupat = false;
-
-  function mesaj(txt) {
-    if (ocupat) return;
-    ocupat = true;
+  /* mai multe butoane de salvare (intro + final) — fiecare cu eticheta lui */
+  function mesaj(btn, txt) {
+    if (btn.getAttribute('data-ocupat')) return;
+    btn.setAttribute('data-ocupat', '1');
+    var vechi = btn.innerHTML;
     btn.innerHTML = txt;
-    setTimeout(function () { btn.innerHTML = eticheta; ocupat = false; }, 2600);
+    setTimeout(function () { btn.innerHTML = vechi; btn.removeAttribute('data-ocupat'); }, 2600);
   }
 
   addEventListener('appinstalled', function () {
     window.__pwaPrompt = null;
-    mesaj('\u2713 Salvat pe desktop');
+    Array.prototype.forEach.call(butoane, function (b) { mesaj(b, '\u2713 Salvat'); });
   });
 
   /* nume de fișier curățat de caracterele interzise de Windows */
@@ -1964,7 +1967,7 @@ requestAnimationFrame(cadru);
   }
 
   /* Scurtătură descărcabilă — merge în orice browser, fără API-uri speciale */
-  function descarcaScurtatura() {
+  function descarcaScurtatura(btn) {
     var url = location.origin + location.pathname;
     var CRLF = String.fromCharCode(13, 10);
     var LF = String.fromCharCode(10);
@@ -1990,13 +1993,13 @@ requestAnimationFrame(cadru);
       document.body.appendChild(a);
       a.click();
       setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-      mesaj('\u2713 Scurt\u0103tur\u0103 desc\u0103rcat\u0103');
+      mesaj(btn, '\u2713 Scurt\u0103tur\u0103 desc\u0103rcat\u0103');
     } catch (e) {
-      mesaj('Nu s-a putut salva');
+      mesaj(btn, 'Nu s-a putut salva');
     }
   }
 
-  btn.addEventListener('click', function () {
+  function salveaza(btn) {
     var p = window.__pwaPrompt;
     if (p && typeof p.prompt === 'function') {
       try {
@@ -2007,12 +2010,25 @@ requestAnimationFrame(cadru);
           }).catch(function () {});
         }
       } catch (e) {
-        descarcaScurtatura();
+        descarcaScurtatura(btn);
       }
     } else {
-      descarcaScurtatura();
+      descarcaScurtatura(btn);
     }
+  }
+
+  Array.prototype.forEach.call(butoane, function (b) {
+    b.addEventListener('click', function () { salveaza(b); });
   });
+
+  /* venit din arcade cu #salveaza: scoatem butonul din intro in evidenta */
+  if (location.hash === '#salveaza') {
+    var tinta = document.querySelector('#ovIntro .btn-salv') || butoane[0];
+    if (tinta) {
+      tinta.classList.add('evidentiat');
+      tinta.addEventListener('click', function () { tinta.classList.remove('evidentiat'); }, { once: true });
+    }
+  }
 })();
 </script>
 </body>

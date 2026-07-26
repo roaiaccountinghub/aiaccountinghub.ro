@@ -1922,6 +1922,19 @@ section.block {
 
 @media (max-width: 640px) {
   .cx-stage { width: min(480px, 100%); }
+  /* Pe telefon cardul pătrat (aspect-ratio 1/1) ieșea mult mai scund decât
+     ecranul — pe un 375×812 ~335px de card și restul fundal gol. Aici renunțăm
+     la raport fix și îl lăsăm să ocupe toată înălțimea disponibilă (viewport
+     minus padding-ul de 40px al backdrop-ului + puțin joc), ca să încapă mai
+     mult text și typewriter-ul să aibă spațiu să ruleze. `dvh` ține cont de
+     bara de adrese pe Android; `vh` rămâne fallback pentru browsere mai vechi.
+     Backdrop-ul păstrează overflow-y:auto, deci cardul rămâne sub înălțimea
+     zonei de conținut și nu declanșează scroll pe fundal. */
+  .cx-card {
+    aspect-ratio: auto;
+    height: calc(100vh - 96px);
+    height: calc(100dvh - 96px);
+  }
   .cx-face { padding: 26px; border-radius: 18px; }
   .cx-back { padding: 30px 26px 26px; }
   .cx-back h3 { font-size: 24px; }
@@ -2532,7 +2545,7 @@ section.block {
         <div class="stair-side">
           <div class="stair-side-label"><span class="line"></span>Joacă</div>
           <h4>Trei joculețe vibe-codate între două deadline-uri.</h4>
-          <p>Dovada că un contabil poate construi lucruri reale cu AI — și cât de departe merge ideea. Fără instalare, fără cont, merg direct în browser și pe telefon.</p>
+          <p>Dovada că umorul de breaslă nu lipsește - distracții construite cu AI — cât de departe poate merge ideea. Fără instalare, fără cont, merg direct în browser și pe telefon.</p>
           <div class="stair-side-mono">click pentru cele trei jocuri</div>
         </div>
       </div>
@@ -3162,9 +3175,37 @@ function openCtaModal() {
   openCx();
 }
 
+/* Butonul „back" de pe Android (tastă sau gest de swipe) închide modalul în
+   loc să iasă din site. Tasta hardware nu poate fi interceptată direct, dar ea
+   navighează în istoricul browserului — deci la deschidere împingem o intrare
+   suplimentară de istoric (aceeași adresă, doar un state marcat), iar „back" o
+   consumă și ne trezim în `popstate`, unde închidem cardul. Când modalul se
+   închide altfel (X, Escape, click pe fundal) consumăm noi intrarea, ca să nu
+   rămână un „back" mort în istoric. */
+let cxHistoryEntry = false;
+
+function pushCxHistory() {
+  if (cxHistoryEntry) return;
+  cxHistoryEntry = true;
+  history.pushState({ cxOpen: true }, '');
+}
+
+function dropCxHistory() {
+  if (!cxHistoryEntry) return;
+  cxHistoryEntry = false;
+  history.back(); // popstate-ul rezultat e ignorat — flagul e deja false
+}
+
+window.addEventListener('popstate', () => {
+  if (!cxHistoryEntry) return; // back-ul nostru programatic, nu al userului
+  cxHistoryEntry = false;
+  if (cxBackdrop.classList.contains('open')) closeCx();
+});
+
 function openCx() {
   cxBackdrop.classList.add('open');
   document.body.style.overflow = 'hidden';
+  pushCxHistory();
   // Sequence: backdrop fade → card flips → card grows
   requestAnimationFrame(() => {
     setTimeout(() => cxBackdrop.classList.add('flipped'), 120);
@@ -3173,6 +3214,7 @@ function openCx() {
 }
 
 function closeCx() {
+  dropCxHistory();
   cxBackdrop.classList.remove('grown');
   setTimeout(() => cxBackdrop.classList.remove('flipped'), 300);
   setTimeout(() => {

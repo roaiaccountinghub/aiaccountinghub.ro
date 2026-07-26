@@ -54,7 +54,7 @@
 
   /* ---------- Construiește modalul (o singură dată) ---------- */
   var els = {};
-  var state = { ep: null, speedIdx: 0, lastOn: -1, saveT: 0, seeking: false };
+  var state = { ep: null, speedIdx: 0, lastOn: -1, saveT: 0, seeking: false, pickerOpen: false };
 
   function build() {
     var back = document.createElement('div');
@@ -69,8 +69,16 @@
         '<button class="ppl-close" type="button" aria-label="Închide player-ul"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>' +
         '<div class="ppl-head">' +
           '<span class="ppl-tag">// Episod</span>' +
-          '<div class="ppl-picker"><select class="ppl-select" aria-label="Alege episodul"></select>' +
-          '<svg class="ppl-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>' +
+          '<div class="ppl-picker">' +
+            '<select class="ppl-select" aria-label="Alege episodul"></select>' +
+            '<svg class="ppl-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>' +
+            /* Selector propriu, vizibil doar pe mobil — vezi podcast-player.css */
+            '<button class="ppl-cbtn" type="button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="ppl-clist" aria-label="Alege episodul">' +
+              '<span class="ppl-cbtn-label"></span>' +
+              '<svg class="ppl-cbtn-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>' +
+            '</button>' +
+            '<div class="ppl-clist" id="ppl-clist" role="listbox" aria-label="Lista episoadelor"></div>' +
+          '</div>' +
         '</div>' +
         '<div class="ppl-sub"></div>' +
         '<div class="ppl-split">' +
@@ -103,6 +111,10 @@
     els.card = back.querySelector('.ppl-card');
     els.close = back.querySelector('.ppl-close');
     els.select = back.querySelector('.ppl-select');
+    els.picker = back.querySelector('.ppl-picker');
+    els.cbtn = back.querySelector('.ppl-cbtn');
+    els.cbtnLabel = back.querySelector('.ppl-cbtn-label');
+    els.clist = back.querySelector('.ppl-clist');
     els.sub = back.querySelector('.ppl-sub');
     els.wave = back.querySelector('.ppl-wave');
     els.artImg = back.querySelector('.ppl-art-img');
@@ -132,15 +144,64 @@
       if (!groups[g]) { groups[g] = []; order.push(g); }
       groups[g].push(e);
     });
-    var html = '';
+    /* Două randări din aceeași grupare: <select>-ul nativ (folosit pe desktop)
+       și lista proprie (folosită pe mobil). */
+    var opts = '', list = '';
     order.forEach(function (g) {
-      html += '<optgroup label="' + esc(g) + '">';
+      opts += '<optgroup label="' + esc(g) + '">';
+      list += '<div class="ppl-cgroup" role="presentation">' + esc(g) + '</div>';
       groups[g].forEach(function (e) {
-        html += '<option value="' + esc(e.id) + '">' + esc(e.ep + ' — ' + e.title) + '</option>';
+        var label = esc(e.ep + ' — ' + e.title);
+        opts += '<option value="' + esc(e.id) + '">' + label + '</option>';
+        list += '<div class="ppl-copt" role="option" tabindex="-1" aria-selected="false"' +
+                ' data-id="' + esc(e.id) + '" title="' + label + '">' + label + '</div>';
       });
-      html += '</optgroup>';
+      opts += '</optgroup>';
     });
-    els.select.innerHTML = html;
+    els.select.innerHTML = opts;
+    els.clist.innerHTML = list;
+  }
+
+  /* ---------- Selector propriu de episod (activ doar pe mobil) ----------
+     Pe Android lista unui <select> nativ e desenată de sistem: font mare și
+     titlurile rupte pe 2–3 rânduri, iar CSS-ul pe <option> (font-size,
+     text-overflow: ellipsis) e ignorat. Pe desktop lista nativă arată bine, așa
+     că acolo rămâne ea — comutarea se face pe lățime, din CSS.
+     <select>-ul rămâne în DOM în ambele cazuri și rămâne sursa de adevăr pentru
+     valoare; lista proprie doar apelează load(), exact ca handlerul de 'change'. */
+  function openPicker() {
+    if (state.pickerOpen) return;
+    state.pickerOpen = true;
+    els.picker.classList.add('ppl-picker-open');
+    els.cbtn.setAttribute('aria-expanded', 'true');
+    var sel = els.clist.querySelector('.ppl-copt[aria-selected="true"]') || els.clist.querySelector('.ppl-copt');
+    if (sel) { sel.focus(); sel.scrollIntoView({ block: 'nearest' }); }
+  }
+  function closePicker(refocus) {
+    if (!state.pickerOpen) return;
+    state.pickerOpen = false;
+    els.picker.classList.remove('ppl-picker-open');
+    els.cbtn.setAttribute('aria-expanded', 'false');
+    if (refocus) els.cbtn.focus();
+  }
+  function pickEpisode(id) {
+    closePicker(true);
+    load(id, true);
+  }
+  /* Ține eticheta butonului și rândul marcat în sincron cu <select>. */
+  function syncPicker(id) {
+    var ep = byId[id];
+    els.cbtnLabel.textContent = ep ? ep.ep + ' — ' + ep.title : '';
+    var opts = els.clist.querySelectorAll('.ppl-copt');
+    for (var i = 0; i < opts.length; i++) {
+      opts[i].setAttribute('aria-selected', opts[i].getAttribute('data-id') === id ? 'true' : 'false');
+    }
+  }
+  function moveOpt(from, dir) {
+    var opts = [].slice.call(els.clist.querySelectorAll('.ppl-copt'));
+    var i = opts.indexOf(from);
+    var next = opts[Math.max(0, Math.min(opts.length - 1, (i < 0 ? 0 : i) + dir))];
+    if (next) { next.focus(); next.scrollIntoView({ block: 'nearest' }); }
   }
 
   /* ---------- Undă ---------- */
@@ -244,6 +305,7 @@
     if (!ep) return;
     state.ep = ep;
     els.select.value = id;
+    syncPicker(id);
     els.sub.textContent = ep.group || '';
     els.spotify.href = 'https://open.spotify.com/episode/' + id;
     els.artImg.src = ep.image || DEFAULT_IMG;
@@ -320,6 +382,7 @@
   }
   function close() {
     if (!els.back) return;
+    closePicker(false);
     savePos();
     els.audio.pause();
     els.back.classList.remove('open');
@@ -352,6 +415,34 @@
     });
 
     els.select.addEventListener('change', function () { load(els.select.value, true); });
+
+    /* Selectorul propriu (mobil) — vezi openPicker() */
+    els.cbtn.addEventListener('click', function () {
+      if (state.pickerOpen) closePicker(true); else openPicker();
+    });
+    els.cbtn.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); openPicker(); }
+    });
+    els.clist.addEventListener('click', function (e) {
+      var o = e.target.closest('.ppl-copt');
+      if (o) pickEpisode(o.getAttribute('data-id'));
+    });
+    els.clist.addEventListener('keydown', function (e) {
+      // Escape închide doar lista, nu tot player-ul (handlerul din document, mai jos)
+      if (e.key === 'Escape') { e.stopPropagation(); closePicker(true); return; }
+      var o = e.target.closest('.ppl-copt');
+      if (!o) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); moveOpt(o, 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); moveOpt(o, -1); }
+      else if (e.key === 'Home') { e.preventDefault(); moveOpt(o, -999); }
+      else if (e.key === 'End') { e.preventDefault(); moveOpt(o, 999); }
+      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pickEpisode(o.getAttribute('data-id')); }
+      else if (e.key === 'Tab') closePicker(false);
+    });
+    // tap oriunde altundeva în card închide lista
+    els.card.addEventListener('click', function (e) {
+      if (state.pickerOpen && !e.target.closest('.ppl-picker')) closePicker(false);
+    });
 
     // scrubber
     els.track.addEventListener('pointerdown', function (e) {

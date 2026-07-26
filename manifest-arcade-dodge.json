@@ -4,7 +4,7 @@
   "short_name": "Dodge Contabil",
   "description": "Ferește-te de ploaia de ordonanțe de urgență. Din Arcade-ul Contabilului.",
   "start_url": "/arcade-dodge-ul-contabilului.html",
-  "scope": "/",
+  "scope": "/arcade-dodge-ul-contabilului.html",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0B0F17",

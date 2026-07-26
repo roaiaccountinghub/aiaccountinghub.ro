@@ -150,9 +150,12 @@
 .cab-notes .note-dd { color: var(--fg-muted); font-size: 13.5px; line-height: 1.6; }
 .cab-foot {
   margin-top: auto;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px 16px;
   padding-top: 18px;
   border-top: 1px solid var(--border);
+  /* cele trei acțiuni nu încap lângă indicația de taste: le lăsăm să treacă
+     pe rândul lor, aliniate la dreapta, în loc să se rupă una câte una */
+  flex-wrap: wrap;
 }
 .cab-ctrl {
   font-family: 'JetBrains Mono', monospace;
@@ -165,6 +168,27 @@
   letter-spacing: 0.04em; text-transform: uppercase; font-size: 12.5px;
 }
 
+/* ── acțiunile din subsolul cardului: Joacă + Salvează + Provoacă ── */
+.cab-actiuni { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-left: auto; }
+.cab-actiuni .cab-play { order: 3; }   /* pe desktop, Joacă rămâne la dreapta */
+.cab-act {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px; letter-spacing: 0.03em;
+  padding: 9px 13px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--bg-2);
+  color: var(--fg-muted); cursor: pointer; white-space: nowrap;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.cab-act:hover { border-color: var(--accent); color: var(--accent); }
+.cab-act:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* eticheta se schimbă după dispozitiv, fără JavaScript */
+.et-mobil { display: none; }
+@media (pointer: coarse) {
+  .et-desktop { display: none; }
+  .et-mobil { display: inline; }
+}
+
 @media (max-width: 760px) {
   .cab { grid-template-columns: 1fr; }
   .cab-screen { min-height: 150px; border-right: none; border-bottom: 1px solid var(--border); }
@@ -173,6 +197,9 @@
   .cab-body h3 { font-size: 20px; }
   .cab-foot { flex-direction: column; align-items: stretch; gap: 12px; }
   .cab-play { justify-content: center; }
+  .cab-actiuni { flex-direction: column; align-items: stretch; width: 100%; margin-left: 0; }
+  .cab-actiuni .cab-play { order: 0; }   /* pe telefon, Joacă trece primul */
+  .cab-act { justify-content: center; }
 }
 </style>
 <!-- Cloudflare Web Analytics -->
@@ -290,7 +317,11 @@
           </div>
           <div class="cab-foot">
             <span class="cab-ctrl">← → / A D · atingere pe telefon</span>
-            <a class="cab-play btn btn-primary" href="arcade-dodge-ul-contabilului.html" data-track="arcade_play_dodge">Joacă ▶</a>
+            <div class="cab-actiuni">
+              <a class="cab-play btn btn-primary" href="arcade-dodge-ul-contabilului.html" data-track="arcade_play_dodge">Joacă ▶</a>
+              <button class="cab-act cab-salv" type="button" data-joc="arcade-dodge-ul-contabilului.html" data-nume="Dodge-ul Contabilului" aria-label="Salvează jocul">💾 <span class="et-desktop">Salvează jocul pe desktop</span><span class="et-mobil">Salvează jocul pe ecran</span></button>
+              <button class="cab-act cab-share" type="button" data-joc="arcade-dodge-ul-contabilului.html" data-nume="Dodge-ul Contabilului" aria-label="Provoacă un coleg">📋 Provoacă un coleg</button>
+            </div>
           </div>
         </div>
       </article>
@@ -319,7 +350,11 @@
           </div>
           <div class="cab-foot">
             <span class="cab-ctrl">Spațiu / ↑ / click — săritură</span>
-            <a class="cab-play btn btn-primary" href="arcade-inspectia-nu-asteapta.html" data-track="arcade_play_inspectia">Joacă ▶</a>
+            <div class="cab-actiuni">
+              <a class="cab-play btn btn-primary" href="arcade-inspectia-nu-asteapta.html" data-track="arcade_play_inspectia">Joacă ▶</a>
+              <button class="cab-act cab-salv" type="button" data-joc="arcade-inspectia-nu-asteapta.html" data-nume="Inspecția nu așteaptă" aria-label="Salvează jocul">💾 <span class="et-desktop">Salvează jocul pe desktop</span><span class="et-mobil">Salvează jocul pe ecran</span></button>
+              <button class="cab-act cab-share" type="button" data-joc="arcade-inspectia-nu-asteapta.html" data-nume="Inspecția nu așteaptă" aria-label="Provoacă un coleg">📋 Provoacă un coleg</button>
+            </div>
           </div>
         </div>
       </article>
@@ -348,7 +383,11 @@
           </div>
           <div class="cab-foot">
             <span class="cab-ctrl">Click / atingere pe termene</span>
-            <a class="cab-play btn btn-primary" href="arcade-whack-a-deadline.html" data-track="arcade_play_whack">Joacă ▶</a>
+            <div class="cab-actiuni">
+              <a class="cab-play btn btn-primary" href="arcade-whack-a-deadline.html" data-track="arcade_play_whack">Joacă ▶</a>
+              <button class="cab-act cab-salv" type="button" data-joc="arcade-whack-a-deadline.html" data-nume="Whack-a-Deadline" aria-label="Salvează jocul">💾 <span class="et-desktop">Salvează jocul pe desktop</span><span class="et-mobil">Salvează jocul pe ecran</span></button>
+              <button class="cab-act cab-share" type="button" data-joc="arcade-whack-a-deadline.html" data-nume="Whack-a-Deadline" aria-label="Provoacă un coleg">📋 Provoacă un coleg</button>
+            </div>
           </div>
         </div>
       </article>
@@ -394,6 +433,88 @@
   </div>
 </footer>
 
+
+<!-- ═══ Acțiunile din carduri: „Salvează jocul” și „Provoacă un coleg” ═══
+     Promptul de instalare aparține paginii jocului (manifestul lui), nu acestei
+     pagini. De aceea: pe desktop descărcăm o scurtătură (merge direct), iar pe
+     telefon deschidem jocul cu #salveaza, unde butonul e chiar în ecranul de start. -->
+<script>
+'use strict';
+(function () {
+  var tactil = matchMedia('(pointer: coarse)').matches;
+
+  function mesaj(btn, txt) {
+    if (btn.getAttribute('data-ocupat')) return;
+    btn.setAttribute('data-ocupat', '1');
+    var vechi = btn.innerHTML;
+    btn.innerHTML = txt;
+    setTimeout(function () { btn.innerHTML = vechi; btn.removeAttribute('data-ocupat'); }, 2600);
+  }
+
+  function adresa(btn) {
+    return new URL(btn.getAttribute('data-joc'), location.href).href;
+  }
+
+  /* ───── Provoacă un coleg ───── */
+  Array.prototype.forEach.call(document.querySelectorAll('.cab-share'), function (btn) {
+    btn.addEventListener('click', function () {
+      var url = adresa(btn), nume = btn.getAttribute('data-nume');
+      var text = 'Hai la o rund\u0103 de \u201E' + nume + '\u201D \u2014 din Arcade-ul Contabilului.';
+      if (navigator.share) {
+        navigator.share({ title: nume, text: text, url: url }).catch(function () {});
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text + ' ' + url).then(function () {
+          mesaj(btn, '\u2713 Link copiat');
+        }).catch(function () { window.prompt('Copiaz\u0103 linkul:', url); });
+        return;
+      }
+      window.prompt('Copiaz\u0103 linkul:', url);
+    });
+  });
+
+  /* ───── Salvează jocul ───── */
+  function descarcaScurtatura(btn) {
+    var url = adresa(btn), nume = btn.getAttribute('data-nume');
+    var CRLF = String.fromCharCode(13, 10), LF = String.fromCharCode(10);
+    var peMac = /Mac|iPhone|iPad/i.test(navigator.userAgent);
+    var interzise = ':*?"<>|/' + String.fromCharCode(92);
+    var curat = '';
+    for (var i = 0; i < nume.length; i++) {
+      if (interzise.indexOf(nume.charAt(i)) === -1) curat += nume.charAt(i);
+    }
+    var continut, fisier;
+    if (peMac) {
+      continut = ['<?xml version="1.0" encoding="UTF-8"?>',
+        '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">',
+        '<plist version="1.0"><dict><key>URL</key><string>' + url + '</string></dict></plist>'].join(LF);
+      fisier = curat + '.webloc';
+    } else {
+      continut = ['[InternetShortcut]', 'URL=' + url, 'IconIndex=0', ''].join(CRLF);
+      fisier = curat + '.url';
+    }
+    try {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([continut], { type: 'text/plain' }));
+      a.download = fisier;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      mesaj(btn, '\u2713 Scurt\u0103tur\u0103 desc\u0103rcat\u0103');
+    } catch (e) {
+      mesaj(btn, 'Nu s-a putut salva');
+    }
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.cab-salv'), function (btn) {
+    btn.addEventListener('click', function () {
+      if (tactil) { location.href = btn.getAttribute('data-joc') + '#salveaza'; return; }
+      descarcaScurtatura(btn);
+    });
+  });
+})();
+</script>
 <script src="assets/site.js"></script>
 </body>
 </html>

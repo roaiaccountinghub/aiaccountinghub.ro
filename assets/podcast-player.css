@@ -55,6 +55,82 @@
 .ppl-picker .ppl-caret { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--accent); width: 15px; height: 15px; }
 .ppl-picker option, .ppl-picker optgroup { background: #0b1a25; color: var(--fg); }
 
+/* ---------- Selector propriu de episod — DOAR pe mobil (≤640px) ----------
+   Pe Android lista unui <select> nativ e desenată de sistem: font mare și
+   titlurile rupte pe 2–3 rânduri, iar CSS-ul pe <option> (font-size,
+   text-overflow: ellipsis) e ignorat de browser. Pe desktop lista nativă arată
+   bine — folosește fontul paginii și e compactă — așa că acolo rămâne ea.
+   De aici comutarea pe lățime: sub 640px ascundem <select>-ul și arătăm lista
+   proprie, cu un singur rând per episod. <select>-ul rămâne în DOM în ambele
+   cazuri, ca sursă de adevăr pentru valoare (vezi podcast-player.js). */
+.ppl-cbtn, .ppl-clist { display: none; }
+
+@media (max-width: 640px) {
+  .ppl-picker > .ppl-select,
+  .ppl-picker > .ppl-caret { display: none; }
+
+  /* Lista se ancorează pe tot rândul de header, nu pe selector: selectorul
+     împarte rândul cu eticheta „// Episod", deci are doar ~159px din 276px
+     disponibili — prea îngust pentru titluri. Mutând contextul de poziţionare
+     pe .ppl-head, panoul se întinde pe toată lăţimea cardului. */
+  .ppl-head { position: relative; }
+  .ppl-picker { position: static; }
+
+  /* Butonul închis — aceleași fonturi, culori și dimensiuni ca select-ul nativ
+     pe care îl înlocuiește, ca să nu se schimbe nimic în aspectul header-ului. */
+  .ppl-cbtn {
+    display: flex; align-items: center; gap: 8px; width: 100%;
+    font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600;
+    color: #fff; text-align: left; cursor: pointer;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-strong); border-radius: 10px;
+    padding: 9px 13px;
+  }
+  /* `flex: 1 1 0` + `width: 0` sunt obligatorii, nu cosmetice: fără ele titlul
+     lung (white-space: nowrap) intră în calculul lăţimii max-content, iar
+     .ppl-backdrop (grid cu place-items: center) dimensionează cardul după
+     conţinut — cardul sărea la 577px pe un ecran de 375px. Un <select> nativ nu
+     avea problema asta, pentru că lăţimea lui intrinsecă o decide browserul. */
+  .ppl-cbtn-label {
+    flex: 1 1 0; width: 0; min-width: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .ppl-cbtn-caret { width: 15px; height: 15px; flex-shrink: 0; color: var(--accent); transition: transform 0.2s ease; }
+  .ppl-picker-open .ppl-cbtn { border-color: var(--accent); }
+  .ppl-picker-open .ppl-cbtn-caret { transform: rotate(180deg); }
+
+  .ppl-picker-open .ppl-clist {
+    display: block;
+    position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 6;
+    max-height: min(52vh, 420px);
+    overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+    background: #0b1a25;
+    border: 1px solid color-mix(in oklab, var(--accent) 34%, transparent);
+    border-radius: 12px; padding: 6px;
+    box-shadow: 0 24px 50px -18px rgba(0,0,0,0.7);
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--accent-2) 60%, transparent) transparent;
+  }
+  .ppl-cgroup {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+    padding: 9px 10px 4px;
+  }
+  /* Un rând per episod: titlul lung se taie cu „…", nu se rupe pe mai multe linii. */
+  .ppl-copt {
+    font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600;
+    color: #d4e7f0; border-radius: 8px; padding: 10px; cursor: pointer;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .ppl-copt[aria-selected="true"] {
+    background: color-mix(in oklab, var(--accent) 18%, transparent); color: #fff;
+  }
+  .ppl-copt:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--accent) 55%, transparent);
+    outline-offset: -2px;
+  }
+}
+
 .ppl-sub {
   font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--fg-dim);
   letter-spacing: 0.06em; margin: 2px 0 16px; min-height: 13px;

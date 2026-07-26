@@ -4,7 +4,7 @@
   "short_name": "Whack-a-Deadline",
   "description": "Lovește termenele înainte să dispară. Ai 45 de secunde.",
   "start_url": "/arcade-whack-a-deadline.html",
-  "scope": "/",
+  "scope": "/arcade-whack-a-deadline.html",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0B0F17",
