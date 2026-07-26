@@ -2952,14 +2952,16 @@ fetch('assets/buzzwords.json', { cache: 'no-cache' })
    No hover/scroll branching needed like the stairway effect — this is driven
    by clicks, so the same code runs identically on desktop and mobile.
 
-   Duration is fixed rather than a fixed chars/sec rate: definitions range
-   from ~860 to ~1450 characters, and someone clicking through several terms
-   in a row shouldn't wait proportionally longer on the long ones. Timing
-   rides performance.now() via requestAnimationFrame rather than a setTimeout
+   Speed matches the measured real-world pace of the original desktop hover
+   effect (index.html stair-side, ~119 chars/sec for body text) — that's the
+   reference speed for every typewriter on this site, so longer definitions
+   (~860–1450 chars) do take longer to finish (~7–12s) rather than racing
+   through at a fixed duration regardless of length. Timing rides
+   performance.now() via requestAnimationFrame rather than a setTimeout
    chain — a per-char setTimeout drifts badly at this length (the browser's
-   minimum delay stretches it well past the intended duration). */
+   minimum delay stretches it well past the intended pace). */
 let cxDefRaf = null;
-const CX_DEF_DURATION_MS = 2400;
+const CX_DEF_CPS = 119;
 
 function typeCxDef(container) {
   if (cxDefRaf) { cancelAnimationFrame(cxDefRaf); cxDefRaf = null; }
@@ -2993,9 +2995,10 @@ function typeCxDef(container) {
   segs[0].done.after(caret);
   let caretAt = 0;
 
+  const durationMs = (total / CX_DEF_CPS) * 1000;
   const t0 = performance.now();
   function frame(now) {
-    const count = Math.min(total, Math.round(((now - t0) / CX_DEF_DURATION_MS) * total));
+    const count = Math.min(total, Math.round(((now - t0) / durationMs) * total));
     let left = count;
     for (let i = 0; i < segs.length; i++) {
       const n = Math.min(left, segs[i].text.length);
@@ -3477,11 +3480,14 @@ document.querySelectorAll('.stair-row').forEach((row) => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   /* Rates, not per-char delays: the run is timed off the clock and drawn on
-     animation frames, so it lasts the same ~2.3s whether the phone is quick or
+     animation frames, so it lasts the same ~4.3s whether the phone is quick or
      struggling. A setTimeout chain drifts badly here — the browser's minimum
-     timeout stretches a 4 ms/char paragraph to roughly double that. */
-  const HEAD_CPS = 55;   // heading chars per second
-  const PARA_CPS = 200;  // paragraph chars per second (these run ~270 chars)
+     timeout stretches a 4 ms/char paragraph to roughly double that.
+     Values match the measured real-world pace of the original desktop hover
+     effect (index.html stair-side, 22 ms/char head + 7 ms/char paragraph
+     nominal) — that's the reference speed for every typewriter on this site. */
+  const HEAD_CPS = 41;   // heading chars per second
+  const PARA_CPS = 119;  // paragraph chars per second (these run ~270 chars)
 
   /* Split an element into "typed so far" + "not yet typed" halves. Adjacent
      inline spans keep the text flowing as one run, so line breaks and the
