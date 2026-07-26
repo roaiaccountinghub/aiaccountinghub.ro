@@ -268,6 +268,66 @@ kbd{
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.001s !important }
 }
+/* ════════════════ PANOURI PE DOUĂ COLOANE (varianta A) ════════════════
+   Problema rezolvată: panoul avea 611 px de conținut în 221 px vizibili pe
+   telefon, iar butoanele rămâneau sub margine — utilizatorul nici nu știa
+   că există. Acum acțiunile stau într-o coloană proprie, care nu derulează.
+
+   `grid-template-rows: minmax(0,1fr)` NU e opțional: fără el rândul grilei
+   crește după conținut, `max-height:100%` de pe coloane nu are față de ce se
+   calcula, iar ultimul buton ajunge tăiat — exact bug-ul pe care îl reparăm. */
+.panou.dublu{
+  display:grid; grid-template-columns:1fr 132px; grid-template-rows:minmax(0,1fr);
+  gap:12px; width:min(98%, 580px); padding:14px 16px; text-align:left; overflow:hidden;
+}
+.panou.dublu .colText{
+  min-width:0; min-height:0; overflow-y:auto; max-height:100%;
+  text-align:center; padding-right:6px; scrollbar-width:thin;
+}
+.panou.dublu .colText::-webkit-scrollbar{ width:7px }
+.panou.dublu .colText::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.16); border-radius:8px }
+.panou.dublu .colAct{
+  display:flex; flex-direction:column; gap:7px; justify-content:center;
+  border-left:1px solid var(--line); padding-left:11px; min-width:0;
+}
+/* butoanele coloanei: verticale, cu textul pe două rânduri */
+.panou.dublu .colAct .btn{
+  width:100%; margin:0; min-height:0; padding:9px 6px;
+  font-size:.72rem; line-height:1.2; white-space:normal;
+  flex-direction:column; gap:1px; text-align:center;
+}
+.panou.dublu .colAct .btn .l{ display:block }
+.panou.dublu .colAct #btnJoaca{ font-size:.86rem; padding:14px 8px }
+
+/* Top 5 pliabil — cel mai mare bloc din panou (130 px), rar necesar imediat */
+details.top5{
+  border:1px solid var(--line); border-radius:9px; padding:6px 9px;
+  background:rgba(255,255,255,.02); margin-top:12px;
+}
+details.top5:empty{ display:none }
+details.top5 summary{
+  font-family:var(--f-mono); font-size:.62rem; letter-spacing:.1em; color:var(--warn);
+  cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:center; gap:7px;
+}
+details.top5 summary::-webkit-details-marker{ display:none }
+details.top5 summary::after{ content:'\25BE'; font-size:.55rem; color:var(--muted) }
+details.top5[open] summary::after{ content:'\25B4' }
+
+/* Sub ~520 px panoul e prea îngust pentru două coloane: revenim la una,
+   cu acțiunile lipite de bază, ca să rămână oricum vizibile. */
+@media (max-width: 520px){
+  .panou.dublu{ display:block; overflow-y:auto }
+  .panou.dublu .colText{ overflow:visible; max-height:none; padding-right:0 }
+  .panou.dublu .colAct{
+    border-left:0; padding-left:0; flex-direction:row; flex-wrap:wrap; justify-content:center;
+    position:sticky; bottom:-14px; z-index:2; margin:12px -16px -14px; padding:10px 16px 14px;
+    background:linear-gradient(180deg, rgba(24,32,48,.55), rgba(21,28,43,.985) 38%);
+    border-top:1px solid var(--line); border-radius:0 0 15px 15px;
+  }
+  .panou.dublu .colAct .btn{ width:auto; flex-direction:row; gap:6px; padding:9px 12px; font-size:.78rem }
+  .panou.dublu .colAct .btn .l{ display:inline }
+  .panou.dublu .colAct .btn .l + .l::before{ content:' ' }
+}
 :focus-visible{ outline:2px solid var(--brand-bright); outline-offset:2px }
 </style>
 </head>
@@ -303,7 +363,8 @@ kbd{
 
     <!-- Overlay INTRO -->
     <div class="overlay activ" id="ovIntro" role="dialog" aria-modal="true" aria-labelledby="titluIntro">
-      <div class="panou">
+      <div class="panou dublu">
+        <div class="colText">
         <h2 class="titluOverlay" id="titluIntro">Inspecția nu așteaptă</h2>
         <p class="descriere">Control neanunțat, fix în ziua de closing. Aleargă prin birou, sari peste
         tot ce-ți iese în cale și ține inspectorul la distanță cu documente predate la timp.</p>
@@ -315,7 +376,10 @@ kbd{
         <div class="tastele" id="ctrlTaste"><kbd>Spațiu</kbd> / <kbd>↑</kbd> sau <b>click</b> — săritură · <kbd>P</kbd> pauză · <kbd>M</kbd> sunet</div>
         <div class="tastele" id="ctrlTactil">👆 Atinge ecranul ca să sari</div>
         <p class="record ascuns" id="introRecord"></p>
-        <button class="btn btnPrimar" id="btnJoaca" type="button">▶ Joacă</button>
+        </div>
+        <div class="colAct">
+          <button class="btn btnPrimar" id="btnJoaca" type="button">▶ Joacă</button>
+        </div>
       </div>
     </div>
 
@@ -333,7 +397,8 @@ kbd{
 
     <!-- Overlay GAME OVER -->
     <div class="overlay" id="ovSfarsit" role="dialog" aria-modal="true" aria-labelledby="titluFin">
-      <div class="panou">
+      <div class="panou dublu">
+        <div class="colText">
         <div class="eyebrowOv">RĂBDARE 0%</div>
         <h2 class="titluOverlay" id="titluFin">Te-a prins!</h2>
         <p class="descriere" id="finMesaj"></p>
@@ -349,12 +414,13 @@ kbd{
           <input id="inInitiale" maxlength="3" autocomplete="off" spellcheck="false" aria-label="Inițiale pentru top 5">
           <button class="btn btnSecundar btnCompact" id="btnSalveazaTop" type="button">Salvează</button>
         </div>
-        <div class="randButoane">
-          <button class="btn btnPrimar" id="btnIncaOData" type="button">↻ Încă o dată</button>
-          <button class="btn btnSecundar" id="btnProvoaca" type="button">📋 Provoacă un coleg</button>
-          <button class="btn btnSecundar" id="btnSalvJoc" type="button">💾 Salvează jocul pe desktop</button>
+        <details class="top5" id="finTop5"></details>
         </div>
-        <div class="top5" id="finTop5"></div>
+        <div class="colAct">
+          <button class="btn btnPrimar" id="btnIncaOData" type="button" aria-label="Încă o dată"><span class="l">↻ Încă</span><span class="l">o dată</span></button>
+          <button class="btn btnSecundar" id="btnProvoaca" type="button" aria-label="Provoacă un coleg"><span class="l">📋 Provoacă</span><span class="l">un coleg</span></button>
+          <button class="btn btnSecundar" id="btnSalvJoc" type="button" aria-label="Salvează jocul pe desktop" title="Salvează o scurtătură către joc pe desktop"><span class="l">💾 Salvează</span><span class="l">jocul</span></button>
+        </div>
       </div>
     </div>
   </div>
@@ -2001,7 +2067,7 @@ function randeazaTop5(pozitiaNoua){
   const randuri = t.map((r, i) =>
     `<li${i === pozitiaNoua ? ' class="evidentiat"' : ''}><b>${i + 1}. ${escapeHTML(r.n)}</b><span>${metriText(r.m)}</span></li>`
   ).join('');
-  finTop5.innerHTML = `<h3>TOP 5 · BIROUL TĂU</h3><ol>${randuri}</ol>`;
+  finTop5.innerHTML = `<summary>🏆 TOP 5 · BIROUL TĂU</summary><ol>${randuri}</ol>`;
 }
 function escapeHTML(s){ return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c])); }
 
@@ -2388,14 +2454,14 @@ requestAnimationFrame(cadru);
   var btn = document.getElementById('btnSalvJoc');
   if (!btn) return;
 
-  var eticheta = btn.textContent;
+  var eticheta = btn.innerHTML;   /* butonul are acum textul pe doua randuri (span.l) */
   var ocupat = false;
 
   function mesaj(txt) {
     if (ocupat) return;
     ocupat = true;
-    btn.textContent = txt;
-    setTimeout(function () { btn.textContent = eticheta; ocupat = false; }, 2600);
+    btn.innerHTML = txt;
+    setTimeout(function () { btn.innerHTML = eticheta; ocupat = false; }, 2600);
   }
 
   addEventListener('appinstalled', function () {
