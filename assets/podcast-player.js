@@ -54,7 +54,7 @@
 
   /* ---------- Construiește modalul (o singură dată) ---------- */
   var els = {};
-  var state = { ep: null, speedIdx: 0, lastOn: -1, saveT: 0, seeking: false, pickerOpen: false, speedOpen: false };
+  var state = { ep: null, speedIdx: 0, lastOn: -1, saveT: 0, seeking: false, pickerOpen: false, speedOpen: false, shareT: 0 };
 
   function build() {
     var back = document.createElement('div');
@@ -111,6 +111,12 @@
           '<div class="ppl-track"><div class="ppl-fill"></div><div class="ppl-knob"></div></div>' +
           '<span class="ppl-t r ppl-dur">0:00</span>' +
         '</div></div>' +
+        '<div class="ppl-sharewrap">' +
+          '<button class="ppl-share" type="button" aria-label="Distribuie episodul">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>' +
+            '<span class="ppl-share-label">Distribuie episodul</span>' +
+          '</button>' +
+        '</div>' +
         '<div class="ppl-foot"><span class="ppl-credit">Powered by NotebookLM</span><span class="ppl-dot">·</span><a class="ppl-spotify" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.6 14.4a.62.62 0 01-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 11-.28-1.22c3.81-.87 7.08-.5 9.72 1.11a.62.62 0 01.21.86zm1.23-2.74a.78.78 0 01-1.07.26c-2.69-1.66-6.79-2.14-9.98-1.17a.78.78 0 11-.45-1.49c3.64-1.1 8.16-.57 11.24 1.33a.78.78 0 01.26 1.07zm.11-2.85C14.42 8.9 9.1 8.73 6.03 9.66a.93.93 0 11-.54-1.79c3.52-1.07 9.4-.86 13.11 1.34a.93.93 0 11-.95 1.6z"/></svg><span class="ppl-splabel">Ascultă pe Spotify</span></a></div>' +
         '<audio class="ppl-audio" preload="metadata"></audio>' +
       '</div>';
@@ -144,6 +150,8 @@
     els.fill = back.querySelector('.ppl-fill');
     els.knob = back.querySelector('.ppl-knob');
     els.spotify = back.querySelector('.ppl-spotify');
+    els.share = back.querySelector('.ppl-share');
+    els.shareLabel = back.querySelector('.ppl-share-label');
     els.audio = back.querySelector('.ppl-audio');
 
     buildDropdown();
@@ -191,13 +199,15 @@
     els.cbtn.setAttribute('aria-expanded', 'true');
     var sel = els.clist.querySelector('.ppl-copt[aria-selected="true"]') || els.clist.querySelector('.ppl-copt');
     if (sel) { sel.focus(); sel.scrollIntoView({ block: 'nearest' }); }
+    layerPush();
   }
-  function closePicker(refocus) {
+  function closePicker(refocus, fromHist) {
     if (!state.pickerOpen) return;
     state.pickerOpen = false;
     els.picker.classList.remove('ppl-picker-open');
     els.cbtn.setAttribute('aria-expanded', 'false');
     if (refocus) els.cbtn.focus();
+    if (!fromHist) layerPop(1);
   }
   function pickEpisode(id) {
     closePicker(true);
@@ -241,13 +251,15 @@
     els.sbtn.setAttribute('aria-expanded', 'true');
     var sel = els.slist.querySelector('.ppl-sopt[aria-selected="true"]') || els.slist.querySelector('.ppl-sopt');
     if (sel) { sel.focus(); sel.scrollIntoView({ block: 'nearest' }); }
+    layerPush();
   }
-  function closeSpeedPicker(refocus) {
+  function closeSpeedPicker(refocus, fromHist) {
     if (!state.speedOpen) return;
     state.speedOpen = false;
     els.speedWrap.classList.remove('ppl-speed-open');
     els.sbtn.setAttribute('aria-expanded', 'false');
     if (refocus) els.sbtn.focus();
+    if (!fromHist) layerPop(1);
   }
   function pickSpeed(val) {
     closeSpeedPicker(true);
@@ -438,24 +450,113 @@
     els.play.setAttribute('aria-label', playing ? 'Pauză' : 'Redă');
   }
 
+  /* ---------- Distribuire ----------
+     Linkul partajat e cel scurt, /p/<slug> — arată curat într-o conversație și
+     are metadate OG proprii. Dacă un episod n-are încă slug, cădem pe deep-link.
+     Foaia nativă de partajare doar pe ecrane cu atingere: pe desktop, Windows
+     deschide un panou greoi, aşa că acolo copiem linkul, care e ce vrea omul. */
+  function shareUrl(id) {
+    var ep = byId[id];
+    if (ep && ep.slug) return 'https://aiaccountinghub.ro/p/' + ep.slug;
+    return location.origin + '/podcast.html?play=' + id;
+  }
+  function flashShare(msg) {
+    if (!els.shareLabel) return;
+    var old = els.shareLabel.getAttribute('data-old') || els.shareLabel.textContent;
+    els.shareLabel.setAttribute('data-old', old);
+    els.shareLabel.textContent = msg;
+    els.share.classList.add('ppl-share-ok');
+    clearTimeout(state.shareT);
+    state.shareT = setTimeout(function () {
+      els.shareLabel.textContent = old;
+      els.share.classList.remove('ppl-share-ok');
+    }, 1800);
+  }
+  function copyLink(url) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(url).then(function () { flashShare('Link copiat ✓'); },
+                                              function () { flashShare('Copiază: ' + url); });
+      return;
+    }
+    var ta = document.createElement('textarea');
+    ta.value = url; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    flashShare(ok ? 'Link copiat ✓' : 'Copiază: ' + url);
+  }
+  function doShare() {
+    var id = state.ep;
+    if (!id) return;
+    var ep = byId[id] || {};
+    var url = shareUrl(id);
+    var title = (ep.ep ? ep.ep + ' — ' : '') + (ep.title || 'Podcast AI Accounting Hub');
+    var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (navigator.share && touch) {
+      navigator.share({ title: title, text: title, url: url })["catch"](function () {});
+    } else {
+      copyLink(url);
+    }
+    if (window.aiahTrack) window.aiahTrack('podcast:share:' + id);
+  }
+
+  /* ---------- Tasta „înapoi" pe mobil ----------
+     Fiecare strat vizual (player, listă episoade, listă viteze) primeşte propria
+     intrare în istoric. Astfel „back" închide doar stratul de deasupra în loc să
+     scoată utilizatorul de pe site — iar episodul rămâne în redare când închizi
+     doar lista. `skip` marchează salturile pe care le facem noi din interfaţă,
+     ca popstate-ul rezultat să nu mai închidă încă un strat. */
+  var hist = { depth: 0, skip: false, skipT: 0 };
+
+  function layerPush() {
+    try { hist.depth++; history.pushState({ ppl: hist.depth }, ''); }
+    catch (e) { hist.depth--; }   // istoric indisponibil — degradare tăcută
+  }
+  function layerPop(n) {
+    var k = Math.min(n || 1, hist.depth);
+    if (k <= 0) return;
+    hist.depth -= k;
+    hist.skip = true;
+    clearTimeout(hist.skipT);
+    hist.skipT = setTimeout(function () { hist.skip = false; }, 500);
+    history.go(-k);
+  }
+  function openLayers() {
+    return (state.speedOpen ? 1 : 0) + (state.pickerOpen ? 1 : 0) +
+           (els.back && !els.back.hidden ? 1 : 0);
+  }
+  window.addEventListener('popstate', function () {
+    if (hist.skip) { hist.skip = false; clearTimeout(hist.skipT); return; }
+    if (hist.depth > 0) hist.depth--;
+    if (state.speedOpen) { closeSpeedPicker(true, true); return; }
+    if (state.pickerOpen) { closePicker(true, true); return; }
+    if (els.back && !els.back.hidden) close(true);
+  });
+
   /* ---------- Deschide / închide ---------- */
   function open(id, autoplay) {
     if (!els.back) build();
     if (!byId[id]) id = EPISODES[0].id;
+    var wasOpen = !els.back.hidden;
     load(id, autoplay !== false);
     els.back.hidden = false;
     requestAnimationFrame(function () { els.back.classList.add('open'); });
     document.body.style.overflow = 'hidden';
+    if (!wasOpen) layerPush();
     if (window.aiahTrack) window.aiahTrack('podcast:' + id);
   }
-  function close() {
+  function close(fromHist) {
     if (!els.back) return;
-    closePicker(false);
-    closeSpeedPicker(false);
+    var n = fromHist ? 0 : openLayers();
+    closePicker(false, true);
+    closeSpeedPicker(false, true);
     savePos();
     els.audio.pause();
     els.back.classList.remove('open');
     setTimeout(function () { els.back.hidden = true; document.body.style.overflow = ''; }, 320);
+    if (n > 0) layerPop(n);
   }
 
   /* ---------- Legături de evenimente ---------- */
@@ -471,8 +572,10 @@
   function wire() {
     var A = els.audio;
 
-    els.close.addEventListener('click', close);
+    // fără wrapper, obiectul Event ar ajunge pe parametrul `fromHist` al lui close()
+    els.close.addEventListener('click', function () { close(); });
     els.back.addEventListener('click', function (e) { if (e.target === els.back) close(); });
+    els.share.addEventListener('click', doShare);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && els.back && !els.back.hidden) close(); });
 
     els.play.addEventListener('click', function () { if (A.paused) A.play(); else A.pause(); });
@@ -585,8 +688,14 @@
   }
 
   /* ---------- Legare la triggere (.sp-trigger[data-spotify]) ---------- */
+  /* Excepţii în interiorul unui card-trigger. stopPropagation() din handlerul
+     butonului nu ar fi suficient: ambele ascultă pe `document`, iar acolo el nu
+     opreşte celelalte handlere de pe acelaşi nod. */
+  function insideException(t) {
+    return !!(t.closest('.ep-read-link') || t.closest('.episode-share'));
+  }
   document.addEventListener('click', function (e) {
-    if (e.target.closest('.ep-read-link')) return; // excepție: link „Citește articolul"
+    if (insideException(e.target)) return; // „Citește articolul" / „Distribuie"
     var trig = e.target.closest('.sp-trigger[data-spotify]');
     if (!trig) return;
     e.preventDefault(); e.stopPropagation();
@@ -596,7 +705,7 @@
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Enter' && e.key !== ' ') return;
     var trig = e.target.closest && e.target.closest('.sp-trigger[data-spotify]');
-    if (!trig || e.target.closest('.ep-read-link')) return;
+    if (!trig || insideException(e.target)) return;
     e.preventDefault();
     open(trig.getAttribute('data-spotify'), true);
   });

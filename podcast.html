@@ -162,6 +162,26 @@
   box-shadow: 0 0 24px -4px color-mix(in oklab, var(--accent) 50%, transparent);
 }
 
+/* Distribuire pe card — contur, nu plin: redarea rămâne acţiunea principală.
+   Ascuns sub 720px odată cu .episode-play, unde tot cardul e zonă de atingere. */
+.episode-actions { display: flex; align-items: center; gap: 12px; }
+.episode-actions.is-col { flex-direction: column; gap: 10px; }
+.episode-share {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  background: var(--bg-2);
+  flex-shrink: 0; cursor: pointer;
+  transition: all 0.25s;
+  position: relative; z-index: 2;
+}
+.episode-share:hover {
+  border-color: var(--accent); color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 10%, var(--bg-2));
+}
+.episode-share.copied { border-color: var(--accent); color: var(--accent); }
+
 .no-results {
   padding: 64px 24px;
   text-align: center;
@@ -192,6 +212,10 @@
   .episode-num .ep { font-size: 20px; margin-bottom: 0; }
   .episode-body h3 { font-size: 18px; }
   .episode-play { display: none; }
+  /* Pe mobil tot cardul e zonă de atingere — un buton în interior ar concura cu
+     ea, aşa că distribuirea rămâne doar în player. `display:none` scoate şi
+     containerul din grilă, altfel ar ocupa o coloană goală. */
+  .episode-actions { display: none; }
   .episode-item:hover { transform: none; }
   .archive-toolbar { padding: 14px; }
   .search-box { flex-basis: 100%; }
@@ -534,9 +558,14 @@ function render() {
           <span>${e.tags.join(' ')}</span>
         </div>
       </div>
-      <button type="button" class="episode-play" aria-label="Redă pe Spotify · ${e.ep}">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
+      <div class="episode-actions">
+        <button type="button" class="episode-share" data-share="${e.spotifyId}" aria-label="Distribuie episodul ${e.ep}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+        </button>
+        <button type="button" class="episode-play" aria-label="Redă pe Spotify · ${e.ep}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
     </div>`).join('');
 
   if ('IntersectionObserver' in window) {
@@ -591,13 +620,65 @@ render();
           <a href="${m.href}" class="ep-read-link" onclick="event.stopPropagation()">Citește articolul →</a>
         </div>
       </div>
-      <div class="episode-num"><span class="ep">${m.ep}</span>${m.duration}</div>
+      <div class="episode-actions is-col">
+        <div class="episode-num"><span class="ep">${m.ep}</span>${m.duration}</div>
+        <button type="button" class="episode-share" data-share="${m.spotifyId}" aria-label="Distribuie episodul ${m.part}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+        </button>
+      </div>
     </div>`).join('');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     el.querySelectorAll('.fade-in').forEach(el => io.observe(el));
   }
 })();
+/* Distribuire de pe card (doar desktop — pe mobil butonul e ascuns).
+   stopPropagation e obligatoriu: tot cardul e .sp-trigger, altfel apăsarea pe
+   share ar deschide şi player-ul. Linkul e cel scurt /p/<slug>, luat din
+   podcast-data.js; dacă lipseşte, cădem pe deep-link-ul lung. */
+(function cardShare() {
+  const SLUG = {};
+  (window.PODCAST_EPISODES || []).forEach(e => { if (e.slug) SLUG[e.id] = e.slug; });
+
+  const linkFor = id => SLUG[id]
+    ? 'https://aiaccountinghub.ro/p/' + SLUG[id]
+    : location.origin + '/podcast.html?play=' + id;
+
+  function feedback(btn) {
+    btn.classList.add('copied');
+    const old = btn.getAttribute('aria-label');
+    btn.setAttribute('aria-label', 'Link copiat');
+    setTimeout(() => { btn.classList.remove('copied'); btn.setAttribute('aria-label', old); }, 1600);
+  }
+
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.episode-share');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const id = btn.dataset.share;
+    const url = linkFor(id);
+    const legacyCopy = () => {
+      const ta = document.createElement('textarea');
+      ta.value = url; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      try { if (document.execCommand('copy')) feedback(btn); } catch (err) {}
+      document.body.removeChild(ta);
+    };
+    const touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (navigator.share && touch) {
+      navigator.share({ title: 'Podcast AI Accounting Hub', url }).catch(() => {});
+    } else if (navigator.clipboard && window.isSecureContext) {
+      // rejectare (fără activare de utilizator, permisiune refuzată) → metoda veche
+      navigator.clipboard.writeText(url).then(() => feedback(btn), legacyCopy);
+    } else {
+      legacyCopy();
+    }
+    if (window.aiahTrack) window.aiahTrack('podcast:share:' + id);
+  });
+})();
+
 /* Deep-link (?play=SPOTIFY_ID) e gestionat acum de assets/podcast-player.js */
 </script>
 </body>
