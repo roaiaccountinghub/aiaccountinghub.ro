@@ -94,8 +94,10 @@
 .episode-list { display: flex; flex-direction: column; gap: 14px; }
 .episode-item {
   display: grid;
-  grid-template-columns: 96px 1fr auto;
-  gap: 28px;
+  /* butoane | zonă de declanşare. Butoanele stau în afara zonei de tap, ca
+     „distribuie" să nu pornească episodul — element interactiv imbricat. */
+  grid-template-columns: auto 1fr;
+  gap: 24px;
   align-items: center;
   padding: 24px 28px;
   border-radius: 14px;
@@ -162,10 +164,19 @@
   box-shadow: 0 0 24px -4px color-mix(in oklab, var(--accent) 50%, transparent);
 }
 
-/* Distribuire pe card — contur, nu plin: redarea rămâne acţiunea principală.
-   Ascuns sub 720px odată cu .episode-play, unde tot cardul e zonă de atingere. */
+/* Zona de declanşare: tot ce e la dreapta butoanelor deschide episodul. */
+.episode-hit {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 28px;
+  align-items: center;
+  cursor: pointer;
+  min-width: 0;
+}
+.episode-hit:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 8px; }
+
+/* Distribuire pe card — contur, nu plin: redarea rămâne acţiunea principală. */
 .episode-actions { display: flex; align-items: center; gap: 12px; }
-.episode-actions.is-col { flex-direction: column; gap: 10px; }
 .episode-share {
   width: 44px; height: 44px; border-radius: 50%;
   display: grid; place-items: center;
@@ -211,11 +222,11 @@
   }
   .episode-num .ep { font-size: 20px; margin-bottom: 0; }
   .episode-body h3 { font-size: 18px; }
-  .episode-play { display: none; }
-  /* Pe mobil tot cardul e zonă de atingere — un buton în interior ar concura cu
-     ea, aşa că distribuirea rămâne doar în player. `display:none` scoate şi
-     containerul din grilă, altfel ar ocupa o coloană goală. */
+  /* Pe mobil butoanele dispar şi zona de declanşare acoperă tot cardul —
+     distribuirea rămâne doar în player. `display:none` scoate containerul şi
+     din grilă, altfel ar ocupa o coloană goală. */
   .episode-actions { display: none; }
+  .episode-hit { grid-template-columns: 1fr; gap: 12px; }
   .episode-item:hover { transform: none; }
   .archive-toolbar { padding: 14px; }
   .search-box { flex-basis: 100%; }
@@ -353,10 +364,9 @@
   background:
     radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 6%, transparent), transparent 60%),
     var(--bg-1);
-  /* play | body | ep-num */
-  grid-template-columns: 52px 1fr 80px;
-  cursor: pointer;
 }
+/* La manifest zona de tap e: corp | număr episod (fără coloana de 96px). */
+.manifest-list .episode-hit { grid-template-columns: 1fr 80px; }
 /* Play button: prominent + leftmost for manifest items */
 .manifest-list .episode-play {
   width: 44px; height: 44px;
@@ -378,10 +388,13 @@
   text-transform: uppercase;
 }
 .ep-read-link:hover { text-decoration: underline; }
-/* Mobile: show play button; hide ep-num column */
+/* Mobil: la manifest păstrăm butonul de redare (ancoră vizuală a seriei), dar
+   fără cel de distribuire; coloana cu numărul episodului dispare. */
 @media (max-width: 720px) {
-  .manifest-list .episode-play { display: grid !important; }
-  .manifest-list .episode-item { grid-template-columns: 44px 1fr; }
+  .manifest-list .episode-actions { display: flex !important; }
+  .manifest-list .episode-share { display: none; }
+  .manifest-list .episode-item { grid-template-columns: 44px 1fr; gap: 16px; }
+  .manifest-list .episode-hit { grid-template-columns: 1fr; }
   .manifest-list .episode-num { display: none; }
 }
 </style>
@@ -542,29 +555,31 @@ function render() {
   noRes.classList.toggle('show', all.length === 0);
 
   listEl.innerHTML = all.map(e => `
-    <div class="episode-item fade-in sp-trigger"
-         data-spotify="${e.spotifyId || ''}"
-         data-title="${e.ep} — ${e.title.replace(/"/g,'&quot;')}"
-         role="button" tabindex="0"
-         aria-label="Ascultă pe Spotify: ${e.title}">
-      <div class="episode-num"><span class="ep">${e.ep}</span>${e.duration}</div>
-      <div class="episode-body">
-        <div class="season">${e.seasonLabel}</div>
-        <h3>${e.title}</h3>
-        <p>${e.excerpt}</p>
-        <div class="meta">
-          <span>${e.duration}</span>
-          <span class="sep">·</span>
-          <span>${e.tags.join(' ')}</span>
-        </div>
-      </div>
+    <div class="episode-item fade-in">
       <div class="episode-actions">
         <button type="button" class="episode-share" data-share="${e.spotifyId}" aria-label="Distribuie episodul ${e.ep}">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
         </button>
-        <button type="button" class="episode-play" aria-label="Redă pe Spotify · ${e.ep}">
+        <button type="button" class="episode-play sp-trigger" data-spotify="${e.spotifyId}" aria-label="Redă episodul ${e.ep}">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </button>
+      </div>
+      <div class="episode-hit sp-trigger"
+           data-spotify="${e.spotifyId}"
+           data-title="${e.ep} — ${e.title.replace(/"/g,'&quot;')}"
+           role="button" tabindex="0"
+           aria-label="Ascultă episodul: ${e.title}">
+        <div class="episode-num"><span class="ep">${e.ep}</span>${e.duration}</div>
+        <div class="episode-body">
+          <div class="season">${e.seasonLabel}</div>
+          <h3>${e.title}</h3>
+          <p>${e.excerpt}</p>
+          <div class="meta">
+            <span>${e.duration}</span>
+            <span class="sep">·</span>
+            <span>${e.tags.join(' ')}</span>
+          </div>
+        </div>
       </div>
     </div>`).join('');
 
@@ -594,20 +609,26 @@ document.getElementById('sort').addEventListener('change', e => { state.sort = e
 render();
 
 /* Render the 5-part manifest series — order is fixed, never filtered/sorted.
-   Clicking anywhere on the card (title, body, play btn) opens Spotify modal.
-   The small "Citește articolul" link navigates to the article instead. */
+   Butoanele stau în afara zonei de declanşare (.episode-hit): altfel apăsarea
+   pe „distribuie" ar porni şi episodul. „Citește articolul" rămâne excepţie. */
 (function renderManifest() {
   const el = document.getElementById('manifest-list');
   if (!el) return;
   el.innerHTML = MANIFEST.map(m => `
-    <div class="episode-item fade-in sp-trigger"
-         data-spotify="${m.spotifyId}"
-         data-title="${m.part} — ${m.title.replace(/"/g,'&quot;')}"
-         role="button" tabindex="0"
-         aria-label="Ascultă pe Spotify: ${m.title}">
-      <button type="button" class="episode-play" aria-label="Redă pe Spotify · ${m.part}">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
+    <div class="episode-item fade-in">
+      <div class="episode-actions">
+        <button type="button" class="episode-share" data-share="${m.spotifyId}" aria-label="Distribuie episodul ${m.part}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+        </button>
+        <button type="button" class="episode-play sp-trigger" data-spotify="${m.spotifyId}" aria-label="Redă episodul ${m.part}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+      <div class="episode-hit sp-trigger"
+           data-spotify="${m.spotifyId}"
+           data-title="${m.part} — ${m.title.replace(/"/g,'&quot;')}"
+           role="button" tabindex="0"
+           aria-label="Ascultă episodul: ${m.title}">
       <div class="episode-body">
         <div class="season">${m.part}</div>
         <h3>${m.title}</h3>
@@ -620,11 +641,7 @@ render();
           <a href="${m.href}" class="ep-read-link" onclick="event.stopPropagation()">Citește articolul →</a>
         </div>
       </div>
-      <div class="episode-actions is-col">
         <div class="episode-num"><span class="ep">${m.ep}</span>${m.duration}</div>
-        <button type="button" class="episode-share" data-share="${m.spotifyId}" aria-label="Distribuie episodul ${m.part}">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-        </button>
       </div>
     </div>`).join('');
   if ('IntersectionObserver' in window) {
@@ -666,9 +683,11 @@ render();
       try { if (document.execCommand('copy')) feedback(btn); } catch (err) {}
       document.body.removeChild(ta);
     };
-    const touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-    if (navigator.share && touch) {
-      navigator.share({ title: 'Podcast AI Accounting Hub', url }).catch(() => {});
+    // Foaia nativă oriunde există (inclusiv desktop Chrome/Edge); altfel copiem.
+    if (navigator.share) {
+      const ep = (window.PODCAST_EPISODES || []).find(x => x.id === id);
+      const title = ep ? (ep.ep + ' — ' + ep.title) : 'Podcast AI Accounting Hub';
+      navigator.share({ title, text: title, url }).catch(() => {});
     } else if (navigator.clipboard && window.isSecureContext) {
       // rejectare (fără activare de utilizator, permisiune refuzată) → metoda veche
       navigator.clipboard.writeText(url).then(() => feedback(btn), legacyCopy);
