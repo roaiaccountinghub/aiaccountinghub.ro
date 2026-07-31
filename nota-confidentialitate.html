@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
 <style>
 /* ============ LEGAL PAGE ============ */
 .legal-wrap {
@@ -284,6 +285,18 @@
       <li>Transmise sau vândute către terți</li>
       <li>Folosite pentru comunicări comerciale nesolicitate</li>
     </ul>
+
+    <h3 id="aplicatie">2.3 Aplicația instalabilă și semnalizarea conținutului nou</h3>
+    <p>Site-ul poate fi salvat pe ecranul telefonului sau pe desktop, ca o aplicație. Este complet opțional. Instalarea <strong>nu presupune cont, adresă de email sau înscriere de niciun fel</strong>, iar noi nu aflăm cine a instalat aplicația și nici că a instalat-o.</p>
+    <p>Odată instalată, aplicația citește periodic fișierul public <em>updates.json</em> de pe acest site — exact același tip de cerere pe care o face orice vizitator care deschide o pagină. Compararea cu ce ați citit deja se face <strong>integral în browserul dumneavoastră</strong>.</p>
+    <p>Pe dispozitivul dumneavoastră se rețin, în spațiul local al browserului (<em>localStorage</em> și <em>Cache Storage</em>), doar:</p>
+    <ul>
+      <li>lista materialelor pe care le-ați deschis deja, sub formă de identificatori scurți;</li>
+      <li>categoriile pe care ați ales să le urmăriți (articole, podcast, buzzword, resurse).</li>
+    </ul>
+    <p>Aceste informații <strong>nu ne sunt transmise niciodată</strong>, nici măcar agregat. Nu există un server care să le primească și nu există nicio listă de abonați.</p>
+    <p>Notificările despre conținut nou sunt afișate <strong>local, de către propriul dumneavoastră browser</strong>. Nu folosim Web Push, deci nu se creează și nu se stochează niciun identificator de dispozitiv la noi. Permisiunea pentru notificări este opțională și poate fi refuzată — restul funcționează la fel.</p>
+    <p>Dezinstalarea aplicației, respectiv ștergerea datelor site-ului din setările browserului, elimină complet aceste informații. Nu rămâne nimic de partea noastră, pentru că nu a existat nimic.</p>
 
     <h2 id="terti"><span class="num">03</span>Servicii terțe integrate</h2>
 

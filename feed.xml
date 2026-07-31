@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  FEED RSS — AI Accounting Hub
+  ============================================================
+  OGLINDA lui updates.json: aceleași materiale, aceeași ordine,
+  toate cele trei tipuri (articol, podcast, buzzword).
+
+  LA FIECARE PUBLICARE se completează AMBELE fișiere:
+    1. updates.json  -> pentru aplicația instalată (bulină + notificare)
+    2. feed.xml      -> pentru cititoarele de feed (Feedly, Inoreader…)
+
+  Reguli pentru un <item> nou:
+    · se adaugă ca PRIM item, imediat sub <image>;
+    · <pubDate> în format RFC-822: „Vin, 31 Jul 2026 08:00:00 +0300”
+      se scrie cu ziua și luna în engleză — Mon/Tue/Wed/Thu/Fri/Sat/Sun
+      și Jan/Feb/Mar/Apr/May/Jun/Jul/Aug/Sep/Oct/Nov/Dec;
+    · <lastBuildDate> din capul canalului se aliniază cu cel mai nou item;
+    · articolele au guid = adresa proprie (isPermaLink="true");
+      episoadele și termenii trăiesc într-o listă, deci primesc un guid
+      propriu, stabil (isPermaLink="false") — altfel cititoarele ar crede
+      că e mereu același material.
+
+  Podcastul are și feed-ul lui oficial, de la Anchor/Spotify, prin care
+  ajunge în aplicațiile de podcast. Acesta e „tot ce apare pe Hub”.
+  ============================================================
+-->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI Accounting Hub</title>
+    <link>https://aiaccountinghub.ro/</link>
+    <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
+    <language>ro</language>
+    <lastBuildDate>Fri, 31 Jul 2026 08:00:00 +0300</lastBuildDate>
+    <image>
+      <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
+      <title>AI Accounting Hub</title>
+      <link>https://aiaccountinghub.ro/</link>
+    </image>
+
+    <item>
+      <title>Promptul perfect 2.0 — ce s-a schimbat în trei luni</title>
+      <link>https://aiaccountinghub.ro/2026-07-31-Promptul-perfect-2.0.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-07-31-Promptul-perfect-2.0.html</guid>
+      <pubDate>Fri, 31 Jul 2026 08:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Cele 7 ingrediente rămân gramatica. Între timp s-a schimbat arhitectura: tag-uri XML pentru separarea datelor de instrucțiuni, ordinea documentelor lungi, guardrails, „instrucțiunea-canar” pentru drift și riscul de prompt injection dintr-un PDF. La final, un mega-prompt complet, aplicat pe o analiză de prețuri de transfer. 16 min de citit.</description>
+    </item>
+
+    <item>
+      <title>Ep. 06 — Adoptarea vs adaptarea AI în contabilitate</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=51MZOf3ZfOXxZYBYD86kAz</link>
+      <guid isPermaLink="false">aiah-podcast-e06</guid>
+      <pubDate>Thu, 30 Jul 2026 08:00:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Adoptarea întreabă „ai deschis AI-ul luna asta?”. Adaptarea întreabă „ai schimbat cum lucrezi, fără să renunți la judecata cu care semnezi?”. Pornind de la un raport Deloitte, un cadru practic în cinci straturi — de la a întreba, la a construi unelte, la a supraveghea agenți — și cei trei piloni care fac diferența: judecată, experimentare, gândire independentă. 20 min.</description>
+    </item>
+
+    <item>
+      <title>Ep. 05 — Analiza modificărilor legislative cu agenți AI</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=1Ib5lY2Avj6UYIOt50IQKl</link>
+      <guid isPermaLink="false">aiah-podcast-e05</guid>
+      <pubDate>Thu, 30 Jul 2026 07:00:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Un OPANAF nou apare joi seara, iar vineri la prânz CFO-ul cere zece livrabile: gap analysis, brief, traducere juridică, prezentare, infografic. În loc de trei zile de muncă brută, un agent orchestrator și opt subagenți scriu totul pe disc peste noapte — iar luni dimineață omul trece prin fiecare fișier, linie cu linie, înainte să plece mai departe. 22 min.</description>
+    </item>
+
+    <item>
+      <title>Adoptare vs. adaptare: ce înseamnă, de fapt, să lucrezi cu AI în contabilitate</title>
+      <link>https://aiaccountinghub.ro/2026-07-24-Adoptare-vs-adaptare-ai-contabilitate.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-07-24-Adoptare-vs-adaptare-ai-contabilitate.html</guid>
+      <pubDate>Fri, 24 Jul 2026 08:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Poți deschide un chatbot în fiecare zi și, în tot acest timp, să lucrezi exact ca acum trei ani. Un raport Deloitte pune degetul pe rană: adoptarea AI e ușor de demonstrat și de simulat, adaptarea nu. Cele trei comportamente care fac diferența — judecată, experimentare și gândire independentă — traduse în limbaj de contabil. 9 min de citit.</description>
+    </item>
+
+    <item>
+      <title>Buzzword: Alignment — AI-ul să vrea ce vrem noi</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#alignment</link>
+      <guid isPermaLink="false">aiah-buzzword-alignment</guid>
+      <pubDate>Wed, 22 Jul 2026 08:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Alinierea este efortul de a face ca obiectivele unui sistem AI să corespundă intențiilor oamenilor — să facă ce am vrut să cerem, nu doar ce am formulat literal. Paralela contabilă: bonusul pe „număr de dosare închise” produce dosare închise superficial.</description>
+    </item>
+
+    <item>
+      <title>Buzzword: Superintelligence / ASI</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#superintelligence-asi</link>
+      <guid isPermaLink="false">aiah-buzzword-superintelligence-asi</guid>
+      <pubDate>Wed, 22 Jul 2026 07:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Nivelul ipotetic la care un AI ar depăși inteligența umană în practic toate domeniile. Dacă AGI înseamnă „la nivel uman”, ASI înseamnă „dincolo de ce poate orice om”. Un termen de cultură generală profesională, nu descrierea vreunui produs pe care îl poți cumpăra.</description>
+    </item>
+
+    <item>
+      <title>Vibe Coding pentru prezentări: o pagină interactivă în loc de slide-uri</title>
+      <link>https://aiaccountinghub.ro/2026-07-21-Vibe-Coding-prezentare-interactiva-html.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-07-21-Vibe-Coding-prezentare-interactiva-html.html</guid>
+      <pubDate>Tue, 21 Jul 2026 08:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Cum am înlocuit PowerPoint-ul cu o pagină HTML care rulează în browser, se trimite ca un singur fișier și e, în același timp, un prototip funcțional (MVP) — cu avantajele, limitele și partea de securitate. 9 min de citit.</description>
+    </item>
+
+    <item>
+      <title>Tool-ul ANAF, versiunea 2 — de la „funcționează” la „rezistă în timp”</title>
+      <link>https://aiaccountinghub.ro/2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html</guid>
+      <pubDate>Sun, 05 Jul 2026 08:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Primul nostru executabil verifica CIF-uri la ANAF și mergea perfect. Punându-i codul înapoi în fața AI-ului, am aflat de ce „merge” nu e același lucru cu „e bine făcut”: configurare externă, fișiere editabile, jurnal de rulare. 15 min de citit.</description>
+    </item>
+
+    <item>
+      <title>Short Friday, o analiză fiscală cu zece livrabile</title>
+      <link>https://aiaccountinghub.ro/2026-07-04-Short-Friday-analiza-fiscala-zece-livrabile.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-07-04-Short-Friday-analiza-fiscala-zece-livrabile.html</guid>
+      <pubDate>Sat, 04 Jul 2026 08:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>OPANAF 828/2026 a rescris din temelii dosarul prețurilor de transfer chiar înainte de weekend. Povestea unei zile de vineri în care un agent orchestrator și opt subagenți AI au produs zece livrabile — de la analiza completă la un podcast — până luni dimineața. 11 min de citit.</description>
+    </item>
+
+    <item>
+      <title>Vibe coding — ce este, de unde vine și unde îl folosim în contabilitate</title>
+      <link>https://aiaccountinghub.ro/2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html</guid>
+      <pubDate>Sun, 14 Jun 2026 08:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>De la un tweet viral la Collins Word of the Year: ce înseamnă vibe coding, cum l-am folosit deja pentru verificări ANAF și unde mai poate ajunge în lumea contabilă. 14 min de citit.</description>
+    </item>
+
+  </channel>
+</rss>

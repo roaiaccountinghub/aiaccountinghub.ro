@@ -1,8 +1,9 @@
 {
-  "_comment": "Arhiva buzzword-urilor săptămânii. Ordinea în array = ordine cronologică (vechi → nou). Ultimul element este cel afișat implicit (săptămâna curentă). Pentru a adăuga un termen nou, adaugă un obiect la finalul array-ului.",
+  "_comment": "Arhiva buzzword-urilor săptămânii. Ordinea în array = ordine cronologică (vechi → nou). Ultimul element este cel afișat implicit (săptămâna curentă). Pentru a adăuga un termen nou, adaugă un obiect la finalul array-ului. Câmpul 'date' (AAAA-LL-ZZ) este data publicării — se copiază în updates.json când semnalăm termenul ca noutate.",
   "terms": [
     {
       "id": "llm",
+      "date": "2026-05-01",
       "term": "LLM",
       "termFull": "LARGE LANGUAGE MODEL",
       "pron": "/ el·el·em /",
@@ -21,6 +22,7 @@
     },
     {
       "id": "tokens",
+      "date": "2026-05-01",
       "term": "TOKENS",
       "termFull": "UNITATE DE PROCESARE TEXT",
       "pron": "/ to·ken /",
@@ -39,6 +41,7 @@
     },
     {
       "id": "context-window",
+      "date": "2026-05-01",
       "term": "CONTEXT WINDOW",
       "termFull": "FEREASTRA DE CONTEXT",
       "pron": "/ con·text win·dow /",
@@ -57,6 +60,7 @@
     },
     {
       "id": "chatbot-vs-ai-assistant",
+      "date": "2026-05-01",
       "term": "CHATBOT vs AI ASSISTANT",
       "termFull": "BOT CONVERSAȚIONAL vs ASISTENT INTELIGENT",
       "pron": "/ ceat·bot vs ei·ai a·sis·tent /",
@@ -75,6 +79,7 @@
     },
     {
       "id": "ai-models",
+      "date": "2026-05-01",
       "term": "AI MODELS",
       "termFull": "VARIANTE DE MODELE ÎN ACELAȘI ECOSISTEM",
       "pron": "/ ei·ai mo·dels /",
@@ -93,6 +98,7 @@
     },
     {
       "id": "prompt",
+      "date": "2026-05-01",
       "term": "PROMPT",
       "termFull": "INSTRUCȚIUNE DATĂ MODELULUI AI",
       "pron": "/ prompt /",
@@ -111,6 +117,7 @@
     },
     {
       "id": "generative-ai",
+      "date": "2026-05-01",
       "term": "GENERATIVE AI",
       "termFull": "INTELIGENȚĂ ARTIFICIALĂ GENERATIVĂ",
       "pron": "/ ge·ne·ra·tiv ei·ai /",
@@ -129,6 +136,7 @@
     },
     {
       "id": "inteligenta-artificiala",
+      "date": "2026-07-22",
       "term": "INTELIGENȚĂ ARTIFICIALĂ (AI)",
       "termFull": "ARTIFICIAL INTELLIGENCE — TERMENUL-UMBRELĂ",
       "pron": "/ ar·ti·fi·șăl in·te·li·gens /",
@@ -147,6 +155,7 @@
     },
     {
       "id": "multimodal-ai",
+      "date": "2026-07-22",
       "term": "MULTIMODAL AI",
       "termFull": "AI CARE PROCESEAZĂ MAI MULTE TIPURI DE DATE SIMULTAN",
       "pron": "/ mul·ti·mo·dal ei·ai /",
@@ -165,6 +174,7 @@
     },
     {
       "id": "frontier-model",
+      "date": "2026-07-22",
       "term": "FRONTIER MODEL",
       "termFull": "MODEL DE FRONTIERĂ — VÂRFUL DE CAPABILITATE AL MOMENTULUI",
       "pron": "/ fran·tir mo·del /",
@@ -183,6 +193,7 @@
     },
     {
       "id": "reasoning-models",
+      "date": "2026-07-22",
       "term": "REASONING MODELS / LRM",
       "termFull": "LARGE REASONING MODELS — MODELE CARE „GÂNDESC” ÎNAINTE SĂ RĂSPUNDĂ",
       "pron": "/ ri·zo·ning mo·dels /",
@@ -201,6 +212,7 @@
     },
     {
       "id": "agi",
+      "date": "2026-07-22",
       "term": "AGI",
       "termFull": "ARTIFICIAL GENERAL INTELLIGENCE — INTELIGENȚĂ ARTIFICIALĂ GENERALĂ",
       "pron": "/ ei·gi·ai /",
@@ -219,6 +231,7 @@
     },
     {
       "id": "superintelligence-asi",
+      "date": "2026-07-22",
       "term": "SUPERINTELLIGENCE / ASI",
       "termFull": "ARTIFICIAL SUPERINTELLIGENCE — DINCOLO DE NIVELUL UMAN",
       "pron": "/ su·per·in·te·li·gens /",
@@ -237,6 +250,7 @@
     },
     {
       "id": "alignment",
+      "date": "2026-07-22",
       "term": "ALIGNMENT",
       "termFull": "ALINIERE — AI-UL SĂ VREA CE VREM NOI",
       "pron": "/ a·lain·ment /",

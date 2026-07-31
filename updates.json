@@ -1,0 +1,92 @@
+{
+  "_comment": "FLUXUL DE NOUTĂȚI — se completează MANUAL la fiecare publicare, împreună cu feed.xml (sunt oglindă). Adaugă noul material ca PRIM element din 'items' (ordinea din listă = ordinea afișării, cele mai noi întâi). Câmpuri: id (unic, nu se mai schimbă niciodată — el decide ce e 'citit'), type (DOAR articol | podcast | buzzword — alt tip nu poate fi bifat de cititor, deci nu i-ar fi semnalat niciodată), title, url (adresa la care duce notificarea), date (AAAA-LL-ZZ), meta (text scurt: durată), mark (opțional — selector CSS al cardului care primește eticheta NOU; dacă lipsește, se caută automat legătura către 'url').",
+  "_linkuri": "Articol: adresa proprie a paginii. Podcast: 'podcast.html?play=<spotifyId>' — deschide direct playerul pe episodul acela. Buzzword: 'buzzword.html#<id>' — deschide definiția și derulează la ea. Resursele nu intră aici: când publici ceva important în Download zone scrii oricum și un articol pe temă.",
+  "_surse": "Datele de publicare există și la sursă: câmpul 'date' din assets/podcast-data.js (episoade) și din assets/buzzwords.json (termeni). De acolo le copiezi când adaugi un material nou aici.",
+  "updated": "2026-07-31",
+  "items": [
+    {
+      "id": "art-2026-07-31-promptul-perfect-2",
+      "type": "articol",
+      "title": "Promptul perfect 2.0 — ce s-a schimbat în trei luni",
+      "url": "2026-07-31-Promptul-perfect-2.0.html",
+      "date": "2026-07-31",
+      "meta": "16 min"
+    },
+    {
+      "id": "pod-e06-adoptare",
+      "type": "podcast",
+      "title": "Ep. 06 — Adoptarea vs adaptarea AI în contabilitate",
+      "url": "podcast.html?play=51MZOf3ZfOXxZYBYD86kAz",
+      "date": "2026-07-30",
+      "meta": "20 min",
+      "mark": "[data-spotify=\"51MZOf3ZfOXxZYBYD86kAz\"]"
+    },
+    {
+      "id": "pod-e05-short-friday",
+      "type": "podcast",
+      "title": "Ep. 05 — Analiza modificărilor legislative cu agenți AI",
+      "url": "podcast.html?play=1Ib5lY2Avj6UYIOt50IQKl",
+      "date": "2026-07-30",
+      "meta": "22 min",
+      "mark": "[data-spotify=\"1Ib5lY2Avj6UYIOt50IQKl\"]"
+    },
+    {
+      "id": "art-2026-07-24-adoptare-vs-adaptare",
+      "type": "articol",
+      "title": "Adoptare vs. adaptare: ce înseamnă, de fapt, să lucrezi cu AI în contabilitate",
+      "url": "2026-07-24-Adoptare-vs-adaptare-ai-contabilitate.html",
+      "date": "2026-07-24",
+      "meta": "9 min"
+    },
+    {
+      "id": "buzz-alignment",
+      "type": "buzzword",
+      "title": "Alignment — AI-ul să vrea ce vrem noi",
+      "url": "buzzword.html#alignment",
+      "date": "2026-07-22",
+      "meta": "termenul săptămânii",
+      "mark": "#alignment"
+    },
+    {
+      "id": "buzz-superintelligence-asi",
+      "type": "buzzword",
+      "title": "Superintelligence / ASI",
+      "url": "buzzword.html#superintelligence-asi",
+      "date": "2026-07-22",
+      "meta": "termen explicat",
+      "mark": "#superintelligence-asi"
+    },
+    {
+      "id": "art-2026-07-21-vibe-coding-prezentari",
+      "type": "articol",
+      "title": "Vibe Coding pentru prezentări: o pagină interactivă în loc de slide-uri",
+      "url": "2026-07-21-Vibe-Coding-prezentare-interactiva-html.html",
+      "date": "2026-07-21",
+      "meta": "9 min"
+    },
+    {
+      "id": "art-2026-07-05-tool-anaf-v2",
+      "type": "articol",
+      "title": "Tool-ul ANAF, versiunea 2 — de la „funcționează” la „rezistă în timp”",
+      "url": "2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html",
+      "date": "2026-07-05",
+      "meta": "15 min"
+    },
+    {
+      "id": "art-2026-07-04-short-friday",
+      "type": "articol",
+      "title": "Short Friday, o analiză fiscală cu zece livrabile",
+      "url": "2026-07-04-Short-Friday-analiza-fiscala-zece-livrabile.html",
+      "date": "2026-07-04",
+      "meta": "11 min"
+    },
+    {
+      "id": "art-2026-06-14-vibe-coding",
+      "type": "articol",
+      "title": "Vibe coding — ce este, de unde vine și unde îl folosim în contabilitate",
+      "url": "2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html",
+      "date": "2026-06-14",
+      "meta": "14 min"
+    }
+  ]
+}

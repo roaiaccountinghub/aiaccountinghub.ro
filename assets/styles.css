@@ -635,3 +635,119 @@ footer.site-footer {
 @media (max-width: 1200px) {
   .toc-mobile { display: block; }
 }
+
+
+/* ============================================================
+   APLICAȚIA INSTALABILĂ (PWA)
+   Blocul e integral aditiv: nu modifică nicio regulă existentă.
+   Culoarea marcajului „NOU" e singurul token nou (roșu-coral).
+   ============================================================ */
+:root { --nou: #f43f5e; }
+[data-theme="light"] { --nou: #be123c; }   /* mai închis, pentru contrast pe fundal deschis */
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- butonul din header ---------- */
+.install-btn {
+  height: 40px; padding: 0 14px; border-radius: 10px;
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-1); color: var(--accent);
+  font-size: 13px; font-weight: 600; white-space: nowrap;
+  transition: all 0.25s ease; position: relative;
+}
+.install-btn:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 12%, transparent);
+}
+.install-btn svg { width: 17px; height: 17px; flex: none; }
+.install-btn[data-new]::after {
+  content: ''; position: absolute; top: -3px; right: -3px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--nou); box-shadow: 0 0 0 2px var(--bg-0);
+}
+/* sub 960px meniul se strânge în hamburger — păstrăm doar iconița */
+@media (max-width: 960px) {
+  .install-btn { width: 40px; padding: 0; justify-content: center; }
+  .install-btn .lbl { display: none; }
+}
+
+/* ---------- banda cu cardul, deasupra footerului ---------- */
+.install-band {
+  position: relative; z-index: 1;
+  padding: 78px 32px;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 90px;
+}
+.install-band-inner { max-width: 990px; margin: 0 auto; }
+.install-card {
+  border: 1px solid var(--border-strong); border-radius: 18px;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 7%, var(--bg-1)) 0%, var(--bg-1) 62%);
+  padding: 32px 34px;
+  display: flex; gap: 28px; align-items: center; flex-wrap: wrap;
+  box-shadow: var(--shadow-lg);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.install-band:target .install-card {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 12%, transparent), var(--shadow-lg);
+}
+.install-card .ic-icon {
+  width: 68px; height: 68px; border-radius: 17px; flex: none;
+  box-shadow: 0 12px 32px -12px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+.install-card .ic-body { flex: 1 1 340px; min-width: 260px; }
+.install-card .ic-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+}
+.install-card h3 { font-size: 20px; margin-bottom: 8px; }
+.install-card p { color: var(--fg-muted); font-size: 14px; max-width: 60ch; }
+.install-card .ic-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.install-card .btn-ghost { padding: 11px 16px; font-size: 13px; }
+.install-card .privacy-line {
+  margin-top: 16px; display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--fg-dim); letter-spacing: 0.03em;
+}
+.install-card .privacy-line svg { width: 13px; height: 13px; color: var(--accent); flex: none; }
+
+/* instrucțiuni afișate doar când browserul nu poate instala singur (iPhone etc.) */
+.install-help {
+  flex: 1 1 100%;
+  margin-top: 4px; padding: 16px 18px;
+  border: 1px dashed var(--border-strong); border-radius: 12px;
+  background: color-mix(in oklab, var(--bg-0) 45%, transparent);
+  font-size: 13px; color: var(--fg-muted);
+}
+.install-help strong { color: var(--fg); font-weight: 600; }
+.install-help ol { margin: 8px 0 0; padding-left: 20px; }
+.install-help li { margin-bottom: 4px; }
+
+@media (max-width: 640px) {
+  .install-band { padding: 56px 20px; }
+  .install-card { padding: 24px 22px; gap: 20px; }
+  .install-card h3 { font-size: 18px; }
+  .install-card .ic-actions { width: 100%; }
+  .install-card .ic-actions .btn { flex: 1 1 auto; justify-content: center; }
+}
+
+/* ---------- marcajul „NOU" pe cardurile existente ---------- */
+.nou-flag {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  background: var(--nou); color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em;
+  padding: 3px 7px; border-radius: 6px;
+  pointer-events: none;
+}
+.is-new { position: relative; }
+.is-new.article-item,
+.is-new.episode-item,
+.is-new.term-item {
+  border-color: color-mix(in oklab, var(--nou) 40%, var(--border));
+}

@@ -10,6 +10,9 @@
    întreținută de Spotify. NU folosi URL-urile de preview din
    dashboard (…-44100-2-….m4a) — sunt fișiere interne, diferite.
 
+   date = data publicării (AAAA-LL-ZZ). Se copiază în updates.json când
+   semnalăm episodul ca noutate în aplicație.
+
    chapters = listă opțională: [{ t: secunde, title: "..." }]
    Lasă [] dacă episodul nu are capitole încă — playerul ascunde
    automat panoul de capitole.
@@ -26,6 +29,7 @@
     /* ---------- Sezonul 2 ---------- */
     {
       id: "51MZOf3ZfOXxZYBYD86kAz", slug: "adoptare", ep: "E06", group: "Sezonul 2",
+      date: "2026-07-30",
       title: "Adoptarea vs adaptarea AI în contabilitate",
       audioUrl: RSS + "123548230" + CF + "2026-6-30%2F0ff8eeda-5f93-0f7c-9baa-65c4e5f0811e.m4a",
       /* TIMPI ESTIMAȚI — proporțional cu lungimea capitolelor din script, raportat
@@ -44,6 +48,7 @@
     },
     {
       id: "1Ib5lY2Avj6UYIOt50IQKl", slug: "short-friday", ep: "E05", group: "Sezonul 2",
+      date: "2026-07-30",
       title: "Analiza modificărilor legislative cu agenți AI",
       audioUrl: RSS + "123548147" + CF + "2026-6-30%2F505dc918-b3f9-991a-0ead-6873a4579e98.m4a",
       /* TIMPI ESTIMAȚI — proporțional cu lungimea capitolelor din script, raportat
@@ -62,6 +67,7 @@
     },
     {
       id: "4ag71LYvnsQLYcyg4w6XYl", slug: "prezentari", ep: "E04", group: "Sezonul 2",
+      date: "2026-07-21",
       title: "Prezentări financiare interactive prin fișiere HTML",
       audioUrl: RSS + "123137075" + CF + "2026-6-21%2Fb2e566b2-5a5d-61a1-2a1d-68d0ea1c855f.m4a",
       /* TIMPI ESTIMAȚI — de înlocuit cu secundele reale după ascultare (t = secunde) */
@@ -78,6 +84,7 @@
     },
     {
       id: "3cOJcviFFf8FxRjqSSHGnb", slug: "vibe-coding", ep: "E03", group: "Sezonul 2",
+      date: "2026-06-16",
       title: "Vibe Coding aplicat în contabilitate",
       audioUrl: RSS + "121575301" + CF + "2026-5-16%2Fd01b3e97-8247-743b-3823-b6b937e3c578.m4a",
       /* timpi din marcajele scriptului */
@@ -94,6 +101,7 @@
     },
     {
       id: "0hZnb2nnOPdCrLTqVicq80", slug: "secret", ep: "E02", group: "Sezonul 2",
+      date: "2026-05-10",
       title: "Agentul AI nu știe să țină un secret",
       audioUrl: RSS + "119754164" + CF + "2026-4-10%2Fc116ecb9-d9eb-adbf-8f6a-a1a5dce5aa3f.m4a",
       /* timpi din marcajele scriptului */
@@ -112,6 +120,7 @@
     },
     {
       id: "5enoAz2nrHLOOLg80JDcsW", slug: "e-factura", ep: "E01", group: "Sezonul 2",
+      date: "2026-05-02",
       title: "RO e-Factura: când ANAF vede viitorul prin AI, iar tu ești blocat în UI-ul anului 2007",
       audioUrl: RSS + "119380489" + CF + "2026-4-2%2F74712743-eb03-984a-569e-56daa6a3da7a.m4a",
       /* timpi din marcajele scriptului */
@@ -130,6 +139,7 @@
     /* ---------- Seria fondatoare ---------- */
     {
       id: "4k0YbxKWkKNWGpKFJ3JklL", slug: "revolutia-ai", ep: "M01", group: "Seria fondatoare",
+      date: "2026-05-01",
       title: "Contextul Revoluției AI: de la ChatGPT la AI Agents",
       audioUrl: RSS + "119306240" + CF + "2026-3-30%2F9eddcc6f-4138-6756-d06b-c5e8b8d4cbe2.m4a",
       /* TIMPI ESTIMAȚI — de corectat după ascultare */
@@ -145,6 +155,7 @@
     },
     {
       id: "0hb9PUgaN6QNCN37qLwzPt", slug: "evolutia", ep: "M02", group: "Seria fondatoare",
+      date: "2026-05-01",
       title: "Evoluția Contabilității: de la registre pe hârtie la era AI",
       audioUrl: RSS + "119306450" + CF + "2026-3-30%2F685d5fcd-cd02-61fa-3ac9-5b7ac61472bf.m4a",
       /* TIMPI ESTIMAȚI — de corectat după ascultare */
@@ -159,6 +170,7 @@
     },
     {
       id: "3FfSF66urjapVHvrPlOi6T", slug: "skilluri", ep: "M03", group: "Seria fondatoare",
+      date: "2026-05-01",
       title: "Skilluri pentru Profesioniști: de la tabele Pivot la Prompt Engineering",
       audioUrl: RSS + "119306737" + CF + "2026-3-30%2Fac0e066b-ac6e-208c-f4da-1ffee615722f.m4a",
       /* TIMPI ESTIMAȚI — de corectat după ascultare */
@@ -173,6 +185,7 @@
     },
     {
       id: "1OFGHOtAYGsBjZJHUsRHgD", slug: "viitorul", ep: "M04", group: "Seria fondatoare",
+      date: "2026-05-01",
       title: "Viitorul Profesiei: cum va arăta contabilitatea în 5–10 ani",
       audioUrl: RSS + "119307001" + CF + "2026-3-30%2Fec292201-576a-483f-33d7-68a65d309847.m4a",
       /* TIMPI ESTIMAȚI — de corectat după ascultare */
@@ -189,6 +202,7 @@
     },
     {
       id: "7IsybDIfyJawn5Hv3PZG97", slug: "misiunea", ep: "M05", group: "Seria fondatoare",
+      date: "2026-05-01",
       title: "Misiunea AI Accounting Hub",
       audioUrl: RSS + "119307119" + CF + "2026-3-30%2F30224b68-9b7a-b19e-3f63-14d750d6c0a3.m4a",
       /* TIMPI ESTIMAȚI — de corectat după ascultare */

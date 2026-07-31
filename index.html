@@ -26,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
 <!-- Hero-ul e primul lucru vizibil: îl pornim la descărcare odată cu CSS-ul, nu după el -->
 <link rel="preload" as="image" href="assets/hero-vf.webp" fetchpriority="high">
 <style>
@@ -2626,6 +2627,55 @@ section.block {
       <button class="carousel-nav" id="carousel-next" aria-label="Resursa următoare">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </button>
+    </div>
+  </div>
+</section>
+
+<!-- APLICAȚIA INSTALABILĂ -->
+<section class="install-band" id="install">
+  <div class="install-band-inner">
+    <div class="install-card">
+      <svg class="ic-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><linearGradient id="pwaIcon" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0891b2"/><stop offset="100%" stop-color="#0d9488"/></linearGradient></defs>
+        <rect width="32" height="32" rx="7" fill="url(#pwaIcon)"/>
+        <rect x="10" y="17" width="12" height="9" rx="1" fill="white" opacity=".95"/>
+        <polygon points="16,7 6,18 8,18 16,10 24,18 26,18" fill="white" opacity=".95"/>
+        <rect x="13.5" y="20" width="5" height="6" rx="1" fill="#0e7490"/>
+      </svg>
+      <div class="ic-body">
+        <div class="ic-label">Aplicația</div>
+        <h3>Păstrează Hub-ul la îndemână</h3>
+        <p>Adaugă site-ul pe ecranul telefonului sau pe desktop. Când apare un articol, un episod de podcast sau un buzzword nou, vezi un semn pe iconiță — fără să-ți verifici mailul.</p>
+        <div class="privacy-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          fără cont · fără email · fără date colectate
+        </div>
+      </div>
+      <div class="ic-actions">
+        <button type="button" class="btn btn-primary" id="install-card-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M12 6v6"/><path d="M9 9h6"/></svg>
+          Instalează aplicația
+        </button>
+        <a href="nota-confidentialitate.html#aplicatie" class="btn btn-ghost">Cum funcționează?</a>
+      </div>
+
+      <!-- afișate doar dacă browserul nu poate porni singur instalarea -->
+      <div class="install-help" id="install-help-ios" hidden>
+        <strong>Pe iPhone și iPad, pasul se face din Safari:</strong>
+        <ol>
+          <li>Apasă butonul <em>Partajează</em> (pătratul cu săgeată în sus), din bara de jos.</li>
+          <li>Alege <em>Adaugă la ecranul principal</em>.</li>
+          <li>Confirmă cu <em>Adaugă</em>. Gata — iconița apare lângă celelalte aplicații.</li>
+        </ol>
+      </div>
+      <div class="install-help" id="install-help-manual" hidden>
+        <strong>Browserul tău nu oferă instalarea automată.</strong>
+        <ol>
+          <li>Deschide meniul browserului (cele trei puncte, sus în dreapta).</li>
+          <li>Caută <em>Instalează pagina ca aplicație</em> sau <em>Adaugă la ecranul principal</em>.</li>
+          <li>Dacă opțiunea lipsește, încearcă din Chrome, Edge sau Safari.</li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
