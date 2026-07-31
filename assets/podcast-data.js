@@ -25,6 +25,42 @@
   window.PODCAST_EPISODES = [
     /* ---------- Sezonul 2 ---------- */
     {
+      id: "51MZOf3ZfOXxZYBYD86kAz", slug: "adoptare", ep: "E06", group: "Sezonul 2",
+      title: "Adoptarea vs adaptarea AI în contabilitate",
+      audioUrl: RSS + "123548230" + CF + "2026-6-30%2F0ff8eeda-5f93-0f7c-9baa-65c4e5f0811e.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea capitolelor din script, raportat
+         la durata reală (20:23). De corectat după ascultare. */
+      chapters: [
+        { t: 0,    title: "Cold open & intro: adoptare sau adaptare" },
+        { t: 65,   title: "Cheia și casa: ce spune raportul Deloitte" },
+        { t: 170,  title: "Spații sigure de experimentare — și de ce lipsesc" },
+        { t: 285,  title: "Cadrul „strat cu strat”: cele cinci niveluri" },
+        { t: 430,  title: "Judecata: clasificări, provizioane, închidere de lună" },
+        { t: 695,  title: "Experimentarea: reconcilieri și unelte proprii" },
+        { t: 890,  title: "Gândirea independentă: raportări și reîncadrare" },
+        { t: 1060, title: "Confidențialitate și responsabilitatea semnăturii" },
+        { t: 1140, title: "Închidere & teaser" }
+      ]
+    },
+    {
+      id: "1Ib5lY2Avj6UYIOt50IQKl", slug: "short-friday", ep: "E05", group: "Sezonul 2",
+      title: "Analiza modificărilor legislative cu agenți AI",
+      audioUrl: RSS + "123548147" + CF + "2026-6-30%2F505dc918-b3f9-991a-0ead-6873a4579e98.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea capitolelor din script, raportat
+         la durata reală (21:49). De corectat după ascultare. */
+      chapters: [
+        { t: 0,    title: "Cold open & intro: weekendul salvat" },
+        { t: 165,  title: "LinkedIn și draftul de vineri dimineață" },
+        { t: 300,  title: "Discuția de la prânz: lista care tot crește" },
+        { t: 485,  title: "Ce aduce OPANAF 828/2026, pe scurt" },
+        { t: 595,  title: "Cursa contra cronometru cu modelul nou" },
+        { t: 725,  title: "Arhitectura pas cu pas: orchestrator și subagenți" },
+        { t: 890,  title: "De ce comunică agenții prin fișiere pe disc" },
+        { t: 1020, title: "Luni dimineață: filtrul uman obligatoriu" },
+        { t: 1175, title: "Închidere & concluzii" }
+      ]
+    },
+    {
       id: "4ag71LYvnsQLYcyg4w6XYl", slug: "prezentari", ep: "E04", group: "Sezonul 2",
       title: "Prezentări financiare interactive prin fișiere HTML",
       audioUrl: RSS + "123137075" + CF + "2026-6-21%2Fb2e566b2-5a5d-61a1-2a1d-68d0ea1c855f.m4a",
