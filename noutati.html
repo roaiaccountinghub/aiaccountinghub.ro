@@ -16,6 +16,19 @@
 <style>
 .nt-wrap { max-width: 780px; margin: 0 auto; padding: 0 32px 100px; }
 
+/* ---------- antetul paginii, temperat ----------
+   Accentul vizual trebuie să stea pe starea curentă (ce e nou / ești la zi),
+   nu pe titlul paginii, care spune același lucru de fiecare dată. */
+.page-noutati .page-header { padding-bottom: 34px; }
+.page-noutati .page-header h1 {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--fg-muted);
+}
+.page-noutati .page-header h1 .accent { color: var(--fg); }
+.page-noutati .page-lede { font-size: 13.5px; color: var(--fg-dim); max-width: 62ch; }
+
 /* ---------- alegerea intereselor ---------- */
 .onb {
   border: 1px solid var(--border-strong); border-radius: 16px;
@@ -50,10 +63,17 @@
 
 /* ---------- lista ---------- */
 .nt-bar {
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  padding-bottom: 16px; margin-bottom: 8px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding-bottom: 18px; margin-bottom: 8px; border-bottom: 1px solid var(--border);
 }
-.nt-count { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); }
+/* starea curentă — elementul cel mai proeminent din pagină */
+.nt-count {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 21px; font-weight: 600; letter-spacing: -0.02em;
+  color: var(--fg); line-height: 1.25;
+}
+.nt-count .n { color: var(--accent); }
+.nt-count .sub { display: block; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 400; color: var(--fg-dim); margin-top: 4px; letter-spacing: 0; }
 .nt-actions { margin-left: auto; display: flex; gap: 8px; }
 .nt-btn {
   font-size: 12px; color: var(--fg-muted);
@@ -86,11 +106,34 @@
 .nt-title { display: block; font-size: 14px; font-weight: 600; line-height: 1.4; }
 .nt-item.read .nt-title { color: var(--fg-muted); font-weight: 500; }
 .nt-meta { display: block; font-size: 11px; color: var(--fg-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+/* ---------- starea „ești la zi", tratată ca destinație, nu ca gol ---------- */
 .nt-empty {
-  text-align: center; padding: 56px 20px; color: var(--fg-dim);
-  border: 1px dashed var(--border); border-radius: 14px; margin-top: 24px;
+  text-align: center; padding: 44px 28px 40px; margin-top: 26px;
+  border: 1px solid var(--border-strong); border-radius: 16px;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 7%, var(--bg-1)) 0%, var(--bg-1) 62%);
+  box-shadow: var(--shadow-lg);
 }
-.nt-empty strong { display: block; color: var(--fg-muted); font-size: 15px; margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; }
+.nt-empty-icon {
+  width: 52px; height: 52px; border-radius: 50%; margin: 0 auto 18px;
+  display: grid; place-items: center;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 32%, transparent);
+}
+.nt-empty-icon svg { width: 24px; height: 24px; }
+.nt-empty strong {
+  display: block; font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px; font-weight: 600; letter-spacing: -0.02em;
+  color: var(--fg); margin-bottom: 10px;
+}
+.nt-empty p { font-size: 14px; color: var(--fg-muted); max-width: 46ch; margin: 0 auto; line-height: 1.6; }
+.nt-empty-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+@media (max-width: 520px) {
+  .nt-empty { padding: 32px 18px 30px; }
+  .nt-empty strong { font-size: 20px; }
+  .nt-empty-actions { width: 100%; }
+  .nt-empty-actions .btn { flex: 1 1 100%; justify-content: center; }
+}
 .nt-foot-note {
   margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--border);
   font-size: 12.5px; color: var(--fg-dim); line-height: 1.7;
@@ -266,6 +309,7 @@
   var elMain   = document.getElementById('nt-main');
   var elList   = document.getElementById('nt-list');
   var elCount  = document.getElementById('nt-count');
+  var elClear  = document.getElementById('nt-clear');
 
   /* ---------- alegerea intereselor ---------- */
   var draft = [];
@@ -317,7 +361,7 @@
     elOnb.scrollIntoView({ block: 'start' });
   });
 
-  document.getElementById('nt-clear').addEventListener('click', function () {
+  elClear.addEventListener('click', function () {
     write(K_SEEN, ITEMS.map(function (it) { return it.id; }));
     pushStateToSW();
     render();
@@ -350,9 +394,18 @@
     var older  = wanted.filter(function (it) { return seen.indexOf(it.id) > -1; });
 
     setBadge(unseen.length);
-    elCount.textContent = unseen.length
-      ? (unseen.length === 1 ? '1 material de la ultima vizită' : unseen.length + ' materiale de la ultima vizită')
-      : 'ești la zi';
+
+    /* Antetul stării: proeminent când e ceva nou, discret când nu e.
+       Butonul „Marchează tot citit" n-are ce marca într-o listă goală. */
+    if (unseen.length) {
+      elCount.innerHTML = '<span class="n">' + unseen.length + '</span> ' +
+        (unseen.length === 1 ? 'material nou' : 'materiale noi') +
+        '<span class="sub">de la ultima ta vizită</span>';
+      elClear.hidden = false;
+    } else {
+      elCount.innerHTML = '<span class="sub" style="margin-top:0">Nimic nou de la ultima vizită.</span>';
+      elClear.hidden = true;
+    }
 
     var html = '';
     if (unseen.length) {
@@ -365,8 +418,17 @@
           group.map(function (it) { return itemHTML(it, true); }).join('') + '</div>';
       });
     } else {
-      html += '<div class="nt-empty"><strong>Ești la zi.</strong>' +
-        'Nu a apărut nimic nou de la ultima ta vizită. Îți punem un semn pe iconiță când se schimbă asta.</div>';
+      html += '<div class="nt-empty">' +
+        '<div class="nt-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></div>' +
+        '<strong>Ești la zi.</strong>' +
+        '<p>Nu a apărut nimic nou de la ultima ta vizită. Îți punem un semn pe iconiță când se schimbă asta — până atunci, poți răsfoi ce e deja pe site.</p>' +
+        '<div class="nt-empty-actions">' +
+          '<a href="index.html" class="btn btn-primary">Mergi pe site' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>' +
+          '</a>' +
+          '<a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor</a>' +
+        '</div>' +
+      '</div>';
     }
 
     if (older.length) {
