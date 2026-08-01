@@ -136,11 +136,13 @@ async function readState() {
     const s = await res.json();
     return {
       seen: Array.isArray(s.seen) ? s.seen : [],
-      interests: Array.isArray(s.interests) ? s.interests : [],
+      /* null = nu a ales încă (îl considerăm interesat de tot);
+         []   = a debifat tot, deliberat */
+      interests: Array.isArray(s.interests) ? s.interests : null,
       notified: Array.isArray(s.notified) ? s.notified : []
     };
   } catch (e) {
-    return { seen: [], interests: [], notified: [] };
+    return { seen: [], interests: null, notified: [] };
   }
 }
 
@@ -185,7 +187,7 @@ async function checkUpdates() {
   const state = await readState();
 
   /* dacă nu a ales încă interese, îl considerăm interesat de tot */
-  const wants = (it) => !state.interests.length || state.interests.indexOf(it.type) > -1;
+  const wants = (it) => !Array.isArray(state.interests) || state.interests.indexOf(it.type) > -1;
 
   const unseen = items.filter((it) => wants(it) && state.seen.indexOf(it.id) === -1);
   setBadge(unseen.length);
@@ -240,7 +242,7 @@ self.addEventListener('message', (event) => {
   if (msg.type === 'aiah-state' && msg.state) {
     event.waitUntil(writeState({
       seen: msg.state.seen || [],
-      interests: msg.state.interests || [],
+      interests: Array.isArray(msg.state.interests) ? msg.state.interests : null,
       notified: msg.state.notified || []
     }));
   }

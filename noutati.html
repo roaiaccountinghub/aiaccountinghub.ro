@@ -14,20 +14,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 <style>
-.nt-wrap { max-width: 780px; margin: 0 auto; padding: 0 32px 100px; }
-
-/* ---------- antetul paginii, temperat ----------
-   Accentul vizual trebuie să stea pe starea curentă (ce e nou / ești la zi),
-   nu pe titlul paginii, care spune același lucru de fiecare dată. */
-.page-noutati .page-header { padding-bottom: 34px; }
-.page-noutati .page-header h1 {
-  font-size: clamp(24px, 3vw, 32px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--fg-muted);
-}
-.page-noutati .page-header h1 .accent { color: var(--fg); }
-.page-noutati .page-lede { font-size: 13.5px; color: var(--fg-dim); max-width: 62ch; }
+/* Pagina nu are antet propriu — cardul de stare e primul lucru de sub meniu,
+   ca să nu-i fure nimic atenția. */
+.nt-wrap { max-width: 780px; margin: 0 auto; padding: 52px 32px 100px; }
 
 /* ---------- alegerea intereselor ---------- */
 .onb {
@@ -82,6 +71,56 @@
 }
 .nt-btn:hover { border-color: var(--accent); color: var(--accent); }
 
+/* ---------- ce urmărești: bife apăsabile direct, fără ecran intermediar ---------- */
+.nt-follow { padding-top: 18px; }
+.nt-follow-head {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14.5px; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--fg); margin-bottom: 10px;
+}
+.nt-follow-chips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.nt-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; padding: 7px 14px 7px 10px; border-radius: 22px;
+  border: 1px solid var(--border); color: var(--fg-dim);
+  background: transparent; transition: all 0.2s ease;
+  font-family: inherit;
+}
+.nt-chip .box {
+  width: 16px; height: 16px; border-radius: 5px; flex: none;
+  border: 1.5px solid var(--fg-dim);
+  display: grid; place-items: center;
+  transition: all 0.2s ease;
+}
+.nt-chip .box svg { width: 11px; height: 11px; opacity: 0; transition: opacity 0.15s ease; }
+.nt-chip:hover { border-color: var(--border-strong); color: var(--fg-muted); }
+.nt-chip.on {
+  border-color: color-mix(in oklab, var(--accent) 55%, transparent);
+  background: color-mix(in oklab, var(--accent) 9%, transparent);
+  color: var(--fg);
+}
+.nt-chip.on .box { background: var(--accent); border-color: var(--accent); color: #07121a; }
+.nt-chip.on .box svg { opacity: 1; }
+.nt-chip-all {
+  margin-left: 4px; font-size: 12px; padding: 7px 13px; border-radius: 8px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--fg-muted); transition: all 0.2s ease; font-family: inherit;
+}
+.nt-chip-all:hover { border-color: var(--accent); color: var(--accent); }
+.nt-follow-note {
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  color: var(--fg-dim); letter-spacing: 0.03em; margin-top: 10px;
+}
+.nt-follow-warn {
+  margin-top: 12px; padding: 12px 14px; border-radius: 10px;
+  border: 1px solid color-mix(in oklab, var(--nou) 40%, transparent);
+  background: color-mix(in oklab, var(--nou) 8%, transparent);
+  font-size: 13px; color: var(--fg-muted);
+}
+@media (max-width: 520px) {
+  .nt-chip-all { margin-left: 0; width: 100%; }
+}
+
 .nt-group { margin-top: 30px; }
 .nt-group-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
 .nt-group-title {
@@ -108,7 +147,8 @@
 .nt-meta { display: block; font-size: 11px; color: var(--fg-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
 /* ---------- starea „ești la zi", tratată ca destinație, nu ca gol ---------- */
 .nt-empty {
-  text-align: center; padding: 44px 28px 40px; margin-top: 26px;
+  text-align: center; padding: 44px 28px 40px; margin: 26px auto 0;
+  max-width: 560px;
   border: 1px solid var(--border-strong); border-radius: 16px;
   background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 7%, var(--bg-1)) 0%, var(--bg-1) 62%);
   box-shadow: var(--shadow-lg);
@@ -173,21 +213,7 @@
   </div>
 </header>
 
-<!-- PAGE HEADER -->
-<section class="page-header">
-  <div class="page-header-ambient"></div>
-  <div class="page-header-grid"></div>
-  <div class="page-header-inner">
-    <div class="breadcrumb">
-      <a href="index.html">Acasă</a>
-      <span class="sep">/</span>
-      <span>Noutăți</span>
-    </div>
-    <div class="page-kicker"><span class="dot"></span>Aplicația</div>
-    <h1>Ce a apărut <span class="accent">de la ultima vizită</span>.</h1>
-    <p class="page-lede">Lista se calculează în browserul tău, comparând ce ai deschis deja cu ce am publicat între timp. Nimic nu pleacă de pe dispozitiv.</p>
-  </div>
-</section>
+<!-- Fără antet de pagină: cardul de stare e singurul care trebuie să atragă atenția. -->
 
 <div class="nt-wrap">
 
@@ -208,10 +234,10 @@
     <div class="nt-bar">
       <span class="nt-count" id="nt-count">se încarcă…</span>
       <div class="nt-actions">
-        <button class="nt-btn" id="nt-prefs">Ce urmăresc</button>
         <button class="nt-btn" id="nt-clear">Marchează tot citit</button>
       </div>
     </div>
+    <div class="nt-follow" id="nt-follow"></div>
     <div id="nt-list"></div>
     <p class="nt-foot-note">
       Preferi un cititor de feed? Ai și <a href="feed.xml">fluxul RSS</a> — aceleași noutăți, tot fără cont și fără email.
@@ -291,7 +317,7 @@
     try {
       navigator.serviceWorker.controller.postMessage({
         type: 'aiah-state',
-        state: { seen: getSeen(), interests: getInterests() || [], notified: [] }
+        state: { seen: getSeen(), interests: getInterests(), notified: [] }
       });
     } catch (e) {}
   }
@@ -310,6 +336,7 @@
   var elList   = document.getElementById('nt-list');
   var elCount  = document.getElementById('nt-count');
   var elClear  = document.getElementById('nt-clear');
+  var elFollow = document.getElementById('nt-follow');
 
   /* ---------- alegerea intereselor ---------- */
   var draft = [];
@@ -345,7 +372,7 @@
   });
 
   elDone.addEventListener('click', function () {
-    write(K_INTERESTS, draft.length ? draft : TYPES.map(function (t) { return t.key; }));
+    write(K_INTERESTS, draft);
     /* gestul utilizatorului e singurul moment în care avem voie să cerem
        permisiunea de notificări — și e opțională: bulina merge oricum */
     try {
@@ -356,9 +383,55 @@
     render();
   });
 
-  document.getElementById('nt-prefs').addEventListener('click', function () {
-    renderOnb();
-    elOnb.scrollIntoView({ block: 'start' });
+  /* Rândul „Urmărești acum": bifele sunt chiar controlul, nu doar afișajul.
+     Se redesenează la fiecare randare, deci clicul merge prin delegare. */
+  var CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>';
+
+  function activeInterests() {
+    var saved = getInterests();
+    return saved || TYPES.map(function (t) { return t.key; });
+  }
+
+  function renderFollow() {
+    var active = activeInterests();
+    var toate = active.length === TYPES.length;
+    var chips = TYPES.map(function (t) {
+      var on = active.indexOf(t.key) > -1;
+      return '<button type="button" class="nt-chip' + (on ? ' on' : '') + '" data-key="' + t.key + '" ' +
+             'role="checkbox" aria-checked="' + on + '">' +
+             '<span class="box">' + CHECK_SVG + '</span>' + esc(t.label) + '</button>';
+    }).join('');
+    elFollow.innerHTML =
+      '<div class="nt-follow-head">Urmărești acum</div>' +
+      '<div class="nt-follow-chips">' + chips +
+        '<button type="button" class="nt-chip-all" data-all>' +
+          (toate ? 'Deselectează tot' : 'Selectează tot') +
+        '</button>' +
+      '</div>' +
+      (active.length ? '' : '<div class="nt-follow-warn">Nu urmărești nicio categorie — nu vei primi niciun semn pe iconiță. Bifează cel puțin una.</div>') +
+      '<div class="nt-follow-note">alegerea rămâne pe dispozitivul tău</div>';
+  }
+
+  function saveInterests(list) {
+    write(K_INTERESTS, list);
+    pushStateToSW();
+    render();
+  }
+
+  elFollow.addEventListener('click', function (e) {
+    var all = e.target.closest('[data-all]');
+    if (all) {
+      var active = activeInterests();
+      saveInterests(active.length === TYPES.length ? [] : TYPES.map(function (t) { return t.key; }));
+      return;
+    }
+    var chip = e.target.closest('.nt-chip');
+    if (!chip) return;
+    var key = chip.getAttribute('data-key');
+    var list = activeInterests().slice();
+    var i = list.indexOf(key);
+    if (i > -1) list.splice(i, 1); else list.push(key);
+    saveInterests(list);
   });
 
   elClear.addEventListener('click', function () {
@@ -438,6 +511,7 @@
     }
 
     elList.innerHTML = html;
+    renderFollow();
     elMain.hidden = false;
   }
 

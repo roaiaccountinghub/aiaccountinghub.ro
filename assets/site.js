@@ -220,8 +220,10 @@ document.addEventListener("click", function (e) {
     try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
   }
 
-  function getSeen()      { var v = read(K_SEEN, []);      return Array.isArray(v) ? v : []; }
-  function getInterests() { var v = read(K_INTERESTS, []); return Array.isArray(v) ? v : []; }
+  function getSeen()      { var v = read(K_SEEN, []); return Array.isArray(v) ? v : []; }
+  /* null = încă nu a ales nimic (îl considerăm interesat de tot)
+     []   = a debifat tot, deliberat (nu i se semnalează nimic) */
+  function getInterests() { var v = read(K_INTERESTS, null); return Array.isArray(v) ? v : null; }
 
   function markSeen(ids) {
     if (!ids || !ids.length) return;
@@ -289,6 +291,10 @@ document.addEventListener("click", function (e) {
     document.documentElement.classList.add('aiah-installed');
     var btn = document.getElementById('install-btn');
     if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+    /* Un singur contor agregat, o singură dată în viața unui dispozitiv.
+       Se trimite doar numele evenimentului — niciun identificator, nimic
+       care să lege două instalări între ele. */
+    if (window.aiahTrack) window.aiahTrack('pwa:install');
   });
 
   window.aiahInstall = function () {
@@ -413,7 +419,7 @@ document.addEventListener("click", function (e) {
     var seen = getSeen();
     var interests = getInterests();
     var wanted = items.filter(function (it) {
-      return !interests.length || interests.indexOf(it.type) > -1;
+      return !interests || interests.indexOf(it.type) > -1;
     });
     var unseen = wanted.filter(function (it) { return seen.indexOf(it.id) === -1; });
 
