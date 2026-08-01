@@ -258,12 +258,15 @@ document.addEventListener("click", function (e) {
     if (location.protocol === 'file:') return;
     navigator.serviceWorker.register('/sw.js').then(function (reg) {
       pushStateToSW();
-      if (!reg.periodicSync || !navigator.permissions) return;
-      navigator.permissions.query({ name: 'periodic-background-sync' }).then(function (status) {
-        if (status.state !== 'granted') return;
-        reg.periodicSync.register('aiah-check-updates', {
-          minInterval: 12 * 60 * 60 * 1000
-        }).catch(function () {});
+      if (!reg.periodicSync) return;
+      /* Încercăm înregistrarea NECONDIȚIONAT, la fiecare deschidere.
+         Chrome acordă permisiunea de verificare în fundal treptat, în funcție
+         de cât de des e folosită aplicația. Dacă interogam întâi permisiunea
+         și ieșeam când nu era „granted", nu apucam niciodată să înregistrăm
+         în momentul în care devenea disponibilă. Aici pur și simplu cerem;
+         dacă browserul refuză, aruncă o eroare pe care o ignorăm. */
+      reg.periodicSync.register('aiah-check-updates', {
+        minInterval: 12 * 60 * 60 * 1000
       }).catch(function () {});
     }).catch(function () {});
   }

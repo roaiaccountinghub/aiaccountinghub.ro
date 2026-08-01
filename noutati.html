@@ -179,6 +179,27 @@
   font-size: 12.5px; color: var(--fg-dim); line-height: 1.7;
 }
 .nt-foot-note a { color: var(--accent); }
+
+/* ---------- panou tehnic, doar la ?diag=1 ---------- */
+.nt-diag {
+  margin-top: 28px; padding: 18px 20px;
+  border: 1px dashed var(--border-strong); border-radius: 12px;
+  background: var(--bg-1);
+}
+.nt-diag-head {
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 12px;
+}
+.nt-diag table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.nt-diag td { padding: 6px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+.nt-diag td:first-child { color: var(--fg-dim); width: 46%; padding-right: 12px; }
+.nt-diag td:last-child { font-family: 'JetBrains Mono', monospace; color: var(--fg); }
+.nt-diag tr:last-child td { border-bottom: none; }
+.nt-diag .ok { color: #34d399; }
+.nt-diag .no { color: #fb7185; }
+.nt-diag-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.nt-diag-note { font-size: 11.5px; color: var(--fg-dim); margin-top: 12px; }
 @media (max-width: 640px) {
   .nt-wrap { padding: 0 20px 70px; }
   .onb { padding: 20px 18px; }
@@ -240,8 +261,19 @@
     <div class="nt-follow" id="nt-follow"></div>
     <div id="nt-list"></div>
     <p class="nt-foot-note">
-      Preferi un cititor de feed? Ai și <a href="feed.xml">fluxul RSS</a> — aceleași noutăți, tot fără cont și fără email.
+      Preferi un cititor de feed? Ai și <a href="feed.xml">fluxul RSS</a>, aceleași noutăți, tot fără cont și fără email.
     </p>
+
+    <!-- Panou tehnic, ascuns. Se vede doar la noutati.html?diag=1 -->
+    <section class="nt-diag" id="nt-diag" hidden>
+      <div class="nt-diag-head">// diagnostic verificare în fundal</div>
+      <table id="nt-diag-table"></table>
+      <div class="nt-diag-actions">
+        <button type="button" class="nt-btn" id="nt-diag-run">Forțează o verificare acum</button>
+        <button type="button" class="nt-btn" id="nt-diag-refresh">Reîmprospătează</button>
+      </div>
+      <p class="nt-diag-note">Panoul nu e vizibil pentru cititori și nu trimite nimic nicăieri. Citește doar starea din propriul browser.</p>
+    </section>
   </section>
 
 </div>
@@ -522,6 +554,75 @@
     var seen = getSeen();
     if (seen.indexOf(id) === -1) { seen.push(id); write(K_SEEN, seen.slice(-300)); pushStateToSW(); }
   });
+
+  /* ---------- panou de diagnostic (doar cu ?diag=1) ---------- */
+  function askSW(type) {
+    return new Promise(function (resolve) {
+      if (!navigator.serviceWorker || !navigator.serviceWorker.controller) return resolve(null);
+      var ch = new MessageChannel();
+      var done = false;
+      ch.port1.onmessage = function (e) { done = true; resolve(e.data); };
+      try { navigator.serviceWorker.controller.postMessage({ type: type }, [ch.port2]); }
+      catch (e) { return resolve(null); }
+      setTimeout(function () { if (!done) resolve(null); }, 1500);
+    });
+  }
+
+  function yn(v) { return v ? '<span class="ok">da</span>' : '<span class="no">nu</span>'; }
+  function when(ts) {
+    if (!ts) return '<span class="no">niciodată</span>';
+    var d = new Date(ts);
+    var min = Math.round((Date.now() - ts) / 60000);
+    var rel = min < 60 ? ('acum ' + min + ' min') : ('acum ' + Math.round(min / 60) + ' h');
+    return d.toLocaleString('ro-RO') + ' (' + rel + ')';
+  }
+
+  function renderDiag() {
+    var el = document.getElementById('nt-diag');
+    var tbl = document.getElementById('nt-diag-table');
+    el.hidden = false;
+    var rows = [];
+
+    var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+                     (window.matchMedia && window.matchMedia('(display-mode: minimal-ui)').matches) ||
+                     window.navigator.standalone === true;
+    rows.push(['Rulează ca aplicație instalată', yn(standalone)]);
+    rows.push(['Badging API disponibil', yn(!!navigator.setAppBadge)]);
+    rows.push(['Permisiune notificări', window.Notification ? Notification.permission : 'nesuportat']);
+
+    Promise.all([
+      navigator.serviceWorker ? navigator.serviceWorker.getRegistration() : null,
+      navigator.permissions ? navigator.permissions.query({ name: 'periodic-background-sync' }).catch(function () { return null; }) : null,
+      askSW('aiah-getstate')
+    ]).then(function (r) {
+      var reg = r[0], perm = r[1], st = r[2];
+      rows.push(['Service worker activ', yn(reg && reg.active)]);
+      rows.push(['Verificare periodică suportată', yn(reg && !!reg.periodicSync)]);
+      rows.push(['Permisiune verificare periodică', perm ? perm.state : 'necunoscut']);
+
+      var tags = (reg && reg.periodicSync && reg.periodicSync.getTags) ? reg.periodicSync.getTags() : Promise.resolve([]);
+      tags.catch(function () { return []; }).then(function (t) {
+        rows.push(['Sarcină înregistrată', (t && t.length) ? '<span class="ok">' + t.join(', ') + '</span>' : '<span class="no">niciuna</span>']);
+        rows.push(['Ultima verificare în fundal', st ? when(st.lastCheck) : 'fără răspuns de la SW']);
+        rows.push(['Număr total de verificări', st ? String(st.checkCount) : '?']);
+        rows.push(['Materiale marcate citite', st ? String(st.seen) : '?']);
+        tbl.innerHTML = rows.map(function (x) {
+          return '<tr><td>' + x[0] + '</td><td>' + x[1] + '</td></tr>';
+        }).join('');
+      });
+    });
+  }
+
+  if (location.search.indexOf('diag=1') > -1) {
+    document.getElementById('nt-diag-refresh').addEventListener('click', renderDiag);
+    document.getElementById('nt-diag-run').addEventListener('click', function () {
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({ type: 'aiah-check' });
+      }
+      setTimeout(renderDiag, 1200);
+    });
+    setTimeout(renderDiag, 800);
+  }
 
   /* ---------- pornire ---------- */
   fetch('/updates.json', { cache: 'no-cache' })

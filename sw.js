@@ -19,7 +19,7 @@
    nu sunt interceptate, se comportă exact ca înainte.
    ============================================================ */
 
-const VERSION       = 'v1';
+const VERSION       = 'v2';
 const SHELL_CACHE   = 'aiah-shell-' + VERSION;
 const RUNTIME_CACHE = 'aiah-runtime-' + VERSION;
 const STATE_CACHE   = 'aiah-state';           /* nu se versionează: e memoria utilizatorului */
@@ -132,17 +132,21 @@ async function readState() {
   try {
     const cache = await caches.open(STATE_CACHE);
     const res = await cache.match(STATE_URL);
-    if (!res) return { seen: [], interests: [], notified: [] };
+    if (!res) return { seen: [], interests: null, notified: [], lastCheck: 0, checkCount: 0 };
     const s = await res.json();
     return {
       seen: Array.isArray(s.seen) ? s.seen : [],
       /* null = nu a ales încă (îl considerăm interesat de tot);
          []   = a debifat tot, deliberat */
       interests: Array.isArray(s.interests) ? s.interests : null,
-      notified: Array.isArray(s.notified) ? s.notified : []
+      notified: Array.isArray(s.notified) ? s.notified : [],
+      /* jurnal minim, doar pentru diagnostic: când a rulat ultima verificare
+         în fundal și de câte ori a rulat. Nu pleacă nicăieri. */
+      lastCheck: typeof s.lastCheck === 'number' ? s.lastCheck : 0,
+      checkCount: typeof s.checkCount === 'number' ? s.checkCount : 0
     };
   } catch (e) {
-    return { seen: [], interests: null, notified: [] };
+    return { seen: [], interests: null, notified: [], lastCheck: 0, checkCount: 0 };
   }
 }
 
@@ -176,6 +180,15 @@ function setBadge(n) {
 }
 
 async function checkUpdates() {
+  /* Notăm rularea chiar de la început, ca să se vadă în diagnostic
+     inclusiv verificările care nu găsesc nimic sau eșuează din rețea. */
+  const before = await readState();
+  const stamped = Object.assign({}, before, {
+    lastCheck: Date.now(),
+    checkCount: (before.checkCount || 0) + 1
+  });
+  await writeState(stamped);
+
   let data;
   try {
     const res = await fetch(UPDATES_URL, { cache: 'no-store' });
@@ -184,7 +197,7 @@ async function checkUpdates() {
   } catch (e) { return; }
 
   const items = Array.isArray(data.items) ? data.items : [];
-  const state = await readState();
+  const state = stamped;
 
   /* dacă nu a ales încă interese, îl considerăm interesat de tot */
   const wants = (it) => !Array.isArray(state.interests) || state.interests.indexOf(it.type) > -1;
@@ -219,11 +232,9 @@ async function checkUpdates() {
     });
   } catch (e) { /* fără permisiune de notificări — bulina rămâne oricum */ }
 
-  await writeState({
-    seen: state.seen,
-    interests: state.interests,
+  await writeState(Object.assign({}, state, {
     notified: state.notified.concat(fresh.map((it) => it.id)).slice(-80)
-  });
+  }));
 }
 
 self.addEventListener('periodicsync', (event) => {
@@ -240,14 +251,28 @@ self.addEventListener('sync', (event) => {
 self.addEventListener('message', (event) => {
   const msg = event.data || {};
   if (msg.type === 'aiah-state' && msg.state) {
-    event.waitUntil(writeState({
+    /* păstrăm jurnalul de diagnostic; pagina trimite doar starea de citire */
+    event.waitUntil(readState().then((prev) => writeState(Object.assign({}, prev, {
       seen: msg.state.seen || [],
       interests: Array.isArray(msg.state.interests) ? msg.state.interests : null,
-      notified: msg.state.notified || []
-    }));
+      notified: msg.state.notified || prev.notified || []
+    }))));
   }
   if (msg.type === 'aiah-badge') setBadge(msg.count || 0);
   if (msg.type === 'aiah-check') event.waitUntil(checkUpdates());
+  /* diagnostic: pagina cere starea internă și primește răspuns pe portul trimis */
+  if (msg.type === 'aiah-getstate' && event.ports && event.ports[0]) {
+    const port = event.ports[0];
+    event.waitUntil(readState().then((s) => {
+      port.postMessage({
+        lastCheck: s.lastCheck || 0,
+        checkCount: s.checkCount || 0,
+        seen: (s.seen || []).length,
+        interests: s.interests,
+        notified: (s.notified || []).length
+      });
+    }));
+  }
 });
 
 /* ---------- clic pe notificare ---------- */
