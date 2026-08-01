@@ -31,12 +31,21 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Fri, 31 Jul 2026 08:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2026 08:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Cum anunți o comunitate când nu colectezi date de contact</title>
+      <link>https://aiaccountinghub.ro/2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact.html</guid>
+      <pubDate>Sat, 01 Aug 2026 08:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>M-am săturat să-mi predau datele personale pentru resurse minimale care ar trebui să fie libere. De ce am ales ca tot ce publicăm să fie direct accesibil, fără cont și fără email. Și cum am rezolvat, totuși, problema anunțării comunității, fără să colectăm nimic. 12 min de citit.</description>
+    </item>
 
     <item>
       <title>Promptul perfect 2.0 — ce s-a schimbat în trei luni</title>

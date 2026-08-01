@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cum anunți o comunitate când nu colectezi date de contact — AI Accounting Hub</title>
+<meta name="description" content="De ce tot ce publicăm e liber, fără cont și fără email. Și cum am rezolvat, totuși, problema anunțării comunității, fără să colectăm nimic.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Cum anunți o comunitate când nu colectezi date de contact">
+<meta property="og:description" content="M-am săturat să-mi predau datele personale pentru un PDF de două pagini. Povestea unei decizii, întrebarea unui prieten și soluția la care am ajuns, fără să colectăm nimic.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cum anunți o comunitate când nu colectezi date de contact">
+<meta name="twitter:description" content="Despre zidul conturilor obligatorii, despre o întrebare care m-a pus pe gânduri și despre butonul care rezolvă problema fără să colecteze nimic.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol. Restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Citatul din s3 are mai multe paragrafe, iar stilul de bază nu prevede spațiere între ele */
+.prose blockquote p { margin: 0 0 14px; }
+.prose blockquote p:last-of-type { margin-bottom: 0; }
+
+/* Lista „zidurilor": situații concrete */
+.wall { margin: 30px 0; display: grid; gap: 12px; }
+.wall-item {
+  display: grid; grid-template-columns: 26px 1fr; gap: 14px;
+  padding: 16px 18px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--bg-1);
+}
+.wall-item .n {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--accent); padding-top: 2px;
+}
+.wall-item .t { font-size: 15px; line-height: 1.6; }
+.wall-item .t b { color: var(--fg); font-weight: 600; }
+.wall-item .t span { display: block; margin-top: 6px; color: var(--fg-muted); font-size: 14px; }
+
+/* Tabelul cu „contabilitatea datelor" */
+.ledger { width: 100%; margin: 28px 0; border-collapse: collapse; font-size: 14px; }
+.ledger th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--accent); text-align: left;
+  padding: 12px 14px; border-bottom: 2px solid var(--border);
+}
+.ledger td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; }
+.ledger tr:last-child td { border-bottom: none; }
+.ledger td:first-child { font-weight: 600; color: var(--fg); }
+.ledger .zero { color: var(--fg-dim); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+/* Pașii de dezinstalare */
+.steps { display: grid; gap: 16px; margin: 28px 0; }
+.step-card {
+  border: 1px solid var(--border); border-radius: 14px;
+  background: var(--bg-1); padding: 20px 22px;
+}
+.step-card h3 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600;
+  margin: 0 0 12px; display: flex; align-items: center; gap: 10px;
+}
+.step-card h3 svg { width: 17px; height: 17px; color: var(--accent); flex: none; }
+.step-card ol { margin: 0; padding-left: 20px; font-size: 14.5px; }
+.step-card li { margin-bottom: 8px; line-height: 1.6; }
+.step-card li:last-child { margin-bottom: 0; }
+.step-card p.alt { margin: 12px 0 0; font-size: 13px; color: var(--fg-dim); }
+
+@media (max-width: 720px) {
+  .ledger { display: block; overflow-x: auto; white-space: nowrap; }
+  .wall-item { grid-template-columns: 1fr; gap: 8px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cum anunți o comunitate când nu colectezi date de contact",
+  "description": "De ce tot ce publicăm e liber, fără cont și fără email. Și cum am rezolvat, totuși, problema anunțării comunității, fără să colectăm nimic.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+
+<!-- Date structurate (JSON-LD): întrebări frecvente (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Trebuie să-mi fac cont ca să descarc resursele de pe AI Accounting Hub?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nu. Nu există conturi pe acest site. Articolele, lista de termeni AI, episoadele de podcast, uneltele mici și prezentările sunt accesibile direct, fără înregistrare, fără adresă de email și fără alte date personale. Nu există nici formulare de acces, nici liste de abonați."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce este aplicația instalabilă a unui site și ce date colectează?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Este o aplicație web progresivă (PWA): site-ul poate fi salvat pe ecranul telefonului sau pe desktop și se deschide ca o aplicație obișnuită. În cazul AI Accounting Hub, instalarea nu presupune cont, email sau permisiuni speciale. Aplicația citește periodic un fișier public de pe site și compară, local, ce ai deschis deja cu ce s-a publicat între timp. Lista materialelor citite și categoriile pe care le urmărești rămân în memoria browserului tău și nu sunt transmise nicăieri."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum poate un site să trimită notificări fără să colecteze date?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prin notificări locale, afișate de propriul browser, nu prin Web Push. Web Push ar presupune un identificator unic de dispozitiv, stocat pe un server, adică exact datele pe care nu voiam să le colectăm. În schimb, un service worker instalat în browser verifică periodic un fișier public cu lista publicărilor și afișează local notificarea. Nu există abonare, nu există endpoint de dispozitiv, nu există server care să primească ceva."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Funcționează notificările despre conținut nou și pe iPhone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Notificarea în fundal, fără ca aplicația să fie deschisă, funcționează pe Chrome și Edge, pe Android și pe desktop. Pe iPhone, Safari nu oferă mecanismul de verificare periodică în fundal fără un server de push, așa că acolo noutățile apar la deschiderea aplicației, prin ecranul dedicat și prin marcajele din pagini. Funcționalitatea de bază rămâne aceeași, doar momentul aflării diferă."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum dezinstalez aplicația AI Accounting Hub?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pe telefon ții apăsat pe iconiță și alegi opțiunea de dezinstalare, exact ca la orice altă aplicație. Pe calculator deschizi aplicația, apeși pe cele trei puncte din colțul ferestrei și alegi Dezinstalează, sau o cauți în lista de aplicații instalate din setările sistemului. Dezinstalarea șterge complet datele păstrate local, iar de partea noastră nu rămâne nimic, pentru că nu s-a colectat nimic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Există o alternativă la aplicație pentru a urmări publicările noi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da, fluxul RSS de la adresa aiaccountinghub.ro/feed.xml. Poate fi adăugat în orice cititor de feed (Feedly, Inoreader, NetNewsWire, Thunderbird) și conține aceleași materiale: articole, episoade de podcast și termeni noi. Nu necesită cont și nu transmite nicio informație despre cititor."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Cum anunți o comunitate</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Editorial</span>
+      <span>1 august 2026</span>
+      <span class="sep">·</span>
+      <span>12 min citire</span>
+    </div>
+
+    <h1>Cum anunți o comunitate <span class="accent">când nu colectezi date de contact</span>.</h1>
+    <p class="article-lede">
+      Povestea unei decizii pornite de la un obicei mărunt al internetului, a unei întrebări puse de un prieten care m-a lăsat fără răspuns o săptămână și a soluției la care am ajuns până la urmă, una care nu ne cere să renunțăm la principiu.
+    </p>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s0">Zidul</a>
+        <a href="#s1">Ce am ales și de ce</a>
+        <a href="#s2">Cealaltă tabără are și ea dreptate</a>
+        <a href="#s3">Întrebarea care m-a pus pe gânduri</a>
+        <a href="#s4">Am cerut o a doua părere</a>
+        <a href="#s5">Ce face, de fapt, butonul</a>
+        <a href="#s6">Contabilitatea datelor</a>
+        <a href="#s7">Ce nu merge, spus pe față</a>
+        <a href="#s8">Dacă nu vrei nici aplicația</a>
+        <a href="#s9">Și dacă te răzgândești</a>
+        <a href="#s10">Ce rămâne</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">01.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// fără cont · fără email · fără date colectate</div>
+    </div>
+
+    <div class="prose">
+
+      <h2 id="s0">Zidul</h2>
+
+      <p>Articolul ăsta nu pornește dintr-o strategie, ci dintr-un lucru mult mai mic: un obicei al internetului de care ne lovim cu toții din ce în ce mai des. Așa că las strategia pe mai târziu și încep cu el.</p>
+
+      <p>Scenariul e cam mereu același. Cauți ceva concret, dai peste o postare care pare exact ce-ți trebuie, citești, e bun, autorul spune „am pregătit și un ghid de o pagină cu toți pașii, îl găsești mai jos". Și acolo, în loc de ghid, e un zid.</p>
+
+      <div class="wall">
+        <div class="wall-item">
+          <div class="n">01</div>
+          <div class="t">
+            <b>Un prompt interesant.</b>
+            <span>Cineva scrie despre o structură de prompt care chiar funcționează. Vrei fișierul cu promptul. Ca să-l descarci, îți faci cont pe platforma lui. Cont. Pentru un fișier text de cincisprezece rânduri.</span>
+          </div>
+        </div>
+        <div class="wall-item">
+          <div class="n">02</div>
+          <div class="t">
+            <b>Un utilitar mic.</b>
+            <span>Un articol despre o unealtă care convertește ceva în altceva. Vrei s-o testezi cinci minute, să vezi dacă merită. „Introdu adresa de email pentru a primi linkul." Nu vrei linkul pe mail. Vrei unealta acum, în browser.</span>
+          </div>
+        </div>
+        <div class="wall-item">
+          <div class="n">03</div>
+          <div class="t">
+            <b>Rezultatele unui sondaj.</b>
+            <span>Un studiu despre profesia ta, cu cifre pe care chiar ai vrea să le vezi. Ca să afli concluziile unui sondaj la care au răspuns oameni ca tine, lași număr de telefon. Număr de telefon.</span>
+          </div>
+        </div>
+      </div>
+
+      <p>M-am săturat. Asta e tot. Nu am o teorie elaborată despre economia atenției, am doar oboseala foarte concretă de a-mi preda datele personale pentru resurse minimale care ar trebui să fie libere.</p>
+
+      <p>Și partea cea mai obositoare nu e nici măcar formularul. E ce vine după. Adresa aia intră într-o listă, lista intră într-o secvență automată, iar tu, care voiai un PDF de două pagini, primești în următoarele opt luni newslettere săptămânale despre webinarii la care nu vei ajunge niciodată. Ai plătit un ghid cu opt luni de dezabonat.</p>
+
+      <h2 id="s1">Ce am ales și de ce</h2>
+
+      <p>Când am pornit AI Accounting Hub, prima decizie n-a fost despre design, despre tematică sau despre ritmul de publicare. A fost asta: <em>tot ce construim aici e pentru comunitate și rămâne liber</em>. Nimic din ce publicăm nu stă în spatele unui zid.</p>
+
+      <p>Și n-am lăsat-o la nivel de intenție. Am scris-o în subsolul fiecărei pagini, unde se vede permanent: <em>„oferim totul fără bariere: fără conturi, fără taxe, fără reclame"</em>. O promisiune afișată e mai greu de retras discret decât una ținută în sertar.</p>
+
+      <p>Fără cont. Fără email. Fără număr de telefon. Fără „completează formularul ca să primești". Concret, înseamnă că tot ce vezi pe site e accesibil direct, dintr-un singur clic:</p>
+
+      <ul>
+        <li><strong><a href="arhiva.html">Articolele</a></strong>: toate, inclusiv <a href="viitorul-profesiei.html">seria fondatoare de cinci articole manifest despre viitorul profesiei contabile</a>, se citesc integral fără nimic în cale.</li>
+        <li><strong><a href="buzzword.html">Lista de termeni AI</a></strong>: buzzword-urile explicate în limbaj de contabil, cu exemple practice, deschise complet.</li>
+        <li><strong><a href="podcast.html">Podcastul</a></strong>: episoadele se ascultă direct în pagină, cu capitole, fără cont pe vreo platformă.</li>
+        <li><strong><a href="resurse.html">Uneltele</a></strong>: utilitarele mici pe care le construim se descarcă din Download zone, fără să lăsăm o adresă în urmă.</li>
+        <li><strong><a href="resurse.html">Prezentările</a></strong>: materialele PPTX, din același loc, fără nicio condiție.</li>
+      </ul>
+
+      <p>Nu e generozitate. E o convingere despre ce fel de resursă merită protejată și ce fel nu. Un ghid de o pagină despre cum să structurezi un prompt nu e proprietate intelectuală de mare valoare pentru care merită să construiești o barieră. E o unealtă mică. Uneltele mici circulă mai bine libere.</p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="cbody">
+          Această alegere e scrisă și în <a href="nota-confidentialitate.html">nota de confidențialitate</a>, nu doar declarată aici. Singurele date care ajung la noi sunt statisticile agregate și anonime de trafic (număr de vizitatori, pagini accesate) și mesajele pe care le trimiți tu, deliberat, prin formularul de contact. Adresa de la care ne scrii o folosim ca să-ți răspundem, apoi o ștergem. Un mail trimis nouă nu te înscrie nicăieri.
+        </div>
+      </div>
+
+      <h2 id="s2">Cealaltă tabără are și ea dreptate</h2>
+
+      <p>Ar fi însă necinstit să mă opresc aici, ca și cum oricine cere o adresă de email ar face-o din rea-credință.</p>
+
+      <p>Înțeleg foarte bine de ce colectează oamenii adrese de email. Un freelancer, un consultant independent, un mic cabinet: pentru ei lista de contacte nu e un moft de marketing, ci infrastructura din care trăiesc. Conținutul gratuit e investiția, lista e randamentul. Fără ea, scrii luni în șir pentru un public pe care nu-l poți contacta niciodată, iar munca aia nu se transformă în nimic. E un model legitim, vechi și, în multe cazuri, singurul care funcționează.</p>
+
+      <p>Dar cred că, dincolo de modelul de business, s-a instalat un reflex. Se cere email pentru orice, inclusiv acolo unde nu are niciun rost. Nu tot ce creezi trebuie neapărat ascuns în spatele unei obligații. Uneori cel mai bun lucru pe care îl poți face cu o resursă mică e s-o lași liberă și să vezi unde ajunge.</p>
+
+      <p>Închei cu o opinie strict personală: cred că democratizarea informației adusă de inteligența artificială va forța și modelul ăsta să se adapteze. Când răspunsul pe care îl ții după un formular se obține oricum în altă parte, în zece secunde, ce mai rămâne de oferit e apropierea, nu bariera. Iar apropierea nu trebuie să fie mereu despre a vinde ceva.</p>
+
+      <h2 id="s3">Întrebarea care m-a pus pe gânduri</h2>
+
+      <p>Îi povesteam toate astea unui prieten, cu entuziasmul cuiva care tocmai și-a găsit o poziție de principiu. M-a ascultat până la capăt și, fiindcă era prieten, nu m-a cruțat. M-a întrebat ceva foarte simplu, nu ca să mă contrazică, ci fiindcă chiar voia să știe:</p>
+
+      <blockquote>
+        <p>Bine, ai dezvoltat toate resursele astea. Dar sincer, cum crezi că-și va aduce cineva aminte să intre din când în când pe site ca să vadă dacă ai publicat ceva nou?</p>
+        <p>Și i-ai mai pus și numele ăla în engleză, <em>aiaccountinghub</em>. Cine reține așa ceva? Câți de „c" sunt în adresă? E ca la începuturile modelelor de limbaj, care nu reușeau să spună câți de „r" sunt în cuvântul <em>strawberry</em>. 🫣</p>
+        <p>Iar asta se întâmplă tocmai pentru că nu colectezi măcar adresa de email. Ceilalți au un canal prin care își anunță comunitatea. Tu ai un site de care oamenii trebuie să-și amintească singuri.</p>
+        <cite>— un prieten, într-o discuție de care mi-am adus aminte cam o săptămână</cite>
+      </blockquote>
+
+      <p>N-am avut ce să-i răspund. Pentru că avea dreptate. Principiul meu rezolva o problemă a cititorului, fiindcă nu-i mai luam datele, dar crea alta, tot a lui: nu avea cum să afle când apare ceva nou. Un principiu care mută costul de la mine la cititor nu e chiar atât de nobil pe cât îmi plăcea mie să cred.</p>
+
+      <h2 id="s4">Am cerut o a doua părere</h2>
+
+      <p>Așa că am dus discuția mai departe, cu un alt „prieten" de-al meu: Claude, asistentul AI cu care lucrez de obicei.</p>
+
+      <p>I-am povestit tot: de la obiceiul ăsta cu zidurile, la decizia de a nu colecta nimic, la întrebarea prietenului meu, până la faptul că nu vreau, sub nicio formă, să ajung să cer adrese de email doar pentru comoditatea de a anunța ce publicăm. Și l-am rugat să-mi găsească o ieșire.</p>
+
+      <p>Și chiar a găsit una. Mi-a explicat că site-ul poate fi transformat într-o <em>aplicație instalabilă</em>: cititorul apasă un buton, iconița hub-ului ajunge pe ecranul telefonului sau pe desktop, lângă celelalte aplicații, iar când public ceva nou apare o bulină pe iconiță și, unde se poate, o notificare cu titlul materialului. Un tap și e direct pe articol.</p>
+
+      <p>Prima mea reacție a fost suspiciunea profesională: <em>și ce date se colectează pentru asta?</em> Am pus întrebarea în toate felurile, pentru că mi se părea prea frumos ca să nu fie ceva la mijloc.</p>
+
+      <p>Nu e nimic la mijloc. Iar explicația e chiar partea interesantă.</p>
+
+      <h2 id="s5">Ce face, de fapt, butonul</h2>
+
+      <p>Mecanismul e surprinzător de simplu odată ce înțelegi ordinea lucrurilor. Nu noi îți trimitem ceva. <strong>Aplicația ta se uită singură dacă am publicat.</strong></p>
+
+      <p>Concret, iată ce se întâmplă. Publicăm un articol nou și, odată cu el, actualizăm un fișier public de pe site, o listă simplă cu ce a apărut și când. Aplicația instalată pe dispozitivul tău verifică din când în când acel fișier, exact același tip de cerere pe care o face orice vizitator care deschide o pagină. Compară lista cu ce ai deschis deja tu, iar comparația se face <strong>în telefonul tău</strong>, nu la noi. Dacă ceva nu e bifat, pune bulina pe iconiță și, dacă ai acceptat notificările, afișează una cu titlul materialului. Apeși, se deschide direct articolul.</p>
+
+      <p>Diferența față de un newsletter e de direcție. Newsletterul funcționează pentru că eu am adresa ta și îți trimit. Asta funcționează pentru că aplicația ta știe să întrebe. Eu nu trebuie să știu nimic despre tine ca să meargă.</p>
+
+      <p>Am adăugat și un ecran <strong>Noutăți</strong>, care se deschide când apeși iconița: lista a ceea ce n-ai văzut, grupată pe articole, podcast și buzzword. Fără căutat prin site. Iar la prima deschidere te întreabă o singură dată ce te interesează. Dacă bifezi doar podcastul, atât primești. Restul nici măcar nu intră la socoteală. Te răzgândești oricând, din același ecran. Alegerea rămâne, și ea, pe dispozitivul tău.</p>
+
+      <h2 id="s6">Contabilitatea datelor</h2>
+
+      <p>Fiindcă suntem între contabili, hai să facem exercițiul așa cum se cuvine. Iată balanța, poziție cu poziție:</p>
+
+      <table class="ledger">
+        <thead>
+          <tr>
+            <th>Ce</th>
+            <th>Unde stă</th>
+            <th>Cine vede</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ce materiale ai deschis</td>
+            <td>În memoria browserului tău, pe dispozitivul tău</td>
+            <td>Doar tu</td>
+          </tr>
+          <tr>
+            <td>Ce categorii urmărești</td>
+            <td>În memoria browserului tău, pe dispozitivul tău</td>
+            <td>Doar tu</td>
+          </tr>
+          <tr>
+            <td>Adresa de email</td>
+            <td class="zero">nu se cere</td>
+            <td class="zero">—</td>
+          </tr>
+          <tr>
+            <td>Contul de utilizator</td>
+            <td class="zero">nu există</td>
+            <td class="zero">—</td>
+          </tr>
+          <tr>
+            <td>Identificator de dispozitiv</td>
+            <td class="zero">nu se creează</td>
+            <td class="zero">—</td>
+          </tr>
+          <tr>
+            <td>Listă de abonați</td>
+            <td class="zero">nu există</td>
+            <td class="zero">—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Poziția care merită explicată e ultima dintre cele goale: <strong>identificatorul de dispozitiv</strong>. Există o metodă standard prin care site-urile trimit notificări, se numește Web Push, și e cea folosită de aproape toată lumea. Funcționează bine. Dar presupune ca browserul tău să genereze o adresă unică de contact pentru dispozitivul tău, iar acea adresă să fie stocată de noi, pe un server. Nu e nume, nu e email, nu spune cine ești, însă e un identificator persistent, legat de un dispozitiv anume. Adică exact categoria de date pe care ne-am propus să nu le atingem.</p>
+
+      <p>Așa că am renunțat la Web Push. Notificarea pe care o primești e afișată <em>local</em>, de propriul tău browser, după ce el însuși a citit lista publicărilor. Nu pleacă de nicăieri și nu ajunge nicăieri. E o diferență tehnică pe care n-ar trebui să fii nevoit s-o cunoști. Dar, dacă tot vorbim despre confidențialitate, mi se pare corect să spun exact unde s-a tras linia și de ce.</p>
+
+      <p>Dezinstalezi aplicația sau ștergi datele site-ului din browser și dispare tot. Nu rămâne nimic de partea noastră, pentru simplul motiv că n-a existat nimic.</p>
+
+      <h2 id="s7">Ce nu merge, spus pe față</h2>
+
+      <p>Ar fi ușor să închei aici, în ton triumfător. Dar dacă tot am construit un articol pe ideea că nu-ți ascundem nimic, ar fi ipocrit să-ți ascund limitele soluției.</p>
+
+      <p><strong>Notificarea nu e instantanee.</strong> Nu apare în secunda în care apăs „publică". Browserul decide singur când rulează verificarea din fundal, în funcție de cât de des folosești aplicația. Poate fi în aceeași zi, poate fi a doua zi. Nu e email, unde apeși trimite și ajunge în trei secunde.</p>
+
+      <p><strong>Pe iPhone nu există notificare în fundal.</strong> Safari nu oferă mecanismul de verificare periodică fără un server de push, adică fără exact lucrul la care am renunțat deliberat. Pe iPhone, noutățile apar la deschiderea aplicației: bulina, ecranul Noutăți și marcajele din pagini funcționează, doar momentul aflării diferă.</p>
+
+      <p><strong>Notificările sunt opționale.</strong> Dacă refuzi permisiunea, nu se strică nimic: bulina de pe iconiță și lista de noutăți merg mai departe.</p>
+
+      <p><strong>Și, sincer, un newsletter ar fi fost mai eficient.</strong> Ar ajunge la mai mulți oameni, mai repede și mai previzibil. Am ales varianta mai slabă ca acoperire pentru că e singura care nu-ți cere nimic. E un compromis asumat, nu o victorie tehnică.</p>
+
+      <h2 id="s8">Dacă nu vrei nici aplicația</h2>
+
+      <p>Perfect rezonabil. Nu toată lumea vrea încă o iconiță pe ecran, iar principiul „fără obligații" s-ar contrazice singur dacă aplicația ar deveni singura cale.</p>
+
+      <p>Există și un <a href="feed.xml">flux RSS</a>. Îl adaugi o dată în cititorul tău de feed (Feedly, Inoreader, Thunderbird, ce folosești) și primești acolo tot ce publicăm, împreună cu restul surselor pe care le urmărești. Nu instalezi nimic, nu ne dai nimic și, spre deosebire de aplicație, nici măcar nu depinzi de browserul tău.</p>
+
+      <p>Rămâne, evident, și varianta clasică: ne găsești pe LinkedIn, unde anunțăm fiecare material nou. Alege ce ți se potrivește. Toate trei duc în același loc.</p>
+
+      <h2 id="s9">Și dacă te răzgândești</h2>
+
+      <p>Ar fi o inconsecvență să scriu un articol întreg despre libertatea de a alege și să trec sub tăcere alegerea inversă. Așa că o spun direct: <strong>dezinstalarea e la fel de simplă ca instalarea.</strong> Se face în două apăsări și nu trebuie să ne anunți, să completezi ceva sau să explici de ce.</p>
+
+      <p>Nu ne-am dori-o, evident. Am construit lucrul ăsta tocmai ca să rămânem în legătură cu tine. Dar o aplicație pe care n-o poți scoate ușor de pe telefon e o altă formă de zid, iar despre ziduri tocmai am vorbit mai sus.</p>
+
+      <div class="steps">
+        <div class="step-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+            Pe telefon, Android sau iPhone
+          </h3>
+          <ol>
+            <li>Ții apăsat pe iconița aplicației, pe ecranul principal.</li>
+            <li>Din meniul care apare, alegi <strong>Dezinstalează</strong> pe Android, respectiv <strong>Șterge aplicația</strong> pe iPhone.</li>
+            <li>Confirmi. Gata.</li>
+          </ol>
+          <p class="alt">Exact ca la orice altă aplicație. Sistemul nu face nicio deosebire între aplicația noastră și una descărcată dintr-un magazin.</p>
+        </div>
+
+        <div class="step-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            Pe calculator, Windows sau Mac
+          </h3>
+          <ol>
+            <li>Deschizi aplicația, așa cum ai face-o în mod obișnuit.</li>
+            <li>Apeși pe cele <strong>trei puncte</strong> din colțul din dreapta sus al ferestrei aplicației.</li>
+            <li>Alegi <strong>Dezinstalează AI Accounting Hub</strong> și confirmi.</li>
+          </ol>
+          <p class="alt">Dacă nu găsești meniul, merge și pe drumul lung. În Windows: <em>Setări</em> → <em>Aplicații</em> → <em>Aplicații instalate</em>, cauți numele în listă și apeși <em>Dezinstalare</em>. Pe Mac o găsești în folderul <em>Aplicații</em> și o tragi la coș.</p>
+        </div>
+      </div>
+
+      <p>Ce se întâmplă cu datele? Dispar odată cu aplicația. Lista materialelor citite și categoriile bifate erau păstrate în memoria browserului tău, deci pleacă împreună cu ea. De partea noastră nu rămâne nimic de șters, fiindcă nu s-a strâns nimic. Nu există un cont de închis, o listă din care să te scoatem sau un formular de dezabonare.</p>
+
+      <p>Iar dacă te răzgândești din nou peste trei luni, butonul e la locul lui. Fără nicio consecință și fără să-ți amintească nimeni că ai plecat.</p>
+
+      <h2 id="s10">Ce rămâne</h2>
+
+      <p>Prietenul meu avea dreptate pe fond: un principiu care nu rezolvă problema practică e doar o poziție confortabilă. Un site pe care nimeni nu-și amintește să-l viziteze nu ajută pe nimeni, oricât de curat ar fi din punctul de vedere al datelor.</p>
+
+      <p>Dar avea dreptate doar pe jumătate. Concluzia lui era că trebuie să colectez adrese de email. Concluzia reală e că trebuia să rezolv problema anunțării, iar soluția prin colectarea datelor e doar cea mai la îndemână, nu singura.</p>
+
+      <p>De cele mai multe ori, când te lovești de un zid, întrebarea nu e „cum trec de zid", ci „de ce e zidul acolo". Aici, zidul era acolo pentru că toată lumea presupune că singura cale de a ajunge la cineva e să-i ai adresa. Nu e.</p>
+
+      <p>Iar dacă vrei să verifici că funcționează: <strong>articolul pe care tocmai l-ai citit este primul test real al mecanismului.</strong> Dacă ai aplicația instalată și a apărut o bulină pe iconiță, ai răspunsul.</p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#confidentialitate</a>
+          <a href="#" class="tag">#fara-cont</a>
+          <a href="#" class="tag">#date-personale</a>
+          <a href="#" class="tag">#comunitate</a>
+          <a href="#" class="tag">#pwa</a>
+          <a href="#" class="tag">#produs</a>
+        </div>
+        <span class="footer-mono">Articolul #019</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s0">Zidul</a>
+        <a href="#s1">Ce am ales și de ce</a>
+        <a href="#s2">Cealaltă tabără</a>
+        <a href="#s3">Întrebarea prietenului</a>
+        <a href="#s4">A doua părere</a>
+        <a href="#s5">Ce face butonul</a>
+        <a href="#s6">Contabilitatea datelor</a>
+        <a href="#s7">Ce nu merge</a>
+        <a href="#s8">Dacă nu vrei aplicația</a>
+        <a href="#s9">Dacă te răzgândești</a>
+        <a href="#s10">Ce rămâne</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- APLICAȚIA INSTALABILĂ -->
+<section class="install-band" id="install">
+  <div class="install-band-inner">
+    <div class="install-card">
+      <svg class="ic-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><linearGradient id="pwaIconArt" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0891b2"/><stop offset="100%" stop-color="#0d9488"/></linearGradient></defs>
+        <rect width="32" height="32" rx="7" fill="url(#pwaIconArt)"/>
+        <rect x="10" y="17" width="12" height="9" rx="1" fill="white" opacity=".95"/>
+        <polygon points="16,7 6,18 8,18 16,10 24,18 26,18" fill="white" opacity=".95"/>
+        <rect x="13.5" y="20" width="5" height="6" rx="1" fill="#0e7490"/>
+      </svg>
+      <div class="ic-body">
+        <div class="ic-label">Aplicația</div>
+        <h3>Păstrează Hub-ul la îndemână</h3>
+        <p>Adaugă site-ul pe ecranul telefonului sau pe desktop. Când apare un articol, un episod de podcast sau un buzzword nou, vezi un semn pe iconiță, fără să-ți verifici mailul.</p>
+        <div class="privacy-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          fără cont · fără email · fără date colectate
+        </div>
+      </div>
+      <div class="ic-actions">
+        <button type="button" class="btn btn-primary" id="install-card-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M12 6v6"/><path d="M9 9h6"/></svg>
+          Instalează aplicația
+        </button>
+        <a href="feed.xml" class="btn btn-ghost">Sau fluxul RSS</a>
+      </div>
+
+      <!-- afișate doar dacă browserul nu poate porni singur instalarea -->
+      <div class="install-help" id="install-help-ios" hidden>
+        <strong>Pe iPhone și iPad, pasul se face din Safari:</strong>
+        <ol>
+          <li>Apasă butonul <em>Partajează</em> (pătratul cu săgeată în sus), din bara de jos.</li>
+          <li>Alege <em>Adaugă la ecranul principal</em>.</li>
+          <li>Confirmă cu <em>Adaugă</em>. Gata, iconița apare lângă celelalte aplicații.</li>
+        </ol>
+      </div>
+      <div class="install-help" id="install-help-manual" hidden>
+        <strong>Browserul tău nu oferă instalarea automată.</strong>
+        <ol>
+          <li>Deschide meniul browserului (cele trei puncte, sus în dreapta).</li>
+          <li>Caută <em>Instalează pagina ca aplicație</em> sau <em>Adaugă la ecranul principal</em>.</li>
+          <li>Dacă opțiunea lipsește, încearcă din Chrome, Edge sau Safari.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-05-01-M5-Misiunea-AI-Accounting-Hub.html" class="related-card fade-in">
+        <div class="related-date">MANIFEST · MAI 2026 · #005</div>
+        <h3>Misiunea AI Accounting Hub</h3>
+        <p>Manifestul din care vine decizia de mai sus: de ce există hub-ul și pentru cine se construiește.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-05-09-Agentul-AI-nu-stie-sa-tina-un-secret.html" class="related-card fade-in">
+        <div class="related-date">SECURITATE · MAI 2026 · #009</div>
+        <h3>Agentul AI nu știe să țină un secret</h3>
+        <p>Cealaltă față a confidențialității: ce se întâmplă cu datele pe care le dai tu, voluntar, unui model AI.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-07-21-Vibe-Coding-prezentare-interactiva-html.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · IUL 2026 · #016</div>
+        <h3>O pagină interactivă în loc de slide-uri</h3>
+        <p>Un alt caz în care soluția evidentă nu era și cea bună, plus ce a ieșit după ce am întrebat altfel.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>
