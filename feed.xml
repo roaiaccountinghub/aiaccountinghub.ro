@@ -31,12 +31,30 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sat, 01 Aug 2026 08:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2026 10:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Buzzword: Workflow Automation — procesul care merge singur</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#workflow-automation</link>
+      <guid isPermaLink="false">aiah-buzzword-workflow-automation</guid>
+      <pubDate>Sat, 01 Aug 2026 10:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Înlănțuirea de pași automatizați care duce un proces repetitiv cap-coadă: un declanșator pornește secvența, iar restul se execută fără intervenție la fiecare pas. AI-ul a schimbat ce se poate automatiza, pentru că pașii care cereau judecată (citirea documentelor nestandardizate, clasificarea, redactarea) au devenit automatizabili. Disciplina rămâne aceeași: un proces prost documentat, automatizat, înseamnă doar haos mai rapid.</description>
+    </item>
+
+    <item>
+      <title>Buzzword: AI Agent — execută sarcini, nu doar răspunde</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#ai-agent</link>
+      <guid isPermaLink="false">aiah-buzzword-ai-agent</guid>
+      <pubDate>Sat, 01 Aug 2026 09:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Un asistent conversațional îți spune cum se face; agentul face. Primește un obiectiv, își construiește un plan, folosește unelte, verifică rezultatele intermediare și continuă până la finalizare, în limitele stabilite de om. Nuanța care contează în practică: autonomia e un cursor, nu un comutator, iar implementarea sănătoasă începe în modul „propune, omul aprobă”.</description>
+    </item>
 
     <item>
       <title>Cum anunți o comunitate când nu colectezi date de contact</title>

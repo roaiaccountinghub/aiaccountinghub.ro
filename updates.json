@@ -5,6 +5,24 @@
   "updated": "2026-08-01",
   "items": [
     {
+      "id": "buzz-workflow-automation",
+      "type": "buzzword",
+      "title": "Workflow Automation — procesul care merge singur",
+      "url": "buzzword.html#workflow-automation",
+      "date": "2026-08-01",
+      "meta": "termenul săptămânii",
+      "mark": "#workflow-automation"
+    },
+    {
+      "id": "buzz-ai-agent",
+      "type": "buzzword",
+      "title": "AI Agent — execută sarcini, nu doar răspunde",
+      "url": "buzzword.html#ai-agent",
+      "date": "2026-08-01",
+      "meta": "termen explicat",
+      "mark": "#ai-agent"
+    },
+    {
       "id": "art-2026-08-01-cum-anunti-o-comunitate",
       "type": "articol",
       "title": "Cum anunți o comunitate când nu colectezi date de contact",
