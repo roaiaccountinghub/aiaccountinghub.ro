@@ -15,7 +15,7 @@
 
 ## Articole reprezentative
 
-- [Promptul perfect 2.0 — ce s-a schimbat în trei luni](https://aiaccountinghub.ro/2026-07-31-Promptul-perfect-2.0.html): ghid de prompting pentru contabili — tag-uri XML, ordinea contextului, guardrails, prompt injection și un mega-prompt aplicat pe o analiză fiscală
+- [Promptul perfect 2.0 — ce s-a schimbat în trei luni](https://aiaccountinghub.ro/2026-07-31-Promptul-perfect-2.0.html): ghid de prompting pentru contabili, aplicabil cererilor cu miză, nu celor de zi cu zi: tag-uri XML, ordinea contextului, guardrails, prompt injection și un mega-prompt aplicat pe o analiză fiscală
 - [Vibe coding — ce este și unde îl folosim](https://aiaccountinghub.ro/2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html): definiție, origine și aplicații practice în contabilitate
 - [RO e-Factura — când ANAF vede viitorul prin AI](https://aiaccountinghub.ro/2026-05-04-RO-e-Factura-cand-ANAF-vede-viitorul-prin-AI.html): analiza digitalizării fiscale românești
 - [AI Literacy România — cifrele care ne plasează ultimii](https://aiaccountinghub.ro/2026-05-17-AI-Literacy-Romania-cifrele-care-ne-plaseaza-ultimii.html): date statistice despre alfabetizarea AI
