@@ -1,5 +1,5 @@
 {
-  "_comment": "Arhiva buzzword-urilor săptămânii. Ordinea în array = ordine cronologică (vechi → nou). Ultimul element este cel afișat implicit (săptămâna curentă). Pentru a adăuga un termen nou, adaugă un obiect la finalul array-ului. Câmpul 'date' (AAAA-LL-ZZ) este data publicării — se copiază în updates.json când semnalăm termenul ca noutate.",
+  "_comment": "Arhiva buzzword-urilor săptămânii. Ordinea în array = ordine cronologică (vechi → nou). Ultimul element este cel afișat implicit (săptămâna curentă). Pentru a adăuga un termen nou, adaugă un obiect la finalul array-ului. Câmpul 'date' (AAAA-LL-ZZ) este data publicării; se copiază în updates.json când semnalăm termenul ca noutate.",
   "terms": [
     {
       "id": "llm",
@@ -10,12 +10,12 @@
       "type": "substantiv",
       "ro": "Modele Lingvistice de Mari Dimensiuni",
       "def": [
-        "Model de limbaj antrenat pe zeci de miliarde de cuvinte din cărți, articole, documentații tehnice și date structurate — capabil să înțeleagă contextul unei cereri și să genereze răspunsuri coerente, să extragă informații din documente nestructurate, să clasifice și să reformuleze text în limbaj profesional.",
-        "Spre deosebire de un motor de căutare care găsește documente existente sau de software-ul tradițional bazat pe reguli rigide („if-then”), un LLM generează răspunsuri noi pe baza tiparelor învățate. Nu stochează fapte ca o bază de date — raționează probabilistic asupra textului primit.",
-        "În practica contabilă, un LLM poate procesa simultan sute de documente cu formate diferite: facturi în PDF scanat, contracte în Word, extrase bancare în CSV — și poate extrage, normaliza și exporta datele fără intervenție manuală pentru fiecare document în parte."
+        "Model de limbaj antrenat pe zeci de miliarde de cuvinte din cărți, articole, documentații tehnice și date structurate, capabil să înțeleagă contextul unei cereri și să genereze răspunsuri coerente, să extragă informații din documente nestructurate, să clasifice și să reformuleze text în limbaj profesional.",
+        "Spre deosebire de un motor de căutare care găsește documente existente sau de software-ul tradițional bazat pe reguli rigide („if-then”), un LLM generează răspunsuri noi pe baza tiparelor învățate. Nu stochează fapte ca o bază de date, ci raționează probabilistic asupra textului primit.",
+        "În practica contabilă, un LLM poate procesa simultan sute de documente cu formate diferite: bonuri și chitanțe scanate, contracte în Word, extrase bancare în CSV, iar apoi poate extrage, normaliza și exporta datele fără intervenție manuală pentru fiecare document în parte."
       ],
       "examples": [
-        "extragere automată câmpuri din 200 facturi PDF → Excel structurat în < 5 min",
+        "extragere automată câmpuri din 200 de bonuri de decont scanate → Excel structurat în < 5 min",
         "Interpretarea contractelor: extragerea automată a clauzelor de reziliere, a termenelor de plată sau a penalităților din sute de contracte comerciale scanate.",
         "Asistență în audit: generarea unei prime versiuni a raportului de audit prin sintetizarea notelor explicative și a balanțelor de verificare."
       ]
@@ -29,13 +29,13 @@
       "type": "substantiv",
       "ro": "Tokeni",
       "def": [
-        "Tokenii reprezintă unitatea de măsură fundamentală a „gândirii” unui model AI. Gândește-te la ei ca la atomii unui text: un token nu este egal cu un cuvânt — poate fi o silabă, un cuvânt întreg, un semn de punctuație sau chiar un spațiu. În limba română, din cauza diacriticelor și a cuvintelor compuse, raportul este aproximativ 1 cuvânt = 1,3–1,6 tokeni.",
-        "AI-ul nu „citește” propoziții, ci procesează fluxuri de tokeni. Tokenizarea este primul pas în orice procesare AI: textul tău este transformat într-o secvență de numere pe care modelul o poate analiza matematic. Cu cât un document are mai mulți tokeni, cu atât procesarea consumă mai multe resurse — și în cazul API-urilor comerciale, mai mult cost.",
+        "Tokenii reprezintă unitatea de măsură fundamentală a „gândirii” unui model AI. Gândește-te la ei ca la atomii unui text: un token nu este egal cu un cuvânt, ci poate fi o silabă, un cuvânt întreg, un semn de punctuație sau chiar un spațiu. În limba română, din cauza diacriticelor și a cuvintelor compuse, raportul este aproximativ 1 cuvânt = 1,3–1,6 tokeni.",
+        "AI-ul nu „citește” propoziții, ci procesează fluxuri de tokeni. Tokenizarea este primul pas în orice procesare AI: textul tău este transformat într-o secvență de numere pe care modelul o poate analiza matematic. Cu cât un document are mai mulți tokeni, cu atât procesarea consumă mai multe resurse și, în cazul API-urilor comerciale, mai mult cost.",
         "În lumea financiară, înțelegerea tokenilor este esențială deoarece aceștia determină atât costul (majoritatea API-urilor se plătesc la număr de tokeni), cât și limita de procesare a informației pe care o poți introduce o singură dată. Referință orientativă: 1.000 tokeni ≈ 750 cuvinte în engleză / ≈ 600 cuvinte în română."
       ],
       "examples": [
         "o factură standard de 1 pagină = ~400–600 tokeni; procesarea a 1.000 facturi/lună = cost estimabil în avans",
-        "un contract de 10 pagini = ~5.000–7.000 tokeni — poate depăși limita unor modele mai mici, necesitând segmentare",
+        "un contract de 10 pagini = ~5.000–7.000 tokeni, deci poate depăși limita unor modele mai mici, necesitând segmentare",
         "optimizând promptul de extracție date de la 300 la 120 tokeni, costul per document scade cu ~60%"
       ]
     },
@@ -48,13 +48,13 @@
       "type": "substantiv",
       "ro": "Fereastra de Context",
       "def": [
-        "Reprezintă „memoria de lucru” sau cantitatea maximă de text — măsurată în tokeni — pe care un model AI o poate menține activă în „minte” și procesa simultan într-o singură interacțiune. Include atât textul pe care îl trimiți tu (promptul, documentele atașate, istoricul conversației), cât și răspunsul pe care modelul îl generează.",
-        "Gândește-te la fereastra de context ca la memoria de lucru a modelului: tot ce nu încape în ea este pur și simplu invizibil. Dacă trimiți un document mai lung decât fereastra permite, modelul nu va citi documentul complet — va procesa doar ce îi încape. Dacă depășești această limită, modelul începe să „uite” primele informații furnizate, ceea ce poate duce la erori sau halucinații.",
-        "Modelele moderne au ferestre de context din ce în ce mai mari: de la 4.000 tokeni (GPT-3) la 200.000 tokeni (Claude) sau chiar 1 milion (Gemini 1.5 Pro) — ceea ce face posibilă procesarea unor dosare întregi de documente într-o singură cerere. Implicație directă în contabilitate: dimensiunea ferestrei determină câte documente poți procesa simultan și cât de mult context istoric poți păstra într-o conversație de lucru cu modelul."
+        "Reprezintă „memoria de lucru” sau cantitatea maximă de text, măsurată în tokeni, pe care un model AI o poate menține activă în „minte” și procesa simultan într-o singură interacțiune. Include atât textul pe care îl trimiți tu (promptul, documentele atașate, istoricul conversației), cât și răspunsul pe care modelul îl generează.",
+        "Gândește-te la fereastra de context ca la memoria de lucru a modelului: tot ce nu încape în ea este pur și simplu invizibil. Dacă trimiți un document mai lung decât fereastra permite, modelul nu va citi documentul complet, ci va procesa doar ce îi încape. Dacă depășești această limită, modelul începe să „uite” primele informații furnizate, ceea ce poate duce la erori sau halucinații.",
+        "Modelele moderne au ferestre de context din ce în ce mai mari: de la 4.000 tokeni (GPT-3) la 200.000 tokeni (Claude) sau chiar 1 milion (Gemini 1.5 Pro), ceea ce face posibilă procesarea unor dosare întregi de documente într-o singură cerere. Implicație directă în contabilitate: dimensiunea ferestrei determină câte documente poți procesa simultan și cât de mult context istoric poți păstra într-o conversație de lucru cu modelul."
       ],
       "examples": [
-        "dosar complet de achiziție — comandă + factură + aviz + contract — ~12 pagini / ~8.000 tokeni — încape într-o singură cerere pe modelele moderne",
-        "balanță anuală cu 500 de conturi exportată din ERP = ~15.000 tokeni — poate fi analizată integral fără segmentare",
+        "dosar complet de achiziție (comandă + factură + aviz + contract): ~12 pagini / ~8.000 tokeni, încape într-o singură cerere pe modelele moderne",
+        "balanță anuală cu 500 de conturi exportată din ERP = ~15.000 tokeni, poate fi analizată integral fără segmentare",
         "conversație lungă cu istoricul a 20 de mesaje despre reconciliere bancară: dacă depășești fereastra, modelul „uită” contextul inițial și răspunsurile devin inconsistente"
       ]
     },
@@ -67,9 +67,9 @@
       "type": "substantiv",
       "ro": "Bot Conversațional vs Asistent Inteligent",
       "def": [
-        "Un chatbot clasic este un program care răspunde după un arbore predefinit de reguli: utilizatorul alege o opțiune din meniu sau scrie un cuvânt-cheie, iar botul returnează un răspuns scriptat. Nu „înțelege” întrebarea — o asociază cu un șablon. Un AI Assistant, în schimb, este construit pe un LLM și interpretează cererea în limbaj natural, raționează asupra contextului și generează un răspuns nou, adaptat situației specifice.",
+        "Un chatbot clasic este un program care răspunde după un arbore predefinit de reguli: utilizatorul alege o opțiune din meniu sau scrie un cuvânt-cheie, iar botul returnează un răspuns scriptat. Nu „înțelege” întrebarea, ci o asociază cu un șablon. Un AI Assistant, în schimb, este construit pe un LLM și interpretează cererea în limbaj natural, raționează asupra contextului și generează un răspuns nou, adaptat situației specifice.",
         "Diferența practică se vede în flexibilitate: un chatbot bancar te poate ghida prin pași standardizați („Apasă 1 pentru sold”), dar nu poate analiza un extras de cont. Un AI Assistant primește același extras în PDF, identifică tranzacțiile suspecte, le grupează pe categorii și îți explică în limbaj clar de ce ar trebui să le verifici. Chatbot-ul lucrează cu meniuri; asistentul lucrează cu documente, contexte și raționamente.",
-        "În practica contabilă, distincția este esențială atunci când alegi un tool: un chatbot pe site-ul ANAF e util pentru întrebări frecvente bine delimitate, dar un AI Assistant integrat în fluxul tău de lucru poate prelua o cerere de tipul „compară bugetul cu execuția pe ultimele 6 luni și identifică abaterile peste 10%” — sarcină imposibilă pentru un bot bazat pe reguli."
+        "În practica contabilă, distincția este esențială atunci când alegi un tool: un chatbot pe site-ul ANAF e util pentru întrebări frecvente bine delimitate, dar un AI Assistant integrat în fluxul tău de lucru poate prelua o cerere de tipul „compară bugetul cu execuția pe ultimele 6 luni și identifică abaterile peste 10%”, sarcină imposibilă pentru un bot bazat pe reguli."
       ],
       "examples": [
         "Chatbot pe site-ul unei bănci: răspunde la „Care e programul sucursalei?” dar nu poate interpreta un extras de cont încărcat de utilizator.",
@@ -86,14 +86,14 @@
       "type": "substantiv",
       "ro": "Modele AI / Variante de Capacitate",
       "def": [
-        "Modelele AI sunt „motoarele” care alimentează asistenții inteligenți. Fiecare furnizor major de AI oferă o familie de modele cu capacități, viteze și costuri diferite — nu un singur „creier”, ci o gamă din care alegi în funcție de sarcină. Anthropic are Claude Haiku 4.5 (rapid și economic), Sonnet 4.6 (echilibrat) și Opus 4.7 (cel mai capabil). OpenAI are GPT-5.3 Instant, GPT-5.4 Thinking și GPT-5.5 Pro. Google are Gemini 3 Flash, Pro și Ultra. Toate funcționează pe aceeași interfață, dar produc rezultate diferite la același prompt.",
-        "Logica este simplă: modelele mici sunt rapide și ieftine, dar superficiale; modelele mari raționează mai profund, dar consumă mai mult timp și costă de 5–10 ori mai mult per token. Diferența nu e doar de „inteligență” — ține de capacitatea de a urmări instrucțiuni complexe, de a menține coerența pe documente lungi și de a evita erorile pe sarcini cu mulți pași. Un model mic poate categorisi 1.000 de tranzacții în câteva secunde; un model mare poate audita un dosar fiscal complet și semnala riscuri ascunse.",
+        "Modelele AI sunt „motoarele” care alimentează asistenții inteligenți. Fiecare furnizor major de AI oferă o familie de modele cu capacități, viteze și costuri diferite: nu un singur „creier”, ci o gamă din care alegi în funcție de sarcină. Anthropic are Claude Haiku 4.5 (rapid și economic), Sonnet 4.6 (echilibrat) și Opus 4.7 (cel mai capabil). OpenAI are GPT-5.3 Instant, GPT-5.4 Thinking și GPT-5.5 Pro. Google are Gemini 3 Flash, Pro și Ultra. Toate funcționează pe aceeași interfață, dar produc rezultate diferite la același prompt.",
+        "Logica este simplă: modelele mici sunt rapide și ieftine, dar superficiale; modelele mari raționează mai profund, dar consumă mai mult timp și costă de 5–10 ori mai mult per token. Diferența nu e doar de „inteligență”: ține de capacitatea de a urmări instrucțiuni complexe, de a menține coerența pe documente lungi și de a evita erorile pe sarcini cu mulți pași. Un model mic poate categorisi 1.000 de tranzacții în câteva secunde; un model mare poate audita un dosar fiscal complet și semnala riscuri ascunse.",
         "În practica contabilă, alegerea modelului devine o decizie strategică de cost-eficiență. Folosirea modelului flagship pentru sarcini banale înseamnă bani aruncați; folosirea modelului mic pentru analize complexe înseamnă rezultate slabe care necesită refacere. Profesionistul matur învață să ruteze inteligent: model mic pentru extracție și clasificare, model mare pentru interpretare și decizie."
       ],
       "examples": [
-        "Categorizarea automată a 5.000 de cheltuieli lunare pe centre de cost → Claude Haiku 4.5 sau GPT-5.3 Instant — rapid și ~10× mai ieftin decât modelele mari.",
-        "Redactarea unui raport de audit pe o entitate complexă cu sinteză din 50 de documente → Claude Opus 4.7 sau GPT-5.5 Pro — capacitate superioară de raționament și coerență pe text lung.",
-        "Strategie hibridă într-un workflow: modelul mic preprocesează și extrage datele structurate, apoi pasează rezultatul către modelul mare pentru analiza finală — cost total redus cu 60–70%."
+        "Categorizarea automată a 5.000 de cheltuieli lunare pe centre de cost → Claude Haiku 4.5 sau GPT-5.3 Instant, rapid și ~10× mai ieftin decât modelele mari.",
+        "Redactarea unui raport de audit pe o entitate complexă cu sinteză din 50 de documente → Claude Opus 4.7 sau GPT-5.5 Pro, capacitate superioară de raționament și coerență pe text lung.",
+        "Strategie hibridă într-un workflow: modelul mic preprocesează și extrage datele structurate, apoi pasează rezultatul către modelul mare pentru analiza finală; cost total redus cu 60–70%."
       ]
     },
     {
@@ -105,9 +105,9 @@
       "type": "substantiv",
       "ro": "Prompt / Instrucțiune",
       "def": [
-        "Promptul este textul complet pe care îl trimiți unui model AI ca să obții un răspuns: include sarcina (ce vrei să facă), contextul (informațiile relevante), constrângerile (reguli de respectat) și formatul dorit al răspunsului. Nu este o simplă „întrebare” ca într-un motor de căutare — este o instrucțiune structurată care orientează modul în care modelul își alocă atenția și raționamentul.",
-        "Calitatea promptului determină direct calitatea răspunsului. Un prompt vag de tipul „analizează această factură” produce un rezultat generic; un prompt structurat care specifică „extrage furnizor, CUI, data emiterii, valoare fără TVA, valoare TVA, total — returnează în format JSON” produce date direct utilizabile în sistemul informatic. Aceeași diferență ca între o solicitare verbală neformală făcută unui coleg și un brief scris cu cerințe clare.",
-        "În practica contabilă, promptul devine un activ reutilizabil: un prompt bine construit pentru închiderea lunară poate fi rulat de zeci de ori cu rezultate consistente. Echipele performante își construiesc o bibliotecă internă de prompturi standardizate — pentru reconciliere, pentru extragere date, pentru sinteza notelor explicative — exact așa cum își standardizează template-urile de documente."
+        "Promptul este textul complet pe care îl trimiți unui model AI ca să obții un răspuns: include sarcina (ce vrei să facă), contextul (informațiile relevante), constrângerile (reguli de respectat) și formatul dorit al răspunsului. Nu este o simplă „întrebare” ca într-un motor de căutare, ci o instrucțiune structurată care orientează modul în care modelul își alocă atenția și raționamentul.",
+        "Calitatea promptului determină direct calitatea răspunsului. Un prompt vag de tipul „analizează această factură” produce un rezultat generic; un prompt structurat care specifică „extrage furnizor, CUI, data emiterii, valoare fără TVA, valoare TVA, total; returnează în format JSON” produce date direct utilizabile în sistemul informatic. Aceeași diferență ca între o solicitare verbală neformală făcută unui coleg și un brief scris cu cerințe clare.",
+        "În practica contabilă, promptul devine un activ reutilizabil: un prompt bine construit pentru închiderea lunară poate fi rulat de zeci de ori cu rezultate consistente. Echipele performante își construiesc o bibliotecă internă de prompturi standardizate (pentru reconciliere, pentru extragere date, pentru sinteza notelor explicative), exact așa cum își standardizează template-urile de documente."
       ],
       "examples": [
         "Prompt slab: „verifică factura asta” → răspuns vag, neutilizabil într-un proces automat.",
@@ -124,13 +124,13 @@
       "type": "substantiv",
       "ro": "AI Generativ",
       "def": [
-        "Generative AI este categoria de modele care creează conținut nou — text, imagini, audio, video, cod, tabele — pornind de la o instrucțiune în limbaj natural. Spre deosebire de AI-ul tradițional care doar clasifică sau prezice pe baza datelor existente (de ex. detectarea fraudei într-o tranzacție), AI-ul generativ produce ieșiri originale care nu existau înainte: un raport, o ilustrație, o melodie, un script video.",
-        "Există modalități diferite de generare, fiecare cu modele specializate. Text-to-text: Claude, ChatGPT, Gemini — generează text din instrucțiuni. Text-to-image: Midjourney, DALL-E, Imagen — produc imagini din descrieri. Text-to-video: Veo, Runway — generează clipuri video scurte. Text-to-audio: ElevenLabs, Suno — sintetizează voce sau muzică. Modelele multimodale combină aceste capacități: pot primi un PDF cu grafice și genera atât o sinteză text, cât și o reprezentare vizuală nouă.",
-        "În practica contabilă și financiară, AI-ul generativ schimbă natura livrabilului: în loc să producă manual rapoarte standardizate, profesionistul descrie ce vrea și modelul generează prima versiune — text, tabel, prezentare sau chiar materiale video de training pentru echipă. Munca se mută de la execuție la regie: ce să se genereze, cu ce constrângeri, pentru ce audiență."
+        "Generative AI este categoria de modele care creează conținut nou (text, imagini, audio, video, cod, tabele) pornind de la o instrucțiune în limbaj natural. Spre deosebire de AI-ul tradițional care doar clasifică sau prezice pe baza datelor existente (de ex. detectarea fraudei într-o tranzacție), AI-ul generativ produce ieșiri originale care nu existau înainte: un raport, o ilustrație, o melodie, un script video.",
+        "Există modalități diferite de generare, fiecare cu modele specializate. Text-to-text (Claude, ChatGPT, Gemini): generează text din instrucțiuni. Text-to-image (Midjourney, DALL-E, Imagen): produc imagini din descrieri. Text-to-video (Veo, Runway): generează clipuri video scurte. Text-to-audio (ElevenLabs, Suno): sintetizează voce sau muzică. Modelele multimodale combină aceste capacități: pot primi un PDF cu grafice și genera atât o sinteză text, cât și o reprezentare vizuală nouă.",
+        "În practica contabilă și financiară, AI-ul generativ schimbă natura livrabilului: în loc să producă manual rapoarte standardizate, profesionistul descrie ce vrea și modelul generează prima versiune, fie ea text, tabel, prezentare sau chiar materiale video de training pentru echipă. Munca se mută de la execuție la regie: ce să se genereze, cu ce constrângeri, pentru ce audiență."
       ],
       "examples": [
         "Generarea automată a rapoartelor lunare către clienți: pe baza balanței exportate din ERP, modelul generează un raport narativ personalizat pe specificul activității fiecărui client.",
-        "Transformarea unei proceduri scrise în material video de training: text-to-video creează un clip de 90 de secunde din procedura de aprobare a notelor de cheltuieli — util pentru onboarding-ul echipei.",
+        "Transformarea unei proceduri scrise în material video de training: text-to-video creează un clip de 90 de secunde din procedura de aprobare a notelor de cheltuieli, util pentru onboarding-ul echipei.",
         "Briefing audio din raportul financiar trimestrial: text-to-audio generează un rezumat de 5 minute pe care managerul îl ascultă în mașină în drum spre ședința consiliului."
       ]
     },
@@ -143,13 +143,13 @@
       "type": "substantiv",
       "ro": "Inteligență Artificială",
       "def": [
-        "Inteligența artificială este domeniul care construiește sisteme informatice capabile să execute sarcini care, în mod tradițional, cereau inteligență umană: înțelegerea limbajului, recunoașterea tiparelor, luarea deciziilor, planificarea. Este termenul-umbrelă sub care intră tot restul vocabularului AI — machine learning, LLM-uri, agenți, AI generativ. Spre deosebire de software-ul clasic, care execută reguli scrise explicit de un programator, un sistem AI își derivă comportamentul din tipare învățate din date.",
-        "În practică, „AI” acoperă o gamă foarte largă: de la filtrul de spam din email și scoringul de credit, până la asistenții conversaționali moderni. Capcana este că termenul e folosit adesea ca etichetă de marketing — nu tot ce se numește „AI” raționează sau înțelege ceva; multe produse folosesc reguli simple sau statistici clasice. Distincția utilă pentru un profesionist: întreabă ce învață sistemul din date și ce decizii ia efectiv singur.",
-        "Pentru profesia contabilă, AI nu este o unealtă unică, ci o familie de capabilități: citirea documentelor scanate, extragerea datelor din facturi, clasificarea tranzacțiilor, sinteza rapoartelor, detectarea anomaliilor. Înțelegerea termenilor din spatele etichetei „AI” te ajută să evaluezi ofertele furnizorilor de software și să separi capabilitățile reale de promisiunile de marketing."
+        "Inteligența artificială este domeniul care construiește sisteme informatice capabile să execute sarcini care, în mod tradițional, cereau inteligență umană: înțelegerea limbajului, recunoașterea tiparelor, luarea deciziilor, planificarea. Este termenul-umbrelă sub care intră tot restul vocabularului AI: machine learning, LLM-uri, agenți, AI generativ. Spre deosebire de software-ul clasic, care execută reguli scrise explicit de un programator, un sistem AI își derivă comportamentul din tipare învățate din date.",
+        "În practică, „AI” acoperă o gamă foarte largă: de la filtrul de spam din email și scoringul de credit, până la asistenții conversaționali moderni. Capcana este că termenul e folosit adesea ca etichetă de marketing: nu tot ce se numește „AI” raționează sau înțelege ceva; multe produse folosesc reguli simple sau statistici clasice. Distincția utilă pentru un profesionist: întreabă ce învață sistemul din date și ce decizii ia efectiv singur.",
+        "Pentru profesia contabilă, AI nu este o unealtă unică, ci o familie de capabilități: citirea documentelor scanate, extragerea datelor din bonuri și deconturi, clasificarea tranzacțiilor, sinteza rapoartelor, detectarea anomaliilor. Înțelegerea termenilor din spatele etichetei „AI” te ajută să evaluezi ofertele furnizorilor de software și să separi capabilitățile reale de promisiunile de marketing."
       ],
       "examples": [
-        "Sistemul de scoring al unei bănci care evaluează automat cererile de credit pe baza istoricului financiar — AI „clasic”, predictiv, existent cu mult înainte de ChatGPT.",
-        "Un asistent conversațional care primește balanța de verificare și răspunde la întrebarea „ce conturi au variații neobișnuite față de luna trecută?” — AI generativ modern.",
+        "Sistemul de scoring al unei bănci care evaluează automat cererile de credit pe baza istoricului financiar: AI „clasic”, predictiv, existent cu mult înainte de ChatGPT.",
+        "Un asistent conversațional care primește balanța de verificare și răspunde la întrebarea „ce conturi au variații neobișnuite față de luna trecută?”, un exemplu de AI generativ modern.",
         "La evaluarea unui software contabil „cu AI”: cere furnizorului să demonstreze concret ce sarcini automatizează și cu ce rată de eroare, nu doar eticheta de marketing."
       ]
     },
@@ -162,9 +162,9 @@
       "type": "substantiv",
       "ro": "AI Multimodal",
       "def": [
-        "AI-ul multimodal este modelul care procesează simultan mai multe tipuri de input — text, imagine, audio, tabel, video — în aceeași conversație și cu aceeași înțelegere a contextului. Primele LLM-uri lucrau exclusiv cu text; un model multimodal „vede” o factură scanată, „citește” nota explicativă atașată și „ascultă” înregistrarea ședinței, tratându-le ca pe un singur context de lucru.",
-        "Diferența față de soluțiile mai vechi: nu mai e nevoie de o conversie prealabilă (OCR separat pentru imagini, transcriere separată pentru audio) — modelul integrează direct modalitățile. Nuanța importantă: performanța poate diferi între modalități; un model excelent pe text poate greși la citirea unui tabel complex dintr-o imagine de calitate slabă, deci verificarea rămâne necesară pe documentele critice.",
-        "Pentru practica financiar-contabilă, multimodalitatea elimină pași întregi de pregătire a datelor: trimiți direct fotografia chitanței, PDF-ul scanat al contractului sau captura de ecran din ERP, fără conversii intermediare. Dosarele mixte — scanuri, poze, tabele, corespondență — devin procesabile într-o singură cerere."
+        "AI-ul multimodal este modelul care procesează simultan mai multe tipuri de input (text, imagine, audio, tabel, video) în aceeași conversație și cu aceeași înțelegere a contextului. Primele LLM-uri lucrau exclusiv cu text; un model multimodal „vede” un bon scanat, „citește” nota explicativă atașată și „ascultă” înregistrarea ședinței, tratându-le ca pe un singur context de lucru.",
+        "Diferența față de soluțiile mai vechi: nu mai e nevoie de o conversie prealabilă (OCR separat pentru imagini, transcriere separată pentru audio), pentru că modelul integrează direct modalitățile. Nuanța importantă: performanța poate diferi între modalități; un model excelent pe text poate greși la citirea unui tabel complex dintr-o imagine de calitate slabă, deci verificarea rămâne necesară pe documentele critice.",
+        "Pentru practica financiar-contabilă, multimodalitatea elimină pași întregi de pregătire a datelor: trimiți direct fotografia chitanței, PDF-ul scanat al contractului sau captura de ecran din ERP, fără conversii intermediare. Dosarele mixte (scanuri, poze, tabele, corespondență) devin procesabile într-o singură cerere."
       ],
       "examples": [
         "Fotografia unei chitanțe de protocol trimisă direct din telefon: modelul extrage suma, data, TVA-ul și propune încadrarea contabilă, fără OCR separat.",
@@ -181,13 +181,13 @@
       "type": "substantiv",
       "ro": "Model de Frontieră",
       "def": [
-        "Frontier model desemnează cele mai avansate modele disponibile la un moment dat — cele care împing „frontiera” capabilităților AI. Termenul e relativ și alunecos: modelul de frontieră de azi devine standardul banal de peste un an. Laboratoarele mari (Anthropic, OpenAI, Google DeepMind) concurează permanent pentru această poziție cu modelele lor flagship.",
-        "Termenul are și o dimensiune de reglementare: tocmai pentru că sunt cele mai puternice, modelele de frontieră sunt ținta principală a cerințelor de siguranță și evaluare — testare înainte de lansare, raportare a riscurilor, praguri de putere de calcul care declanșează obligații suplimentare (logică prezentă și în EU AI Act pentru modelele cu risc sistemic). Cu cât modelul e mai capabil, cu atât plasa de siguranță cerută e mai deasă.",
+        "Frontier model desemnează cele mai avansate modele disponibile la un moment dat, cele care împing „frontiera” capabilităților AI. Termenul e relativ și alunecos: modelul de frontieră de azi devine standardul banal de peste un an. Laboratoarele mari (Anthropic, OpenAI, Google DeepMind) concurează permanent pentru această poziție cu modelele lor flagship.",
+        "Termenul are și o dimensiune de reglementare: tocmai pentru că sunt cele mai puternice, modelele de frontieră sunt ținta principală a cerințelor de siguranță și evaluare, adică testare înainte de lansare, raportare a riscurilor, praguri de putere de calcul care declanșează obligații suplimentare (logică prezentă și în EU AI Act pentru modelele cu risc sistemic). Cu cât modelul e mai capabil, cu atât plasa de siguranță cerută e mai deasă.",
         "Pentru un profesionist financiar, relevanța e dublă: pe de o parte, modelele de frontieră aduc primele capabilitățile noi (raționament fiscal mai fiabil, analiză de documente mai lungi); pe de altă parte, sunt cele mai scumpe și nu întotdeauna necesare. Regula practică: testează sarcinile critice pe modelul de frontieră, apoi verifică dacă un model mai ieftin le rezolvă la fel de bine."
       ],
       "examples": [
-        "O speță fiscală complexă cu legislație contradictorie: modelul de frontieră o descâlcește corect, modelul mediu produce un răspuns plauzibil dar incomplet — diferența justifică costul pe sarcinile critice.",
-        "Politica firmei de audit: rapoartele către clienți trec prin modelul de frontieră, sarcinile interne de rutină prin modele standard — echilibru cost/calitate.",
+        "O speță fiscală complexă cu legislație contradictorie: modelul de frontieră o descâlcește corect, modelul mediu produce un răspuns plauzibil dar incomplet; diferența justifică costul pe sarcinile critice.",
+        "Politica firmei de audit: rapoartele către clienți trec prin modelul de frontieră, sarcinile interne de rutină prin modele standard, pentru echilibru cost/calitate.",
         "La fiecare generație nouă de modele, refă testele interne: sarcini care ieri cereau modelul de frontieră devin azi rezolvabile cu modelul mediu, la o fracțiune din cost."
       ]
     },
@@ -201,13 +201,13 @@
       "ro": "Modele de Raționament",
       "def": [
         "Modelele de raționament sunt LLM-uri care, înainte de a da răspunsul final, parcurg intern un proces de „gândire” pas cu pas: descompun problema, explorează variante, își verifică propriile calcule și abia apoi formulează concluzia. Diferența față de un LLM clasic e ca între un coleg care răspunde din reflex și unul care ia o foaie de hârtie și face calculul înainte să se pronunțe.",
-        "Practic, aceste modele „cheltuiesc” tokeni suplimentari pe raționament intern — de aceea sunt mai lente și mai scumpe per cerere, dar semnificativ mai precise la matematică, cod, analiză multi-pas și probleme cu multe constrângeri. Capcana de evitat: pentru întrebări simple, modelul de raționament e risipă — plătești minute de „gândire” pentru un răspuns pe care un model rapid îl dă în 2 secunde.",
+        "Practic, aceste modele „cheltuiesc” tokeni suplimentari pe raționament intern; de aceea sunt mai lente și mai scumpe per cerere, dar semnificativ mai precise la matematică, cod, analiză multi-pas și probleme cu multe constrângeri. Capcana de evitat: pentru întrebări simple, modelul de raționament e risipă, fiindcă plătești minute de „gândire” pentru un răspuns pe care un model rapid îl dă în 2 secunde.",
         "În practica financiară, modelele de raționament strălucesc exact acolo unde LLM-urile clasice greșeau: calcule fiscale în mai mulți pași, reconcilieri cu multe excepții, verificarea coerenței între documente. Regula de rutare: sarcini de extragere și redactare → model rapid; sarcini cu calcul și logică înlănțuită → model de raționament."
       ],
       "examples": [
         "Calculul impactului fiscal al unei restructurări cu 5 scenarii alternative: modelul de raționament parcurge fiecare scenariu pas cu pas și compară rezultatele coerent.",
         "Reconcilierea unui sold divergent: modelul „gândește” prin cele 12 tranzacții suspecte, elimină ipotezele una câte una și identifică dubla înregistrare.",
-        "Workflow optimizat: modelul rapid extrage datele din documente, apoi modelul de raționament face doar verificarea aritmetică și logică finală — precizie mare, cost controlat."
+        "Workflow optimizat: modelul rapid extrage datele din documente, apoi modelul de raționament face doar verificarea aritmetică și logică finală, deci precizie mare, cost controlat."
       ]
     },
     {
@@ -219,14 +219,14 @@
       "type": "substantiv",
       "ro": "Inteligență Artificială Generală",
       "def": [
-        "AGI desemnează un AI ipotetic cu inteligență generală la nivel uman: capabil să învețe și să execute orice sarcină cognitivă pe care o poate face un om — nu doar domeniile pe care a fost antrenat. Modelele actuale, oricât de impresionante, sunt considerate „înguste” prin comparație: exceptionale la unele sarcini, surprinzător de slabe la altele.",
-        "Capcana termenului: nu există o definiție acceptată unanim și nici un test-arbitru — fiecare laborator și cercetător trasează linia altfel, de la „poate face munca economică medie” la „egalează omul în orice”. De aceea afirmațiile „AGI vine în X ani” trebuie citite cu scepticism profesional: se dezbate inclusiv ce anume ar trebui să vină. Termenul are însă greutate reală în strategie și investiții — misiunile declarate ale marilor laboratoare sunt formulate în jurul lui.",
+        "AGI desemnează un AI ipotetic cu inteligență generală la nivel uman: capabil să învețe și să execute orice sarcină cognitivă pe care o poate face un om, nu doar domeniile pe care a fost antrenat. Modelele actuale, oricât de impresionante, sunt considerate „înguste” prin comparație: excepționale la unele sarcini, surprinzător de slabe la altele.",
+        "Capcana termenului: nu există o definiție acceptată unanim și nici un test-arbitru; fiecare laborator și cercetător trasează linia altfel, de la „poate face munca economică medie” la „egalează omul în orice”. De aceea afirmațiile „AGI vine în X ani” trebuie citite cu scepticism profesional: se dezbate inclusiv ce anume ar trebui să vină. Termenul are însă greutate reală în strategie și investiții: misiunile declarate ale marilor laboratoare sunt formulate în jurul lui.",
         "Pentru un profesionist financiar, AGI e un termen de context strategic, nu de operațiuni: apare în discuții despre viitorul profesiilor, în rapoarte de investiții și în dezbaterea publică. Poziția practică sănătoasă: planifică pe baza capacităților demonstrabile ale modelelor de azi, nu pe baza promisiunilor despre AGI."
       ],
       "examples": [
-        "Într-un raport de analiză a unei companii AI, „progres către AGI” apare ca justificare de evaluare — semnal să separi capabilitățile actuale de aspirații.",
-        "Discuție de planificare a carierei în profesie: indiferent de calendarul AGI, sarcinile repetitive se automatizează deja — competența de supervizare a AI devine diferențiatorul.",
-        "Test de luciditate la conferințe: când auzi „AGI”, întreabă „cu ce definiție?” — răspunsurile diferite arată cât de nedecantat e termenul."
+        "Într-un raport de analiză a unei companii AI, „progres către AGI” apare ca justificare de evaluare, semnal să separi capabilitățile actuale de aspirații.",
+        "Discuție de planificare a carierei în profesie: indiferent de calendarul AGI, sarcinile repetitive se automatizează deja, iar competența de supervizare a AI devine diferențiatorul.",
+        "Test de luciditate la conferințe: când auzi „AGI”, întreabă „cu ce definiție?”; răspunsurile diferite arată cât de nedecantat e termenul."
       ]
     },
     {
@@ -238,13 +238,13 @@
       "type": "substantiv",
       "ro": "Superinteligență Artificială",
       "def": [
-        "Superinteligența (ASI) este nivelul ipotetic la care un AI ar depăși inteligența umană în practic toate domeniile — știință, strategie, creativitate, persuasiune. Dacă AGI înseamnă „la nivel uman”, ASI înseamnă „dincolo de ce poate orice om sau grup de oameni”. Rămâne un concept speculativ: nu există azi nimic apropiat de așa ceva.",
-        "Termenul contează pentru că a migrat din filosofie în strategia industriei: laboratoare majore și-au declarat public superinteligența drept obiectiv, iar în jurul ei se poartă dezbaterea serioasă despre siguranță — cum controlezi un sistem mai capabil decât cei care îl supraveghează? De aici investițiile în cercetarea de aliniere și apelurile la reglementare internațională.",
+        "Superinteligența (ASI) este nivelul ipotetic la care un AI ar depăși inteligența umană în practic toate domeniile: știință, strategie, creativitate, persuasiune. Dacă AGI înseamnă „la nivel uman”, ASI înseamnă „dincolo de ce poate orice om sau grup de oameni”. Rămâne un concept speculativ: nu există azi nimic apropiat de așa ceva.",
+        "Termenul contează pentru că a migrat din filosofie în strategia industriei: laboratoare majore și-au declarat public superinteligența drept obiectiv, iar în jurul ei se poartă dezbaterea serioasă despre siguranță, și anume cum controlezi un sistem mai capabil decât cei care îl supraveghează? De aici investițiile în cercetarea de aliniere și apelurile la reglementare internațională.",
         "Pentru comunitatea financiar-contabilă, ASI e un termen de cultură generală profesională: apare în presa economică, în tezele de investiții și în discuțiile despre riscuri pe termen lung. Utilitatea practică imediată e să-l recunoști ca vocabular de viziune și risc, nu ca descriere a vreunui produs pe care îl poți cumpăra."
       ],
       "examples": [
-        "Un fond de investiții își justifică expunerea pe sectorul AI prin „cursa către superinteligență” — semnal de teză speculativă, de evaluat critic ca orice narativ de piață.",
-        "În dezbaterea despre reglementare, ASI apare ca argument pentru praguri de siguranță la modelele de frontieră — context util când citești despre EU AI Act.",
+        "Un fond de investiții își justifică expunerea pe sectorul AI prin „cursa către superinteligență”, semnal de teză speculativă, de evaluat critic ca orice narativ de piață.",
+        "În dezbaterea despre reglementare, ASI apare ca argument pentru praguri de siguranță la modelele de frontieră, context util când citești despre EU AI Act.",
         "La o prezentare către board: distinge clar între automatizările AI concrete din firmă (reale, măsurabile) și scenariile ASI din presă (speculative)."
       ]
     },
@@ -257,14 +257,14 @@
       "type": "substantiv",
       "ro": "Aliniere",
       "def": [
-        "Alinierea este efortul de a face ca obiectivele și comportamentul unui sistem AI să corespundă intențiilor și valorilor oamenilor — să facă ce am vrut să ceară, nu doar ce am formulat literal. Problema e veche și familiară oricui a dat vreodată o sarcină ambiguă: instrucțiunea executată literal poate produce exact opusul intenției.",
+        "Alinierea este efortul de a face ca obiectivele și comportamentul unui sistem AI să corespundă intențiilor și valorilor oamenilor, adică să facă ce am vrut să ceară, nu doar ce am formulat literal. Problema e veche și familiară oricui a dat vreodată o sarcină ambiguă: instrucțiunea executată literal poate produce exact opusul intenției.",
         "Paralela contabilă perfectă este stimulentul prost construit: bonusul pe „număr de dosare închise” produce dosare închise superficial. La fel, un AI optimizat pe „răspunsuri care plac” învață lingușeala, iar unul optimizat pe „taskuri finalizate” poate tăia colțuri nevăzute. Alinierea acoperă tot lanțul: obiective bine definite, antrenare pe feedback (RLHF), testare adversarială, garduri de siguranță.",
         "Pentru practica profesională, alinierea are o versiune de birou foarte concretă: instrucțiunile pe care le dai modelului sunt mini-exerciții de aliniere. Cu cât definești mai precis obiectivul, constrângerile și ce NU vrei, cu atât scade riscul ca AI-ul să „rezolve” sarcina într-un mod formal corect, dar practic inutil sau riscant."
       ],
       "examples": [
-        "Ceri „reduce numărul de erori din raport” și modelul scurtează raportul — obiectiv atins literal, intenție ratată; reformulezi cu criterii explicite de calitate.",
-        "Un agent AI instruit „minimizează soldurile restante” propune compensări agresive nepermise — fără constrângerea „doar operațiuni conforme”, optimizarea o ia pe scurtătură.",
-        "În procedura de lucru cu AI a firmei: fiecare prompt de sarcină critică include obiectiv + limite + ce este interzis — alinierea aplicată la scară mică."
+        "Ceri „reduce numărul de erori din raport” și modelul scurtează raportul: obiectiv atins literal, intenție ratată; reformulezi cu criterii explicite de calitate.",
+        "Un agent AI instruit „minimizează soldurile restante” propune compensări agresive nepermise; fără constrângerea „doar operațiuni conforme”, optimizarea o ia pe scurtătură.",
+        "În procedura de lucru cu AI a firmei: fiecare prompt de sarcină critică include obiectiv + limite + ce este interzis, alinierea aplicată la scară mică."
       ]
     },
     {
@@ -276,12 +276,12 @@
       "type": "substantiv",
       "ro": "Învățare Automată",
       "def": [
-        "Machine learning este ramura AI în care sistemul „învață” tipare direct din date, în loc să fie programat cu reguli explicite. În software-ul clasic, un programator scrie: „dacă factura depășește 5.000 lei, cere aprobare”. În machine learning, sistemul primește mii de exemple de facturi aprobate și respinse și deduce singur regulile — inclusiv unele pe care niciun om nu le-ar fi formulat explicit.",
+        "Machine learning este ramura AI în care sistemul „învață” tipare direct din date, în loc să fie programat cu reguli explicite. În software-ul clasic, un programator scrie: „dacă factura depășește 5.000 lei, cere aprobare”. În machine learning, sistemul primește mii de exemple de facturi aprobate și respinse și deduce singur regulile, inclusiv unele pe care niciun om nu le-ar fi formulat explicit.",
         "Procesul are două faze distincte: antrenarea (modelul analizează date istorice și își ajustează parametrii interni) și utilizarea (modelul aplică ce a învățat pe date noi). Calitatea rezultatului depinde direct de calitatea datelor de antrenare: date incomplete, dezechilibrate sau cu erori produc modele care repetă și amplifică acele defecte. De aici regula de aur: „garbage in, garbage out”.",
-        "În finanțe și contabilitate, machine learning este deja omniprezent, adesea invizibil: detectarea tranzacțiilor frauduloase, predicția întârzierilor la plată, clasificarea automată a cheltuielilor. Aproape tot ce numim azi „AI” — inclusiv LLM-urile — este construit pe machine learning; diferența e doar scara și tipul de date pe care învață."
+        "În finanțe și contabilitate, machine learning este deja omniprezent, adesea invizibil: detectarea tranzacțiilor frauduloase, predicția întârzierilor la plată, clasificarea automată a cheltuielilor. Aproape tot ce numim azi „AI”, inclusiv LLM-urile, este construit pe machine learning; diferența e doar scara și tipul de date pe care învață."
       ],
       "examples": [
-        "Banca detectează o plată suspectă pe cardul firmei la ora 3 noaptea, dintr-o altă țară — modelul a învățat tiparul normal de cheltuieli și semnalează abaterea.",
+        "Banca detectează o plată suspectă pe cardul firmei la ora 3 noaptea, dintr-o altă țară: modelul a învățat tiparul normal de cheltuieli și semnalează abaterea.",
         "Un model antrenat pe istoricul de încasări al firmei prezice care clienți au probabilitate mare de întârziere la plată în următoarele 30 de zile.",
         "Clasificarea automată a cheltuielilor pe centre de cost: după câteva luni de corecții manuale, modelul învață specificul firmei și rata de eroare scade vizibil."
       ]
@@ -295,14 +295,14 @@
       "type": "substantiv",
       "ro": "Învățare Profundă",
       "def": [
-        "Deep learning este subtipul de machine learning bazat pe rețele neuronale cu multe straturi suprapuse — de aici „profund”. Fiecare strat învață trăsături din ce în ce mai abstracte: la recunoașterea unei facturi scanate, primele straturi văd linii și contraste, straturile intermediare recunosc litere și tabele, iar cele finale înțeleg că „acesta e un total cu TVA”. Este motorul din spatele LLM-urilor, al recunoașterii vocale și al generatoarelor de imagini.",
-        "Diferența față de machine learning clasic: nu mai e nevoie ca un om să definească manual trăsăturile relevante („uită-te la raportul dintre venit și datorie”) — rețeaua le descoperă singură din date brute. Prețul este apetitul uriaș pentru date și putere de calcul: modelele profunde au nevoie de milioane sau miliarde de exemple și de procesoare specializate (GPU) pentru antrenare.",
-        "Pentru un profesionist contabil, deep learning explică de ce AI-ul modern poate lucra cu documente „murdare”: facturi fotografiate strâmb, scanuri de calitate slabă, formate diferite de la sute de furnizori. Sistemele clasice bazate pe șabloane cedau la orice abatere de format; rețelele profunde generalizează dincolo de exemplele văzute la antrenare."
+        "Deep learning este subtipul de machine learning bazat pe rețele neuronale cu multe straturi suprapuse; de aici „profund”. Fiecare strat învață trăsături din ce în ce mai abstracte: la recunoașterea unui bon fiscal fotografiat, primele straturi văd linii și contraste, straturile intermediare recunosc litere și tabele, iar cele finale înțeleg că „acesta e un total cu TVA”. Este motorul din spatele LLM-urilor, al recunoașterii vocale și al generatoarelor de imagini.",
+        "Diferența față de machine learning clasic: nu mai e nevoie ca un om să definească manual trăsăturile relevante („uită-te la raportul dintre venit și datorie”), fiindcă rețeaua le descoperă singură din date brute. Prețul este apetitul uriaș pentru date și putere de calcul: modelele profunde au nevoie de milioane sau miliarde de exemple și de procesoare specializate (GPU) pentru antrenare.",
+        "Pentru un profesionist contabil, deep learning explică de ce AI-ul modern poate lucra cu documente „murdare”: bonuri fotografiate strâmb, scanuri de calitate slabă, formate diferite de la sute de comercianți. Sistemele clasice bazate pe șabloane cedau la orice abatere de format; rețelele profunde generalizează dincolo de exemplele văzute la antrenare."
       ],
       "examples": [
-        "OCR-ul modern citește corect o chitanță fotografiată cu telefonul, ușor mototolită și prost iluminată — sarcină la care OCR-ul clasic pe șabloane eșua frecvent.",
+        "OCR-ul modern citește corect o chitanță fotografiată cu telefonul, ușor mototolită și prost iluminată, sarcină la care OCR-ul clasic pe șabloane eșua frecvent.",
         "Recunoașterea vocală din aplicațiile de dictare a proceselor-verbale de inventariere folosește rețele profunde antrenate pe mii de ore de vorbire.",
-        "La alegerea unui soft de procesare facturi: soluțiile pe deep learning se adaptează la furnizori noi fără configurare de șabloane per furnizor — costul de mentenanță scade semnificativ."
+        "La alegerea unui soft de procesare documente: soluțiile pe deep learning se adaptează la emitenți noi fără configurare de șabloane per format, iar costul de mentenanță scade semnificativ."
       ]
     },
     {
@@ -314,14 +314,14 @@
       "type": "substantiv",
       "ro": "Rețea Neuronală",
       "def": [
-        "Rețeaua neuronală este structura matematică aflată la baza AI-ului modern: mii sau miliarde de „neuroni” artificiali — funcții matematice simple — conectați în straturi, fiecare conexiune având o „greutate” numerică ajustabilă. Inspirația vine vag de la creierul uman, dar analogia e limitată: un neuron artificial doar înmulțește numere și decide cât semnal transmite mai departe.",
-        "Puterea nu stă în neuronul individual, ci în ansamblu: informația trece prin straturi succesive, fiecare transformând-o puțin, iar la antrenare greutățile conexiunilor se ajustează treptat până când ieșirea devine corectă. Gândește-te la o comisie uriașă în care fiecare membru dă un vot ponderat, iar ponderile se calibrează după mii de decizii verificate — ansamblul devine expert fără ca vreun membru să „știe” totul.",
-        "Relevanța practică: tot ce folosești azi sub eticheta AI — de la extragerea datelor din facturi la asistentul care redactează rapoarte — este o rețea neuronală. Înțelegerea acestui fapt explică două limite importante pentru munca contabilă: rezultatele sunt probabilistice (nu garantate), iar raționamentul intern e greu de inspectat (problema „cutiei negre”)."
+        "Rețeaua neuronală este structura matematică aflată la baza AI-ului modern: mii sau miliarde de „neuroni” artificiali (funcții matematice simple) conectați în straturi, fiecare conexiune având o „greutate” numerică ajustabilă. Inspirația vine vag de la creierul uman, dar analogia e limitată: un neuron artificial doar înmulțește numere și decide cât semnal transmite mai departe.",
+        "Puterea nu stă în neuronul individual, ci în ansamblu: informația trece prin straturi succesive, fiecare transformând-o puțin, iar la antrenare greutățile conexiunilor se ajustează treptat până când ieșirea devine corectă. Gândește-te la o comisie uriașă în care fiecare membru dă un vot ponderat, iar ponderile se calibrează după mii de decizii verificate; ansamblul devine expert fără ca vreun membru să „știe” totul.",
+        "Relevanța practică: tot ce folosești azi sub eticheta AI, de la extragerea datelor din facturi la asistentul care redactează rapoarte, este o rețea neuronală. Înțelegerea acestui fapt explică două limite importante pentru munca contabilă: rezultatele sunt probabilistice (nu garantate), iar raționamentul intern e greu de inspectat (problema „cutiei negre”)."
       ],
       "examples": [
-        "Rețeaua din spatele OCR-ului de facturi transformă pixelii scanului în text: primele straturi detectează contururi, ultimele recunosc câmpurile „furnizor” și „total”.",
+        "Rețeaua din spatele OCR-ului de bonuri transformă pixelii scanului în text: primele straturi detectează contururi, ultimele recunosc câmpurile „comerciant” și „total”.",
         "Modelul care recomandă contul contabil pentru o tranzacție nouă este o rețea antrenată pe istoricul înregistrărilor firmei.",
-        "În audit, faptul că decizia unui model vine dintr-o rețea cu miliarde de conexiuni — nu dintr-o regulă documentabilă — impune păstrarea validării umane pe deciziile semnificative."
+        "În audit, faptul că decizia unui model vine dintr-o rețea cu miliarde de conexiuni, nu dintr-o regulă documentabilă, impune păstrarea validării umane pe deciziile semnificative."
       ]
     },
     {
@@ -333,14 +333,14 @@
       "type": "substantiv",
       "ro": "Transformer (arhitectură de rețea neuronală)",
       "def": [
-        "Transformer este arhitectura de rețea neuronală introdusă în 2017 de cercetătorii Google în lucrarea „Attention is All You Need” — fundația pe care sunt construite toate LLM-urile moderne. Este „T”-ul din GPT (Generative Pre-trained Transformer). Inovația centrală se numește „atenție”: mecanismul prin care modelul cântărește, pentru fiecare cuvânt, cât de relevante sunt toate celelalte cuvinte din text.",
+        "Transformer este arhitectura de rețea neuronală introdusă în 2017 de cercetătorii Google în lucrarea „Attention is All You Need”, fundația pe care sunt construite toate LLM-urile moderne. Este „T”-ul din GPT (Generative Pre-trained Transformer). Inovația centrală se numește „atenție”: mecanismul prin care modelul cântărește, pentru fiecare cuvânt, cât de relevante sunt toate celelalte cuvinte din text.",
         "Înainte de Transformer, modelele citeau textul secvențial, cuvânt cu cuvânt, și „uitau” începutul frazelor lungi. Atenția permite procesarea întregului text simultan: când modelul întâlnește cuvântul „scadență” într-un contract, poate „privi” direct la clauza de la pagina 3 care o definește. Această procesare paralelă a făcut posibilă și antrenarea pe volume uriașe de date, deblocând scara actuală a modelelor.",
         "Pentru un profesionist financiar, Transformer-ul explică de ce AI-ul modern înțelege contextul, nu doar cuvintele: același termen „provizion” e interpretat diferit într-un contract de muncă față de o notă contabilă, pentru că modelul cântărește tot contextul din jur. Este și motivul pentru care documentele lungi pot fi analizate coerent cap-coadă."
       ],
       "examples": [
         "La întrebarea „care e penalitatea de întârziere?” pe un contract de 20 de pagini, mecanismul de atenție leagă automat întrebarea de clauza 12.3, oriunde s-ar afla ea.",
         "Analiza unei corespondențe email de 50 de mesaje despre un litigiu comercial: modelul urmărește firul argumentației pentru că fiecare mesaj e pus în relație cu toate celelalte.",
-        "Practic, toate instrumentele AI pe care le folosești — Claude, ChatGPT, Gemini, Copilot — au la bază aceeași arhitectură Transformer, diferențele venind din date, dimensiune și rafinare."
+        "Practic, toate instrumentele AI pe care le folosești (Claude, ChatGPT, Gemini, Copilot) au la bază aceeași arhitectură Transformer, diferențele venind din date, dimensiune și rafinare."
       ]
     },
     {
@@ -352,14 +352,14 @@
       "type": "substantiv",
       "ro": "Model de Limbaj de Mici Dimensiuni",
       "def": [
-        "SLM-ul este „fratele mic” al LLM-ului: un model de limbaj compact, cu mult mai puțini parametri, proiectat să fie rapid, ieftin și suficient de mic încât să ruleze local — pe un laptop, un server propriu sau chiar un telefon. Sacrifică din profunzimea raționamentului în schimbul vitezei, costului redus și, crucial, al controlului asupra datelor.",
-        "Analogia utilă: LLM-ul este consultantul senior — scump, dar capabil de analize complexe; SLM-ul este asistentul junior harnic — excelent la sarcini repetitive, bine delimitate, executate în volum mare. Pe sarcini simple (clasificare, extragere de câmpuri, reformulare), un SLM bine ales poate atinge rezultate apropiate de modelele mari, la o fracțiune din cost.",
+        "SLM-ul este „fratele mic” al LLM-ului: un model de limbaj compact, cu mult mai puțini parametri, proiectat să fie rapid, ieftin și suficient de mic încât să ruleze local, pe un laptop, un server propriu sau chiar un telefon. Sacrifică din profunzimea raționamentului în schimbul vitezei, costului redus și, crucial, al controlului asupra datelor.",
+        "Analogia utilă: LLM-ul este consultantul senior, scump, dar capabil de analize complexe; SLM-ul este asistentul junior harnic, excelent la sarcini repetitive, bine delimitate, executate în volum mare. Pe sarcini simple (clasificare, extragere de câmpuri, reformulare), un SLM bine ales poate atinge rezultate apropiate de modelele mari, la o fracțiune din cost.",
         "Pentru profesiile cu date confidențiale, argumentul decisiv este rularea locală: datele clienților nu părăsesc niciodată infrastructura firmei, ceea ce simplifică semnificativ conformitatea cu GDPR și obligațiile de confidențialitate profesională. Un cabinet contabil poate rula un SLM pe propriul server pentru sarcinile de rutină, rezervând modelele mari din cloud pentru analize fără date sensibile."
       ],
       "examples": [
-        "Clasificarea a mii de tranzacții lunare pe categorii de cheltuieli rulează pe un SLM local — datele clientului nu părăsesc serverul cabinetului.",
+        "Clasificarea a mii de tranzacții lunare pe categorii de cheltuieli rulează pe un SLM local, iar datele clientului nu părăsesc serverul cabinetului.",
         "Anonimizarea documentelor înainte de trimiterea către un model mare din cloud: SLM-ul local înlocuiește numele, CNP-urile și CUI-urile cu pseudonime.",
-        "Strategie hibridă de cost: SLM-ul local preia majoritatea sarcinilor de rutină, iar cererile complexe merg către modelul mare plătit per token — factura API scade drastic."
+        "Strategie hibridă de cost: SLM-ul local preia majoritatea sarcinilor de rutină, iar cererile complexe merg către modelul mare plătit per token, iar factura API scade drastic."
       ]
     },
     {
@@ -371,14 +371,14 @@
       "type": "substantiv",
       "ro": "Parametri",
       "def": [
-        "Parametrii sunt valorile numerice interne ale unui model — „greutățile” conexiunilor din rețeaua neuronală — care se reglează în timpul antrenării și codifică tot ce a „învățat” modelul. Gândește-te la ei ca la milioanele de șuruburi de reglaj ale unui utilaj de precizie: fiecare în parte e nesemnificativ, dar ansamblul calibrat determină comportamentul întregii mașini.",
-        "Numărul de parametri — de la câteva milioane la sute de miliarde sau mai mult — este indicatorul brut al dimensiunii unui model, folosit adesea ca proxy pentru capacitate. Nuanța importantă: mai mulți parametri nu înseamnă automat rezultate mai bune; calitatea datelor de antrenare și tehnicile de rafinare contează enorm, iar modelele mici recente bat frecvent modele mari de generație veche.",
-        "Pentru un profesionist financiar, parametrii sunt utili ca reper de cost și infrastructură: modelele cu multe miliarde de parametri rulează doar în cloud, pe hardware scump, în timp ce modelele compacte pot rula local, pe serverul firmei — cu implicații directe asupra confidențialității datelor clienților și a bugetului. E aceeași logică din practica de zi cu zi: nu evaluezi un colaborator după numărul de diplome, ci după rezultate pe sarcinile tale."
+        "Parametrii sunt valorile numerice interne ale unui model, „greutățile” conexiunilor din rețeaua neuronală, care se reglează în timpul antrenării și codifică tot ce a „învățat” modelul. Gândește-te la ei ca la milioanele de șuruburi de reglaj ale unui utilaj de precizie: fiecare în parte e nesemnificativ, dar ansamblul calibrat determină comportamentul întregii mașini.",
+        "Numărul de parametri, de la câteva milioane la sute de miliarde sau mai mult, este indicatorul brut al dimensiunii unui model, folosit adesea ca proxy pentru capacitate. Nuanța importantă: mai mulți parametri nu înseamnă automat rezultate mai bune; calitatea datelor de antrenare și tehnicile de rafinare contează enorm, iar modelele mici recente bat frecvent modele mari de generație veche.",
+        "Pentru un profesionist financiar, parametrii sunt utili ca reper de cost și infrastructură: modelele cu multe miliarde de parametri rulează doar în cloud, pe hardware scump, în timp ce modelele compacte pot rula local, pe serverul firmei, cu implicații directe asupra confidențialității datelor clienților și a bugetului. E aceeași logică din practica de zi cu zi: nu evaluezi un colaborator după numărul de diplome, ci după rezultate pe sarcinile tale."
       ],
       "examples": [
         "Un model compact de câteva miliarde de parametri rulează pe un laptop de birou obișnuit și clasifică tranzacții cu acuratețe suficientă pentru rutina lunară.",
-        "Modelele flagship, cu sute de miliarde de parametri, sunt accesibile doar prin API — cost per token mai mare, dar raționament superior pe spețe fiscale complexe.",
-        "La selecția unui furnizor: nu te lăsa impresionat de „modelul nostru are X miliarde de parametri” — cere teste pe documentele tale reale."
+        "Modelele flagship, cu sute de miliarde de parametri, sunt accesibile doar prin API: cost per token mai mare, dar raționament superior pe spețe fiscale complexe.",
+        "La selecția unui furnizor: nu te lăsa impresionat de „modelul nostru are X miliarde de parametri”; cere teste pe documentele tale reale."
       ]
     },
     {
@@ -390,12 +390,12 @@
       "type": "substantiv",
       "ro": "Reprezentări Vectoriale (Embeddings)",
       "def": [
-        "Embeddings sunt „amprenta numerică” a unui text: o listă lungă de numere (un vector) care codifică sensul textului, nu literele lui. Două texte cu înțeles apropiat — „factură neachitată” și „creanță restantă” — primesc vectori apropiați matematic, chiar dacă nu au niciun cuvânt comun. Este mecanismul prin care AI-ul poate compara sensuri, nu doar șiruri de caractere.",
-        "Analogia practică: gândește-te la o hartă pe care fiecare document primește coordonate în funcție de subiect — documentele despre TVA se așază într-o zonă, cele despre salarizare în alta. Căutarea nu mai înseamnă „găsește cuvântul exact”, ci „găsește vecinii de pe hartă”. Embeddings stau la baza căutării semantice, a bazelor de date vectoriale și a sistemelor RAG.",
+        "Embeddings sunt „amprenta numerică” a unui text: o listă lungă de numere (un vector) care codifică sensul textului, nu literele lui. Două texte cu înțeles apropiat, cum sunt „factură neachitată” și „creanță restantă”, primesc vectori apropiați matematic, chiar dacă nu au niciun cuvânt comun. Este mecanismul prin care AI-ul poate compara sensuri, nu doar șiruri de caractere.",
+        "Analogia practică: gândește-te la o hartă pe care fiecare document primește coordonate în funcție de subiect, așa că documentele despre TVA se așază într-o zonă, cele despre salarizare în alta. Căutarea nu mai înseamnă „găsește cuvântul exact”, ci „găsește vecinii de pe hartă”. Embeddings stau la baza căutării semantice, a bazelor de date vectoriale și a sistemelor RAG.",
         "În practica contabilă, embeddings deblochează regăsirea informației în arhive mari și eterogene: cauți „penalități pentru plata cu întârziere” și găsești și clauzele formulate ca „daune moratorii” sau „dobândă penalizatoare”. Pentru cabinetele cu mii de documente pe client, diferența față de căutarea clasică pe cuvinte-cheie este dramatică."
       ],
       "examples": [
-        "Căutarea „cheltuieli de deplasare nedeductibile” în arhiva cabinetului returnează și documentele care vorbesc despre „diurnă peste plafonul legal” — potrivire de sens, nu de cuvinte.",
+        "Căutarea „cheltuieli de deplasare nedeductibile” în arhiva cabinetului returnează și documentele care vorbesc despre „diurnă peste plafonul legal”, adică potrivire de sens, nu de cuvinte.",
         "Detectarea facturilor duplicate cu descrieri reformulate: vectorii aproape identici semnalează aceeași prestație facturată de două ori.",
         "Construirea unui asistent intern pe procedurile firmei: fiecare procedură e transformată în embeddings, iar întrebările angajaților găsesc automat secțiunea relevantă."
       ]
@@ -409,13 +409,13 @@
       "type": "substantiv",
       "ro": "Inferență",
       "def": [
-        "Inferența este momentul în care un model deja antrenat produce un răspuns: primește promptul tău și generează rezultatul, token cu token. Este „faza de utilizare”, distinctă de faza de antrenare. Analogie contabilă: antrenarea e ca formarea profesională a unui angajat (lungă, costisitoare, o singură dată); inferența e ziua lui obișnuită de muncă — fiecare sarcină rezolvată consumă timp și resurse curente.",
-        "Distincția contează pentru că economia celor două faze e complet diferită: antrenarea costă enorm o dată; inferența costă puțin, dar de fiecare dată — și la volume mari devine costul dominant. Viteza de inferență (latența) determină experiența practică: un model care răspunde în 2 secunde e utilizabil interactiv; unul care „gândește” 2 minute e potrivit doar pentru procesări în fundal.",
-        "Pentru bugetarea unui proiect AI în contabilitate, inferența este linia de cost recurentă: fiecare factură procesată, fiecare raport generat, fiecare întrebare pusă consumă inferență, plătită de regulă per token. Optimizarea inferenței — modele mai mici pentru sarcini simple, prompturi mai scurte, procesare în loturi — este pârghia principală de control al costurilor la scară."
+        "Inferența este momentul în care un model deja antrenat produce un răspuns: primește promptul tău și generează rezultatul, token cu token. Este „faza de utilizare”, distinctă de faza de antrenare. Analogie contabilă: antrenarea e ca formarea profesională a unui angajat (lungă, costisitoare, o singură dată); inferența e ziua lui obișnuită de muncă, în care fiecare sarcină rezolvată consumă timp și resurse curente.",
+        "Distincția contează pentru că economia celor două faze e complet diferită: antrenarea costă enorm o dată; inferența costă puțin, dar de fiecare dată, iar la volume mari devine costul dominant. Viteza de inferență (latența) determină experiența practică: un model care răspunde în 2 secunde e utilizabil interactiv; unul care „gândește” 2 minute e potrivit doar pentru procesări în fundal.",
+        "Pentru bugetarea unui proiect AI în contabilitate, inferența este linia de cost recurentă: fiecare factură procesată, fiecare raport generat, fiecare întrebare pusă consumă inferență, plătită de regulă per token. Optimizarea inferenței (modele mai mici pentru sarcini simple, prompturi mai scurte, procesare în loturi) este pârghia principală de control al costurilor la scară."
       ],
       "examples": [
         "Procesarea zilnică a 300 de facturi prin API: fiecare document = o cerere de inferență; costul lunar se estimează din tokeni per document × volum.",
-        "Un raport complex generat de un model de raționament durează 1–2 minute de inferență — planifici generarea în fundal, nu în timpul întâlnirii cu clientul.",
+        "Un raport complex generat de un model de raționament durează 1–2 minute de inferență, deci planifici generarea în fundal, nu în timpul întâlnirii cu clientul.",
         "Mutarea clasificării de tranzacții de pe modelul flagship pe un model mic reduce costul de inferență de câteva ori, fără pierdere vizibilă de calitate pe această sarcină."
       ]
     },
@@ -428,13 +428,13 @@
       "type": "substantiv",
       "ro": "Model de Bază",
       "def": [
-        "Foundation model este un model mare, generalist, antrenat pe volume vaste și diverse de date, conceput să servească drept fundație pentru o multitudine de aplicații — nu pentru o singură sarcină. GPT, Claude și Gemini sunt foundation models: același model de bază poate redacta contracte, analiza balanțe, scrie cod sau traduce, fără reantrenare.",
+        "Foundation model este un model mare, generalist, antrenat pe volume vaste și diverse de date, conceput să servească drept fundație pentru o multitudine de aplicații, nu pentru o singură sarcină. GPT, Claude și Gemini sunt foundation models: același model de bază poate redacta contracte, analiza balanțe, scrie cod sau traduce, fără reantrenare.",
         "Contrastul e cu AI-ul „clasic”, unde fiecare sarcină cerea propriul model antrenat de la zero: unul pentru detectarea fraudei, altul pentru clasificarea documentelor. Foundation model-ul inversează logica: o singură fundație scumpă, construită o dată, apoi adaptată ieftin la mii de utilizări prin promptare, fine-tuning sau conectare la date externe (RAG). E ca fundația unui bloc: o torni o dată, apoi construiești pe ea apartamente diferite.",
-        "Pentru un cabinet sau un departament financiar, implicația practică este că nu mai construiești AI de la zero — alegi un foundation model existent și îl adaptezi la specificul tău cu instrumente accesibile: instrucțiuni personalizate, baza ta de cunoștințe, exemplele tale. Costul de intrare a scăzut de la milioane (antrenare proprie) la sute de lei pe lună (abonament sau API)."
+        "Pentru un cabinet sau un departament financiar, implicația practică este că nu mai construiești AI de la zero, ci alegi un foundation model existent și îl adaptezi la specificul tău cu instrumente accesibile: instrucțiuni personalizate, baza ta de cunoștințe, exemplele tale. Costul de intrare a scăzut de la milioane (antrenare proprie) la sute de lei pe lună (abonament sau API)."
       ],
       "examples": [
-        "Același foundation model este folosit luni pentru sinteza modificărilor din Codul Fiscal și marți pentru redactarea răspunsului la o notificare ANAF — zero reconfigurare.",
-        "Un furnizor de software contabil construiește modulul de procesare facturi „peste” un foundation model prin API, în loc să antreneze propriul model — timp de lansare redus de la ani la luni.",
+        "Același foundation model este folosit luni pentru sinteza modificărilor din Codul Fiscal și marți pentru redactarea răspunsului la o notificare ANAF, cu zero reconfigurare.",
+        "Un furnizor de software contabil construiește modulul de procesare facturi „peste” un foundation model prin API, în loc să antreneze propriul model, cu timp de lansare redus de la ani la luni.",
         "Strategia cabinetului: un singur abonament la un foundation model + o bibliotecă internă de prompturi specializate acoperă 80% din cazurile de utilizare, fără investiții în modele dedicate."
       ]
     },
@@ -447,14 +447,14 @@
       "type": "substantiv",
       "ro": "Amestec de Experți",
       "def": [
-        "Mixture of Experts este o arhitectură în care modelul, deși uriaș pe hârtie, activează pentru fiecare cerere doar o mică parte din el — „experții” relevanți pentru sarcina respectivă. Un mecanism de rutare intern decide, token cu token, ce experți intră în joc: unul „bun la cod”, altul „bun la limbaj juridic”, altul la calcule.",
-        "Analogia firească e cabinetul de consultanță: ai 50 de specialiști în firmă, dar la un dosar de TVA lucrează doar cei 3 relevanți — nu convoci toată firma pentru fiecare client. Rezultatul: modelul păstrează cunoașterea unui sistem gigantic, dar consumă la fiecare cerere doar resursele unei părți din el — mai rapid și mai ieftin de rulat decât un model dens de aceeași dimensiune.",
-        "Pentru utilizatorul din finanțe, MoE e un detaliu „sub capotă”, dar explică o realitate de piață: cum pot furnizorii să ofere modele tot mai capabile fără prețuri proporțional mai mari. Multe modele moderne de top folosesc această arhitectură — eficiența MoE este unul dintre motoarele scăderii constante a costului per token."
+        "Mixture of Experts este o arhitectură în care modelul, deși uriaș pe hârtie, activează pentru fiecare cerere doar o mică parte din el: „experții” relevanți pentru sarcina respectivă. Un mecanism de rutare intern decide, token cu token, ce experți intră în joc: unul „bun la cod”, altul „bun la limbaj juridic”, altul la calcule.",
+        "Analogia firească e cabinetul de consultanță: ai 50 de specialiști în firmă, dar la un dosar de TVA lucrează doar cei 3 relevanți; nu convoci toată firma pentru fiecare client. Rezultatul: modelul păstrează cunoașterea unui sistem gigantic, dar consumă la fiecare cerere doar resursele unei părți din el, deci e mai rapid și mai ieftin de rulat decât un model dens de aceeași dimensiune.",
+        "Pentru utilizatorul din finanțe, MoE e un detaliu „sub capotă”, dar explică o realitate de piață: cum pot furnizorii să ofere modele tot mai capabile fără prețuri proporțional mai mari. Multe modele moderne de top folosesc această arhitectură, iar eficiența MoE este unul dintre motoarele scăderii constante a costului per token."
       ],
       "examples": [
-        "La analiza unui contract de leasing, se activează „experții” pe limbaj juridic și calcul financiar; la generarea unui email către client, cu totul alții — același model, resurse diferite.",
-        "Un model MoE cu sute de miliarde de parametri totali poate activa doar câteva zeci de miliarde per cerere — de aici viteza surprinzătoare pentru dimensiunea lui.",
-        "La compararea ofertelor API: două modele cu „aceeași dimensiune” pot avea costuri de rulare foarte diferite — arhitectura MoE e adesea explicația celui mai ieftin."
+        "La analiza unui contract de leasing, se activează „experții” pe limbaj juridic și calcul financiar; la generarea unui email către client, cu totul alții: același model, resurse diferite.",
+        "Un model MoE cu sute de miliarde de parametri totali poate activa doar câteva zeci de miliarde per cerere; de aici viteza surprinzătoare pentru dimensiunea lui.",
+        "La compararea ofertelor API: două modele cu „aceeași dimensiune” pot avea costuri de rulare foarte diferite, iar arhitectura MoE e adesea explicația celui mai ieftin."
       ]
     },
     {
@@ -467,8 +467,8 @@
       "ro": "Distilare",
       "def": [
         "Distilarea este tehnica prin care un model mare, „profesorul”, antrenează un model mic, „elevul”: elevul învață să imite răspunsurile profesorului, nu să redescopere totul din date brute. Rezultatul e un model compact care păstrează o mare parte din competența celui mare, la o fracțiune din costul de rulare.",
-        "Analogia din practică: partenerul senior nu-i dă juniorului toată biblioteca de legislație fiscală, ci ghiduri sintetice cu spețe rezolvate — juniorul devine rapid competent pe cazurile frecvente, chiar dacă nu are profunzimea seniorului pe cazurile exotice. La fel, modelul distilat excelează pe tiparele comune și cedează pe situațiile rare. Tehnica a devenit celebră odată cu DeepSeek R1, care a demonstrat cât de mult din capacitatea unui model scump poate fi transferată ieftin.",
-        "Relevanța pentru business: distilarea este motivul pentru care apar constant modele mici și ieftine surprinzător de bune — și instrumentul prin care furnizorii de software contabil pot oferi funcții AI la prețuri accesibile, rulând modele distilate specializate pe sarcinile lor. Merită știut și că distilarea neautorizată a modelelor concurente este o zonă de dispută juridică între laboratoarele AI."
+        "Analogia din practică: partenerul senior nu-i dă juniorului toată biblioteca de legislație fiscală, ci ghiduri sintetice cu spețe rezolvate, iar juniorul devine rapid competent pe cazurile frecvente, chiar dacă nu are profunzimea seniorului pe cazurile exotice. La fel, modelul distilat excelează pe tiparele comune și cedează pe situațiile rare. Tehnica a devenit celebră odată cu DeepSeek R1, care a demonstrat cât de mult din capacitatea unui model scump poate fi transferată ieftin.",
+        "Relevanța pentru business: distilarea este motivul pentru care apar constant modele mici și ieftine surprinzător de bune, dar și instrumentul prin care furnizorii de software contabil pot oferi funcții AI la prețuri accesibile, rulând modele distilate specializate pe sarcinile lor. Merită știut și că distilarea neautorizată a modelelor concurente este o zonă de dispută juridică între laboratoarele AI."
       ],
       "examples": [
         "Un furnizor de soft de contabilitate distilează un model mare pe sarcina „încadrare cheltuieli”: modelul rezultat rulează pe serverele proprii, la cost mic per client.",
@@ -485,13 +485,13 @@
       "type": "substantiv",
       "ro": "Cuantizare",
       "def": [
-        "Cuantizarea reduce precizia numerelor cu care e stocat un model — de exemplu de la 16 biți la 4 biți per parametru — pentru a-l face de câteva ori mai mic și mai rapid, cu o pierdere de calitate de regulă minimă. Modelul rămâne același „creier”, doar scris cu mai puține zecimale.",
-        "Analogia contabilă e naturală: e ca rotunjirea la leu în rapoartele de management — pierzi banii de sub un leu, dar tabloul rămâne corect și mult mai ușor de citit. La fel, un model cuantizat pierde nuanțe fine, dar pe majoritatea sarcinilor practice diferența e greu de observat. Capcana: la cuantizări agresive, degradarea devine vizibilă exact pe sarcinile delicate — calcule precise, raționamente lungi.",
-        "Relevanța practică: cuantizarea este ce face posibilă rularea modelelor pe hardware obișnuit — un model care cerea un server cu GPU-uri scumpe poate rula, cuantizat, pe un laptop de birou. Pentru un cabinet care vrea AI local din motive de confidențialitate, modelele cuantizate sunt de obicei calea de intrare cu buget rezonabil."
+        "Cuantizarea reduce precizia numerelor cu care e stocat un model, de exemplu de la 16 biți la 4 biți per parametru, pentru a-l face de câteva ori mai mic și mai rapid, cu o pierdere de calitate de regulă minimă. Modelul rămâne același „creier”, doar scris cu mai puține zecimale.",
+        "Analogia contabilă e naturală: e ca rotunjirea la leu în rapoartele de management, unde pierzi banii de sub un leu, dar tabloul rămâne corect și mult mai ușor de citit. La fel, un model cuantizat pierde nuanțe fine, dar pe majoritatea sarcinilor practice diferența e greu de observat. Capcana: la cuantizări agresive, degradarea devine vizibilă exact pe sarcinile delicate, adică pe calcule precise și raționamente lungi.",
+        "Relevanța practică: cuantizarea este ce face posibilă rularea modelelor pe hardware obișnuit, fiindcă un model care cerea un server cu GPU-uri scumpe poate rula, cuantizat, pe un laptop de birou. Pentru un cabinet care vrea AI local din motive de confidențialitate, modelele cuantizate sunt de obicei calea de intrare cu buget rezonabil."
       ],
       "examples": [
         "Un model de 14 miliarde de parametri, cuantizat pe 4 biți, încape în memoria unui laptop cu 16 GB RAM și clasifică local documentele clienților.",
-        "Test intern înainte de adopție: rulezi aceleași 100 de facturi prin varianta plină și cea cuantizată — dacă extragerile coincid, alegi varianta ieftină.",
+        "Test intern înainte de adopție: rulezi aceleași 100 de facturi prin varianta plină și cea cuantizată; dacă extragerile coincid, alegi varianta ieftină.",
         "Pentru verificarea aritmetică a deconturilor alegi varianta necuantizată sau un model mai mare: precizia numerică e exact zona unde cuantizarea agresivă doare."
       ]
     },
@@ -504,12 +504,12 @@
       "type": "substantiv",
       "ro": "Modele cu Greutăți Deschise",
       "def": [
-        "Modelele open-weight sunt cele ale căror „greutăți” — parametrii rezultați din antrenare — sunt publicate și pot fi descărcate, rulate și adaptate de oricine, pe propria infrastructură (Llama, DeepSeek, Mistral). Contrastul e cu modelele închise (GPT, Claude, Gemini), accesibile doar prin serviciile furnizorului, fără acces la interiorul modelului.",
-        "Nuanța de terminologie: „open-weight” nu înseamnă neapărat „open-source” în sens strict — adesea primești greutățile, dar nu datele de antrenare sau codul complet, iar licența poate impune restricții comerciale. Compromisul practic: modelele deschise oferă control total și cost de rulare propriu, dar cer competență tehnică internă și vin fără suportul și garanțiile unui furnizor comercial.",
+        "Modelele open-weight sunt cele ale căror „greutăți”, parametrii rezultați din antrenare, sunt publicate și pot fi descărcate, rulate și adaptate de oricine, pe propria infrastructură (Llama, DeepSeek, Mistral). Contrastul e cu modelele închise (GPT, Claude, Gemini), accesibile doar prin serviciile furnizorului, fără acces la interiorul modelului.",
+        "Nuanța de terminologie: „open-weight” nu înseamnă neapărat „open-source” în sens strict, fiindcă adesea primești greutățile, dar nu datele de antrenare sau codul complet, iar licența poate impune restricții comerciale. Compromisul practic: modelele deschise oferă control total și cost de rulare propriu, dar cer competență tehnică internă și vin fără suportul și garanțiile unui furnizor comercial.",
         "Pentru profesiile cu obligații stricte de confidențialitate, modelele deschise sunt opțiunea „datele nu pleacă din casă”: rulezi modelul pe serverul propriu, nimic nu ajunge la terți. Decizia devine un calcul clasic de make-or-buy: suveranitate asupra datelor și cost marginal mic la volume mari, contra simplității și calității de vârf a serviciilor închise."
       ],
       "examples": [
-        "Un cabinet de audit rulează un model open-weight pe server propriu pentru sinteza documentelor de lucru — cerință contractuală ca datele clientului să nu părăsească infrastructura firmei.",
+        "Un cabinet de audit rulează un model open-weight pe server propriu pentru sinteza documentelor de lucru, ca urmare a cerinței contractuale ca datele clientului să nu părăsească infrastructura firmei.",
         "Comparație de buget: la volume mari de documente procesate zilnic, un model deschis auto-găzduit poate deveni mai ieftin decât plata per token; la volume mici, API-ul închis câștigă clar.",
         "Politică hibridă: modelul deschis local pentru date sensibile ale clienților, modelul închis de top pentru cercetare legislativă și redactare fără date confidențiale."
       ]
@@ -523,14 +523,14 @@
       "type": "substantiv",
       "ro": "Modele de Lume",
       "def": [
-        "World models sunt sisteme AI care învață o reprezentare internă a modului în care funcționează lumea fizică — obiecte, spațiu, cauză și efect — și pot simula „ce s-ar întâmpla dacă”. În loc să prezică următorul cuvânt, ca un LLM, ele prezic următoarea stare a unui mediu: cum cade un obiect, ce se vede după colț, cum evoluează o scenă.",
-        "Diferența de fond: un LLM a citit despre lume; un world model încearcă să o simuleze. De aceea sunt considerate o piesă-cheie pentru roboți, vehicule autonome și generarea de medii 3D interactive — mașina are nevoie de „bun-simț” fizic, nu doar de limbaj. Domeniul e încă tânăr, cu demonstrații spectaculoase dar aplicații comerciale abia în formare.",
-        "Relevanța contabilă directă este deocamdată limitată — acesta e un termen de urmărit, nu de folosit zilnic. Merită totuși înțeles conceptul de simulare: aceeași logică „construiește un model al sistemului și testează scenarii pe el” este familiară profesioniștilor financiari din modelarea bugetară — world models fac asta pentru realitatea fizică."
+        "World models sunt sisteme AI care învață o reprezentare internă a modului în care funcționează lumea fizică (obiecte, spațiu, cauză și efect) și pot simula „ce s-ar întâmpla dacă”. În loc să prezică următorul cuvânt, ca un LLM, ele prezic următoarea stare a unui mediu: cum cade un obiect, ce se vede după colț, cum evoluează o scenă.",
+        "Diferența de fond: un LLM a citit despre lume; un world model încearcă să o simuleze. De aceea sunt considerate o piesă-cheie pentru roboți, vehicule autonome și generarea de medii 3D interactive: mașina are nevoie de „bun-simț” fizic, nu doar de limbaj. Domeniul e încă tânăr, cu demonstrații spectaculoase dar aplicații comerciale abia în formare.",
+        "Relevanța contabilă directă este deocamdată limitată: acesta e un termen de urmărit, nu de folosit zilnic. Merită totuși înțeles conceptul de simulare: aceeași logică „construiește un model al sistemului și testează scenarii pe el” este familiară profesioniștilor financiari din modelarea bugetară, iar world models fac asta pentru realitatea fizică."
       ],
       "examples": [
-        "Un producător își antrenează roboții de depozit într-o simulare generată de un world model înainte de a-i lăsa printre rafturile reale — erori ieftine în simulare, nu în inventar.",
-        "Generarea de medii virtuale interactive din simple descrieri text — direcție explorată de laboratoare mari pentru jocuri, training și robotică.",
-        "Paralela utilă pentru un CFO: world model : lumea fizică = modelul de buget cu scenarii : finanțele firmei — ambele răspund la „ce se întâmplă dacă?” înainte de decizia reală."
+        "Un producător își antrenează roboții de depozit într-o simulare generată de un world model înainte de a-i lăsa printre rafturile reale: erori ieftine în simulare, nu în inventar.",
+        "Generarea de medii virtuale interactive din simple descrieri text, direcție explorată de laboratoare mari pentru jocuri, training și robotică.",
+        "Paralela utilă pentru un CFO: world model : lumea fizică = modelul de buget cu scenarii : finanțele firmei; ambele răspund la „ce se întâmplă dacă?” înainte de decizia reală."
       ]
     },
     {
@@ -542,13 +542,13 @@
       "type": "substantiv",
       "ro": "Model de Difuzie",
       "def": [
-        "Modelul de difuzie este arhitectura din spatele generatoarelor de imagini (Midjourney, DALL-E, Stable Diffusion): pornește de la zgomot vizual pur — un ecran de „purici” — și îl „curăță” iterativ, pas cu pas, până când din haos se conturează imaginea cerută în prompt. La antrenare, procesul e invers: modelul învață cum se degradează imaginile reale în zgomot, apoi execută degradarea în sens invers.",
-        "Analogia accesibilă: un restaurator care primește o pictură complet acoperită de murdărie și o curăță strat cu strat — doar că aici „restauratorul” decide ce operă să dezvăluie, ghidat de descrierea ta. Aceeași tehnică s-a extins la video și audio, iar iterativitatea explică de ce generarea unei imagini durează secunde, nu milisecunde.",
-        "Relevanța contabilă directă e limitată — e un termen de cultură AI generală. Punctele de contact cu biroul: generarea de vizualuri pentru prezentări și materiale de training și, pe partea de risc, faptul că aceeași tehnologie alimentează deepfake-urile — documentele și imaginile primite ca „dovadă” nu mai au valoarea probatorie de altădată."
+        "Modelul de difuzie este arhitectura din spatele generatoarelor de imagini (Midjourney, DALL-E, Stable Diffusion): pornește de la zgomot vizual pur, un ecran de „purici”, și îl „curăță” iterativ, pas cu pas, până când din haos se conturează imaginea cerută în prompt. La antrenare, procesul e invers: modelul învață cum se degradează imaginile reale în zgomot, apoi execută degradarea în sens invers.",
+        "Analogia accesibilă: un restaurator care primește o pictură complet acoperită de murdărie și o curăță strat cu strat, doar că aici „restauratorul” decide ce operă să dezvăluie, ghidat de descrierea ta. Aceeași tehnică s-a extins la video și audio, iar iterativitatea explică de ce generarea unei imagini durează secunde, nu milisecunde.",
+        "Relevanța contabilă directă e limitată: e un termen de cultură AI generală. Punctele de contact cu biroul: generarea de vizualuri pentru prezentări și materiale de training și, pe partea de risc, faptul că aceeași tehnologie alimentează deepfake-urile, iar documentele și imaginile primite ca „dovadă” nu mai au valoarea probatorie de altădată."
       ],
       "examples": [
         "Pentru prezentarea anuală către clienți, generezi în câteva minute ilustrații personalizate în loc să cumperi fotografii de stoc generice.",
-        "Un „bon fiscal” fotografiat poate fi azi generat integral de un model de difuzie — controalele pe documente justificative primite electronic trebuie regândite.",
+        "Un „bon fiscal” fotografiat poate fi azi generat integral de un model de difuzie, deci controalele pe documente justificative primite electronic trebuie regândite.",
         "Materiale de training interne: procedura de arhivare devine un set de infografice generate, nu un document text pe care nu-l citește nimeni."
       ]
     },
@@ -561,13 +561,13 @@
       "type": "substantiv",
       "ro": "Antrenare / Preantrenare",
       "def": [
-        "Antrenarea este procesul prin care un model își formează „cunoașterea”: parcurge miliarde de exemple de text (preantrenarea), învățând să prezică următorul token, iar parametrii interni se ajustează treptat până când tiparele limbajului, faptele și raționamentele frecvente sunt codificate în model. Este faza cea mai scumpă din viața unui model — luni de calcul pe mii de procesoare specializate.",
-        "Analogia profesională: preantrenarea e facultatea plus toată biblioteca citită vreodată — formare generală, o singură dată; fine-tuning-ul care urmează e specializarea la locul de muncă; inferența e ziua de lucru efectivă. Consecința esențială: modelul „știe” doar ce a văzut la antrenare — de aici data-limită a cunoștințelor (knowledge cutoff) și necesitatea RAG sau a căutării web pentru informații recente.",
-        "Pentru practica financiară, două implicații concrete: legislația apărută după antrenarea modelului nu există pentru el — verifică întotdeauna actualitatea normelor citate; și invers, tot ce a fost public pe internet la antrenare poate fi în model, motiv în plus să nu introduci date confidențiale în instrumente care le-ar putea folosi pentru antrenări viitoare."
+        "Antrenarea este procesul prin care un model își formează „cunoașterea”: parcurge miliarde de exemple de text (preantrenarea), învățând să prezică următorul token, iar parametrii interni se ajustează treptat până când tiparele limbajului, faptele și raționamentele frecvente sunt codificate în model. Este faza cea mai scumpă din viața unui model: luni de calcul pe mii de procesoare specializate.",
+        "Analogia profesională: preantrenarea e facultatea plus toată biblioteca citită vreodată, adică formare generală, o singură dată; fine-tuning-ul care urmează e specializarea la locul de muncă; inferența e ziua de lucru efectivă. Consecința esențială: modelul „știe” doar ce a văzut la antrenare; de aici data-limită a cunoștințelor (knowledge cutoff) și necesitatea RAG sau a căutării web pentru informații recente.",
+        "Pentru practica financiară, două implicații concrete: legislația apărută după antrenarea modelului nu există pentru el, deci verifică întotdeauna actualitatea normelor citate; și invers, tot ce a fost public pe internet la antrenare poate fi în model, motiv în plus să nu introduci date confidențiale în instrumente care le-ar putea folosi pentru antrenări viitoare."
       ],
       "examples": [
-        "Modelul citează o cotă de TVA valabilă la data antrenării lui, nu cea curentă — pentru legislație folosești RAG sau căutare web, nu memoria modelului.",
-        "Un furnizor își antrenează modelul de extragere pe milioane de facturi europene — de aceea recunoaște formate pe care nu le-a „văzut” niciodată identic.",
+        "Modelul citează o cotă de TVA valabilă la data antrenării lui, nu cea curentă; pentru legislație folosești RAG sau căutare web, nu memoria modelului.",
+        "Un furnizor își antrenează modelul de extragere pe milioane de facturi europene; de aceea recunoaște formate pe care nu le-a „văzut” niciodată identic.",
         "Politica internă a cabinetului: verifică în setările fiecărui instrument AI dacă datele introduse sunt folosite la antrenare și dezactivează opțiunea pentru datele clienților."
       ]
     },
@@ -580,14 +580,14 @@
       "type": "substantiv",
       "ro": "Ajustare Fină",
       "def": [
-        "Fine-tuning-ul este reantrenarea ușoară a unui model general pe un set de date specific, pentru a-l specializa: pornești de la un model care „știe de toate” și îl calibrezi pe domeniul, stilul sau formatul tău. Nu construiești un creier nou — trimiți un absolvent bun la o specializare scurtă.",
-        "Distincția practică importantă: fine-tuning-ul schimbă comportamentul modelului (stil, format, reflexe pe sarcini repetitive), dar nu e soluția potrivită pentru a-i adăuga cunoștințe factuale actualizate — acolo funcționează mai bine RAG, care îi pune sursele sub ochi la fiecare cerere. Regula scurtă: fine-tuning pentru „cum să răspundă”, RAG pentru „ce să știe”. În plus, fine-tuning-ul cere sute sau mii de exemple de calitate și se repetă la fiecare schimbare majoră.",
-        "În practica financiar-contabilă, fine-tuning-ul devine rentabil la volume mari și sarcini foarte repetitive: un model ajustat pe mii de exemple de încadrări contabile ale firmei tale învață planul de conturi și particularitățile clienților. Pentru majoritatea cabinetelor însă, promptarea bună plus RAG acoperă nevoia la o fracțiune din efort — fine-tuning-ul e pasul de maturitate, nu de start."
+        "Fine-tuning-ul este reantrenarea ușoară a unui model general pe un set de date specific, pentru a-l specializa: pornești de la un model care „știe de toate” și îl calibrezi pe domeniul, stilul sau formatul tău. Nu construiești un creier nou, ci trimiți un absolvent bun la o specializare scurtă.",
+        "Distincția practică importantă: fine-tuning-ul schimbă comportamentul modelului (stil, format, reflexe pe sarcini repetitive), dar nu e soluția potrivită pentru a-i adăuga cunoștințe factuale actualizate; acolo funcționează mai bine RAG, care îi pune sursele sub ochi la fiecare cerere. Regula scurtă: fine-tuning pentru „cum să răspundă”, RAG pentru „ce să știe”. În plus, fine-tuning-ul cere sute sau mii de exemple de calitate și se repetă la fiecare schimbare majoră.",
+        "În practica financiar-contabilă, fine-tuning-ul devine rentabil la volume mari și sarcini foarte repetitive: un model ajustat pe mii de exemple de încadrări contabile ale firmei tale învață planul de conturi și particularitățile clienților. Pentru majoritatea cabinetelor însă, promptarea bună plus RAG acoperă nevoia la o fracțiune din efort, iar fine-tuning-ul e pasul de maturitate, nu de start."
       ],
       "examples": [
-        "Un procesator de facturi ajustează fin un model pe 50.000 de facturi românești adnotate — acuratețea extragerii pe formatele locale crește vizibil față de modelul generic.",
+        "Un procesator de documente ajustează fin un model pe 50.000 de bonuri și chitanțe românești adnotate, iar acuratețea extragerii pe formatele locale crește vizibil față de modelul generic.",
         "Fine-tuning pe corespondența cabinetului: modelul învață tonul și structura scrisorilor către clienți și produce prima versiune aproape gata de trimis.",
-        "Decizie de arhitectură: pentru „răspunde conform procedurilor noastre interne” alegi RAG pe baza de proceduri, nu fine-tuning — procedurile se schimbă lunar, reantrenarea ar fi risipă."
+        "Decizie de arhitectură: pentru „răspunde conform procedurilor noastre interne” alegi RAG pe baza de proceduri, nu fine-tuning, fiindcă procedurile se schimbă lunar, iar reantrenarea ar fi risipă."
       ]
     },
     {
@@ -600,13 +600,13 @@
       "ro": "Învățare prin Întărire din Feedback Uman",
       "def": [
         "RLHF este metoda prin care un model brut, abia ieșit din preantrenare, este „șlefuit” cu ajutorul evaluatorilor umani: oamenii compară perechi de răspunsuri și aleg varianta mai utilă, mai corectă, mai sigură, iar modelul e antrenat să producă mai des răspunsuri de tipul preferat. Este ingredientul care a transformat modelele de completat text în asistenți conversaționali utilizabili.",
-        "Analogia de birou: stagiarul care scrie corect gramatical, dar fără simțul situației — după sute de corecturi de la seniori („prea lung”, „lipsește avertismentul”, „tonul e nepotrivit”), învață nu doar limba, ci meseria de a răspunde. Efectul secundar cunoscut: modelul poate învăța să placă evaluatorului, nu doar să fie corect — una dintre rădăcinile sicofanției (tendinței de a-ți da dreptate).",
-        "Pentru utilizatorul profesionist, RLHF explică două trăsături de zi cu zi ale asistenților AI: de ce refuză anumite cereri și răspund prudent la subiecte sensibile (au fost antrenați spre siguranță) și de ce au tendința de a fi excesiv de agreabili. Concluzia practică pentru munca financiară: nu lua acordul modelului drept validare — cere-i explicit contraargumente."
+        "Analogia de birou: stagiarul care scrie corect gramatical, dar fără simțul situației; după sute de corecturi de la seniori („prea lung”, „lipsește avertismentul”, „tonul e nepotrivit”), învață nu doar limba, ci meseria de a răspunde. Efectul secundar cunoscut: modelul poate învăța să placă evaluatorului, nu doar să fie corect, una dintre rădăcinile sicofanției (tendinței de a-ți da dreptate).",
+        "Pentru utilizatorul profesionist, RLHF explică două trăsături de zi cu zi ale asistenților AI: de ce refuză anumite cereri și răspund prudent la subiecte sensibile (au fost antrenați spre siguranță) și de ce au tendința de a fi excesiv de agreabili. Concluzia practică pentru munca financiară: nu lua acordul modelului drept validare; cere-i explicit contraargumente."
       ],
       "examples": [
-        "Întrebi modelul dacă interpretarea ta la o speță de deductibilitate e corectă — datorită tiparelor din RLHF, tinde să confirme; reformulezi: „găsește slăbiciunile interpretării mele” și obții analiza reală.",
+        "Întrebi modelul dacă interpretarea ta la o speță de deductibilitate e corectă și, datorită tiparelor din RLHF, tinde să confirme; reformulezi: „găsește slăbiciunile interpretării mele” și obții analiza reală.",
         "Refuzul politicos al modelului de a redacta o „factură pentru servicii fictive” este comportament instalat prin RLHF, nu o regulă scrisă de programatori.",
-        "În procedura internă de utilizare AI: cere echipei să solicite modelului argumente pro ȘI contra la orice opinie fiscală — neutralizezi înclinația spre confirmare."
+        "În procedura internă de utilizare AI: cere echipei să solicite modelului argumente pro ȘI contra la orice opinie fiscală, ca să neutralizezi înclinația spre confirmare."
       ]
     },
     {
@@ -618,12 +618,12 @@
       "type": "substantiv",
       "ro": "Învățare fără Exemple / cu Puține Exemple",
       "def": [
-        "Zero-shot înseamnă că modelul rezolvă o sarcină pe care nu i-ai demonstrat-o deloc — îi spui doar ce vrei („clasifică aceste cheltuieli pe categorii”) și el aplică ce a învățat la antrenare. Few-shot înseamnă că îi dai în prompt câteva exemple rezolvate (de regulă 2–5), iar modelul deduce tiparul și îl aplică pe cazurile noi.",
+        "Zero-shot înseamnă că modelul rezolvă o sarcină pe care nu i-ai demonstrat-o deloc: îi spui doar ce vrei („clasifică aceste cheltuieli pe categorii”) și el aplică ce a învățat la antrenare. Few-shot înseamnă că îi dai în prompt câteva exemple rezolvate (de regulă 2–5), iar modelul deduce tiparul și îl aplică pe cazurile noi.",
         "Este echivalentul instruirii unui coleg nou: uneori e suficient să-i spui sarcina (zero-shot), dar de cele mai multe ori două-trei exemple lucrate („uite cum am încadrat aceste trei facturi”) ridică dramatic calitatea și consistența. Exemplele funcționează ca un contract implicit de format: modelul copiază structura, stilul și nivelul de detaliu al exemplelor tale.",
-        "În practica contabilă, few-shot este cea mai rentabilă tehnică de prompting raportat la efort: fără reantrenare, fără unelte speciale — doar exemple bine alese lipite în prompt. Regula practică: începe zero-shot; dacă rezultatele sunt inconsistente, adaugă 3 exemple reprezentative, inclusiv un caz-limită, și retestează."
+        "În practica contabilă, few-shot este cea mai rentabilă tehnică de prompting raportat la efort: fără reantrenare, fără unelte speciale, doar exemple bine alese lipite în prompt. Regula practică: începe zero-shot; dacă rezultatele sunt inconsistente, adaugă 3 exemple reprezentative, inclusiv un caz-limită, și retestează."
       ],
       "examples": [
-        "Zero-shot: „extrage furnizorul și totalul din factura atașată” — funcționează direct, modelul a văzut milioane de facturi la antrenare.",
+        "Zero-shot: „extrage furnizorul și totalul din factura atașată”. Funcționează direct, modelul a văzut milioane de facturi la antrenare.",
         "Few-shot: dai 3 exemple de încadrare pe centrele de cost specifice firmei tale, apoi modelul încadrează consecvent următoarele 200 de tranzacții după aceeași logică.",
         "Optimizare: alegerea atentă a celor 3 exemple (un caz tipic, un caz ambiguu, o excepție) reduce corecturile manuale mai mult decât orice reformulare a instrucțiunilor."
       ]
@@ -637,14 +637,14 @@
       "type": "substantiv",
       "ro": "Lanț de Raționament",
       "def": [
-        "Chain-of-Thought este tehnica prin care ceri modelului să își expună raționamentul pas cu pas înainte de a da răspunsul final, în loc să sară direct la concluzie. Simpla instrucțiune „gândește pas cu pas” sau „arată calculul înainte de rezultat” crește măsurabil acuratețea pe probleme cu mai multe etape — calcule, logică, spețe cu condiții multiple.",
-        "Mecanismul: modelul generează text secvențial, iar pașii intermediari scriși devin context pe care se sprijină pașii următori — exact ca diferența dintre a calcula un impozit „în cap” și a-l calcula pe hârtie, etapă cu etapă. Bonus practic: raționamentul vizibil e verificabil — vezi unde a greșit, nu doar că a greșit. Modelele de raționament moderne au internalizat această tehnică, dar pe modelele rapide instrucțiunea explicită rămâne valoroasă.",
+        "Chain-of-Thought este tehnica prin care ceri modelului să își expună raționamentul pas cu pas înainte de a da răspunsul final, în loc să sară direct la concluzie. Simpla instrucțiune „gândește pas cu pas” sau „arată calculul înainte de rezultat” crește măsurabil acuratețea pe probleme cu mai multe etape: calcule, logică, spețe cu condiții multiple.",
+        "Mecanismul: modelul generează text secvențial, iar pașii intermediari scriși devin context pe care se sprijină pașii următori, exact ca diferența dintre a calcula un impozit „în cap” și a-l calcula pe hârtie, etapă cu etapă. Bonus practic: raționamentul vizibil e verificabil, fiindcă vezi unde a greșit, nu doar că a greșit. Modelele de raționament moderne au internalizat această tehnică, dar pe modelele rapide instrucțiunea explicită rămâne valoroasă.",
         "În practica financiară, CoT este obligatoriu pe orice sarcină cu calcul sau încadrare condiționată: ceri întâi analiza pașilor (baza de calcul, cotele aplicabile, excepțiile), apoi concluzia. Raționamentul expus devine și documentație: îl poți atașa la dosarul de lucru ca justificare a modului de calcul propus."
       ],
       "examples": [
-        "Calculul plafonului de deductibilitate al unei cheltuieli de protocol: cu CoT, modelul scrie baza, procentul, plafonul, comparația — și abia apoi concluzia; erorile devin vizibile imediat.",
-        "Verificarea unui decont complex: „parcurge fiecare linie, arată regula aplicată, semnalează liniile neconforme” — obții o listă auditabilă, nu un verdict opac.",
-        "În biblioteca de prompturi a echipei, toate șabloanele de calcul încep cu „prezintă raționamentul pas cu pas înainte de rezultat” — o singură linie, calitate vizibil mai bună."
+        "Calculul plafonului de deductibilitate al unei cheltuieli de protocol: cu CoT, modelul scrie baza, procentul, plafonul, comparația și abia apoi concluzia; erorile devin vizibile imediat.",
+        "Verificarea unui decont complex: „parcurge fiecare linie, arată regula aplicată, semnalează liniile neconforme”, deci obții o listă auditabilă, nu un verdict opac.",
+        "În biblioteca de prompturi a echipei, toate șabloanele de calcul încep cu „prezintă raționamentul pas cu pas înainte de rezultat”: o singură linie, calitate vizibil mai bună."
       ]
     },
     {
@@ -656,14 +656,14 @@
       "type": "substantiv",
       "ro": "Temperatură",
       "def": [
-        "Temperatura este parametrul care controlează cât de „aventuros” alege modelul următorul token: la temperatură mică (aproape de 0), modelul alege aproape mereu varianta cea mai probabilă — răspunsuri consecvente, predictibile, aproape identice la rulări repetate; la temperatură mare, acceptă și variante mai puțin probabile — răspunsuri variate, creative, uneori surprinzătoare.",
-        "Analogia: setarea dintre „contabilul conservator” și „copywriterul inspirat”. Nu există valoare universal corectă — există valoare potrivită sarcinii. Capcana frecventă: temperatura mare pe sarcini factuale crește riscul de formulări fanteziste; temperatura 0 pe sarcini creative produce texte plate și repetitive. În interfețele de chat obișnuite parametrul e presetat; el devine reglabil când lucrezi prin API sau în instrumente de automatizare.",
-        "Pentru fluxurile financiar-contabile automatizate, regula e simplă: extragere de date, clasificare, calcule, rapoarte standardizate → temperatură mică sau zero, pentru reproductibilitate — același document trebuie să producă aceeași extragere azi și mâine. Texte către clienți, idei de prezentare, brainstorming → temperatură mai mare, controlată."
+        "Temperatura este parametrul care controlează cât de „aventuros” alege modelul următorul token: la temperatură mică (aproape de 0), modelul alege aproape mereu varianta cea mai probabilă, deci răspunsuri consecvente, predictibile, aproape identice la rulări repetate; la temperatură mare, acceptă și variante mai puțin probabile, deci răspunsuri variate, creative, uneori surprinzătoare.",
+        "Analogia: setarea dintre „contabilul conservator” și „copywriterul inspirat”. Nu există valoare universal corectă, ci valoare potrivită sarcinii. Capcana frecventă: temperatura mare pe sarcini factuale crește riscul de formulări fanteziste; temperatura 0 pe sarcini creative produce texte plate și repetitive. În interfețele de chat obișnuite parametrul e presetat; el devine reglabil când lucrezi prin API sau în instrumente de automatizare.",
+        "Pentru fluxurile financiar-contabile automatizate, regula e simplă: extragere de date, clasificare, calcule, rapoarte standardizate → temperatură mică sau zero, pentru reproductibilitate, fiindcă același document trebuie să producă aceeași extragere azi și mâine. Texte către clienți, idei de prezentare, brainstorming → temperatură mai mare, controlată."
       ],
       "examples": [
-        "Pipeline-ul de extragere din facturi rulează cu temperatura 0: aceeași factură procesată de două ori dă exact același JSON — condiție de bază pentru un proces auditabil.",
-        "Newsletterul lunar către clienți se generează cu temperatură ridicată: formulări variate, ton viu — apoi trece oricum prin revizia umană.",
-        "Debugging de workflow: rezultate inconsistente la aceeași factură? Primul lucru de verificat e temperatura — setată greșit peste 0 în pasul de extragere."
+        "Pipeline-ul de extragere din facturi rulează cu temperatura 0: aceeași factură procesată de două ori dă exact același JSON, condiție de bază pentru un proces auditabil.",
+        "Newsletterul lunar către clienți se generează cu temperatură ridicată: formulări variate, ton viu, apoi trece oricum prin revizia umană.",
+        "Debugging de workflow: rezultate inconsistente la aceeași factură? Primul lucru de verificat e temperatura, setată greșit peste 0 în pasul de extragere."
       ]
     },
     {
@@ -675,14 +675,14 @@
       "type": "substantiv",
       "ro": "Supra-antrenare",
       "def": [
-        "Overfitting-ul apare când un model memorează datele de antrenare în loc să învețe tiparele generale din ele: performanță excelentă pe exemplele văzute, performanță slabă pe date noi. E ca studentul care învață pe de rost rezolvările din culegere — perfect la problemele identice, pierdut la prima problemă nouă, deși „materia” e aceeași.",
-        "Cauzele tipice: model prea complex pentru date prea puține, sau antrenare prea lungă pe același set. Remedii standard în machine learning: mai multe date, oprirea antrenării la timp, penalizarea complexității și — mai ales — evaluarea pe un set de test pe care modelul nu l-a văzut niciodată. Un model trebuie judecat exclusiv pe date noi; performanța pe datele de antrenare e informativ irelevantă.",
+        "Overfitting-ul apare când un model memorează datele de antrenare în loc să învețe tiparele generale din ele: performanță excelentă pe exemplele văzute, performanță slabă pe date noi. E ca studentul care învață pe de rost rezolvările din culegere: perfect la problemele identice, pierdut la prima problemă nouă, deși „materia” e aceeași.",
+        "Cauzele tipice: model prea complex pentru date prea puține, sau antrenare prea lungă pe același set. Remedii standard în machine learning: mai multe date, oprirea antrenării la timp, penalizarea complexității și, mai ales, evaluarea pe un set de test pe care modelul nu l-a văzut niciodată. Un model trebuie judecat exclusiv pe date noi; performanța pe datele de antrenare e informativ irelevantă.",
         "În contextul financiar, overfitting-ul e o capcană clasică a modelelor predictive interne: modelul de estimare a întârzierilor la plată „calibrat perfect” pe istoricul 2022–2024 poate eșua în 2026, pentru că a memorat conjunctura, nu mecanismele. Întrebarea de due diligence către orice furnizor: „care e performanța pe date din afara setului de antrenare?”"
       ],
       "examples": [
-        "Modelul intern de predicție a neplății are acuratețe excelentă pe datele istorice și dezamăgitoare pe clienții noi — simptom clasic de overfitting pe conjunctura anilor de antrenare.",
-        "Un clasificator de documente antrenat doar pe facturile a 3 furnizori mari eșuează la primul furnizor nou — a memorat aspectul acelor facturi, nu conceptul de factură.",
-        "La achiziția unui soft cu scoring: cere matricea de performanță pe set de validare separat, pe perioade diferite de cele de antrenare — altfel cifrele de acuratețe sunt decorative."
+        "Modelul intern de predicție a neplății are acuratețe excelentă pe datele istorice și dezamăgitoare pe clienții noi: simptom clasic de overfitting pe conjunctura anilor de antrenare.",
+        "Un clasificator de documente antrenat doar pe facturile a 3 furnizori mari eșuează la primul furnizor nou: a memorat aspectul acelor facturi, nu conceptul de factură.",
+        "La achiziția unui soft cu scoring: cere matricea de performanță pe set de validare separat, pe perioade diferite de cele de antrenare; altfel, cifrele de acuratețe sunt decorative."
       ]
     },
     {
@@ -695,12 +695,12 @@
       "ro": "Deriva Modelului / Deriva Datelor",
       "def": [
         "Drift-ul este degradarea tăcută a performanței unui model în timp: modelul rămâne neschimbat, dar realitatea se îndepărtează de datele pe care a fost antrenat. Data drift = se schimbă datele de intrare (formate noi de facturi, tipuri noi de tranzacții); concept drift = se schimbă însăși relația de prezis (o criză modifică comportamentul de plată al clienților).",
-        "Perspectiva contabilă o recunoaște imediat: e echivalentul unui buget construit pe ipotezele anului trecut — impecabil la data aprobării, tot mai rupt de realitate cu fiecare trimestru. Pericolul specific AI: degradarea e graduală și fără mesaje de eroare; modelul continuă să livreze răspunsuri încrezătoare, doar că tot mai des greșite.",
-        "Implicația practică pentru orice automatizare AI din firmă: performanța trebuie monitorizată continuu, nu doar validată la implementare. Un eșantion lunar de verificare umană, praguri de alertă la creșterea corecturilor și recalibrare periodică — echivalentul reviziei tehnice pentru procesele automate. Automatizare fără monitorizare = datorie ascunsă."
+        "Perspectiva contabilă o recunoaște imediat: e echivalentul unui buget construit pe ipotezele anului trecut, impecabil la data aprobării și tot mai rupt de realitate cu fiecare trimestru. Pericolul specific AI: degradarea e graduală și fără mesaje de eroare; modelul continuă să livreze răspunsuri încrezătoare, doar că tot mai des greșite.",
+        "Implicația practică pentru orice automatizare AI din firmă: performanța trebuie monitorizată continuu, nu doar validată la implementare. Un eșantion lunar de verificare umană, praguri de alertă la creșterea corecturilor și recalibrare periodică: echivalentul reviziei tehnice pentru procesele automate. Automatizare fără monitorizare = datorie ascunsă."
       ],
       "examples": [
-        "Clasificatorul de cheltuieli funcționa excelent; firma a lansat o linie nouă de business și 15% din tranzacții ajung în categorii greșite — data drift nedetectat timp de un trimestru.",
-        "Modelul de predicție a încasărilor, antrenat pe ani stabili, ratează sistematic după o schimbare legislativă care modifică termenele de plată — concept drift.",
+        "Clasificatorul de cheltuieli funcționa excelent; firma a lansat o linie nouă de business și 15% din tranzacții ajung în categorii greșite, adică data drift nedetectat timp de un trimestru.",
+        "Modelul de predicție a încasărilor, antrenat pe ani stabili, ratează sistematic după o schimbare legislativă care modifică termenele de plată: concept drift.",
         "Procedura sănătoasă: lunar, 50 de documente procesate automat sunt re-verificate manual; dacă rata de eroare depășește pragul stabilit, modelul intră în recalibrare."
       ]
     },
@@ -713,14 +713,14 @@
       "type": "substantiv",
       "ro": "Generare Augmentată prin Regăsire",
       "def": [
-        "RAG este arhitectura care „hrănește” modelul cu informații din sursele tale înainte de a răspunde: la fiecare întrebare, sistemul caută întâi în baza de documente (proceduri, legislație, contracte), extrage fragmentele relevante și le pune în prompt, iar modelul răspunde pe baza lor — nu din memoria lui generală. Modelul devine un expert care consultă dosarul înainte să vorbească.",
-        "Diferența față de un LLM „gol”: răspunsurile sunt ancorate în surse verificabile și actualizabile — schimbi documentele, se schimbă răspunsurile, fără reantrenare. RAG reduce semnificativ halucinațiile, dar nu le elimină: calitatea depinde de calitatea regăsirii (dacă fragmentul relevant nu e găsit, modelul improvizează) și de disciplina modelului de a se limita la sursele primite.",
-        "Pentru contabilitate, RAG este probabil cea mai valoroasă arhitectură aplicată: asistent pe legislația fiscală curentă, pe procedurile interne ale firmei, pe contractele clientului — cu citarea sursei la fiecare afirmație. Regula de aur la implementare: cere întotdeauna referința (documentul și pasajul) ca parte din răspuns, ca omul să poată verifica în secunde."
+        "RAG este arhitectura care „hrănește” modelul cu informații din sursele tale înainte de a răspunde: la fiecare întrebare, sistemul caută întâi în baza de documente (proceduri, legislație, contracte), extrage fragmentele relevante și le pune în prompt, iar modelul răspunde pe baza lor, nu din memoria lui generală. Modelul devine un expert care consultă dosarul înainte să vorbească.",
+        "Diferența față de un LLM „gol”: răspunsurile sunt ancorate în surse verificabile și actualizabile; schimbi documentele, se schimbă răspunsurile, fără reantrenare. RAG reduce semnificativ halucinațiile, dar nu le elimină: calitatea depinde de calitatea regăsirii (dacă fragmentul relevant nu e găsit, modelul improvizează) și de disciplina modelului de a se limita la sursele primite.",
+        "Pentru contabilitate, RAG este probabil cea mai valoroasă arhitectură aplicată: asistent pe legislația fiscală curentă, pe procedurile interne ale firmei, pe contractele clientului, cu citarea sursei la fiecare afirmație. Regula de aur la implementare: cere întotdeauna referința (documentul și pasajul) ca parte din răspuns, ca omul să poată verifica în secunde."
       ],
       "examples": [
-        "Asistentul intern al cabinetului răspunde la „care e procedura noastră pentru dosarele de rambursare TVA?” citând pagina exactă din manualul de proceduri — actualizat săptămâna trecută.",
+        "Asistentul intern al cabinetului răspunde la „care e procedura noastră pentru dosarele de rambursare TVA?” citând pagina exactă din manualul de proceduri, actualizat săptămâna trecută.",
         "Întrebările pe legislație rulează pe o bază de acte normative consolidate la zi: modelul citează articolul, nu „își amintește” o versiune veche din antrenare.",
-        "Onboarding accelerat: noii angajați întreabă asistentul RAG în loc să întrerupă seniorii — întrebările repetitive scad, iar răspunsurile vin mereu cu trimiterea la sursă."
+        "Onboarding accelerat: noii angajați întreabă asistentul RAG în loc să întrerupă seniorii, iar întrebările repetitive scad, iar răspunsurile vin mereu cu trimiterea la sursă."
       ]
     },
     {
@@ -732,14 +732,14 @@
       "type": "substantiv",
       "ro": "RAG Agentic",
       "def": [
-        "Agentic RAG este evoluția RAG-ului clasic: în loc de un singur pas fix „caută → răspunde”, un agent planifică activ procesul — descompune întrebarea, decide unde și ce să caute, evaluează dacă rezultatele sunt suficiente, reformulează căutarea dacă nu, consultă mai multe surse și abia apoi sintetizează răspunsul.",
-        "Diferența e ca între un documentarist care execută mecanic o căutare după cuvinte-cheie și un consultant care investighează: pornește de la întrebare, își dă seama că îi lipsește o piesă, cere dosarul suplimentar, confruntă sursele contradictorii și își verifică concluzia înainte s-o predea. Costul acestei minuțiozități: mai mulți pași înseamnă latență și consum mai mari — se justifică pe întrebări complexe, nu pe FAQ-uri.",
-        "În practica financiară, Agentic RAG devine valoros exact pe întrebările cu adevărat grele: spețe care ating simultan mai multe acte normative, analize care combină contractul, legislația și datele contabile ale clientului. Sistemul poate observa singur că răspunsul cere și consultarea normelor de aplicare, nu doar a codului — pasul pe care RAG-ul simplu l-ar fi ratat."
+        "Agentic RAG este evoluția RAG-ului clasic: în loc de un singur pas fix „caută → răspunde”, un agent planifică activ procesul; descompune întrebarea, decide unde și ce să caute, evaluează dacă rezultatele sunt suficiente, reformulează căutarea dacă nu, consultă mai multe surse și abia apoi sintetizează răspunsul.",
+        "Diferența e ca între un documentarist care execută mecanic o căutare după cuvinte-cheie și un consultant care investighează: pornește de la întrebare, își dă seama că îi lipsește o piesă, cere dosarul suplimentar, confruntă sursele contradictorii și își verifică concluzia înainte s-o predea. Costul acestei minuțiozități: mai mulți pași înseamnă latență și consum mai mari, deci se justifică pe întrebări complexe, nu pe FAQ-uri.",
+        "În practica financiară, Agentic RAG devine valoros exact pe întrebările cu adevărat grele: spețe care ating simultan mai multe acte normative, analize care combină contractul, legislația și datele contabile ale clientului. Sistemul poate observa singur că răspunsul cere și consultarea normelor de aplicare, nu doar a codului, adică exact pasul pe care RAG-ul simplu l-ar fi ratat."
       ],
       "examples": [
-        "Întrebare complexă de TVA intracomunitar: agentul caută în Codul Fiscal, observă trimiterea la normele metodologice, le caută și pe acelea, confruntă și abia apoi răspunde — cu ambele surse citate.",
+        "Întrebare complexă de TVA intracomunitar: agentul caută în Codul Fiscal, observă trimiterea la normele metodologice, le caută și pe acelea, confruntă și abia apoi răspunde, cu ambele surse citate.",
         "Due diligence pe un client nou: agentul interoghează pe rând contractele, situațiile financiare și corespondența, construind progresiv tabloul riscurilor, în loc de o singură căutare superficială.",
-        "Design de sistem: întrebările simple merg pe RAG clasic (rapid, ieftin), cele marcate „complexe” escaladează automat la fluxul agentic — echilibru între cost și profunzime."
+        "Design de sistem: întrebările simple merg pe RAG clasic (rapid, ieftin), cele marcate „complexe” escaladează automat la fluxul agentic, pentru echilibru între cost și profunzime."
       ]
     },
     {
@@ -751,14 +751,14 @@
       "type": "substantiv",
       "ro": "Bază de Date Vectorială",
       "def": [
-        "Baza de date vectorială stochează embeddings — „amprentele numerice” de sens ale textelor — și răspunde la o întrebare fundamental diferită de bazele clasice: nu „ce înregistrări conțin exact acest cuvânt?”, ci „ce fragmente au înțelesul cel mai apropiat de întrebarea mea?”. Este infrastructura standard din spatele căutării semantice și al sistemelor RAG.",
-        "Contrastul cu SQL-ul familiar: baza relațională e un registru cu rubrici fixe — precisă, dar literală; baza vectorială e un arhivar care a citit tot și îți aduce documentele „despre asta”, indiferent de formulare. În practică ele coexistă: datele structurate (solduri, scadențe) rămân în baze clasice, iar conținutul nestructurat (contracte, proceduri, corespondență) se indexează vectorial.",
+        "Baza de date vectorială stochează embeddings („amprentele numerice” de sens ale textelor) și răspunde la o întrebare fundamental diferită de bazele clasice: nu „ce înregistrări conțin exact acest cuvânt?”, ci „ce fragmente au înțelesul cel mai apropiat de întrebarea mea?”. Este infrastructura standard din spatele căutării semantice și al sistemelor RAG.",
+        "Contrastul cu SQL-ul familiar: baza relațională e un registru cu rubrici fixe, precisă, dar literală; baza vectorială e un arhivar care a citit tot și îți aduce documentele „despre asta”, indiferent de formulare. În practică ele coexistă: datele structurate (solduri, scadențe) rămân în baze clasice, iar conținutul nestructurat (contracte, proceduri, corespondență) se indexează vectorial.",
         "Pentru un cabinet, baza vectorială e piesa tehnică din spatele promisiunii „vorbește cu arhiva ta”: mii de contracte, spețe și proceduri devin interogabile în limbaj natural. La evaluarea soluțiilor, întrebările corecte sunt unde e găzduită baza (datele clienților!), cât costă reindexarea la actualizări și cât de bine funcționează pe limba română."
       ],
       "examples": [
         "Arhiva de 10.000 de documente ale cabinetului, indexată vectorial: „ce clienți au clauze de ajustare a prețului cu inflația?” returnează contractele relevante în secunde.",
         "Baza de spețe fiscale interne: o întrebare nouă găsește automat cele 3 spețe similare rezolvate în trecut, chiar dacă sunt formulate complet diferit.",
-        "Arhitectură tipică de asistent intern: documentele stau în baza vectorială, cifrele în ERP — asistentul combină ambele surse la un singur răspuns."
+        "Arhitectură tipică de asistent intern: documentele stau în baza vectorială, cifrele în ERP, iar asistentul combină ambele surse la un singur răspuns."
       ]
     },
     {
@@ -770,14 +770,14 @@
       "type": "substantiv",
       "ro": "Căutare Semantică",
       "def": [
-        "Căutarea semantică găsește documente după înțelesul întrebării, nu după potrivirea literală a cuvintelor: interogarea și documentele sunt convertite în embeddings, iar sistemul returnează cele mai apropiate ca sens. „Sancțiuni pentru depunerea cu întârziere” găsește și textele care vorbesc despre „penalități la nedepunerea în termen” — zero cuvinte comune, același înțeles.",
-        "Limita căutării clasice pe cuvinte-cheie e cunoscută de oricine a căutat vreodată într-o arhivă: dacă autorul a folosit alt sinonim, documentul e invizibil. Nuanța practică: semantica nu înlocuiește complet exactitatea — pentru coduri de cont, CUI-uri sau numere de factură, potrivirea exactă rămâne superioară; sistemele mature combină ambele (căutare hibridă).",
-        "În munca financiar-contabilă, câștigul e direct proporțional cu dimensiunea și dezordinea arhivei: legislație, contracte, corespondență și proceduri scrise de oameni diferiți, cu vocabulare diferite, devin regăsibile printr-o singură întrebare firească. Este și componenta „R” din RAG — calitatea căutării semantice determină calitatea răspunsurilor asistentului."
+        "Căutarea semantică găsește documente după înțelesul întrebării, nu după potrivirea literală a cuvintelor: interogarea și documentele sunt convertite în embeddings, iar sistemul returnează cele mai apropiate ca sens. „Sancțiuni pentru depunerea cu întârziere” găsește și textele care vorbesc despre „penalități la nedepunerea în termen”: zero cuvinte comune, același înțeles.",
+        "Limita căutării clasice pe cuvinte-cheie e cunoscută de oricine a căutat vreodată într-o arhivă: dacă autorul a folosit alt sinonim, documentul e invizibil. Nuanța practică: semantica nu înlocuiește complet exactitatea, fiindcă pentru coduri de cont, CUI-uri sau numere de factură, potrivirea exactă rămâne superioară; sistemele mature combină ambele (căutare hibridă).",
+        "În munca financiar-contabilă, câștigul e direct proporțional cu dimensiunea și dezordinea arhivei: legislație, contracte, corespondență și proceduri scrise de oameni diferiți, cu vocabulare diferite, devin regăsibile printr-o singură întrebare firească. Este și componenta „R” din RAG, iar calitatea căutării semantice determină calitatea răspunsurilor asistentului."
       ],
       "examples": [
-        "Cauți „când pot deduce mașina firmei?” și găsești circulara internă intitulată „Tratamentul fiscal al vehiculelor în folosință mixtă” — căutarea clasică ar fi ratat-o complet.",
+        "Cauți „când pot deduce mașina firmei?” și găsești circulara internă intitulată „Tratamentul fiscal al vehiculelor în folosință mixtă”, pe care căutarea clasică ar fi ratat-o complet.",
         "În corespondența cu un client, „nemulțumiri legate de facturare” scoate la suprafață emailurile relevante, indiferent că clientul scria despre „sume eronate” sau „valori umflate”.",
-        "Căutare hibridă în practică: semantic pentru „clauze de răspundere limitată”, exact pentru „factura FCT-2024-0187” — fiecare unealtă la locul ei."
+        "Căutare hibridă în practică: semantic pentru „clauze de răspundere limitată”, exact pentru „factura FCT-2024-0187”; fiecare unealtă la locul ei."
       ]
     },
     {
@@ -790,12 +790,12 @@
       "ro": "Graf de Cunoștințe",
       "def": [
         "Graful de cunoștințe este o structură care reprezintă informația ca entități (persoane, firme, conturi, contracte) legate prin relații explicite: „Firma A → deține 60% din → Firma B”, „Contractul X → semnat de → Administratorul Y”. În loc de documente izolate, obții o hartă navigabilă a conexiunilor.",
-        "Diferența față de embeddings și căutarea semantică: acolo similaritatea e „intuiție” statistică; în graf, relațiile sunt fapte structurate, verificabile, care se pot parcurge în lanț — de la firmă la acționar, de la acționar la altă firmă, de la aceasta la un furnizor. Combinația graf + LLM dă AI-ului atât înțelegerea limbajului, cât și rigoarea relațiilor: modelul poate răspunde „cine controlează indirect acest furnizor?” urmând muchiile grafului, nu ghicind.",
-        "În practica financiară, grafurile de cunoștințe sunt instrumentul natural pentru părți afiliate, structuri de grup și detectarea conflictelor de interese — exact zonele unde relațiile în lanț contează mai mult decât documentele individuale. Auditorii și analiștii AML lucrează, conceptual, pe grafuri de ani de zile; AI-ul le face acum interogabile în limbaj natural."
+        "Diferența față de embeddings și căutarea semantică: acolo similaritatea e „intuiție” statistică; în graf, relațiile sunt fapte structurate, verificabile, care se pot parcurge în lanț, de la firmă la acționar, de la acționar la altă firmă, de la aceasta la un furnizor. Combinația graf + LLM dă AI-ului atât înțelegerea limbajului, cât și rigoarea relațiilor: modelul poate răspunde „cine controlează indirect acest furnizor?” urmând muchiile grafului, nu ghicind.",
+        "În practica financiară, grafurile de cunoștințe sunt instrumentul natural pentru părți afiliate, structuri de grup și detectarea conflictelor de interese, exact zonele unde relațiile în lanț contează mai mult decât documentele individuale. Auditorii și analiștii AML lucrează, conceptual, pe grafuri de ani de zile; AI-ul le face acum interogabile în limbaj natural."
       ],
       "examples": [
         "Verificarea părților afiliate la audit: graful leagă acționari, administratori și firme; întrebarea „există tranzacții cu entități controlate de familia administratorului?” devine o interogare, nu o săptămână de săpat.",
-        "Client nou la onboarding: graful construit din registrul comerțului și documentele primite arată că 3 dintre furnizorii lui principali au același beneficiar real — semnal de investigat.",
+        "Client nou la onboarding: graful construit din registrul comerțului și documentele primite arată că 3 dintre furnizorii lui principali au același beneficiar real, semnal de investigat.",
         "Arhitectură avansată de asistent: LLM-ul răspunde la întrebări interogând graful pentru relații („cine, cu cine”) și baza vectorială pentru conținut („ce scrie în contract”)."
       ]
     },
@@ -808,14 +808,14 @@
       "type": "substantiv",
       "ro": "Ingineria Contextului",
       "def": [
-        "Context engineering este disciplina de a decide ce informație primește modelul în fereastra de context la fiecare moment: instrucțiuni, documente relevante, istoricul potrivit, exemplele utile — nici mai mult, nici mai puțin. Dacă prompt engineering optimizează formularea unei cereri, context engineering optimizează întregul mediu informațional în care modelul lucrează.",
-        "Premisa e simplă: calitatea răspunsului e plafonată de calitatea contextului. Prea puțin context → modelul improvizează; prea mult → informația critică se „îneacă” în balast, costurile cresc și atenția modelului se diluează. Disciplina combină mai multe unelte — RAG pentru documente, memorie pentru istoric, rezumare pentru conversații lungi, structurare pentru claritate — orchestrate în funcție de sarcină.",
+        "Context engineering este disciplina de a decide ce informație primește modelul în fereastra de context la fiecare moment: instrucțiuni, documente relevante, istoricul potrivit, exemplele utile, nici mai mult, nici mai puțin. Dacă prompt engineering optimizează formularea unei cereri, context engineering optimizează întregul mediu informațional în care modelul lucrează.",
+        "Premisa e simplă: calitatea răspunsului e plafonată de calitatea contextului. Prea puțin context → modelul improvizează; prea mult → informația critică se „îneacă” în balast, costurile cresc și atenția modelului se diluează. Disciplina combină mai multe unelte (RAG pentru documente, memorie pentru istoric, rezumare pentru conversații lungi, structurare pentru claritate) orchestrate în funcție de sarcină.",
         "Paralela contabilă e pregătirea dosarului pentru un expert: nu-i predai toată arhiva firmei, ci piesele relevante speței, ordonate logic, cu o notă de sinteză. În sistemele AI serioase din finanțe, munca grea nu mai e „găsirea promptului magic”, ci construirea fluxului care aduce automat documentele corecte, datele corecte și regulile corecte în fața modelului, pentru fiecare tip de sarcină."
       ],
       "examples": [
-        "Asistentul de închidere lunară primește automat: procedura de închidere, balanța curentă, balanța lunii precedente și lista de verificări — context complet, zero căutări manuale.",
-        "Conversația de 100 de mesaje e rezumată automat la fiecare 20: modelul păstrează esența deciziilor fără să care tot istoricul — fereastra rămâne liberă pentru documentele de lucru.",
-        "Debug de calitate: răspunsurile slabe ale asistentului intern se rezolvă de regulă nu schimbând modelul, ci curățând contextul — proceduri expirate scoase, versiuni duplicate eliminate."
+        "Asistentul de închidere lunară primește automat: procedura de închidere, balanța curentă, balanța lunii precedente și lista de verificări, deci context complet, zero căutări manuale.",
+        "Conversația de 100 de mesaje e rezumată automat la fiecare 20: modelul păstrează esența deciziilor fără să care tot istoricul, iar fereastra rămâne liberă pentru documentele de lucru.",
+        "Debug de calitate: răspunsurile slabe ale asistentului intern se rezolvă de regulă nu schimbând modelul, ci curățând contextul, cu proceduri expirate scoase și versiuni duplicate eliminate."
       ]
     },
     {
@@ -828,13 +828,13 @@
       "ro": "Agent AI",
       "def": [
         "Agentul AI este un sistem care nu doar răspunde la întrebări, ci execută sarcini: primește un obiectiv, își face un plan, folosește unelte (căutare, fișiere, aplicații, API-uri), verifică rezultatele intermediare și continuă până la finalizare. Diferența față de un asistent conversațional: asistentul îți spune cum se face; agentul face.",
-        "Anatomia tipică: un LLM ca „creier”, un set de unelte pe care le poate apela, o buclă de execuție (planifică → acționează → observă → ajustează) și limite definite de om — ce are voie să facă singur și unde se oprește pentru aprobare. Nuanța critică: autonomia e un cursor, nu un comutator; un agent bine proiectat execută singur rutina și escaladează excepțiile.",
-        "În contabilitate, agenții sunt pasul de la „AI care mă ajută să lucrez” la „AI care lucrează sub supravegherea mea”: preluarea facturilor din email, extragerea datelor, înregistrarea în ERP, semnalarea excepțiilor — cap-coadă. Regula de implementare: începe cu agentul în modul „propune, omul aprobă”, și abia după ce rata de eroare e dovedit mică, treci rutina pe execuție automată cu eșantion de control."
+        "Anatomia tipică: un LLM ca „creier”, un set de unelte pe care le poate apela, o buclă de execuție (planifică → acționează → observă → ajustează) și limite definite de om, adică ce are voie să facă singur și unde se oprește pentru aprobare. Nuanța critică: autonomia e un cursor, nu un comutator; un agent bine proiectat execută singur rutina și escaladează excepțiile.",
+        "În contabilitate, agenții sunt pasul de la „AI care mă ajută să lucrez” la „AI care lucrează sub supravegherea mea”: preluarea deconturilor de cheltuieli cu bonurile atașate, extragerea datelor, înregistrarea în ERP, semnalarea excepțiilor, totul cap-coadă. Regula de implementare: începe cu agentul în modul „propune, omul aprobă”, și abia după ce rata de eroare e dovedit mică, treci rutina pe execuție automată cu eșantion de control."
       ],
       "examples": [
-        "Agent de procesare a facturilor primite: citește emailul, extrage atașamentul, validează datele fiscale ale furnizorului, propune înregistrarea contabilă și o trimite spre aprobare cu tot cu documentul sursă.",
+        "Agent de procesare a facturilor de la furnizori externi: citește emailul, extrage atașamentul, validează datele fiscale ale furnizorului, propune înregistrarea contabilă și o trimite spre aprobare cu tot cu documentul sursă.",
         "Agent de urmărire a creanțelor: identifică facturile scadente, redactează somațiile gradual (amabil → ferm), le programează și raportează săptămânal ce a trimis și ce răspunsuri a primit.",
-        "Design cu limite: agentul poate opera singur înregistrări sub un plafon valoric; peste plafon sau la orice neconcordanță, se oprește și cere validare umană — autonomie proporțională cu riscul."
+        "Design cu limite: agentul poate opera singur înregistrări sub un plafon valoric; peste plafon sau la orice neconcordanță, se oprește și cere validare umană, cu autonomie proporțională cu riscul."
       ]
     },
     {
@@ -846,14 +846,14 @@
       "type": "substantiv",
       "ro": "AI Agentic",
       "def": [
-        "Agentic AI este termenul-umbrelă pentru paradigma în care sistemele AI planifică, decid și acționează cu autonomie reală — de la un agent individual până la echipe de agenți care colaborează, își împart sarcinile și își verifică reciproc rezultatele. Este cuvântul-cheie al perioadei 2025–2026: mutarea accentului de la „modele care răspund” la „sisteme care execută”.",
-        "Distincția utilă față de „AI agent”: agentul e piesa; agentic e paradigma. Un sistem agentic poate însemna un orchestrator care sparge un proces în sub-sarcini distribuite mai multor agenți specializați — unul extrage, altul validează, altul înregistrează, altul raportează. Cu autonomia crește și miza erorilor: un chatbot care greșește produce un răspuns prost; un sistem agentic care greșește produce acțiuni greșite în sistemele tale reale.",
-        "Pentru profesia contabilă, agentic AI este tendința de fond care merită urmărită strategic: procesele repetitive cap-coadă (procurement-to-pay, order-to-cash, închideri) sunt candidatul natural. La fel de important e vocabularul de guvernanță care vine la pachet: limite de autoritate, jurnale de acțiuni, puncte de aprobare umană — auditarea agenților devine o competență profesională nouă."
+        "Agentic AI este termenul-umbrelă pentru paradigma în care sistemele AI planifică, decid și acționează cu autonomie reală, de la un agent individual până la echipe de agenți care colaborează, își împart sarcinile și își verifică reciproc rezultatele. Este cuvântul-cheie al perioadei 2025–2026: mutarea accentului de la „modele care răspund” la „sisteme care execută”.",
+        "Distincția utilă față de „AI agent”: agentul e piesa; agentic e paradigma. Un sistem agentic poate însemna un orchestrator care sparge un proces în sub-sarcini distribuite mai multor agenți specializați: unul extrage, altul validează, altul înregistrează, altul raportează. Cu autonomia crește și miza erorilor: un chatbot care greșește produce un răspuns prost; un sistem agentic care greșește produce acțiuni greșite în sistemele tale reale.",
+        "Pentru profesia contabilă, agentic AI este tendința de fond care merită urmărită strategic: procesele repetitive cap-coadă (procurement-to-pay, order-to-cash, închideri) sunt candidatul natural. La fel de important e vocabularul de guvernanță care vine la pachet: limite de autoritate, jurnale de acțiuni, puncte de aprobare umană; auditarea agenților devine o competență profesională nouă."
       ],
       "examples": [
         "Închiderea lunară orchestrată agentic: un agent colectează extrasele, altul face reconcilierile, altul propune ajustările, iar contabilul validează excepțiile dintr-un singur ecran de control.",
         "Contrast de generații: chatbot-ul din 2023 explica cum se face o reconciliere; sistemul agentic din 2026 o execută și prezintă doar diferențele nerezolvate.",
-        "Guvernanță: fiecare acțiune a fiecărui agent e jurnalizată (cine, ce, când, pe ce bază) — jurnalul devine probă de audit, exact ca registrele operațiunilor umane."
+        "Guvernanță: fiecare acțiune a fiecărui agent e jurnalizată (cine, ce, când, pe ce bază), iar jurnalul devine probă de audit, exact ca registrele operațiunilor umane."
       ]
     },
     {
@@ -865,14 +865,14 @@
       "type": "substantiv",
       "ro": "Apelare de Funcții / Utilizare de Unelte",
       "def": [
-        "Function calling este capacitatea unui model de a folosi unelte externe pentru a-și îndeplini sarcina: în loc să „ghicească” un calcul sau o informație, modelul apelează un instrument potrivit — un calculator, o interogare în baza de date, un API de curs valutar, o căutare web — primește rezultatul și îl folosește în răspuns.",
+        "Function calling este capacitatea unui model de a folosi unelte externe pentru a-și îndeplini sarcina: în loc să „ghicească” un calcul sau o informație, modelul apelează un instrument potrivit (un calculator, o interogare în baza de date, un API de curs valutar, o căutare web), primește rezultatul și îl folosește în răspuns.",
         "Mecanismul: dezvoltatorul îi pune la dispoziție un meniu de funcții descrise clar („getCursBNR(data)”, „cautaFactura(numar)”), iar modelul decide singur când și cu ce parametri să le cheme. Asta rezolvă elegant o slăbiciune structurală a LLM-urilor: aritmetica și faptele curente. Un LLM care calculează „din cap” TVA la o sumă cu multe zecimale poate greși; unul care apelează calculatorul, nu. Tool use e fundamentul pe care sunt construiți agenții.",
-        "Pentru fluxurile financiare, acesta e răspunsul la scepticismul legitim „nu las un model probabilistic să-mi facă calculele”: corect — calculele le face funcția deterministă, modelul doar orchestrează. Arhitectura sănătoasă: LLM-ul interpretează cererea și alege uneltele; cifrele vin întotdeauna din sisteme exacte (ERP, calculator, API oficial)."
+        "Pentru fluxurile financiare, acesta e răspunsul la scepticismul legitim „nu las un model probabilistic să-mi facă calculele”: corect, calculele le face funcția deterministă, modelul doar orchestrează. Arhitectura sănătoasă: LLM-ul interpretează cererea și alege uneltele; cifrele vin întotdeauna din sisteme exacte (ERP, calculator, API oficial)."
       ],
       "examples": [
-        "„Cât e TVA de plată pe facturile emise săptămâna asta?” — modelul apelează interogarea în ERP și funcția de calcul; cifra vine din sistem, nu din „memoria” modelului.",
+        "„Cât e TVA de plată pe facturile emise săptămâna asta?”: modelul apelează interogarea în ERP și funcția de calcul; cifra vine din sistem, nu din „memoria” modelului.",
         "Conversia valutară într-un raport: modelul cheamă API-ul de curs oficial la data tranzacției, în loc să folosească un curs aproximativ din datele de antrenare.",
-        "Audit trail: fiecare apel de funcție e înregistrat (ce unealtă, ce parametri, ce rezultat) — poți reconstitui exact de unde vine fiecare cifră din raportul generat."
+        "Audit trail: fiecare apel de funcție e înregistrat (ce unealtă, ce parametri, ce rezultat), deci poți reconstitui exact de unde vine fiecare cifră din raportul generat."
       ]
     },
     {
@@ -884,14 +884,14 @@
       "type": "substantiv",
       "ro": "Protocolul de Context al Modelului",
       "def": [
-        "MCP este un standard deschis, lansat de Anthropic în noiembrie 2024, care definește un mod unic de a conecta modelele AI la unelte și surse de date externe: fișiere, baze de date, aplicații de business, servicii web. Analogia consacrată: „USB-C pentru AI” — un singur tip de „mufă” în loc de o integrare custom pentru fiecare pereche aplicație-model.",
+        "MCP este un standard deschis, lansat de Anthropic în noiembrie 2024, care definește un mod unic de a conecta modelele AI la unelte și surse de date externe: fișiere, baze de date, aplicații de business, servicii web. Analogia consacrată: „USB-C pentru AI”, adică un singur tip de „mufă” în loc de o integrare custom pentru fiecare pereche aplicație-model.",
         "Problema rezolvată: înainte, fiecare conexiune AI ↔ sistem cerea dezvoltare dedicată (modelul X cu ERP-ul Y, apoi de la capăt pentru modelul Z). Cu MCP, furnizorul unei aplicații construiește o singură dată un „server MCP”, și orice asistent compatibil îl poate folosi. Ecosistemul a crescut rapid, cu servere publice pentru sute de aplicații și adoptare largă în industrie.",
-        "Pentru un cabinet sau departament financiar, MCP e vestea practică bună: asistentul AI se poate conecta la sculele existente — ERP, foldere de documente, email, calendar — fără proiect de integrare de luni de zile. La evaluarea software-ului contabil, „aveți server MCP?” devine o întrebare de due diligence la fel de firească precum „aveți API?”."
+        "Pentru un cabinet sau departament financiar, MCP e vestea practică bună: asistentul AI se poate conecta la sculele existente (ERP, foldere de documente, email, calendar) fără proiect de integrare de luni de zile. La evaluarea software-ului contabil, „aveți server MCP?” devine o întrebare de due diligence la fel de firească precum „aveți API?”."
       ],
       "examples": [
         "Asistentul conectat prin MCP la folderul de lucru și la ERP: „pregătește dosarul de închidere pentru clientul X” adună singur balanța, extrasele și documentele lipsă.",
         "Furnizorul de soft contabil publică un server MCP: toți clienții lui pot conecta orice asistent compatibil, fără integrare per client.",
-        "Guvernanță: serverele MCP se configurează cu permisiuni granulare — asistentul poate citi jurnalele, dar nu poate opera plăți; drepturile reflectă exact politica firmei."
+        "Guvernanță: serverele MCP se configurează cu permisiuni granulare, așa că asistentul poate citi jurnalele, dar nu poate opera plăți; drepturile reflectă exact politica firmei."
       ]
     },
     {
@@ -903,14 +903,14 @@
       "type": "substantiv",
       "ro": "Protocol Agent-la-Agent",
       "def": [
-        "A2A este un protocol deschis, propus de Google în 2025, prin care agenții AI — construiți de furnizori diferiți, pe modele diferite — pot comunica, negocia și colabora între ei la sarcini comune: un agent descoperă capabilitățile altuia, îi deleagă o sub-sarcină, primește rezultatul și continuă procesul.",
-        "Distincția de reținut față de MCP: MCP conectează un agent la unelte și date („mâinile” agentului); A2A conectează agenți între ei („telefonul” dintre agenți). Sunt complementare, nu concurente. Scenariul-țintă: procesele care traversează organizații — agentul firmei tale vorbește cu agentul furnizorului, al băncii sau al clientului, fiecare rămânând în sistemul lui.",
+        "A2A este un protocol deschis, propus de Google în 2025, prin care agenții AI, construiți de furnizori diferiți, pe modele diferite, pot comunica, negocia și colabora între ei la sarcini comune: un agent descoperă capabilitățile altuia, îi deleagă o sub-sarcină, primește rezultatul și continuă procesul.",
+        "Distincția de reținut față de MCP: MCP conectează un agent la unelte și date („mâinile” agentului); A2A conectează agenți între ei („telefonul” dintre agenți). Sunt complementare, nu concurente. Scenariul-țintă: procesele care traversează organizații, în care agentul firmei tale vorbește cu agentul furnizorului, al băncii sau al clientului, fiecare rămânând în sistemul lui.",
         "Pentru finanțe și contabilitate, direcția e ușor de intuit chiar dacă adopția e la început: agentul tău de achiziții cere oferte agentului de vânzări al furnizorului; agentul de reconciliere al firmei interoghează agentul băncii pentru tranzacțiile lipsă. Împreună cu ea vin întrebările de guvernanță care vor conta profesional: cine răspunde pentru o „înțelegere” greșită între doi agenți și cum se auditează o negociere mașină-mașină."
       ],
       "examples": [
-        "Reconciliere inter-companii în grup: agenții celor două entități își confruntă direct soldurile reciproce și prezintă contabililor doar diferențele — restul e deja împerecheat.",
-        "Onboarding de furnizor: agentul tău cere agentului furnizorului certificatele fiscale și datele bancare, le validează și pregătește dosarul — schimb structurat, jurnalizat, mașină-mașină.",
-        "Clauză de viitor în contracte: părțile agreează formatul și limitele schimburilor dintre agenții lor (ce date, ce plafoane, ce se escaladează la oameni) — noua anexă „tehnică” a colaborării."
+        "Reconciliere inter-companii în grup: agenții celor două entități își confruntă direct soldurile reciproce și prezintă contabililor doar diferențele; restul e deja împerecheat.",
+        "Onboarding de furnizor: agentul tău cere agentului furnizorului certificatele fiscale și datele bancare, le validează și pregătește dosarul, într-un schimb structurat, jurnalizat, mașină-mașină.",
+        "Clauză de viitor în contracte: părțile agreează formatul și limitele schimburilor dintre agenții lor (ce date, ce plafoane, ce se escaladează la oameni). Este noua anexă „tehnică” a colaborării."
       ]
     },
     {
@@ -922,14 +922,14 @@
       "type": "substantiv",
       "ro": "Copilot AI",
       "def": [
-        "Copilotul este asistentul AI integrat direct într-o aplicație de lucru — editor de documente, foaie de calcul, ERP, email — care sugerează, completează și accelerează munca fără a o prelua complet. Metafora e exactă: pilotul (tu) păstrează comenzile și răspunderea; copilotul urmărește instrumentele, propune și execută la cerere.",
-        "Diferența față de un asistent generalist deschis în alt tab: copilotul „vede” contextul aplicației — celulele foii de calcul, documentul deschis, înregistrarea din ERP — și acționează în interiorul ei, cu unelte native. Diferența față de agent: copilotul lucrează în ritmul tău, sugestie cu sugestie; agentul primește obiectivul și pleacă să-l execute. Capcana cunoscută: sugestiile fluente se acceptă ușor pe pilot automat — confortul alimentează automation bias.",
+        "Copilotul este asistentul AI integrat direct într-o aplicație de lucru (editor de documente, foaie de calcul, ERP, email) care sugerează, completează și accelerează munca fără a o prelua complet. Metafora e exactă: pilotul (tu) păstrează comenzile și răspunderea; copilotul urmărește instrumentele, propune și execută la cerere.",
+        "Diferența față de un asistent generalist deschis în alt tab: copilotul „vede” contextul aplicației (celulele foii de calcul, documentul deschis, înregistrarea din ERP) și acționează în interiorul ei, cu unelte native. Diferența față de agent: copilotul lucrează în ritmul tău, sugestie cu sugestie; agentul primește obiectivul și pleacă să-l execute. Capcana cunoscută: sugestiile fluente se acceptă ușor pe pilot automat, iar confortul alimentează automation bias.",
         "În practica financiară, copiloții sunt de regulă prima formă de AI care intră în firmă, pentru că vin „la pachet” cu uneltele existente: sugestii de formule și analize în foile de calcul, prime versiuni de emailuri și rapoarte, explicarea înregistrărilor în ERP. Sunt și un teren excelent de învățare organizațională înaintea pasului către agenți: echipa se obișnuiește să verifice, să corecteze și să conducă AI-ul."
       ],
       "examples": [
-        "În foaia de calcul: „adaugă o coloană cu variația procentuală față de bugetul aprobat și evidențiază abaterile peste 10%” — copilotul scrie formulele și formatarea, tu validezi logica.",
-        "În ERP: pe o factură deschisă, copilotul semnalează că furnizorul are alt IBAN decât la plățile anterioare — sugestie de verificare exact la momentul potrivit.",
-        "Politică de echipă: sugestiile copilotului pe formule de calcul se verifică prin sondaj săptămânal — productivitate păstrată, pilot automat evitat."
+        "În foaia de calcul: „adaugă o coloană cu variația procentuală față de bugetul aprobat și evidențiază abaterile peste 10%”. Copilotul scrie formulele și formatarea, tu validezi logica.",
+        "În ERP: pe o factură deschisă, copilotul semnalează că furnizorul are alt IBAN decât la plățile anterioare, sugestie de verificare exact la momentul potrivit.",
+        "Politică de echipă: sugestiile copilotului pe formule de calcul se verifică prin sondaj săptămânal, cu productivitate păstrată și pilot automat evitat."
       ]
     },
     {
@@ -941,14 +941,14 @@
       "type": "substantiv",
       "ro": "Interfață de Programare a Aplicațiilor",
       "def": [
-        "API-ul este „priza” standardizată prin care software-ul tău se conectează la un serviciu extern — inclusiv la un model AI — pentru a-l folosi programatic, fără interfața de chat: aplicația trimite cererea (promptul, documentul) și primește răspunsul, automat, de mii de ori pe zi dacă e nevoie.",
-        "Diferența față de abonamentul de chat: chat-ul e pentru oameni — o conversație, un ecran; API-ul e pentru procese — integrare în propriile fluxuri, volume mari, control fin (alegerea modelului, temperatura, formatul răspunsului). Modelul de cost diferă fundamental: abonament fix pe utilizator la chat versus plată per token consumat la API — la volume mari, diferența se calculează, nu se ghicește.",
+        "API-ul este „priza” standardizată prin care software-ul tău se conectează la un serviciu extern, inclusiv la un model AI, pentru a-l folosi programatic, fără interfața de chat: aplicația trimite cererea (promptul, documentul) și primește răspunsul, automat, de mii de ori pe zi dacă e nevoie.",
+        "Diferența față de abonamentul de chat: chat-ul e pentru oameni, o conversație pe un ecran; API-ul e pentru procese, cu integrare în propriile fluxuri, volume mari, control fin (alegerea modelului, temperatura, formatul răspunsului). Modelul de cost diferă fundamental: abonament fix pe utilizator la chat versus plată per token consumat la API; la volume mari, diferența se calculează, nu se ghicește.",
         "Pentru un departament financiar, API-ul e răspunsul la întrebarea „cum trecem de la colegul care folosește ChatGPT la un proces al firmei?”: procesarea facturilor, generarea rapoartelor și clasificarea tranzacțiilor devin fluxuri automate, integrate în sistemele existente. Vine la pachet cu responsabilități noi de gestionat: chei de acces securizate, monitorizarea consumului și plafoane de cost."
       ],
       "examples": [
-        "Softul de contabilitate trimite prin API fiecare factură primită către model și primește înapoi JSON-ul cu câmpurile extrase — 2.000 de documente pe lună, zero copy-paste.",
+        "Softul de contabilitate trimite prin API fiecare factură primită către model și primește înapoi JSON-ul cu câmpurile extrase: 2.000 de documente pe lună, zero copy-paste.",
         "Estimare de buget: volum lunar de documente × tokeni per document × preț per token = cost predictibil, comparabil direct cu costul procesării manuale.",
-        "Incident evitabil: cheia API salvată într-un fișier partajat ajunge publică, consumul explodează — de aceea cheile se păstrează în seifuri de parole, cu plafoane și alerte de consum."
+        "Incident evitabil: cheia API salvată într-un fișier partajat ajunge publică, consumul explodează; de aceea cheile se păstrează în seifuri de parole, cu plafoane și alerte de consum."
       ]
     },
     {
@@ -960,14 +960,14 @@
       "type": "substantiv",
       "ro": "Automatizarea Fluxurilor de Lucru",
       "def": [
-        "Workflow automation înseamnă înlănțuirea de pași automatizați care execută un proces repetitiv cap-coadă: un declanșator (a sosit un email cu factură) pornește o secvență de acțiuni (extrage atașamentul → citește datele → validează → înregistrează → notifică), fără intervenție umană la fiecare pas. AI-ul a schimbat calitativ ce se poate automatiza: pașii care cereau judecată — citirea documentelor nestandardizate, clasificarea, redactarea — au devenit automatizabili.",
-        "Distincția față de agenți: workflow-ul clasic e o linie de asamblare — pași ficși, ordine fixă, excepțiile cad în coșul „de rezolvat manual”; agentul e un lucrător flexibil care improvizează în limite date. În practică se combină: fluxuri fixe pentru volumul predictibil, agenți pentru excepții. Uneltele accesibile (Zapier, Make, n8n, Power Automate) au adus construcția de fluxuri la îndemâna non-programatorilor.",
-        "Pentru contabilitate, aici e cel mai concret randament al AI-ului: procesele lunare repetitive — colectarea documentelor de la clienți, procesarea facturilor, remindere de scadențe, rapoarte standard — sunt candidați ideali. Disciplina esențială: procesele se documentează înainte de automatizare (un proces prost automatizat = haos mai rapid) și fiecare flux are un responsabil și un jurnal de execuție."
+        "Workflow automation înseamnă înlănțuirea de pași automatizați care execută un proces repetitiv cap-coadă: un declanșator (a sosit un decont nou, cu bonuri atașate) pornește o secvență de acțiuni (extrage documentele → citește datele → validează → înregistrează → notifică), fără intervenție umană la fiecare pas. AI-ul a schimbat calitativ ce se poate automatiza: pașii care cereau judecată (citirea documentelor nestandardizate, clasificarea, redactarea) au devenit automatizabili.",
+        "Distincția față de agenți: workflow-ul clasic e o linie de asamblare, cu pași ficși și ordine fixă, iar excepțiile cad în coșul „de rezolvat manual”; agentul e un lucrător flexibil care improvizează în limite date. În practică se combină: fluxuri fixe pentru volumul predictibil, agenți pentru excepții. Uneltele accesibile (Zapier, Make, n8n, Power Automate) au adus construcția de fluxuri la îndemâna non-programatorilor.",
+        "Pentru contabilitate, aici e cel mai concret randament al AI-ului: procesele lunare repetitive (colectarea documentelor de la clienți, procesarea facturilor, remindere de scadențe, rapoarte standard) sunt candidați ideali. Disciplina esențială: procesele se documentează înainte de automatizare (un proces prost automatizat = haos mai rapid) și fiecare flux are un responsabil și un jurnal de execuție."
       ],
       "examples": [
         "Flux de colectare documente: pe 1 ale lunii, sistemul cere automat clienților documentele lipsă, le urmărește, trimite remindere gradate și raportează contabilului doar ce nu a sosit.",
-        "Factura primită pe email → extragere date cu AI → verificare furnizor în baza de date → propunere de înregistrare în ERP → notificare pentru aprobare: 4 pași automați, unul uman.",
-        "Regulă de proiectare: fluxul procesează automat cazurile standard (majoritatea covârșitoare a volumului) și rutează excepțiile către om — nu invers."
+        "Bon fiscal fotografiat de angajat în aplicația de deconturi → extragere date cu AI → verificare încadrare și plafon de deductibilitate → propunere de înregistrare în ERP → notificare pentru aprobare: 4 pași automați, unul uman.",
+        "Regulă de proiectare: fluxul procesează automat cazurile standard (majoritatea covârșitoare a volumului) și rutează excepțiile către om, nu invers."
       ]
     }
   ]
