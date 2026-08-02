@@ -1,0 +1,263 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Regie demo · Noutăți</title>
+<!-- ============================================================
+     UNEALTĂ TEMPORARĂ DE REGIE, NU FACE PARTE DIN SITE
+     ------------------------------------------------------------
+     Nu e legată din niciun meniu, nu intră în sitemap, în feed sau
+     în updates.json, și are noindex. Se publică doar pe durata
+     filmării și se șterge după.
+
+     Ce face: scrie în aceleași chei pe care le folosește aplicația
+     (localStorage: aiah.seen / aiah.interests / aiah.baseline) și
+     trimite starea către service worker, exact ca noutati.html.
+     Nu inventează niciun ecran: pune aplicația reală în starea în
+     care se află un cititor pentru care tocmai a apărut ceva nou.
+     ============================================================ -->
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 20px 16px 60px;
+    background: #07121a; color: #e8f3f8;
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    max-width: 620px; margin-inline: auto;
+  }
+  h1 { font-size: 19px; margin: 0 0 4px; }
+  .sub { color: #8fa9b8; font-size: 13px; margin: 0 0 18px; }
+  .card {
+    background: #0d1e2a; border: 1px solid #1d3547; border-radius: 12px;
+    padding: 14px; margin-bottom: 14px;
+  }
+  .card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em;
+             color: #6fb6d8; margin: 0 0 10px; font-weight: 700; }
+  label.item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 8px; border-radius: 8px; cursor: pointer;
+  }
+  label.item:hover { background: #12283704; background: rgba(255,255,255,.04); }
+  label.item input { margin-top: 3px; flex: none; }
+  .t { font-weight: 600; }
+  .m { color: #8fa9b8; font-size: 12.5px; }
+  .tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 999px;
+         background: #14384d; color: #7fd0f0; margin-right: 6px; vertical-align: 1px; }
+  button {
+    font: inherit; font-weight: 600; border-radius: 9px; padding: 11px 14px;
+    border: 1px solid #2a4b63; background: #14293a; color: #e8f3f8;
+    cursor: pointer; width: 100%; margin-top: 8px;
+  }
+  button.primary { background: #1d7fa8; border-color: #1d7fa8; color: #fff; }
+  button.ghost { background: transparent; }
+  button:disabled { opacity: .5; cursor: default; }
+  select { font: inherit; padding: 8px; border-radius: 8px; background: #14293a;
+           color: #e8f3f8; border: 1px solid #2a4b63; width: 100%; margin-top: 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  td { padding: 4px 0; border-bottom: 1px solid #16303f; }
+  td:last-child { text-align: right; color: #b6cdd9; }
+  .ok { color: #6ee7a8; } .no { color: #f0a4a4; }
+  #log { font: 12.5px/1.5 ui-monospace, "Cascadia Mono", Consolas, monospace;
+         white-space: pre-wrap; color: #9fd8ef; min-height: 20px; }
+  .big { font-size: 34px; text-align: center; font-weight: 700; color: #7fd0f0;
+         letter-spacing: .04em; }
+</style>
+
+<h1>Regie demo · ecranul de Noutăți</h1>
+<p class="sub">Pune aplicația instalată în starea „a apărut ceva nou”, ca să poți filma situația reală.
+Deschide pagina în <b>același Chrome</b> din care ai instalat aplicația.</p>
+
+<div class="card">
+  <h2>Starea de acum</h2>
+  <table id="diag"><tr><td>se încarcă…</td><td></td></tr></table>
+</div>
+
+<div class="card">
+  <h2>1 · Ce material devine „nou”</h2>
+  <div id="list">se încarcă lista din updates.json…</div>
+  <button id="btn-prep" class="primary" disabled>Pregătește starea</button>
+  <button id="btn-reset" class="ghost">Restaurează: marchează tot citit</button>
+</div>
+
+<div class="card">
+  <h2>2 · Declanșează notificarea</h2>
+  <select id="delay">
+    <option value="0">imediat</option>
+    <option value="10" selected>peste 10 secunde (timp să ieși pe ecranul de start)</option>
+    <option value="20">peste 20 de secunde</option>
+  </select>
+  <button id="btn-notif">Trimite notificarea</button>
+  <div class="big" id="count" hidden></div>
+</div>
+
+<div class="card">
+  <h2>Jurnal</h2>
+  <div id="log">—</div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var K_SEEN = 'aiah.seen', K_INT = 'aiah.interests', K_BASE = 'aiah.baseline';
+  var TYPES = ['articol', 'podcast', 'buzzword'];
+  var ITEMS = [], reg = null, timer = null;
+
+  var elList  = document.getElementById('list');
+  var elPrep  = document.getElementById('btn-prep');
+  var elReset = document.getElementById('btn-reset');
+  var elNotif = document.getElementById('btn-notif');
+  var elDelay = document.getElementById('delay');
+  var elCount = document.getElementById('count');
+  var elLog   = document.getElementById('log');
+  var elDiag  = document.getElementById('diag');
+
+  function log(msg) {
+    var t = new Date().toTimeString().slice(0, 8);
+    elLog.textContent = t + '  ' + msg + '\n' + (elLog.textContent === '—' ? '' : elLog.textContent);
+  }
+  function read(k, d) { try { var r = localStorage.getItem(k); return r ? JSON.parse(r) : d; } catch (e) { return d; } }
+  function write(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  }); }
+
+  function swPost(msg) {
+    var target = (navigator.serviceWorker && navigator.serviceWorker.controller) ||
+                 (reg && (reg.active || reg.waiting));
+    if (!target) { log('service worker indisponibil, mesajul „' + msg.type + '” nu a plecat'); return false; }
+    target.postMessage(msg);
+    return true;
+  }
+
+  /* ---------- diagnostic ---------- */
+  function renderDiag() {
+    var seen = read(K_SEEN, []);
+    var interests = read(K_INT, null);
+    var perm = (window.Notification && Notification.permission) || 'indisponibil';
+    var rows = [
+      ['Aplicație instalată (mod standalone)', matchMedia('(display-mode: standalone)').matches ? 'da (ești în aplicație)' : 'nu (ești în browser, corect)'],
+      ['Service worker activ', (navigator.serviceWorker && navigator.serviceWorker.controller) ? '<span class="ok">da</span>' : '<span class="no">nu</span>'],
+      ['Permisiune notificări', perm === 'granted' ? '<span class="ok">acordată</span>' : '<span class="no">' + perm + '</span>'],
+      ['Bulină pe iconiță (Badging API)', navigator.setAppBadge ? '<span class="ok">suportat</span>' : 'nesuportat (pe Android bulina vine din notificare)'],
+      ['Categorii urmărite', interests ? interests.join(', ') : 'toate (nealese încă)'],
+      ['Materiale marcate citite', String(seen.length)]
+    ];
+    elDiag.innerHTML = rows.map(function (r) {
+      return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>';
+    }).join('');
+  }
+
+  /* ---------- lista de materiale ---------- */
+  function renderList() {
+    if (!ITEMS.length) { elList.textContent = 'updates.json nu s-a putut citi.'; return; }
+    var preselect = 0;
+    for (var i = 0; i < ITEMS.length; i++) { if (ITEMS[i].type === 'articol') { preselect = i; break; } }
+    elList.innerHTML = ITEMS.slice(0, 12).map(function (it, i) {
+      return '<label class="item">' +
+        '<input type="radio" name="pick" value="' + i + '"' + (i === preselect ? ' checked' : '') + '>' +
+        '<span><span class="t"><span class="tag">' + esc(it.type) + '</span>' + esc(it.title) + '</span>' +
+        '<br><span class="m">' + esc(it.date || '') + (it.meta ? ' · ' + esc(it.meta) : '') + '</span></span>' +
+      '</label>';
+    }).join('');
+    elPrep.disabled = false;
+  }
+
+  function picked() {
+    var el = elList.querySelector('input[name="pick"]:checked');
+    return el ? ITEMS[Number(el.value)] : null;
+  }
+
+  /* ---------- acțiuni ---------- */
+  elPrep.addEventListener('click', function () {
+    var it = picked();
+    if (!it) return;
+
+    /* toate materialele trec drept citite, mai puțin cel ales */
+    var seen = ITEMS.filter(function (x) { return x.id !== it.id; }).map(function (x) { return x.id; });
+
+    /* categoriile: le păstrăm pe cele alese de tine, dar ne asigurăm
+       că tipul materialului ales e bifat, altfel n-ar fi semnalat deloc */
+    var interests = read(K_INT, null);
+    if (!Array.isArray(interests) || !interests.length) interests = TYPES.slice();
+    if (interests.indexOf(it.type) === -1) interests = interests.concat([it.type]);
+
+    write(K_BASE, true);
+    write(K_INT, interests);
+    write(K_SEEN, seen);
+
+    /* „notified: []” face ca service workerul să considere materialul
+       neanunțat încă, deci notificarea se poate repeta la fiecare dublă */
+    swPost({ type: 'aiah-state', state: { seen: seen, interests: interests, notified: [] } });
+
+    log('pregătit: „' + it.title + '” devine material nou (' + seen.length + ' marcate citite)');
+    renderDiag();
+  });
+
+  elReset.addEventListener('click', function () {
+    var all = ITEMS.map(function (x) { return x.id; });
+    write(K_SEEN, all);
+    swPost({ type: 'aiah-state', state: { seen: all, interests: read(K_INT, null), notified: all } });
+    swPost({ type: 'aiah-badge', count: 0 });
+    if (reg && reg.getNotifications) {
+      reg.getNotifications().then(function (list) {
+        list.forEach(function (n) { n.close(); });
+        if (list.length) log('am închis ' + list.length + ' notificare(i) rămase');
+      });
+    }
+    if (timer) { clearInterval(timer); timer = null; elCount.hidden = true; }
+    log('restaurat: totul e marcat citit, bulina stinsă');
+    renderDiag();
+  });
+
+  function fire() {
+    swPost({ type: 'aiah-check' });
+    log('am cerut verificarea; notificarea apare în 1 până la 3 secunde');
+    setTimeout(function () {
+      if (reg && reg.getNotifications) {
+        reg.getNotifications().then(function (list) {
+          log(list.length ? 'notificare afișată: „' + list[0].title + '”'
+                          : 'nicio notificare (verifică permisiunea sau starea pregătită)');
+        });
+      }
+      renderDiag();
+    }, 2500);
+  }
+
+  elNotif.addEventListener('click', function () {
+    if (window.Notification && Notification.permission === 'default') {
+      Notification.requestPermission().then(function (p) {
+        log('permisiune notificări: ' + p);
+        renderDiag();
+      });
+    }
+    var wait = Number(elDelay.value) || 0;
+    if (!wait) { fire(); return; }
+
+    var left = wait;
+    elCount.hidden = false;
+    elCount.textContent = left + ' s';
+    log('pornit cronometrul: ieși acum pe ecranul de start');
+    if (timer) clearInterval(timer);
+    timer = setInterval(function () {
+      left--;
+      elCount.textContent = left + ' s';
+      if (left <= 0) { clearInterval(timer); timer = null; elCount.hidden = true; fire(); }
+    }, 1000);
+  });
+
+  /* ---------- pornire ---------- */
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('/sw.js').catch(function () {});
+    navigator.serviceWorker.ready.then(function (r) { reg = r; renderDiag(); }).catch(function () {});
+  }
+  fetch('/updates.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      ITEMS = (data && Array.isArray(data.items)) ? data.items : [];
+      renderList();
+      log('citit updates.json: ' + ITEMS.length + ' materiale');
+    })
+    .catch(function () { elList.textContent = 'updates.json nu s-a putut citi.'; });
+  renderDiag();
+})();
+</script>
