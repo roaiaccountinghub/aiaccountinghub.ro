@@ -64,6 +64,9 @@
   .row button { margin-top: 0; font-size: 13px; padding: 8px 10px; font-weight: 500; }
   .hint { color: #8fa9b8; font-size: 12.5px; margin: 10px 0 0; }
   .picked { color: #7fd0f0; font-size: 13px; font-weight: 600; margin: 10px 0 0; }
+  .result { padding: 12px 13px; border-radius: 10px; margin-top: 10px; font-size: 14px; line-height: 1.5; }
+  .result.ok  { background: #0f3628; border: 1px solid #1f7a56; color: #a6f3cd; }
+  .result.bad { background: #37161a; border: 1px solid #7d2b33; color: #f5b3b3; }
 </style>
 
 <h1>Regie demo · ecranul de Noutăți</h1>
@@ -84,12 +87,17 @@ din aplicație, apasă la final <b>„Am terminat, du-mă pe Noutăți”</b>, c
   </div>
   <div id="list">se încarcă lista din updates.json…</div>
   <div class="picked" id="picked"></div>
-  <button id="btn-prep" class="primary" disabled>Pregătește starea</button>
+  <button id="btn-all" class="primary" disabled>Pornește tot: stare + bulină + notificare</button>
+  <div id="result" class="result" hidden></div>
+  <button id="btn-prep" class="ghost" disabled>Doar pregătește starea</button>
   <button id="btn-reset" class="ghost">Restaurează: marchează tot citit</button>
 </div>
 
 <div class="card">
-  <h2>2 · Declanșează notificarea</h2>
+  <h2>2 · Variantă avansată: notificare întârziată</h2>
+  <p class="hint" style="margin-top:0">Doar dacă vrei să filmezi <b>momentul în care intră notificarea</b>.
+  Cronometrul rulează în această pagină: apeși „Trimite notificarea”, apoi apeși direct butonul Home.
+  Nu apăsa nimic altceva, nu închide pagina și nu naviga aiurea, altfel numărătoarea moare și notificarea nu mai pleacă.</p>
   <select id="delay">
     <option value="0">imediat</option>
     <option value="10" selected>peste 10 secunde (timp să ieși pe ecranul de start)</option>
@@ -129,6 +137,7 @@ din aplicație, apasă la final <b>„Am terminat, du-mă pe Noutăți”</b>, c
 
   var elList  = document.getElementById('list');
   var elPick  = document.getElementById('picked');
+  var elRes   = document.getElementById('result');
   var elPrep  = document.getElementById('btn-prep');
   var elReset = document.getElementById('btn-reset');
   var elNotif = document.getElementById('btn-notif');
@@ -208,6 +217,7 @@ din aplicație, apasă la final <b>„Am terminat, du-mă pe Noutăți”</b>, c
       '</label>';
     }).join('');
     elPrep.disabled = false;
+    document.getElementById('btn-all').disabled = false;
     renderPicked();
   }
 
@@ -239,9 +249,9 @@ din aplicație, apasă la final <b>„Am terminat, du-mă pe Noutăți”</b>, c
   });
 
   /* ---------- acțiuni ---------- */
-  elPrep.addEventListener('click', function () {
+  function prepare() {
     var sel = picked();
-    if (!sel.length) { log('nu ai bifat niciun material'); return; }
+    if (!sel.length) { log('nu ai bifat niciun material'); return 0; }
     var ids = sel.map(function (x) { return x.id; });
 
     /* toate materialele trec drept citite, mai puțin cele alese */
@@ -268,6 +278,52 @@ din aplicație, apasă la final <b>„Am terminat, du-mă pe Noutăți”</b>, c
         sel.map(function (x) { return x.type; }).join(', ') +
         ' (' + seen.length + ' marcate citite)');
     renderDiag();
+    return ids.length;
+  }
+
+  elPrep.addEventListener('click', prepare);
+
+  /* ---------- pornirea completă, în ordinea corectă ----------
+     Ordinea contează și e ușor de greșit manual: întâi starea, apoi
+     verificarea din service worker (care trimite notificarea), apoi
+     bulina cerută explicit din pagină. La final confirmăm ce a ieșit,
+     ca să nu pleci la filmat fără să știi dacă a funcționat. */
+  function showResult(ok, html) {
+    elRes.hidden = false;
+    elRes.className = 'result ' + (ok ? 'ok' : 'bad');
+    elRes.innerHTML = html;
+  }
+
+  document.getElementById('btn-all').addEventListener('click', function () {
+    elRes.hidden = true;
+    var n = prepare();
+    if (!n) { showResult(false, 'Nu ai bifat niciun material.'); return; }
+
+    setTimeout(function () {
+      swPost({ type: 'aiah-check' });
+      if (navigator.setAppBadge) {
+        navigator.setAppBadge(n).then(function () { log('bulina cerută: ' + n); })
+                                .catch(function (e) { log('bulina refuzată: ' + e); });
+      }
+    }, 500);
+
+    setTimeout(function () {
+      renderDiag();
+      if (!reg || !reg.getNotifications) {
+        showResult(true, 'Stare pregătită și bulină cerută. Apasă butonul Home și uită-te la iconiță.');
+        return;
+      }
+      reg.getNotifications().then(function (list) {
+        if (list.length) {
+          showResult(true, '<b>Gata.</b> Notificare activă: „' + esc(list[0].title) + '”.<br>' +
+            'Bulină cerută pentru ' + n + ' material(e).<br>' +
+            'Apasă acum butonul Home și filmează ecranul de start. Nu șterge notificarea.');
+        } else {
+          showResult(false, 'Starea e pregătită și bulina cerută, dar nicio notificare nu e activă. ' +
+            'Verifică rândul „Permisiune notificări” din tabelul de sus.');
+        }
+      });
+    }, 2600);
   });
 
   elReset.addEventListener('click', function () {
