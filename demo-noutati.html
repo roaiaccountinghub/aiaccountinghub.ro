@@ -60,11 +60,16 @@
          white-space: pre-wrap; color: #9fd8ef; min-height: 20px; }
   .big { font-size: 34px; text-align: center; font-weight: 700; color: #7fd0f0;
          letter-spacing: .04em; }
+  .row { display: flex; gap: 8px; margin-bottom: 6px; }
+  .row button { margin-top: 0; font-size: 13px; padding: 8px 10px; font-weight: 500; }
+  .hint { color: #8fa9b8; font-size: 12.5px; margin: 10px 0 0; }
+  .picked { color: #7fd0f0; font-size: 13px; font-weight: 600; margin: 10px 0 0; }
 </style>
 
 <h1>Regie demo · ecranul de Noutăți</h1>
 <p class="sub">Pune aplicația instalată în starea „a apărut ceva nou”, ca să poți filma situația reală.
-Deschide pagina în <b>același Chrome</b> din care ai instalat aplicația.</p>
+Merge la fel în Chrome și în aplicația instalată: e aceeași memorie, pe aceeași adresă. Dacă o deschizi
+din aplicație, apasă la final <b>„Am terminat, du-mă pe Noutăți”</b>, ca aplicația să nu rămână parcată aici.</p>
 
 <div class="card">
   <h2>Starea de acum</h2>
@@ -72,8 +77,13 @@ Deschide pagina în <b>același Chrome</b> din care ai instalat aplicația.</p>
 </div>
 
 <div class="card">
-  <h2>1 · Ce material devine „nou”</h2>
+  <h2>1 · Ce materiale devin „noi”</h2>
+  <div class="row">
+    <button id="btn-each" class="ghost">Câte unul din fiecare tip</button>
+    <button id="btn-none" class="ghost">Golește selecția</button>
+  </div>
   <div id="list">se încarcă lista din updates.json…</div>
+  <div class="picked" id="picked"></div>
   <button id="btn-prep" class="primary" disabled>Pregătește starea</button>
   <button id="btn-reset" class="ghost">Restaurează: marchează tot citit</button>
 </div>
@@ -87,6 +97,21 @@ Deschide pagina în <b>același Chrome</b> din care ai instalat aplicația.</p>
   </select>
   <button id="btn-notif">Trimite notificarea</button>
   <div class="big" id="count" hidden></div>
+  <p class="hint">Pe Android, punctul de pe iconiță vine din notificarea rămasă activă.
+  Dacă o ștergi din bara de sus, dispare și punctul.</p>
+  <button id="btn-goto" class="ghost">Am terminat, du-mă pe Noutăți</button>
+  <p class="hint">Apasă butonul înainte de filmare dacă ai deschis regia în aplicație:
+  aplicația nu mai rămâne parcată aici, iar la atingerea iconiței ajungi unde trebuie.</p>
+</div>
+
+<div class="card">
+  <h2>3 · Test separat pentru bulina de sistem</h2>
+  <p class="hint" style="margin-top:0">Verifică dacă telefonul tău chiar desenează bulina cerută prin
+  Badging API, independent de notificări. Apeși, ieși pe ecranul de start și te uiți la iconiță.</p>
+  <div class="row">
+    <button id="btn-badge">Pune bulina (3)</button>
+    <button id="btn-badge-off" class="ghost">Stinge bulina</button>
+  </div>
 </div>
 
 <div class="card">
@@ -103,6 +128,7 @@ Deschide pagina în <b>același Chrome</b> din care ai instalat aplicația.</p>
   var ITEMS = [], reg = null, timer = null;
 
   var elList  = document.getElementById('list');
+  var elPick  = document.getElementById('picked');
   var elPrep  = document.getElementById('btn-prep');
   var elReset = document.getElementById('btn-reset');
   var elNotif = document.getElementById('btn-notif');
@@ -138,48 +164,97 @@ Deschide pagina în <b>același Chrome</b> din care ai instalat aplicația.</p>
       ['Aplicație instalată (mod standalone)', matchMedia('(display-mode: standalone)').matches ? 'da (ești în aplicație)' : 'nu (ești în browser, corect)'],
       ['Service worker activ', (navigator.serviceWorker && navigator.serviceWorker.controller) ? '<span class="ok">da</span>' : '<span class="no">nu</span>'],
       ['Permisiune notificări', perm === 'granted' ? '<span class="ok">acordată</span>' : '<span class="no">' + perm + '</span>'],
-      ['Bulină pe iconiță (Badging API)', navigator.setAppBadge ? '<span class="ok">suportat</span>' : 'nesuportat (pe Android bulina vine din notificare)'],
+      ['Badging API prezent în browser', navigator.setAppBadge ? '<span class="ok">da</span>' : '<span class="no">nu</span>'],
+      ['Notificări active acum', '<span id="d-notif">…</span>'],
       ['Categorii urmărite', interests ? interests.join(', ') : 'toate (nealese încă)'],
       ['Materiale marcate citite', String(seen.length)]
     ];
     elDiag.innerHTML = rows.map(function (r) {
       return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>';
     }).join('');
+
+    /* numărul de notificări rămase active: pe Android, ele sunt cele care
+       țin punctul aprins pe iconiță */
+    var cell = document.getElementById('d-notif');
+    if (cell && reg && reg.getNotifications) {
+      reg.getNotifications().then(function (list) {
+        cell.innerHTML = list.length ? '<span class="ok">' + list.length + '</span>' : '0';
+      }).catch(function () { cell.textContent = '?'; });
+    } else if (cell) { cell.textContent = reg ? '0' : 'fără service worker'; }
   }
 
   /* ---------- lista de materiale ---------- */
-  function renderList() {
+  /* Cel mai recent material din fiecare tip: exact ce vrei să arăți în clip,
+     ca ecranul de noutăți să iasă grupat pe Articole / Podcast / Buzzword. */
+  function newestOfEachType() {
+    var out = [];
+    TYPES.forEach(function (t) {
+      for (var i = 0; i < ITEMS.length; i++) {
+        if (ITEMS[i].type === t) { out.push(ITEMS[i].id); return; }
+      }
+    });
+    return out;
+  }
+
+  function renderList(preselected) {
     if (!ITEMS.length) { elList.textContent = 'updates.json nu s-a putut citi.'; return; }
-    var preselect = 0;
-    for (var i = 0; i < ITEMS.length; i++) { if (ITEMS[i].type === 'articol') { preselect = i; break; } }
+    var pre = preselected || newestOfEachType();
     elList.innerHTML = ITEMS.slice(0, 12).map(function (it, i) {
+      var on = pre.indexOf(it.id) > -1;
       return '<label class="item">' +
-        '<input type="radio" name="pick" value="' + i + '"' + (i === preselect ? ' checked' : '') + '>' +
+        '<input type="checkbox" name="pick" value="' + i + '"' + (on ? ' checked' : '') + '>' +
         '<span><span class="t"><span class="tag">' + esc(it.type) + '</span>' + esc(it.title) + '</span>' +
         '<br><span class="m">' + esc(it.date || '') + (it.meta ? ' · ' + esc(it.meta) : '') + '</span></span>' +
       '</label>';
     }).join('');
     elPrep.disabled = false;
+    renderPicked();
   }
 
   function picked() {
-    var el = elList.querySelector('input[name="pick"]:checked');
-    return el ? ITEMS[Number(el.value)] : null;
+    var out = [];
+    Array.prototype.forEach.call(elList.querySelectorAll('input[name="pick"]:checked'), function (el) {
+      out.push(ITEMS[Number(el.value)]);
+    });
+    return out;
   }
+
+  /* Rezumatul selecției: îți arată dinainte ce titlu va avea notificarea,
+     pentru că service workerul comasează mai multe materiale într-una singură. */
+  function renderPicked() {
+    var sel = picked();
+    if (!sel.length) { elPick.textContent = 'Nu ai bifat nimic: nu va apărea nicio noutate.'; return; }
+    elPick.textContent = sel.length === 1
+      ? 'Un material nou. Notificarea va fi „' + (sel[0].type === 'articol' ? 'Articol nou' :
+          sel[0].type === 'podcast' ? 'Podcast nou' : 'Buzzword nou') + '”.'
+      : sel.length + ' materiale noi. Notificarea va fi „' + sel.length + ' materiale noi”.';
+  }
+
+  elList.addEventListener('change', renderPicked);
+  document.getElementById('btn-each').addEventListener('click', function () {
+    renderList(newestOfEachType());
+  });
+  document.getElementById('btn-none').addEventListener('click', function () {
+    renderList([]);
+  });
 
   /* ---------- acțiuni ---------- */
   elPrep.addEventListener('click', function () {
-    var it = picked();
-    if (!it) return;
+    var sel = picked();
+    if (!sel.length) { log('nu ai bifat niciun material'); return; }
+    var ids = sel.map(function (x) { return x.id; });
 
-    /* toate materialele trec drept citite, mai puțin cel ales */
-    var seen = ITEMS.filter(function (x) { return x.id !== it.id; }).map(function (x) { return x.id; });
+    /* toate materialele trec drept citite, mai puțin cele alese */
+    var seen = ITEMS.filter(function (x) { return ids.indexOf(x.id) === -1; })
+                    .map(function (x) { return x.id; });
 
     /* categoriile: le păstrăm pe cele alese de tine, dar ne asigurăm
-       că tipul materialului ales e bifat, altfel n-ar fi semnalat deloc */
+       că tipurile materialelor alese sunt bifate, altfel n-ar fi semnalate deloc */
     var interests = read(K_INT, null);
     if (!Array.isArray(interests) || !interests.length) interests = TYPES.slice();
-    if (interests.indexOf(it.type) === -1) interests = interests.concat([it.type]);
+    sel.forEach(function (it) {
+      if (interests.indexOf(it.type) === -1) interests = interests.concat([it.type]);
+    });
 
     write(K_BASE, true);
     write(K_INT, interests);
@@ -189,7 +264,9 @@ Deschide pagina în <b>același Chrome</b> din care ai instalat aplicația.</p>
        neanunțat încă, deci notificarea se poate repeta la fiecare dublă */
     swPost({ type: 'aiah-state', state: { seen: seen, interests: interests, notified: [] } });
 
-    log('pregătit: „' + it.title + '” devine material nou (' + seen.length + ' marcate citite)');
+    log('pregătit: ' + ids.length + ' material(e) nou(i) · ' +
+        sel.map(function (x) { return x.type; }).join(', ') +
+        ' (' + seen.length + ' marcate citite)');
     renderDiag();
   });
 
@@ -243,6 +320,27 @@ Deschide pagina în <b>același Chrome</b> din care ai instalat aplicația.</p>
       elCount.textContent = left + ' s';
       if (left <= 0) { clearInterval(timer); timer = null; elCount.hidden = true; fire(); }
     }, 1000);
+  });
+
+  /* ---------- test separat de bulină ----------
+     Badging API poate exista în browser și totuși lansatorul telefonului să
+     nu deseneze nimic. Butoanele astea despart cele două cazuri. */
+  document.getElementById('btn-badge').addEventListener('click', function () {
+    if (!navigator.setAppBadge) { log('Badging API lipsește pe acest dispozitiv'); return; }
+    navigator.setAppBadge(3).then(function () {
+      log('bulina cerută (3). Ieși pe ecranul de start și uită-te la iconiță.');
+    }).catch(function (e) {
+      log('bulina a fost refuzată: ' + (e && e.message ? e.message : e));
+    });
+  });
+  document.getElementById('btn-goto').addEventListener('click', function () {
+    location.href = '/noutati.html?sursa=app';
+  });
+
+  document.getElementById('btn-badge-off').addEventListener('click', function () {
+    if (navigator.clearAppBadge) navigator.clearAppBadge().catch(function () {});
+    swPost({ type: 'aiah-badge', count: 0 });
+    log('bulina stinsă');
   });
 
   /* ---------- pornire ---------- */
