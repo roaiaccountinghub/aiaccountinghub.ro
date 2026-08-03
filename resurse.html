@@ -512,10 +512,15 @@
 <script>
 const RESOURCES = [
   /* ===== PDF ===== */
-  { type: 'pdf', kind: 'Cheat sheet · PPTX', title: 'Cei 7 pași pentru promptul perfect',
-    desc: 'Cele 7 ingrediente ale unui prompt bun + meta-promptul shortcut, sintetizate într-un cheat sheet vizual. Gata de printat sau de păstrat pe desktop. Însoțește articolul „Goana după promptul perfect".',
-    size: 'PPTX · 47 KB', cta: 'Download',
-    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Cei_7_pasi_pentru_promptul_perfect.pptx' },
+  { type: 'pdf', kind: 'Cheat sheet · PPTX', title: 'Promptul perfect, cele 14 elemente',
+    desc: 'Două one-pagere vizuale care se citesc împreună. Partea 1 e gramatica: cele 7 ingrediente ale unui prompt bun plus meta-promptul shortcut. Partea 2 e arhitectura: cele 7 elemente din 2.0, de la tag-uri XML la guardrails, plus trucul clarificărilor. Gata de printat sau de adaptat la fluxul tău. Însoțesc articolele „Goana după promptul perfect" și „Promptul perfect 2.0".',
+    size: 'PPTX · 2 fișiere',
+    files: [
+      { label: 'Partea 1 · mai', title: 'Cei 7 pași pentru promptul perfect (PPTX · 47 KB)',
+        href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Cei_7_pasi_pentru_promptul_perfect.pptx' },
+      { label: 'Partea 2 · iulie', title: 'Încă 7 pași pentru promptul perfect 2.0 (PPTX · 94 KB)',
+        href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Inca_7_pasi_pentru_promptul_perfect_2-0.pptx' },
+    ] },
   { type: 'pdf', kind: 'Ghid · PDF', title: 'GDPR în era AI',
     desc: 'Ce date poți și ce nu poți trimite în modele AI publice. Checklist practic și exemple concrete pentru firmele de contabilitate.',
     size: 'PDF · 1.8 MB', cta: 'În curând' },
@@ -553,14 +558,22 @@ const iconFor = (t) => ({
   tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>'
 }[t]);
 
+const DL_ICON = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>';
+const dlBtn = (href, label, title) =>
+  `<a href="${href}" download="${href.split('/').pop()}" class="download-btn"${title ? ` title="${title}"` : ''}>
+        ${label}
+        ${DL_ICON}
+      </a>`;
+
 function cardHTML(r) {
   const downloadUrl = r.href || r.link;
-  const action = downloadUrl
-    ? `<a href="${downloadUrl}" download="${downloadUrl.split('/').pop()}" class="download-btn">
-        Download
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-      </a>`
-    : `<span class="res-soon">În curând</span>`;
+  /* r.files = mai multe descărcări în același card; footerul trece pe două rânduri */
+  const action = r.files
+    ? `<div style="display:flex; gap:8px; flex-wrap:wrap;">${r.files.map(f => dlBtn(f.href, f.label, f.title)).join('')}</div>`
+    : downloadUrl
+      ? dlBtn(downloadUrl, 'Download')
+      : `<span class="res-soon">În curând</span>`;
+  const footerStyle = r.files ? ' style="flex-direction:column; align-items:stretch; gap:12px;"' : '';
   return `
     <div class="resource ${r.type} fade-in">
       <div class="resource-header">
@@ -569,7 +582,7 @@ function cardHTML(r) {
       </div>
       <h3>${r.title}</h3>
       <p>${r.desc}</p>
-      <div class="resource-footer">
+      <div class="resource-footer"${footerStyle}>
         <span class="resource-size">${r.size}</span>
         ${action}
       </div>

@@ -3634,9 +3634,15 @@ const resources = [
   { type: 'xls', kind: 'Template · Excel', title: 'Jurnal de vânzări AI-ready',
     desc: 'Structură standard pentru jurnalul de vânzări, pregătită pentru import automat în instrumente AI — coloane normalizate și validări.',
     size: 'XLSX · 120 KB' },
-  { type: 'pdf', kind: 'Cheat sheet · PPTX', title: 'Cei 7 pași pentru promptul perfect',
-    desc: 'Cele 7 ingrediente ale unui prompt bun + meta-promptul shortcut, sintetizate într-un cheat sheet vizual. Însoțește articolul „Goana după promptul perfect".',
-    size: 'PPTX · 47 KB', href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Cei_7_pasi_pentru_promptul_perfect.pptx' },
+  { type: 'pdf', kind: 'Cheat sheet · PPTX', title: 'Promptul perfect, cele 14 elemente',
+    desc: 'Două one-pagere vizuale care se citesc împreună: partea 1 e gramatica, cele 7 ingrediente ale unui prompt bun, iar partea 2 e arhitectura, cele 7 elemente din 2.0. Însoțesc articolele „Goana după promptul perfect" și „Promptul perfect 2.0".',
+    size: 'PPTX · 2 fișiere',
+    files: [
+      { label: 'Partea 1 · mai', title: 'Cei 7 pași pentru promptul perfect (PPTX · 47 KB)',
+        href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Cei_7_pasi_pentru_promptul_perfect.pptx' },
+      { label: 'Partea 2 · iulie', title: 'Încă 7 pași pentru promptul perfect 2.0 (PPTX · 94 KB)',
+        href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Inca_7_pasi_pentru_promptul_perfect_2-0.pptx' },
+    ] },
   { type: 'tool', kind: 'Tool · Web', title: 'Extractor BF travel PDF, imagini → Excel',
     desc: 'Drag-and-drop pentru BF scanate PDF, imagini. Extrage furnizor, CIF, total, TVA și le exportă într-un Excel gata pentru import.',
     size: 'Browser · Fără upload server' },
@@ -3656,13 +3662,20 @@ const iconFor = (t) => ({
   tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>'
 }[t]);
 const resTrack = document.getElementById('resources-track');
+const dlIcon = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>';
+const dlBtn = (href, label, title) =>
+  `<a href="${href}" download="${href.split('/').pop()}" class="download-btn" onclick="event.stopPropagation()"${title ? ` title="${title}"` : ''}>
+        ${label}
+        ${dlIcon}
+      </a>`;
 resTrack.innerHTML = resources.map(r => {
-  const action = r.href
-    ? `<a href="${r.href}" download="${r.href.split('/').pop()}" class="download-btn" onclick="event.stopPropagation()">
-        Download
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-      </a>`
-    : `<span class="res-soon">În curând</span>`;
+  /* r.files = mai multe descărcări în același card; footerul trece pe două rânduri */
+  const action = r.files
+    ? `<div style="display:flex; gap:8px; flex-wrap:wrap;">${r.files.map(f => dlBtn(f.href, f.label, f.title)).join('')}</div>`
+    : r.href
+      ? dlBtn(r.href, 'Download')
+      : `<span class="res-soon">În curând</span>`;
+  const footerStyle = r.files ? ' style="flex-direction:column; align-items:stretch; gap:12px;"' : '';
   return `
   <div class="resource ${r.type}">
     <div class="resource-header">
@@ -3671,7 +3684,7 @@ resTrack.innerHTML = resources.map(r => {
     </div>
     <h3>${r.title}</h3>
     <p>${r.desc}</p>
-    <div class="resource-footer">
+    <div class="resource-footer"${footerStyle}>
       <span class="resource-size">${r.size}</span>
       ${action}
     </div>
