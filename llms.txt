@@ -9,7 +9,7 @@
 
 - [Arhiva articolelor](https://aiaccountinghub.ro/arhiva.html): toate articolele publicate, în ordine cronologică
 - [Resurse](https://aiaccountinghub.ro/resurse.html): instrumente descărcabile gratuite pentru contabili (verificare CIF ANAF, prompturi)
-- [Buzzword](https://aiaccountinghub.ro/buzzword.html): glosar de termeni AI explicați pe înțelesul profesioniștilor contabili
+- [Buzzword](https://aiaccountinghub.ro/buzzword.html): glosar de termeni AI explicați pe înțelesul profesioniștilor contabili; fiecare termen are pagina lui, la `https://aiaccountinghub.ro/buzzword/<termen>.html` (de exemplu `/buzzword/rag.html`), cu definiție, exemple aplicate în contabilitate și, la termenii principali, întrebări frecvente
 - [Podcast](https://aiaccountinghub.ro/podcast.html): episoade audio despre AI în contabilitate
 - [Viitorul profesiei](https://aiaccountinghub.ro/viitorul-profesiei.html): program de pregătire pentru era AI
 

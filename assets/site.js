@@ -90,9 +90,15 @@
 
     if (label.includes('Copiază')) {
       btn.addEventListener('click', async () => {
+        /* Textul se poate personaliza pe pagină, prin data-share-text pe
+           .share-row (paginile de termen spun „definiția termenului”, nu
+           „articol”). Fără atribut se păstrează formularea de pe articole. */
+        const row = btn.closest('.share-row');
+        const customText = row && row.dataset.shareText;
+
         const shareData = {
           title: document.title.replace(' — AI Accounting Hub', ''),
-          text: 'Îți recomand acest articol de pe AI Accounting Hub:',
+          text: customText || 'Îți recomand acest articol de pe AI Accounting Hub:',
           url: window.location.href
         };
 
@@ -131,6 +137,24 @@
         window.print();
       });
     }
+  });
+})();
+
+/* ========== TIPĂRIRE: ACORDEOANE DESCHISE ==========
+   Un <details> închis nu se tipărește, iar CSS-ul nu îl poate forța consecvent
+   în toate browserele. Le deschidem înainte de print și le punem la loc după,
+   ca utilizatorul să regăsească pagina exact cum era. */
+(function () {
+  let reopened = [];
+
+  window.addEventListener('beforeprint', () => {
+    reopened = [...document.querySelectorAll('details:not([open])')];
+    reopened.forEach(d => d.setAttribute('open', ''));
+  });
+
+  window.addEventListener('afterprint', () => {
+    reopened.forEach(d => d.removeAttribute('open'));
+    reopened = [];
   });
 })();
 

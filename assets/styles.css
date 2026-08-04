@@ -751,3 +751,73 @@ html { scroll-behavior: smooth; }
 .is-new.term-item {
   border-color: color-mix(in oklab, var(--nou) 40%, var(--border));
 }
+
+/* ============ TIPĂRIRE ============
+   Browserele nu tipăresc fundalurile, iar tema noastră are text deschis pe
+   fundal închis: fără regulile de mai jos, pagina iese aproape goală pe hârtie.
+   Rescriem tokenii pentru cerneală și scoatem tot ce nu are sens pe foaie.
+   Se aplică la fel articolelor și paginilor de termen. */
+@media print {
+  :root,
+  [data-theme="dark"],
+  [data-theme="light"] {
+    --bg-0: #ffffff;
+    --bg-1: #ffffff;
+    --bg-2: #ffffff;
+    --bg-card: #ffffff;
+    --fg: #000000;
+    --fg-muted: #1f1f1f;
+    --fg-dim: #444444;
+    --border: #c4c4c4;
+    --border-strong: #8a8a8a;
+    --accent: #005a72;
+    --accent-2: #005a72;
+    --glow: none;
+    --shadow-lg: none;
+    --grid-line: transparent;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  body::before { display: none !important; }   /* grila decorativă de fundal */
+
+  /* Elemente de navigare și interacțiune: inutile pe hârtie */
+  .header,
+  .site-footer,
+  .theme-toggle,
+  .tshare,
+  .share-row,
+  .archive-toolbar,
+  .tnav,
+  .tback,
+  .toc,
+  .toc-mobile,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Marginile paginii tipărite */
+  @page { margin: 18mm 16mm; }
+
+  /* Legăturile nu mai sunt colorate, nu se poate da click pe hârtie */
+  a { color: #000000 !important; text-decoration: none !important; }
+
+  /* Cardurile nu se rup între foi */
+  .term-item,
+  .tex,
+  .tfaq-item,
+  .thero,
+  .article-cover,
+  .term-examples {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+
+  /* Acordeoanele închise se deschid la tipărire prin site.js (beforeprint);
+     aici doar ne asigurăm că marcajul lor nu apare pe foaie. */
+  .tfaq-item summary::after { content: '' !important; }
+}
