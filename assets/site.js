@@ -306,6 +306,60 @@ document.addEventListener("click", function (e) {
            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   }
 
+  /* ---------- contoare de aplicație ----------
+     `appinstalled` (mai jos) e un eveniment Chromium, iar pe iOS „Adaugă la
+     ecranul principal" nu declanșează absolut nimic. Dacă ne-am baza doar pe el,
+     fiecare instalare de pe iPhone ar fi invizibilă. De aceea numărăm
+     DESCHIDERILE aplicației, care se văd pe orice platformă:
+       · prima deschidere per dispozitiv ține loc de „instalare reală" — o
+         instalare pe care nimeni n-a deschis-o nu valorează nimic;
+       · deschiderile, cel mult una pe zi, arată dacă aplicația chiar e folosită.
+     Nu pleacă niciun identificator, doar numele contorului. Cheile de mai jos
+     rămân pe dispozitiv și servesc exclusiv la a nu număra de două ori. */
+  var K_APP_FIRST = 'aiah.app.first';
+  var K_APP_DAY   = 'aiah.app.day';
+
+  /* Rulează ca aplicație instalată?
+     Atenție: manifestul cere `display: minimal-ui`, deci întrebarea după
+     `standalone` singură ar răspunde „nu" pe Android și pe desktop. Verificăm
+     toate modurile fără bară de browser, plus semnalul iOS, plus parametrul din
+     `start_url` (`/noutati.html?sursa=app`) — ultimul e independent de platformă
+     și de modul de afișare, deci ține loc de plasă de siguranță. */
+  function ruleazaCaAplicatie() {
+    var moduri = ['standalone', 'minimal-ui', 'fullscreen', 'window-controls-overlay'];
+    if (window.matchMedia) {
+      for (var i = 0; i < moduri.length; i++) {
+        try {
+          if (window.matchMedia('(display-mode: ' + moduri[i] + ')').matches) return true;
+        } catch (e) {}
+      }
+    }
+    if (window.navigator.standalone === true) return true;
+    return location.search.indexOf('sursa=app') > -1;
+  }
+
+  /* Ziua locală a dispozitivului. Nu trebuie să coincidă cu fusul serverului:
+     e doar cheia prin care evităm să numărăm de două ori în aceeași zi. */
+  function ziuaLocala() {
+    var d = new Date();
+    return d.getFullYear() + '-' +
+           ('0' + (d.getMonth() + 1)).slice(-2) + '-' +
+           ('0' + d.getDate()).slice(-2);
+  }
+
+  function trackApp() {
+    if (!ruleazaCaAplicatie() || !window.aiahTrack) return;
+    if (!read(K_APP_FIRST, false)) {
+      write(K_APP_FIRST, true);
+      window.aiahTrack('pwa:first-launch');
+    }
+    var azi = ziuaLocala();
+    if (read(K_APP_DAY, '') !== azi) {
+      write(K_APP_DAY, azi);
+      window.aiahTrack('pwa:launch');
+    }
+  }
+
   /* ---------- fereastra de instalare, păstrată pentru mai târziu ---------- */
   var deferredPrompt = null;
   window.addEventListener('beforeinstallprompt', function (e) {
@@ -368,6 +422,10 @@ document.addEventListener("click", function (e) {
       return;
     }
     btn.addEventListener('click', function () {
+      /* Intenția de instalare. Comparat cu `pwa:install`, dă rata de abandon la
+         fereastra de confirmare; pe iOS și pe browserele fără instalare
+         automată e singurul semnal că cineva a vrut aplicația. */
+      if (window.aiahTrack) window.aiahTrack('pwa:install-tap');
       var result = window.aiahInstall();
       if (result === 'prompt') return;
       var helps = document.querySelectorAll('.install-help');
@@ -480,6 +538,7 @@ document.addEventListener("click", function (e) {
 
   function start() {
     registerSW();
+    trackApp();
     injectButton();
     wireCard();
     fetch(UPDATES_URL, { cache: 'no-cache' })
