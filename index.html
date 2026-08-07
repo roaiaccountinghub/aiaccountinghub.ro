@@ -35,7 +35,6 @@
    modal contact, butoane de bază) vin din assets/styles.css.
    Aici rămân doar regulile proprii homepage-ului și suprascrierile
    lui intenționate (secțiuni mai compacte, butoane mai mici etc.). */
-[data-theme="light"] section.block#resurse { background: var(--bg-0) !important; }
 /* Soften the hero text panel in light mode so text reads as "above" the image, not a white box over it */
 [data-theme="light"] .hero-headline::after {
   background: radial-gradient(ellipse 60% 80% at 28% 50%, color-mix(in oklab, var(--bg-0) 78%, transparent) 10%, color-mix(in oklab, var(--bg-0) 40%, transparent) 45%, transparent 82%);
@@ -472,7 +471,8 @@ section.block {
 /* Rândurile impare: cardul la stânga, textul la dreapta */
 .stair-row-1,
 .stair-row-3,
-.stair-row-5 {
+.stair-row-5,
+.stair-row-7 {
   justify-content: flex-start;
   transform-origin: left center;
   padding-left: 30px;
@@ -487,12 +487,13 @@ section.block {
 }
 /* STIVUIRE INVERSATĂ — 1 peste 2, 2 peste 3 … ca o scară privită din lateral.
    Astfel textul unui rând rămâne deasupra cardului de sub el, deci nu mai e tăiat. */
-.stair-row-1 { z-index: 6; }
-.stair-row-2 { z-index: 5; }
-.stair-row-3 { z-index: 4; }
-.stair-row-4 { z-index: 3; }
-.stair-row-5 { z-index: 2; }
-.stair-row-6 { z-index: 1; }
+.stair-row-1 { z-index: 7; }
+.stair-row-2 { z-index: 6; }
+.stair-row-3 { z-index: 5; }
+.stair-row-4 { z-index: 4; }
+.stair-row-5 { z-index: 3; }
+.stair-row-6 { z-index: 2; }
+.stair-row-7 { z-index: 1; }
 /* Rândul activ trece peste TOATE celelalte (și peste cel de deasupra, și peste
    cel de dedesubt), ca textul care se scrie să se vadă complet */
 .stair-row:hover,
@@ -1077,7 +1078,7 @@ section.block {
 .community-cta:hover .cc-hint-warm { background: var(--accent-warm); color: #1a0f07; border-color: var(--accent-warm); }
 
 /* ── Alternanța de culoare pe scară ──
-   Cardurile 2, 4 și 6 sunt aurii, 1, 3 și 5 clasice (cyan). `.is-warm` aplică
+   Cardurile 2, 4 și 6 sunt aurii, 1, 3, 5 și 7 clasice (cyan). `.is-warm` aplică
    tratamentul auriu pe orice card de comunitate (identic cu `.community-cta`). */
 .welcome-card.is-warm {
   background:
@@ -1960,176 +1961,6 @@ section.block {
   .cx-close svg { width: 15px; height: 15px; }
 }
 
-/* ============ RESOURCES CAROUSEL ============ */
-.resources-carousel {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  max-width: 990px;
-  margin: 0 auto;
-}
-.resources-track-wrap {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  padding: 30px 0;
-  mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
-}
-.resources-track {
-  display: flex;
-  gap: 24px;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change: transform;
-}
-.carousel-nav {
-  width: 48px; height: 48px; border-radius: 50%;
-  display: grid; place-items: center;
-  border: 1px solid var(--border-strong);
-  background: var(--bg-1);
-  color: var(--fg);
-  flex-shrink: 0;
-  transition: all 0.25s ease;
-  z-index: 2;
-}
-.carousel-nav:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  box-shadow: 0 0 24px color-mix(in oklab, var(--accent) 40%, transparent);
-  transform: scale(1.06);
-}
-.carousel-nav:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-.carousel-nav svg { width: 20px; height: 20px; }
-
-/* ============ RESOURCES ============ */
-.resources-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 990px;
-  margin: 0 auto;
-}
-.resource {
-  position: relative;
-  flex: 0 0 320px;
-  padding: 28px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--bg-1);
-  display: flex; flex-direction: column;
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease, opacity 0.5s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-}
-/* Light theme: give resource cards the same layered look as zone-2 cards */
-[data-theme="light"] .resource {
-  background:
-    radial-gradient(ellipse 120% 80% at 100% 0%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 60%),
-    linear-gradient(145deg, var(--bg-2) 0%, color-mix(in oklab, var(--bg-2) 70%, var(--bg-0)) 100%);
-  border-color: var(--border-strong);
-  box-shadow: 0 6px 18px -10px rgba(15, 61, 82, 0.18);
-}
-.resources-track .resource {
-  transform: scale(0.78);
-  filter: blur(4px);
-  opacity: 0.4;
-}
-.resources-track .resource.is-adjacent {
-  transform: scale(0.88);
-  filter: blur(1.5px);
-  opacity: 0.75;
-}
-.resources-track .resource.is-active {
-  transform: scale(1);
-  filter: blur(0);
-  opacity: 1;
-  z-index: 2;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent), 0 0 40px color-mix(in oklab, var(--accent) 25%, transparent), var(--shadow-lg);
-}
-.resource::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 10%, transparent) 0%, transparent 40%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-.resource { transition: all 0.3s ease; cursor: pointer; }
-.resource:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-lg), 0 0 0 1px color-mix(in oklab, var(--accent) 25%, transparent); }
-.resource:hover::before { opacity: 1; }
-.resource h3 { transition: color 0.25s ease; }
-.resource:hover h3 { color: var(--accent); }
-.resource:hover .download-btn {
-  background: var(--accent-2);
-  letter-spacing: 0.08em;
-  box-shadow: 0 10px 24px -8px color-mix(in oklab, var(--accent) 70%, transparent);
-}
-.resource:hover .download-btn svg { transform: translateY(2px); }
-.resource-header {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  margin-bottom: 40px;
-}
-.resource-icon {
-  width: 48px; height: 48px; border-radius: 12px;
-  display: grid; place-items: center;
-  position: relative;
-  border: 1px solid var(--border-strong);
-  background: var(--bg-2);
-}
-.resource-icon svg { width: 22px; height: 22px; }
-.resource.pdf .resource-icon { color: #fb7185; background: color-mix(in oklab, #fb7185 8%, var(--bg-2)); border-color: color-mix(in oklab, #fb7185 25%, transparent); }
-.resource.xls .resource-icon { color: #34d399; background: color-mix(in oklab, #34d399 8%, var(--bg-2)); border-color: color-mix(in oklab, #34d399 25%, transparent); }
-.resource.tool .resource-icon { color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, var(--bg-2)); border-color: color-mix(in oklab, var(--accent) 30%, transparent); }
-.resource-type {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--fg-dim);
-  padding: 4px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
-.resource h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 10px; }
-.resource p { font-size: 13px; color: var(--fg-muted); margin-bottom: 24px; line-height: 1.55; flex: 1; }
-.resource-footer {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-}
-.resource-size {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; color: var(--fg-dim);
-}
-.download-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 14px; border-radius: 8px;
-  background: var(--accent);
-  color: #07121a;
-  font-size: 12px; font-weight: 600;
-  font-family: 'JetBrains Mono', monospace;
-  letter-spacing: 0.04em; text-transform: uppercase;
-  transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
-}
-.download-btn:hover { background: var(--accent-2); letter-spacing: 0.08em; }
-.download-btn svg { transition: transform 0.25s ease; }
-.download-btn:hover svg { transform: translateY(2px); }
-.res-soon {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-  color: #fbbf24;
-  padding: 8px 12px;
-  border: 1px solid color-mix(in oklab, #fbbf24 45%, transparent);
-  background: color-mix(in oklab, #fbbf24 14%, var(--bg-2));
-  border-radius: 8px;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px -6px color-mix(in oklab, #fbbf24 40%, transparent);
-}
-
 /* Footer: definiția unică vine din assets/styles.css (identic pe toate paginile) */
 
 
@@ -2153,25 +1984,26 @@ section.block {
   /* Scara își păstrează geometria; sub 1038 px containerul se îngustează singur,
      iar textul lateral (flex: 1 1 auto) se strânge odată cu el. */
   .stair-side { padding: 14px 14px; }
-  .stair-row-1, .stair-row-3, .stair-row-5 { padding-left: 18px; }
+  .stair-row-1, .stair-row-3, .stair-row-5, .stair-row-7 { padding-left: 18px; }
   .stair-row-2, .stair-row-4, .stair-row-6 { padding-right: 18px; }
 }
 @media (max-width: 960px) {
   .stairway { padding: 4px 0 12px; }
   .stair-row { flex-direction: column; gap: 14px; transform: scale(1); filter: none; margin: 0 0 22px; text-align: center; padding-left: 0; padding-right: 0; z-index: auto; align-items: center; }
-  .stair-row-1, .stair-row-2, .stair-row-3,
-  .stair-row-4, .stair-row-5, .stair-row-6 { justify-content: center; align-items: center; transform-origin: center; padding-left: 0; padding-right: 0; margin-bottom: 22px; }
+  .stair-row-1, .stair-row-2, .stair-row-3, .stair-row-4,
+  .stair-row-5, .stair-row-6, .stair-row-7 { justify-content: center; align-items: center; transform-origin: center; padding-left: 0; padding-right: 0; margin-bottom: 22px; }
   .stair-card-wrap .flip-card,
   .stair-card-wrap .podcast-card,
   .stair-card-wrap .mission-card { aspect-ratio: auto; min-height: 280px; }
   /* pe mobil cardurile de comunitate rămân la proporția de dinainte (2,05 e prea turtit) */
   .stair-card-wrap .welcome-card { aspect-ratio: 1.82 / 1; }
   /* Mobile order: textul ÎNAINTEA cardului, pe toate rândurile.
-     - Rândurile impare (1, 3, 5): markup card → text ⇒ column-reverse.
+     - Rândurile impare (1, 3, 5, 7): markup card → text ⇒ column-reverse.
      - Rândurile pare (2, 4, 6): markup text → card ⇒ ordinea e deja bună. */
   .stair-row-1,
   .stair-row-3,
-  .stair-row-5 { flex-direction: column-reverse; }
+  .stair-row-5,
+  .stair-row-7 { flex-direction: column-reverse; }
   .stair-row-2,
   .stair-row-4,
   .stair-row-6 { flex-direction: column; }
@@ -2196,12 +2028,6 @@ section.block {
   .flip-meta { align-items: center; }
   .flip-meta .meta-l1,
   .flip-meta .meta-l2 { align-self: center; margin-left: 0; margin-right: 0; }
-  .resources-carousel { gap: 6px; }
-  .resources-track-wrap { padding: 16px 0; }
-  .carousel-nav { width: 38px; height: 38px; }
-  .resource { flex: 0 0 240px; padding: 22px; }
-  .resource-header { margin-bottom: 24px; }
-  .resource h3 { font-size: 17px; }
 }
 /* Touch / no-hover devices: always show side text */
 @media (hover: none) {
@@ -2261,12 +2087,6 @@ section.block {
   .player { gap: 14px; margin-top: 18px; }
   .play-btn { width: 46px; height: 46px; }
   .play-btn svg { width: 16px; height: 16px; }
-  /* Carousel: smaller cards so the active one fits comfortably */
-  .resource { flex: 0 0 220px; padding: 20px; }
-  .resources-track { gap: 16px; }
-  .resources-track-wrap { mask-image: none; -webkit-mask-image: none; padding: 12px 0; }
-  .carousel-nav { width: 34px; height: 34px; }
-  .carousel-nav svg { width: 16px; height: 16px; }
 }
 @media (max-width: 420px) {
   .hero { padding: 16px 14px 20px; }
@@ -2288,16 +2108,6 @@ section.block {
   .podcast-hero h3 { font-size: 18px; }
   .podcast-label { font-size: 11px; }
   .player-title { font-size: 12px; }
-  /* Resources carousel: tightest sizing for the smallest viewports */
-  .resource { flex: 0 0 200px; padding: 16px; }
-  .resource h3 { font-size: 15px; margin-bottom: 8px; }
-  .resource p { font-size: 12px; margin-bottom: 16px; }
-  .resource-header { margin-bottom: 18px; }
-  .resource-icon { width: 38px; height: 38px; }
-  .resource-icon svg { width: 18px; height: 18px; }
-  .resources-track { gap: 12px; }
-  .carousel-nav { width: 30px; height: 30px; }
-  .carousel-nav svg { width: 14px; height: 14px; }
 }
 
 </style>
@@ -2543,27 +2353,27 @@ section.block {
         </div>
       </div>
 
-      <!-- ROW 5 — ARCADE-UL CONTABILULUI (stânga, clasic) + text (dreapta) -->
+      <!-- ROW 5 — RESURSE & TOOL-URI (stânga, clasic) + text (dreapta) -->
       <div class="stair-row stair-row-5">
         <div class="stair-card-wrap">
-          <div class="welcome-card community-card" id="arcade-card"
-             aria-label="Arcade-ul Contabilului — trei mini-jocuri arcade">
+          <div class="welcome-card community-card" id="resurse-card"
+             aria-label="Resurse și tool-uri: ghiduri PDF, template-uri Excel și unelte mici">
             <div class="mission-centerpiece">
-              <div class="cc-kicker">// Joacă</div>
-              <h3 class="mission-title">Arcade-ul<br>Contabilului</h3>
-              <div class="mission-heading">Trei joculețe vibe-codate</div>
+              <div class="cc-kicker">// Download zone</div>
+              <h3 class="mission-title">Resurse &amp;<br>Tool-uri</h3>
+              <div class="mission-heading">Ghiduri, template-uri, unelte</div>
             </div>
             <span class="flip-hint cc-hint cc-hint-cyan">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
-              Intră în arcade
+              Vezi resursele
             </span>
           </div>
         </div>
         <div class="stair-side">
-          <div class="stair-side-label"><span class="line"></span>Joacă</div>
-          <h4>Trei joculețe vibe-codate între două deadline-uri.</h4>
-          <p>Dovada că umorul de breaslă nu lipsește - distracții construite cu AI — cât de departe poate merge ideea. Fără instalare, fără cont, merg direct în browser și pe telefon.</p>
-          <div class="stair-side-mono">click pentru cele trei jocuri</div>
+          <div class="stair-side-label"><span class="line"></span>Download zone</div>
+          <h4>Ghiduri, template-uri și unelte mici de lucru.</h4>
+          <p>Materiale gata de folosit: ghiduri PDF citite în 10–20 de minute, foi de calcul cu formule pre-validate și mici unelte care rulează direct în browser. Toate testate pe flux real de contabilitate, fără cont, fără newsletter, doar download.</p>
+          <div class="stair-side-mono">click pentru toate resursele</div>
         </div>
       </div>
 
@@ -2590,46 +2400,43 @@ section.block {
         </div>
       </div>
 
+      <!-- ROW 7 — ARCADE-UL CONTABILULUI (stânga, clasic) + text (dreapta) -->
+      <div class="stair-row stair-row-7">
+        <div class="stair-card-wrap">
+          <div class="welcome-card community-card" id="arcade-card"
+             aria-label="Arcade-ul Contabilului: trei mini-jocuri arcade">
+            <div class="mission-centerpiece">
+              <div class="cc-kicker">// Joacă</div>
+              <h3 class="mission-title">Arcade-ul<br>Contabilului</h3>
+              <div class="mission-heading">Trei joculețe vibe-codate</div>
+            </div>
+            <span class="flip-hint cc-hint cc-hint-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+              Intră în arcade
+            </span>
+          </div>
+        </div>
+        <div class="stair-side">
+          <div class="stair-side-label"><span class="line"></span>Joacă</div>
+          <h4>Trei joculețe vibe-codate între două deadline-uri.</h4>
+          <p>Dovada că umorul de breaslă nu lipsește: distracții construite cu AI, ca să vedem cât de departe poate merge ideea. Fără instalare, fără cont, merg direct în browser și pe telefon.</p>
+          <div class="stair-side-mono">click pentru cele trei jocuri</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- Inter-section scroll: Explorează → Download zone -->
+<!-- Inter-section scroll: Explorează → Aplicația instalabilă -->
 <div class="section-scroll" aria-hidden="false">
-  <a href="#resurse" aria-label="Scroll la secțiunea Resurse">
-    <span>Resurse</span>
+  <a href="#install" aria-label="Scroll la secțiunea Aplicația">
+    <span>Aplicația</span>
     <span class="arrow">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </span>
   </a>
 </div>
-
-<!-- RESOURCES -->
-<section class="block" id="resurse" style="background: var(--bg-0); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-  <div class="block-inner">
-    <div class="section-head">
-      <div class="section-head-left">
-        <div class="section-label">Download zone</div>
-        <h2 data-typewriter="Resurse &amp; Tool-uri.">Resurse &amp; Tool-uri.</h2>
-        <p data-typewriter="Ghiduri PDF, template-uri Excel și unelte AI mici — testate pe flux real de contabilitate. Fără cont, fără newsletter, doar download.">Ghiduri PDF, template-uri Excel și unelte AI mici — testate pe flux real de contabilitate. Fără cont, fără newsletter, doar download.</p>
-      </div>
-    </div>
-
-    <div class="resources-carousel">
-      <button class="carousel-nav" id="carousel-prev" aria-label="Resursa anterioară">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <div class="resources-track-wrap">
-        <div class="resources-track" id="resources-track">
-          <!-- injected -->
-        </div>
-      </div>
-      <button class="carousel-nav" id="carousel-next" aria-label="Resursa următoare">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
-    </div>
-  </div>
-</section>
 
 <!-- APLICAȚIA INSTALABILĂ -->
 <section class="install-band" id="install">
@@ -3174,6 +2981,39 @@ function openWelcomeModal() {
   openCx();
 }
 
+function openResurseModal() {
+  cxBack.classList.remove('podcast');
+  cxBack.dataset.kind = 'resurse';
+  cxFront.innerHTML = `
+    <div class="cx-meta">
+      <span>// Download zone</span>
+    </div>
+    <div class="cx-word" style="font-size: clamp(34px, 5vw, 52px); line-height: 1.05;">
+      Resurse &amp; Tool-uri
+    </div>
+    <div class="cx-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+      Vezi resursele
+    </div>
+  `;
+  cxBack.innerHTML = `
+    <div class="cx-label">// Ghiduri, template-uri, unelte</div>
+    <h3>Materiale de lucru, nu materiale de citit și gata</h3>
+    <div class="cx-def">
+      <p>Tot ce apare aici a trecut mai întâi printr-un flux real de contabilitate. Dacă nu a scurtat o sarcină concretă, nu a ajuns în listă.</p>
+      <p><strong>· Ghiduri PDF</strong> — materiale concise, de citit în 10–20 de minute și de aplicat în aceeași zi. Le poți printa sau salva pe telefon.<br>
+         <strong>· Dashboard-uri și template-uri Excel</strong> — foi de calcul cu structură pre-validată, formule și macro-uri. Înlocuiești datele tale și ai output-ul dorit.<br>
+         <strong>· Mici unelte executabile</strong> — aplicații ușoare care rulează direct în browser sau pe calculatorul tău, fără server și fără upload. Datele rămân la tine.</p>
+      <p>Fără cont, fără email, fără newsletter. Descarci ce îți trebuie și pleci.</p>
+    </div>
+    <a href="resurse.html" class="cx-cta cx-cta-cyan">
+      Deschide pagina de resurse
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  `;
+  openCx();
+}
+
 function openArcadeModal() {
   cxBack.classList.remove('podcast');
   cxBack.dataset.kind = 'arcade';
@@ -3340,6 +3180,15 @@ if (welcomeCardEl) {
     if (e.target.closest('a, button')) return;
     if (window.aiahTrack) window.aiahTrack('modal:comunitate');
     openWelcomeModal();
+  });
+}
+
+const resurseCardEl = document.getElementById('resurse-card');
+if (resurseCardEl) {
+  resurseCardEl.addEventListener('click', (e) => {
+    if (e.target.closest('a, button')) return;
+    if (window.aiahTrack) window.aiahTrack('modal:resurse');
+    openResurseModal();
   });
 }
 
@@ -3626,101 +3475,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && cxBackdr
 /* ========== PLAY BUTTON — Spotify modal este declanșat prin sp-trigger + data-spotify ========== */
 /* (delegarea click-urilor pe .sp-trigger[data-spotify] este în scriptul modalului Spotify) */
 
-/* ========== RESOURCES CAROUSEL ========== */
-const resources = [
-  { type: 'tool', kind: 'Tool · API', title: 'Verificare CIF — ANAF (v2)',
-    desc: 'Verificare bulk și single CIF direct din API-ul public ANAF. Versiunea 2 (recomandată): configurare externă, câmpuri la alegere și jurnal de rulare.',
-    size: 'ZIP · Tool Windows', href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AnafCIFChecker_v2.zip' },
-  { type: 'xls', kind: 'Template · Excel', title: 'Jurnal de vânzări AI-ready',
-    desc: 'Structură standard pentru jurnalul de vânzări, pregătită pentru import automat în instrumente AI — coloane normalizate și validări.',
-    size: 'XLSX · 120 KB' },
-  { type: 'pdf', kind: 'Cheat sheet · PPTX', title: 'Promptul perfect, cele 14 elemente',
-    desc: 'Două one-pagere vizuale care se citesc împreună: partea 1 e gramatica, cele 7 ingrediente ale unui prompt bun, iar partea 2 e arhitectura, cele 7 elemente din 2.0. Însoțesc articolele „Goana după promptul perfect" și „Promptul perfect 2.0".',
-    size: 'PPTX · 2 fișiere',
-    files: [
-      { label: 'Partea 1 · mai', title: 'Cei 7 pași pentru promptul perfect (PPTX · 47 KB)',
-        href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Cei_7_pasi_pentru_promptul_perfect.pptx' },
-      { label: 'Partea 2 · iulie', title: 'Încă 7 pași pentru promptul perfect 2.0 (PPTX · 94 KB)',
-        href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Inca_7_pasi_pentru_promptul_perfect_2-0.pptx' },
-    ] },
-  { type: 'tool', kind: 'Tool · Web', title: 'Extractor BF travel PDF, imagini → Excel',
-    desc: 'Drag-and-drop pentru BF scanate PDF, imagini. Extrage furnizor, CIF, total, TVA și le exportă într-un Excel gata pentru import.',
-    size: 'Browser · Fără upload server' },
-  { type: 'xls', kind: 'Template · Excel', title: 'Reconciliere bancară automată',
-    desc: 'Template cu formule și macro-uri pentru reconcilierea extraselor bancare cu jurnalul contabil — marcează automat diferențele.',
-    size: 'XLSM · 340 KB' },
-  { type: 'pdf', kind: 'Ghid · PDF', title: 'GDPR în era AI',
-    desc: 'Ce date poți și ce nu poți trimite în modele AI publice. Checklist practic și exemple concrete pentru firmele de contabilitate.',
-    size: 'PDF · 1.8 MB' },
-  { type: 'tool', kind: 'Tool · API', title: 'Verificare SAF-T',
-    desc: 'Completează template-uri pornind de la fișierul XML — validare instantanee și transpunere XML în Excel conform SAF-T.',
-    size: 'Browser · Verificare XML' },
-];
-const iconFor = (t) => ({
-  pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h1.5a1.5 1.5 0 0 1 0 3H9v-3zM9 16v3M14 13v6M14 13h2M14 16h1.5"/></svg>',
-  xls:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16M15 4v16"/></svg>',
-  tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>'
-}[t]);
-const resTrack = document.getElementById('resources-track');
-const dlIcon = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>';
-const dlBtn = (href, label, title) =>
-  `<a href="${href}" download="${href.split('/').pop()}" class="download-btn" onclick="event.stopPropagation()"${title ? ` title="${title}"` : ''}>
-        ${label}
-        ${dlIcon}
-      </a>`;
-resTrack.innerHTML = resources.map(r => {
-  /* r.files = mai multe descărcări în același card; footerul trece pe două rânduri */
-  const action = r.files
-    ? `<div style="display:flex; gap:8px; flex-wrap:wrap;">${r.files.map(f => dlBtn(f.href, f.label, f.title)).join('')}</div>`
-    : r.href
-      ? dlBtn(r.href, 'Download')
-      : `<span class="res-soon">În curând</span>`;
-  const footerStyle = r.files ? ' style="flex-direction:column; align-items:stretch; gap:12px;"' : '';
-  return `
-  <div class="resource ${r.type}">
-    <div class="resource-header">
-      <div class="resource-icon">${iconFor(r.type)}</div>
-      <span class="resource-type">${r.kind}</span>
-    </div>
-    <h3>${r.title}</h3>
-    <p>${r.desc}</p>
-    <div class="resource-footer"${footerStyle}>
-      <span class="resource-size">${r.size}</span>
-      ${action}
-    </div>
-  </div>`;
-}).join('');
 
-const resCards = [...resTrack.querySelectorAll('.resource')];
-let resIdx = Math.floor(resCards.length / 2);
-const resPrev = document.getElementById('carousel-prev');
-const resNext = document.getElementById('carousel-next');
-
-function updateCarousel() {
-  const n = resCards.length;
-  resCards.forEach((c, i) => {
-    const dist = Math.min(
-      Math.abs(i - resIdx),
-      Math.abs(i - resIdx - n),
-      Math.abs(i - resIdx + n)
-    );
-    c.classList.toggle('is-active', i === resIdx);
-    c.classList.toggle('is-adjacent', dist === 1);
-  });
-  const active = resCards[resIdx];
-  if (!active) return;
-  const wrap = resTrack.parentElement;
-  const offset = active.offsetLeft + active.offsetWidth / 2 - wrap.offsetWidth / 2;
-  resTrack.style.transform = `translateX(${-offset}px)`;
-}
-resPrev.addEventListener('click', () => { resIdx = (resIdx - 1 + resCards.length) % resCards.length; updateCarousel(); });
-resNext.addEventListener('click', () => { resIdx = (resIdx + 1) % resCards.length; updateCarousel(); });
-resCards.forEach((c, i) => c.addEventListener('click', (e) => {
-  if (e.target.closest('.download-btn, a.download-btn')) return; /* let download link fire naturally */
-  if (i !== resIdx) { resIdx = i; updateCarousel(); }
-}));
-window.addEventListener('resize', updateCarousel);
-requestAnimationFrame(updateCarousel);
 
 </script>
 </body>
