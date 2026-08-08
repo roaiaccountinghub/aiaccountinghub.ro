@@ -28,6 +28,41 @@
   window.PODCAST_EPISODES = [
     /* ---------- Sezonul 2 ---------- */
     {
+      id: "3HBHI4h8yRlAIdZUkf3pnI", slug: "comunitate", ep: "E08", group: "Sezonul 2",
+      date: "2026-08-08",
+      title: "Despre resurse libere, aplicații și ziduri inutile",
+      audioUrl: RSS + "123953848" + CF + "2026-7-8%2Fa5f3a889-f4cc-7f8e-697d-694f7936587e.m4a",
+      /* TIMPI ESTIMAȚI — media dintre marcajele din script și repartiția
+         proporțională cu lungimea capitolelor, raportată la durata reală
+         (21:52). De corectat după ascultare. */
+      chapters: [
+        { t: 0,    title: "Cold open & intro: zidul și filosofia hub-ului" },
+        { t: 348,  title: "Marea dilemă și autoironia numelui în engleză" },
+        { t: 600,  title: "Soluția: aplicația instalabilă și timpul câștigat" },
+        { t: 858,  title: "Fair-play pentru cabinete mici și liber profesioniști" },
+        { t: 1124, title: "Închidere & concluzii" }
+      ]
+    },
+    {
+      id: "4Xv8QaB6LpmZ6YHeNxgHdh", slug: "prompt-2", ep: "E07", group: "Sezonul 2",
+      date: "2026-08-08",
+      title: "Promptul perfect 2.0: de la trucuri de vocabular la arhitectură",
+      audioUrl: RSS + "123953761" + CF + "2026-7-8%2Fd21d6b8c-8f49-7aff-f5ee-5e4084d9488a.m4a",
+      /* TIMPI ESTIMAȚI — media dintre marcajele din script și repartiția
+         proporțională cu lungimea capitolelor, raportată la durata reală
+         (34:51). De corectat după ascultare. */
+      chapters: [
+        { t: 0,    title: "Cold open & intro: de ce revizuim promptul după 3 luni" },
+        { t: 250,  title: "Ce nu mai funcționează în 2026: vrăjitoriile au murit" },
+        { t: 605,  title: "Tag-urile XML: limba știută deja din SAF-T și e-Factura" },
+        { t: 939,  title: "Ordinea contează: fenomenul „Lost in the middle”" },
+        { t: 1245, title: "Guardrails și „canarul din mină”" },
+        { t: 1495, title: "Economia de tokeni și contractul de ieșire" },
+        { t: 1732, title: "Mega-promptul 2.0: cum așezăm totul în practică" },
+        { t: 1950, title: "Închidere & concluzii" }
+      ]
+    },
+    {
       id: "51MZOf3ZfOXxZYBYD86kAz", slug: "adoptare", ep: "E06", group: "Sezonul 2",
       date: "2026-07-30",
       title: "Adoptarea vs adaptarea AI în contabilitate",

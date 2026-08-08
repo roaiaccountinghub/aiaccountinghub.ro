@@ -31,12 +31,30 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sat, 01 Aug 2026 10:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2026 22:28:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Ep. 08 — Despre resurse libere, aplicații și ziduri inutile</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=3HBHI4h8yRlAIdZUkf3pnI</link>
+      <guid isPermaLink="false">aiah-podcast-e08</guid>
+      <pubDate>Sat, 08 Aug 2026 22:28:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Un șablon de o pagină, opt câmpuri obligatorii și un telefon de vânzări peste două ore. Din frustrarea asta s-a născut regula hub-ului: totul la un click, fără conturi, fără adrese colectate. Rămâne o întrebare practică: cum afli că a apărut ceva nou, dacă nimeni nu are baza ta de e-mailuri? Plus de ce un cabinet mic are toate motivele să ceară date de contact. 22 min.</description>
+    </item>
+
+    <item>
+      <title>Ep. 07 — Promptul perfect 2.0: de la trucuri de vocabular la arhitectură</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=4Xv8QaB6LpmZ6YHeNxgHdh</link>
+      <guid isPermaLink="false">aiah-podcast-e07</guid>
+      <pubDate>Sat, 08 Aug 2026 22:25:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Politețea nu mai aduce nimic în plus, „gândește pas cu pas” a devenit redundant, iar majusculele agresive fac mai mult rău decât bine. Ce contează acum e arhitectura: tag-uri XML care separă datele de instrucțiuni, dosarul sus și întrebarea jos de tot (fenomenul „Lost in the middle”), guardrails cu un canar care îți arată instant când modelul a ieșit din traseu. 35 min.</description>
+    </item>
 
     <item>
       <title>Buzzword: Workflow Automation — procesul care merge singur</title>
