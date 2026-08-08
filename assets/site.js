@@ -295,11 +295,56 @@ document.addEventListener("click", function (e) {
     }).catch(function () {});
   }
 
-  /* ---------- stare aplicație ---------- */
+  /* ---------- stare aplicație ----------
+     Rulăm CHIAR ACUM în interiorul aplicației instalate?
+     Atenție la capcană: manifestul cere `display: minimal-ui`. Android raportează
+     totuși `standalone`, dar desktopul raportează `minimal-ui`, așa că întrebarea
+     doar după `standalone` dădea „nu" în aplicația de pe calculator și butonul de
+     instalare rămânea vizibil acolo unde n-avea ce căuta. Verificăm toate modurile
+     fără bară de browser, plus semnalul propriu al iOS. */
   function isInstalled() {
-    return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
-           window.navigator.standalone === true;
+    var moduri = ['standalone', 'minimal-ui', 'fullscreen', 'window-controls-overlay'];
+    if (window.matchMedia) {
+      for (var i = 0; i < moduri.length; i++) {
+        try {
+          if (window.matchMedia('(display-mode: ' + moduri[i] + ')').matches) return true;
+        } catch (e) {}
+      }
+    }
+    return window.navigator.standalone === true;
   }
+  /* Aplicația e instalată pe dispozitiv, dar o privim dintr-o filă normală de
+     browser? `display-mode` nu poate răspunde: într-o filă e mereu „browser".
+     Singura cale e să întrebăm browserul direct.
+
+     Ce face `getInstalledRelatedApps`: e o funcție a browserului, ca `matchMedia`.
+     Se uită local, pe dispozitiv, și răspunde DOAR despre aplicațiile pe care
+     site-ul le declară ca fiind ale lui, în `related_applications` din manifest.
+     Nu poate enumera ce alte aplicații are omul instalate — restricția există
+     tocmai ca API-ul să nu poată fi folosit la amprentarea vizitatorilor. Nu
+     pleacă nimic spre niciun server, nu se scrie nimic pe disc, nu e implicată
+     nicio terță parte.
+     Disponibil doar pe Chromium și doar pe HTTPS. Pe iPhone nu există, deci
+     acolo răspunsul rămâne „nu știu" și arătăm formularea prudentă. */
+  function intreabaDacaEInstalata() {
+    if (!navigator.getInstalledRelatedApps) return Promise.resolve(false);
+    try {
+      return navigator.getInstalledRelatedApps()
+        .then(function (apps) { return !!(apps && apps.length); })
+        .catch(function () { return false; });
+    } catch (e) { return Promise.resolve(false); }
+  }
+
+  /* Scoate complet îndemnul la instalare: butonul din antet și banda de pe
+     pagina principală. Folosit și când suntem în aplicație, și când browserul
+     ne confirmă că aplicația există deja pe dispozitiv. */
+  function ascundeIndemnulDeInstalare() {
+    var btn = document.getElementById('install-btn');
+    if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+    var band = document.getElementById('install');
+    if (band) band.hidden = true;
+  }
+
   function isIOS() {
     var ua = navigator.userAgent || '';
     return /iPad|iPhone|iPod/.test(ua) ||
@@ -370,8 +415,7 @@ document.addEventListener("click", function (e) {
   window.addEventListener('appinstalled', function () {
     deferredPrompt = null;
     document.documentElement.classList.add('aiah-installed');
-    var btn = document.getElementById('install-btn');
-    if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+    ascundeIndemnulDeInstalare();
     /* Un singur contor agregat, o singură dată în viața unui dispozitiv.
        Se trimite doar numele evenimentului — niciun identificator, nimic
        care să lege două instalări între ele. */
@@ -427,9 +471,15 @@ document.addEventListener("click", function (e) {
          automată e singurul semnal că cineva a vrut aplicația. */
       if (window.aiahTrack) window.aiahTrack('pwa:install-tap');
       var result = window.aiahInstall();
-      if (result === 'prompt') return;
+      if (result === 'prompt') return;   /* fereastra nativă s-a deschis, n-avem ce explica */
       var helps = document.querySelectorAll('.install-help');
       for (var i = 0; i < helps.length; i++) helps[i].hidden = true;
+      /* Fereastra nativă n-a apărut. Dacă browserul ar fi putut confirma că
+         aplicația e deja instalată, butonul ăsta nici n-ar mai fi fost aici —
+         deci în punctul ăsta chiar nu știm. Punem întâi ipoteza cea mai
+         probabilă („poate o ai deja"), apoi pașii de instalare manuală. */
+      var poate = document.getElementById('install-help-maybe');
+      if (poate) poate.hidden = false;
       var help = document.getElementById('install-help-' + (result === 'ios' ? 'ios' : 'manual'));
       if (help) help.hidden = false;
     });
@@ -541,6 +591,14 @@ document.addEventListener("click", function (e) {
     trackApp();
     injectButton();
     wireCard();
+    /* Nu suntem în aplicație, dar poate e totuși instalată pe dispozitiv și o
+       privim dintr-o filă obișnuită. Dacă browserul ne-o confirmă, scoatem
+       îndemnul la instalare: nu are sens să-i propui cuiva ceva ce are deja. */
+    if (!isInstalled()) {
+      intreabaDacaEInstalata().then(function (instalata) {
+        if (instalata) ascundeIndemnulDeInstalare();
+      });
+    }
     fetch(UPDATES_URL, { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) { if (d) boot(d); })

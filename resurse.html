@@ -221,6 +221,181 @@
 <!-- Cloudflare Web Analytics -->
 <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
 <!-- End Cloudflare Web Analytics -->
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://aiaccountinghub.ro/resurse.html#pagina",
+      "name": "Resurse & Tool-uri",
+      "description": "Ghiduri, fișe de lucru, dashboard-uri Excel și unelte mici pentru profesioniștii contabili care lucrează cu AI.",
+      "url": "https://aiaccountinghub.ro/resurse.html",
+      "inLanguage": "ro",
+      "isPartOf": {
+        "@id": "https://aiaccountinghub.ro/#website"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "hasPart": {
+        "@id": "https://aiaccountinghub.ro/resurse.html#categorii"
+      },
+      "mainEntity": {
+        "@id": "https://aiaccountinghub.ro/resurse.html#resurse"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://aiaccountinghub.ro/resurse.html#categorii",
+      "name": "Categorii de resurse",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ghiduri & fișe de lucru",
+          "url": "https://aiaccountinghub.ro/resurse.html#rail-read"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Dashboard-uri & template-uri",
+          "url": "https://aiaccountinghub.ro/resurse.html#rail-fill"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Unelte & aplicații mici",
+          "url": "https://aiaccountinghub.ro/resurse.html#rail-run"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://aiaccountinghub.ro/resurse.html#resurse",
+      "name": "Resurse disponibile pentru descărcare",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#prompt-perfect"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#prompt-perfect-2"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#anaf-v2"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "PresentationDigitalDocument",
+      "@id": "https://aiaccountinghub.ro/resurse.html#prompt-perfect",
+      "name": "Cei 7 pași pentru promptul perfect",
+      "description": "One-pager vizual cu cele 7 ingrediente ale unui prompt bun, plus meta-promptul shortcut. Gata de printat sau de adaptat la fluxul propriu.",
+      "url": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Cei_7_pasi_pentru_promptul_perfect.pptx",
+      "encodingFormat": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Goana după promptul perfect",
+        "url": "https://aiaccountinghub.ro/2026-05-01-Goana-dupa-promptul-perfect.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
+    },
+    {
+      "@type": "PresentationDigitalDocument",
+      "@id": "https://aiaccountinghub.ro/resurse.html#prompt-perfect-2",
+      "name": "Încă 7 pași pentru promptul perfect 2.0",
+      "description": "Partea a doua: arhitectura promptului, de la tag-uri XML la guardrails, plus trucul clarificărilor.",
+      "url": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Inca_7_pasi_pentru_promptul_perfect_2-0.pptx",
+      "encodingFormat": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Promptul perfect 2.0, ce s-a schimbat în trei luni",
+        "url": "https://aiaccountinghub.ro/2026-07-31-Promptul-perfect-2.0.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://aiaccountinghub.ro/resurse.html#anaf-v2",
+      "name": "Verificare CIF — ANAF (v2)",
+      "description": "Verificare bulk și single CIF direct din API-ul public ANAF: nume firmă, plătitor TVA, stare activă și altele. Configurare externă, câmpuri la alegere, jurnal de rulare și sursele Python incluse în arhivă.",
+      "url": "https://aiaccountinghub.ro/resurse.html#rail-run",
+      "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AnafCIFChecker_v2.zip",
+      "encodingFormat": "application/zip",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows",
+      "softwareVersion": "2",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RON"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Tool-ul ANAF, versiunea 2: de la „funcționează” la „rezistă în timp”",
+        "url": "https://aiaccountinghub.ro/2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Acasă",
+          "item": "https://aiaccountinghub.ro/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Resurse",
+          "item": "https://aiaccountinghub.ro/resurse.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -415,7 +590,20 @@
 /* Fiecare resursă stă într-una din cele trei categorii: `pdf` = de citit,
    `xls` = de completat, `tool` = de rulat. Câmpul `articles` face legătura
    înapoi spre articolul care explică resursa: de ce există, cum a fost
-   construită și cum se folosește. */
+   construită și cum se folosește.
+
+   `track` = numele contorului trimis în backend la click pe download. Slug-ul e
+   ACELAȘI cu cel al link-ului scurt din /r/, ca statisticile din D1 să se poată
+   pune cap la cap cu cele de pe shortlink-uri fără mapare manuală. GitHub
+   Releases dă doar totalul cumulativ per fișier, deci defalcarea pe zile vine
+   exclusiv de aici.
+
+   ⚠ LA FIECARE RESURSĂ NOUĂ CHIAR DISPONIBILĂ, actualizează și blocul JSON-LD
+   din <head>. Nu se generează de aici, deliberat: cardurile de mai jos se
+   randează din JavaScript, iar crawlerele care nu execută JS (GPTBot,
+   ClaudeBot, PerplexityBot) n-ar vedea nici resursele, nici datele lor. Blocul
+   static din <head> e singura descriere a catalogului pe care o pot citi.
+   Resursele „În curând" nu se trec acolo: n-au adresă de descărcare. */
 const RESOURCES = [
   /* ===== DE CITIT ===== */
   { type: 'pdf', kind: 'Cheat sheet · PPTX', title: 'Promptul perfect, cele 14 elemente',
@@ -423,8 +611,10 @@ const RESOURCES = [
     size: 'PPTX · 2 fișiere',
     files: [
       { label: 'Partea 1 · mai', title: 'Cei 7 pași pentru promptul perfect (PPTX · 47 KB)',
+        track: 'resursa:prompt-perfect',
         href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Cei_7_pasi_pentru_promptul_perfect.pptx' },
       { label: 'Partea 2 · iulie', title: 'Încă 7 pași pentru promptul perfect 2.0 (PPTX · 94 KB)',
+        track: 'resursa:prompt-perfect-2',
         href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Inca_7_pasi_pentru_promptul_perfect_2-0.pptx' },
     ],
     articles: {
@@ -455,8 +645,9 @@ const RESOURCES = [
   { type: 'tool', kind: 'Tool · API', title: 'Verificare CIF — ANAF (v2)',
     desc: 'Verificare bulk și single CIF direct din API-ul public ANAF: nume firmă, plătitor TVA, stare activă și altele. Versiunea 2 adaugă configurare externă, câmpuri la alegere, jurnal de rulare și sursele Python în arhivă. Fără cont, fără instalare.',
     size: 'ZIP · Tool Windows', cta: 'Descarcă v2',
+    track: 'resursa:anaf-v2',
     href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AnafCIFChecker_v2.zip',
-    secondary: 'Recomandăm versiunea 2. Ai nevoie de varianta inițială? <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AnafCIFChecker.zip" download="AnafCIFChecker.zip">Descarcă v1</a>.',
+    secondary: 'Recomandăm versiunea 2. Ai nevoie de varianta inițială? <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AnafCIFChecker.zip" download="AnafCIFChecker.zip" data-track="resursa:anaf-v1">Descarcă v1</a>.',
     articles: {
       label: 'Cum a fost construit',
       items: [
@@ -486,8 +677,11 @@ const iconFor = (t) => ({
 const DL_ICON = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>';
 const ART_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
 
-const dlBtn = (href, label, title) =>
-  `<a href="${href}" download="${href.split('/').pop()}" class="download-btn"${title ? ` title="${title}"` : ''}>
+/* `data-track` e prins de handler-ul global din assets/site.js, care trimite
+   contorul în backend. Fire-and-forget: `keepalive` face ca cererea să plece
+   chiar dacă navigarea spre fișier începe în aceeași clipă. */
+const dlBtn = (href, label, title, track) =>
+  `<a href="${href}" download="${href.split('/').pop()}" class="download-btn"${title ? ` title="${title}"` : ''}${track ? ` data-track="${track}"` : ''}>
         ${label}
         ${DL_ICON}
       </a>`;
@@ -496,9 +690,9 @@ function cardHTML(r) {
   const downloadUrl = r.href || r.link;
   /* r.files = mai multe descărcări în același card; footerul trece pe două rânduri */
   const action = r.files
-    ? `<div style="display:flex; gap:8px; flex-wrap:wrap;">${r.files.map(f => dlBtn(f.href, f.label, f.title)).join('')}</div>`
+    ? `<div style="display:flex; gap:8px; flex-wrap:wrap;">${r.files.map(f => dlBtn(f.href, f.label, f.title, f.track)).join('')}</div>`
     : downloadUrl
-      ? dlBtn(downloadUrl, r.cta && r.cta !== 'În curând' ? r.cta : 'Download')
+      ? dlBtn(downloadUrl, r.cta && r.cta !== 'În curând' ? r.cta : 'Download', null, r.track)
       : `<span class="res-soon">În curând</span>`;
   const footerStyle = r.files ? ' style="flex-direction:column; align-items:stretch; gap:12px;"' : '';
   /* Trimiterea înapoi la articol: contextul în care resursa capătă sens */

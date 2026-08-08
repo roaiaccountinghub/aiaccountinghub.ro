@@ -12,6 +12,10 @@
   "lang": "ro",
   "dir": "ltr",
   "categories": ["education", "business", "news"],
+  "related_applications": [
+    { "platform": "webapp", "url": "https://aiaccountinghub.ro/manifest.json" }
+  ],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/assets/icons/app-192.png",

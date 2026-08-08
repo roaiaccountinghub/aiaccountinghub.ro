@@ -2467,6 +2467,20 @@ section.block {
       </div>
 
       <!-- afișate doar dacă browserul nu poate porni singur instalarea -->
+      <!-- Când fereastra nativă nu apare, cel mai frecvent motiv pe Chrome sau Edge
+           nu e că browserul n-ar putea, ci că aplicația e deja instalată. Acolo unde
+           browserul ne poate confirma asta, butonul dispare cu totul și blocul de mai
+           jos nu se mai vede niciodată. Pe iPhone însă nu există nicio cale de a ști,
+           deci formulăm prudent și îi arătăm omului unde s-o caute. -->
+      <div class="install-help" id="install-help-maybe" hidden>
+        <strong>Este posibil ca aplicația să fie deja instalată pe dispozitivul tău.</strong>
+        Browserul nu a deschis fereastra de instalare, iar cel mai des asta înseamnă că aplicația există deja. Caut-o întâi:
+        <ol>
+          <li>Pe telefon, iconița <em>AI Accounting Hub</em> stă pe ecranul principal sau în sertarul de aplicații.</li>
+          <li>Pe desktop, în meniul Start (Windows) sau în Launchpad (Mac). O găsești și scriind <em>chrome://apps</em> în Chrome, respectiv <em>edge://apps</em> în Edge.</li>
+          <li>Dacă tot nu o găsești, urmează pașii de mai jos.</li>
+        </ol>
+      </div>
       <div class="install-help" id="install-help-ios" hidden>
         <strong>Pe iPhone și iPad, pasul se face din Safari:</strong>
         <ol>
