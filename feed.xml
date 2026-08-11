@@ -31,12 +31,75 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sat, 08 Aug 2026 22:28:00 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2026 22:25:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <!-- ============================================================
+         PROIECTUL AI JOURNAL — publicat pe 11.08.2026: cele patru articole
+         principale plus activitatea S1. Activitățile S2-S6 au fișierele
+         urcate de la aceeași dată, dar se anunță aici câte una pe săptămână
+         (blocurile gata de lipit: _nepublicat/AI-Journal-republicare-saptamanal.md).
+         Aici apar invers, cel mai nou primul, cu ore decalate ca să
+         păstreze ordinea în cititoarele de feed.
+         ============================================================ -->
+
+    <item>
+      <title>Ep. 09 — Zece minute cu „AI Journal” lângă cafea</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=0Vk1a5yXg4HkY7vtV192HD</link>
+      <guid isPermaLink="false">aiah-podcast-e09</guid>
+      <pubDate>Tue, 11 Aug 2026 22:25:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Patru direcții într-un singur episod: unde suntem după datele Eurostat, de ce salvăm zeci de linkuri fără să le deschidem vreodată, ce e AI Journal pe dinăuntru, de la cele două casete până la ce se întâmplă când lipsești o săptămână, și cum verifici singur un fișier HTML descărcat de pe internet. 16 min.</description>
+    </item>
+
+    <item>
+      <title>Descarci un fișier HTML. Ce poate face, ce nu poate — și cum verifici singur</title>
+      <link>https://aiaccountinghub.ro/2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html</guid>
+      <pubDate>Tue, 11 Aug 2026 09:30:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Ezitarea dinaintea unui dublu-click e reflexul corect. Ce poate face cu adevărat o pagină HTML pusă pe calculatorul tău, ce nu poate face deloc, și trei feluri de a verifica singur în sub cinci minute: tabul Network, zece cuvinte căutate cu Ctrl+F și un prompt de verificare gata de copiat pentru un asistent AI. 14 min.</description>
+    </item>
+
+    <item>
+      <title>Două casete și o cafea. Tot ce ai de completat în Jurnalul AI</title>
+      <link>https://aiaccountinghub.ro/2026-08-11-AI-Journal-doua-casete-si-o-cafea.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-11-AI-Journal-doua-casete-si-o-cafea.html</guid>
+      <pubDate>Tue, 11 Aug 2026 09:20:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Ghidul vizual al jurnalului, cu capturi și clipuri din aplicație: prima deschidere, de ce butonul Start nu cere nicio configurare, scrisoarea din prima zi, cele două casete de completat și de ce a doua poate rămâne goală fără să te coste nimic. Plus ce se întâmplă când lipsești câteva zile și jurnalul te întreabă singur cum reiei, recapitularea săptămânală cu mini-quiz și termenul 31, Human-in-the-Loop. 14 min.</description>
+    </item>
+
+    <item>
+      <title>Obiceiul nu se construiește. Se lipește</title>
+      <link>https://aiaccountinghub.ro/2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html</guid>
+      <pubDate>Tue, 11 Aug 2026 09:10:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Am construit Buzzword pentru o nevoie reală, apoi ne-am uitat la cum e folosit: omul intră o dată, mai intră o dată și gata. Nu conținutul lipsea, ci mecanismul care îl aduce înapoi mâine. Ce am luat din Atomic Habits: stratificarea peste o ancoră existentă, regula celor două minute și platoul potențialului latent. 13 min.</description>
+    </item>
+
+    <item>
+      <title>Europa a accelerat cu 48% într-un an. Noi am rămas la 5,2%</title>
+      <link>https://aiaccountinghub.ro/2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html</guid>
+      <pubDate>Tue, 11 Aug 2026 09:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Pachetul „State of the Digital Decade 2026”, raportul de țară și Eurobarometrul special, publicate toate pe 17 iunie 2026. Media europeană a urcat de la 13,5% la 20% dintre firme, noi am rămas la 5,2%. Iar bariera nr. 1 declarată de românii înșiși pentru AI generativ nu e prețul și nu e frica: e lipsa formării. 11 min.</description>
+    </item>
+
+    <item>
+      <title>AI Jurnal S1 — Familiarizare: alege-ți tool-ul și umblă prin el</title>
+      <link>https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html</guid>
+      <pubDate>Tue, 11 Aug 2026 08:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Nu ai deschis niciodată un program nou de contabilitate direct pe balanța de decembrie. Prima săptămână din jurnal nu produce nimic și exact asta e ideea: un singur asistent, toate setările deschise, trei conversații fără nicio miză și același răspuns cerut în trei formate diferite. 8 min.</description>
+    </item>
 
     <item>
       <title>Ep. 08 — Despre resurse libere, aplicații și ziduri inutile</title>

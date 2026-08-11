@@ -59,8 +59,17 @@
 .callout .cbody strong { color: var(--accent); }
 .article-end { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
 .tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 10px; border-radius: 6px; background: var(--bg-2); border: 1px solid var(--border); color: var(--fg-muted); transition: all 0.2s; }
-.tag:hover { border-color: var(--accent); color: var(--accent); }
+/* Etichetele de la finalul articolului sunt semnal de conținut, nu navigație:
+   <span>, nu <a>. Fără stare de hover și fără tranziție, ca să nu promită o
+   acțiune care nu există. Accentul e purtat permanent; în tema hârtie el devine
+   #0e7490, tonul întunecat ales pentru contrast, deci ambele teme rămân lizibile. */
+.tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  padding: 6px 10px; border-radius: 6px;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+}
 .author-card { margin: 72px 0 0; padding: 32px; border-radius: 18px; border: 1px solid var(--border-strong); background: radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%), var(--bg-1); display: flex; gap: 24px; align-items: flex-start; }
 .author-card .author-avatar { width: 64px; height: 64px; font-size: 20px; }
 .author-card h3 { font-size: 20px; margin-bottom: 6px; }
@@ -181,4 +190,81 @@
   .stat-card { padding: 20px 18px 18px; }
   .stat-hero { grid-template-columns: 1fr; gap: 14px; }
   .table-wrap { border-radius: 10px; }
+}
+
+/* ===================================================================
+   TABEL RESPONSIV — „t-stack”
+   -------------------------------------------------------------------
+   Marcajul rămâne un <table> complet: thead, tbody, th, td. Crawlerele,
+   cititoarele de ecran și Search Console văd exact aceeași structură ca
+   pe desktop. Sub 640px fiecare rând devine un card, iar fiecare celulă
+   își primește eticheta coloanei din atributul data-label. Zero derulare
+   pe orizontală, zero text tăiat.
+
+   Cum se folosește: class="compare-table t-stack" (sau doar class="t-stack"
+   pe tabelele fără compare-table) + data-label="<antetul coloanei>" pe
+   fiecare <td>. Antetul rămâne în DOM, doar ascuns vizual.
+
+   Selectorii sunt prefixați cu .prose ca să bată regulile locale de tabel
+   din <style>-ul fiecărui articol, care se încarcă după acest fișier.
+   =================================================================== */
+.prose .t-stack td:first-child { white-space: normal; }
+
+@media (max-width: 640px) {
+  .prose .t-stack,
+  .prose .t-stack tbody,
+  .prose .t-stack tr,
+  .prose .t-stack td { display: block; width: 100%; }
+
+  .prose .t-stack { border-collapse: collapse; margin: 22px 0; font-size: 14.5px; }
+
+  /* Antetul rămâne citibil pentru roboți și pentru cititoarele de ecran. */
+  .prose .t-stack thead {
+    position: absolute; width: 1px; height: 1px;
+    margin: -1px; padding: 0; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+
+  .prose .t-stack tr {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-1);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .prose .t-stack tr:last-child { margin-bottom: 0; }
+
+  .prose .t-stack td {
+    border: none;
+    padding: 0 0 12px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+  }
+  .prose .t-stack td:last-child { padding-bottom: 0; border-bottom: none; }
+  .prose .t-stack td strong { color: var(--fg); }
+
+  .prose .t-stack td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+
+  /* Prima celulă e titlul cardului: fără etichetă, corp mai apăsat. */
+  .prose .t-stack td:first-child {
+    font-size: 15.5px; font-weight: 600; color: var(--fg);
+    padding: 0 0 12px; margin-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .prose .t-stack td:first-child::before { display: none; }
+
+  /* Zebra și hover nu au sens pe carduri. */
+  .prose .t-stack tbody tr:nth-child(even) { background: var(--bg-1); }
+  .prose .t-stack tbody tr:hover td { background: transparent; }
+
+  /* Containerul cu scroll orizontal devine inutil când rândurile sunt carduri. */
+  .prose .table-wrap.is-stacked { border: none; border-radius: 0; overflow: visible; background: none; }
 }

@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Europa a accelerat cu 48% într-un an. Noi am rămas la 5,2% — AI Accounting Hub</title>
+<meta name="description" content="Rapoartele europene din 17 iunie 2026 confirmă: decalajul României la AI nu s-a închis, s-a adâncit. Iar bariera pe care o declară românii înșiși nu e prețul și nu e frica — este lipsa formării.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Europa a accelerat cu 48% într-un an. Noi am rămas la 5,2%">
+<meta property="og:description" content="Ce s-a publicat pe 17 iunie 2026, ce s-a mișcat, ce nu — și de ce bariera nr. 1 declarată de români pentru AI generativ este lipsa formării.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Europa a accelerat cu 48% într-un an. Noi am rămas la 5,2%">
+<meta name="twitter:description" content="Decalajul nu s-a închis, s-a adâncit. Iar motivul declarat de românii înșiși nu e prețul, ci lipsa formării.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+.prose tbody tr:hover td { background: color-mix(in oklab, var(--accent) 3%, transparent); }
+.stat-card { position: relative; padding: 24px 26px 22px; border-radius: 16px; border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent); background: radial-gradient(ellipse 90% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%), var(--bg-1); overflow: hidden; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Bara de bariere din Eurobarometru — bare orizontale simple, fără librării */
+.bars { margin: 28px 0; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); padding: 22px 24px; }
+.bars .bars-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 4px; }
+.bars .bars-sub { font-size: 13px; color: var(--fg-dim); margin-bottom: 18px; }
+.bar-row { display: grid; grid-template-columns: 1fr 46px; align-items: center; gap: 14px; margin-bottom: 14px; }
+.bar-row:last-of-type { margin-bottom: 0; }
+.bar-label { font-size: 14.5px; color: var(--fg-muted); line-height: 1.4; }
+.bar-label strong { color: var(--fg); }
+.bar-track { grid-column: 1 / -1; height: 8px; border-radius: 999px; background: color-mix(in oklab, var(--fg) 8%, transparent); overflow: hidden; margin-top: -6px; }
+.bar-fill { height: 100%; border-radius: 999px; background: var(--accent); }
+.bar-fill.dim { background: color-mix(in oklab, var(--accent) 45%, transparent); }
+.bar-val { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--fg); text-align: right; }
+
+/* Blocul „ce s-a schimbat / ce nu" */
+.delta { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+.delta > div { border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); padding: 20px 22px; }
+.delta .k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 10px; }
+.delta .v { font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 600; color: var(--fg); line-height: 1.1; margin-bottom: 8px; }
+.delta p { font-size: 14px; color: var(--fg-muted); margin: 0; line-height: 1.5; }
+@media (max-width: 640px) { .delta { grid-template-columns: 1fr; } }
+
+@media (max-width: 420px) {
+  .prose table { font-size: 12px; }
+  .prose th, .prose td { padding: 8px 10px; }
+}
+@media (max-width: 720px) {
+  .prose table { font-size: 13px; }
+  .prose th, .prose td { padding: 10px 12px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Europa a accelerat cu 48% într-un an. Noi am rămas la 5,2%",
+  "description": "Rapoartele europene din 17 iunie 2026 confirmă: decalajul României la AI nu s-a închis, s-a adâncit. Bariera declarată de românii înșiși este lipsa formării.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "inLanguage": "ro",
+  "articleSection": "AI Journal",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+<!-- Date structurate (JSON-LD) - Intrebari frecvente (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Cât de mare e decalajul României la adopția AI în firme, față de media UE?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Datele Eurostat pentru anul de referință 2025, publicate pe 17 iunie 2026 în pachetul „State of the Digital Decade 2026”, arată 5,2% dintre firmele din România care folosesc tehnologii AI, față de o medie europeană de 20%. Media UE a urcat de la 13,5% la 20% într-un singur an, adică o creștere de 48%, în timp ce procentul românesc a rămas pe loc. Decalajul nu s-a păstrat, s-a mărit. Pe ultimele locuri sunt România, Polonia (8%) și Bulgaria, Grecia și Cipru (9% fiecare); în frunte, Danemarca (42%), Finlanda (38%), Suedia și Belgia (35%)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Care este principala barieră declarată de români pentru folosirea AI generativ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lipsa formării sau a competențelor relevante, indicată de 28% dintre respondenți în Eurobarometrul special „Digital Decade 2026”, cu teren desfășurat în februarie și martie 2026. Urmează confidențialitatea și protecția datelor (26%) și riscul pierderii locurilor de muncă (26%). Este singura barieră din listă pe care o persoană o poate dărâma singură, fără să depindă de un furnizor de software, de o strategie națională sau de un abonament mai ieftin."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "De ce nu se rezolvă lipsa competențelor AI cu un curs de două zile?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pentru că AI-ul nu se învață prin expunere la informație, ca legislația fiscală, ci prin repetiție în contexte reale, ca Excel-ul. Studiul Phillippa Lally (University College London, 2010) a găsit o mediană de 66 de zile până când un comportament nou devine automat, iar zona de risc maxim sunt primele 30 de zile. Ce lipsește nu este conținutul, care există gratuit și în exces, ci mecanismul care te aduce înapoi a doua zi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum stă România la ceilalți indicatori digitali măsurați de Eurostat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tiparul se repetă: 22% dintre firme folosesc cloud sofisticat sau intermediar, față de 47% media UE; 32% dintre persoanele de 16 până la 74 de ani au competențe digitale de bază, față de 60% media UE și o țintă europeană de 80% pentru 2030; 17% folosesc servicii de e-guvernare, ultimul loc în Uniune; doar 2% dintre IMM-uri au intensitate digitală foarte ridicată. Există și o excepție în sens invers: femeile reprezintă 27,8% dintre specialiștii IT angajați în România, cea mai mare pondere din UE, unde media este 19,5%."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Decalajul se adâncește</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">AI Journal</span>
+      <span>11 august 2026</span>
+      <span class="sep">·</span>
+      <span>11 min citire</span>
+      <span class="sep">·</span>
+      <span>AI literacy · România</span>
+    </div>
+
+    <h1>Europa a accelerat cu 48% într-un an. <span class="accent">Noi am rămas la 5,2%</span> — și românii spun singuri de ce</h1>
+    <p class="article-lede">
+      Pe 17 iunie 2026, Comisia Europeană a publicat pachetul „State of the Digital Decade”, raportul de țară pentru România și un Eurobarometru special. Cifra care ne interesa cel mai mult nu s-a mișcat. S-a mișcat, în schimb, media europeană — semnificativ. Iar în Eurobarometru apare, negru pe alb, motivul principal pe care îl invocă românii pentru care nu folosesc AI generativ. Nu e prețul. Nu e frica de concediere. Este lipsa formării.
+    </p>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s0">Ce s-a publicat pe 17 iunie</a>
+        <a href="#s1">Cifra care s-a mișcat și cifra care n-a</a>
+        <a href="#s2">Nu e un indicator izolat</a>
+        <a href="#s3">Ce spun românii despre ei înșiși</a>
+        <a href="#s4">Aceeași concluzie, într-o sală din Oradea</a>
+        <a href="#s5">De ce „lipsa formării” nu se rezolvă cu un curs</a>
+        <a href="#s6">Ce am construit între timp</a>
+        <a href="#s7">Ce faci luni dimineață</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">11.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// Editorial · Digital Decade 2026 · Eurobarometru · CECCAR</div>
+    </div>
+
+    <div class="prose">
+
+      <!-- S0 -->
+      <h2 id="s0">Ce s-a publicat pe 17 iunie</h2>
+      <p>
+        În mai am scris despre două cifre Eurostat care ne așezau ultimii în Uniune: <strong>5,21%</strong> dintre firmele din România foloseau tehnologii AI și <strong>17,8%</strong> dintre români folosiseră AI generativ. Articolul se încheia cu o promisiune implicită: revenim când apar date noi.
+      </p>
+      <p>Au apărut. Pe 17 iunie 2026, Comisia Europeană a publicat, în aceeași zi, trei lucruri relevante:</p>
+      <ul>
+        <li>Pachetul <strong>„State of the Digital Decade 2026”</strong>, evaluarea la jumătatea drumului către țintele digitale pentru 2030.</li>
+        <li><strong>Raportul de țară pentru România</strong>, cu recomandări specifice.</li>
+        <li><strong>Eurobarometrul special Digital Decade 2026</strong>, cu teren desfășurat în februarie–martie 2026 și cu o fișă separată pentru fiecare stat membru, inclusiv România.</li>
+      </ul>
+      <p>
+        Primele două confirmă ce știam. Al treilea spune ceva ce nu știam, și e partea cea mai utilă a acestui articol. Dar hai să le luăm pe rând.
+      </p>
+
+      <!-- S1 -->
+      <h2 id="s1">Cifra care s-a mișcat și cifra care n-a</h2>
+      <p>
+        Datele Eurostat pe care se sprijină rapoartele sunt tot cele colectate pentru anul de referință 2025, deci procentele naționale sunt aceleași ca în mai. Ce e nou e <em>viteza</em> la care se mișcă restul Europei, calculată explicit de Comisie.
+      </p>
+
+      <div class="delta">
+        <div>
+          <div class="k">Media UE — firme care folosesc AI</div>
+          <div class="v">13,5% → 20,0%</div>
+          <p>Plus 6,5 puncte procentuale față de 2024, o creștere de <strong>48% într-un singur an</strong>, cifră calculată explicit în raportul Comisiei.</p>
+        </div>
+        <div>
+          <div class="k">România — firme care folosesc AI</div>
+          <div class="v">5,2%</div>
+          <p>Ultimul loc în UE, urmată de Polonia (8%) și de Bulgaria, Grecia și Cipru (9% fiecare). Liderii: Danemarca 42%, Finlanda 38%, Suedia și Belgia 35%.</p>
+        </div>
+      </div>
+
+      <p>
+        Aici e miezul problemei și motivul pentru care merita un articol nou. <strong>Un decalaj static și un decalaj care se lărgește sunt două lucruri diferite.</strong> În mai vorbeam despre o distanță de aproape 4 ori față de media europeană. Distanța aceea nu s-a păstrat: s-a mărit, pentru că restul continentului a apăsat pedala într-un an în care noi am stat.
+      </p>
+      <blockquote>
+        Când ceilalți accelerează cu 48% și tu rămâi pe loc, nu pierzi teren proporțional. Pierzi teren compus.
+      </blockquote>
+
+      <!-- S2 -->
+      <h2 id="s2">Nu e un indicator izolat</h2>
+      <p>
+        Tentația firească e să spui: bine, AI-ul e nou, mai avem timp. Problema e că indicatorul de AI nu stă singur. Se așază peste un tipar care se repetă la aproape fiecare capitol digital măsurat de Eurostat pentru 2025.
+      </p>
+
+      <div class="table-wrap is-stacked">
+        <table class="t-stack">
+          <thead>
+            <tr>
+              <th>Indicator (Eurostat, 2025)</th>
+              <th>România</th>
+              <th>Media UE</th>
+              <th>Poziție</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Indicator (Eurostat, 2025)"><strong>Firme care folosesc tehnologii AI</strong></td>
+              <td data-label="România"><strong>5%</strong></td>
+              <td data-label="Media UE">20%</td>
+              <td data-label="Poziție">ultimul loc</td>
+            </tr>
+            <tr>
+              <td data-label="Indicator (Eurostat, 2025)"><strong>Firme cu cloud sofisticat sau intermediar</strong></td>
+              <td data-label="România"><strong>22%</strong></td>
+              <td data-label="Media UE">47%</td>
+              <td data-label="Poziție">penultimele trei</td>
+            </tr>
+            <tr>
+              <td data-label="Indicator (Eurostat, 2025)"><strong>Persoane cu competențe digitale de bază</strong> (16–74 ani)</td>
+              <td data-label="România"><strong>32%</strong></td>
+              <td data-label="Media UE">60%</td>
+              <td data-label="Poziție">ultimul loc</td>
+            </tr>
+            <tr>
+              <td data-label="Indicator (Eurostat, 2025)"><strong>Utilizarea serviciilor de e-guvernare</strong></td>
+              <td data-label="România"><strong>17%</strong></td>
+              <td data-label="Media UE">—</td>
+              <td data-label="Poziție">ultimul loc (Finlanda și Danemarca: 91%)</td>
+            </tr>
+            <tr>
+              <td data-label="Indicator (Eurostat, 2025)"><strong>IMM-uri cu intensitate digitală foarte ridicată</strong></td>
+              <td data-label="România"><strong>2%</strong></td>
+              <td data-label="Media UE">—</td>
+              <td data-label="Poziție">ultimul loc</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Ținta europeană pentru 2030 la competențe digitale de bază este 80%. UE e la 60%. Noi, la 32%. Ținta pentru IMM-uri cu intensitate digitală măcar bazală este 90%; media UE e la 71%.
+      </p>
+      <p>
+        Și totuși, fiindcă e o cifră care contrazice narativul comod al „țării care nu poate”, la un capitol suntem <strong>primii din Uniune</strong>: femeile reprezintă 27,8% dintre specialiștii IT angajați în România, cea mai mare pondere din UE, unde media e 19,5%.
+      </p>
+      <p>
+        Deci nu e o problemă de capacitate tehnică. Rămâne exact diagnosticul din mai, doar că acum e confirmat de trei documente în plus: <strong>problema e de adopție.</strong>
+      </p>
+
+      <!-- S3 -->
+      <h2 id="s3">Ce spun românii despre ei înșiși</h2>
+      <p>
+        Aici intervine Eurobarometrul. Până acum, când discutam de ce nu se folosește AI în România, invocam ipoteze: prețul abonamentelor, teama de GDPR, neîncrederea, lipsa timpului. Ipoteze rezonabile, dar ipoteze.
+      </p>
+      <p>
+        Sondajul din februarie–martie 2026 a întrebat direct. Iată ce au răspuns respondenții din România, când li s-a cerut să numească principalele obstacole în calea folosirii instrumentelor de AI generativ:
+      </p>
+
+      <div class="bars">
+        <div class="bars-title">// Bariere declarate — AI generativ, România</div>
+        <div class="bars-sub">Eurobarometru special „Digital Decade 2026”, teren februarie–martie 2026</div>
+
+        <div class="bar-row">
+          <div class="bar-label"><strong>Lipsa formării sau a competențelor relevante</strong> pentru a le folosi</div>
+          <div class="bar-val">28%</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">Confidențialitatea și protecția datelor</div>
+          <div class="bar-val">26%</div>
+          <div class="bar-track"><div class="bar-fill dim" style="width:93%"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">Riscul pierderii locurilor de muncă</div>
+          <div class="bar-val">26%</div>
+          <div class="bar-track"><div class="bar-fill dim" style="width:93%"></div></div>
+        </div>
+      </div>
+
+      <p>
+        Citește încă o dată prima linie. Bariera pe care românii o pun pe primul loc <strong>nu este una pe care o poate rezolva o firmă de software, un guvern sau un abonament mai ieftin.</strong> Este una care se rezolvă cu timp petrecut lucrând cu instrumentul.
+      </p>
+      <p>
+        Din aceeași fișă de țară mai reținem două lucruri. Primul: doar <strong>59% dintre români</strong> consideră politica digitală o prioritate ridicată pentru UE, față de <strong>79%</strong> media europeană. Al doilea: <strong>64%</strong> dintre români susțin că dezvoltarea AI ar trebui reglementată atent, chiar dacă asta îi constrânge pe dezvoltatori, față de 80% media UE.
+      </p>
+      <p>
+        Nu suntem, așadar, o țară speriată de AI care cere frâne. Suntem o țară care, în bună măsură, încă nu s-a apropiat suficient de subiect cât să aibă o opinie fermă despre el. Iar prioritatea nr. 1 pe care o cer românii pentru deceniul următor confirmă: <strong>77% vor ca instrumentele digitale să devină mai accesibile pentru toată lumea</strong>.
+      </p>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Traducere practică:</strong> problema declarată de populație este exact problema pe care o poate rezolva educația aplicată. Nu o strategie națională, nu o subvenție. Un om, un instrument, un exercițiu, repetat.
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <h2 id="s4">Aceeași concluzie, într-o sală din Oradea</h2>
+      <p>
+        La o lună după rapoartele europene, pe <strong>13 iulie 2026</strong>, CECCAR a organizat ediția a XXII-a a Zilei Naționale a Contabilului Român. Tema aleasă pentru acest an spune totul despre unde e profesia: <strong>„#SmartAccounting powered by AI. A fi sau a nu fi?”</strong>
+      </p>
+      <p>
+        La Oradea, filiala CECCAR Bihor a reunit experți contabili, reprezentanți ai instituțiilor publice și specialiști în tehnologie. Renate Popescu, președintele filialei, a formulat problema într-un fel care merită reținut:
+      </p>
+      <blockquote>
+        „Întrebarea nu este dacă inteligența artificială poate și va schimba profesia contabilă. Întrebarea corectă este dacă suntem noi pregătiți să ne schimbăm împreună cu inteligența artificială. Dacă rămânem ancorați în trecut, vom fi depășiți de firmele și cabinetele care aleg să evolueze.”
+        <cite>Renate Popescu, președinte CECCAR Bihor · 13 iulie 2026</cite>
+      </blockquote>
+      <p>
+        Din același panel, trei observații care se potrivesc surprinzător de bine cu ce scriem aici de luni de zile.
+      </p>
+      <p>
+        <strong>Despre date structurate.</strong> Cristian Toma, expert contabil și reprezentant Saga Software, a explicat că povestea nu începe acum doi ani, ci acum cinci-șase, odată cu digitalizarea relației cu statul: „Inteligența artificială funcționează cu atât mai bine cu cât informațiile sunt mai bine structurate.” E, în alte cuvinte, exact argumentul pentru care contabilul pornește cu un avantaj: lucrează deja cu date structurate.
+      </p>
+      <p>
+        <strong>Despre confidențialitate.</strong> Tot Cristian Toma, cu o formulare pe care o recomandăm afișată lângă monitor:
+      </p>
+      <blockquote>
+        „Nu voi recomanda niciodată încărcarea într-un sistem AI public a unui stat de salarii care conține nume, CNP-uri sau alte date personale. Vorbim despre informații sensibile, iar orice aplicație conectată la internet poate avea vulnerabilități. Confidențialitatea trebuie să rămână prioritatea numărul unu.”
+        <cite>Cristian Toma, expert contabil</cite>
+      </blockquote>
+      <p>
+        <strong>Despre verificare.</strong> Alin Hucea, specialist în dezvoltarea de soluții AI, a comparat AI-ul cu un coleg junior: rapid, neobosit, dar care greșește și trebuie verificat permanent. Și a adăugat propoziția care rezumă întregul articol de față: <em>„Nu cred că inteligența artificială va înlocui contabilii. Cred însă că un contabil care știe să folosească AI îl va înlocui pe unul care refuză să o înțeleagă.”</em>
+      </p>
+      <p>
+        Nu e o coincidență că raportul Comisiei Europene și un panel de la Oradea ajung la aceeași concluzie prin drumuri complet diferite. Când datele macro și experiența de teren spun același lucru, de obicei lucrul acela e adevărat.
+      </p>
+
+      <!-- S5 -->
+      <h2 id="s5">De ce „lipsa formării” nu se rezolvă cu un curs</h2>
+      <p>
+        Reacția instituțională standard la „lipsa competențelor” este un curs. Două zile, un certificat, o poză de grup. Am făcut instruire, bifat.
+      </p>
+      <p>
+        Problema e că AI-ul nu se învață ca legislația fiscală, prin expunere la informație. Se învață ca Excel-ul: prin repetiție, în contexte reale, cu greșeli proprii. Nimeni nu a devenit bun la Excel după un curs de două zile. A devenit bun după al treilea raport lunar făcut sub presiune.
+      </p>
+      <p>
+        Am scris în mai despre studiul Phillippa Lally (University College London, 2010): mediana până când un comportament nou devine automat a fost de <strong>66 de zile</strong>, nu 21. Iar zona de risc maxim sunt primele 30. Acolo se pierd cei mai mulți. Acolo închizi tab-ul.
+      </p>
+      <p>
+        Pune cele două lucruri împreună și obții diagnosticul complet:
+      </p>
+      <ul>
+        <li>România spune că îi lipsește <strong>formarea</strong> (28%, bariera nr. 1 în Eurobarometru 2026).</li>
+        <li>Formarea reală în AI cere <strong>repetiție zilnică</strong>, nu expunere unică (Lally, 2010).</li>
+        <li>Repetiția zilnică fără structură se stinge în <strong>sub 30 de zile</strong> (același tipar ca abonamentul la sală).</li>
+      </ul>
+      <p>
+        Ce lipsește, deci, nu e conținutul. Conținut e peste tot, gratuit, mai mult decât poate consuma cineva. Lipsește <strong>mecanismul care te aduce înapoi mâine.</strong>
+      </p>
+
+      <!-- S6 -->
+      <h2 id="s6">Ce am construit între timp</h2>
+      <p>
+        Între articolul din mai și cel de acum au trecut aproape trei luni. Le-am folosit ca să construim exact acest mecanism.
+      </p>
+      <p>
+        <strong>Jurnalul AI</strong> este o resursă descărcabilă gratuit din secțiunea Resurse. Un program de 30 de zile, cu 10–15 minute pe zi: un termen nou de înțeles, un exercițiu practic mic cu un instrument AI, o reflecție scurtă scrisă. Nu îți cere cont, nu îți cere email, nu îți cere bani, la fel ca tot restul hub-ului.
+      </p>
+      <p>
+        În jurul lui am publicat o serie de șase articole, câte unul pentru fiecare săptămână de activitate practică:
+      </p>
+      <div class="table-wrap is-stacked">
+        <table class="t-stack">
+          <thead>
+            <tr>
+              <th>Săptămâna</th>
+              <th>Activitatea</th>
+              <th>Ce înveți efectiv</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Săptămâna"><strong>S1</strong></td>
+              <td data-label="Activitatea"><a href="2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html">Familiarizare — alege-ți tool-ul</a></td>
+              <td data-label="Ce înveți efectiv">Să nu mai pierzi două luni întrebându-te care model e „cel mai bun”</td>
+            </tr>
+            <tr>
+              <td data-label="Săptămâna"><strong>S2</strong></td>
+              <td data-label="Activitatea"><a href="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html">Prompturi care chiar funcționează</a></td>
+              <td data-label="Ce înveți efectiv">Structura unei cereri, nu formule magice</td>
+            </tr>
+            <tr>
+              <td data-label="Săptămâna"><strong>S3</strong></td>
+              <td data-label="Activitatea"><a href="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html">Compară modele și halucinații</a></td>
+              <td data-label="Ce înveți efectiv">Să recunoști un răspuns plauzibil, dar fals — înainte să-l trimiți clientului</td>
+            </tr>
+            <tr>
+              <td data-label="Săptămâna"><strong>S4</strong></td>
+              <td data-label="Activitatea"><a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">Igienă AI și consolidare</a></td>
+              <td data-label="Ce înveți efectiv">Ce nu se urcă niciodată într-un tool extern</td>
+            </tr>
+            <tr>
+              <td data-label="Săptămâna"><strong>S5</strong></td>
+              <td data-label="Activitatea"><a href="2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html">Projects, rutine și lucrul organizat</a></td>
+              <td data-label="Ce înveți efectiv">Trecerea de la „mă joc” la „lucrez”</td>
+            </tr>
+            <tr>
+              <td data-label="Săptămâna"><strong>S6</strong></td>
+              <td data-label="Activitatea"><a href="2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html">Documente, date și conexiuni</a></td>
+              <td data-label="Ce înveți efectiv">Teancul de facturi, norma de 40 de pagini, calculul cu trei condiții</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        La finalul celor 30 de zile, jurnalul îți dă un prompt final care îți generează <strong>propria poveste de călătorie</strong>, un text personalizat, construit din ce ai scris tu, nu din ce am scris noi. E recompensa care închide bucla obiceiului.
+      </p>
+
+      <!-- S7 -->
+      <h2 id="s7">Ce faci luni dimineață</h2>
+      <p>
+        Rapoartele europene sunt utile ca diagnostic și inutile ca tratament. Niciun contabil din România nu și-a schimbat felul de a lucra pentru că a citit un document al Comisiei Europene.
+      </p>
+      <p>
+        Așa că închei cu singura parte care contează. Nu ai nevoie de o strategie. Ai nevoie de trei lucruri, în ordinea asta:
+      </p>
+      <ol>
+        <li><strong>Un instrument.</strong> Unul singur, ales luni și nemaischimbat 30 de zile.</li>
+        <li><strong>Un moment fix.</strong> Aceleași 15 minute în fiecare zi lucrătoare, de preferat legate de ceva ce faci deja (prima cafea, după verificarea e-mailului).</li>
+        <li><strong>Un loc unde scrii ce ai încercat.</strong> Nu pentru noi. Pentru tine, peste 30 de zile, când vei vrea să vezi cât ai avansat.</li>
+      </ol>
+      <p>
+        Al treilea e Jurnalul. Primele două ți le dai singur.
+      </p>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Pe scurt:</strong> media europeană a crescut cu 48% într-un an. Noi am rămas la 5,2%. Motivul declarat de românii înșiși e lipsa formării — singura barieră din lista aceea pe care o poți dărâma de unul singur, fără să aștepți pe nimeni. Începe luni. <a href="resurse.html">Jurnalul AI e în secțiunea Resurse</a>, descărcabil, gratuit, fără cont.
+        </div>
+      </div>
+
+      <h3 id="surse">Surse</h3>
+      <ul>
+        <li>Comisia Europeană — <a href="https://digital-strategy.ec.europa.eu/en/policies/2026-state-digital-decade-package" target="_blank" rel="noopener">2026 State of the Digital Decade package</a> (17 iunie 2026)</li>
+        <li>Comisia Europeană — <a href="https://digital-strategy.ec.europa.eu/en/factpages/romanias-2026-digital-decade-country-report" target="_blank" rel="noopener">Romania's 2026 Digital Decade Country Report</a></li>
+        <li>Comisia Europeană — <a href="https://digital-strategy.ec.europa.eu/en/library/digital-decade-2026-special-eurobarometer" target="_blank" rel="noopener">Digital Decade 2026: Special Eurobarometer</a> (teren februarie–martie 2026)</li>
+        <li>Eurostat — <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Towards_Digital_Decade_targets_for_Europe" target="_blank" rel="noopener">Towards Digital Decade targets for Europe</a>, date 2025</li>
+        <li>Eurostat — <a href="https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20251211-2" target="_blank" rel="noopener">20% of EU enterprises use AI technologies</a></li>
+        <li>Transilvania Business — <a href="https://www.transilvaniabusiness.ro/2026/07/13/inteligenta-artificiala-schimba-regulile-jocului-in-contabilitate-ceccar-bihor-viitorul-apartine-celor-care-se-adapteaza/" target="_blank" rel="noopener">Ziua Națională a Contabilului Român, ediția a XXII-a — CECCAR Bihor</a> (13 iulie 2026)</li>
+        <li>Lally, P. et al. (2010), <em>How are habits formed: Modelling habit formation in the real world</em>, European Journal of Social Psychology</li>
+      </ul>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#AILiteracy</span>
+          <span class="tag">#DigitalDecade2026</span>
+          <span class="tag">#Eurobarometru</span>
+          <span class="tag">#Romania</span>
+          <span class="tag">#profesiaContabila</span>
+          <span class="tag">#CECCAR</span>
+          <span class="tag">#JurnalulAI</span>
+          <span class="tag">#SmartAccounting</span>
+        </div>
+        <span class="footer-mono">Articolul #026</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s0">Ce s-a publicat pe 17 iunie</a>
+        <a href="#s1">Cifra care s-a mișcat și cifra care n-a</a>
+        <a href="#s2">Nu e un indicator izolat</a>
+        <a href="#s3">Ce spun românii despre ei înșiși</a>
+        <a href="#s4">Aceeași concluzie, într-o sală din Oradea</a>
+        <a href="#s5">De ce „lipsa formării” nu se rezolvă cu un curs</a>
+        <a href="#s6">Ce am construit între timp</a>
+        <a href="#s7">Ce faci luni dimineață</a>
+        <a href="#surse" class="toc-sub">Surse</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă lectura</div>
+        <h2>De la diagnostic la rutină.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-05-17-AI-Literacy-Romania-cifrele-care-ne-plaseaza-ultimii.html" class="related-card fade-in">
+        <div class="related-date">EDITORIAL · #011 · ARTICOLUL PRECEDENT</div>
+        <h3>5,21% și 17,8%. Cifrele care ne plasează ultimii la AI în Europa</h3>
+        <p>Punctul de plecare: cele două cifre Eurostat, paradoxul român și de ce profesia contabilă e cea mai bine poziționată să schimbe lucrurile.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S1 · #020</div>
+        <h3>Familiarizare: alege-ți tool-ul</h3>
+        <p>Prima săptămână din Jurnalul AI. Cum alegi un instrument și cum scapi de capcana comparațiilor care te țin pe loc luni întregi.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html#grid-tool" class="related-card fade-in">
+        <div class="related-date">RESURSĂ · APLICAȚIE HTML</div>
+        <h3>Jurnalul AI, 30 de zile de adaptare</h3>
+        <p>Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe fiecare zi lucrătoare, zece minute la cafea, plus șase activități practice. Fără cont, fără email, totul rămâne la tine.</p>
+        <span class="related-read">Descarcă jurnalul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+<script>
+
+/* Copy link button */
+(function () {
+  const btn = document.querySelector('.share-btn[aria-label="Copiază link"]');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+      setTimeout(() => { btn.innerHTML = orig; }, 1800);
+    });
+  });
+})();
+</script>
+</body>
+</html>

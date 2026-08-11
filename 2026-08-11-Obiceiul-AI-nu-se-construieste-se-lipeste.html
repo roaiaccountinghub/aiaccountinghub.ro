@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Obiceiul nu se construiește. Se lipește. — AI Accounting Hub</title>
+<meta name="description" content="Problema nu e unde găsești informația, ci că nu ai obiceiul de a o căuta. Cum se lipește un obicei nou de documentare peste o rutină care îți merge deja perfect — și de ce scopul final e autonomia ta, nu revenirea pe site.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Obiceiul nu se construiește. Se lipește.">
+<meta property="og:description" content="De ce o resursă bună nu e de ajuns, și ce am învățat din Atomic Habits despre construirea obiceiului de a cerceta, a învăța și a te documenta singur.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Obiceiul nu se construiește. Se lipește.">
+<meta name="twitter:description" content="Nu ai nevoie de disciplină nouă. Ai nevoie de o ancoră veche care merge deja perfect — și de un strat subțire pus peste ea. Scopul: să te documentezi singur.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+.prose tbody tr:hover td { background: color-mix(in oklab, var(--accent) 3%, transparent); }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Caseta de serie — pentru cine ajunge direct pe articolul ăsta */
+.serie-box { margin: 0 0 34px; padding: 22px 24px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 14px; background: var(--bg-1); }
+.serie-box .sb-k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.serie-box p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.65; color: var(--fg-muted); }
+.serie-box ol { margin: 0; padding: 0; list-style: none; counter-reset: serie; display: grid; gap: 8px; }
+.serie-box ol li { counter-increment: serie; position: relative; padding: 5px 0 5px 34px; font-size: 14.5px; line-height: 1.5; color: var(--fg-muted); }
+.serie-box ol li::before { content: counter(serie); position: absolute; left: 0; top: 5px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); }
+.serie-box ol li a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 32%, transparent); }
+.serie-box ol li a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+/* articolul de la care merită să pornești */
+.serie-box ol li.start { background: color-mix(in oklab, var(--accent) 8%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 26%, transparent); border-radius: 10px; padding: 11px 14px 11px 42px; }
+.serie-box ol li.start::before { left: 13px; top: 11px; border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box ol li.start a { color: var(--fg); font-weight: 600; border-bottom-color: color-mix(in oklab, var(--accent) 55%, transparent); }
+.serie-box ol li.here { color: var(--fg); }
+.serie-box ol li.here::before { border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box .sb-chip { display: inline-block; margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.serie-box .sb-now { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); margin-left: 8px; white-space: nowrap; }
+
+
+/* Formula de stratificare — blocul central al articolului */
+.formula { margin: 30px 0; border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent); border-radius: 16px; background: radial-gradient(ellipse 90% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%), var(--bg-1); padding: 26px 28px; }
+.formula .f-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 14px; }
+.formula .f-line { font-family: 'Space Grotesk', sans-serif; font-size: 21px; font-weight: 600; color: var(--fg); line-height: 1.45; }
+.formula .f-line em { font-style: normal; color: var(--accent); }
+.formula .f-note { font-size: 14px; color: var(--fg-muted); margin-top: 14px; line-height: 1.55; }
+
+/* Stiva vizuală: ancoră veche + strat nou */
+.stack { margin: 28px 0; display: grid; gap: 10px; }
+.stack .layer { border: 1px solid var(--border); border-radius: 12px; background: var(--bg-1); padding: 16px 20px; display: grid; grid-template-columns: 92px 1fr; gap: 18px; align-items: center; }
+.stack .layer .tagx { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); }
+.stack .layer .txt { font-size: 15px; color: var(--fg-muted); line-height: 1.5; }
+.stack .layer .txt strong { color: var(--fg); }
+.stack .layer.new { border-color: color-mix(in oklab, var(--accent) 45%, transparent); background: color-mix(in oklab, var(--accent) 6%, var(--bg-1)); }
+.stack .layer.new .tagx { color: var(--accent); }
+@media (max-width: 560px) { .stack .layer { grid-template-columns: 1fr; gap: 6px; } }
+
+/* Cele trei eșecuri */
+.fails { margin: 28px 0; display: grid; gap: 14px; }
+.fails > div { border: 1px solid var(--border); border-left: 3px solid color-mix(in oklab, var(--accent) 55%, transparent); border-radius: 0 12px 12px 0; background: var(--bg-1); padding: 18px 22px; }
+.fails .h { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16.5px; color: var(--fg); margin-bottom: 6px; }
+.fails p { margin: 0; font-size: 14.5px; color: var(--fg-muted); line-height: 1.6; }
+.fails p + p { margin-top: 8px; }
+
+@media (max-width: 420px) {
+  .prose table { font-size: 12px; }
+  .prose th, .prose td { padding: 8px 10px; }
+  .formula .f-line { font-size: 18px; }
+}
+@media (max-width: 720px) {
+  .prose table { font-size: 13px; }
+  .prose th, .prose td { padding: 10px 12px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Obiceiul nu se construiește. Se lipește",
+  "description": "Cum se lipește un obicei nou de documentare peste o rutină existentă — și de ce scopul final al Jurnalului AI e autonomia cititorului, nu revenirea pe site.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "inLanguage": "ro",
+  "articleSection": "AI Journal",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "AI Journal"
+  },
+  "position": 1,
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Obiceiul nu se construiește</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">AI Journal</span>
+      <span>11 august 2026</span>
+      <span class="sep">·</span>
+      <span>13 min citire</span>
+      <span class="sep">·</span>
+      <span>obiceiuri · AI literacy</span>
+    </div>
+
+    <h1>Obiceiul nu se construiește. <span class="accent">Se lipește</span> — peste ceva ce deja îți merge perfect</h1>
+    <p class="article-lede">
+      Domeniul AI nu evoluează, explodează, iar noi toți salvăm linkuri pe care ne promitem că le citim „săptămâna viitoare”. Multă vreme am crezut că lipsește un loc bun unde să găsești explicațiile. Am construit unul — și n-a rezolvat nimic. Pentru că problema nu era unde găsești informația, ci că nu ai obiceiul de a o căuta. Articolul ăsta e despre o singură idee din <em>Atomic Habits</em> care ne-a schimbat complet abordarea, și despre singurul rezultat care contează la capăt: să te descurci fără noi.
+    </p>
+
+    <div class="serie-box">
+      <div class="sb-k">// seria „AI Journal” · partea 1 din 3</div>
+      <p>
+        Jurnalul AI e explicat în trei articole care se citesc cel mai bine în ordine. Ești chiar la primul, cel despre de ce ai nevoie de un obicei, nu de încă un curs. Al doilea arată unealta pe dinăuntru, al treilea se ocupă de siguranța fișierului pe care îl descarci.
+      </p>
+      <ol>
+        <li class="here">Obiceiul nu se construiește. Se lipește <span class="sb-now">ești aici</span></li>
+        <li><a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">Două casete și o cafea. Tot ce ai de completat în Jurnalul AI</a></li>
+        <li><a href="2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">Descarci un fișier HTML. Ce poate face, ce nu poate și cum verifici</a></li>
+      </ol>
+    </div>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s0">Nu ne lipsește informația</a>
+        <a href="#s1">„Mă apuc în weekend” nu e un plan</a>
+        <a href="#s2">Nu construi un obicei. Lipește-l</a>
+        <a href="#s3">Cum îți alegi ancora</a>
+        <a href="#s4">Trei feluri în care stratificarea eșuează</a>
+        <a href="#s5">Stratul trebuie să fie subțire</a>
+        <a href="#s6">De ce nu simți nimic în primele trei săptămâni</a>
+        <a href="#s7">Regula care salvează tot: nu rata de două ori</a>
+        <a href="#s8">Cine devii, nu ce știi</a>
+        <a href="#s9">Cum arată toate astea în Jurnalul AI</a>
+        <a href="#s10">Scopul nu e să revii aici</a>
+        <a href="#surse" class="toc-sub">Surse</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">11.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// Editorial · Atomic Habits · obiceiul de a te documenta · Jurnalul AI</div>
+    </div>
+
+    <div class="prose">
+
+      <!-- S0 -->
+      <h2 id="s0">Nu ne lipsește informația</h2>
+      <p>
+        Punctul de plecare a fost o frustrare pe care o are, credem, oricine lucrează în meseria asta. Domeniul AI nu evoluează. Explodează. Într-o săptămână apar <em>reasoning models</em>, în următoarea toată lumea vorbește despre agenți, apoi despre MCP, apoi despre <em>context window</em> și RAG, ca și cum ar fi termeni pe care ar trebui să-i știi deja.
+      </p>
+      <p>
+        Iar reacția noastră, a tuturor, e identică: salvăm. Un link în bookmark-uri, un clip pe YouTube în „Watch later”, un articol în Pocket, un mesaj trimis nouă înșine pe WhatsApp. Ne promitem că ne apucăm în weekend. Vine weekendul, teancul crește, iar senzația rămâne: alergăm după un tren care accelerează.
+      </p>
+      <p>
+        De aici e ușor să tragi concluzia greșită. Am tras-o și noi. Că problema e lipsa unui loc bun. Că dacă ar exista o resursă suficient de bine făcută, în română, pe înțelesul profesiei, teancul s-ar rezolva de la sine.
+      </p>
+      <p>
+        Așa a apărut <strong><a href="buzzword.html">Buzzword</a></strong>: termenii AI explicați cu pronunție, traducere și, partea care contează cel mai mult, cu o paralelă din contabilitate. Nu definiții scrise de informaticieni pentru informaticieni, ci pentru cineva care înțelege perfect ce e o reconciliere, dar n-a auzit până acum de <em>token</em>. Resursa a ieșit bine. Chiar suntem mândri de ea.
+      </p>
+      <p>
+        Și n-a rezolvat problema.
+      </p>
+      <blockquote>
+        Omul intră o dată. Mai intră o dată. Și apoi nu mai intră.
+      </blockquote>
+      <p>
+        Nu pentru că materialul e slab. Ci pentru că lipsa lui nu era, de fapt, problema. <strong>Nu ne lipsește informația. Ne lipsește obiceiul de a o căuta.</strong>
+      </p>
+      <p>
+        O bibliotecă excelentă nu face pe nimeni cititor. Un dicționar bun nu te face vorbitor al limbii respective. Poți să ai la îndemână cea mai clară explicație din lume. Dacă nu te-ai oprit niciodată din lucru ca să întrebi „ce înseamnă cuvântul ăsta pe care tocmai l-am citit?”, explicația nu ajunge niciodată la tine.
+      </p>
+      <p>
+        Și atunci ne-am pus întrebarea corectă. Nu „cum facem conținutul mai bun?”. Nici măcar „cum îl aducem pe om înapoi la noi?”. Ci: <strong>cum ajunge cineva să-și construiască singur reflexul de a cerceta, de a se documenta, de a verifica, cu sau fără noi?</strong>
+      </p>
+
+      <!-- S1 -->
+      <h2 id="s1">„Mă apuc în weekend” nu e un plan</h2>
+      <p>
+        Răspunsul l-am găsit într-o carte pe care probabil ai văzut-o pe raftul cuiva: <em>Atomic Habits</em>, James Clear. Am recitit-o cu alți ochi, nu ca pe o carte de dezvoltare personală, ci ca pe un manual de inginerie. Pentru că exact asta ne lipsea: nu conținut, ci mecanism.
+      </p>
+      <p>
+        Prima idee din carte e simplă și incomodă: <strong>nu te ridici la nivelul obiectivelor tale, ci cazi la nivelul sistemului tău.</strong> Obiectivul e destinația. Sistemul e ce faci marți la 8:15, indiferent dacă ai chef sau nu.
+      </p>
+      <p>
+        Toți avem același obiectiv: „să fiu la curent cu AI”. E un obiectiv corect și complet inutil, pentru că nu-ți spune ce faci marți la 8:15. Doi contabili cu exact același obiectiv vor avea rezultate opuse peste un an, nu pentru că unul a vrut mai mult, ci pentru că unul a avut un sistem și celălalt a avut o listă de linkuri nedeschise.
+      </p>
+      <p>
+        Paralela din meseria noastră e imediată. Nimeni sănătos la cap nu reconciliază tot anul într-o singură ședință de decembrie. Postezi zilnic, verifici pe parcurs, iar la final balanța pur și simplu <em>este</em>. Cunoașterea AI se construiește la fel: nu într-un weekend eroic, ci prin înregistrări mici, zilnice, care se adună.
+      </p>
+
+      <!-- S2 -->
+      <h2 id="s2">Nu construi un obicei. Lipește-l</h2>
+      <p>
+        Aici e ideea pentru care merită scris tot articolul, și cea mai subestimată din carte.
+      </p>
+      <p>
+        Când vrem un obicei nou, pornim aproape întotdeauna de la zero. Ne propunem ceva nou, într-un moment nou al zilei, cu o disciplină nouă pe care încă n-o avem. Practic, cerem creierului să construiască o clădire pe teren viran. E scump și rareori se termină.
+      </p>
+      <p>
+        Clear propune exact opusul, preluând o metodă dezvoltată de cercetătorul BJ Fogg de la Stanford, care o numește <em>ancorare</em>. Nu construi. <strong>Stratifică.</strong> Ia un comportament pe care îl ai deja betonat, unul pe care îl execuți zilnic fără să te gândești o secundă la el, și lipește noul obicei imediat după. Formula are o singură linie:
+      </p>
+
+      <div class="formula">
+        <div class="f-label">// Formula stratificării</div>
+        <div class="f-line">După ce <em>[obiceiul pe care îl am deja]</em>, voi <em>[obiceiul nou]</em>.</div>
+        <div class="f-note">Obiceiul vechi devine declanșatorul celui nou. Nu mai ai nevoie să-ți amintești — își amintește el în locul tău.</div>
+      </div>
+
+      <p>
+        Motivul pentru care funcționează e mecanic, nu motivațional. Un obicei consolidat are deja un declanșator care nu dă greș: îl execuți de ani de zile, la aceeași oră, în același loc, fără efort. Energia de pornire e deja plătită. Tu nu mai construiești un declanșator nou: <strong>îl împrumuți pe cel care merge perfect.</strong>
+      </p>
+      <p>
+        Uite cum arată, în cazul nostru:
+      </p>
+
+      <div class="stack">
+        <div class="layer">
+          <div class="tagx">// ancoră</div>
+          <div class="txt"><strong>Îmi torn prima cafea și mă așez la birou.</strong> Se întâmplă în fiecare zi lucrătoare, de ani de zile, fără să iau vreo decizie.</div>
+        </div>
+        <div class="layer new">
+          <div class="tagx">// strat nou</div>
+          <div class="txt"><strong>Deschid jurnalul și citesc termenul zilei.</strong> Zece minute. Nu îmi cere disciplină nouă — îmi cere doar să nu mă ridic de pe scaun.</div>
+        </div>
+      </div>
+
+      <p>
+        Precizia contează mai mult decât pare. Cercetarea pe „intenții de implementare”, adică planuri de forma <em>dacă/când se întâmplă X, atunci fac Y</em>, are în spate o meta-analiză a lui Peter Gollwitzer și Paschal Sheeran, publicată în 2006, care a adunat 94 de studii independente și peste 8.000 de participanți. Efectul asupra atingerii obiectivelor a fost mediu spre mare (d = 0,65). Cu alte cuvinte: oamenii care își scriu <em>când</em> și <em>unde</em> vor face un lucru chiar îl fac, într-o proporție semnificativ mai mare decât cei care doar își propun.
+      </p>
+      <p>
+        Nu „o să citesc ceva despre AI zilele astea”. Ci: <em>„După ce îmi torn prima cafea, la birou, înainte de prima balanță, citesc termenul zilei.”</em> Vagul nu se execută niciodată. Precisul, da.
+      </p>
+
+      <!-- S3 -->
+      <h2 id="s3">Cum îți alegi ancora</h2>
+      <p>
+        Nu orice obicei vechi e o ancoră bună. O ancoră care ține trebuie să bifeze patru lucruri:
+      </p>
+      <ol>
+        <li><strong>Se întâmplă zilnic</strong>, în zilele în care vrei obiceiul nou. Dacă ancora ta e „după ședința de luni”, ai un obicei săptămânal, nu unul zilnic.</li>
+        <li><strong>Se întâmplă la aceeași oră și în același loc.</strong> Un obicei care migrează prin zi nu ancorează nimic.</li>
+        <li><strong>Are un final clar.</strong> „După ce verific e-mailul” nu funcționează: verificatul e-mailului nu se termină niciodată. „După ce îmi torn cafeaua” se termină în zece secunde.</li>
+        <li><strong>E urmat de un moment liber.</strong> Nu lipi zece minute de învățare fix înaintea unui lucru care te presează.</li>
+      </ol>
+      <p>
+        Ziua unui profesionist contabil e, din fericire, plină de ancore excelente. Câteva care funcționează:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ancora (obiceiul existent)</th>
+              <th>Stratul nou</th>
+              <th>De ce ține</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Prima cafea, la birou</strong></td>
+              <td>Termenul zilei + notița în jurnal</td>
+              <td>Final clar, oră fixă, creierul e încă odihnit</td>
+            </tr>
+            <tr>
+              <td><strong>După ce închid laptopul de la client / ies din SPV</strong></td>
+              <td>Cinci minute de termen, înainte de următoarea sarcină</td>
+              <td>Marchează o graniță deja existentă între două activități</td>
+            </tr>
+            <tr>
+              <td><strong>Drumul spre birou (dacă mergi cu transportul în comun)</strong></td>
+              <td>Un episod de podcast din serie</td>
+              <td>Timp care oricum e „pierdut”, fricțiune zero</td>
+            </tr>
+            <tr>
+              <td><strong>Pauza de prânz, primele minute</strong></td>
+              <td>Un card Buzzword, citit înainte de mâncare</td>
+              <td>Se întâmplă zilnic și nu concurează cu nimic urgent</td>
+            </tr>
+            <tr>
+              <td><strong>După ce trimit ultima declarație a zilei</strong></td>
+              <td>Nota de reflecție: ce am încercat azi cu AI</td>
+              <td>Vine cu o descărcare naturală de tensiune — moment bun de scris</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Alege <strong>una singură</strong>. Nu cinci. Un singur strat, pe o singură ancoră, timp de 30 de zile. Restul poate să aștepte.
+      </p>
+
+      <!-- S4 -->
+      <h2 id="s4">Trei feluri în care stratificarea eșuează</h2>
+      <p>
+        Am văzut toate cele trei la noi înșine, înainte să le recunoaștem ca tipare.
+      </p>
+
+      <div class="fails">
+        <div>
+          <div class="h">1 · Ancora e vagă</div>
+          <p>„Dimineața” nu e o ancoră. „Când am timp” nu e o ancoră. „După ce ajung la birou” e deja mai bine, dar tot slab: între ajuns la birou și așezat pe scaun încap douăzeci de lucruri.</p>
+          <p><strong>Reparație:</strong> coboară până la un gest fizic, unic, cu început și sfârșit. Nu „dimineața”, ci „după ce pun cana pe birou”.</p>
+        </div>
+        <div>
+          <div class="h">2 · Ancora e într-o zonă aglomerată a zilei</div>
+          <p>Ora 9:00 într-un cabinet de contabilitate nu e un moment. E o avalanșă. Dacă lipești obiceiul de ceva ce se întâmplă în mijlocul haosului, obiceiul pierde de fiecare dată, împotriva a ceva urgent.</p>
+          <p><strong>Reparație:</strong> mută ancora cu 20 de minute mai devreme sau la capătul zilei. Nu ai nevoie de cel mai bun moment. Ai nevoie de cel mai liniștit.</p>
+        </div>
+        <div>
+          <div class="h">3 · Stratul e prea gros pentru ancoră</div>
+          <p>Ancora suportă doar atâta greutate. Dacă îți propui „după cafea, o oră de studiu AI”, în ziua a patra vei începe să eviți cafeaua. Sună absurd, dar exact asta se întâmplă: creierul asociază ancora cu efortul și începe să o saboteze.</p>
+          <p><strong>Reparație:</strong> subțiază stratul până devine ridicol de ușor. Vezi secțiunea următoare.</p>
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <h2 id="s5">Stratul trebuie să fie subțire</h2>
+      <p>
+        Aici pierde lumea cel mai des, pentru că își propune prea mult din prima. Antidotul din carte se numește <strong>regula celor două minute</strong>: micșorează obiceiul până devine ridicol de ușor de început.
+      </p>
+      <p>
+        Obiceiul nu e „stăpânește AI-ul”. Nu e nici măcar „citește un articol lung”. E: <em>citește o singură definiție</em>. Atât. Un termen, o explicație, o paralelă din contabilitate. Dacă versiunea de start îți ia sub două minute, nu mai ai scuza „n-am timp azi”. Nimeni n-are prea puțin timp pentru două minute.
+      </p>
+      <p>
+        Ideea nu e să faci puțin pentru totdeauna. Ideea e că un obicei trebuie <em>stabilit</em> înainte să fie <em>optimizat</em>. Întâi devii omul care nu ratează sesiunea de două minute. Extinderea vine singură: de multe ori „doar definiția” se transformă în încă zece minute, fiindcă deja ai început. Dar începutul e tot.
+      </p>
+      <p>
+        Și mai e ceva, la fel de important: <strong>scoate fricțiunea</strong>. Fiecare pas în plus între tine și acțiune e o scuză în plus. Jurnalul deschis pe desktop, nu într-un folder. Termenul zilei deja selectat, ca să nu pierzi energie alegând. Definiția deja scrisă, ca să nu pleci în căutare pe internet și să te pierzi în douăzeci de taburi. Contabil fiind, știi asta perfect: un formular precompletat se depune; unul gol se amână.
+      </p>
+
+      <!-- S6 -->
+      <h2 id="s6">De ce nu simți nimic în primele trei săptămâni</h2>
+      <p>
+        Contabililor nu trebuie să le explici dobânda compusă. O simt în oase. Deci hai s-o folosim.
+      </p>
+      <p>
+        Un progres de 1% pe zi pare invizibil. Un termen AI înțeles azi nu-ți schimbă săptămâna. Diferența e aceeași ca între o pușculiță și un depozit cu dobândă capitalizată: în pușculiță, ce pui azi rămâne exact cât ai pus; în depozit, fiecare perioadă pornește de la o bază mai mare decât cea dinainte. Ce înveți azi nu se așază lângă ce știai: <strong>schimbă baza de la care înțelegi mâine.</strong>
+      </p>
+      <p>
+        Problema e că răbdarea noastră e liniară, iar rezultatul nu e. De aici vine abandonul.
+      </p>
+      <p>
+        Clear numește asta <strong>platoul potențialului latent</strong>, sau valea dezamăgirii. Faci lucrul corect zile la rând și pare că nu se întâmplă nimic. Un cub de gheață stă la −4°C, apoi la −2°C, apoi la 0°C, și încă nu se topește. Efortul se acumulează sub suprafață. Apoi, la un grad care nu pare cu nimic mai special decât celelalte, se topește.
+      </p>
+      <p>
+        Tradus la noi: în prima săptămână de citit câte un termen pe zi n-o să te simți mai deștept. Nici în a doua. Apoi, pe la a cincea, deschizi un articol despre agenți AI și îți dai seama că înțelegi <em>tot</em>, pentru că știai deja ce e un token, un context window, un RAG, un prompt de sistem. Nu s-a întâmplat brusc. S-a compus. Tu ai văzut doar momentul topirii.
+      </p>
+      <blockquote>
+        Cei mai mulți nu abandonează pentru că sistemul nu funcționează. Abandonează în valea dezamăgirii — cu o zi înainte ca gheața să se topească.
+      </blockquote>
+      <p>
+        Și aici merită repetat ce am scris în <a href="2026-05-17-AI-Literacy-Romania-cifrele-care-ne-plaseaza-ultimii.html">editorialul despre AI literacy</a>: studiul Phillippa Lally (University College London, 2010) a găsit o mediană de <strong>66 de zile</strong> până când un comportament nou devine automat. Nu 21. Iar zona de risc maxim sunt primele 30.
+      </p>
+
+      <!-- S7 -->
+      <h2 id="s7">Regula care salvează tot: nu rata de două ori</h2>
+      <p>
+        O să ratezi o zi. Un termen de depunere, un control, o zi pur și simplu grea. Se întâmplă. Nu asta rupe obiceiul.
+      </p>
+      <p>
+        Ce rupe obiceiul e a doua zi ratată la rând. O ratare e un accident. Două la rând e începutul unei noi rutine, a celei de a nu mai face. Regula lui Clear e simplă și iertătoare: <strong>nu rata niciodată de două ori.</strong> N-ai apucat azi? Se întâmplă. Mâine revii, chiar dacă e doar versiunea de două minute.
+      </p>
+      <p>
+        Un obicei nu se distruge de o pauză. Se distruge de renunțare. Un sistem bun nu-ți cere să fii perfect, îți cere doar să nu ratezi de două ori la rând, suficient de mult timp cât gheața să se topească.
+      </p>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Obiceiul din umbră:</strong> derularea feed-ului cu știri AI. Vezi 40 de postări cu „asta schimbă tot”, primești senzația falsă că ești la curent și nu reții nimic. E consum pasiv deghizat în învățare — cheltui atenție și te alegi cu anxietate, nu cu cunoaștere. Un termen înțeles temeinic bate o sută de postări derulate.
+        </div>
+      </div>
+
+      <!-- S8 -->
+      <h2 id="s8">Cine devii, nu ce știi</h2>
+      <p>
+        Mai e o mișcare din carte care merită făcută, pentru că e cea mai des ignorată.
+      </p>
+      <p>
+        Schimbarea are trei niveluri: rezultatul (ce obții), procesul (ce faci) și identitatea (cine crezi că ești). Aproape toți începem de la rezultat: „vreau să știu AI”. Clear spune să inversăm ordinea.
+      </p>
+      <ul>
+        <li><strong>Obiectiv (rezultat):</strong> „Vreau să înțeleg AI-ul.”</li>
+        <li><strong>Identitate:</strong> „Sunt contabilul care rezervă zilnic câteva minute pentru tehnologia din meseria lui.”</li>
+      </ul>
+      <p>
+        Pare o nuanță de vocabular. Nu e. Un obiectiv se termină: îl atingi sau renunți la el. O identitate nu se termină; o <em>întreții</em>. Iar fiecare gest mic devine, în cuvintele lui Clear, un vot pentru persoana care vrei să devii.
+      </p>
+      <p>
+        Nu trebuie să citești un tratat ca să înțelegi cinci termeni AI. Trebuie doar să fii, azi, genul de profesionist care deschide jurnalul și notează unul. Peste 30 de voturi, nu-ți mai <em>propui</em> să fii la curent. <strong>Ești.</strong>
+      </p>
+
+      <!-- S9 -->
+      <h2 id="s9">Cum arată toate astea în Jurnalul AI</h2>
+      <p>
+        Tot ce am scris până aici nu sunt idei pe care să le ții minte și să speri că le aplici singur. Forța de voință nu e un plan. De aceea nu am scris doar un articol despre obiceiuri. Am construit <strong>Jurnalul AI</strong> ca să <em>execute</em> principiile în locul tău.
+      </p>
+      <p>
+        E un singur fișier pe care îl descarci și îl pui pe desktop. Câteva decizii din el, cu principiul din spate:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ce face jurnalul</th>
+              <th>Principiul din spate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Un fișier pe desktop, nu o aplicație cu cont.</strong> Îl vezi de fiecare dată când deschizi calculatorul; un dublu-click și ai pornit.</td>
+              <td>Declanșator vizibil + fricțiune zero</td>
+            </tr>
+            <tr>
+              <td><strong>Ritmul e „un termen pe zi lucrătoare, 10–15 minute, la cafeaua de dimineață”.</strong> Ancora e scrisă explicit în jurnal, nu lăsată la latitudinea ta.</td>
+              <td>Stratificarea, cu ancoră aleasă</td>
+            </tr>
+            <tr>
+              <td><strong>Butonul spune „Start — pornesc azi”.</strong> Jurnalul începe cu ziua de azi, nu „de luni”.</td>
+              <td>Elimină amânarea legitimată</td>
+            </tr>
+            <tr>
+              <td><strong>În prima zi scrii o scrisoare către tine</strong> — ce speri să știi peste 30 de termeni — și o sigilezi.</td>
+              <td>Identitatea, fixată înainte de rezultat</td>
+            </tr>
+            <tr>
+              <td><strong>Bara de progres „ziua X din 30”</strong> și recapitularea săptămânală de cinci minute.</td>
+              <td>Satisfacție imediată; golul se vede înainte să devină două goluri</td>
+            </tr>
+            <tr>
+              <td><strong>Termenul zilei pornește din Buzzword</strong>, dar caseta de notițe îți cere și linkuri, și clipuri găsite de tine.</td>
+              <td>Reacție ușoară la start, documentare proprie pe parcurs</td>
+            </tr>
+            <tr>
+              <td><strong>Ziua 15 deblochează o recompensă</strong>, iar dacă ai sărit zile poți recupera în ritm de doi termeni pe zi.</td>
+              <td>„Nu rata de două ori”, transformat în funcționalitate</td>
+            </tr>
+            <tr>
+              <td><strong>La final: termenul 31 și mega-promptul „Povestea călătoriei tale”</strong> — un text personalizat, construit din ce ai scris tu.</td>
+              <td>Recompensa mare + dovada scrisă a identității</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <blockquote>
+        Jurnalul nu e magic. E doar dobânda compusă, pusă pe hârtie și programată zi de zi — cu o ancoră aleasă, un strat subțire și o recompensă la fiecare bifă.
+      </blockquote>
+      <p>
+        Datele rămân la tine: totul se salvează local, cu export și import de fișier. Cum e construit exact și de ce poți avea încredere într-o pagină HTML descărcată vedem în partea a treia a seriei.
+      </p>
+
+      <!-- S10 -->
+      <h2 id="s10">Scopul nu e să revii aici</h2>
+      <p>
+        Trebuie spus și lucrul pe care cărțile de obiceiuri îl uită des: a-ți forma un obicei nu e același lucru cu a te perfecționa.
+      </p>
+      <p>
+        Clear e explicit aici. Obiceiurile te bagă în joc, dar nu sunt suficiente pentru măiestrie. Odată ce un comportament devine automat, repetiția pură începe să te plafoneze. Ca să crești mai departe, ai nevoie de practică deliberată peste obicei: să revizuiești, să ajustezi, să extinzi.
+      </p>
+      <p>
+        Tradus la noi, adevărul e ușor incomod: în AI, obiceiul format azi nu te ține la nesfârșit. Termenii pe care i-ai învățat luna asta nu sunt tot vocabularul de luna viitoare. Altfel devii foarte disciplinat în a repeta ce știai deja acum șase luni.
+      </p>
+      <p>
+        Iar aici trebuie spus ceva ce sună contraintuitiv pentru un site care publică articole: <strong>scopul jurnalului nu e să te aducă înapoi aici.</strong>
+      </p>
+      <p>
+        Cele 30 de zile sunt niște roți ajutătoare. Îți dau structura completă: ai un termen dat, ai de unde porni, ai unde să notezi. Dar sub structura aia se construiește altceva, și acela e adevăratul livrabil: <strong>reflexul de a te opri când dai peste un cuvânt pe care nu-l știi.</strong> De a-l căuta. De a deschide două surse în loc de una. De a-ți nota ce ai înțeles cu propriile cuvinte, nu de a copia definiția.
+      </p>
+      <p>
+        Reflexul ăla nu are nevoie de noi. Funcționează la fel de bine pentru o normă publicată săptămâna asta în Monitorul Oficial, pentru un standard nou, pentru un tool pe care îl testezi înainte să-l recomanzi unui client. E aceeași mișcare, aplicată la orice.
+      </p>
+      <blockquote>
+        Buzzword e un punct de plecare bun. Dacă la ziua 30 e singurul loc în care știi să te documentezi, nu ne-am făcut treaba — am construit dependență, nu competență.
+      </blockquote>
+      <p>
+        Semnele că a funcționat n-au legătură cu noi. Cauți un termen înainte să-ți apară în jurnal. Deschizi două surse și observi că se contrazic. Îți dai seama singur că un articol e superficial. Explici unui coleg fără să te uiți la definiție. Ajungi la un termen pe care încă nu l-am scris nicăieri și te descurci oricum.
+      </p>
+      <p>
+        Ținem Buzzword actualizat, scriem mai departe articole, testăm unelte, nu vindem nimic și nu ne-am propus vreodată să vindem. Dar rostul lor e să-ți dea un teren solid de pe care să pleci, nu o cameră confortabilă în care să rămâi.
+      </p>
+      <blockquote>
+        Un curs se termină cu un certificat. Un obicei se termină cu independență.
+      </blockquote>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Pe scurt:</strong> nu ai nevoie de disciplină nouă. Ai nevoie de o ancoră veche care îți merge deja perfect și de un strat subțire pus imediat după ea. Scrie-ți acum propoziția — „După ce ____, mă documentez zece minute” — și ai făcut jumătate din drum. <a href="resurse.html">Jurnalul AI e în secțiunea Resurse</a>: descărcabil, gratuit, fără cont.
+        </div>
+      </div>
+      <p>
+        Roțile ajutătoare se scot. De la bun început asta a fost ideea.
+      </p>
+
+      <h3 id="surse">Surse</h3>
+      <ul>
+        <li>James Clear — <em>Atomic Habits</em> (2018): sisteme vs. obiective, cele patru legi, stratificarea obiceiurilor, regula celor două minute, „nu rata de două ori”, platoul potențialului latent, obiceiuri bazate pe identitate</li>
+        <li>BJ Fogg — metoda <em>Tiny Habits</em> și conceptul de <em>ancorare</em>, sursa pe care Clear o creditează pentru stratificare</li>
+        <li>Gollwitzer, P. M. &amp; Sheeran, P. (2006), <em>Implementation intentions and goal achievement: A meta-analysis of effects and processes</em> — 94 de studii independente, peste 8.000 de participanți, d = 0,65</li>
+        <li>Lally, P. et al. (2010), <em>How are habits formed: Modelling habit formation in the real world</em>, European Journal of Social Psychology — mediana de 66 de zile</li>
+      </ul>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#AtomicHabits</a>
+          <a href="#" class="tag">#stratificare</a>
+          <a href="#" class="tag">#obiceiuri</a>
+          <a href="#" class="tag">#AILiteracy</a>
+          <a href="#" class="tag">#Buzzword</a>
+          <a href="#" class="tag">#JurnalulAI</a>
+          <a href="#" class="tag">#profesiaContabila</a>
+        </div>
+        <span class="footer-mono">Articolul #027</span>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s0">Nu ne lipsește informația</a>
+        <a href="#s1">„Mă apuc în weekend” nu e un plan</a>
+        <a href="#s2">Nu construi un obicei. Lipește-l</a>
+        <a href="#s3">Cum îți alegi ancora</a>
+        <a href="#s4">Trei feluri în care stratificarea eșuează</a>
+        <a href="#s5">Stratul trebuie să fie subțire</a>
+        <a href="#s6">De ce nu simți nimic în primele trei săptămâni</a>
+        <a href="#s7">Nu rata de două ori</a>
+        <a href="#s8">Cine devii, nu ce știi</a>
+        <a href="#s9">Cum arată în Jurnalul AI</a>
+        <a href="#s10">Obiceiul e startul, nu sosirea</a>
+        <a href="#surse" class="toc-sub">Surse</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă lectura</div>
+        <h2>Seria „AI Journal” continuă.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html" class="related-card fade-in">
+        <div class="related-date">EDITORIAL · #026</div>
+        <h3>Europa a accelerat cu 48% într-un an. Noi am rămas la 5,2%</h3>
+        <p>De ce era nevoie de un obicei: bariera nr. 1 declarată de români pentru AI generativ este lipsa formării. Datele care justifică tot ce citești aici.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S1 · #020</div>
+        <h3>Familiarizare: alege-ți tool-ul</h3>
+        <p>Prima săptămână practică din jurnal. Cum alegi un instrument și cum scapi de capcana comparațiilor care te țin pe loc luni întregi.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html#grid-tool" class="related-card fade-in">
+        <div class="related-date">RESURSĂ · APLICAȚIE HTML</div>
+        <h3>Jurnalul AI, 30 de zile de adaptare</h3>
+        <p>Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe fiecare zi lucrătoare, zece minute la cafea, plus șase activități practice. Fără cont, fără email, totul rămâne la tine.</p>
+        <span class="related-read">Descarcă jurnalul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+<script>
+
+/* Copy link button */
+(function () {
+  const btn = document.querySelector('.share-btn[aria-label="Copiază link"]');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+      setTimeout(() => { btn.innerHTML = orig; }, 1800);
+    });
+  });
+})();
+</script>
+</body>
+</html>

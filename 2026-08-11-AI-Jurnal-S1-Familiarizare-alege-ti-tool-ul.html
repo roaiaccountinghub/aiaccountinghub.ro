@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Familiarizare: alege-ți tool-ul AI și umblă prin el, ca prin orice program nou de contabilitate — AI Accounting Hub</title>
+<meta name="description" content="Prima săptămână din AI Journal nu produce nimic — și exact asta e ideea. Cum alegi un singur asistent AI, ce cauți în setări, de ce conversațiile fără miză contează și cum îți schimbă rezultatul simpla cerere de format.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Familiarizare: alege-ți tool-ul AI și umblă prin el, ca prin orice program nou de contabilitate">
+<meta property="og:description" content="Nu ai deschis un program nou de contabilitate direct pe balanța de decembrie. Cu asistentul AI de ce ai face-o? Ghidul activității din Săptămâna 1.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Familiarizare: alege-ți tool-ul AI și umblă prin el, ca prin orice program nou de contabilitate">
+<meta name="twitter:description" content="Nu ai deschis un program nou de contabilitate direct pe balanța de decembrie. Cu asistentul AI de ce ai face-o? Ghidul activității din Săptămâna 1.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile seriei „AI Journal" — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Bara seriei — cele 6 activități săptămânale */
+.serie-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 30px; }
+.serie-bar a, .serie-bar span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 11px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--fg-dim);
+  text-decoration: none; white-space: nowrap;
+}
+.serie-bar a:hover { color: var(--fg); border-color: var(--accent); }
+.serie-bar .now {
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  border-color: var(--accent); color: var(--accent);
+}
+
+/* Card „Exemplu practic" */
+.example { margin: 26px 0; padding: 20px 22px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg-1); }
+.example .lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+}
+.example .lbl::before { content: "\2192"; font-weight: 700; }
+.example p { font-size: 15px; line-height: 1.6; margin: 0; }
+.example p + p { margin-top: 10px; }
+.example ul { margin: 10px 0 0; padding-left: 20px; font-size: 15px; line-height: 1.6; }
+.example li + li { margin-top: 6px; }
+
+/* Pașii activității — card numerotat */
+.step { position: relative; margin: 34px 0 26px; padding: 24px 24px 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg-1); }
+.step .step-n {
+  position: absolute; top: -13px; left: 22px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  background: var(--bg-0); padding: 3px 10px; border: 1px solid var(--accent); border-radius: 999px;
+}
+.step h3 { margin: 4px 0 12px; font-size: 19px; line-height: 1.35; }
+.step p { font-size: 15px; line-height: 1.65; }
+.step p:last-child { margin-bottom: 0; }
+.step ul { font-size: 15px; line-height: 1.62; }
+
+/* Comparație „în oglindă" */
+.vs-grid { margin: 32px 0; display: grid; gap: 16px; }
+.vs-pair { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--bg-1); }
+.vs-side { padding: 18px 20px; font-size: 15px; line-height: 1.62; }
+.vs-side.bad { color: var(--fg-muted); border-right: 1px solid var(--border); }
+.vs-side.good { background: color-mix(in oklab, var(--accent) 7%, transparent); color: var(--fg); }
+.vs-tag { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.vs-side.bad .vs-tag { color: var(--fg-dim); }
+.vs-side.good .vs-tag { color: var(--accent); }
+.vs-side.good strong { color: var(--fg); }
+@media (max-width: 720px) {
+  .vs-pair { grid-template-columns: 1fr; }
+  .vs-side.bad { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* Tabel de comparație */
+.compare-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14.5px; }
+.compare-table th, .compare-table td { border: 1px solid var(--border); padding: 11px 14px; text-align: left; vertical-align: top; line-height: 1.55; }
+.compare-table th { background: var(--bg-1); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+.compare-table tbody tr:nth-child(even) { background: color-mix(in oklab, var(--fg) 3%, transparent); }
+@media (max-width: 640px) { .compare-table { font-size: 13px; } .compare-table th, .compare-table td { padding: 8px 10px; } }
+
+/* Bloc de prompt — text de copiat */
+.promptbox {
+  margin: 24px 0; padding: 18px 20px; border-radius: 14px;
+  border: 1px dashed var(--border); background: color-mix(in oklab, var(--accent) 4%, transparent);
+  font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.7; white-space: pre-wrap; color: var(--fg-muted);
+}
+.promptbox .pb-lbl { display: block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+/* Caseta de serie — pentru cine ajunge direct pe articolul ăsta */
+.serie-box { margin: 0 0 34px; padding: 22px 24px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 14px; background: var(--bg-1); }
+.serie-box .sb-k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.serie-box p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.65; color: var(--fg-muted); }
+.serie-box ol { margin: 0; padding: 0; list-style: none; counter-reset: serie; display: grid; gap: 8px; }
+.serie-box ol li { counter-increment: serie; position: relative; padding: 5px 0 5px 34px; font-size: 14.5px; line-height: 1.5; color: var(--fg-muted); }
+.serie-box ol li::before { content: counter(serie); position: absolute; left: 0; top: 5px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); }
+.serie-box ol li a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 32%, transparent); }
+.serie-box ol li a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+/* articolul de la care merită să pornești */
+.serie-box ol li.start { background: color-mix(in oklab, var(--accent) 8%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 26%, transparent); border-radius: 10px; padding: 11px 14px 11px 42px; }
+.serie-box ol li.start::before { left: 13px; top: 11px; border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box ol li.start a { color: var(--fg); font-weight: 600; border-bottom-color: color-mix(in oklab, var(--accent) 55%, transparent); }
+.serie-box ol li.here { color: var(--fg); }
+.serie-box ol li.here::before { border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box .sb-chip { display: inline-block; margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.serie-box .sb-now { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); margin-left: 8px; white-space: nowrap; }
+
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Familiarizare: alege-ți tool-ul AI și umblă prin el, ca prin orice program nou de contabilitate",
+  "description": "Prima săptămână din AI Journal nu produce nimic — și exact asta e ideea. Cum alegi un singur asistent AI, ce cauți în setări, de ce conversațiile fără miză contează și cum îți schimbă rezultatul simpla cerere de format.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "inLanguage": "ro",
+  "articleSection": "AI Journal",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "AI Journal: activitățile săptămânale"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+
+<!-- Date structurate (JSON-LD) — Întrebări frecvente (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce asistent AI ar trebui să aleagă un contabil la început?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aproape nu contează care — contează să fie unul singur. Claude, ChatGPT, Gemini și Copilot rezolvă la fel de bine sarcinile de început ale unui contabil: reformulare, explicație, traducere, structurare. Criteriile practice de departajare sunt altele: dacă firma ta are deja licență (Copilot vine cu Microsoft 365), dacă ai nevoie de integrare cu Google Workspace (Gemini), dacă lucrezi mult cu documente lungi și vrei un ton mai sobru (Claude), sau dacă vrei cel mai mare ecosistem de resurse în limba română (ChatGPT). Greșeala e să le ții pe toate patru deschise și să nu ajungi expert în niciunul."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "De ce e important să umbli prin setările unui asistent AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Din două motive. Primul ține de mediul în care lucrezi: trebuie să știi ce tip de plan ai — personal, business sau enterprise — pentru că de asta depinde ce date ai voie să folosești. Un abonament enterprise achiziționat de firmă vine, de regulă, cu acord de prelucrare a datelor și cu clauză de neutilizare la antrenare; un cont personal gratuit nu vine cu niciuna. Al doilea motiv e practic: în setări stau funcții care schimbă complet experiența — instrucțiuni permanente, memorie, proiecte, moduri de raționament — pe care majoritatea utilizatorilor nu le descoperă niciodată."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "De ce să exersez pe conversații fără legătură cu contabilitatea?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pentru că vrei să înveți comportamentul instrumentului, nu să obții un rezultat. Când miza e reală, te uiți doar la răspuns: e bun sau nu e bun. Când miza e zero — o rețetă, un plan de weekend — te poți uita la cum ajunge acolo: ce întreabă înapoi, unde inventează, cum reacționează dacă îi spui că a greșit, cum se schimbă tonul dacă îi ceri altfel. Sunt exact tiparele pe care le vei recunoaște mai târziu într-o speță de TVA, unde greșeala costă."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Chiar contează în ce format cer răspunsul de la AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da, și mai mult decât se așteaptă majoritatea. Formatul cerut schimbă conținutul, nu doar aspectul. O listă cu bullet-uri te obligă să primești idei paralele și rupe legăturile logice dintre ele. Un tabel te obligă să primești aceleași dimensiuni pentru fiecare element și scoate la iveală golurile — celulele goale sunt informația. Un paragraf continuu păstrează raționamentul, dar ascunde structura. Pentru un contabil, tabelul e adesea cel mai onest format, pentru că nu poți completa o coloană cu vorbe."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>AI Journal · S1 Familiarizare</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">AI Journal</span>
+      <span>11 august 2026</span>
+      <span class="sep">·</span>
+      <span>8 min citire</span>
+    </div>
+
+    <h1>Familiarizare: alege-ți tool-ul și <span class="accent">umblă prin el</span>.</h1>
+    <p class="article-lede">
+      Nu ai deschis niciodată un program nou de contabilitate direct pe balanța de decembrie. Ai făcut întâi o firmă de test, ai umblat prin nomenclatoare, ai stricat ceva și ai revenit. Cu asistentul AI, aproape toată lumea sare peste pasul ăsta — și apoi se miră că „nu merge”.
+    </p>
+
+    <div class="serie-box">
+      <div class="sb-k">// seria „AI Journal” · activitatea săptămânii 1 din 6</div>
+      <p>
+        Articolul de față e activitatea practică a săptămânii 1 și nu e gândit să fie citit singur. Cele șase activități
+        au fost construite pentru <strong>Jurnalul AI</strong>, o aplicație de un singur fișier pe care o pui pe desktop
+        și în care notezi un termen AI pe fiecare zi lucrătoare, timp de 30 de zile. Jurnalul îți deschide singur linkul
+        către articolul săptămânii, atunci când ajungi la ea. Dacă ai nimerit direct aici, ordinea de mai jos îți scutește
+        drumurile inutile.
+      </p>
+      <ol>
+        <li class="start"><a href="resurse.html">Descarcă Jurnalul AI din secțiunea Resurse</a> <span class="sb-chip">începe aici</span></li>
+        <li><a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">Obiceiul nu se construiește. Se lipește</a>, de ce ai nevoie de un obicei, nu de încă un curs</li>
+        <li><a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">Două casete și o cafea</a>, cum se folosește jurnalul, pas cu pas</li>
+        <li><a href="2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">Descarci un fișier HTML</a>, ce poate face și cum verifici singur că e în regulă</li>
+      </ol>
+    </div>
+
+    <nav class="serie-bar" aria-label="Seria AI Journal — cele 6 activități">
+        <span class="now">S1 · Familiarizare</span>
+        <a href="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html">S2 · Prompturi</a>
+        <a href="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html">S3 · Modele & halucinații</a>
+        <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">S4 · Igienă AI</a>
+        <a href="2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html">S5 · Projects & rutine</a>
+        <a href="2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html">S6 · Documente & date</a>
+      </nav>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">De ce săptămâna 1 nu produce nimic</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Un singur asistent</a>
+        <a href="#s-p2">2 · Meniuri și setări</a>
+        <a href="#s-p3">3 · Trei conversații fără miză</a>
+        <a href="#s-p4">4 · Același răspuns, trei formate</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">11.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// AI Journal · Săptămâna 1 · Familiarizare</div>
+    </div>
+
+    <div class="prose">
+
+
+      <p>Există un moment pe care îl recunoaște orice contabil care a trecut printr-o migrare de sistem: prima zi în programul nou. Nu faci nimic util. Deschizi meniuri, cauți unde s-a ascuns balanța, încerci un articol contabil pe o firmă de test, îl storni, te uiți unde s-a dus. E o zi complet neproductivă și complet necesară.</p>
+
+      <p>Prima săptămână din <strong>AI Journal</strong> este exact acea zi, întinsă pe cinci zile lucrătoare. Activitatea se numește <em>familiarizare</em> și are o singură regulă care surprinde pe toată lumea: nu ai voie să produci nimic cu ea.</p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Articol din seria AI Journal.</strong> Fiecare dintre cele 6 săptămâni ale jurnalului are o activitate practică de 10–15 minute pe zi. Acesta e ghidul detaliat al activității din Săptămâna 1: ce faci, de ce, și cum arată aplicată în munca unui contabil. Jurnalul îți cere să notezi; articolul îți explică ce anume merită notat.
+          <br><br>Nu ai încă jurnalul? Se descarcă gratuit, fără cont, din <a href="resurse.html">secțiunea Resurse</a>, iar modul de completare e explicat pas cu pas în <a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">ghidul de utilizare</a>.
+        </div>
+      </div>
+
+      <h2 id="s-ce">Ce e, de fapt, activitatea asta</h2>
+
+      <p>Obiectivul declarat al săptămânii sună așa: <em>tratează asistentul AI ca pe un program nou de contabilitate: înainte să-l folosești în producție, îi umbli prin meniuri.</em></p>
+
+      <p>În traducere: săptămâna asta nu rezolvi nicio problemă reală cu AI-ul. Nu redactezi mailul acela dificil către client, nu explici articolul 291 din Codul fiscal, nu faci rezumatul contractului. Faci patru lucruri aparent banale, adică alegi un tool, îi citești setările, porți trei conversații fără importanță și ceri același răspuns în trei formate diferite, și le notezi în jurnal.</p>
+
+      <p>Pare puțin. E, de fapt, singura săptămână care determină dacă celelalte cinci au sens. Un instrument pe care nu-l cunoști nu poate fi evaluat: dacă nu știi ce poate face, orice eșec pare vina lui și orice reușită pare noroc.</p>
+
+      <h2 id="s-dece">De ce săptămâna 1 nu produce nimic (și de ce e important)</h2>
+
+      <p>Majoritatea contabililor care spun „am încercat AI-ul și nu m-a impresionat” au făcut, fără excepție, același lucru: au deschis un chatbot, i-au dat o întrebare tehnică grea din prima, o speță de TVA la încasare sau o încadrare de cheltuială nedeductibilă, au primit un răspuns aproximativ și au închis fereastra. Verdict: „nu e făcut pentru noi”.</p>
+
+      <p>Testul e nedrept nu pentru că AI-ul e mai bun decât pare, ci pentru că a fost făcut fără nicio bază de comparație. Nu știai ce înseamnă un răspuns bun de la instrumentul acela. Nu știai dacă întrebarea era formulată în felul în care el o poate folosi. Nu știai dacă modelul avea acces la surse sau lucra din memorie. Ai măsurat ceva fără să calibrezi aparatul.</p>
+
+      <blockquote>Familiarizarea nu e un pas de încălzire. E calibrarea. Fără ea, tot ce urmează e o măsurătoare fără etalon.</blockquote>
+
+      <p>Mai e un motiv, mai puțin evident. Un asistent AI nu se comportă ca un program clasic. Programul de contabilitate e determinist: aceeași apăsare de buton dă mereu același rezultat, iar dacă nu-l dă, e un bug. Asistentul AI e probabilistic: aceeași întrebare pusă de două ori poate da două răspunsuri ușor diferite, iar asta nu e o defecțiune, e modul lui de funcționare. Până nu vezi cu ochii tăi variația asta pe o întrebare fără miză, nu o vei accepta pe una cu miză, și vei trage concluzii greșite exact atunci când contează.</p>
+
+      <h2 id="s-urmareste">Ce urmărește exercițiul, concret</h2>
+
+      <p>Activitatea are trei obiective care nu se anunță, dar se produc:</p>
+
+      <ul class="checklist">
+        <li><strong>Îți construiește o linie de bază.</strong> La final știi cum arată un răspuns tipic al instrumentului tău: lungime, ton, cât de sigur pe el e, când pune întrebări înapoi. Fără linia asta nu poți sesiza mai târziu că „ceva nu e în regulă cu răspunsul ăsta”.</li>
+        <li><strong>Îți dă controlul asupra datelor înainte să introduci vreuna.</strong> Setările de confidențialitate se citesc <em>înainte</em>, nu după ce ai lipit prima balanță în fereastră.</li>
+        <li><strong>Îți arată că formularea ta e o variabilă.</strong> Ultimul pas, același răspuns în trei formate, e primul contact cu ideea că rezultatul depinde de cum ceri, nu doar de ce ceri. E puntea către săptămâna a doua.</li>
+      </ul>
+
+      <h2 id="s-pasi">Cei patru pași, pe rând</h2>
+
+      <div class="step">
+        <span class="step-n">Pasul 1</span>
+        <h3 id="s-p1">Alege UN singur asistent și rămâi pe el</h3>
+        <p>Claude, ChatGPT, Gemini, Copilot. Alegi unul. Nu „încerc două săptămâni fiecare”, ci <em>unul</em>, pentru toată durata jurnalului.</p>
+        <p>Motivul e același pentru care nu ții contabilitatea în trei programe simultan ca să vezi care e mai bun: nu ajungi să cunoști niciunul suficient de bine cât să-l judeci. Diferențele reale dintre asistenți apar abia după ce depășești nivelul de suprafață: în felul în care țin contextul unei conversații lungi, în ce fac când nu știu, în cât de bine respectă o instrucțiune de format. Iar dacă schimbi tool-ul de fiecare dată când unul te dezamăgește, nu ajungi niciodată acolo.</p>
+        <p>Criterii practice de departajare, dacă ești nehotărât: dacă firma are deja Microsoft 365, Copilot e deja plătit și stă în Word și Excel. Dacă lucrezi în Google Workspace, Gemini e cel mai puțin dus-întors. Dacă lucrezi mult cu documente lungi și vrei un ton sobru, Claude. Dacă vrei cel mai mare volum de tutoriale în limba română, ChatGPT. Diferența dintre ele e mai mică decât diferența dintre a ști să folosești unul și a nu ști să folosești niciunul.</p>
+
+        <p><strong>Prima întrebare nu e însă care, ci gratuit sau plătit.</strong> Dacă poți, ia varianta plătită. Am testat ambele și, la sarcinile simple, diferența chiar nu se vede: o reformulare, o traducere, o explicație ies la fel de bine. Se vede exact acolo unde contează, la lucrurile grele: un document lung ținut cap-coadă fără să se piardă pe drum, un raționament în mai mulți pași care nu o ia razna la al treilea, o instrucțiune de format respectată până la capăt. Adică fix genul de sarcini pentru care ai vrea să folosești un asistent la muncă, nu la joacă.</p>
+
+        <p>Pe planurile plătite se deschid și zonele unde se lucrează serios: spații de lucru în echipă unde poți testa agenți AI pe sarcini repetitive, și unelte de tip Codex pentru cine ajunge să automatizeze ceva. Nu ai nevoie de ele în săptămâna 1 și nici în săptămâna 6, dar e bine să știi de la început că există un etaj deasupra, ca să nu tragi concluzii despre AI din varianta gratuită.</p>
+
+        <div class="callout">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M2 12h20"/></svg>
+          </div>
+          <div class="cbody">
+            <strong>Dacă lucrezi într-o companie, întreabă înainte să-ți faci cont.</strong> Cele mai multe organizații au deja un model aprobat intern, cu contract și cu regulile de date puse la punct, iar în practică cel mai des e vorba de ChatGPT Enterprise. Dacă firma ta are deja unul, alegerea e făcută: îl folosești pe acela, ai și acoperirea juridică, și un abonament pe care nu-l plătești tu. Dacă nu are, plătește-ți singur unul pe lunile astea. Sunt banii cei mai bine investiți din tot parcursul.
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 2</span>
+        <h3 id="s-p2">Deschide toate meniurile și setările</h3>
+        <p>Aici e partea pe care o sare aproape toată lumea și e, profesional vorbind, cea mai importantă. Nu cauți butoane frumoase, cauți răspunsuri la întrebări care țin de răspunderea ta.</p>
+        <table class="compare-table t-stack">
+          <thead>
+            <tr><th>Ce cauți</th><th>De ce contează pentru un contabil</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Ce cauți">Unde e istoricul conversațiilor și cât se păstrează</td><td data-label="De ce contează pentru un contabil">Dacă ai introdus din greșeală o informație despre un client, trebuie să știi de unde o ștergi și dacă ștergerea e reală.</td></tr>
+            <tr><td data-label="Ce cauți">Dacă discuțiile tale sunt folosite pentru antrenarea modelului — și cum oprești asta</td><td data-label="De ce contează pentru un contabil">E prima linie de apărare a confidențialității. Setarea există la toți furnizorii mari, dar la unii e activă implicit.</td></tr>
+            <tr><td data-label="Ce cauți"><strong>Ce tip de cont ai: personal, business sau enterprise administrat de firmă</strong></td><td data-label="De ce contează pentru un contabil">Cel mai important rând din tabel. Un abonament enterprise vine cu acord de prelucrare (DPA) și cu clauză expresă de neantrenare — deci cu un cu totul alt set de lucruri pe care ai voie să le încarci. Un cont personal nu are niciun contract în spate.</td></tr>
+            <tr><td data-label="Ce cauți">Dacă instrumentul e pe lista aprobată de firmă</td><td data-label="De ce contează pentru un contabil">Nu e o întrebare de setări, ci una către IT sau administrator — dar se pune exact acum, înainte să te obișnuiești cu un instrument pe care nu ai voie să-l folosești în producție.</td></tr>
+            <tr><td data-label="Ce cauți">Instrucțiunile permanente (custom instructions / personalizare)</td><td data-label="De ce contează pentru un contabil">Aici scrii o dată cine ești și cum vrei să ți se răspundă, în loc s-o repeți în fiecare conversație.</td></tr>
+            <tr><td data-label="Ce cauți">Memoria — dacă reține lucruri între conversații și cum o ștergi</td><td data-label="De ce contează pentru un contabil">Comod, dar înseamnă că informația pe care ai dat-o luni poate reapărea în conversația de vineri, poate în alt context.</td></tr>
+            <tr><td data-label="Ce cauți">Modelele disponibile (rapid vs. „care gândește”)</td><td data-label="De ce contează pentru un contabil">Pregătește direct săptămâna 3. Majoritatea oamenilor folosesc luni în șir modelul implicit fără să știe că există alternative.</td></tr>
+          </tbody>
+        </table>
+        <p>Notează în jurnal ce ai găsit și, mai ales, ce <em>nu</em> ai găsit. Dacă nu ai reușit să afli ce se întâmplă cu datele tale în zece minute de căutat, aceea e o informație despre instrument.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 3</span>
+        <h3 id="s-p3">Trei conversații fără nicio miză</h3>
+        <p>O rețetă. Un plan de weekend. O explicație pentru un copil de zece ani. Nimic din munca ta.</p>
+        <p>Regula asta pare o pierdere de timp pentru un profesionist ocupat, dar are o logică precisă: <strong>când miza e zero, te uiți la cum funcționează instrumentul, nu la rezultat.</strong> Într-o speță reală te interesează un singur lucru: răspunsul e corect sau nu. Într-o conversație despre ce gătești duminică poți observa lucrurile care contează cu adevărat mai târziu:</p>
+        <ul>
+          <li>Pune întrebări înapoi înainte să răspundă, sau presupune și merge mai departe?</li>
+          <li>Ce face când îi spui „nu, ai greșit”? Se corectează cu argumente sau capitulează instant și îți dă dreptate orbește?</li>
+          <li>Cât de lung e răspunsul implicit? Îl poți scurta cerând, sau revine la lungimea lui obișnuită?</li>
+          <li>Reține ce ai spus acum zece mesaje, sau pierde firul?</li>
+        </ul>
+        <p>Ultimul punct, capitularea instantanee, merită atenție specială. Un asistent care își schimbă răspunsul de fiecare dată când îl contrazici nu e politicos, e nefolositor. Vei vrea să știi asta despre el <em>înainte</em> să-l întrebi dacă o cheltuială e deductibilă și să-l contrazici din instinct.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 4</span>
+        <h3 id="s-p4">Același răspuns în trei formate</h3>
+        <p>Iei o singură întrebare, orice, chiar și una din conversațiile de mai sus, și ceri răspunsul de trei ori: ca <em>listă cu bullet-uri</em>, ca <em>tabel</em>, ca <em>paragraf continuu</em>. Apoi te uiți la ce s-a schimbat.</p>
+        <p>Descoperirea nu e că arată diferit. E că <strong>spun lucruri diferite.</strong> Formatul nu e ambalaj, e o constrângere care schimbă conținutul:</p>
+        <div class="vs-grid">
+          <div class="vs-pair">
+            <div class="vs-side bad"><span class="vs-tag">Listă cu bullet-uri</span>Idei paralele, ușor de scanat. Dar rupe legăturile logice: „X, prin urmare Y” devine două puncte independente, iar cauzalitatea dispare.</div>
+            <div class="vs-side good"><span class="vs-tag">Tabel</span>Te obligă să primești <strong>aceleași dimensiuni pentru fiecare element</strong>. Golurile devin vizibile — o celulă goală e o informație pe care nu o ai.</div>
+          </div>
+        </div>
+        <p>Paragraful continuu, la rândul lui, păstrează raționamentul intact, dar ascunde structura: e formatul în care se strecoară cel mai ușor o afirmație nesusținută, pentru că nimic nu o izolează.</p>
+        <div class="example">
+          <span class="lbl">Exemplu din lumea noastră</span>
+          <p>Cere-i unui asistent să-ți explice diferența dintre amortizarea contabilă și cea fiscală.</p>
+          <p><strong>În paragraf</strong> îți dă o explicație curgătoare, plauzibilă, pe care o citești și zici „da, corect”.</p>
+          <p><strong>În tabel</strong>, cu coloanele <em>bază legală / durată / efect în rezultatul contabil / efect în rezultatul fiscal</em>, se întâmplă ceva util: apar celulele pe care nu le poate completa. Acolo, exact acolo, e locul unde trebuie să te uiți tu în lege.</p>
+        </div>
+        <p>Pentru un contabil, tabelul e adesea cel mai onest format cerut de la un AI, pentru că într-o celulă nu poți turna vorbe.</p>
+      </div>
+
+      <h2 id="s-bine">Cum știi că ți-a ieșit săptămâna</h2>
+
+      <p>Nu ai niciun livrabil la final. Ai însă patru lucruri pe care poți să le spui cu voce tare:</p>
+
+      <ul class="checklist">
+        <li><strong>Știi ce tool folosești</strong> și de ce l-ai ales, nu pentru că a fost primul deschis.</li>
+        <li><strong>Știi ce se întâmplă cu ce scrii acolo</strong> și ai închis ce trebuia închis.</li>
+        <li><strong>Ai o intuiție despre cum „se poartă”</strong>: cât de repede cedează, cât de mult inventează, când întreabă înapoi.</li>
+        <li><strong>Ai văzut cu ochii tăi</strong> că modul în care ceri schimbă ce primești.</li>
+      </ul>
+
+      <p>Dacă la finalul săptămânii notița din jurnal e „nu am făcut nimic util”, e semn bun. Utilul începe săptămâna viitoare, iar acum ai pe ce să-l construiești.</p>
+
+      <h2 id="s-capcane">Trei capcane ale primei săptămâni</h2>
+
+      <p><strong>1. Turismul între tool-uri.</strong> Deschizi ChatGPT, nu-ți place răspunsul, treci pe Gemini, nu-ți place nici acolo, ajungi la Claude. La final ai patru conturi și zero competență. Alege repede, dar alege o singură dată.</p>
+
+      <p><strong>2. Testul-capcană din prima zi.</strong> Tentația de a-l „prinde” imediat cu o întrebare grea de fiscalitate e mare, mai ales pentru cineva sceptic. O poți face, dar în săptămâna 3, cu unelte de verificare, când exercițiul chiar are un rost. În săptămâna 1 nu-ți spune nimic despre instrument și îți confirmă doar scepticismul cu care ai intrat.</p>
+
+      <p><strong>3. Datele reale înainte să știi în ce mediu ești.</strong> Nu pentru că datele reale ar fi interzise, fiindcă într-un abonament enterprise cu contract în spate sunt perfect utilizabile, ci pentru că în săptămâna 1 încă nu ai verificat dacă ești în acel mediu. Ordinea corectă e: întâi afli ce cont ai și ce instrument e aprobat de firmă, apoi decizi ce încarci. Regula completă de decizie o construiești în <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">Săptămâna 4, Igienă AI</a>; conversațiile fără miză din pasul 3 sunt, până atunci, terenul sigur.</p>
+
+      <h2 id="s-final">Ce duci mai departe</h2>
+
+      <p>La finalul acestei săptămâni ai un instrument pe care îl cunoști superficial, dar direct, nu din articole, din propria mână. Ai închis ce trebuia închis în setări. Și ai observat, poate pentru prima dată, că răspunsul se schimbă când schimbi cererea.</p>
+
+      <p>Exact de acolo pornește <a href="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html">Săptămâna 2</a>: de la „întreb ceva” la „cer exact ce-mi trebuie”. Dar treaba aia are sens doar dacă știi deja cum arată instrumentul când îl lași în pace.</p>
+
+      <blockquote>Nimeni nu s-a priceput vreodată la un program pe care nu l-a stricat măcar o dată pe o firmă de test.</blockquote>
+
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#ai-jurnal</span>
+          <span class="tag">#familiarizare</span>
+          <span class="tag">#prompt</span>
+          <span class="tag">#llm</span>
+          <span class="tag">#setari-confidentialitate</span>
+          <span class="tag">#contabilitate</span>
+        </div>
+        <span class="footer-mono">Articolul #020</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">De ce săptămâna 1 nu produce nimic</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Un singur asistent</a>
+        <a href="#s-p2">2 · Meniuri și setări</a>
+        <a href="#s-p3">3 · Trei conversații fără miză</a>
+        <a href="#s-p4">4 · Același răspuns, trei formate</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- RELATED -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S2</div>
+        <h3>S2 · Prompturi care chiar funcționează</h3>
+        <p>Rol → context → sarcină → format. Structura care transformă „întreb ceva” în „cer exact ce-mi trebuie”.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S3</div>
+        <h3>S3 · Compară modele și prinde-l cu mâța-n sac</h3>
+        <p>Două modele, același prompt. Un bon fotografiat. Un articol de lege verificat la sursă. Și prima halucinație notată.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html#grid-tool" class="related-card fade-in">
+        <div class="related-date">RESURSĂ · APLICAȚIE HTML</div>
+        <h3>Jurnalul AI, 30 de zile de adaptare</h3>
+        <p>Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe fiecare zi lucrătoare, zece minute la cafea, plus șase activități practice. Fără cont, fără email, totul rămâne la tine.</p>
+        <span class="related-read">Descarcă jurnalul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

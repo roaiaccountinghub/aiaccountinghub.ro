@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Prompturi care chiar funcționează: cele patru straturi și de ce contează pentru un contabil — AI Accounting Hub</title>
+<meta name="description" content="Săptămâna 2 din AI Journal: treci de la „întreb ceva” la „cer exact ce-mi trebuie”. Structura promptului în patru straturi, aplicată pe sarcini reale de contabil — mail către client, traducere, explicarea unei prevederi — plus testul guardrails.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Prompturi care chiar funcționează: cele patru straturi și de ce contează pentru un contabil">
+<meta property="og:description" content="Diferența dintre un răspuns aproximativ și unul pe care îl poți trimite clientului nu stă în model. Stă în ce ai scris tu înainte.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Prompturi care chiar funcționează: cele patru straturi și de ce contează pentru un contabil">
+<meta name="twitter:description" content="Diferența dintre un răspuns aproximativ și unul pe care îl poți trimite clientului nu stă în model. Stă în ce ai scris tu înainte.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile seriei „AI Journal" — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Bara seriei — cele 6 activități săptămânale */
+.serie-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 30px; }
+.serie-bar a, .serie-bar span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 11px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--fg-dim);
+  text-decoration: none; white-space: nowrap;
+}
+.serie-bar a:hover { color: var(--fg); border-color: var(--accent); }
+.serie-bar .now {
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  border-color: var(--accent); color: var(--accent);
+}
+
+/* Card „Exemplu practic" */
+.example { margin: 26px 0; padding: 20px 22px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg-1); }
+.example .lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+}
+.example .lbl::before { content: "\2192"; font-weight: 700; }
+.example p { font-size: 15px; line-height: 1.6; margin: 0; }
+.example p + p { margin-top: 10px; }
+.example ul { margin: 10px 0 0; padding-left: 20px; font-size: 15px; line-height: 1.6; }
+.example li + li { margin-top: 6px; }
+
+/* Pașii activității — card numerotat */
+.step { position: relative; margin: 34px 0 26px; padding: 24px 24px 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg-1); }
+.step .step-n {
+  position: absolute; top: -13px; left: 22px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  background: var(--bg-0); padding: 3px 10px; border: 1px solid var(--accent); border-radius: 999px;
+}
+.step h3 { margin: 4px 0 12px; font-size: 19px; line-height: 1.35; }
+.step p { font-size: 15px; line-height: 1.65; }
+.step p:last-child { margin-bottom: 0; }
+.step ul { font-size: 15px; line-height: 1.62; }
+
+/* Comparație „în oglindă" */
+.vs-grid { margin: 32px 0; display: grid; gap: 16px; }
+.vs-pair { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--bg-1); }
+.vs-side { padding: 18px 20px; font-size: 15px; line-height: 1.62; }
+.vs-side.bad { color: var(--fg-muted); border-right: 1px solid var(--border); }
+.vs-side.good { background: color-mix(in oklab, var(--accent) 7%, transparent); color: var(--fg); }
+.vs-tag { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.vs-side.bad .vs-tag { color: var(--fg-dim); }
+.vs-side.good .vs-tag { color: var(--accent); }
+.vs-side.good strong { color: var(--fg); }
+@media (max-width: 720px) {
+  .vs-pair { grid-template-columns: 1fr; }
+  .vs-side.bad { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* Tabel de comparație */
+.compare-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14.5px; }
+.compare-table th, .compare-table td { border: 1px solid var(--border); padding: 11px 14px; text-align: left; vertical-align: top; line-height: 1.55; }
+.compare-table th { background: var(--bg-1); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+.compare-table tbody tr:nth-child(even) { background: color-mix(in oklab, var(--fg) 3%, transparent); }
+@media (max-width: 640px) { .compare-table { font-size: 13px; } .compare-table th, .compare-table td { padding: 8px 10px; } }
+
+/* Bloc de prompt — text de copiat */
+.promptbox {
+  margin: 24px 0; padding: 18px 20px; border-radius: 14px;
+  border: 1px dashed var(--border); background: color-mix(in oklab, var(--accent) 4%, transparent);
+  font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.7; white-space: pre-wrap; color: var(--fg-muted);
+}
+.promptbox .pb-lbl { display: block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+/* Caseta de serie — pentru cine ajunge direct pe articolul ăsta */
+.serie-box { margin: 0 0 34px; padding: 22px 24px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 14px; background: var(--bg-1); }
+.serie-box .sb-k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.serie-box p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.65; color: var(--fg-muted); }
+.serie-box ol { margin: 0; padding: 0; list-style: none; counter-reset: serie; display: grid; gap: 8px; }
+.serie-box ol li { counter-increment: serie; position: relative; padding: 5px 0 5px 34px; font-size: 14.5px; line-height: 1.5; color: var(--fg-muted); }
+.serie-box ol li::before { content: counter(serie); position: absolute; left: 0; top: 5px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); }
+.serie-box ol li a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 32%, transparent); }
+.serie-box ol li a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+/* articolul de la care merită să pornești */
+.serie-box ol li.start { background: color-mix(in oklab, var(--accent) 8%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 26%, transparent); border-radius: 10px; padding: 11px 14px 11px 42px; }
+.serie-box ol li.start::before { left: 13px; top: 11px; border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box ol li.start a { color: var(--fg); font-weight: 600; border-bottom-color: color-mix(in oklab, var(--accent) 55%, transparent); }
+.serie-box ol li.here { color: var(--fg); }
+.serie-box ol li.here::before { border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box .sb-chip { display: inline-block; margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.serie-box .sb-now { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); margin-left: 8px; white-space: nowrap; }
+
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Prompturi care chiar funcționează: cele patru straturi și de ce contează pentru un contabil",
+  "description": "Săptămâna 2 din AI Journal: treci de la „întreb ceva” la „cer exact ce-mi trebuie”. Structura promptului în patru straturi, aplicată pe sarcini reale de contabil — mail către client, traducere, explicarea unei prevederi — plus testul guardrails.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "inLanguage": "ro",
+  "articleSection": "AI Journal",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "AI Journal: activitățile săptămânale"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+
+<!-- Date structurate (JSON-LD) — Întrebări frecvente (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce înseamnă promptul în patru straturi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "E o structură simplă de scriere a cererii către un asistent AI: rol (cine să fie și pentru cine scrie), context (situația concretă, cu detaliile pe care doar tu le știi), sarcină (ce anume vrei, la singular și cu verb clar) și format (cum să arate răspunsul — lungime, structură, ton, ce să nu conțină). Nu e o formulă magică, ci un mod de a nu lăsa modelul să presupună lucrurile pe care le poți spune tu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Care strat lipsește cel mai des dintr-un prompt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contextul. E paradoxal, pentru că e singurul strat pe care AI-ul nu-l poate deduce singur: modelul știe multe despre contabilitate în general și nimic despre clientul tău, despre ce s-a discutat la telefon săptămâna trecută sau despre faptul că raportul merge la un director care urăște tabelele. Rolul și sarcina sunt intuitive și le scrie aproape toată lumea; formatul se învață repede; contextul e cel care face diferența între un răspuns generic și unul folosibil."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce sunt guardrails și de ce ar trebui să le testez?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Guardrails („bariere de siguranță”) sunt limitele impuse unui asistent AI: refuză să genereze anumite tipuri de conținut, să dea sfaturi în domenii reglementate fără avertismente, sau să te ajute la lucruri ilegale. Le testezi nu ca să le ocolești, ci ca să știi unde sunt. Un contabil care nu știe că asistentul refuză sau nuanțează anumite cereri va interpreta greșit un refuz ca pe o eroare tehnică — și, mai important, va rata semnalul că a intrat într-o zonă care cere judecată umană, nu automatizare."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cât de lung trebuie să fie un prompt bun?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cât e nevoie ca să nu rămână nimic esențial de presupus — de regulă între 5 și 15 rânduri pentru o sarcină profesională reală. Un prompt de un rând produce un răspuns generic pentru că modelul completează golurile cu media a ceea ce a văzut. Dar lungimea în sine nu e o virtute: un prompt de o pagină plin de politețuri și repetări e mai slab decât unul de cinci rânduri care conține rolul, situația, cererea și formatul. Regula practică: fiecare propoziție din prompt trebuie să elimine o presupunere posibilă."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>AI Journal · S2 Prompturi</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">AI Journal</span>
+      <span>11 august 2026</span>
+      <span class="sep">·</span>
+      <span>9 min citire</span>
+    </div>
+
+    <h1>Prompturi care chiar <span class="accent">funcționează</span>.</h1>
+    <p class="article-lede">
+      Un contabil nu-i spune unui coleg junior „fă și tu ceva cu dosarul ăsta”. Îi spune cine e clientul, ce s-a discutat data trecută, ce anume vrea și sub ce formă îi trebuie răspunsul. Cu AI-ul, aproape toată lumea revine la „fă și tu ceva” — și apoi judecă rezultatul.
+    </p>
+
+    <div class="serie-box">
+      <div class="sb-k">// seria „AI Journal” · activitatea săptămânii 2 din 6</div>
+      <p>
+        Articolul de față e activitatea practică a săptămânii 2 și nu e gândit să fie citit singur. Cele șase activități
+        au fost construite pentru <strong>Jurnalul AI</strong>, o aplicație de un singur fișier pe care o pui pe desktop
+        și în care notezi un termen AI pe fiecare zi lucrătoare, timp de 30 de zile. Jurnalul îți deschide singur linkul
+        către articolul săptămânii, atunci când ajungi la ea. Dacă ai nimerit direct aici, ordinea de mai jos îți scutește
+        drumurile inutile.
+      </p>
+      <ol>
+        <li class="start"><a href="resurse.html">Descarcă Jurnalul AI din secțiunea Resurse</a> <span class="sb-chip">începe aici</span></li>
+        <li><a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">Obiceiul nu se construiește. Se lipește</a>, de ce ai nevoie de un obicei, nu de încă un curs</li>
+        <li><a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">Două casete și o cafea</a>, cum se folosește jurnalul, pas cu pas</li>
+        <li><a href="2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">Descarci un fișier HTML</a>, ce poate face și cum verifici singur că e în regulă</li>
+      </ol>
+    </div>
+
+    <nav class="serie-bar" aria-label="Seria AI Journal — cele 6 activități">
+        <a href="2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html">S1 · Familiarizare</a>
+        <span class="now">S2 · Prompturi</span>
+        <a href="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html">S3 · Modele & halucinații</a>
+        <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">S4 · Igienă AI</a>
+        <a href="2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html">S5 · Projects & rutine</a>
+        <a href="2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html">S6 · Documente & date</a>
+      </nav>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">De ce promptul e o competență, nu un truc</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Sarcini reale, nu exerciții</a>
+        <a href="#s-p2">2 · Promptul în patru straturi</a>
+        <a href="#s-p3">3 · Rescrie până iese din prima</a>
+        <a href="#s-p4">4 · Testează o limită</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">11.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// AI Journal · Săptămâna 2 · Rol → context → sarcină → format</div>
+    </div>
+
+    <div class="prose">
+
+
+      <p>Săptămâna trecută nu ai produs nimic, ai umblat prin meniuri și ai purtat conversații despre rețete. Săptămâna asta se schimbă complet regula: <strong>lucrezi doar pe sarcini reale</strong>, din agenda ta de oricum, nu pe exerciții inventate.</p>
+
+      <p>Obiectivul e o singură propoziție: treci de la „întreb ceva” la „cer exact ce-mi trebuie”. Distanța dintre cele două e mai mare decât pare și e, în cele mai multe cazuri, întreaga explicație pentru care AI-ul funcționează spectaculos pentru unii colegi și dezamăgitor pentru alții. Nu e modelul. E ce ai scris tu înainte de el.</p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Articol din seria AI Journal.</strong> Ghidul detaliat al activității din Săptămâna 2. Dacă vrei tratarea extinsă a subiectului, cu arhitecturi de prompt mai complexe, articolul <a href="2026-07-31-Promptul-perfect-2.0.html">Promptul perfect 2.0</a> e continuarea naturală a acestei săptămâni.
+          <br><br>Nu ai încă jurnalul? Se descarcă gratuit, fără cont, din <a href="resurse.html">secțiunea Resurse</a>, iar modul de completare e explicat pas cu pas în <a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">ghidul de utilizare</a>.
+        </div>
+      </div>
+
+      <h2 id="s-ce">Ce e, de fapt, activitatea asta</h2>
+
+      <p>Patru pași, toți pe muncă reală: iei trei sarcini pe care oricum le ai de făcut, le scrii promptul într-o structură fixă de patru straturi, rescrii până iese bun <em>din prima încercare</em>, și, la final, testezi o limită a instrumentului.</p>
+
+      <p>Punctul esențial, cel care schimbă exercițiul dintr-un joc într-o competență: nu inventezi sarcini pentru AI. Iei ce ai deja pe birou. Un mail către un client care trebuie scris oricum. O traducere de care ai nevoie oricum. Explicarea unei prevederi pe care oricum trebuie s-o explici cuiva.</p>
+
+      <h2 id="s-dece">De ce promptul e o competență, nu un truc</h2>
+
+      <p>Circulă ideea că „prompt engineering” e o modă trecătoare, adică modelele devin tot mai bune și în curând vor înțelege oricum ce vrei. E parțial adevărat și complet irelevant. Modelele chiar au devenit mult mai tolerante la cereri formulate neglijent. Dar niciun model, oricât de bun, nu poate ghici <em>ce nu i-ai spus</em>.</p>
+
+      <p>Iar ce nu-i spui, ca profesionist, e enorm. Modelul știe multe despre contabilitate în general. Nu știe nimic despre clientul tău, despre ce ați discutat la telefon marți, despre faptul că administratorul are un istoric de întârzieri și că mailul trebuie să fie ferm dar nu ostil, sau despre faptul că raportul ajunge la un director care nu citește niciodată tabele.</p>
+
+      <blockquote>Un model bun compensează un prompt formulat neglijent. Niciun model nu compensează un prompt din care lipsește informația.</blockquote>
+
+      <p>Analogia care ține cel mai bine în profesia noastră: promptul e ca instrucțiunea dată unui junior isteț, cu memorie excelentă și zero experiență în firma ta. Nu e limitat, dar nu a fost la nicio ședință, nu a citit niciun dosar și nu cunoaște niciun client. Tot ce nu-i spui, va completa cu media a ceea ce a văzut în altă parte. Iar media, în fiscalitate, e adesea exact răspunsul greșit.</p>
+
+      <h2 id="s-urmareste">Ce urmărește exercițiul, concret</h2>
+
+      <ul class="checklist">
+        <li><strong>Să scazi numărul de iterații.</strong> Măsura succesului nu e „am obținut până la urmă ce voiam”, ci „am obținut din a doua încercare, nu din a șaptea”. Timpul câștigat cu AI se pierde integral în dus-întorsul cu el.</li>
+        <li><strong>Să afli ce anume face diferența.</strong> Nu e suficient să iasă bine, trebuie să știi <em>de ce</em> a ieșit bine, altfel nu poți repeta.</li>
+        <li><strong>Să-ți construiești primele șabloane.</strong> Prompturile care funcționează pe sarcini recurente devin, în Săptămâna 4, biblioteca ta personală.</li>
+        <li><strong>Să vezi unde sunt limitele.</strong> Ultimul pas, testul de guardrails, îți arată zona în care instrumentul se oprește, ceea ce e la fel de util ca zona în care merge.</li>
+      </ul>
+
+      <h2 id="s-pasi">Cei patru pași, pe rând</h2>
+
+      <div class="step">
+        <span class="step-n">Pasul 1</span>
+        <h3 id="s-p1">Ia trei sarcini pe care oricum le ai în agendă</h3>
+        <p>Un mail către client. O traducere. Explicarea unei prevederi. Alege-le pe cele reale, cu termen și destinatar.</p>
+        <p>Motivul e simplu și incomod: pe un exercițiu inventat nu ai criteriu de calitate. „E bun răspunsul?” Habar n-ai, n-ai ce compara. Pe un mail care chiar pleacă la client ai un criteriu foarte clar: l-ai trimite așa cum e sau nu? Aceea e singura evaluare care contează.</p>
+        <p>Sarcinile potrivite pentru săptămâna asta au trei caracteristici: le poți evalua tu (ești expertul), nu conțin date confidențiale care să iasă din firmă, și le-ai mai făcut de câteva ori, deci știi cum arată varianta bună.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 2</span>
+        <h3 id="s-p2">Scrie promptul în patru straturi</h3>
+        <p><strong>Rol → context → sarcină → formatul răspunsului.</strong> Nu e o formulă magică; e o listă de verificare care te împiedică să lași goluri.</p>
+        <table class="compare-table t-stack">
+          <thead>
+            <tr><th>Strat</th><th>Ce conține</th><th>Ce se strică dacă lipsește</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Strat"><strong>Rol</strong></td><td data-label="Ce conține">Cine să fie și pentru cine scrie. „Ești contabil senior care scrie unui administrator fără pregătire economică.”</td><td data-label="Ce se strică dacă lipsește">Răspunsul iese la un nivel de tehnicitate aleatoriu — fie prea simplu, fie plin de jargon.</td></tr>
+            <tr><td data-label="Strat"><strong>Context</strong></td><td data-label="Ce conține">Situația concretă, istoricul, constrângerile. Ce știi tu și nu poate ști el.</td><td data-label="Ce se strică dacă lipsește">Primești un răspuns corect în general și inutil în particular. Stratul cel mai des omis.</td></tr>
+            <tr><td data-label="Strat"><strong>Sarcină</strong></td><td data-label="Ce conține">Un singur lucru, cu verb clar: <em>redactează</em>, <em>compară</em>, <em>rezumă</em>, <em>verifică</em>.</td><td data-label="Ce se strică dacă lipsește">Dacă ceri trei lucruri deodată, primești trei răspunsuri superficiale în loc de unul bun.</td></tr>
+            <tr><td data-label="Strat"><strong>Format</strong></td><td data-label="Ce conține">Lungime, structură, ton, ce să NU conțină.</td><td data-label="Ce se strică dacă lipsește">Primești formatul implicit al modelului — de regulă mai lung, mai entuziast și mai plin de introduceri decât ai nevoie.</td></tr>
+          </tbody>
+        </table>
+        <p>Iată cum arată diferența, pe o sarcină pe care o are orice contabil în august:</p>
+        <div class="vs-grid">
+          <div class="vs-pair">
+            <div class="vs-side bad"><span class="vs-tag">Prompt de un rând</span>„Scrie-mi un mail către client despre documentele lipsă.”</div>
+            <div class="vs-side good"><span class="vs-tag">Prompt în patru straturi</span><strong>Rol:</strong> contabil care ține legătura cu un client mic, ton profesionist dar cald.<br><strong>Context:</strong> e a treia oară în trei luni când documentele întârzie; relația e bună și nu vreau s-o stric, dar termenul de declarare e peste 5 zile și riscul de amendă e real.<br><strong>Sarcină:</strong> redactează mailul de solicitare.<br><strong>Format:</strong> maximum 120 de cuvinte, fără formule pompoase, cu o listă scurtă a documentelor și un termen explicit. Fără amenințări, fără „conform prevederilor legale”.</div>
+          </div>
+        </div>
+        <p>Al doilea prompt e mai lung de scris decât primul cu vreo 40 de secunde. Economisește, în schimb, trei runde de „nu, mai scurt”, „nu, mai puțin sec”, „scoate paragraful ăla”.</p>
+        <div class="promptbox"><span class="pb-lbl">Schelet reutilizabil</span>Rol: ești [cine] și scrii pentru [cui], care [ce știe / ce nu știe].
+Context: [situația, istoricul, constrângerile pe care doar eu le știu].
+Sarcină: [un singur verb + un singur obiect].
+Format: [lungime] · [structură] · [ton] · [ce să NU apară].</div>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 3</span>
+        <h3 id="s-p3">Rescrie până iese bun din prima încercare — și notează CE a făcut diferența</h3>
+        <p>Aici e miezul săptămânii, iar formularea din jurnal e deliberată: nu „până iese bun”, ci <em>până iese bun din prima încercare</em>.</p>
+        <p>Diferența e uriașă. Oricine ajunge la un rezultat acceptabil după opt mesaje de corectat. Dar dacă îți ia opt mesaje de fiecare dată, nu ai automatizat nimic, ai adăugat o etapă. Adevăratul câștig apare când promptul e suficient de bun încât prima ieșire să fie folosibilă, iar promptul acela poate fi refolosit luna viitoare.</p>
+        <p>Modul de lucru: pornești de la promptul în patru straturi, vezi ce nu-ți place la răspuns, apoi, în loc să-i ceri lui corecția în mesajul următor, <strong>te întorci și modifici promptul</strong>, într-o conversație nouă. Sună ineficient. E, de fapt, singura metodă prin care înveți ceva transferabil.</p>
+        <p>Și partea pe care jurnalul o cere explicit: <em>notează ce a făcut diferența</em>. De obicei e un singur lucru: o propoziție de context adăugată, o limită de lungime, un „nu folosi cuvintele X și Y”, o precizare despre cine citește. Notița aceea valorează mai mult decât promptul final, pentru că se aplică și la alte sarcini.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 4</span>
+        <h3 id="s-p4">Testează o limită: cere-i ceva ce n-ar trebui să facă</h3>
+        <p>Ultimul pas pare o glumă și nu e. Guardrails, adică barierele de siguranță, sunt limitele pe care furnizorul le-a pus modelului: refuză anumite cereri, nuanțează altele, adaugă avertismente unde e cazul.</p>
+        <p>Nu le testezi ca să le ocolești. Le testezi ca să știi unde sunt și <strong>cum arată un refuz</strong>, ca să nu-l confunzi mai târziu cu o eroare tehnică sau cu incompetență. Cere-i, de exemplu, să-ți scrie o justificare convingătoare pentru o cheltuială clar nedeductibilă, sau să-ți spună „sigur” că o operațiune e legală fără să vadă documentele. Uită-te la ce face.</p>
+        <p>Reacția are, de regulă, una din trei forme, și fiecare îți spune altceva:</p>
+        <ul>
+          <li><strong>Refuz clar</strong>, cu explicație. Bine, știi unde e granița.</li>
+          <li><strong>Reformulare</strong>: îți dă ce se poate da, cu nuanțele necesare. Cel mai util comportament, și cel mai frecvent la modelele bune.</li>
+          <li><strong>Acceptare entuziastă</strong> a unei cereri problematice. Cel mai important semnal al săptămânii: instrumentul acesta nu are o judecată pe care te poți baza. Toată judecata rămâne la tine.</li>
+        </ul>
+        <p>Pentru un contabil, exercițiul are o valoare suplimentară. Un refuz sau o nuanțare nu e un obstacol, e o etichetă care spune „aici e o zonă de judecată profesională, nu de automatizare”. E exact genul de semnal pe care merită să-l tratezi ca pe un semn de întrebare, nu ca pe un bug.</p>
+      </div>
+
+      <h2 id="s-bine">Cum știi că ți-a ieșit săptămâna</h2>
+
+      <ul class="checklist">
+        <li><strong>Ai trei prompturi</strong> care, copiate și lipite din nou luna viitoare, funcționează fără modificări majore.</li>
+        <li><strong>Poți spune în cuvinte</strong> ce anume a transformat un răspuns slab într-unul bun, nu „am tot încercat”, ci „i-am spus cine citește”.</li>
+        <li><strong>Scrii instinctiv contextul.</strong> E stratul care dispare primul când te grăbești și care lipsește din 90% dintre prompturile care nu funcționează.</li>
+        <li><strong>Știi cum arată un refuz</strong> al instrumentului tău și nu-l mai iei drept defecțiune.</li>
+      </ul>
+
+      <h2 id="s-capcane">Trei capcane ale săptămânii a doua</h2>
+
+      <p><strong>1. Colecția de „prompturi magice” de pe internet.</strong> Circulă liste cu „50 de prompturi pentru contabili”. Sunt aproape inutile, nu pentru că ar fi scrise slab, ci pentru că stratul de context, singurul care contează, e fix cel pe care nu ți-l poate scrie nimeni altcineva. Un prompt copiat funcționează exact cât un dosar de client copiat de la alt client.</p>
+
+      <p><strong>2. Politețea inutilă.</strong> „Te rog frumos, dacă se poate, ai putea eventual să...” nu îmbunătățește răspunsul și consumă contextul. Fii direct, nu grosolan, direct. Instrucțiunea clară e forma de respect care funcționează aici.</p>
+
+      <p><strong>3. Contextul scris fără să știi în ce mediu ești.</strong> Stratul de context e cel mai valoros și e și cel în care ajung, firesc, datele reale. Cât de detaliat poate fi depinde de instrument: într-un abonament enterprise al firmei, cu acord de prelucrare și clauză de neantrenare, poți scrie contextul cu date reale și chiar atașa documentul. Într-un cont personal, îl scrii anonimizat: „un SRL din comerț, cifră de afaceri aproximativ X, plătitor de TVA la încasare” conține tot ce trebuie și niciun nume. Merită observat, de altfel, că varianta anonimizată produce aproape întotdeauna același răspuns: numele clientului nu a contribuit niciodată cu nimic la o analiză fiscală. Regula completă de decizie o construiești în <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">Săptămâna 4</a>.</p>
+
+      <h2 id="s-final">Ce duci mai departe</h2>
+
+      <p>Ai învățat să ceri. Ceea ce înseamnă că, de acum, când răspunsul e slab, nu mai poți da vina automat pe model, prima întrebare devine „ce nu i-am spus?”.</p>
+
+      <p>Dar există și cealaltă parte a monedei, iar ea vine imediat: uneori promptul e impecabil și răspunsul e, totuși, greșit. Cu aplomb, cu detalii credibile, cu un articol de lege care nu există. Despre asta e <a href="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html">Săptămâna 3</a>.</p>
+
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#ai-jurnal</span>
+          <span class="tag">#prompt-engineering</span>
+          <span class="tag">#guardrails</span>
+          <span class="tag">#context-window</span>
+          <span class="tag">#productivitate</span>
+          <span class="tag">#contabilitate</span>
+        </div>
+        <span class="footer-mono">Articolul #021</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">De ce promptul e o competență, nu un truc</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Sarcini reale, nu exerciții</a>
+        <a href="#s-p2">2 · Promptul în patru straturi</a>
+        <a href="#s-p3">3 · Rescrie până iese din prima</a>
+        <a href="#s-p4">4 · Testează o limită</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- RELATED -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S1</div>
+        <h3>S1 · Familiarizare — alege-ți tool-ul și umblă prin el</h3>
+        <p>Prima săptămână nu produce nimic. Un singur asistent, toate setările deschise, trei conversații fără miză.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S3</div>
+        <h3>S3 · Compară modele și prinde-l cu mâța-n sac</h3>
+        <p>Două modele, același prompt. Un bon fotografiat. Un articol de lege verificat la sursă. Și prima halucinație notată.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html#grid-tool" class="related-card fade-in">
+        <div class="related-date">RESURSĂ · APLICAȚIE HTML</div>
+        <h3>Jurnalul AI, 30 de zile de adaptare</h3>
+        <p>Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe fiecare zi lucrătoare, zece minute la cafea, plus șase activități practice. Fără cont, fără email, totul rămâne la tine.</p>
+        <span class="related-read">Descarcă jurnalul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

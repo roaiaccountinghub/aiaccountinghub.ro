@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Compară modele și prinde-l cu mâța-n sac: cum arată o halucinație AI într-o speță fiscală — AI Accounting Hub</title>
+<meta name="description" content="Săptămâna 3 din AI Journal: nu există „AI-ul”, există modele diferite cu puteri diferite — și toate greșesc uneori cu aplomb. Cum rulezi același prompt pe două modele, cum testezi multimodalul pe un bon și cum prinzi prima halucinație.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Compară modele și prinde-l cu mâța-n sac: cum arată o halucinație AI într-o speță fiscală">
+<meta property="og:description" content="Un articol din Codul fiscal care nu există, citat cu număr, alineat și un rezumat perfect plauzibil. Așa arată o halucinație. Săptămâna în care înveți s-o prinzi.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Compară modele și prinde-l cu mâța-n sac: cum arată o halucinație AI într-o speță fiscală">
+<meta name="twitter:description" content="Un articol din Codul fiscal care nu există, citat cu număr, alineat și un rezumat perfect plauzibil. Așa arată o halucinație. Săptămâna în care înveți s-o prinzi.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile seriei „AI Journal" — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Bara seriei — cele 6 activități săptămânale */
+.serie-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 30px; }
+.serie-bar a, .serie-bar span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 11px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--fg-dim);
+  text-decoration: none; white-space: nowrap;
+}
+.serie-bar a:hover { color: var(--fg); border-color: var(--accent); }
+.serie-bar .now {
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  border-color: var(--accent); color: var(--accent);
+}
+
+/* Card „Exemplu practic" */
+.example { margin: 26px 0; padding: 20px 22px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg-1); }
+.example .lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+}
+.example .lbl::before { content: "\2192"; font-weight: 700; }
+.example p { font-size: 15px; line-height: 1.6; margin: 0; }
+.example p + p { margin-top: 10px; }
+.example ul { margin: 10px 0 0; padding-left: 20px; font-size: 15px; line-height: 1.6; }
+.example li + li { margin-top: 6px; }
+
+/* Pașii activității — card numerotat */
+.step { position: relative; margin: 34px 0 26px; padding: 24px 24px 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg-1); }
+.step .step-n {
+  position: absolute; top: -13px; left: 22px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  background: var(--bg-0); padding: 3px 10px; border: 1px solid var(--accent); border-radius: 999px;
+}
+.step h3 { margin: 4px 0 12px; font-size: 19px; line-height: 1.35; }
+.step p { font-size: 15px; line-height: 1.65; }
+.step p:last-child { margin-bottom: 0; }
+.step ul { font-size: 15px; line-height: 1.62; }
+
+/* Comparație „în oglindă" */
+.vs-grid { margin: 32px 0; display: grid; gap: 16px; }
+.vs-pair { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--bg-1); }
+.vs-side { padding: 18px 20px; font-size: 15px; line-height: 1.62; }
+.vs-side.bad { color: var(--fg-muted); border-right: 1px solid var(--border); }
+.vs-side.good { background: color-mix(in oklab, var(--accent) 7%, transparent); color: var(--fg); }
+.vs-tag { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.vs-side.bad .vs-tag { color: var(--fg-dim); }
+.vs-side.good .vs-tag { color: var(--accent); }
+.vs-side.good strong { color: var(--fg); }
+@media (max-width: 720px) {
+  .vs-pair { grid-template-columns: 1fr; }
+  .vs-side.bad { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* Tabel de comparație */
+.compare-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14.5px; }
+.compare-table th, .compare-table td { border: 1px solid var(--border); padding: 11px 14px; text-align: left; vertical-align: top; line-height: 1.55; }
+.compare-table th { background: var(--bg-1); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+.compare-table tbody tr:nth-child(even) { background: color-mix(in oklab, var(--fg) 3%, transparent); }
+@media (max-width: 640px) { .compare-table { font-size: 13px; } .compare-table th, .compare-table td { padding: 8px 10px; } }
+
+/* Bloc de prompt — text de copiat */
+.promptbox {
+  margin: 24px 0; padding: 18px 20px; border-radius: 14px;
+  border: 1px dashed var(--border); background: color-mix(in oklab, var(--accent) 4%, transparent);
+  font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.7; white-space: pre-wrap; color: var(--fg-muted);
+}
+.promptbox .pb-lbl { display: block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+/* Caseta de serie — pentru cine ajunge direct pe articolul ăsta */
+.serie-box { margin: 0 0 34px; padding: 22px 24px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 14px; background: var(--bg-1); }
+.serie-box .sb-k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.serie-box p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.65; color: var(--fg-muted); }
+.serie-box ol { margin: 0; padding: 0; list-style: none; counter-reset: serie; display: grid; gap: 8px; }
+.serie-box ol li { counter-increment: serie; position: relative; padding: 5px 0 5px 34px; font-size: 14.5px; line-height: 1.5; color: var(--fg-muted); }
+.serie-box ol li::before { content: counter(serie); position: absolute; left: 0; top: 5px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); }
+.serie-box ol li a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 32%, transparent); }
+.serie-box ol li a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+/* articolul de la care merită să pornești */
+.serie-box ol li.start { background: color-mix(in oklab, var(--accent) 8%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 26%, transparent); border-radius: 10px; padding: 11px 14px 11px 42px; }
+.serie-box ol li.start::before { left: 13px; top: 11px; border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box ol li.start a { color: var(--fg); font-weight: 600; border-bottom-color: color-mix(in oklab, var(--accent) 55%, transparent); }
+.serie-box ol li.here { color: var(--fg); }
+.serie-box ol li.here::before { border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box .sb-chip { display: inline-block; margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.serie-box .sb-now { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); margin-left: 8px; white-space: nowrap; }
+
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Compară modele și prinde-l cu mâța-n sac: cum arată o halucinație AI într-o speță fiscală",
+  "description": "Săptămâna 3 din AI Journal: nu există „AI-ul”, există modele diferite cu puteri diferite — și toate greșesc uneori cu aplomb. Cum rulezi același prompt pe două modele, cum testezi multimodalul pe un bon și cum prinzi prima halucinație.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "inLanguage": "ro",
+  "articleSection": "AI Journal",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "AI Journal: activitățile săptămânale"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+
+<!-- Date structurate (JSON-LD) — Întrebări frecvente (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce este o halucinație AI și de ce apare?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "O halucinație este o afirmație generată cu aceeași încredere ca oricare alta, dar care nu corespunde realității: un articol de lege care nu există, o cifră inventată, o dată greșită, o sursă fabricată. Apare pentru că un model lingvistic nu caută adevărul într-o bază de date — el produce continuarea cea mai plauzibilă a textului. Când nu are informația, plauzibilul ia locul corectului, fără niciun semnal vizibil de incertitudine. De aceea halucinațiile sunt periculoase: arată exact ca răspunsurile bune."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Care e diferența dintre un model rapid și unul „care gândește”?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Modelele rapide răspund aproape instant și sunt potrivite pentru reformulare, traducere, rezumat scurt, ton. Modelele de raționament („care gândesc”) parcurg pași intermediari înainte să răspundă, durează mai mult și consumă mai multe resurse, dar se descurcă vizibil mai bine la sarcini cu mai multe condiții simultane — o speță cu trei excepții, un calcul în mai mulți pași, o comparație structurată. Regula practică: dacă răspunsul are un singur pas, folosește modelul rapid; dacă ai fi luat creionul pe hârtie, folosește-l pe cel care gândește."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pot folosi AI ca să extrag date dintr-o poză cu un bon sau o factură?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da — capacitatea se numește multimodalitate și funcționează surprinzător de bine pe documente lizibile. Dar rezultatul trebuie tratat ca un draft, nu ca o extragere sigură. Erorile tipice nu sunt aleatorii: separatorul zecimal interpretat greșit, TVA-ul dedus prin calcul în loc de citit din document, o cifră estompată completată cu ce e plauzibil, un total care „se potrivește” pentru că a fost recalculat, nu citit. Verificarea obligatorie e pe totaluri și pe cifrele care nu se puteau deduce."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum verific dacă AI-ul a inventat un articol din Codul fiscal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mergi la sursă, de fiecare dată: textul oficial al Codului fiscal, normele metodologice, Monitorul Oficial sau site-ul ANAF. Nu întreba același asistent dacă e sigur — un model care a inventat o referință o va confirma adesea cu aceeași convingere, pentru că nu are cum să știe că a inventat-o. Cel mai util reflex este să ceri răspunsul cu trimitere exactă (act, articol, alineat) tocmai pentru că o trimitere exactă e verificabilă în două minute, spre deosebire de o formulare vagă."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>AI Journal · S3 Compară modele</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">AI Journal</span>
+      <span>11 august 2026</span>
+      <span class="sep">·</span>
+      <span>9 min citire</span>
+    </div>
+
+    <h1>Compară modele și <span class="accent">prinde-l cu mâța-n sac</span>.</h1>
+    <p class="article-lede">
+      Cea mai periculoasă greșeală a unui asistent AI nu e cea evidentă. E cea care arată exact ca un răspuns corect: articol cu număr, alineat, formulare de manual — și complet inventat. Săptămâna asta îl prinzi cu mâța-n sac, în condiții controlate.
+    </p>
+
+    <div class="serie-box">
+      <div class="sb-k">// seria „AI Journal” · activitatea săptămânii 3 din 6</div>
+      <p>
+        Articolul de față e activitatea practică a săptămânii 3 și nu e gândit să fie citit singur. Cele șase activități
+        au fost construite pentru <strong>Jurnalul AI</strong>, o aplicație de un singur fișier pe care o pui pe desktop
+        și în care notezi un termen AI pe fiecare zi lucrătoare, timp de 30 de zile. Jurnalul îți deschide singur linkul
+        către articolul săptămânii, atunci când ajungi la ea. Dacă ai nimerit direct aici, ordinea de mai jos îți scutește
+        drumurile inutile.
+      </p>
+      <ol>
+        <li class="start"><a href="resurse.html">Descarcă Jurnalul AI din secțiunea Resurse</a> <span class="sb-chip">începe aici</span></li>
+        <li><a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">Obiceiul nu se construiește. Se lipește</a>, de ce ai nevoie de un obicei, nu de încă un curs</li>
+        <li><a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">Două casete și o cafea</a>, cum se folosește jurnalul, pas cu pas</li>
+        <li><a href="2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">Descarci un fișier HTML</a>, ce poate face și cum verifici singur că e în regulă</li>
+      </ol>
+    </div>
+
+    <nav class="serie-bar" aria-label="Seria AI Journal — cele 6 activități">
+        <a href="2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html">S1 · Familiarizare</a>
+        <a href="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html">S2 · Prompturi</a>
+        <span class="now">S3 · Modele & halucinații</span>
+        <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">S4 · Igienă AI</a>
+        <a href="2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html">S5 · Projects & rutine</a>
+        <a href="2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html">S6 · Documente & date</a>
+      </nav>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">De ce nu există „AI-ul”</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Același prompt, două modele</a>
+        <a href="#s-p2">2 · Testul multimodal</a>
+        <a href="#s-p3">3 · Cere ceva verificabil</a>
+        <a href="#s-p4">4 · Prima halucinație prinsă</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">11.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// AI Journal · Săptămâna 3 · Modele, multimodal, halucinații</div>
+    </div>
+
+    <div class="prose">
+
+
+      <p>Dacă ar fi să păstrezi o singură săptămână din tot jurnalul, aceasta ar fi. Nu pentru că e cea mai spectaculoasă, ci pentru că e singura care te învață ceva ce nu poți învăța citind: <strong>cum arată o greșeală de AI care nu seamănă deloc a greșeală.</strong></p>
+
+      <p>Obiectivul săptămânii, așa cum e formulat în jurnal: nu există „AI-ul”. Există modele diferite, cu puteri și defecte diferite, iar toate greșesc uneori cu aplomb.</p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Articol din seria AI Journal.</strong> Ghidul detaliat al activității din Săptămâna 3. E săptămâna cu cel mai mare raport valoare/efort din tot jurnalul — și singura în care „am prins o greșeală” e rezultatul dorit, nu un eșec.
+          <br><br>Nu ai încă jurnalul? Se descarcă gratuit, fără cont, din <a href="resurse.html">secțiunea Resurse</a>, iar modul de completare e explicat pas cu pas în <a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">ghidul de utilizare</a>.
+        </div>
+      </div>
+
+      <h2 id="s-ce">Ce e, de fapt, activitatea asta</h2>
+
+      <p>Patru pași, toți experimentali: rulezi același prompt pe două modele diferite și compari, testezi capacitatea de a citi imagini pe un bon sau un screenshot, ceri ceva verificabil și te duci la sursă, iar la final notezi prima halucinație prinsă și, partea importantă, <em>cum ți-ai dat seama</em>.</p>
+
+      <p>Jurnalul spune despre ultimul punct că e „cea mai valoroasă notiță a săptămânii”. Nu e o figură de stil. Metoda prin care ai prins-o e transferabilă; halucinația în sine, nu.</p>
+
+      <h2 id="s-dece">De ce nu există „AI-ul”</h2>
+
+      <p>În discuțiile din birou se spune „AI-ul zice că...”, ca și cum ar exista o singură entitate cu o singură opinie. E cam ca și cum ai spune „programul de contabilitate zice că” fără să precizezi care, ce versiune și cum e configurat.</p>
+
+      <p>În realitate, în spatele aceleiași ferestre de chat stau, de regulă, mai multe modele între care poți alege, iar diferențele dintre ele sunt practice, nu teoretice:</p>
+
+      <table class="compare-table t-stack">
+        <thead>
+          <tr><th>Tip de model</th><th>La ce e bun</th><th>Unde te lasă</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-label="Tip de model"><strong>Rapid</strong> (modelul implicit, de obicei)</td><td data-label="La ce e bun">Reformulare, traducere, rezumat scurt, ton, răspunsuri într-un singur pas. Ieftin și instant.</td><td data-label="Unde te lasă">Spețe cu mai multe condiții simultane, calcule în mai mulți pași, comparații cu excepții.</td></tr>
+          <tr><td data-label="Tip de model"><strong>„Care gândește”</strong> (raționament extins)</td><td data-label="La ce e bun">Probleme cu mai multe straturi, unde ai fi luat și tu creionul pe hârtie. Își arată pașii.</td><td data-label="Unde te lasă">E mai lent și, la sarcini banale, e risipă. Nu e imun la halucinații — doar le produce mai rar.</td></tr>
+          <tr><td data-label="Tip de model"><strong>Multimodal</strong> (citește imagini)</td><td data-label="La ce e bun">Extragere din documente fotografiate, screenshot-uri, tabele scanate.</td><td data-label="Unde te lasă">Cifre estompate, coloane înghesuite, formate ambigue de dată și separatori zecimali.</td></tr>
+        </tbody>
+      </table>
+
+      <p>Un contabil care folosește luni la rând modelul implicit pentru orice e ca un contabil care face toată analiza în același raport standard, pentru că nu știe că se pot construi altele. Funcționează. Doar că nu foarte bine, și fără să știe de ce.</p>
+
+      <h2 id="s-urmareste">Ce urmărește exercițiul, concret</h2>
+
+      <ul class="checklist">
+        <li><strong>Să nu mai spui „AI-ul”.</strong> Să știi ce model folosești, pentru ce, și când merită să schimbi.</li>
+        <li><strong>Să vezi variația.</strong> Același prompt, două modele, două răspunsuri diferite, dovada palpabilă că răspunsul nu e „adevărul”, e o producție.</li>
+        <li><strong>Să-ți formezi reflexul de verificare la sursă.</strong> Nu ca principiu declarat, ci ca obicei: dacă e verificabil, se verifică.</li>
+        <li><strong>Să prinzi o halucinație în condiții sigure</strong>, pe o întrebare fără consecințe, ca să o recunoști mai târziu, când va avea consecințe.</li>
+      </ul>
+
+      <h2 id="s-pasi">Cei patru pași, pe rând</h2>
+
+      <div class="step">
+        <span class="step-n">Pasul 1</span>
+        <h3 id="s-p1">Rulează exact același prompt pe două modele diferite</h3>
+        <p>Unul rapid, unul „care gândește”. Același text, cuvânt cu cuvânt, în conversații separate.</p>
+        <p>Alege un prompt cu miză intelectuală reală, nu o întrebare de dicționar. O speță cu condiții multiple e ideală, pentru că acolo se vede diferența:</p>
+        <div class="promptbox"><span class="pb-lbl">Exemplu de prompt de comparație</span>Un SRL plătitor de TVA la încasare emite o factură în decembrie, o încasează parțial în ianuarie, iar restul rămâne neîncasat 12 luni.
+Explică-mi ce se întâmplă cu exigibilitatea TVA în fiecare moment, ce înregistrări contabile apar și care e termenul-limită după care regula se schimbă.
+Arată-mi raționamentul pas cu pas și marchează explicit orice punct în care nu ești sigur.</div>
+        <p>Ce compari, la citire: care dintre ele a prins <em>toate</em> condițiile; care a inventat o condiție care nu era în întrebare; care și-a semnalat incertitudinea și care a livrat totul cu aceeași siguranță; și, foarte util, dacă ambele au greșit <em>în același loc</em>, un semn că întrebarea era ambiguă, nu modelul slab.</p>
+        <p>Notează în jurnal nu care model „a câștigat”, ci <strong>la ce fel de sarcină</strong> a câștigat. Așa se construiește criteriul de alegere pentru lunile următoare.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 2</span>
+        <h3 id="s-p2">Testează multimodalul: o poză cu un bon, un screenshot dintr-un tabel</h3>
+        <p>Fotografiază un bon sau o factură și cere-i datele într-o structură clară: furnizor, dată, bază, TVA, total. Dacă lucrezi pe un abonament enterprise al firmei, poți folosi direct un document real, care e chiar exercițiul mai util. Dacă ești pe un cont personal, folosește un bon propriu sau un document anonimizat; testul funcționează la fel de bine.</p>
+        <p>Prima reacție e, de obicei, uimirea: citește. Citește și scrisul de mână, și bonurile șterse, și tabelele strâmbe. A doua reacție, dacă verifici, e mai utilă.</p>
+        <div class="example">
+          <span class="lbl">Ce verifici, concret</span>
+          <ul>
+            <li><strong>Separatorul zecimal.</strong> 1.234 poate deveni 1234 sau 1,234. Pe un bon mic nu contează; pe o factură de 12.500 lei, contează foarte tare.</li>
+            <li><strong>TVA-ul: citit sau calculat?</strong> Multe modele recalculează TVA-ul din bază în loc să-l citească din document. Când cele două diferă, la rotunjiri sau la cote mixte, greșeala e invizibilă și sistematică.</li>
+            <li><strong>Totalul.</strong> Dacă totalul extras „se potrivește” perfect cu suma liniilor, întreabă-te dacă l-a citit sau l-a dedus.</li>
+            <li><strong>Cifrele estompate.</strong> Acolo unde documentul e neclar, modelul nu spune „nu se vede”. Completează cu ce e plauzibil.</li>
+          </ul>
+        </div>
+        <p>Concluzia practică pentru munca reală: extragerea multimodală e excelentă ca <em>primă trecere</em> și inacceptabilă ca <em>rezultat final</em>. Săptămâna 6 dezvoltă exact acest flux, cu verificare pe totaluri.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 3</span>
+        <h3 id="s-p3">Cere-i ceva verificabil — și verifică la sursă</h3>
+        <p>Un articol din Codul fiscal. O cotă. Un termen de depunere. O dată de intrare în vigoare. Ceva cu un singur răspuns corect, pe care îl poți confirma în două minute în textul oficial.</p>
+        <p>Cheia e să ceri o <strong>trimitere exactă</strong>: act, articol, alineat. Nu pentru că sună serios, ci pentru că o trimitere exactă e verificabilă, iar o formulare vagă nu e. „Conform legislației în vigoare” nu poate fi nici confirmat, nici infirmat, și exact de aceea e formularea preferată a răspunsurilor slabe.</p>
+        <p>Apoi te duci la sursă. Textul oficial, nu un forum, nu un articol de blog, nu al doilea asistent AI. Și, mai ales, <strong>nu întrebi același model dacă e sigur.</strong> Un model care a inventat o referință o va confirma cu aceeași convingere. Nu minte, pur și simplu nu are cum să știe că a inventat-o.</p>
+        <blockquote>Întrebarea „ești sigur?” pusă unui AI nu e o verificare. E o invitație la a-și schimba părerea, indiferent dacă avea sau nu dreptate.</blockquote>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 4</span>
+        <h3 id="s-p4">Notează prima halucinație și cum ți-ai dat seama</h3>
+        <p>O halucinație e o afirmație produsă cu exact aceeași încredere ca oricare alta, dar falsă. Nu e o eroare de sistem, e modul în care funcționează un model lingvistic: el produce continuarea cea mai plauzibilă, iar când nu are informația, plauzibilul ia locul corectului fără niciun semnal.</p>
+        <p>De aceea halucinația e periculoasă. Nu arată ca o eroare. Arată ca un răspuns bun.</p>
+        <div class="vs-grid">
+          <div class="vs-pair">
+            <div class="vs-side bad"><span class="vs-tag">Cum ne așteptăm să arate o greșeală</span>Ceva evident aiurea: o cotă de TVA de 47%, un termen de depunere pe 31 februarie, o formulare confuză.</div>
+            <div class="vs-side good"><span class="vs-tag">Cum arată de fapt</span>Un articol cu <strong>număr și alineat</strong>, un rezumat impecabil al conținutului, un ton de manual — și articolul acela pur și simplu nu spune asta. Sau nu există.</div>
+          </div>
+        </div>
+        <p>Semnalele care merită să declanșeze verificarea, în ordinea utilității:</p>
+        <ul class="checklist">
+          <li><strong>Precizia excesivă acolo unde nu te aștepți.</strong> Un număr de articol, o dată exactă, un procent cu zecimale, livrate fără ezitare la o întrebare de nișă.</li>
+          <li><strong>Netezimea.</strong> Un răspuns fără nicio nuanță, fără „depinde”, fără excepții, la o întrebare de fiscalitate. Fiscalitatea noastră nu are răspunsuri netede.</li>
+          <li><strong>Coerența prea frumoasă.</strong> Când totul se potrivește perfect, inclusiv detaliile pe care nu le-ai cerut.</li>
+          <li><strong>Insistența la contrazicere.</strong> Sau opusul: capitularea instantanee. Ambele înseamnă că nu există o bază solidă în spate.</li>
+        </ul>
+        <p>Notează în jurnal: ce a spus, unde ai verificat, ce era de fapt și, cel mai important, <em>ce te-a făcut să te uiți</em>. Aceea e competența pe care o duci mai departe. Halucinația se uită; reflexul rămâne.</p>
+      </div>
+
+      <h2 id="s-bine">Cum știi că ți-a ieșit săptămâna</h2>
+
+      <ul class="checklist">
+        <li><strong>Ai o preferință argumentată</strong> de model pe tipuri de sarcini, nu „îmi place mai mult”, ci „la spețe cu excepții merg pe cel care gândește”.</li>
+        <li><strong>Ai extras date dintr-o imagine</strong> și ai găsit cel puțin o diferență față de original.</li>
+        <li><strong>Ai cel puțin o halucinație notată</strong>, cu metoda prin care ai prins-o.</li>
+        <li><strong>Ți s-a schimbat reflexul:</strong> când citești un răspuns care sună perfect, prima reacție nu mai e satisfacția, e „unde verific asta?”.</li>
+      </ul>
+
+      <h2 id="s-capcane">Trei capcane ale săptămânii a treia</h2>
+
+      <p><strong>1. Vânătoarea de greșeli devine scop.</strong> Există o plăcere reală în a prinde AI-ul cu minciuna, mai ales pentru un profesionist sceptic. Dar scopul nu e să demonstrezi că e nefolositor, e să știi <em>unde</em> nu te poți baza pe el. Un instrument în care nu ai încredere oarbă e mai util decât unul în care nu ai deloc încredere.</p>
+
+      <p><strong>2. Verificarea cu al doilea AI.</strong> Tentant și înșelător. Două modele pot greși în același fel, pentru că au învățat din surse suprapuse. Verificarea înseamnă sursa oficială, nu o a doua opinie generată.</p>
+
+      <p><strong>3. Testul multimodal făcut în mediul greșit.</strong> Fotografiezi „doar un bon” de pe telefon, în contul personal, și ai încărcat un CUI, un nume și o sumă într-un serviciu fără niciun contract în spate. Aceeași acțiune, făcută din abonamentul enterprise al firmei, e o operațiune normală. Verifică întâi unde ești; regula completă vine în <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">Săptămâna 4</a>.</p>
+
+      <h2 id="s-final">Ce duci mai departe</h2>
+
+      <p>Ai văzut cu ochii tăi că răspunsul depinde de model, că imaginea se citește dar nu se crede, și că un răspuns poate fi complet fals fără să dea niciun semn. Ai, cu alte cuvinte, exact motivul pentru care săptămâna următoare nu adaugă unelte, ci reguli.</p>
+
+      <p><a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">Săptămâna 4</a> e momentul în care scrii ce nu intră niciodată într-un tool AI și ce trece obligatoriu prin ochi de om. E o oprire deliberată, pentru că săptămânile 5 și 6 duc AI-ul în documentele tale reale, iar acolo nu vrei să intri fără reguli.</p>
+
+      <blockquote>Un instrument pe care îl crezi întotdeauna e periculos. Unul pe care nu-l crezi niciodată e inutil. Săptămâna asta îl muți din prima categorie în zona în care devine folositor.</blockquote>
+
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#ai-jurnal</span>
+          <span class="tag">#halucinatii</span>
+          <span class="tag">#modele-ai</span>
+          <span class="tag">#multimodal</span>
+          <span class="tag">#verificare</span>
+          <span class="tag">#cod-fiscal</span>
+        </div>
+        <span class="footer-mono">Articolul #022</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">De ce nu există „AI-ul”</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Același prompt, două modele</a>
+        <a href="#s-p2">2 · Testul multimodal</a>
+        <a href="#s-p3">3 · Cere ceva verificabil</a>
+        <a href="#s-p4">4 · Prima halucinație prinsă</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- RELATED -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S2</div>
+        <h3>S2 · Prompturi care chiar funcționează</h3>
+        <p>Rol → context → sarcină → format. Structura care transformă „întreb ceva” în „cer exact ce-mi trebuie”.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S4</div>
+        <h3>S4 · Igienă AI și consolidare</h3>
+        <p>Cele trei medii de lucru, ce se poate în fiecare, regula de verificare și biblioteca personală de prompturi.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html#grid-tool" class="related-card fade-in">
+        <div class="related-date">RESURSĂ · APLICAȚIE HTML</div>
+        <h3>Jurnalul AI, 30 de zile de adaptare</h3>
+        <p>Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe fiecare zi lucrătoare, zece minute la cafea, plus șase activități practice. Fără cont, fără email, totul rămâne la tine.</p>
+        <span class="related-read">Descarcă jurnalul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

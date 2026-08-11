@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Igienă AI și consolidare: nu ce date folosești, ci în ce mediu le pui — AI Accounting Hub</title>
+<meta name="description" content="Săptămâna 4 din AI Journal: cele trei medii de lucru cu AI — abonament enterprise cu DPA, model open weight local, cont personal — ce se poate în fiecare, ce rămâne interzis oriunde, regula de verificare umană și biblioteca personală de prompturi.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Igienă AI și consolidare: nu ce date folosești, ci în ce mediu le pui">
+<meta property="og:description" content="Aceeași balanță e o problemă într-un cont personal gratuit și o operațiune normală într-un abonament enterprise cu DPA. Întrebarea nu e dacă folosești date reale, ci unde.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Igienă AI și consolidare: nu ce date folosești, ci în ce mediu le pui">
+<meta name="twitter:description" content="Aceeași balanță e o problemă într-un cont personal gratuit și o operațiune normală într-un abonament enterprise cu DPA. Întrebarea nu e dacă folosești date reale, ci unde.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile seriei „AI Journal" — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Bara seriei — cele 6 activități săptămânale */
+.serie-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 30px; }
+.serie-bar a, .serie-bar span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 11px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--fg-dim);
+  text-decoration: none; white-space: nowrap;
+}
+.serie-bar a:hover { color: var(--fg); border-color: var(--accent); }
+.serie-bar .now {
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  border-color: var(--accent); color: var(--accent);
+}
+
+/* Card „Exemplu practic" */
+.example { margin: 26px 0; padding: 20px 22px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg-1); }
+.example .lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+}
+.example .lbl::before { content: "\2192"; font-weight: 700; }
+.example p { font-size: 15px; line-height: 1.6; margin: 0; }
+.example p + p { margin-top: 10px; }
+.example ul { margin: 10px 0 0; padding-left: 20px; font-size: 15px; line-height: 1.6; }
+.example li + li { margin-top: 6px; }
+
+/* Pașii activității — card numerotat */
+.step { position: relative; margin: 34px 0 26px; padding: 24px 24px 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg-1); }
+.step .step-n {
+  position: absolute; top: -13px; left: 22px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  background: var(--bg-0); padding: 3px 10px; border: 1px solid var(--accent); border-radius: 999px;
+}
+.step h3 { margin: 4px 0 12px; font-size: 19px; line-height: 1.35; }
+.step p { font-size: 15px; line-height: 1.65; }
+.step p:last-child { margin-bottom: 0; }
+.step ul { font-size: 15px; line-height: 1.62; }
+
+/* Comparație „în oglindă" */
+.vs-grid { margin: 32px 0; display: grid; gap: 16px; }
+.vs-pair { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--bg-1); }
+.vs-side { padding: 18px 20px; font-size: 15px; line-height: 1.62; }
+.vs-side.bad { color: var(--fg-muted); border-right: 1px solid var(--border); }
+.vs-side.good { background: color-mix(in oklab, var(--accent) 7%, transparent); color: var(--fg); }
+.vs-tag { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.vs-side.bad .vs-tag { color: var(--fg-dim); }
+.vs-side.good .vs-tag { color: var(--accent); }
+.vs-side.good strong { color: var(--fg); }
+@media (max-width: 720px) {
+  .vs-pair { grid-template-columns: 1fr; }
+  .vs-side.bad { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* Tabel de comparație */
+.compare-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14.5px; }
+.compare-table th, .compare-table td { border: 1px solid var(--border); padding: 11px 14px; text-align: left; vertical-align: top; line-height: 1.55; }
+.compare-table th { background: var(--bg-1); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+.compare-table tbody tr:nth-child(even) { background: color-mix(in oklab, var(--fg) 3%, transparent); }
+@media (max-width: 640px) { .compare-table { font-size: 13px; } .compare-table th, .compare-table td { padding: 8px 10px; } }
+
+/* Bloc de prompt — text de copiat */
+.promptbox {
+  margin: 24px 0; padding: 18px 20px; border-radius: 14px;
+  border: 1px dashed var(--border); background: color-mix(in oklab, var(--accent) 4%, transparent);
+  font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.7; white-space: pre-wrap; color: var(--fg-muted);
+}
+.promptbox .pb-lbl { display: block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+/* Caseta de serie — pentru cine ajunge direct pe articolul ăsta */
+.serie-box { margin: 0 0 34px; padding: 22px 24px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 14px; background: var(--bg-1); }
+.serie-box .sb-k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.serie-box p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.65; color: var(--fg-muted); }
+.serie-box ol { margin: 0; padding: 0; list-style: none; counter-reset: serie; display: grid; gap: 8px; }
+.serie-box ol li { counter-increment: serie; position: relative; padding: 5px 0 5px 34px; font-size: 14.5px; line-height: 1.5; color: var(--fg-muted); }
+.serie-box ol li::before { content: counter(serie); position: absolute; left: 0; top: 5px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); }
+.serie-box ol li a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 32%, transparent); }
+.serie-box ol li a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+/* articolul de la care merită să pornești */
+.serie-box ol li.start { background: color-mix(in oklab, var(--accent) 8%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 26%, transparent); border-radius: 10px; padding: 11px 14px 11px 42px; }
+.serie-box ol li.start::before { left: 13px; top: 11px; border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box ol li.start a { color: var(--fg); font-weight: 600; border-bottom-color: color-mix(in oklab, var(--accent) 55%, transparent); }
+.serie-box ol li.here { color: var(--fg); }
+.serie-box ol li.here::before { border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box .sb-chip { display: inline-block; margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.serie-box .sb-now { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); margin-left: 8px; white-space: nowrap; }
+
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Igienă AI și consolidare: nu ce date folosești, ci în ce mediu le pui",
+  "description": "Săptămâna 4 din AI Journal: cele trei medii de lucru cu AI — abonament enterprise cu DPA, model open weight local, cont personal — ce se poate în fiecare, ce rămâne interzis oriunde, regula de verificare umană și biblioteca personală de prompturi.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "inLanguage": "ro",
+  "articleSection": "AI Journal",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "AI Journal: activitățile săptămânale"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+
+<!-- Date structurate (JSON-LD) — Întrebări frecvente (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Pot folosi date reale de client într-un asistent AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depinde de mediul în care lucrezi, nu de tipul datelor. Într-un abonament enterprise sau business achiziționat de firmă, cu acord de prelucrare (DPA) și clauză expresă că datele nu sunt folosite pentru antrenarea modelelor, se pot încărca documente și date complete — cu moderație și doar unde e strict necesar. Într-un model open weight rulat local, datele nu părăsesc infrastructura ta. Într-un cont personal gratuit sau de tip consumer, fără niciun contract în spate, datele reale de client nu au ce căuta — acolo se lucrează exclusiv anonimizat. Primul pas, în toate cazurile: verifică ce instrumente sunt aprobate de firma ta. Lista de tool-uri aprobate e o decizie de IT și conducere, nu una individuală."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce înseamnă că un abonament enterprise are DPA și clauză de neantrenare?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DPA (Data Processing Agreement, acordul de prelucrare a datelor) e contractul prin care furnizorul de AI se obligă să prelucreze datele doar conform instrucțiunilor tale, cu măsuri de securitate definite, retenție controlată și fără a le folosi pentru antrenarea modelelor. Mecanica juridică relevantă pentru un contabil: tu ești persoană împuternicită pentru clientul tău, iar furnizorul AI devine sub-împuternicit. Deci nu e suficient ca tu să ai un plan bun, trebuie ca acordul cu clientul să permită sub-împuterniciri, sau să existe o informare și un acord explicit. Planurile personale și gratuite nu oferă, de regulă, niciunul dintre aceste angajamente."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce sunt modelele open weight și de ce contează pentru confidențialitate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sunt modele ale căror ponderi sunt publicate și care pot fi instalate și rulate pe infrastructura proprie — pe un server al firmei sau chiar pe un calculator suficient de puternic. Avantajul de confidențialitate e categoric: datele nu părăsesc rețeaua ta, deci întrebarea despre antrenare și retenție nici nu se pune. Compromisurile sunt reale și trebuie spuse: calitatea e, de regulă, sub cea a modelelor comerciale de vârf, e nevoie de hardware și de cineva care să le administreze, iar actualizarea rămâne în sarcina ta. Pentru un cabinet mic, o instalare locală e o investiție; pentru unul care lucrează cu documente sensibile în volum, poate fi cea mai simplă cale către liniște."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pot analiza un contract cu ajutorul AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da, și e una dintre cele mai bune utilizări. Substanța unui contract — clauzele, termenele, riscurile, tratamentul fiscal al operațiunii — nu depinde de cine sunt părțile. Într-un mediu neprotejat contractual, elimini tot ce identifică părțile: denumiri, CUI-uri, adrese, persoane de contact, numere de contract și, dacă sunt identificatoare, sumele exacte. Rămâi cu exact ce ai nevoie ca să analizezi. Într-un mediu enterprise cu DPA, contractul poate fi încărcat integral, cu condiția să nu existe o clauză expresă de confidențialitate care interzice divulgarea către terți fără acord — clauză care se citește înainte, nu după."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce este Shadow AI și cum îl previi într-un cabinet de contabilitate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shadow AI e folosirea de instrumente AI în activitatea profesională fără știrea și fără aprobarea firmei — un coleg care lipește o balanță într-un chatbot gratuit ca să meargă mai repede. Riscul real nu e că omul folosește AI, ci că îl folosește în mediul greșit: un cont personal, fără contract, fără vizibilitate asupra a ce a ieșit din firmă. Antidotul nu e interdicția — care doar împinge practica mai adânc în umbră — ci opusul: o listă clară de instrumente aprobate, cu abonamentele plătite de firmă, un rol activ al IT-ului în verificarea și configurarea lor, și un canal prin care oamenii pot cere aprobare pentru un instrument nou fără să se simtă vinovați."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>AI Journal · S4 Igienă AI</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">AI Journal</span>
+      <span>11 august 2026</span>
+      <span class="sep">·</span>
+      <span>10 min citire</span>
+    </div>
+
+    <h1>Igienă AI: nu <span class="accent">ce date</span> folosești, ci <span class="accent">unde</span> le pui.</h1>
+    <p class="article-lede">
+      Discuția despre confidențialitate în AI s-a blocat într-o falsă dilemă: date reale sau nimic. În practică, aceeași balanță e un incident într-un cont personal gratuit și o operațiune perfect normală într-un abonament enterprise cu contract în spate. Întrebarea utilă nu e <em>ce</em> date folosești, ci <em>unde</em> le pui.
+    </p>
+
+    <div class="serie-box">
+      <div class="sb-k">// seria „AI Journal” · activitatea săptămânii 4 din 6</div>
+      <p>
+        Articolul de față e activitatea practică a săptămânii 4 și nu e gândit să fie citit singur. Cele șase activități
+        au fost construite pentru <strong>Jurnalul AI</strong>, o aplicație de un singur fișier pe care o pui pe desktop
+        și în care notezi un termen AI pe fiecare zi lucrătoare, timp de 30 de zile. Jurnalul îți deschide singur linkul
+        către articolul săptămânii, atunci când ajungi la ea. Dacă ai nimerit direct aici, ordinea de mai jos îți scutește
+        drumurile inutile.
+      </p>
+      <ol>
+        <li class="start"><a href="resurse.html">Descarcă Jurnalul AI din secțiunea Resurse</a> <span class="sb-chip">începe aici</span></li>
+        <li><a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">Obiceiul nu se construiește. Se lipește</a>, de ce ai nevoie de un obicei, nu de încă un curs</li>
+        <li><a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">Două casete și o cafea</a>, cum se folosește jurnalul, pas cu pas</li>
+        <li><a href="2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">Descarci un fișier HTML</a>, ce poate face și cum verifici singur că e în regulă</li>
+      </ol>
+    </div>
+
+    <nav class="serie-bar" aria-label="Seria AI Journal — cele 6 activități">
+        <a href="2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html">S1 · Familiarizare</a>
+        <a href="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html">S2 · Prompturi</a>
+        <a href="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html">S3 · Modele & halucinații</a>
+        <span class="now">S4 · Igienă AI</span>
+        <a href="2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html">S5 · Projects & rutine</a>
+        <a href="2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html">S6 · Documente & date</a>
+      </nav>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">Falsa dilemă: date reale sau nimic</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Stabilește mediul de lucru</a>
+        <a href="#s-p2">2 · Regula de verificare</a>
+        <a href="#s-p3">3 · Fă curat: taie umplutura</a>
+        <a href="#s-p4">4 · Biblioteca ta de prompturi</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">11.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// AI Journal · Săptămâna 4 · Mediul de lucru · Human-in-the-loop</div>
+    </div>
+
+    <div class="prose">
+
+
+      <p>Trei săptămâni ai testat. Ai ales un instrument, ai învățat să-i ceri și l-ai prins măcar o dată inventând. Ai, cu alte cuvinte, tot ce-ți trebuie ca să începi să-l folosești serios, și exact de aceea urmează o oprire.</p>
+
+      <p>Săptămâna 4 nu adaugă nicio funcție nouă. Adaugă reguli. Dar nu genul de reguli care să te împiedice să lucrezi, ci genul care îți spune <em>unde</em> poți lucra fără grijă. Iar poziția ei în calendar nu e întâmplătoare: săptămânile 5 și 6 duc asistentul în proiectele tale, în documentele tale, în facturile tale.</p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Articol din seria AI Journal.</strong> Ghidul detaliat al activității din Săptămâna 4 — săptămâna-pivot a jurnalului. Până aici ai experimentat pe date fără miză; de aici încolo, deciziile luate acum stabilesc cât de mult poți folosi instrumentul în munca reală.
+          <br><br>Nu ai încă jurnalul? Se descarcă gratuit, fără cont, din <a href="resurse.html">secțiunea Resurse</a>, iar modul de completare e explicat pas cu pas în <a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">ghidul de utilizare</a>.
+        </div>
+      </div>
+
+      <h2 id="s-ce">Ce e, de fapt, activitatea asta</h2>
+
+      <p>Patru pași, toți cu livrabil scris: stabilești în ce mediu lucrezi și ce se poate în el, scrii regula de verificare umană, faci o curățenie în textele generate până acum și aduni prompturile bune într-un singur fișier.</p>
+
+      <p>Spre deosebire de celelalte săptămâni, aici <em>rezultatul e un document</em>, nu o experiență. La final ai două-trei pagini care rămân valabile și peste un an, indiferent ce model folosești atunci.</p>
+
+      <h2 id="s-dece">Falsa dilemă: date reale sau nimic</h2>
+
+      <p>Discuția despre AI și confidențialitate în profesia noastră s-a blocat, în multe locuri, într-o alegere binară: ori folosești date reale și îți asumi că „ajung cine știe unde”, ori nu folosești nimic real și rămâi cu exemple de manual.</p>
+
+      <p>Ambele variante sunt greșite. A doua e chiar mai periculoasă decât pare, pentru că nu produce prudență, produce <strong>Shadow AI</strong>. Când regula internă e „nu folosim AI pentru nimic legat de clienți”, colegul grăbit din 24 ale lunii nu renunță la AI. Îl folosește pe contul lui personal, de pe telefon, fără să spună nimănui. Ai obținut exact scenariul de care te fereai, doar că fără vizibilitate.</p>
+
+      <blockquote>Riscul real nu e că oamenii folosesc AI. E că îl folosesc în mediul greșit — și că regula prea strictă e chiar cea care îi împinge acolo.</blockquote>
+
+      <p>Realitatea e că nu toate mediile de lucru sunt la fel. Aceeași balanță, același contract, aceeași factură pot fi complet în regulă într-un context și complet nepotrivite în altul. Diferența nu o dă tipul datelor. O dă ce ai semnat cu furnizorul.</p>
+
+      <h2 id="s-urmareste">Ce urmărește exercițiul, concret</h2>
+
+      <ul class="checklist">
+        <li><strong>Să înlocuiască frica difuză cu o regulă de decizie.</strong> „Nu știu dacă am voie” blochează folosirea instrumentului; „în mediul X pot, în mediul Y nu” o deblochează.</li>
+        <li><strong>Să separe ce e verificabil de ce e delegabil.</strong> Un draft de mail intern și o încadrare fiscală nu cer același nivel de control.</li>
+        <li><strong>Să-ți recuperezi vocea.</strong> După trei săptămâni de texte generate, e util să vezi cât din ele sună a tine și cât a nimeni.</li>
+        <li><strong>Să capitalizezi.</strong> Prompturile bune se pierd în istoricul conversațiilor dacă nu le scoți de acolo.</li>
+      </ul>
+
+      <h2 id="s-pasi">Cei patru pași, pe rând</h2>
+
+      <div class="step">
+        <span class="step-n">Pasul 1</span>
+        <h3 id="s-p1">Stabilește mediul de lucru — și scrie ce se poate în el</h3>
+        <p>Înainte de orice listă de date, o întrebare de administrare: <strong>ce instrumente AI sunt aprobate în firma ta?</strong> Nu ce instrumente există, ce e aprobat. Lista aceea e o decizie de conducere și de IT: cine verifică termenii contractuali, cine configurează setările de retenție și de antrenare, cine administrează conturile și accesele. Dacă lista nu există, primul tău livrabil al săptămânii nu e o listă neagră: e întrebarea pusă către IT sau către administrator.</p>
+        <p>Odată clarificat instrumentul, te încadrezi într-unul din trei medii, iar regulile diferă substanțial:</p>
+        <table class="compare-table t-stack">
+          <thead>
+            <tr><th>Mediu</th><th>Ce ai în spate</th><th>Ce se poate</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Mediu"><strong>1. Enterprise / Business</strong><br>abonament al firmei</td>
+              <td data-label="Ce ai în spate">DPA semnat, clauză expresă de neutilizare la antrenare, retenție și ștergere definite, administrare centralizată a conturilor</td>
+              <td data-label="Ce se poate"><strong>Date și documente complete</strong> — balanțe, facturi, contracte, extrase. Cu moderație și doar unde e strict necesar (vezi mai jos).</td>
+            </tr>
+            <tr>
+              <td data-label="Mediu"><strong>2. Open weight, local</strong><br>model instalat pe infrastructura ta</td>
+              <td data-label="Ce ai în spate">Datele nu părăsesc rețeaua firmei. Întrebarea despre antrenare nici nu se pune.</td>
+              <td data-label="Ce se poate">Practic orice, în limitele politicii interne. Compromisul e de calitate și de efort de administrare, nu de confidențialitate.</td>
+            </tr>
+            <tr>
+              <td data-label="Mediu"><strong>3. Cont personal</strong><br>plan gratuit sau consumer</td>
+              <td data-label="Ce ai în spate">Niciun contract. La unii furnizori, antrenarea pe conversații e activă implicit. Nicio garanție de retenție.</td>
+              <td data-label="Ce se poate">Doar date anonimizate. Aici — și doar aici — se aplică integral logica „lista neagră”.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Moderația, în mediul 1.</strong> Faptul că <em>poți</em> încărca date complete nu înseamnă că e util să încarci tot. Principiul minimizării nu e doar o cerință GDPR, e și o regulă de calitate: un model care primește întreaga bază de date răspunde mai slab decât unul care primește eșantionul relevant. Recomandarea practică rămâne <strong>mostre de date, nu întreaga bază</strong>: cinci facturi reprezentative, nu tot jurnalul de cumpărări; luna cu problema, nu tot exercițiul financiar.</p>
+
+        <p>Și un filtru care rămâne activ chiar și cu DPA în spate: <strong>contractele cu clienții tăi</strong>. Dacă ai o clauză expresă care interzice transferul datelor către terți sau folosirea de instrumente AI, contractul cu furnizorul nu o anulează. Mecanica juridică merită spusă limpede, pentru că e sursa celor mai multe confuzii: tu ești persoană împuternicită pentru client, iar furnizorul AI devine sub-împuternicit. Nu e suficient ca <em>tu</em> să ai un plan bun, trebuie ca acordul cu clientul să permită sub-împuterniciri.</p>
+
+        <div class="example">
+          <span class="lbl">Analiza de contracte — cazul care se schimbă cel mai mult</span>
+          <p>Substanța unui contract nu depinde de cine sunt părțile. Clauzele, termenele, riscurile, tratamentul fiscal al operațiunii, toate se pot analiza fără să știi cine a semnat.</p>
+          <p><strong>În mediu neprotejat:</strong> ștergi denumirile, CUI-urile, adresele, persoanele de contact, numerele de contract și, dacă sunt identificatoare, sumele exacte. Ce rămâne e exact materialul de analizat. „Prestatorul se obligă să livreze în 30 de zile de la comandă fermă” e la fel de analizabil fără nume.</p>
+          <p><strong>În mediu enterprise:</strong> contractul poate fi încărcat integral, cu condiția să nu existe o clauză de confidențialitate care interzice divulgarea către terți. Clauza aceea se citește <em>înainte</em>, nu după.</p>
+        </div>
+
+        <p><strong>Ce rămâne interzis în orice mediu.</strong> Lista e scurtă tocmai pentru că e serioasă:</p>
+        <ul class="checklist">
+          <li><strong>Categoriile speciale de date</strong> în sensul GDPR: sănătate, apartenență sindicală, convingeri, date biometrice, inclusiv cele care ajung în salarizare.</li>
+          <li><strong>Credențiale</strong>: parole, chei, tokenuri, date de acces la SPV sau la conturi bancare.</li>
+          <li><strong>Orice acoperit de o interdicție contractuală expresă</strong> din partea clientului.</li>
+          <li><strong>Datele personale de care întrebarea nu are nevoie.</strong> Nu pentru că ar fi interzise în mediul 1, ci pentru că nu contribuie cu nimic la răspuns. CNP-ul nu a îmbunătățit niciodată o analiză fiscală.</li>
+        </ul>
+        <p>Livrabilul pasului: o pagină care spune ce instrument folosești, în ce mediu ești, ce se poate în el și ce rămâne în afară. Scrisă, nu ținută minte. Un coleg ar trebui s-o poată citi și aplica.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 2</span>
+        <h3 id="s-p2">Scrie regula de verificare: ce trece obligatoriu prin ochi de om</h3>
+        <p>Aceasta e traducerea practică a principiului <strong>human-in-the-loop</strong>: AI-ul face prima trecere, omul rămâne răspunzător de rezultat. Și, spre deosebire de regulile de confidențialitate, aceasta <em>nu se relaxează în niciun mediu</em>. Ține de răspunderea profesională, nu de contractul cu furnizorul.</p>
+        <p>Regula devine utilă abia când e specifică. „Verific tot” nu e o regulă, e o formulă care nu supraviețuiește lunii martie. O ierarhizare pe niveluri de risc funcționează:</p>
+        <table class="compare-table t-stack">
+          <thead>
+            <tr><th>Nivel</th><th>Ce intră aici</th><th>Ce faci</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Nivel"><strong>Roșu</strong> — verificare integrală</td><td data-label="Ce intră aici">Orice cifră, orice încadrare fiscală, orice trimitere legală, orice text care pleacă la ANAF sau la client cu semnătura ta</td><td data-label="Ce faci">Citit integral, cifre recalculate, referințe confirmate la sursă. Fără excepții de termen.</td></tr>
+            <tr><td data-label="Nivel"><strong>Galben</strong> — citire atentă</td><td data-label="Ce intră aici">Rezumate de documente lungi, sinteze pentru uz intern, drafturi de proceduri</td><td data-label="Ce faci">Citit cap-coadă, verificat punctual ce urmează să fie folosit mai departe.</td></tr>
+            <tr><td data-label="Nivel"><strong>Verde</strong> — citire normală</td><td data-label="Ce intră aici">Reformulări, traduceri de curtoazie, idei de structură, brainstorming</td><td data-label="Ce faci">Citit ca pe orice draft. Riscul e stilistic, nu profesional.</td></tr>
+          </tbody>
+        </table>
+        <p>Formularea care merită scrisă la începutul regulii, pentru că rezolvă majoritatea situațiilor ambigue: <em>nimic din ce poartă numele meu nu pleacă fără ca eu să fi citit fiecare cifră și fiecare trimitere legală.</em></p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 3</span>
+        <h3 id="s-p3">Fă curat: recitește trei texte generate și taie tot ce sună a umplutură</h3>
+        <p>Ia trei texte pe care le-ai produs cu AI în ultimele trei săptămâni. Citește-le din nou, la rece. Taie.</p>
+        <p>Ce cauți are un nume: <strong>AI slop</strong>, sau workslop: conținut care ocupă spațiu fără să adauge informație. Semnele sunt destul de constante:</p>
+        <ul class="checklist">
+          <li><strong>Introduceri care anunță ce urmează.</strong> „În cele ce urmează vom analiza...” Cititorul vede deja ce urmează.</li>
+          <li><strong>Concluzii care repetă cuprinsul.</strong> Ultimul paragraf care nu adaugă nimic, doar rezumă.</li>
+          <li><strong>Adjective fără conținut.</strong> „Robust”, „holistic”, „inovator”, „strategic”: verifică dacă propoziția rezistă fără ele. De regulă rezistă mai bine.</li>
+          <li><strong>Enumerările de trei, din care al treilea e evident.</strong> Modelele au o preferință puternică pentru triade, chiar când există doar două idei reale.</li>
+          <li><strong>Fraze frumoase și neverificabile.</strong> „Aceasta asigură conformitatea deplină cu cerințele legale”. Care cerințe? care articol?</li>
+        </ul>
+        <p>Testul mecanic: taie propoziția și recitește. Dacă textul nu a pierdut nimic, propoziția era umplutură.</p>
+        <div class="example">
+          <span class="lbl">De ce contează, profesional</span>
+          <p>Într-un raport de contabil, umplutura nu e doar inestetică. Diluează exact informația pentru care ai fost plătit. Un administrator care primește trei pagini din care două sunt formulări generale nu va găsi observația importantă de la pagina trei, și nu e vina lui.</p>
+          <p>Mai e un efect, mai subtil: textul generat și nelucrat sună la fel indiferent cine îl trimite. Un client care primește lună de lună rapoarte fără voce începe, la un moment dat, să se întrebe la ce anume plătește.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 4</span>
+        <h3 id="s-p4">Adună prompturile care au funcționat într-un singur fișier</h3>
+        <p>Biblioteca ta personală. Un fișier simplu, un document, un Excel sau un fișier text, în care intră doar ce a mers.</p>
+        <p>Pentru fiecare prompt salvat, trei rânduri sunt suficiente: <strong>promptul</strong>, <strong>la ce sarcină îl folosești</strong>, <strong>ce anume l-a făcut să funcționeze</strong>. Al treilea rând e cel care contează peste șase luni, când nu-ți mai amintești de ce e formulat așa.</p>
+        <div class="promptbox"><span class="pb-lbl">Structura unei intrări din bibliotecă</span>[SARCINĂ] Mail de solicitare documente restante, client mic, a treia oară
+[PROMPT] Rol: ... / Context: ... / Sarcină: ... / Format: max 120 cuvinte, ...
+[CE A FĂCUT DIFERENȚA] Precizarea „fără formule pompoase, fără conform prevederilor legale"
+[MODEL] rapid — nu are nevoie de raționament
+[MEDIU] enterprise / anonimizat — unde poate fi folosit
+[DATA] 11.08.2026</div>
+        <p>Rândul despre mediu e mic și salvează timp mai târziu: un prompt care funcționează cu documentul atașat integral nu e același lucru cu unul construit pentru descriere anonimizată.</p>
+        <p>Motivul pentru care exercițiul apare exact acum, la jumătatea jurnalului: în <a href="2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html">Săptămâna 5</a> construiești un Project cu instrucțiuni permanente. Biblioteca de prompturi e materia primă pentru acele instrucțiuni.</p>
+      </div>
+
+      <h2 id="s-bine">Cum știi că ți-a ieșit săptămâna</h2>
+
+      <ul class="checklist">
+        <li><strong>Știi ce instrument e aprobat</strong> în firma ta și în ce mediu te încadrezi, sau ai pus întrebarea către IT și aștepți răspunsul.</li>
+        <li><strong>Poți spune într-o frază</strong> ce ai voie să încarci și ce nu, fără să eziți.</li>
+        <li><strong>Regula de verificare e specifică</strong>, cu niveluri, nu un „verific tot” care nu ține.</li>
+        <li><strong>Ai tăiat efectiv</strong> din trei texte, iar biblioteca are cel puțin trei intrări.</li>
+      </ul>
+
+      <h2 id="s-capcane">Trei capcane ale săptămânii a patra</h2>
+
+      <p><strong>1. Regula prea strictă ca să fie respectată.</strong> „Nu folosim AI pentru nimic legat de clienți” sună responsabil și cedează în prima săptămână de raportări. O regulă bună e cea pe care o respecți și în ziua de 25, iar asta înseamnă, de obicei, o regulă care spune <em>unde ai voie</em>, nu una care spune doar <em>nu</em>.</p>
+
+      <p><strong>2. Presupunerea că un abonament plătit înseamnă automat DPA.</strong> Nu toate planurile plătite sunt planuri de business, iar nu toate planurile de business au aceleași angajamente. Verifică efectiv termenii, sau, mai bine, cere IT-ului să-i verifice și să-ți spună concluzia în două rânduri. Diferența dintre un abonament individual plătit și unul enterprise administrat de firmă e exact diferența dintre mediul 3 și mediul 1.</p>
+
+      <p><strong>3. Curățenia care omoară textul.</strong> Tăierea umpluturii nu înseamnă tăierea nuanțelor. Într-o speță fiscală, „depinde de” și „cu excepția cazului în care” nu sunt umplutură, sunt exact substanța. Taie adjectivele, nu condițiile.</p>
+
+      <h2 id="s-final">Ce duci mai departe</h2>
+
+      <p>Ai un cadru care îți spune ce poți face, nu doar ce nu poți. Știi în ce mediu lucrezi, ce se poate în el, ce nu pleacă neverificat și ai început să aduni ce funcționează.</p>
+
+      <p>Sunt exact cele trei lucruri de care ai nevoie ca să treci de la conversații izolate la lucru organizat: <a href="2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html">Săptămâna 5</a>, un spațiu care își aduce aminte contextul tău, și <a href="2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html">Săptămâna 6</a>, în care AI-ul intră în munca grea: PDF-uri, facturi, cifre.</p>
+
+      <blockquote>Igiena nu e lista lucrurilor pe care nu ai voie să le faci. E harta locurilor în care ai voie să lucrezi liniștit.</blockquote>
+
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#ai-jurnal</span>
+          <span class="tag">#confidentialitate</span>
+          <span class="tag">#dpa</span>
+          <span class="tag">#open-weight</span>
+          <span class="tag">#shadow-ai</span>
+          <span class="tag">#human-in-the-loop</span>
+          <span class="tag">#gdpr</span>
+        </div>
+        <span class="footer-mono">Articolul #023</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">Falsa dilemă: date reale sau nimic</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Stabilește mediul de lucru</a>
+        <a href="#s-p2">2 · Regula de verificare</a>
+        <a href="#s-p3">3 · Fă curat: taie umplutura</a>
+        <a href="#s-p4">4 · Biblioteca ta de prompturi</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- RELATED -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S3</div>
+        <h3>S3 · Compară modele și prinde-l cu mâța-n sac</h3>
+        <p>Două modele, același prompt. Un bon fotografiat. Un articol de lege verificat la sursă. Și prima halucinație notată.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S5</div>
+        <h3>S5 · Projects, rutine și lucrul organizat</h3>
+        <p>Un spațiu care își aduce aminte contextul tău: instrucțiuni permanente, documente de referință, rutine.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html#grid-tool" class="related-card fade-in">
+        <div class="related-date">RESURSĂ · APLICAȚIE HTML</div>
+        <h3>Jurnalul AI, 30 de zile de adaptare</h3>
+        <p>Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe fiecare zi lucrătoare, zece minute la cafea, plus șase activități practice. Fără cont, fără email, totul rămâne la tine.</p>
+        <span class="related-read">Descarcă jurnalul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

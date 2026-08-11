@@ -308,6 +308,7 @@
       <div class="chips" id="chips">
         <button class="chip active" data-cat="all">Toate</button>
         <button class="chip" data-cat="pick" title="Recomandarea editorului">Recomandate</button>
+        <button class="chip" data-cat="ai-jurnal" title="Proiectul AI Journal — jurnalul de 30 de zile și tot ce ține de el">AI Journal</button>
         <button class="chip" data-cat="opinie">Opinie</button>
         <button class="chip" data-cat="analiza">Analiză</button>
         <button class="chip" data-cat="ghid">Ghid</button>
@@ -432,6 +433,32 @@
 <script src="assets/site.js"></script>
 <script>
 const ARTICLES = [
+  /* ===== PROIECTUL AI JOURNAL — 10 articole publicate în aceeași zi =====
+     Toate au data 2026-08-11, deci sortarea pe dată le lasă în ordinea din
+     acest tablou (sort-ul e stabil). Ordinea aleasă: cele patru articole de
+     context, cel mai recent publicat primul, apoi cele șase săptămâni în
+     ordinea firească S1 → S6, pentru că o serie numerotată se citește înainte. */
+
+  { date: '2026-08-11', day: '11', month: 'AUGUST', cat: 'ai-jurnal', catLabel: 'AI Journal · Siguranță',
+    title: 'Descarci un fișier HTML. Ce poate face, ce nu poate — și cum verifici singur',
+    excerpt: 'Dacă ai ezitat înainte să descarci Jurnalul AI, ai făcut exact ce trebuia. Ce riscuri are cu adevărat o pagină HTML pusă pe calculatorul tău, unde sunt limitele ei tehnice și trei feluri de a verifica singur, în sub cinci minute, fără să știi programare: tabul Network, zece cuvinte căutate cu Ctrl+F și un prompt de verificare gata de copiat pentru un asistent AI.',
+    read: '14 min', tags: ['#siguranta-datelor', '#transparenta', '#verificare', '#HITL', '#jurnalul-ai', '#GDPR'], href: '2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html' },
+  { date: '2026-08-11', day: '11', month: 'AUGUST', cat: 'ai-jurnal', catLabel: 'AI Journal · Mod de utilizare', pick: true,
+    title: 'Două casete și o cafea. Tot ce ai de completat în Jurnalul AI',
+    excerpt: 'Ghidul vizual al aplicației, cu capturi și clipuri din ecran: ce vezi la prima deschidere, de ce butonul Start nu îți cere nicio configurare, scrisoarea din prima zi, cele două casete de completat și de ce a doua poate rămâne goală fără să te coste nimic. Plus ce se întâmplă când lipsești câteva zile și jurnalul te întreabă singur cum reiei, recapitularea săptămânală cu mini-quiz, salvarea în fișier .md și termenul 31, Human-in-the-Loop.',
+    read: '14 min', tags: ['#jurnalul-ai', '#mod-de-utilizare', '#obiceiuri', '#buzzword', '#ai-literacy'], href: '2026-08-11-AI-Journal-doua-casete-si-o-cafea.html' },
+  { date: '2026-08-11', day: '11', month: 'AUGUST', cat: 'ai-jurnal', catLabel: 'AI Journal · Obiceiul',
+    title: 'Obiceiul nu se construiește. Se lipește — peste ceva ce deja îți merge perfect',
+    excerpt: 'Am construit Buzzword pentru o nevoie reală, apoi ne-am uitat la cum e folosit: omul intră o dată, mai intră o dată și gata. Nu conținutul lipsea, ci mecanismul care îl aduce înapoi mâine. Ce am luat din Atomic Habits: stratificarea peste o ancoră existentă, regula celor două minute, „nu rata de două ori” și platoul potențialului latent.',
+    read: '13 min', tags: ['#atomic-habits', '#stratificare', '#obiceiuri', '#ai-literacy', '#buzzword', '#jurnalul-ai'], href: '2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html' },
+  { date: '2026-08-11', day: '11', month: 'AUGUST', cat: 'ai-jurnal', catLabel: 'AI Journal · Contextul', pick: true,
+    title: 'Europa a accelerat cu 48% într-un an. Noi am rămas la 5,2% — și românii spun singuri de ce',
+    excerpt: 'Pachetul „State of the Digital Decade 2026”, raportul de țară și Eurobarometrul special, publicate toate pe 17 iunie 2026. Media europeană a urcat de la 13,5% la 20% dintre firme, noi am rămas pe loc. Iar bariera nr. 1 declarată de români pentru AI generativ nu e prețul și nu e frica de concediere: e lipsa formării.',
+    read: '11 min', tags: ['#ai-literacy', '#digital-decade', '#eurobarometru', '#Romania', '#CECCAR', '#jurnalul-ai'], href: '2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html' },
+  { date: '2026-08-11', day: '11', month: 'AUGUST', cat: 'ai-jurnal', catLabel: 'AI Journal · Săptămâna 1',
+    title: 'S1 · Familiarizare: alege-ți tool-ul și umblă prin el',
+    excerpt: 'Nu ai deschis niciodată un program nou de contabilitate direct pe balanța de decembrie. Prima săptămână din jurnal nu produce nimic și exact asta e ideea: un singur asistent, toate setările deschise, trei conversații fără nicio miză și același răspuns cerut în trei formate diferite.',
+    read: '8 min', tags: ['#ai-jurnal', '#familiarizare', '#prompt', '#llm', '#setari-confidentialitate'], href: '2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html' },
   { date: '2026-08-01', day: '01', month: 'AUGUST', cat: 'opinie', catLabel: 'Editorial', pick: true,
     title: 'Cum anunți o comunitate când nu colectezi date de contact',
     excerpt: 'M-am săturat să-mi predau datele personale pentru resurse minimale care ar trebui să fie libere: un prompt ascuns după un cont, un utilitar ascuns după o adresă de email, rezultatele unui sondaj ascunse după un număr de telefon. De ce am ales ca tot ce publicăm să fie direct accesibil și cum am rezolvat, totuși, problema pe care mi-a ridicat-o un prieten: dacă nu ai mailul nimănui, cum afli că am publicat ceva nou?',

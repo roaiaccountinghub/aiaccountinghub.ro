@@ -28,6 +28,23 @@
   window.PODCAST_EPISODES = [
     /* ---------- Sezonul 2 ---------- */
     {
+      id: "0Vk1a5yXg4HkY7vtV192HD", slug: "ai-journal", ep: "E09", group: "Sezonul 2",
+      date: "2026-08-11",
+      title: "Zece minute cu „AI Journal” lângă cafea",
+      audioUrl: RSS + "124089334" + CF + "2026-7-11%2F9166f48d-487e-972e-5c71-e47ccdba2f8e.m4a",
+      /* TIMPI ESTIMAȚI — media dintre marcajele din script și repartiția
+         proporțională cu lungimea capitolelor, raportată la durata reală
+         (16:06). De corectat după ascultare. */
+      chapters: [
+        { t: 0,   title: "Intro: cele patru direcții ale episodului" },
+        { t: 97,  title: "Unde suntem: 5,2% față de 20% media UE" },
+        { t: 220, title: "Obiceiul: ancora, stratul subțire, cele 66 de zile" },
+        { t: 470, title: "AI Journal pe dinăuntru: două casete, pauza, datele locale" },
+        { t: 762, title: "E sigur un fișier HTML descărcat? Trei verificări" },
+        { t: 920, title: "Închidere: zece minute la prima cafea" }
+      ]
+    },
+    {
       id: "3HBHI4h8yRlAIdZUkf3pnI", slug: "comunitate", ep: "E08", group: "Sezonul 2",
       date: "2026-08-08",
       title: "Despre resurse libere, aplicații și ziduri inutile",

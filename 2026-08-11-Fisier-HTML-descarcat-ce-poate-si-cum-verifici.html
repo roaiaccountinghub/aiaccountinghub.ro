@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Descarci un fișier HTML. Ce poate face, ce nu poate — și cum verifici singur — AI Accounting Hub</title>
+<meta name="description" content="Riscurile reale ale unei pagini HTML descărcate, limitele ei tehnice, și trei metode prin care oricine poate verifica în câteva minute că un fișier nu trimite nimic nicăieri. Inclusiv promptul gata de copiat pentru un asistent AI.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Descarci un fișier HTML. Ce poate face, ce nu poate — și cum verifici singur">
+<meta property="og:description" content="Nu-ți cerem să ne crezi pe cuvânt. Îți arătăm trei feluri în care poți verifica singur, în câteva minute, orice fișier HTML descărcat.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Descarci un fișier HTML. Ce poate face, ce nu poate — și cum verifici singur">
+<meta name="twitter:description" content="Riscul e real, limitele sunt reale, iar verificarea durează sub cinci minute. Cu promptul de verificare gata de copiat.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+.prose tbody tr:hover td { background: color-mix(in oklab, var(--accent) 3%, transparent); }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+
+/* Caseta de serie — pentru cine ajunge direct pe articolul ăsta */
+.serie-box { margin: 0 0 34px; padding: 22px 24px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 14px; background: var(--bg-1); }
+.serie-box .sb-k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.serie-box p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.65; color: var(--fg-muted); }
+.serie-box ol { margin: 0; padding: 0; list-style: none; counter-reset: serie; display: grid; gap: 8px; }
+.serie-box ol li { counter-increment: serie; position: relative; padding: 5px 0 5px 34px; font-size: 14.5px; line-height: 1.5; color: var(--fg-muted); }
+.serie-box ol li::before { content: counter(serie); position: absolute; left: 0; top: 5px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); }
+.serie-box ol li a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 32%, transparent); }
+.serie-box ol li a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+/* articolul de la care merită să pornești */
+.serie-box ol li.start { background: color-mix(in oklab, var(--accent) 8%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 26%, transparent); border-radius: 10px; padding: 11px 14px 11px 42px; }
+.serie-box ol li.start::before { left: 13px; top: 11px; border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box ol li.start a { color: var(--fg); font-weight: 600; border-bottom-color: color-mix(in oklab, var(--accent) 55%, transparent); }
+.serie-box ol li.here { color: var(--fg); }
+.serie-box ol li.here::before { border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box .sb-chip { display: inline-block; margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.serie-box .sb-now { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); margin-left: 8px; white-space: nowrap; }
+
+/* Cod inline — cuvintele de căutat */
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: color-mix(in oklab, var(--fg) 8%, transparent); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; color: var(--fg); white-space: nowrap; }
+.prose td code { font-size: 12.5px; }
+
+/* Verdict — poate / nu poate */
+.verdict { margin: 30px 0; display: grid; gap: 14px; }
+.verdict > div { border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); padding: 20px 22px; }
+.verdict .h { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+.verdict .can .h { color: #e0a33e; }
+.verdict .cant .h { color: #6fbf8b; }
+.verdict ul { margin: 0; padding-left: 18px; }
+.verdict li { font-size: 14.5px; color: var(--fg-muted); line-height: 1.6; margin-bottom: 8px; }
+.verdict li:last-child { margin-bottom: 0; }
+.verdict li strong { color: var(--fg); }
+@media (min-width: 820px) { .verdict { grid-template-columns: 1fr 1fr; } }
+
+/* Caseta cu promptul de copiat */
+.promptbox { margin: 28px 0; border: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); border-radius: 14px; background: var(--bg-1); overflow: hidden; }
+.promptbox .pb-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--accent) 7%, transparent); }
+.promptbox .pb-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); }
+.promptbox .pb-copy { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-muted); background: transparent; border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; cursor: pointer; transition: .18s; }
+.promptbox .pb-copy:hover { color: var(--fg); border-color: var(--accent); }
+.promptbox pre { margin: 0; padding: 18px 20px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 12.8px; line-height: 1.72; color: var(--fg-muted); white-space: pre-wrap; word-break: break-word; }
+
+/* Pași numerotați cu fundal */
+.steps { margin: 28px 0; counter-reset: st; display: grid; gap: 12px; }
+.steps > div { position: relative; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-1); padding: 16px 20px 16px 58px; }
+.steps > div::before { counter-increment: st; content: counter(st); position: absolute; left: 18px; top: 15px; width: 26px; height: 26px; border-radius: 50%; background: color-mix(in oklab, var(--accent) 18%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 45%, transparent); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 12px; display: grid; place-items: center; }
+.steps p { margin: 0; font-size: 14.5px; color: var(--fg-muted); line-height: 1.6; }
+.steps p strong { color: var(--fg); }
+
+@media (max-width: 420px) {
+  .prose table { font-size: 12px; }
+  .prose th, .prose td { padding: 8px 10px; }
+  .promptbox pre { font-size: 11.5px; }
+}
+@media (max-width: 720px) {
+  .prose table { font-size: 13px; }
+  .prose th, .prose td { padding: 10px 12px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Descarci un fișier HTML. Ce poate face, ce nu poate — și cum verifici singur",
+  "description": "Riscurile reale ale unei pagini HTML descărcate, limitele ei tehnice și trei metode de verificare accesibile oricui.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "inLanguage": "ro",
+  "articleSection": "AI Journal",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "AI Journal"
+  },
+  "position": 3,
+  "author": { "@type": "Organization", "name": "AI Accounting Hub" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": { "@type": "ImageObject", "url": "https://aiaccountinghub.ro/assets/og-image.png" }
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Siguranța unui fișier HTML</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">AI Journal</span>
+      <span>11 august 2026</span>
+      <span class="sep">·</span>
+      <span>14 min citire</span>
+      <span class="sep">·</span>
+      <span>siguranța datelor · verificare</span>
+    </div>
+
+    <h1>Descarci un fișier HTML. <span class="accent">Ce poate face, ce nu poate</span> — și cum verifici singur</h1>
+    <p class="article-lede">
+      Dacă ai ezitat înainte să descarci Jurnalul AI, ai făcut exact ce trebuia. O pagină HTML pusă pe calculatorul tău chiar poate rula cod, iar „e doar un fișier, n-ai nicio grijă” e genul de propoziție care ar trebui să te pună în gardă, nu să te liniștească. Așa că nu îți cerem să ne crezi pe cuvânt. Îți arătăm ce riscuri există cu adevărat, unde sunt limitele lor, și trei feluri în care poți verifica singur — începând cu unul care nu-ți cere să deschizi fișierul deloc.
+    </p>
+
+    <div class="serie-box">
+      <div class="sb-k">// seria „AI Journal” · partea 3 din 3</div>
+      <p>
+        Jurnalul AI e explicat în trei articole care se citesc cel mai bine în ordine: primul spune de ce ai nevoie de un obicei, nu de încă un curs, al doilea arată unealta pe dinăuntru, al treilea se ocupă de siguranța fișierului pe care îl descarci. Se pot citi și separat, dar dacă ai ajuns direct aici, cel mai bine e să începi cu primul.
+      </p>
+      <ol>
+        <li class="start"><a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">Obiceiul nu se construiește. Se lipește</a> <span class="sb-chip">începe aici</span></li>
+        <li><a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">Două casete și o cafea. Tot ce ai de completat în Jurnalul AI</a></li>
+        <li class="here">Descarci un fișier HTML. Ce poate face, ce nu poate și cum verifici <span class="sb-now">ești aici</span></li>
+      </ol>
+    </div>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s0">Ezitarea e reflexul corect</a>
+        <a href="#s1">De ce un fișier HTML și nu altceva</a>
+        <a href="#s2">Ce poate și ce nu poate face</a>
+        <a href="#s3">Ce am ales noi: nimic ascuns</a>
+        <a href="#s5">Trei feluri de a verifica</a>
+        <a href="#s5-1" class="toc-sub">1 · Raport de la un asistent AI</a>
+        <a href="#s5-2" class="toc-sub">2 · Te uiți la trafic</a>
+        <a href="#s5-3" class="toc-sub">3 · Deschizi cu un editor de text</a>
+        <a href="#s6">De ce nu vezi codul aici</a>
+        <a href="#s7">Aceeași listă, pentru orice fișier</a>
+        <a href="#s8">Ultimul cuvânt e tot al tău</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">11.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// Tehnic · siguranța datelor · verificare · transparență</div>
+    </div>
+
+    <div class="prose">
+
+      <!-- S0 -->
+      <h2 id="s0">Ezitarea e reflexul corect</h2>
+      <p>
+        Profesia contabilă are un avantaj nativ aici, despre care am mai scris: reflexul de confidențialitate. GDPR, secret profesional, codul etic, toate te-au învățat să te întrebi unde ajung datele înainte să apeși pe ceva. E exact reflexul care lipsește în majoritatea celorlalte departamente.
+      </p>
+      <p>
+        Așa că, dacă ai descărcat un fișier de pe un site și te-ai oprit o clipă înainte să dai dublu-click, nu ești paranoic. Ești atent. Iar articolul ăsta nu e scris ca să te liniștească, ci ca să-ți dea instrumentele prin care să te liniștești singur.
+      </p>
+      <blockquote>
+        Un furnizor care îți spune „ai încredere” îți cere ceva. Unul care îți arată cum să verifici îți dă ceva.
+      </blockquote>
+
+      <!-- S1 -->
+      <h2 id="s1">De ce un fișier HTML și nu altceva</h2>
+      <p>
+        Prima întrebare rezonabilă e de ce am ales tocmai formatul ăsta. Un PDF ar fi părut mai cuminte. O aplicație, mai serioasă. Un cont online, mai modern.
+      </p>
+      <p>
+        Problema e că <strong>aproape orice format poate rula cod.</strong> PDF-urile pot conține JavaScript, de aici o parte din vulnerabilitățile celebre ale cititoarelor de PDF. Fișierele Excel pot conține macrouri, care rulează pe calculatorul tău cu drepturile tale, în afara oricărei cutii de siguranță. Un program instalat are, prin definiție, acces la tot.
+      </p>
+      <p>
+        Diferența reală nu e „rulează sau nu rulează cod”. Sunt alte două lucruri: <strong>cât de multă putere are codul</strong> și <strong>dacă îl poți citi.</strong>
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Format</th>
+              <th>Poate rula cod</th>
+              <th>Cu ce drepturi</th>
+              <th>Îl poți citi tu?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Program instalat (.exe)</strong></td>
+              <td>Da</td>
+              <td>Ale tale, complet — fișiere, rețea, pornire automată</td>
+              <td><strong>Nu.</strong> E compilat</td>
+            </tr>
+            <tr>
+              <td><strong>Excel cu macrouri (.xlsm)</strong></td>
+              <td>Da</td>
+              <td>Aproape ale tale, în afara browserului</td>
+              <td>Parțial, dacă știi unde să te uiți</td>
+            </tr>
+            <tr>
+              <td><strong>PDF</strong></td>
+              <td>Da, JavaScript încorporat</td>
+              <td>Limitate de cititor</td>
+              <td>Greu — e format binar</td>
+            </tr>
+            <tr>
+              <td><strong>Aplicație web cu cont</strong></td>
+              <td>Da</td>
+              <td>Codul rulează la ei, datele stau la ei</td>
+              <td>Nu. Se poate schimba oricând, fără să afli</td>
+            </tr>
+            <tr>
+              <td><strong>Pagină HTML</strong></td>
+              <td>Da</td>
+              <td>Doar cele din cutia browserului</td>
+              <td><strong>Da, integral.</strong> E text</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Asta e toată logica alegerii. Un <code>.exe</code> nu poate fi citit de nimeni: nici de tine, nici de un expert, nici de un asistent AI. O pagină HTML e text de la primul până la ultimul caracter. Se deschide cu orice editor de text, iar fiecare cuvânt din ea poate fi citit de tine, de un coleg din IT sau de un asistent AI.
+      </p>
+      <blockquote>
+        Transparența nu e o promisiune pe care ți-o facem. E o proprietate a formatului.
+      </blockquote>
+      <p>
+        La care se adaugă avantajele practice: un singur fișier, fără instalare, fără cont, fără email, merge pe orice sistem cu un browser, funcționează fără internet și rămâne al tău dacă mâine site-ul dispare.
+      </p>
+
+      <!-- S2 -->
+      <h2 id="s2">Ce poate face o pagină descărcată</h2>
+      <p>
+        Acum partea incomodă, spusă fără menajamente. O pagină HTML deschisă de pe calculatorul tău rulează JavaScript, la fel ca orice site. Una scrisă cu intenții rele ar putea:
+      </p>
+
+      <div class="verdict">
+        <div class="can">
+          <div class="h">// ce poate face</div>
+          <ul>
+            <li><strong>Să trimită ce scrii.</strong> Riscul principal. Dacă are cod de rețea, tot ce tastezi poate pleca spre un server, în timp real, fără ca tu să vezi ceva pe ecran.</li>
+            <li><strong>Să aducă alt cod de pe internet.</strong> Fișierul pe care l-ai verificat azi poate încărca mâine cu totul altceva, dacă are voie să se conecteze undeva.</li>
+            <li><strong>Să semnaleze că ai deschis-o.</strong> O simplă imagine încărcată de pe un server extern spune cuiva că, la ora asta, cineva de la adresa asta a deschis fișierul.</li>
+            <li><strong>Să te redirecteze</strong> către o pagină care imită un site cunoscut și îți cere parole.</li>
+            <li><strong>Să declanșeze o descărcare</strong> sau să te împingă spre una.</li>
+            <li><strong>Să-ți ceară permisiuni</strong>: cameră, microfon, localizare, notificări. Browserul întreabă, dar oamenii apasă „Permite” din reflex.</li>
+          </ul>
+        </div>
+        <div class="cant">
+          <div class="h">// ce nu poate face</div>
+          <ul>
+            <li><strong>Nu-ți citește fișierele.</strong> Nu poate umbla prin foldere. Ajunge la un fișier doar dacă îl alegi tu, printr-o fereastră de selecție.</li>
+            <li><strong>Nu vede celelalte taburi.</strong> Nu poate citi sesiunea de la bancă, mailul sau SPV-ul. Browserul ține fiecare pagină în cutia ei.</li>
+            <li><strong>Nu instalează nimic.</strong> Nu e un program. Nu se scrie în sistem, nu pornește odată cu calculatorul.</li>
+            <li><strong>Nu rămâne activă.</strong> Închizi tabul, se oprește. Nu rulează în fundal după aceea.</li>
+            <li><strong>Nu ia permisiuni în tăcere.</strong> Camera, microfonul și localizarea cer acordul tău explicit, de fiecare dată.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>
+        Concluzia onestă: riscul e real, dar are un contur clar. <strong>Practic totul se reduce la o singură întrebare: poate fișierul să vorbească cu internetul?</strong> Dacă nu poate, aproape niciunul dintre pericolele din coloana stângă nu se mai poate întâmpla. Iar asta se verifică ușor.
+      </p>
+
+      <!-- S3 -->
+      <h2 id="s3">Ce am ales noi: nimic ascuns</h2>
+      <p>
+        Jurnalul AI e construit pornind exact de la întrebarea de mai sus. Nu conține niciun mecanism prin care să se conecteze undeva. Nu pentru că am promis noi, ci pentru că liniile de cod care ar face asta pur și simplu nu există în fișier.
+      </p>
+      <p>Iată ce conține, numărat:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ce am căutat</th>
+              <th>Ce ar însemna dacă ar exista</th>
+              <th>Găsit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code>, <code>sendBeacon</code>, <code>EventSource</code></td>
+              <td>Trimite sau aduce date de pe internet</td>
+              <td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td><code>eval</code>, <code>new Function</code>, <code>document.write</code>, <code>atob</code></td>
+              <td>Execută cod construit din text — folosit ca să ascunzi ce face codul</td>
+              <td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td><code>&lt;iframe&gt;</code>, <code>&lt;object&gt;</code>, <code>&lt;embed&gt;</code>, <code>&lt;form&gt;</code></td>
+              <td>Încarcă altă pagină înăuntru sau trimite date undeva</td>
+              <td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td><code>&lt;script&gt;</code></td>
+              <td>Cod. Contează dacă e scris în fișier sau adus din altă parte</td>
+              <td><strong>1</strong>, scris în fișier, fără <code>src</code></td>
+            </tr>
+            <tr>
+              <td><code>src="http</code></td>
+              <td>Aduce ceva de pe un server extern la fiecare deschidere</td>
+              <td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td>Fonturi externe</td>
+              <td>Semnalează unui furnizor de fonturi că ai deschis fișierul</td>
+              <td><strong>0</strong> — folosește fonturi de sistem</td>
+            </tr>
+            <tr>
+              <td>Adrese externe</td>
+              <td>Unde te poate trimite</td>
+              <td><strong>16</strong>, toate către <code>aiaccountinghub.ro</code>, doar la click</td>
+            </tr>
+            <tr>
+              <td>Cookie-uri</td>
+              <td>Urmărire între sesiuni</td>
+              <td><strong>0</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Două lucruri pe care le-am fi putut ascunde și nu le ascundem, pentru că altfel v-ați fi întrebat despre ele:
+      </p>
+      <p>
+        <strong>Există o cerere de permisiune în fișier.</strong> Una singură. E cea prin care browserul te întreabă dacă are voie să rescrie fișierul <code>.md</code> pe care <em>tu</em> l-ai ales la salvarea anterioară. Fără ea, ai avea zece copii cu nume diferite în folderul de descărcări. Nu are legătură cu camera, microfonul sau localizarea.
+      </p>
+      <p>
+        <strong>Există două apariții ale unei adrese care începe cu <code>http://</code>.</strong> Amândouă sunt <code>http://www.w3.org/2000/svg</code>, nu e o conexiune, ci numele oficial al formatului grafic folosit de pictograma jurnalului. Apare în orice fișier care conține un desen vectorial. Dacă îți dă un asistent AI un avertisment despre ea, e o alarmă falsă.
+      </p>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="cbody">
+          Cifrele de mai sus se referă la versiunea publicată în august 2026. Nu-ți cerem să le crezi, și tocmai de asta urmează partea în care le verifici singur. Dacă descarci o versiune viitoare, refă verificarea — durează sub cinci minute.
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <h2 id="s5">Trei feluri de a verifica</h2>
+      <p>
+        Sunt aranjate în ordinea în care le recomandăm. Niciuna nu-ți cere să știi programare, și <strong>niciuna nu te obligă să citești conținutul fișierului</strong>, lucru care contează, din motivul explicat mai jos.
+      </p>
+
+      <h3 id="s5-1">1 · Pui un asistent AI să-ți facă un raport</h3>
+      <p>
+        Începem cu ea pentru că e cea mai potrivită pentru cei mai mulți oameni, și nu din snobism tehnologic. Are trei calități pe care celelalte nu le au: <strong>nu deschizi deloc fișierul</strong>, nu trebuie să știi ce înseamnă cuvintele pe care le caută, și primești la final un verdict scris, nu o listă de rezultate pe care să le interpretezi singur.
+      </p>
+      <p>
+        Descarci fișierul, îl încarci într-un asistent AI, oricare dintre Claude, ChatGPT sau Gemini acceptă atașamente, și lipești promptul de mai jos. În mai puțin de un minut ai un raport.
+      </p>
+
+      <div class="promptbox">
+        <div class="pb-head">
+          <span class="pb-title">// prompt de verificare — copiază-l ca atare</span>
+          <button class="pb-copy" id="copyPrompt" type="button">Copiază</button>
+        </div>
+        <pre id="promptText">Îți atașez un fișier HTML pe care intenționez să-l deschid în browser, pe calculatorul meu. Vreau un raport de siguranță despre el.
+
+IMPORTANT: nu-mi rezuma conținutul și nu-mi spune ce texte conține. Ignoră complet partea de conținut — mă interesează exclusiv codul și comportamentul lui. Dacă îmi dezvălui conținutul, îmi strici motivul pentru care folosesc fișierul.
+
+Structurează raportul exact așa:
+
+VERDICT
+O singură frază: aș avea vreun motiv real de îngrijorare dacă deschid fișierul? Adaugă un nivel de risc — scăzut, mediu sau ridicat.
+
+CE AM VERIFICAT
+Răspunde punctual la fiecare punct, cu DA sau NU și cu detalii unde e cazul:
+1. Apeluri de rețea (fetch, XMLHttpRequest, WebSocket, sendBeacon, EventSource, import dinamic). Dacă există, către ce adrese?
+2. Resurse încărcate din exterior (script, link, img, iframe, fonturi). De unde anume?
+3. Cod ofuscat sau executat dinamic (eval, new Function, atob, document.write, șiruri codificate, nume de variabile ilizibile).
+4. Se colectează ceva din ce scrie utilizatorul și se trimite undeva?
+5. Cere permisiuni de browser (cameră, microfon, localizare, notificări, clipboard)? În ce scop?
+6. Redirecționări automate sau descărcări declanșate fără acțiunea utilizatorului.
+7. Unde se salvează datele utilizatorului și cine le poate citi.
+
+SEMNALE DE ATENȚIE
+Dacă ai găsit ceva îngrijorător, citează linia exactă și explică-mi în cuvinte simple de ce e o problemă.
+
+ALARME FALSE
+Listează separat lucrurile care par suspecte la prima vedere, dar au o explicație tehnică banală — ca să nu mă sperii degeaba.
+
+Scrie tot raportul pe înțelesul cuiva fără studii tehnice.</pre>
+      </div>
+
+      <p>
+        Ultimele două secțiuni cerute sunt cele care fac diferența. Fără ele, asistenții au tendința să semnaleze lucruri perfect normale, cum e adresa aceea <code>w3.org</code>, și te sperie degeaba. Cerându-i explicit să le separe, primești un raport pe care chiar te poți baza.
+      </p>
+      <p>
+        <strong>Două limite, spuse cinstit.</strong> Prima: un asistent AI poate greși în ambele sensuri: poate rata ceva sau poate inventa o problemă inexistentă. E o verificare în plus, nu un certificat. De asta urmează încă două metode. A doua: încărcând un fișier într-un asistent, fișierul ajunge la furnizorul acelui asistent. Pentru jurnal nu contează absolut deloc, fiindcă e public, oricine îl poate descărca de pe site. Dar reflexul de a te întreba asta <em>înainte</em>, nu după, e exact ce încercăm să construim aici.
+      </p>
+
+      <h3 id="s5-2">2 · Te uiți la trafic</h3>
+      <p>
+        Metoda asta nu are cum să mintă. În loc să cauți prin cod ce <em>ar putea</em> să facă fișierul, te uiți pur și simplu la ce <em>face</em>: cu ce vorbește, în timp real, în timp ce îl folosești.
+      </p>
+
+      <div class="steps">
+        <div><p>Deschide fișierul în Chrome sau Edge.</p></div>
+        <div><p>Apasă <strong>F12</strong>. Se deschide panoul de dezvoltare. Alege tabul <strong>Network</strong> (Rețea).</p></div>
+        <div><p>Reîncarcă pagina cu <strong>Ctrl+R</strong>, ca panoul să prindă totul de la început.</p></div>
+        <div><p>Folosește jurnalul normal câteva minute: apasă Start, scrie ceva în casete, deschide instrumentele, salvează.</p></div>
+        <div><p><strong>Uită-te la listă.</strong> Dacă rămâne goală, sau conține doar fișierul însuși, nu pleacă nimic nicăieri. Nu e o opinie, e ce vede browserul.</p></div>
+      </div>
+
+      <p>
+        Funcționează pentru absolut orice pagină, inclusiv pentru site-urile pe care le vizitezi zilnic. Fă o dată exercițiul pe un site de știri, ca să vezi contrastul: acolo lista se umple cu zeci de linii în câteva secunde.
+      </p>
+
+      <h3 id="s5-3">3 · Deschizi fișierul cu un editor de text</h3>
+      <p>
+        Fiind text de la primul până la ultimul caracter, jurnalul poate fi deschis cu <strong>orice editor de text</strong>. Nu contează care, oricare face aceeași treabă.
+      </p>
+      <p>
+        Odată deschis, codul devine vizibil integral. Și aici e o alegere pe care am făcut-o deliberat: <strong>nu am ascuns nimic.</strong> Nicio bucată de cod comprimată, niciun text codificat, niciun nume de variabilă schimbat ca să devină de neînțeles. Practicile astea au uneori motive legitime, de la fișiere mai mici la încărcare mai rapidă, dar au și efectul că fac codul imposibil de citit de un om obișnuit. Într-un fișier care se descarcă și se ține pe calculatorul cuiva, am considerat că lizibilitatea bate cu mult câțiva kilobytes economisiți.
+      </p>
+      <p>
+        Ceea ce înseamnă că poți verifica singur fiecare afirmație din tabelul de mai sus. Nu citind. <strong>Căutând.</strong> Folosește funcția de căutare a editorului, de obicei <code>Ctrl+F</code>, pentru fiecare rând de mai jos. Când un cuvânt lipsește, editorul îți spune că nu l-a găsit. Aia e vestea bună.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Caută</th>
+              <th>Ce ar însemna dacă apare</th>
+              <th>Ar trebui să găsești</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>fetch(</code></td><td>Trimite sau aduce date de pe internet</td><td>nimic</td></tr>
+            <tr><td><code>XMLHttpRequest</code></td><td>Același lucru, metodă mai veche</td><td>nimic</td></tr>
+            <tr><td><code>WebSocket</code></td><td>Canal deschis permanent către un server</td><td>nimic</td></tr>
+            <tr><td><code>sendBeacon</code></td><td>Trimite date discret, chiar și la închiderea paginii</td><td>nimic</td></tr>
+            <tr><td><code>eval(</code></td><td>Execută cod construit din text — clasic pentru cod ascuns</td><td>nimic</td></tr>
+            <tr><td><code>new Function</code></td><td>Același lucru, altă formă</td><td>nimic</td></tr>
+            <tr><td><code>atob(</code></td><td>Descifrează text codificat, adesea ca să ascundă instrucțiuni</td><td>nimic</td></tr>
+            <tr><td><code>&lt;iframe</code></td><td>Încarcă altă pagină în interiorul acesteia</td><td>nimic</td></tr>
+            <tr><td><code>&lt;form</code></td><td>Trimite ce ai completat către o adresă</td><td>nimic</td></tr>
+            <tr><td><code>src="http</code></td><td>Aduce un fișier de pe un server extern la fiecare deschidere</td><td>nimic</td></tr>
+            <tr><td><code>https://</code></td><td>Adrese externe</td><td>doar <code>aiaccountinghub.ro</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Dacă alegi metoda asta, caută — nu derula.</strong> Căutarea îți arată exclusiv ce ai cerut. Derulatul îți arată tot, inclusiv ce ar fi mai bine să descoperi pe parcurs. Motivul, în secțiunea următoare.
+        </div>
+      </div>
+
+      <!-- S6 -->
+      <h2 id="s6">De ce nu vezi codul aici</h2>
+      <p>
+        Ai observat, poate, că într-un articol despre transparență nu apare nicio captură cu interiorul fișierului. Nu e o scăpare.
+      </p>
+      <p>
+        Fișierul conține, în text simplu, <strong>toți cei 30 de termeni, cele șase activități săptămânale și promptul final.</strong> Cine îl deschide și derulează prin el află din prima zi tot ce urma să descopere în șase săptămâni. Călătoria se strică singură.
+      </p>
+      <blockquote>
+        Nu te rugăm să nu te uiți pentru că avem ceva de ascuns. Te rugăm tocmai pentru că nu avem.
+      </blockquote>
+      <p>
+        E, dacă stai să te gândești, cea mai bună dovadă posibilă pentru afirmațiile din articol. Un fișier în care nimic nu e ascuns e și un fișier în care nimic nu poate fi ascuns de tine.
+      </p>
+      <p>
+        De asta cele trei metode de verificare sunt construite toate ca să te ferească de conținut: <strong>asistentul AI</strong> primește instrucțiunea explicită să nu-ți povestească nimic, <strong>traficul</strong> nu-ți arată text, iar <strong>căutarea</strong> îți arată doar cuvântul cerut.
+      </p>
+
+      <!-- S7 -->
+      <h2 id="s7">Aceeași listă, pentru orice fișier</h2>
+      <p>
+        Tot ce ai citit până aici funcționează pentru orice HTML care ajunge la tine: de la un furnizor, de la un client, dintr-un newsletter. Câteva reguli care se adaugă:
+      </p>
+      <ul>
+        <li><strong>Sursa contează mai mult decât formatul.</strong> Un fișier primit pe mail de la cineva pe care nu-l cunoști nu se deschide, indiferent ce extensie are. Verificarea e pentru fișierele pe care ai un motiv să le vrei.</li>
+        <li><strong>Ordinea riscului nu e cea intuitivă.</strong> Un <code>.xlsm</code> cu macrouri e mult mai periculos decât un HTML, pentru că macroul rulează în afara cutiei browserului, cu drepturile tale. Un <code>.exe</code> e în altă categorie cu totul.</li>
+        <li><strong>Orice fișier care îți cere să activezi ceva e o alarmă.</strong> „Activează macrourile ca să vezi conținutul”, „Enable content”, „Dezactivează temporar antivirusul”. Nu există motiv legitim pentru genul ăsta de cerere.</li>
+        <li><strong>Cu cât un fișier e mai ușor de citit, cu atât e mai ușor de verificat.</strong> Un fișier care nu poate fi citit de nimeni îți cere, obligatoriu, încredere. Unul care poate fi citit îți lasă alegerea.</li>
+        <li><strong>Verifică din nou după fiecare actualizare.</strong> Un fișier curat azi poate fi altul mâine. Verificarea nu e o dată pentru totdeauna, e un obicei de cinci minute, o dată pe versiune.</li>
+      </ul>
+
+      <!-- S8 -->
+      <h2 id="s8">Ultimul cuvânt e tot al tău</h2>
+      <p>
+        În articolul precedent am scris despre termenul cu care se închide jurnalul: <strong>Human-in-the-Loop</strong>. AI-ul face prima trecere, omul decide și răspunde. Nu ca formulă de politică internă, ci ca decizie luată de fiecare dată, pentru fiecare set de date.
+      </p>
+      <p>
+        Verificarea unui fișier înainte să-l deschizi e exact același reflex, mutat cu un pas mai devreme. Nu accepți un rezultat pentru că vine de la un sistem care pare competent. Nu accepți un fișier pentru că vine de pe un site care pare serios. Te uiți, în amândouă cazurile, și abia apoi decizi.
+      </p>
+      <p>
+        Iar dacă, după toate verificările, tot preferi să nu-l descarci, e o decizie perfect rațională și o respectăm. Aceeași logică ca la a patra opțiune din finalul jurnalului: <em>decizi că rămâne offline, și e un răspuns la fel de bun ca celelalte.</em>
+      </p>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Pe scurt:</strong> riscul unei pagini HTML descărcate se reduce, practic, la o singură întrebare — poate vorbi cu internetul? Se verifică în cinci minute, în trei feluri diferite, fără să știi programare și fără să citești fișierul. <a href="resurse.html">Jurnalul AI e în secțiunea Resurse</a> — verifică-l înainte, dacă asta te ajută să pornești liniștit.
+        </div>
+      </div>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <a href="#" class="tag">#siguranțaDatelor</a>
+          <a href="#" class="tag">#transparență</a>
+          <a href="#" class="tag">#verificare</a>
+          <a href="#" class="tag">#HITL</a>
+          <a href="#" class="tag">#JurnalulAI</a>
+          <a href="#" class="tag">#GDPR</a>
+          <a href="#" class="tag">#profesiaContabila</a>
+        </div>
+        <span class="footer-mono">Articolul #029</span>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s0">Ezitarea e reflexul corect</a>
+        <a href="#s1">De ce un fișier HTML</a>
+        <a href="#s2">Ce poate și ce nu poate face</a>
+        <a href="#s3">Ce am ales noi: nimic ascuns</a>
+        <a href="#s5">Trei feluri de a verifica</a>
+        <a href="#s5-1" class="toc-sub">1 · Raport de la un asistent AI</a>
+        <a href="#s5-2" class="toc-sub">2 · Te uiți la trafic</a>
+        <a href="#s5-3" class="toc-sub">3 · Deschizi cu un editor de text</a>
+        <a href="#s6">De ce nu vezi codul aici</a>
+        <a href="#s7">Aceeași listă, pentru orice fișier</a>
+        <a href="#s8">Ultimul cuvânt e tot al tău</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă lectura</div>
+        <h2>Seria „AI Journal”, de la capăt.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html" class="related-card fade-in">
+        <div class="related-date">AI JOURNAL · PARTEA 1 DIN 3 · #027</div>
+        <h3>Obiceiul nu se construiește. Se lipește</h3>
+        <p>De ce o resursă bună nu e de ajuns, și cum se stratifică un obicei nou peste unul care îți merge deja perfect.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html" class="related-card fade-in">
+        <div class="related-date">AI JOURNAL · PARTEA 2 DIN 3 · #028</div>
+        <h3>Două casete și o cafea</h3>
+        <p>Ghidul vizual al aplicației: prima deschidere, Start, cele două casete de completat și ce te așteaptă la capăt.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html#grid-tool" class="related-card fade-in">
+        <div class="related-date">RESURSĂ · APLICAȚIE HTML</div>
+        <h3>Jurnalul AI, 30 de zile de adaptare</h3>
+        <p>Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe fiecare zi lucrătoare, zece minute la cafea, plus șase activități practice. Fără cont, fără email, totul rămâne la tine.</p>
+        <span class="related-read">Descarcă jurnalul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+<script>
+
+/* Copy link button */
+(function () {
+  const btn = document.querySelector('.share-btn[aria-label="Copiază link"]');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+      setTimeout(() => { btn.innerHTML = orig; }, 1800);
+    });
+  });
+})();
+
+/* Copiere prompt de verificare */
+(function () {
+  const btn = document.getElementById('copyPrompt');
+  const pre = document.getElementById('promptText');
+  if (!btn || !pre) return;
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
+      btn.textContent = 'Copiat ✓';
+      setTimeout(() => { btn.textContent = 'Copiază'; }, 2000);
+    }).catch(() => { btn.textContent = 'Selectează manual'; });
+  });
+})();
+</script>
+</body>
+</html>

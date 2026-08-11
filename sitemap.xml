@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Pagini principale -->
-  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-08-08</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-08-01</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/podcast.html</loc><lastmod>2026-08-08</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/podcast.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-08-01</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/resurse.html</loc><lastmod>2026-08-07</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/resurse.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/viitorul-profesiei.html</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/contact.html</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/nota-confidentialitate.html</loc><lastmod>2026-07-19</lastmod></url>
@@ -31,6 +31,13 @@
   <url><loc>https://aiaccountinghub.ro/2026-07-24-Adoptare-vs-adaptare-ai-contabilitate.html</loc><lastmod>2026-07-24</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/2026-07-31-Promptul-perfect-2.0.html</loc><lastmod>2026-08-02</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact.html</loc><lastmod>2026-08-01</lastmod></url>
+
+  <!-- Proiectul AI Journal — articolele publicate pe 11.08.2026 (S2-S6 se adauga saptamanal) -->
+  <url><loc>https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-08-11-AI-Journal-doua-casete-si-o-cafea.html</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html</loc><lastmod>2026-08-11</lastmod></url>
 
   <!-- Termeni buzzword (generat automat) -->
   <url><loc>https://aiaccountinghub.ro/buzzword/llm.html</loc><lastmod>2026-05-01</lastmod></url>

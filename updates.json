@@ -2,8 +2,57 @@
   "_comment": "FLUXUL DE NOUTĂȚI — se completează MANUAL la fiecare publicare, împreună cu feed.xml (sunt oglindă). Adaugă noul material ca PRIM element din 'items' (ordinea din listă = ordinea afișării, cele mai noi întâi). Câmpuri: id (unic, nu se mai schimbă niciodată — el decide ce e 'citit'), type (DOAR articol | podcast | buzzword — alt tip nu poate fi bifat de cititor, deci nu i-ar fi semnalat niciodată), title, url (adresa la care duce notificarea), date (AAAA-LL-ZZ), meta (text scurt: durată), mark (opțional — selector CSS al cardului care primește eticheta NOU; dacă lipsește, se caută automat legătura către 'url').",
   "_linkuri": "Articol: adresa proprie a paginii. Podcast: 'podcast.html?play=<spotifyId>' — deschide direct playerul pe episodul acela. Buzzword: 'buzzword.html#<id>' — deschide definiția și derulează la ea. Resursele nu intră aici: când publici ceva important în Download zone scrii oricum și un articol pe temă.",
   "_surse": "Datele de publicare există și la sursă: câmpul 'date' din assets/podcast-data.js (episoade) și din assets/buzzwords.json (termeni). De acolo le copiezi când adaugi un material nou aici.",
-  "updated": "2026-08-08",
+  "updated": "2026-08-11",
   "items": [
+    {
+      "id": "pod-e09-ai-journal",
+      "type": "podcast",
+      "title": "Ep. 09 — Zece minute cu „AI Journal” lângă cafea",
+      "url": "podcast.html?play=0Vk1a5yXg4HkY7vtV192HD",
+      "date": "2026-08-11",
+      "meta": "16 min",
+      "mark": "[data-spotify=\"0Vk1a5yXg4HkY7vtV192HD\"]"
+    },
+    {
+      "id": "art-2026-08-11-fisier-html-verificare",
+      "type": "articol",
+      "title": "Descarci un fișier HTML. Ce poate face și cum verifici singur",
+      "url": "2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html",
+      "date": "2026-08-11",
+      "meta": "14 min · AI Journal 4/4"
+    },
+    {
+      "id": "art-2026-08-11-doua-casete-si-o-cafea",
+      "type": "articol",
+      "title": "Două casete și o cafea. Tot ce ai de completat în Jurnalul AI",
+      "url": "2026-08-11-AI-Journal-doua-casete-si-o-cafea.html",
+      "date": "2026-08-11",
+      "meta": "14 min · AI Journal 3/4"
+    },
+    {
+      "id": "art-2026-08-11-obiceiul-se-lipeste",
+      "type": "articol",
+      "title": "Obiceiul nu se construiește. Se lipește",
+      "url": "2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html",
+      "date": "2026-08-11",
+      "meta": "13 min · AI Journal 2/4"
+    },
+    {
+      "id": "art-2026-08-11-decalajul-se-adanceste",
+      "type": "articol",
+      "title": "Europa a accelerat cu 48% într-un an. Noi am rămas la 5,2%",
+      "url": "2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html",
+      "date": "2026-08-11",
+      "meta": "11 min · AI Journal 1/4"
+    },
+    {
+      "id": "art-2026-08-11-ai-jurnal-s1",
+      "type": "articol",
+      "title": "AI Jurnal S1 — Familiarizare: alege-ți tool-ul și umblă prin el",
+      "url": "2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html",
+      "date": "2026-08-11",
+      "meta": "8 min · AI Journal · săptămâna 1"
+    },
     {
       "id": "pod-e08-comunitate",
       "type": "podcast",

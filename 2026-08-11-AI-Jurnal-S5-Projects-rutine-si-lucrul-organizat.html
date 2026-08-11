@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Projects, rutine și lucrul organizat: cum ieși din „o conversație nouă de fiecare dată” — AI Accounting Hub</title>
+<meta name="description" content="Săptămâna 5 din AI Journal: construiești un Project pe o temă reală — e-Factura, SAF-T, Registrul de Inventar, un client — cu instrucțiuni permanente și documente de referință, testezi căutarea în propriile fișiere și programezi o rutină.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Projects, rutine și lucrul organizat: cum ieși din „o conversație nouă de fiecare dată”">
+<meta property="og:description" content="Dacă rescrii același context de fiecare dată, nu folosești instrumentul — îl reintroduci. Săptămâna în care construiești un spațiu care își aduce aminte.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Projects, rutine și lucrul organizat: cum ieși din „o conversație nouă de fiecare dată”">
+<meta name="twitter:description" content="Dacă rescrii același context de fiecare dată, nu folosești instrumentul — îl reintroduci. Săptămâna în care construiești un spațiu care își aduce aminte.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile seriei „AI Journal" — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Bara seriei — cele 6 activități săptămânale */
+.serie-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 30px; }
+.serie-bar a, .serie-bar span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 11px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--fg-dim);
+  text-decoration: none; white-space: nowrap;
+}
+.serie-bar a:hover { color: var(--fg); border-color: var(--accent); }
+.serie-bar .now {
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  border-color: var(--accent); color: var(--accent);
+}
+
+/* Card „Exemplu practic" */
+.example { margin: 26px 0; padding: 20px 22px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg-1); }
+.example .lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+}
+.example .lbl::before { content: "\2192"; font-weight: 700; }
+.example p { font-size: 15px; line-height: 1.6; margin: 0; }
+.example p + p { margin-top: 10px; }
+.example ul { margin: 10px 0 0; padding-left: 20px; font-size: 15px; line-height: 1.6; }
+.example li + li { margin-top: 6px; }
+
+/* Pașii activității — card numerotat */
+.step { position: relative; margin: 34px 0 26px; padding: 24px 24px 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg-1); }
+.step .step-n {
+  position: absolute; top: -13px; left: 22px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  background: var(--bg-0); padding: 3px 10px; border: 1px solid var(--accent); border-radius: 999px;
+}
+.step h3 { margin: 4px 0 12px; font-size: 19px; line-height: 1.35; }
+.step p { font-size: 15px; line-height: 1.65; }
+.step p:last-child { margin-bottom: 0; }
+.step ul { font-size: 15px; line-height: 1.62; }
+
+/* Comparație „în oglindă" */
+.vs-grid { margin: 32px 0; display: grid; gap: 16px; }
+.vs-pair { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--bg-1); }
+.vs-side { padding: 18px 20px; font-size: 15px; line-height: 1.62; }
+.vs-side.bad { color: var(--fg-muted); border-right: 1px solid var(--border); }
+.vs-side.good { background: color-mix(in oklab, var(--accent) 7%, transparent); color: var(--fg); }
+.vs-tag { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.vs-side.bad .vs-tag { color: var(--fg-dim); }
+.vs-side.good .vs-tag { color: var(--accent); }
+.vs-side.good strong { color: var(--fg); }
+@media (max-width: 720px) {
+  .vs-pair { grid-template-columns: 1fr; }
+  .vs-side.bad { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* Tabel de comparație */
+.compare-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14.5px; }
+.compare-table th, .compare-table td { border: 1px solid var(--border); padding: 11px 14px; text-align: left; vertical-align: top; line-height: 1.55; }
+.compare-table th { background: var(--bg-1); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+.compare-table tbody tr:nth-child(even) { background: color-mix(in oklab, var(--fg) 3%, transparent); }
+@media (max-width: 640px) { .compare-table { font-size: 13px; } .compare-table th, .compare-table td { padding: 8px 10px; } }
+
+/* Bloc de prompt — text de copiat */
+.promptbox {
+  margin: 24px 0; padding: 18px 20px; border-radius: 14px;
+  border: 1px dashed var(--border); background: color-mix(in oklab, var(--accent) 4%, transparent);
+  font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.7; white-space: pre-wrap; color: var(--fg-muted);
+}
+.promptbox .pb-lbl { display: block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+/* Caseta de serie — pentru cine ajunge direct pe articolul ăsta */
+.serie-box { margin: 0 0 34px; padding: 22px 24px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 14px; background: var(--bg-1); }
+.serie-box .sb-k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.serie-box p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.65; color: var(--fg-muted); }
+.serie-box ol { margin: 0; padding: 0; list-style: none; counter-reset: serie; display: grid; gap: 8px; }
+.serie-box ol li { counter-increment: serie; position: relative; padding: 5px 0 5px 34px; font-size: 14.5px; line-height: 1.5; color: var(--fg-muted); }
+.serie-box ol li::before { content: counter(serie); position: absolute; left: 0; top: 5px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); }
+.serie-box ol li a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 32%, transparent); }
+.serie-box ol li a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+/* articolul de la care merită să pornești */
+.serie-box ol li.start { background: color-mix(in oklab, var(--accent) 8%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 26%, transparent); border-radius: 10px; padding: 11px 14px 11px 42px; }
+.serie-box ol li.start::before { left: 13px; top: 11px; border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box ol li.start a { color: var(--fg); font-weight: 600; border-bottom-color: color-mix(in oklab, var(--accent) 55%, transparent); }
+.serie-box ol li.here { color: var(--fg); }
+.serie-box ol li.here::before { border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box .sb-chip { display: inline-block; margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.serie-box .sb-now { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); margin-left: 8px; white-space: nowrap; }
+
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Projects, rutine și lucrul organizat: cum ieși din „o conversație nouă de fiecare dată”",
+  "description": "Săptămâna 5 din AI Journal: construiești un Project pe o temă reală — e-Factura, SAF-T, Registrul de Inventar, un client — cu instrucțiuni permanente și documente de referință, testezi căutarea în propriile fișiere și programezi o rutină.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "inLanguage": "ro",
+  "articleSection": "AI Journal",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "AI Journal: activitățile săptămânale"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+
+<!-- Date structurate (JSON-LD) — Întrebări frecvente (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce este un Project într-un asistent AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un Project (numit și spațiu de lucru, GPT personalizat sau Gem, în funcție de instrument) este un container persistent care ține laolaltă trei lucruri: instrucțiuni permanente aplicate automat fiecărei conversații din el, un set de documente de referință pe care asistentul le poate consulta, și istoricul conversațiilor pe tema respectivă. Diferența față de o conversație obișnuită e că nu mai rescrii contextul: el e deja acolo, de fiecare dată, identic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pot construi un Project pe un client anume, cu documentele lui?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da, dacă instrumentul e aprobat de firmă și e un abonament enterprise sau business cu acord de prelucrare (DPA) și clauză de neutilizare la antrenare. În acel mediu, un Project pe un client e una dintre cele mai utile construcții posibile: instrucțiuni permanente cu specificul lui, documentele de referință relevante, istoric consecvent. Două condiții rămân: contractul cu clientul să nu interzică expres transferul datelor către terți sau folosirea instrumentelor AI, și principiul minimizării — încarci documentele de care ai nevoie, nu toată arhiva. Pe un cont personal, fără contract în spate, Projectul se construiește anonimizat."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce pun în instrucțiunile permanente ale unui Project de contabilitate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Patru lucruri: cine ești și pentru cine lucrezi (rolul și publicul), regulile de conținut specifice temei (ce legislație se aplică, ce termene contează, ce presupuneri să nu facă), regulile de format (lungime, structură, trimiteri legale obligatorii), și regulile de siguranță — în special instrucțiunea explicită de a semnala când nu are informația în documentele încărcate, în loc să completeze din memoria generală. Ultimul punct e cel care transformă un Project dintr-o comoditate într-un instrument de lucru serios."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum funcționează căutarea în propriile fișiere încărcate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prin căutare semantică: instrumentul nu caută cuvântul exact pe care l-ai tastat, ci fragmentele cu înțeles apropiat de întrebarea ta. Practic, poți întreba „ce se întâmplă dacă furnizorul nu răspunde în termen” și primești paragraful relevant chiar dacă în document scrie „în cazul lipsei unui răspuns din partea partenerului comercial”. E diferența față de Ctrl+F, care găsește doar ce ai scris identic — și motivul pentru care merită să încarci proceduri și ghiduri, nu doar să le păstrezi într-un folder."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Merită să programez sarcini recurente cu un asistent AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Merită dacă sarcina e cu adevărat repetitivă și dacă rezultatul e un punct de plecare, nu un livrabil final. Exemple utile pentru un contabil: un rezumat săptămânal al modificărilor legislative dintr-o zonă pe care o urmărești, un memento structurat înainte de termenele de declarare, o listă de verificare generată automat la începutul lunii. Nu merită — și nu e permis profesional — pentru orice implică date de client sau pentru rezultate care ar pleca mai departe fără citire umană."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>AI Journal · S5 Projects</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">AI Journal</span>
+      <span>11 august 2026</span>
+      <span class="sep">·</span>
+      <span>9 min citire</span>
+    </div>
+
+    <h1>Projects și rutine: ieși din <span class="accent">„o conversație nouă de fiecare dată”</span>.</h1>
+    <p class="article-lede">
+      Există un moment în care oricine folosește AI serios se prinde că pierde mai mult timp explicând contextul decât primind răspunsuri. E semnalul că ai depășit faza conversațiilor izolate — și că e timpul pentru un spațiu care își aduce aminte cine ești.
+    </p>
+
+    <div class="serie-box">
+      <div class="sb-k">// seria „AI Journal” · activitatea săptămânii 5 din 6</div>
+      <p>
+        Articolul de față e activitatea practică a săptămânii 5 și nu e gândit să fie citit singur. Cele șase activități
+        au fost construite pentru <strong>Jurnalul AI</strong>, o aplicație de un singur fișier pe care o pui pe desktop
+        și în care notezi un termen AI pe fiecare zi lucrătoare, timp de 30 de zile. Jurnalul îți deschide singur linkul
+        către articolul săptămânii, atunci când ajungi la ea. Dacă ai nimerit direct aici, ordinea de mai jos îți scutește
+        drumurile inutile.
+      </p>
+      <ol>
+        <li class="start"><a href="resurse.html">Descarcă Jurnalul AI din secțiunea Resurse</a> <span class="sb-chip">începe aici</span></li>
+        <li><a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">Obiceiul nu se construiește. Se lipește</a>, de ce ai nevoie de un obicei, nu de încă un curs</li>
+        <li><a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">Două casete și o cafea</a>, cum se folosește jurnalul, pas cu pas</li>
+        <li><a href="2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">Descarci un fișier HTML</a>, ce poate face și cum verifici singur că e în regulă</li>
+      </ol>
+    </div>
+
+    <nav class="serie-bar" aria-label="Seria AI Journal — cele 6 activități">
+        <a href="2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html">S1 · Familiarizare</a>
+        <a href="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html">S2 · Prompturi</a>
+        <a href="2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html">S3 · Modele & halucinații</a>
+        <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">S4 · Igienă AI</a>
+        <span class="now">S5 · Projects & rutine</span>
+        <a href="2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html">S6 · Documente & date</a>
+      </nav>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">De ce contextul rescris e timp pierdut</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Un Project pe o temă reală</a>
+        <a href="#s-p2">2 · Instrucțiuni permanente și referințe</a>
+        <a href="#s-p3">3 · Caută în propriile fișiere</a>
+        <a href="#s-p4">4 · Programează o rutină</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">11.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// AI Journal · Săptămâna 5 · Projects · Instrucțiuni permanente · Rutine</div>
+    </div>
+
+    <div class="prose">
+
+
+      <p>Până acum, fiecare conversație a pornit de la zero. Ai deschis o fereastră, ai scris cine ești, ce lucrezi și ce vrei, ai primit un răspuns, ai închis. A doua zi, la fel. Și a treia.</p>
+
+      <p>Funcționează. Doar că, la un moment dat, îți dai seama că scrii de fiecare dată aceleași cinci rânduri de context. Acela e semnalul: ai depășit faza conversațiilor izolate. Obiectivul săptămânii a cincea e exact ăsta: <em>ieși din „o conversație nouă de fiecare dată” și construiești un spațiu care își aduce aminte contextul tău.</em></p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Articol din seria AI Journal.</strong> Ghidul detaliat al activității din Săptămâna 5. Pornește direct de la ce ai construit în <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">Săptămâna 4</a>: biblioteca de prompturi devine materie primă pentru instrucțiunile permanente, iar lista neagră decide ce documente încarci și ce nu.
+          <br><br>Nu ai încă jurnalul? Se descarcă gratuit, fără cont, din <a href="resurse.html">secțiunea Resurse</a>, iar modul de completare e explicat pas cu pas în <a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">ghidul de utilizare</a>.
+        </div>
+      </div>
+
+      <h2 id="s-ce">Ce e, de fapt, activitatea asta</h2>
+
+      <p>Patru pași: creezi un Project pe o temă reală, îl încarci cu instrucțiuni permanente și documente de referință, testezi căutarea în propriile fișiere și, dacă instrumentul permite, programezi o sarcină recurentă.</p>
+
+      <p>„Project” e denumirea din Claude și ChatGPT. În alte instrumente se numește altfel: Gem, agent, spațiu de lucru, GPT personalizat. Ideea e identică: un container care ține laolaltă instrucțiuni permanente, documente și istoric, astfel încât contextul să nu mai fie rescris.</p>
+
+      <h2 id="s-dece">De ce contextul rescris de fiecare dată e timp pierdut</h2>
+
+      <p>Un contabil nu-i explică unui coleg de trei ani, la fiecare discuție, ce fel de firmă e clientul X și ce s-a hotărât acum două luni. Colegul știe. Costul relației a fost plătit o dată.</p>
+
+      <p>Cu AI-ul, majoritatea utilizatorilor plătesc costul acela zilnic. Rescriu cine sunt, pentru cine lucrează, ce reguli se aplică, și, de multe ori, îl rescriu <em>neglijent</em>, pentru că se grăbesc. Rezultatul e o degradare lentă: primele conversații ale săptămânii sunt bune, ultimele sunt mediocre, pentru că nu mai ai chef să explici a douăzecea oară.</p>
+
+      <blockquote>Dacă îți rescrii contextul la fiecare conversație, nu folosești instrumentul. Îl reinstalezi.</blockquote>
+
+      <p>Un Project rezolvă asta, dar aduce ceva mai valoros decât economia de timp: <strong>consistența</strong>. Instrucțiunile scrise o dată, cu cap, se aplică identic de fiecare dată. Nu depind de cât de obosit ești vineri la ora cinci. Pentru o profesie în care consecvența tratamentului e o cerință, nu o preferință, argumentul ăsta cântărește mai mult decât minutele economisite.</p>
+
+      <h2 id="s-urmareste">Ce urmărește exercițiul, concret</h2>
+
+      <ul class="checklist">
+        <li><strong>Să treci de la utilizare la sistem.</strong> Un Project e prima infrastructură pe care o construiești, nu doar o interacțiune pe care o repeți.</li>
+        <li><strong>Să vezi ce înseamnă „AI-ul citește documentele mele”.</strong> Diferența dintre răspunsuri din cunoașterea generală și răspunsuri din procedurile tale e vizibilă imediat.</li>
+        <li><strong>Să-ți testezi propria documentație.</strong> Un efect secundar surprinzător: descoperi ce nu e scris nicăieri în firmă.</li>
+        <li><strong>Să automatizezi ceva mic.</strong> Nu întregul flux, ci o singură rutină, ca să înțelegi ce înseamnă un rezultat care apare fără să-l ceri.</li>
+      </ul>
+
+      <h2 id="s-pasi">Cei patru pași, pe rând</h2>
+
+      <div class="step">
+        <span class="step-n">Pasul 1</span>
+        <h3 id="s-p1">Creează un Project pe o temă reală</h3>
+        <p>e-Factura. SAF-T. Registrul de Inventar. Un client anume. Ceva la care chiar revii, nu o temă aleasă pentru exercițiu.</p>
+        <p>Criteriul de alegere e simplu: <em>o temă la care ai revenit de cel puțin trei ori în ultima lună</em>. Dacă nu revii, un Project nu-ți aduce nimic, o conversație obișnuită e suficientă.</p>
+        <table class="compare-table t-stack">
+          <thead>
+            <tr><th>Temă</th><th>De ce funcționează bine ca Project</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Temă"><strong>RO e-Factura</strong></td><td data-label="De ce funcționează bine ca Project">Reglementare în mișcare, cu multe excepții, termene și situații particulare. Revii des și ai nevoie de răspunsuri consecvente.</td></tr>
+            <tr><td data-label="Temă"><strong>SAF-T (D406)</strong></td><td data-label="De ce funcționează bine ca Project">Documentație tehnică voluminoasă și greu de navigat. Exact tipul de material în care căutarea semantică bate Ctrl+F.</td></tr>
+            <tr><td data-label="Temă"><strong>Registrul de Inventar / proceduri interne</strong></td><td data-label="De ce funcționează bine ca Project">Ai proceduri scrise pe care nimeni nu le mai deschide. Un Project le repune în circulație.</td></tr>
+            <tr><td data-label="Temă"><strong>Un client recurent</strong></td><td data-label="De ce funcționează bine ca Project">Cea mai utilă temă dintre toate. Se construiește pe instrumentul aprobat de firmă, într-un abonament enterprise cu DPA — sau, în lipsa lui, anonimizat. Vezi capcana 3.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 2</span>
+        <h3 id="s-p2">Pune instrucțiuni permanente + 3–5 documente de referință</h3>
+        <p>Instrucțiunile permanente sunt promptul din <a href="2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html">Săptămâna 2</a>, promovat la rang de constantă. Rolul și formatul nu se mai rescriu, se scriu o dată, aici.</p>
+        <div class="promptbox"><span class="pb-lbl">Schelet de instrucțiuni permanente</span>ROL: Ești asistent pentru un contabil autorizat din România care lucrează cu SRL-uri mici și mijlocii. Publicul răspunsurilor: eu, un profesionist — nu simplifica excesiv.
+
+CONȚINUT: Tema acestui spațiu este [e-Factura / SAF-T / ...]. Aplică legislația românească în vigoare. Când o regulă are excepții, enumeră-le explicit. Nu presupune niciodată regimul de TVA sau forma juridică — întreabă-mă.
+
+FORMAT: Răspunsuri structurate, cu trimitere la act, articol și alineat acolo unde există. Fără introduceri și fără concluzii care repetă. Maximum [X] cuvinte dacă nu cer altfel.
+
+SIGURANȚĂ: Dacă răspunsul nu se găsește în documentele încărcate aici, spune-mi explicit că răspunzi din cunoaștere generală și că trebuie verificat la sursă. Nu completa golurile.</div>
+        <p>Ultimul paragraf e cel mai important și cel mai des omis. Fără el, asistentul amestecă fără avertisment ce a găsit în documentele tale cu ce știe din altă parte, exact confuzia pe care un Project ar trebui s-o elimine.</p>
+        <p>Documentele de referință: 3–5, nu 40. Alege-le pe cele pe care le-ai deschide oricum: procedura internă, ghidul oficial, textul legal consolidat, un model de document validat. Și treci-le prin regula de mediu din <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html">Săptămâna 4</a> înainte să le încarci: un ghid public intră oriunde; un dosar de client intră într-un abonament enterprise cu DPA și nu intră într-un cont personal. Iar în ambele cazuri, principiul rămâne mostre relevante, nu arhiva întreagă, și nu doar din prudență, ci pentru că un Project supraîncărcat răspunde mai slab.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 3</span>
+        <h3 id="s-p3">Testează căutarea în propriile fișiere</h3>
+        <p>Pune o întrebare al cărei răspuns e îngropat în documentele încărcate, genul de întrebare pentru care, altfel, ai fi deschis un PDF de 80 de pagini și ai fi dat Ctrl+F de patru ori cu termeni diferiți.</p>
+        <p>Ce se întâmplă tehnic se numește <strong>căutare semantică</strong>: instrumentul nu caută cuvântul exact, ci fragmentele cu înțeles apropiat. Practic, poți întreba „ce se întâmplă dacă furnizorul nu răspunde în termen” și primești paragraful potrivit chiar dacă în document scrie „în cazul lipsei unui răspuns din partea partenerului comercial”.</p>
+        <div class="example">
+          <span class="lbl">Cum testezi corect</span>
+          <p>Alege o întrebare la care <strong>știi tu răspunsul</strong> și știi și unde e în document. Așa poți evalua nu doar dacă a găsit, ci și dacă a găsit <em>tot</em>, inclusiv excepția de la pagina 60, nu doar regula de la pagina 12.</p>
+          <p>Apoi cere-i sursa: „la ce pagină și în ce secțiune scrie asta?”. Un Project bine construit citează. Unul care nu poate cita înseamnă, de regulă, că răspunde din memoria generală, nu din fișierele tale.</p>
+        </div>
+        <p>Efectul secundar cel mai valoros al acestui pas nu e legat de AI. Când pui întrebări reale documentelor tale, descoperi ce <em>nu</em> e scris nicăieri: golurile din procedurile firmei, pe care le compensați cu toții din memorie. Aceea e o listă de îmbunătățit, independent de orice instrument.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-n">Pasul 4</span>
+        <h3 id="s-p4">Programează o sarcină recurentă (dacă tool-ul permite)</h3>
+        <p>Pasul e marcat opțional în jurnal pentru că nu toate instrumentele au funcția. Dacă a ta o are, merită încercată o singură dată, ca să înțelegi diferența dintre a cere un rezultat și a-l primi fără să-l ceri.</p>
+        <p>Candidați rezonabili pentru un contabil:</p>
+        <ul class="checklist">
+          <li><strong>Un rezumat săptămânal</strong> al modificărilor dintr-o zonă pe care o urmărești oricum.</li>
+          <li><strong>Un memento structurat</strong> înainte de termenele de declarare, cu lista a ce trebuie pregătit.</li>
+          <li><strong>O listă de verificare</strong> generată la începutul lunii, pe baza procedurii încărcate în Project.</li>
+        </ul>
+        <p>Ce nu e candidat: orice implică date de client, orice produce un rezultat care ar pleca mai departe fără citire umană, orice îți dă senzația că „se ocupă el”. Regula de verificare din Săptămâna 4 se aplică integral și rezultatelor automate. De fapt, mai ales lor, pentru că exact acolo tentația de a nu citi e cea mai mare.</p>
+      </div>
+
+      <h2 id="s-bine">Cum știi că ți-a ieșit săptămâna</h2>
+
+      <ul class="checklist">
+        <li><strong>Ai un Project la care te întorci</strong> fără să rescrii nimic despre cine ești.</li>
+        <li><strong>Ai primit un răspuns cu citat</strong> din propriile documente, nu din cunoașterea generală.</li>
+        <li><strong>Ai găsit cel puțin un gol</strong> în documentația ta internă, descoperit punând o întrebare.</li>
+        <li><strong>Știi ce merită automatizat</strong> și, mai ales, ce nu.</li>
+      </ul>
+
+      <h2 id="s-capcane">Trei capcane ale săptămânii a cincea</h2>
+
+      <p><strong>1. Projectul-depozit.</strong> Încarci 40 de documente „ca să aibă tot”. Rezultatul e mai slab, nu mai bun: răspunsurile devin vagi, pentru că materialul relevant se pierde în volum. Cinci documente bine alese bat patruzeci strânse la grămadă.</p>
+
+      <p><strong>2. Instrucțiunile scrise în cinci minute.</strong> Sunt permanente, deci merită o oră. Un rând formulat neglijent acolo se va reflecta în fiecare răspuns, luni de zile, fără să-ți dai seama de unde vine.</p>
+
+      <p><strong>3. Projectul pe un client, construit în mediul greșit.</strong> Nu problema e că folosești numele clientului, fiindcă pe un abonament enterprise cu DPA, e chiar varianta care funcționează cel mai bine. Problema e să-l construiești pe contul tău personal, fără contract în spate, pentru că „așa e mai comod”. Verifică întâi ce instrument e aprobat de firmă și ce plan e; dacă răspunsul e „cont personal”, construiește-l anonimizat: „Client A, SRL comerț, TVA la încasare”, și funcționează aproape la fel de bine.</p>
+
+      <h2 id="s-final">Ce duci mai departe</h2>
+
+      <p>Ai un spațiu care știe cine ești și ce reguli aplici. E infrastructura pe care se sprijină ultima săptămână, cea în care AI-ul intră efectiv în munca grea: <a href="2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html">PDF-uri, facturi, documente lungi și cifre</a>.</p>
+
+      <p>Diferența dintre a face acele lucruri într-o conversație oarecare și a le face într-un Project construit e diferența dintre a improviza și a avea un mod de lucru.</p>
+
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#ai-jurnal</span>
+          <span class="tag">#projects</span>
+          <span class="tag">#workflow-automation</span>
+          <span class="tag">#cautare-semantica</span>
+          <span class="tag">#scheduled-tasks</span>
+          <span class="tag">#e-factura</span>
+        </div>
+        <span class="footer-mono">Articolul #024</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s-ce">Ce e, de fapt, activitatea</a>
+        <a href="#s-dece">De ce contextul rescris e timp pierdut</a>
+        <a href="#s-urmareste">Ce urmărește exercițiul</a>
+        <a href="#s-pasi">Cei patru pași, pe rând</a>
+        <a href="#s-p1">1 · Un Project pe o temă reală</a>
+        <a href="#s-p2">2 · Instrucțiuni permanente și referințe</a>
+        <a href="#s-p3">3 · Caută în propriile fișiere</a>
+        <a href="#s-p4">4 · Programează o rutină</a>
+        <a href="#s-bine">Cum știi că ți-a ieșit</a>
+        <a href="#s-capcane">Trei capcane</a>
+        <a href="#s-final">Ce duci mai departe</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- RELATED -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Mai multe din hub.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S4</div>
+        <h3>S4 · Igienă AI și consolidare</h3>
+        <p>Cele trei medii de lucru, ce se poate în fiecare, regula de verificare și biblioteca personală de prompturi.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html" class="related-card fade-in">
+        <div class="related-date">AI JURNAL · S6</div>
+        <h3>S6 · Documente, date și conexiuni</h3>
+        <p>Extragere din facturi, sinteza unei norme, calcul cu raționament vizibil și conectarea la fișierele tale.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html#grid-tool" class="related-card fade-in">
+        <div class="related-date">RESURSĂ · APLICAȚIE HTML</div>
+        <h3>Jurnalul AI, 30 de zile de adaptare</h3>
+        <p>Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe fiecare zi lucrătoare, zece minute la cafea, plus șase activități practice. Fără cont, fără email, totul rămâne la tine.</p>
+        <span class="related-read">Descarcă jurnalul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Două casete și o cafea. Tot ce ai de completat în Jurnalul AI — AI Accounting Hub</title>
+<meta name="description" content="Ghid vizual pentru AI Journal: ce vezi la prima deschidere, cum pornești, ce scrii în cele două casete, ce se întâmplă dacă lipsești câteva zile și de ce una dintre casete poate rămâne goală fără să te coste nimic.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Două casete și o cafea. Tot ce ai de completat în Jurnalul AI">
+<meta property="og:description" content="Ce vezi la prima deschidere a Jurnalului AI, cum pornești, ce scrii în fiecare zi și ce se întâmplă când lipsești o săptămână. Cu capturi și clipuri din aplicație.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Două casete și o cafea. Tot ce ai de completat în Jurnalul AI">
+<meta name="twitter:description" content="Ghid vizual: prima deschidere, Start, cele două casete, pauza de care ai voie și ce se întâmplă cu datele tale.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+
+/* Caseta de serie — pentru cine ajunge direct pe articolul ăsta */
+.serie-box { margin: 0 0 34px; padding: 22px 24px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 14px; background: var(--bg-1); }
+.serie-box .sb-k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.serie-box p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.65; color: var(--fg-muted); }
+.serie-box ol { margin: 0; padding: 0; list-style: none; counter-reset: serie; display: grid; gap: 8px; }
+.serie-box ol li { counter-increment: serie; position: relative; padding: 5px 0 5px 34px; font-size: 14.5px; line-height: 1.5; color: var(--fg-muted); }
+.serie-box ol li::before { content: counter(serie); position: absolute; left: 0; top: 5px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); }
+.serie-box ol li a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 32%, transparent); }
+.serie-box ol li a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+/* articolul de la care merită să pornești */
+.serie-box ol li.start { background: color-mix(in oklab, var(--accent) 8%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 26%, transparent); border-radius: 10px; padding: 11px 14px 11px 42px; }
+.serie-box ol li.start::before { left: 13px; top: 11px; border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box ol li.start a { color: var(--fg); font-weight: 600; border-bottom-color: color-mix(in oklab, var(--accent) 55%, transparent); }
+.serie-box ol li.here { color: var(--fg); }
+.serie-box ol li.here::before { border-color: color-mix(in oklab, var(--accent) 55%, transparent); color: var(--accent); }
+.serie-box .sb-chip { display: inline-block; margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.serie-box .sb-now { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); margin-left: 8px; white-space: nowrap; }
+
+
+/* Coverul articolului: clip din aplicație în loc de imaginea comună.
+   Banda are înălțime fixă și raport variabil pe breakpoint-uri, deci decupăm
+   de jos (object-position: top) ca să rămână bara de sus și butonul Start. */
+.article-cover-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+/* Scrim mai puternic decât cel comun: peste o interfață luminoasă,
+   gradientul din article.css nu ține subtitrarea lizibilă. */
+.article-cover::after { background: linear-gradient(180deg, transparent 40%, color-mix(in oklab, var(--bg-0) 55%, transparent) 72%, color-mix(in oklab, var(--bg-0) 94%, transparent) 100%); }
+
+/* ---- CAPTURI DIN APLICAȚIE ---- */
+.shot { margin: 32px 0; }
+.shot img, .shot video { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-1); }
+.shot figcaption { margin-top: 12px; font-size: 13.5px; line-height: 1.6; color: var(--fg-dim); border-left: 2px solid color-mix(in oklab, var(--accent) 45%, transparent); padding-left: 14px; }
+.shot figcaption b { color: var(--fg-muted); font-weight: 600; }
+/* pereche de capturi, una sub alta, lipite ca o comparație */
+.shot.pair { display: grid; gap: 10px; }
+.shot.pair figcaption { grid-column: 1 / -1; }
+@media (min-width: 820px) { .shot.pair { grid-template-columns: 1fr 1fr; } }
+/* decupaje înguste — nu le lățim inutil */
+.shot.narrow img { max-width: 720px; margin-inline: auto; }
+/* ferestrele instrumentelor — capturi mai mici, nu le întindem */
+.shot.ui img { max-width: 640px; margin-inline: auto; }
+/* clipul cu ghidul e vertical */
+.shot.clip video { max-width: 460px; margin-inline: auto; }
+.shot .badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); border: 1px solid var(--border); border-radius: 999px; padding: 3px 9px; margin-bottom: 10px; }
+
+/* Cele două casete — blocul de sinteză */
+.fields { margin: 30px 0; display: grid; gap: 14px; }
+.fields > div { border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); padding: 20px 22px; }
+.fields .k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.fields .t { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 17px; color: var(--fg); margin-bottom: 8px; }
+.fields p { margin: 0; font-size: 14.5px; color: var(--fg-muted); line-height: 1.6; }
+.fields p + p { margin-top: 8px; }
+@media (min-width: 820px) { .fields { grid-template-columns: 1fr 1fr; } }
+
+@media (max-width: 420px) {
+  .prose table { font-size: 12px; }
+  .prose th, .prose td { padding: 8px 10px; }
+}
+@media (max-width: 720px) {
+  .prose table { font-size: 13px; }
+  .prose th, .prose td { padding: 10px 12px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Două casete și o cafea. Tot ce ai de completat în Jurnalul AI",
+  "description": "Ghid vizual pentru AI Journal: prima deschidere, Start, cele două casete de completat, pauza pe care jurnalul ți-o recunoaște singur și ce se întâmplă cu datele tale.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "inLanguage": "ro",
+  "articleSection": "AI Journal",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-11-AI-Journal-doua-casete-si-o-cafea.html",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "AI Journal"
+  },
+  "position": 2,
+  "author": { "@type": "Organization", "name": "AI Accounting Hub" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": { "@type": "ImageObject", "url": "https://aiaccountinghub.ro/assets/og-image.png" }
+  }
+}
+</script>
+<!-- Date structurate (JSON-LD) - Intrebari frecvente (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce trebuie să completez, concret, în Jurnalul AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Două casete de text. Prima, notițele zilei, se completează în fiecare zi lucrătoare: ideea principală despre termenul de azi, scrisă cu cuvintele tale, plus linkurile și clipurile din care te-ai documentat. Patru sau cinci rânduri sunt suficiente. A doua casetă, „Adaptare AI”, se schimbă o dată pe săptămână și e locul unde notezi ce ai încercat efectiv din activitatea practică a săptămânii."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce se întâmplă dacă las goală caseta de adaptare săptămânală?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nu se rupe nimic. Caseta a doua se salvează separat, pe săptămână, și nu influențează bara de progres, procentul sau șirul de zile consecutive. Doar prima casetă marchează ziua ca încheiată. Separarea este deliberată: obligația zilnică trebuie să rămână subțire, altfel prima săptămână cu termen de depunere le-ar rupe pe amândouă. Notarea zilnică e obligația ușoară, practica săptămânală e invitația."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce se întâmplă dacă nu deschid Jurnalul AI câteva zile la rând?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nu există buton de pauză, pentru că un buton apăsat din timp devine un motiv de amânare. Jurnalul te așteaptă în schimb, oricât ar dura. La redeschidere, dacă în urmă au rămas cel puțin trei zile lucrătoare consecutive necompletate, jurnalul deschide singur o casetă și te întreabă cum vrei să reiei. Prima variantă, recomandată: termenul la care rămăseseși devine termenul de azi, iar toți termenii care urmează se mută în față, așa că parcursul se termină mai târziu cu exact atâtea zile câte ai lipsit și nu rămâne nimic de recuperat. A doua: continui cu ziua din calendar, iar zilele din perioada absenței rămân marcate ca de recuperat. În ambele cazuri, zilele deja completate își păstrează datele reale, șirul de zile consecutive se rupe ca la orice zi ratată, iar pauza rămâne în istoric și intră în Povestea de la final."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Unde se salvează datele scrise în Jurnalul AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Local, în memoria browserului de pe calculatorul tău și, la cerere, într-un fișier .md pe care îl descarci. Nimic nu pleacă spre vreun server, iar acest lucru se poate verifica în tabul Network al browserului, care rămâne gol. Memoria browserului se golește însă la ștergerea datelor de navigare, la o curățare cu un program de întreținere sau la schimbarea calculatorului, deci fișierul .md este backupul real. Cu „Importă progres” continui exact de unde ai rămas, inclusiv pe alt calculator."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce este termenul 31, Human-in-the-Loop, și de ce apare abia la final?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Este ultimul termen din jurnal și singurul care nu se citește, ci se practică. Human-in-the-Loop înseamnă că AI-ul face prima trecere, iar omul rămâne răspunzător de rezultat. La finalul celor 30 de zile, înainte de a duce fișierul cu notițe într-un asistent AI, jurnalul te oprește și te pune să decizi patru lucruri: ce scoți din fișier înainte să-l încarci, ce instrument alegi și de ce, ce verifici în textul primit și dacă nu cumva jurnalul e prea personal și rămâne offline. Ultima variantă este un răspuns la fel de bun ca celelalte."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Jurnalul AI, pe dinăuntru</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">AI Journal</span>
+      <span>11 august 2026</span>
+      <span class="sep">·</span>
+      <span>14 min citire</span>
+      <span class="sep">·</span>
+      <span>mod de utilizare</span>
+    </div>
+
+    <h1>Două casete și o cafea. <span class="accent">Tot ce ai de completat</span> în Jurnalul AI</h1>
+    <p class="article-lede">
+      Am scris data trecută despre de ce ai nevoie de un obicei, nu de încă un curs. Acum e rândul uneltei. Jurnalul AI e un singur fișier pe care îl descarci, îl pui pe desktop și îl deschizi cu dublu-click. Nu are cont, nu are abonament, nu trimite nimic nicăieri. Iar tot ce îți cere, zi de zi, încape în două casete de text. Hai să le vedem pe rând, cu capturi din aplicație.
+    </p>
+
+    <div class="serie-box">
+      <div class="sb-k">// seria „AI Journal” · partea 2 din 3</div>
+      <p>
+        Jurnalul AI e explicat în trei articole care se citesc cel mai bine în ordine: primul spune de ce ai nevoie de un obicei, nu de încă un curs, al doilea arată unealta pe dinăuntru, al treilea se ocupă de siguranța fișierului pe care îl descarci. Se pot citi și separat, dar dacă ai ajuns direct aici, cel mai bine e să începi cu primul.
+      </p>
+      <ol>
+        <li class="start"><a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">Obiceiul nu se construiește. Se lipește</a> <span class="sb-chip">începe aici</span></li>
+        <li class="here">Două casete și o cafea. Tot ce ai de completat în Jurnalul AI <span class="sb-now">ești aici</span></li>
+        <li><a href="2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">Descarci un fișier HTML. Ce poate face, ce nu poate și cum verifici</a></li>
+      </ol>
+    </div>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s0">Prima deschidere</a>
+        <a href="#s1">Două teme, un comutator</a>
+        <a href="#s2">Ghidul de bun venit</a>
+        <a href="#s3">Start — pornești cu ziua de azi</a>
+        <a href="#s4">Scrisoarea către tine</a>
+        <a href="#s5">Caseta 1 — notițele zilei</a>
+        <a href="#s6">Caseta 2 — adaptarea săptămânii</a>
+        <a href="#s7">De ce a doua poate rămâne goală</a>
+        <a href="#s8">Cum îți arată unde ești</a>
+        <a href="#s8b">Când lipsești mai mult de trei zile</a>
+        <a href="#s9">Instrumentele din dreapta</a>
+        <a href="#s9-1" class="toc-sub">Recap și mini-quiz</a>
+        <a href="#s9-2" class="toc-sub">Salvare, import, resetare</a>
+        <a href="#s9-3" class="toc-sub">Întrebări frecvente</a>
+        <a href="#s10">Datele rămân la tine</a>
+        <a href="#s11">Ce te așteaptă la capăt</a>
+        <a href="#s11-1" class="toc-sub">Termenul 31: Human-in-the-Loop</a>
+        <a href="#s12">Cum începi azi</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">11.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <video id="coverClip" class="article-cover-video" autoplay muted loop playsinline
+             preload="metadata" poster="assets/jurnal/j2-cover-poster.webp"
+             width="1100" height="522"
+             aria-label="Aplicația AI Journal înainte de start, apăsarea butonului Start și apariția primei zile de jurnal">
+        <source src="assets/jurnal/j2-cover.mp4" type="video/mp4">
+      </video>
+      <div class="article-cover-caption">// Ghid · AI Journal · mod de utilizare · capturi și clipuri din aplicație</div>
+    </div>
+
+    <div class="prose">
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Înainte de orice, două lucruri practice.</strong> Jurnalul e făcut pentru calculator, PC sau laptop, pe un ecran mare. Are trei coloane care se văd în același timp și casete în care chiar ai loc să scrii, iar toate astea au nevoie de lățime. Al doilea: <b>ține-l pe desktop, nu într-un folder.</b> Un fișier pe care îl vezi de fiecare dată când pornești calculatorul e jumătate din obicei, iar unul îngropat în „Documente” e o intenție bună despre care îți amintești în decembrie.
+          <br><br>
+          Am avut și o variantă de telefon și am renunțat la ea deliberat. Nu din lipsă de timp, ci pentru că pe telefon distragerile sunt la un deget distanță: notificarea care intră fix când scrii notița, aplicația deschisă „doar o secundă”, cele zece minute care se transformă în două. Jurnalul are nevoie de exact opusul, un moment scurt și liniștit, lipit de prima cafea.
+        </div>
+      </div>
+
+      <!-- S0 -->
+      <h2 id="s0">Prima deschidere</h2>
+      <p>
+        Descarci fișierul din <a href="resurse.html">secțiunea Resurse</a>, îl pui pe desktop și dai dublu-click. Se deschide în browserul tău obișnuit, ca orice pagină, doar că nu e pe internet, e la tine pe calculator. Asta vezi:
+      </p>
+
+      <figure class="shot">
+        <img src="assets/jurnal/j2-start-1760.webp"
+             srcset="assets/jurnal/j2-start-880.webp 880w, assets/jurnal/j2-start-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Ecranul de pornire al aplicației AI Journal, înainte de a apăsa Start: în stânga panoul de setări cu butonul Start, în centru mesajul „Jurnalul tău te așteaptă”, în dreapta panoul cu cele patru instrumente.">
+        <figcaption>
+          Trei coloane. <b>Stânga</b>: de unde pornești. <b>Centru</b>: unde vei scrie. <b>Dreapta</b>: patru instrumente, dintre care două se deschid abia mai târziu și îți spun singure când. Sus, bara de progres, încă goală.
+        </figcaption>
+      </figure>
+
+      <p>
+        Sub butonul de Start scrie data de azi, nu una pe care o alegi tu. Jurnalul pornește cu ziua curentă și atât. Singura abatere e weekendul: dacă îl deschizi sâmbăta sau duminica, apar două butoane în loc de unul, fiindcă se lucrează în zilele lucrătoare. Preiei termenul de vineri și începi imediat, sau aștepți până luni. În ambele cazuri weekendul rămâne pauză și nu te lasă blocat în fața unui ecran gol.
+      </p>
+
+      <!-- S1 -->
+      <h2 id="s1">Două teme, un comutator</h2>
+      <p>
+        Butonul din colțul dreapta-sus schimbă tema. Aceleași informații, două atmosfere. Alegi ce nu-ți obosește ochii la ora la care lucrezi.
+      </p>
+
+      <figure class="shot pair">
+        <img src="assets/jurnal/j2-tema-hartie-1400.webp"
+             srcset="assets/jurnal/j2-tema-hartie-700.webp 700w, assets/jurnal/j2-tema-hartie-1400.webp 1400w"
+             sizes="(max-width: 820px) 92vw, 420px"
+             width="1400" height="369" loading="lazy" decoding="async"
+             alt="Zona de sus a Jurnalului AI în tema deschisă, numită hârtie.">
+        <img src="assets/jurnal/j2-tema-espresso-1400.webp"
+             srcset="assets/jurnal/j2-tema-espresso-700.webp 700w, assets/jurnal/j2-tema-espresso-1400.webp 1400w"
+             sizes="(max-width: 820px) 92vw, 420px"
+             width="1400" height="369" loading="lazy" decoding="async"
+             alt="Aceeași zonă a Jurnalului AI în tema închisă, numită espresso.">
+        <figcaption>
+          Aceeași zi, același ecran: <b>hârtie</b> și <b>espresso</b>. De aici încolo, toate capturile din articol sunt în espresso.
+        </figcaption>
+      </figure>
+
+      <!-- S2 -->
+      <h2 id="s2">Ghidul de bun venit</h2>
+      <p>
+        La prima deschidere nu trebuie să cauți nimic: ghidul apare singur, peste ecranul de pornire. Îl poți parcurge atunci sau îl poți redeschide oricând din panoul stâng, de la <b>🧭 Ghid de utilizare</b>. Nu e genul de tur care apare o dată și dispare pentru totdeauna.
+      </p>
+
+      <figure class="shot clip">
+        <video id="ghidClip" autoplay muted loop playsinline preload="metadata"
+               width="658" height="830"
+               aria-label="Derulare prin ecranele ghidului de bun venit din aplicația AI Journal">
+          <source src="assets/jurnal/j2-ghid.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          Ghidul, parcurs de la un capăt la altul. Opt ecrane scurte: ce e jurnalul, cum pornește, scrisoarea din prima zi, termenul zilei și Buzzword, instrumentele din dreapta, unde se salvează datele, Povestea de la final și ce faci dacă rămâi cu o nelămurire. <b>Îl închizi cu ✕ sau cu Escape</b>, ca pe orice altă fereastră din aplicație.
+        </figcaption>
+      </figure>
+
+      <!-- S3 -->
+      <h2 id="s3">Start — pornești cu ziua de azi</h2>
+      <p>
+        Butonul de Start nu îți cere nimic. Nicio configurare, nicio alegere, niciun formular. Apeși și ai început.
+      </p>
+      <p>
+        Asta e o decizie luată deliberat. Orice ecran de configurare pus înaintea primei zile devine, în practică, un motiv de amânare: te uiți la opțiuni, îți spui că te gândești mai bine diseară, și gata. Jurnalul pornește <strong>cu ziua de azi</strong>, pentru că un obicei începe acum, nu „de luni”.
+      </p>
+      <blockquote>
+        Singura configurare din jurnal e absența ei.
+      </blockquote>
+      <p>
+        Ritmul e fix: un termen pe zi lucrătoare, 30 de termeni, 30 de zile, șase săptămâni. Nu e o limitare, e ideea. Un obicei se construiește din repetare, nu din viteză. Weekendurile sunt pauze planificate, iar șirul de zile consecutive nu se rupe sâmbăta și duminica.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/jurnal/j2-dupa-start-1760.webp"
+             srcset="assets/jurnal/j2-dupa-start-880.webp 880w, assets/jurnal/j2-dupa-start-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Jurnalul AI imediat după apăsarea butonului Start: în stânga data de start, ritmul de lucru și calendarul săptămânii, în centru termenul primei zile cu caseta de notițe.">
+        <figcaption>
+          Același ecran, imediat după Start. În stânga au apărut <b>data de start, ritmul de lucru și calendarul</b>, cu ziua curentă încercuită. Sus, primul segment din bară s-a aprins. În dreapta, panoul cu instrumente s-a retras în pictograme, ca să lase loc de scris.
+        </figcaption>
+      </figure>
+
+      <!-- S4 -->
+      <h2 id="s4">Scrisoarea către tine</h2>
+      <p>
+        În prima zi, și doar în prima zi, apare o casetă în plus. O singură întrebare: ce speri să știi, sau să poți face, peste 30 de termeni?
+      </p>
+
+      <figure class="shot">
+        <img src="assets/jurnal/j2-scrisoarea-1760.webp"
+             srcset="assets/jurnal/j2-scrisoarea-880.webp 880w, assets/jurnal/j2-scrisoarea-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="411" loading="lazy" decoding="async"
+             alt="Caseta „O scrisoare către tine” din prima zi a Jurnalului AI, cu un câmp de text și butonul Sigilează scrisoarea.">
+        <figcaption>
+          Două propoziții sunt de ajuns. O sigilezi și dispare din ecran. Lângă buton e și varianta onestă: <b>„poate altă dată”</b>.
+        </figcaption>
+      </figure>
+
+      <p>
+        E singurul lucru din jurnal care nu se poate recupera mai târziu. Nu pentru că ar bloca ceva, ci pentru că își pierde rostul: o scrisoare despre ce speri are valoare doar dacă e scrisă înainte să știi cum e drumul. După trei săptămâni ai deja răspunsurile și n-o mai poți formula sincer.
+      </p>
+      <p>
+        Poți să o amâni, sigur. Dar rămâne o zi în care ai fi putut avea un „înainte”.
+      </p>
+
+      <!-- S5 -->
+      <h2 id="s5">Caseta 1 — notițele zilei</h2>
+      <p>
+        Aici e miezul. În fiecare zi lucrătoare primești un termen AI. Îl documentezi în <a href="buzzword.html">Buzzword</a>, linkul e chiar deasupra casetei și se deschide într-un tab nou, apoi scrii aici ce ai reținut.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/jurnal/j2-caseta-1-1760.webp"
+             srcset="assets/jurnal/j2-caseta-1-880.webp 880w, assets/jurnal/j2-caseta-1-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="485" loading="lazy" decoding="async"
+             alt="Zona termenului zilei din Jurnalul AI: deasupra, eticheta cu ziua și data și numele termenului; în dreapta, linkul către Arhiva Buzzword; dedesubt, caseta de notițe goală cu textul sugestiv în trei puncte.">
+        <figcaption>
+          Tot ce ai nevoie într-un singur cadru. <b>Sus</b>: ziua, data și termenul de azi. <b>Dreapta</b>: linkul către Buzzword, unde te documentezi. <b>Jos</b>: caseta. Textul gri dinăuntru nu e decor, e chiar instrucțiunea, și dispare în clipa în care începi să scrii.
+        </figcaption>
+      </figure>
+
+      <p>Cele trei rânduri îți spun exact ce se așteaptă de la tine:</p>
+      <ul>
+        <li><strong>Ideea principală despre termenul de azi</strong>: o definiție care ți-a rămas, un exemplu. Cu cuvintele tale, nu copiată.</li>
+        <li><strong>Linkuri către articolele pe care le-ai citit</strong>. Aici se duce teancul de bookmark-uri, în sfârșit într-un loc unde îl vei regăsi.</li>
+        <li><strong>Clipuri de pe YouTube</strong>, dacă ai găsit ceva bun.</li>
+      </ul>
+      <p>
+        Nu e nevoie de mai mult de patru sau cinci rânduri. Serios. Dacă scrii mai mult, cu atât mai bine, dar pragul de intrare trebuie să rămână ridicol de jos, altfel îl sari într-o zi aglomerată. Iar o zi sărită e mult mai scumpă decât o notiță scurtă.
+      </p>
+      <p>
+        <strong>Nu există buton de salvare.</strong> Scrii, iar sub casetă apare pentru o clipă „se salvează…”, apoi „salvat local ✓”. Atât. Poți închide fișierul în orice moment.
+      </p>
+
+      <!-- S6 -->
+      <h2 id="s6">Caseta 2 — adaptarea săptămânii</h2>
+      <p>
+        Sub termenul zilei e a doua casetă. Nu se schimbă zilnic, ci o dată pe săptămână, și are alt rost: acolo unde prima îți construiește vocabularul, a doua te pune să faci ceva cu el.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/jurnal/j2-caseta-2-1760.webp"
+             srcset="assets/jurnal/j2-caseta-2-880.webp 880w, assets/jurnal/j2-caseta-2-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="666" loading="lazy" decoding="async"
+             alt="Secțiunea „Adaptare AI” din Jurnalul AI: titlul activității săptămânii, obiectivul, caseta de notat în stânga și lista de pași în dreapta.">
+        <figcaption>
+          <b>Sus</b>: activitatea săptămânii și obiectivul ei, într-o frază. <b>Dreapta</b>: pașii concreți. <b>Stânga</b>: caseta unde notezi ce ai încercat. Iar linkul portocaliu duce la articolul dedicat săptămânii, de pe site.
+        </figcaption>
+      </figure>
+
+      <p>
+        Fiecare dintre cele șase săptămâni are propriul articol pe hub, care desface activitatea pas cu pas. Nu trebuie să-l citești ca să lucrezi, pașii din dreapta sunt suficienți, dar e acolo dacă vrei contextul întreg.
+      </p>
+
+      <!-- S7 -->
+      <h2 id="s7">De ce a doua poate rămâne goală</h2>
+      <p>
+        Și acum partea care merită spusă explicit, pentru că altfel pare o scăpare.
+      </p>
+
+      <div class="fields">
+        <div>
+          <div class="k">// caseta 1 · zilnic</div>
+          <div class="t">Notițele zilei</div>
+          <p>Ține ritmul. Ea colorează bara de progres, ea alimentează șirul de zile consecutive, ea marchează ziua ca încheiată în calendar.</p>
+          <p>De completat în fiecare zi lucrătoare. Cinci rânduri ajung.</p>
+        </div>
+        <div>
+          <div class="k">// caseta 2 · săptămânal</div>
+          <div class="t">Adaptare AI</div>
+          <p>Ține practica. Se salvează separat, pe săptămână, și <strong>nu influențează progresul, procentul sau șirul de zile.</strong></p>
+          <p>Dacă o săptămână e imposibilă și rămâne goală, nu se rupe nimic.</p>
+        </div>
+      </div>
+
+      <p>
+        Asta nu e o omisiune. E aceeași logică despre care am scris <a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html">în articolul precedent</a>: stratul zilnic trebuie să rămână subțire, altfel ancora cedează. Dacă ți-am fi condiționat ziua de a fi făcut și exercițiul practic, în prima săptămână cu termen de depunere ai fi ratat amândouă. Iar odată ce bara arată o zi ruptă, motivul de a reveni scade brutal.
+      </p>
+      <blockquote>
+        Notarea zilnică e obligația ușoară. Practica săptămânală e invitația. Nu le punem pe același cântar.
+      </blockquote>
+      <p>
+        În practică, majoritatea oamenilor completează caseta a doua în două sau trei reprize pe parcursul săptămânii, pe măsură ce apucă să încerce pașii. Nu dintr-o singură ședință.
+      </p>
+
+      <!-- S8 -->
+      <h2 id="s8">Cum îți arată unde ești</h2>
+
+      <figure class="shot narrow">
+        <img src="assets/jurnal/j2-bara-progres-1440.webp"
+             srcset="assets/jurnal/j2-bara-progres-720.webp 720w, assets/jurnal/j2-bara-progres-1440.webp 1440w"
+             sizes="(max-width: 760px) 92vw, 720px"
+             width="1440" height="82" loading="lazy" decoding="async"
+             alt="Bara de sus a Jurnalului AI: titlul aplicației, indicatorul „ziua 1 din 30”, bara de progres segmentată și contorul de zile consecutive.">
+        <figcaption>
+          Bara de sus, în prima zi. Treizeci de segmente, câte unul pentru fiecare zi.
+        </figcaption>
+      </figure>
+
+      <p>
+        Bara nu e o decorațiune. Fiecare zi completată colorează un segment, iar o zi sărită lasă un gol vizibil. E traducerea directă a regulii „nu rata de două ori”: vezi golul înainte să apuci să-l transformi în două goluri.
+      </p>
+
+      <figure class="shot narrow">
+        <img src="assets/jurnal/j2-bara-pauza-1440.webp"
+             srcset="assets/jurnal/j2-bara-pauza-720.webp 720w, assets/jurnal/j2-bara-pauza-1440.webp 1440w"
+             sizes="(max-width: 760px) 92vw, 720px"
+             width="1440" height="82" loading="lazy" decoding="async"
+             alt="Bara de progres a Jurnalului AI în ziua 11: primele cinci segmente colorate, urmate de cinci segmente marcate ca zile ratate, apoi restul goale.">
+        <figcaption>
+          Aceeași bară, în ziua 11, după o săptămână lipsă. Cinci segmente pline, apoi golul. <b>Nu e nevoie de nicio explicație ca să-l vezi</b>, și exact asta e ideea.
+        </figcaption>
+      </figure>
+
+      <p>
+        Lângă ea, contorul de zile consecutive. Iar în panoul stâng, un calendar pe săptămâni, unde poți naviga înapoi și înainte, poți redeschide o zi anterioară ca să-ți completezi notița și poți vedea dintr-o privire câte zile ai încheiat.
+      </p>
+      <p>
+        Cel mai simplu e să se vadă. În clipul de mai jos e un tur complet: calendarul, trecerea de la o zi la alta, panourile care se retrag și se desfac, și ferestrele instrumentelor deschise pe rând.
+      </p>
+
+      <figure class="shot">
+        <video id="navClip" controls muted playsinline preload="metadata"
+               width="1280" height="608"
+               aria-label="Tur de navigare prin aplicația AI Journal: calendarul, zilele, panourile laterale și instrumentele">
+          <source src="assets/jurnal/j2-navigare.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          Un minut de navigare, fără sonor. <b>Nimic din ce vezi nu cere internet</b>: totul se întâmplă în fișierul deschis local.
+        </figcaption>
+      </figure>
+
+      <!-- S8b -->
+      <h2 id="s8b">Când lipsești mai mult de trei zile</h2>
+      <p>
+        Aici e cea mai nouă piesă din jurnal, și cea care spune cel mai mult despre cum e gândit.
+      </p>
+      <p>
+        Nu există buton de pauză. Nu e o scăpare, e o alegere: un buton de pauză apăsat din timp se transformă în amânare, iar amânarea e exact lucrul împotriva căruia lucrează tot restul aplicației. Așa că jurnalul nu îți cere să anunți nimic dinainte. Te așteaptă, oricât ar dura.
+      </p>
+      <p>
+        În schimb, își dă seama singur la revenire. Dacă în urmă au rămas <strong>cel puțin trei zile lucrătoare consecutive necompletate</strong>, la redeschiderea fișierului se deschide o casetă și te întreabă cum vrei să reiei.
+      </p>
+
+      <figure class="shot ui">
+        <img src="assets/jurnal/j2-pauza.webp"
+             width="1000" height="779" loading="lazy" decoding="async"
+             alt="Caseta „Bine ai revenit” din Jurnalul AI, după o absență de cinci zile lucrătoare, cu cele două variante de reluare: „Reiau de unde am rămas” și „Continui cu ziua de azi”.">
+        <figcaption>
+          Exemplu real: o săptămână lipsă. Jurnalul spune exact <b>câte zile ai lipsit, unde e ultima notiță și la ce zi a ajuns calendarul</b> între timp, apoi îți pune cele două variante una lângă alta, cu consecințele scrise pe fiecare.
+        </figcaption>
+      </figure>
+
+      <p>
+        Cele două variante nu sunt „bine” și „rău”, sunt două feluri de a socoti timpul:
+      </p>
+      <ul>
+        <li>
+          <strong>Reiau de unde am rămas</strong>, varianta recomandată. Termenul la care rămăseseși devine termenul de azi, iar toți termenii care urmează se mută în față. Nu rămâne nimic de recuperat, iar parcursul se termină mai târziu cu exact atâtea zile câte ai lipsit. Jurnalul îți spune chiar în casetă pe ce dată ajunge ziua 30.
+        </li>
+        <li>
+          <strong>Continui cu ziua de azi.</strong> Mergi mai departe cu ziua din calendar, iar zilele din perioada absenței rămân marcate cu contur, ca de recuperat. Trebuie să revii peste ele mai târziu, altfel Povestea de la final se generează cu termeni goi.
+        </li>
+      </ul>
+      <p>
+        În ambele cazuri, zilele pe care le-ai completat deja rămân neatinse, cu textul tău real. Nimic nu se șterge și nimic nu se rescrie.
+      </p>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Ce nu face jurnalul:</strong> nu se preface că nu s-a întâmplat nimic. Șirul de zile consecutive se rupe, ca la orice zi ratată. Iar pauza nu dispare din istoric, intră în Povestea de la final ca atare: cât a durat, între ce date, de la ce zi ai reluat. Nu ca reproș, ci pentru că un parcurs de șase săptămâni cu o pauză în el e povestea adevărată, nu cea lustruită.
+        </div>
+      </div>
+      <p>
+        Efectul se vede și în caseta a doua. Dacă pauza a căzut peste o activitate săptămânală, deasupra ei apare un rând care recunoaște situația și îți scade pretențiile: activitatea a fost întreruptă, scrie ce ai apucat să faci, nu e nevoie să reiei tot.
+      </p>
+      <blockquote>
+        Pauza nu e un eșec și nu are nevoie de scuze. E ce se întâmplă într-un parcurs de șase săptămâni.
+      </blockquote>
+      <p>
+        Un detaliu practic: dacă alegi „continui cu ziua de azi”, jurnalul nu te mai bate la cap cu aceeași pauză. Dar dacă lipsești din nou, mai târziu, te întreabă din nou pentru noua absență.
+      </p>
+
+      <!-- S9 -->
+      <h2 id="s9">Instrumentele din dreapta</h2>
+      <p>
+        Patru. Fiecare se deschide într-o fereastră centrală, peste ecranul de lucru, și se închide cu ✕ sau cu Escape. Două sunt disponibile din prima zi, două stau blocate și îți spun singure când se deschid.
+      </p>
+      <p>
+        Pe ecrane mici, sau când vrei mai mult spațiu de scris, ambele panouri laterale se retrag în bare subțiri de pictograme. Le redeschizi din săgeata de pe margine.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/jurnal/j2-panou-dreapta-1760.webp"
+             srcset="assets/jurnal/j2-panou-dreapta-880.webp 880w, assets/jurnal/j2-panou-dreapta-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Jurnalul AI cu panoul din dreapta desfăcut, arătând cele patru instrumente, și cu panoul din stânga retras într-o bară îngustă de pictograme.">
+        <figcaption>
+          Panoul din dreapta, desfăcut. Sub fiecare instrument scrie când și de ce se deschide. În stânga, panoul retras în pictograme: coloana de scris se lățește, iar accesul rămâne la îndemână.
+        </figcaption>
+      </figure>
+
+      <h3 id="s9-1">🔁 Recap săptămânal — și mini-quizul</h3>
+      <p>
+        Se deblochează lunea, după fiecare săptămână încheiată. Îl deschizi și ai, într-un singur ecran, cele cinci zile ale săptămânii trecute: termenul fiecărei zile și notița pe care ai scris-o tu. Dacă o zi a rămas goală, ți-o spune și te trimite în calendar să o recuperezi.
+      </p>
+
+      <figure class="shot ui">
+        <img src="assets/jurnal/j2-instr-recap.webp"
+             width="1000" height="493" loading="lazy" decoding="async"
+             alt="Fereastra Recap săptămânal din Jurnalul AI, cu cele șase săptămâni afișate ca butoane blocate și mesajul că recapitulările se deblochează luni.">
+        <figcaption>
+          În prima zi, toate șase sunt încă închise. Fiecare se deschide singură, lunea de după săptămâna încheiată.
+        </figcaption>
+      </figure>
+
+      <p>
+        La capătul fiecărei recapitulări e partea care contează cel mai mult: un <strong>mini-quiz</strong> de cinci întrebări, câte una pentru fiecare termen al săptămânii. Trei variante de răspuns, o singură încercare per întrebare. Ordinea variantelor e amestecată, ca să nu memorezi poziția răspunsului corect în loc de răspuns.
+      </p>
+      <p>
+        <strong>Nu ai punctaj și nu ai miză.</strong> Nu se raportează nimic nicăieri, nu blochează nimic dacă greșești, nu-ți colorează bara în roșu. Vezi doar la câte ai răspuns și câte au fost corecte.
+      </p>
+      <p>
+        Rostul lui e altul, și e cel mai bine documentat mecanism din tot ce ține de învățare: o informație pe care ai <em>scos-o</em> din memorie o dată se fixează considerabil mai bine decât una pe care ai recitit-o de cinci ori. Recitirea dă senzația de familiaritate; extragerea construiește amintirea. Cinci întrebări la care răspunzi din cap, la o săptămână după ce ai citit termenul, fac mai mult decât o oră de reluat notițe.
+      </p>
+      <blockquote>
+        Cinci termeni, cinci minute — și săptămâna e închisă ca la carte.
+      </blockquote>
+
+      <h3 id="s9-2">💾 Salvare .md și import — plus butonul de resetare</h3>
+
+      <figure class="shot ui">
+        <img src="assets/jurnal/j2-instr-salvare.webp"
+             width="900" height="998" loading="lazy" decoding="async"
+             alt="Fereastra Salvare .md și import din Jurnalul AI, cu explicația despre memoria browserului și trei butoane: Salvează jurnalul, Importă progres și Resetează jurnalul.">
+        <figcaption>
+          Trei butoane. Primul e cel pe care îl folosești săptămânal, al doilea când te muți sau ai pățit ceva, al treilea aproape niciodată.
+        </figcaption>
+      </figure>
+
+      <p>
+        <strong>⬇ Salvează jurnalul (.md)</strong> descarcă tot ce ai scris ca fișier text simplu. La prima salvare alegi unde îl pui, ideal chiar lângă fișierul jurnalului. Salvările următoare rescriu același fișier, fără să-ți umple folderul de duplicate.
+      </p>
+      <p>
+        <strong>📂 Importă progres</strong> face drumul invers: alegi fișierul .md și continui exact de unde ai rămas. Ăsta e mecanismul prin care muți jurnalul pe alt calculator, sau prin care revii dacă browserul și-a golit memoria.
+      </p>
+      <p>
+        <strong>🗑 Resetează jurnalul</strong> șterge tot ce e salvat local și te duce înapoi la ecranul dinainte de Start. E acolo pentru două situații reale: ai umblat prin jurnal ca să vezi cum arată și vrei să pornești curat abia acum, sau vrei pur și simplu să reiei călătoria de la capăt.
+      </p>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Despre resetare, o precizare care contează:</strong> șterge doar datele din browser. <b>Nu atinge fișierul .md</b> pe care l-ai descărcat. Deci, dacă ai un backup, resetarea e reversibilă: reimporți și ai totul înapoi. Fără backup, e definitivă. Încă un motiv să apeși „Salvează” în fiecare luni.
+        </div>
+      </div>
+
+      <h3 id="s9-3">❓ Întrebări frecvente</h3>
+      <p>
+        Nu e un text de complezență. Sunt întrebările pe care le-am primit efectiv, cu răspunsuri scurte.
+      </p>
+
+      <figure class="shot ui">
+        <img src="assets/jurnal/j2-instr-faq.webp"
+             width="880" height="983" loading="lazy" decoding="async"
+             alt="Fereastra Întrebări frecvente din Jurnalul AI, cu lista de întrebări: cum pornesc jurnalul, unde se salvează datele, pot muta fișierul, ce se întâmplă dacă plec în concediu, ce se întâmplă dacă sar o zi, pot schimba ritmul, cum salvez și reimport progresul.">
+        <figcaption>
+          Fiecare întrebare se desfășoară la click. Câteva dintre ele lămuresc exact lucrurile de care oamenii se blochează în prima săptămână.
+        </figcaption>
+      </figure>
+
+      <ul>
+        <li><strong>Cum pornesc jurnalul?</strong> Din panoul de Setări, cu butonul Start. Nu se poate alege o dată din trecut sau din viitor, pornește cu ziua curentă. Excepția e weekendul, când ai două butoane: preiei termenul de vineri sau aștepți luni.</li>
+        <li><strong>Unde se salvează datele mele?</strong> Local, în browserul tău și, la cerere, în fișierul .md. Nimic nu pleacă spre vreun server, poți verifica singur în tabul Network al browserului: rămâne gol.</li>
+        <li><strong>Pot muta fișierul în alt folder după ce am început?</strong> În Chrome și Edge, da. Acolo browserul leagă datele de „fișier local” în general, nu de locul exact în care stă fișierul. Consecința firească a aceleiași reguli: două copii ale jurnalului pe același calculator folosesc aceleași date, deci nu poți ține două jurnale separate copiind pur și simplu fișierul.</li>
+        <li><strong>Plec în concediu sau am o urgență. Ce se întâmplă cu jurnalul?</strong> Exact ce am descris mai sus: te așteaptă, iar la revenire te întreabă cum reiei.</li>
+        <li><strong>Ce se întâmplă dacă sar o zi?</strong></li>
+        <li><strong>Pot schimba ritmul după ce am început?</strong> O singură dată, și nu de la început. Primele 15 zile merg obligatoriu în ritm de un termen pe zi, acolo se formează obiceiul. Din ziua 16 jurnalul te întreabă o dată dacă vrei să treci la doi termeni pe zi, iar alegerea de acolo rămâne definitivă până la ultima zi.</li>
+        <li><strong>Cum îmi salvez și reimport progresul?</strong></li>
+      </ul>
+      <p>
+        Iar dacă nu găsești răspunsul acolo, fereastra te trimite la <a href="contact.html">pagina de contact</a>. Întrebările primite modelează versiunile următoare ale jurnalului, deci chiar merită trimise.
+      </p>
+
+      <h3 id="s9-4">🏆 Al patrulea stă blocat</h3>
+      <p>
+        <strong>Povestea călătoriei tale</strong> e singurul instrument care nu se deschide când vrei tu. Îți spune, din prima zi, câte zile mai sunt până la el. Despre ce se întâmplă acolo, în secțiunea următoare.
+      </p>
+
+      <!-- S10 -->
+      <h2 id="s10">Datele rămân la tine</h2>
+      <p>
+        Nimic din ce scrii nu pleacă nicăieri. Jurnalul funcționează complet offline, iar textul se salvează în memoria browserului tău.
+      </p>
+      <p>
+        Comod și privat, dar nu sigur pe termen lung. Memoria browserului se golește la ștergerea cookie-urilor și a datelor de navigare, la o curățare cu un program de întreținere, la reinstalarea browserului, la schimbarea calculatorului. Nu reține nimic nici dacă lucrezi în fereastră privată. Se întâmplă des și aproape mereu din greșeală.
+      </p>
+      <p>
+        De aceea insistăm pe fișierul <strong>.md</strong>. Îl descarci din instrumentul de salvare, stă pe calculatorul tău, nu depinde de browser, iar cu „Importă progres” continui exact de unde ai rămas. Fiind text simplu, îl poți deschide cu Notepad ca să vezi exact ce conține.
+      </p>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Obiceiul de salvare, stratificat și el:</strong> lunea, imediat după recapitularea săptămânii, apeși „Salvează jurnalul”. Durează cinci secunde. Recapul devine ancora pentru backup.
+        </div>
+      </div>
+
+      <!-- S11 -->
+      <h2 id="s11">Ce te așteaptă la capăt</h2>
+      <p>
+        Nu stricăm surpriza, așa că spunem doar cât trebuie.
+      </p>
+
+      <figure class="shot ui">
+        <img src="assets/jurnal/j2-instr-povestea.webp"
+             width="900" height="508" loading="lazy" decoding="async"
+             alt="Fereastra Povestea călătoriei tale din Jurnalul AI, blocată în prima zi, cu mesajul că se deblochează în ziua 30 și că la final primești un mega prompt și termenul 31, Human-in-the-Loop.">
+        <figcaption>
+          Așa arată în prima zi. Îți spune din start ce te așteaptă și cât mai e până acolo.
+        </figcaption>
+      </figure>
+
+      <p>
+        La finalul celor 30 de termeni se deblochează <strong>Povestea călătoriei tale</strong>. Jurnalul îți pregătește un text lung, construit din tot ce ai scris tu pe parcurs, inclusiv scrisoarea din prima zi, redeschisă lângă ce ai ajuns să știi efectiv. Nu e o diplomă. E o comparație între „înainte” și „după”, scrisă cu propriile tale cuvinte. Iar pauzele, dacă au fost, își au și ele locul acolo.
+      </p>
+
+      <h3 id="s11-1">Termenul 31: Human-in-the-Loop</h3>
+      <p>
+        Ultimul termen din jurnal nu apare în cele 30 de zile. Vine abia la final, și e singurul pe care nu-l citești, ci îl practici.
+      </p>
+      <p>
+        <strong>Human-in-the-Loop</strong>, adică omul rămâne în buclă, înseamnă că AI-ul face prima trecere, dar omul rămâne răspunzător de rezultat. Nu e o formulă de politică internă, de pus pe un slide și uitat. E o decizie pe care o iei de fiecare dată, pentru fiecare set de date, înainte să apeși trimite.
+      </p>
+      <p>
+        Pentru profesia contabilă, conceptul ăsta nu e o subtilitate teoretică. E chiar linia dintre a folosi un instrument și a-ți externaliza răspunderea. Modelul poate scrie o notă explicativă impecabilă, poate corela un cont cu altul, poate rezuma o normă în trei rânduri, dar semnătura de pe raport rămâne a ta, iar în fața unui control nimeni nu acceptă „așa mi-a zis asistentul”. Răspunderea profesională nu se poate delega unui sistem care nu poate fi tras la răspundere.
+      </p>
+      <blockquote>
+        AI-ul propune. Omul decide și răspunde. Între cele două nu există scurtătură.
+      </blockquote>
+      <p>
+        Iar aici e partea inteligentă a jurnalului: nu îți explică HITL într-un paragraf, ci te pune exact în situația respectivă. La final ai un fișier cu 30 de zile de notițe personale și ești pe cale să-l dai unui asistent AI. Înainte de a genera orice, jurnalul te oprește și te pune să decizi patru lucruri:
+      </p>
+      <ol>
+        <li><strong>Ce iese din fișier înainte să-l încarci?</strong> Nume de clienți, cifre reale, orice ai scris în grabă într-o zi aglomerată.</li>
+        <li><strong>Ce instrument alegi și de ce?</strong> Contează unde ajung datele, cine le păstrează și dacă modelul se antrenează pe ele.</li>
+        <li><strong>Ce verifici în textul primit</strong> înainte să-l publici sau să-l trimiți mai departe?</li>
+        <li><strong>Sau decizi că jurnalul e prea personal și rămâne offline.</strong> E un răspuns la fel de bun ca celelalte.</li>
+      </ol>
+      <p>
+        Fiecare rubrică din fișier e opțională, iar jurnalul nu trimite nimic nicăieri: pregătește fișierul, îl descarci, îl citești, ștergi din el ce nu vrei să iasă din casă, și abia apoi hotărăști dacă îl duci într-un asistent AI. E ultima decizie a călătoriei și o iei tu, ceea ce e, de fapt, toată ideea.
+      </p>
+
+      <!-- S12 -->
+      <h2 id="s12">Cum începi azi</h2>
+      <ol>
+        <li><strong>Descarci fișierul</strong> din secțiunea Resurse și îl pui pe desktop, nu într-un folder. Trebuie să-l vezi.</li>
+        <li><strong>Îl deschizi și citești ghidul.</strong> Se deschide singur. Două minute.</li>
+        <li><strong>Apeși Start.</strong> Azi, nu de luni.</li>
+        <li><strong>Scrii scrisoarea.</strong> Două propoziții, cât încă nu știi cum e drumul.</li>
+        <li><strong>Îți alegi ancora</strong>, momentul din zi de care lipești cele zece minute. Prima cafea funcționează pentru majoritatea.</li>
+      </ol>
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Pe scurt:</strong> un fișier, două casete, zece minute pe zi. Prima casetă e obligația ușoară, a doua e invitația. Dacă lipsești, te așteaptă. Nimic nu pleacă de la tine. <a href="resurse.html">Jurnalul AI e în secțiunea Resurse</a>, gratuit, fără cont, fără email.
+        </div>
+      </div>
+      <p>
+        În <a href="2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html">ultima parte a seriei</a> ieșim din jurnal și punem pe hârtie lucrurile la care trebuie să fii atent ori de câte ori folosești un fișier HTML descărcat de pe internet: ce poate și ce nu poate face o pagină deschisă local, de unde ai voie s-o iei, ce semne merită verificate înainte de dublu-click și cum îți dai seama singur, în câteva minute și fără să știi programare, că e ce pretinde a fi.
+      </p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#JurnalulAI</span>
+          <span class="tag">#AIJournal</span>
+          <span class="tag">#modDeUtilizare</span>
+          <span class="tag">#obiceiuri</span>
+          <span class="tag">#Buzzword</span>
+          <span class="tag">#AILiteracy</span>
+          <span class="tag">#profesiaContabila</span>
+        </div>
+        <span class="footer-mono">Articolul #028</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-08-11-AI-Journal-doua-casete-si-o-cafea"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s0">Prima deschidere</a>
+        <a href="#s1">Două teme, un comutator</a>
+        <a href="#s2">Ghidul de bun venit</a>
+        <a href="#s3">Start — pornești cu ziua de azi</a>
+        <a href="#s4">Scrisoarea către tine</a>
+        <a href="#s5">Caseta 1 — notițele zilei</a>
+        <a href="#s6">Caseta 2 — adaptarea săptămânii</a>
+        <a href="#s7">De ce a doua poate rămâne goală</a>
+        <a href="#s8">Cum îți arată unde ești</a>
+        <a href="#s8b">Când lipsești mai mult de trei zile</a>
+        <a href="#s9">Instrumentele din dreapta</a>
+        <a href="#s9-1" class="toc-sub">Recap și mini-quiz</a>
+        <a href="#s9-2" class="toc-sub">Salvare, import, resetare</a>
+        <a href="#s9-3" class="toc-sub">Întrebări frecvente</a>
+        <a href="#s10">Datele rămân la tine</a>
+        <a href="#s11">Ce te așteaptă la capăt</a>
+        <a href="#s11-1" class="toc-sub">Termenul 31: Human-in-the-Loop</a>
+        <a href="#s12">Cum începi azi</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT-STEP CTA -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă lectura</div>
+        <h2>Seria „AI Journal”.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html" class="related-card fade-in">
+        <div class="related-date">AI JOURNAL · PARTEA 1 DIN 3 · #027</div>
+        <h3>Obiceiul nu se construiește. Se lipește</h3>
+        <p>De ce o resursă bună nu e de ajuns, și cum se stratifică un obicei nou peste unul care îți merge deja perfect.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="resurse.html#grid-tool" class="related-card fade-in">
+        <div class="related-date">RESURSĂ · APLICAȚIE HTML</div>
+        <h3>Jurnalul AI, 30 de zile de adaptare</h3>
+        <p>Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe fiecare zi lucrătoare, zece minute la cafea, plus șase activități practice. Fără cont, fără email, totul rămâne la tine.</p>
+        <span class="related-read">Descarcă jurnalul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html" class="related-card fade-in">
+        <div class="related-date">AI JOURNAL · PARTEA 3 DIN 3 · #029</div>
+        <h3>Descarci un fișier HTML. Ce poate face și cum verifici</h3>
+        <p>Ce riscuri are o pagină descărcată, unde sunt limitele ei și trei feluri de a verifica singur, în cinci minute, fără să știi programare.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+<script>
+
+/* Copy link button */
+(function () {
+  const btn = document.querySelector('.share-btn[aria-label="Copiază link"]');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+      setTimeout(() => { btn.innerHTML = orig; }, 1800);
+    });
+  });
+})();
+
+/* Clipul cu ghidul: respectă preferința de mișcare redusă */
+(function () {
+  const v = document.getElementById('ghidClip');
+  if (!v) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const apply = () => {
+    if (reduce.matches) {
+      v.autoplay = false; v.loop = false; v.controls = true; v.pause();
+    } else {
+      v.controls = false; v.loop = true;
+      const p = v.play(); if (p && p.catch) p.catch(() => { v.controls = true; });
+    }
+  };
+  apply();
+  reduce.addEventListener ? reduce.addEventListener('change', apply) : reduce.addListener(apply);
+})();
+
+/* Clipul din cover: decorativ, deci la mișcare redusă rămâne posterul.
+   Nu primește controale — e fundal, nu conținut de urmărit. */
+(function () {
+  const v = document.getElementById('coverClip');
+  if (!v) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const apply = () => {
+    if (reduce.matches) {
+      v.autoplay = false; v.loop = false; v.pause();
+    } else {
+      v.loop = true;
+      const p = v.play(); if (p && p.catch) p.catch(() => {});
+    }
+  };
+  apply();
+  reduce.addEventListener ? reduce.addEventListener('change', apply) : reduce.addListener(apply);
+})();
+</script>
+</body>
+</html>
