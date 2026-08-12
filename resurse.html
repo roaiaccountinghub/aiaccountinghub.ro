@@ -132,6 +132,21 @@
   -ms-overflow-style: none;
 }
 .rail-track::-webkit-scrollbar { display: none; }
+/* Ancore pe carduri: /resurse.html#jurnalul-ai duce direct la cardul resursei.
+   Cardul e adus in viewport pe verticala si in rail pe orizontala, apoi pulseaza
+   scurt, ca ochiul sa stie unde sa se opreasca. */
+.resource[id] { scroll-margin-top: 110px; }
+.resource.is-target {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 0 34px -6px color-mix(in oklab, var(--accent) 55%, transparent);
+  animation: resourcePulse 2.4s ease-out 1;
+}
+@keyframes resourcePulse {
+  0%   { box-shadow: 0 0 0 1px var(--accent), 0 0 0 0 color-mix(in oklab, var(--accent) 45%, transparent); }
+  35%  { box-shadow: 0 0 0 1px var(--accent), 0 0 0 12px transparent; }
+  100% { box-shadow: 0 0 0 1px var(--accent), 0 0 34px -6px color-mix(in oklab, var(--accent) 55%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) { .resource.is-target { animation: none; } }
 .rail-track > .resource {
   flex: 0 0 calc((100% - 40px) / 3);
   scroll-snap-align: start;
@@ -684,9 +699,9 @@ const RESOURCES = [
     size: 'XLSM · 480 KB', cta: 'În curând' },
 
   /* ===== DE RULAT ===== */
-  { type: 'tool', kind: 'Aplicație · HTML', title: 'Jurnalul AI — 30 de zile de adaptare',
+  { type: 'tool', slug: 'jurnalul-ai', kind: 'Aplicație · HTML', title: 'Jurnalul AI — 30 de zile de adaptare',
     desc: 'Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe zi lucrătoare, 10–15 minute, timp de 30 de zile, plus șase activități practice săptămânale. Făcut pentru PC sau laptop, pe ecran mare. Dacă lipsești câteva zile, te întreabă singur cum reiei. Fără cont, fără email, fără internet: totul se salvează local, cu export și import în fișier .md.',
-    size: 'ZIP · 82 KB · rulează în browser', cta: 'Descarcă jurnalul',
+    size: 'ZIP · 85 KB · rulează în browser', cta: 'Descarcă jurnalul',
     track: 'resursa:jurnalul-ai',
     href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AI-Journal.zip',
     articles: {
@@ -696,7 +711,7 @@ const RESOURCES = [
         { href: '2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html', title: 'Obiceiul nu se construiește, se lipește' },
         { href: '2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html', title: 'Ce poate face un fișier HTML descărcat și cum verifici singur' },
       ] } },
-  { type: 'tool', kind: 'Tool · API', title: 'Verificare CIF — ANAF (v2)',
+  { type: 'tool', slug: 'verificare-cif-anaf', kind: 'Tool · API', title: 'Verificare CIF — ANAF (v2)',
     desc: 'Verificare bulk și single CIF direct din API-ul public ANAF: nume firmă, plătitor TVA, stare activă și altele. Versiunea 2 adaugă configurare externă, câmpuri la alegere, jurnal de rulare și sursele Python în arhivă. Fără cont, fără instalare.',
     size: 'ZIP · Tool Windows', cta: 'Descarcă v2',
     track: 'resursa:anaf-v2',
@@ -758,7 +773,7 @@ function cardHTML(r) {
     : '';
   const secondary = r.secondary ? `<p class="res-secondary">${r.secondary}</p>` : '';
   return `
-    <div class="resource ${r.type} fade-in">
+    <div class="resource ${r.type} fade-in"${r.slug ? ` id="${r.slug}"` : ''}>
       <div class="resource-header">
         <div class="resource-icon">${iconFor(r.type)}</div>
         <span class="resource-type">${r.kind}</span>
@@ -772,6 +787,35 @@ function cardHTML(r) {
       </div>
       ${secondary}
     </div>`;
+}
+
+/* ========== ANCORA PE CARD ==========
+   Cardurile sunt injectate din JS, deci fragmentul din URL nu are ce gasi cand
+   browserul incearca sa sara la el. Il tratam noi, dupa render: aducem cardul
+   in rail pe orizontala, apoi pagina la el pe verticala, si il marcam scurt. */
+function focusFromHash() {
+  const id = decodeURIComponent((location.hash || '').slice(1));
+  if (!id) return;
+  const card = document.getElementById(id);
+  if (!card || !card.classList.contains('resource')) return;
+
+  const track = card.closest('.rail-track');
+  if (track) {
+    /* fara animatie orizontala: pozitionam direct, ca sa nu se bata cu scroll-ul paginii */
+    const prev = track.style.scrollBehavior;
+    track.style.scrollBehavior = 'auto';
+    track.scrollLeft = card.offsetLeft - track.offsetLeft;
+    track.style.scrollBehavior = prev;
+    track.dispatchEvent(new Event('scroll'));
+  }
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+
+  document.querySelectorAll('.resource.is-target').forEach(el => el.classList.remove('is-target'));
+  card.classList.add('is-target');
+  clearTimeout(focusFromHash._t);
+  focusFromHash._t = setTimeout(() => card.classList.remove('is-target'), 4000);
 }
 
 function render() {
@@ -881,6 +925,9 @@ function initFade() {
 
 render();
 initRails();
+/* dupa initRails, ca sagetile si estomparea sa fie deja calculate */
+requestAnimationFrame(focusFromHash);
+window.addEventListener('hashchange', focusFromHash);
 initSpy();
 initFade();
 </script>
