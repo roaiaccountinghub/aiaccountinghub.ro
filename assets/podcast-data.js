@@ -37,11 +37,11 @@
          (16:06). De corectat după ascultare. */
       chapters: [
         { t: 0,   title: "Intro: cele patru direcții ale episodului" },
-        { t: 97,  title: "Unde suntem: 5,2% față de 20% media UE" },
-        { t: 220, title: "Obiceiul: ancora, stratul subțire, cele 66 de zile" },
-        { t: 470, title: "AI Journal pe dinăuntru: două casete, pauza, datele locale" },
-        { t: 762, title: "E sigur un fișier HTML descărcat? Trei verificări" },
-        { t: 920, title: "Închidere: zece minute la prima cafea" }
+        { t: 67,  title: "Unde suntem: 5,2% față de 20% media UE" },
+        { t: 191, title: "Obiceiul: ancora, stratul subțire, cele 66 de zile" },
+        { t: 378, title: "AI Journal pe dinăuntru: două casete, pauza, datele locale" },
+        { t: 590, title: "E sigur un fișier HTML descărcat? Trei verificări" },
+        { t: 850, title: "Închidere: zece minute la prima cafea" }
       ]
     },
     {
