@@ -969,6 +969,158 @@
         "Bon fiscal fotografiat de angajat în aplicația de deconturi → extragere date cu AI → verificare încadrare și plafon de deductibilitate → propunere de înregistrare în ERP → notificare pentru aprobare: 4 pași automați, unul uman.",
         "Regulă de proiectare: fluxul procesează automat cazurile standard (majoritatea covârșitoare a volumului) și rutează excepțiile către om, nu invers."
       ]
+    },
+    {
+      "id": "ai-memory",
+      "date": "2026-08-14",
+      "term": "AI MEMORY",
+      "termFull": "MEMORIE PERSISTENTĂ — CE REȚINE ASISTENTUL ÎNTRE CONVERSAȚII",
+      "pron": "/ ei·ai me·mo·ri /",
+      "type": "substantiv",
+      "ro": "Memorie AI Persistentă",
+      "def": [
+        "AI memory este capacitatea unui asistent de a reține informații între conversații (preferințe, context de lucru, decizii anterioare) dincolo de fereastra de context a unei singure sesiuni. Fără memorie, fiecare conversație pornește de la zero, ca un consultant excelent dar amnezic; cu memorie, asistentul „știe” deja cum lucrezi, ce clienți ai și ce format preferi la rapoarte.",
+        "Tehnic, memoria nu e „în model”, fiindcă modelul rămâne neschimbat; informațiile reținute sunt stocate separat (note, profiluri, istoric distilat) și injectate automat în context la conversațiile următoare. Distincția utilă: fereastra de context e memoria de lucru a unei ședințe; memoria persistentă e dosarul de client care supraviețuiește între ședințe. Revers important: ce reține asistentul devine dată stocată, cu tot ce implică asta pentru confidențialitate.",
+        "Pentru practica financiar-contabilă, memoria transformă asistentul dintr-o unealtă generică într-un colaborator calibrat: reține planul de conturi folosit, formatul rapoartelor firmei, particularitățile fiecărui client. Disciplina necesară: verifică periodic ce a memorat (informații expirate produc erori „încrezătoare”), și stabilește politica firmei privind datele clienților care au voie să intre în memoria instrumentelor cloud."
+      ],
+      "examples": [
+        "Asistentul reține din sesiunile trecute că firma X are exercițiu financiar decalat, iar toate analizele ulterioare folosesc automat perioada corectă, fără să o mai specifici.",
+        "Memorie expirată: asistentul „ține minte” vechea cotă de TVA discutată acum un an și o aplică într-un calcul; igiena periodică a memoriei previne exact asta.",
+        "Politică internă: memoria asistentului poate reține preferințe de format și procese, dar nu CNP-uri, solduri sau date identificabile ale clienților, iar separarea e verificată la auditul intern."
+      ]
+    },
+    {
+      "id": "guardrails",
+      "date": "2026-08-14",
+      "term": "GUARDRAILS",
+      "termFull": "BARIERE DE SIGURANȚĂ LA INTRAREA ȘI IEȘIREA MODELULUI",
+      "pron": "/ gard·reils /",
+      "type": "substantiv",
+      "ro": "Bariere de Siguranță",
+      "def": [
+        "Guardrails sunt constrângerile aplicate în jurul unui model, la intrare și la ieșire, pentru a preveni răspunsuri dăunătoare, incorecte sau în afara cadrului stabilit: filtre care blochează cererile nepermise, validatoare care verifică formatul și conținutul răspunsului înainte să ajungă mai departe, reguli care limitează ce acțiuni poate face un agent.",
+        "Analogia contabilă este controlul intern: nu te bazezi pe buna intenție a operatorului, ci pe sistemul care nu permite plata fără aprobare. La fel, nu te bazezi pe „cumințenia” modelului, ci pe straturile din jur: validarea intrărilor (documentul chiar e o factură?), validarea ieșirilor (JSON-ul are toate câmpurile? suma e plauzibilă?), limite de acțiune (agentul nu poate opera peste plafon). Nuanța: guardrails reduc riscul, nu îl elimină; rămân parte dintr-un sistem de control, nu înlocuitorul lui.",
+        "Pentru fluxurile AI din finanțe, barierele sunt diferența dintre jucărie și unealtă de producție: fiecare automatizare serioasă are definit ce NU are voie să facă și fiecare ieșire critică trece printr-o validare independentă de model. Întrebarea de due diligence pentru orice furnizor de AI contabil: „ce guardrails aveți pe extragere și pe acțiuni, și ce se întâmplă când sunt încălcate?”"
+      ],
+      "examples": [
+        "Bariera de ieșire pe extragerea din facturi: dacă totalul extras nu e egal cu net + TVA, documentul nu intră în ERP, ci în coada de verificare manuală.",
+        "Bariera de acțiune pe agentul de plăți: propune plăți doar către IBAN-uri deja validate în sistem; orice IBAN nou declanșează obligatoriu aprobare umană.",
+        "Bariera de intrare pe asistentul intern: cererile care conțin CNP-uri sunt respinse cu mesaj de anonimizare, așa că datele personale nu ajung deloc la modelul din cloud."
+      ]
+    },
+    {
+      "id": "human-in-the-loop",
+      "date": "2026-08-14",
+      "term": "HUMAN-IN-THE-LOOP (HITL)",
+      "termFull": "OMUL ÎN BUCLĂ — VALIDARE UMANĂ ÎN PUNCTELE CRITICE",
+      "pron": "/ hiu·măn in dă lup /",
+      "type": "substantiv",
+      "ro": "Omul în Buclă",
+      "def": [
+        "Human-in-the-loop este modelul de proces în care un om validează, corectează sau aprobă deciziile AI în punctele critice: AI-ul execută volumul, omul păstrează judecata și răspunderea. Nu e o frână pusă tehnologiei, ci o arhitectură de proces: definești unde e obligatorie semnătura umană și unde poate curge automatizarea liber.",
+        "Designul bun al buclei e o artă a proporției: prea multe puncte de validare și ai automatizat nimic, fiindcă omul re-verifică tot; prea puține și riscul scapă de sub control. Principiul sănătos: validare umană proporțională cu impactul și ireversibilitatea deciziei; clasificarea unei cheltuieli mărunte poate curge automat cu control prin sondaj; o plată mare sau o poziție fiscală cere ochi umani de fiecare dată. Capcana de proces: validatorul care aprobă pe bandă, fără să citească (rubber-stamping), transformă bucla în teatru.",
+        "Pentru contabilitate și audit, HITL nu e opțional, ci parte din natura profesiei: răspunderea profesională nu se deleagă unui model. Standardele profesionale și reglementările (inclusiv EU AI Act, pentru sistemele cu risc ridicat) merg în aceeași direcție: supraveghere umană efectivă, documentată, cu competența și autoritatea de a interveni."
+      ],
+      "examples": [
+        "Fluxul de facturi: 90% trec automat pe baza regulilor, 10%, adică excepțiile și sumele mari, ajung la contabil; timpul câștigat se investește exact unde judecata contează.",
+        "Anti-rubber-stamping: sistemul strecoară periodic în coada de validare documente cu erori cunoscute; dacă validatorul le aprobă, procesul de control se recalibrează.",
+        "În angajamentul de audit: eșantionarea asistată de AI e revizuită de auditor, iar dosarul documentează explicit ce a propus sistemul și ce a decis omul, deci trasabilitate completă."
+      ]
+    },
+    {
+      "id": "system-prompt",
+      "date": "2026-08-14",
+      "term": "SYSTEM PROMPT",
+      "termFull": "INSTRUCȚIUNILE DE BAZĂ, INVIZIBILE UTILIZATORULUI",
+      "pron": "/ sis·tem prompt /",
+      "type": "substantiv",
+      "ro": "Prompt de Sistem",
+      "def": [
+        "System prompt-ul este setul de instrucțiuni de bază, de regulă invizibil utilizatorului final, care definește identitatea, regulile și limitele unui asistent AI înainte ca orice conversație să înceapă: cine este, ce ton folosește, ce are voie și ce nu, ce format respectă. Fiecare mesaj al tău e interpretat prin această lentilă preinstalată.",
+        "Ierarhia contează: instrucțiunile de sistem au prioritate față de cererile din conversație; de aceea un asistent refuză anumite lucruri indiferent cum îl rogi. Analogia de birou: system prompt-ul e fișa postului plus regulamentul intern; mesajele tale sunt sarcinile zilnice, iar angajatul le execută pe ale tale, dar în cadrul regulamentului. Cine construiește asistenți personalizați scrie, de fapt, system prompts: acolo se pun regulile firmei, o singură dată, valabile pentru toți utilizatorii.",
+        "Pentru practica financiară, system prompt-ul e pârghia de standardizare și control: asistentul intern al cabinetului primește acolo planul de conturi, politica de confidențialitate, formatul rapoartelor și interdicțiile („nu da sfaturi fiscale definitive fără mențiunea de verificare umană”). E și o zonă de securitate: atacurile de tip prompt injection încearcă exact ocolirea acestor instrucțiuni."
+      ],
+      "examples": [
+        "Asistentul de cabinet are în system prompt: „răspunzi doar pe baza legislației din baza documentară atașată; citezi articolul; la incertitudine, recomanzi consultarea unui expert”, pentru comportament uniform la toți angajații.",
+        "Același model, două produse: cu un system prompt e asistent de audit riguros, cu altul e redactor de newslettere; „personalitatea” e configurație, nu tehnologie.",
+        "La achiziția unui asistent white-label: cere să vezi system prompt-ul sau măcar politicile lui, fiindcă acolo scrie ce va face de fapt instrumentul cu datele și cererile echipei tale."
+      ]
+    },
+    {
+      "id": "sycophancy",
+      "date": "2026-08-14",
+      "term": "SYCOPHANCY",
+      "termFull": "LINGUȘEALĂ — MODELUL ÎȚI DĂ DREPTATE ÎN LOC SĂ TE CORECTEZE",
+      "pron": "/ si·co·făn·si /",
+      "type": "substantiv",
+      "ro": "Sicofanție / Lingușeală",
+      "def": [
+        "Sicofanția este tendința modelelor de a-ți confirma opiniile și a te flata în loc să te contrazică atunci când greșești: schimbi formularea întrebării și primești alt răspuns, exprimă-ți preferința și modelul „descoperă” argumente pentru ea. Rădăcina e în antrenarea pe feedback uman: evaluatorii au preferat răspunsurile agreabile, iar modelul a învățat că acordul place.",
+        "Pericolul e subtil pentru că se simte ca validare competentă: un consilier care îți spune mereu că ai dreptate pare util exact până la prima decizie greșită confirmată. Semnal de alarmă practic: dacă modelul își schimbă poziția imediat ce insiști, fără argumente noi, nu ai primit o analiză, ci o oglindă. Contramăsurile sunt de formulare: întrebări neutre, fără dezvăluirea preferinței, cereri explicite de contraargumente.",
+        "În practica financiară, sicofanția e periculoasă exact la deciziile cu miză: interpretări fiscale agresive, estimări optimiste, încadrări discutabile, unde modelul tinde să confirme poziția pe care i-o sugerezi. Disciplina profesională: cere întotdeauna „cazul împotriva” poziției tale și tratează acordul rapid al modelului ca zero informație, nu ca a doua opinie."
+      ],
+      "examples": [
+        "„Cheltuiala asta e deductibilă, nu-i așa?” → confirmare amabilă; aceeași speță formulată neutru, „analizează deductibilitatea, argumente pro și contra”, scoate la iveală riscul real.",
+        "Estimarea de venituri a clientului e nerealistă; modelul, întrebat „e rezonabilă?”, o validează politicos; întrebat „ce ipoteze ar trebui să fie adevărate ca cifrele astea să țină?”, o demontează.",
+        "Practica echipei: la orice opinie cu miză, două rulări, una cerând apărarea poziției, una cerând atacul ei; decizia se ia comparând argumentele, nu numărând confirmările."
+      ]
+    },
+    {
+      "id": "ai-ethics-bias",
+      "date": "2026-08-14",
+      "term": "AI ETHICS & BIAS",
+      "termFull": "ETICĂ ȘI PREJUDECĂȚI — CÂND MODELUL MOȘTENEȘTE PĂRTINIRILE DATELOR",
+      "pron": "/ ei·ai e·tics end ba·ias /",
+      "type": "substantiv",
+      "ro": "Etică AI și Prejudecăți",
+      "def": [
+        "Bias-ul AI este tendința sistematică a unui model de a produce rezultate părtinitoare, favorizând sau defavorizând grupuri, tipare sau concluzii, pentru că a învățat din date care conțineau acele părtiniri. Modelul nu are opinii; are statistici. Dacă istoricul de creditare a discriminat o categorie, modelul antrenat pe el va „învăța” discriminarea ca regularitate utilă.",
+        "Subtilitatea: bias-ul nu dispare eliminând coloana sensibilă, fiindcă modelul o reconstruiește din corelații (cod poștal, tip de activitate, vechime). Etica AI e disciplina mai largă care întreabă nu doar „e corect statistic?”, ci „e just, transparent și asumabil?”: cine răspunde pentru decizia automată, poate fi contestată, știe persoana afectată că a decis un algoritm? Cadrul de reglementare merge exact în această direcție: scoringul de credit, de pildă, e clasificat cu risc ridicat în EU AI Act.",
+        "Pentru profesioniștii financiari, subiectul e concret, nu filozofic: modele de scoring, de detectare a fraudei, de aprobare a limitelor comerciale; toate pot discrimina sistematic dacă nu sunt testate. Întrebările de due diligence: pe ce date a fost antrenat, cum se testează echitatea între grupuri, ce cale de contestare are clientul respins. Un model părtinitor nu e doar risc reputațional, ci risc juridic."
+      ],
+      "examples": [
+        "Modelul de credit-scoring respinge sistematic firmele dintr-o zonă geografică pentru că istoricul reflectă o criză locală veche: corelație moștenită, tratată de model ca regulă.",
+        "Detectorul de fraudă semnalează disproporționat tranzacțiile micilor firme cu activitate sezonieră, fiindcă tiparul lor legitim seamănă statistic cu tiparul fraudelor din datele de antrenare.",
+        "Control periodic: raportul de echitate compară ratele de respingere între categorii de clienți; abaterile semnificative declanșează investigație, la fel ca orice control intern serios."
+      ]
+    },
+    {
+      "id": "deepfake",
+      "date": "2026-08-14",
+      "term": "DEEPFAKE",
+      "termFull": "CONȚINUT AUDIO/VIDEO FALS, GENERAT DE AI, CARE IMITĂ PERSOANE REALE",
+      "pron": "/ dip·feic /",
+      "type": "substantiv",
+      "ro": "Deepfake / Falsuri Profunde",
+      "def": [
+        "Deepfake-ul este conținut audio, video sau foto generat de AI care imită convingător persoane reale: vocea directorului cerând o plată urgentă, chipul unui coleg într-un apel video, „înregistrarea” unui eveniment care nu a avut loc. Tehnologia care alimenta efectele speciale a devenit accesibilă oricui, cu minute de efort și mostre publice de voce sau imagine.",
+        "Schimbarea de paradigmă pentru profesii bazate pe probe: „am văzut/am auzit” nu mai e verificare. Cazul-școală în finanțe: un angajat al grupului Arup a transferat ~25 de milioane de dolari după un apel video în care „CFO-ul” și colegii erau toți deepfake-uri. Apărarea eficientă nu e tehnologică în primul rând, ci procedurală: canale de confirmare independente, parole de verificare convenite, imposibilitatea ca o singură comunicare, oricât de convingătoare, să declanșeze o plată.",
+        "Pentru contabili și auditori, deepfake-ul lovește direct în noțiunea de document justificativ și de instrucțiune verbală: apeluri, mesaje vocale, chiar înregistrări video de la „client” pot fi fabricate. Controalele clasice anti-CEO-fraud devin obligatorii și se extind: verificarea prin canal separat a oricărei instrucțiuni de plată neobișnuite, indiferent cât de autentic „sună” solicitantul."
+      ],
+      "examples": [
+        "Vocea „administratorului” cere telefonic contabilului o plată urgentă către un furnizor nou, iar procedura de rechemare pe numărul cunoscut din contract oprește frauda în 30 de secunde.",
+        "Cazul Arup (Hong Kong, 2024): apel video cu mai mulți participanți deepfake → transfer de ~25 milioane USD; argumentul definitiv pentru dubla validare a plăților mari.",
+        "Actualizarea procedurilor: nicio schimbare de IBAN și nicio plată peste plafon nu se execută pe baza unei singure comunicări audio/video, indiferent de aparenta identitate a solicitantului."
+      ]
+    },
+    {
+      "id": "ai-fomo",
+      "date": "2026-08-14",
+      "term": "AI FOMO",
+      "termFull": "FRICA DE A RĂMÂNE ÎN URMĂ — ȘI TEANCUL DE LINKURI PE CARE NU-L CITEȘTI NICIODATĂ",
+      "pron": "/ ei·ai fo·mo /",
+      "type": "substantiv",
+      "ro": "Frica de a Rămâne în Urmă cu AI",
+      "def": [
+        "AI FOMO este anxietatea că toată lumea avansează cu inteligența artificială, numai tu nu, și comportamentul pe care îl produce: salvezi compulsiv articole, postări de LinkedIn, clipuri și anunțuri de modele noi, cu promisiunea că sâmbătă te apuci serios. Sâmbătă vezi teancul, te copleșește dimensiunea lui și renunți, cu un strop de vinovăție care alimentează exact frica de la care ai pornit. Cercetarea numește mecanismul din spate eroarea colecționarului: creierul tratează salvarea ca pe un progres, deși a ști despre ceva nu înseamnă a ști ceva, iar sub o cincime din conținutul salvat e redeschis vreodată.",
+        "Distincția utilă e că problema nu e consumul excesiv, ci neconsumul: nu e doomscrolling, unde te intoxici citind lucruri rele, ci acumulare fără digestie. Motivul pentru care efortul de recuperare eșuează mereu e aritmetic, nu moral: fluxul de conținut nou crește mai repede decât viteza oricărei lecturi, deci teancul e prin construcție nerambursabil, iar amânarea către un moment viitor idealizat („sâmbătă”, „după închidere”, „în concediu”) îi garantează creșterea. Se adaugă lipsa oricărei ierarhii, fiindcă în aceeași listă stau un curs de patru ore, un thread de trei minute și un anunț care era deja depășit când l-ai salvat. Testul sincer: dacă nu poți numi trei lucruri pe care le faci altfel decât acum trei luni, colecția e decor, nu formare.",
+        "Profesioniștii financiari sunt ținta perfectă, fiindcă suprapun obligația de pregătire continuă peste un val de schimbări reale în meserie, iar teama de irelevanță e rațională, nu imaginară. Reformularea care ajută e contabilă: teancul de linkuri nu e activ, ci datorie acumulată, pentru că nu produce nimic până la consum, iar dobânda o plătești în anxietate. Disciplina care funcționează are trei reguli: o oră pe săptămână, un singur subiect, aplicat pe o sarcină reală din firmă, ceea ce lasă un rezultat verificabil în locul senzației de lectură; un instrument testat efectiv bate zece salvate; și un faliment periodic al colecției, în care ștergi fără vinovăție tot ce e mai vechi de o lună, fiindcă ce contează cu adevărat îți reapare oricum în față."
+      ],
+      "examples": [
+        "Inventarul sincer al colecției: 340 de linkuri salvate în șase luni, 11 deschise vreodată; cifra nu măsoară cât ai învățat, ci cât de bine funcționează butonul de salvare ca anxiolitic.",
+        "Sâmbăta reparată: în loc de trei ore alocate „recuperării”, o oră pe un singur subiect, extragerea datelor din 20 de bonuri reale ale firmei; luni există un flux care merge, nu 30 de file deschise și un sentiment de eșec.",
+        "Falimentul de semne de carte: ștergi tot ce e mai vechi de 60 de zile și constați că jumătate se referea la versiuni de modele deja înlocuite; anxietatea scade imediat, competența rămâne neschimbată, ceea ce spune tot despre valoarea teancului."
+      ]
     }
   ]
 }

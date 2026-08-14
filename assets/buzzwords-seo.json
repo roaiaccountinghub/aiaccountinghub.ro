@@ -1,0 +1,233 @@
+{
+  "_comment": "Unghiul SEO per termen, opțional. Cheia = id-ul din buzzwords.json. Termenii care lipsesc de aici primesc titlul generic „Ce înseamnă X? Definiție și exemple pentru contabili”. Câmpuri: q = titlul paginii, formulat ca întrebarea pe care o tastează un contabil (include termenul, ca să rămână identificabil); lead = meta description scrisă de mână, altfel se ia primul paragraf al definiției; faq = perechi întrebare/răspuns AFIȘATE în pagină, într-un acordeon <details>. Două reguli: titlul promite doar ce livrează pagina (întrebările de tip „cum” care nu sunt acoperite integral merg în faq, nu în titlu), iar răspunsul trebuie să se înțeleagă scos din context, fără trimiteri de tip „cum am arătat mai sus”.",
+
+  "llm": {
+    "q": "LLM: ce este un model de limbaj și ce poate face pentru un contabil",
+    "lead": "Ce este un LLM, prin ce diferă de un motor de căutare și ce poate procesa concret dintr-un dosar contabil: bonuri scanate, contracte, extrase bancare.",
+    "faq": [
+      {
+        "q": "Care e diferența dintre un LLM și un motor de căutare?",
+        "a": "Motorul de căutare găsește documente care există deja, iar LLM-ul generează un răspuns nou pe baza tiparelor învățate. De aceea poate reformula, extrage și clasifica text, dar nu stochează fapte ca o bază de date. Consecința practică: cifrele și referințele legale se verifică întotdeauna."
+      },
+      {
+        "q": "Poate un LLM să citească bonuri scanate și contracte în Word?",
+        "a": "Da, poate procesa simultan sute de documente în formate diferite: bonuri și chitanțe scanate, contracte în Word, extrase bancare în CSV. Extrage datele, le normalizează și le exportă, fără să configurezi un șablon separat pentru fiecare tip de document. Pentru imagini și scanuri ai nevoie de un model multimodal."
+      }
+    ]
+  },
+
+  "prompt": {
+    "q": "Prompt: cum scrii o instrucțiune care îți dă date, nu text generic",
+    "lead": "Ce este un prompt, de ce „analizează această factură” nu funcționează și cum se formulează o cerere care întoarce câmpuri gata de importat.",
+    "faq": [
+      {
+        "q": "De ce îmi dă AI-ul răspunsuri generice când îi trimit o factură?",
+        "a": "Pentru că cererea e vagă. „Analizează această factură” nu spune ce câmpuri vrei și în ce format. Formulează sarcina exact: extrage furnizor, CUI, data emiterii, valoare fără TVA, valoare TVA și total, apoi cere rezultatul într-un format anume. E diferența dintre un paragraf de citit și date de importat."
+      },
+      {
+        "q": "Merită să-mi construiesc o bibliotecă de prompturi?",
+        "a": "Da, dacă ai procese care se repetă lunar. Un prompt bine construit pentru închiderea lunară se rulează de zeci de ori cu rezultate consistente, deci efortul de scriere se amortizează de la a doua sau a treia utilizare. Echipele care lucrează serios cu AI au prompturi standardizate pentru reconciliere, extragere de date și verificări."
+      }
+    ]
+  },
+
+  "ai-agent": {
+    "q": "Agent AI: ce este, din ce e făcut și unde îl pui la treabă în contabilitate",
+    "lead": "Agentul AI nu răspunde la întrebări, ci execută sarcini: primește un obiectiv, își face un plan, folosește unelte și lucrează în limitele pe care i le dai.",
+    "faq": [
+      {
+        "q": "Cum îmi construiesc un agent AI?",
+        "a": "Ai nevoie de patru piese: un model de limbaj pe post de creier, un set de unelte pe care le poate apela (fișiere, aplicații, API-uri), o buclă de execuție care planifică, acționează, observă și ajustează, plus limite definite de tine, adică ce are voie să facă singur și unde se oprește pentru aprobare. Regula de start: pornește cu un proces mărunt și clar, nu cu închiderea lunii."
+      },
+      {
+        "q": "Care e diferența dintre un agent AI și un asistent de tip chat?",
+        "a": "Asistentul răspunde, agentul execută. Îi dai un obiectiv, nu o întrebare, iar el își face planul, folosește uneltele necesare, verifică rezultatele intermediare și continuă până termină. Autonomia nu e un comutator pornit sau oprit, ci un cursor pe care îl reglezi tu."
+      },
+      {
+        "q": "Ce poate prelua concret un agent într-un cabinet contabil?",
+        "a": "Procese cap-coadă cu pași clari: preluarea deconturilor de cheltuieli cu bonurile atașate, extragerea datelor, înregistrarea în ERP și semnalarea excepțiilor. Diferența față de automatizarea clasică e că agentul se descurcă și cu situațiile care ies din tipar, în loc să le trimită pe toate în coșul „de rezolvat manual”."
+      }
+    ]
+  },
+
+  "agentic-ai": {
+    "q": "Agentic AI: ce e diferit față de un agent și de ce contează pentru procese",
+    "lead": "Agentul e piesa, agentic e paradigma: echipe de agenți care își împart sarcinile și își verifică reciproc rezultatele, cu limite de autoritate și jurnale de acțiuni.",
+    "faq": [
+      {
+        "q": "Care e diferența dintre AI agent și agentic AI?",
+        "a": "Agentul e piesa individuală, agentic e paradigma. Un sistem agentic poate însemna un orchestrator care sparge un proces în sub-sarcini distribuite mai multor agenți specializați: unul extrage, altul validează, altul înregistrează, altul raportează."
+      },
+      {
+        "q": "Ce procese financiare sunt candidatul natural?",
+        "a": "Procesele repetitive cap-coadă: procurement-to-pay, order-to-cash, închiderile lunare. Odată cu autonomia crește însă și miza, așa că vine la pachet un vocabular de guvernanță: limite de autoritate, jurnale de acțiuni și puncte obligatorii de aprobare."
+      }
+    ]
+  },
+
+  "ai-copilot": {
+    "q": "Copilot AI: asistentul din Excel și ERP, și cât te poți baza pe el",
+    "lead": "Copilotul e AI-ul integrat în aplicația în care lucrezi deja: vede contextul, sugerează și accelerează, dar comenzile și răspunderea rămân la tine.",
+    "faq": [
+      {
+        "q": "Care e diferența dintre un copilot și un asistent deschis în alt tab?",
+        "a": "Copilotul vede contextul aplicației, adică celulele foii de calcul, documentul deschis sau înregistrarea din ERP, și acționează în interiorul ei cu unelte native. Asistentul generalist lucrează doar pe ce îi copiezi tu. Diferența practică e că dispar copierile dintr-o parte în alta, împreună cu erorile lor."
+      },
+      {
+        "q": "Copilotul preia munca sau doar o sugerează?",
+        "a": "O sugerează. Lucrează în ritmul tău, propunere cu propunere, și așteaptă acceptul tău la fiecare pas. De regulă e prima formă de AI care intră într-o firmă, pentru că vine la pachet cu uneltele deja folosite, ceea ce o face și un teren bun de învățare."
+      }
+    ]
+  },
+
+  "api": {
+    "q": "API: cum treci de la ChatGPT folosit de un coleg la un proces al firmei",
+    "lead": "API-ul e priza prin care programele tale folosesc direct un model AI, fără interfața de chat: volume mari, format controlat și cost la consum, nu pe utilizator.",
+    "faq": [
+      {
+        "q": "Care e diferența dintre abonamentul de chat și API?",
+        "a": "Chat-ul e pentru oameni, o conversație pe un ecran; API-ul e pentru procese, integrat în fluxurile tale. Diferă și modelul de cost: abonamentul e fix pe utilizator, API-ul se plătește la consum. Dacă ai un proces care rulează de sute de ori pe lună, API-ul e singura variantă rezonabilă."
+      },
+      {
+        "q": "Ce pot automatiza printr-un API într-un departament financiar?",
+        "a": "Procesarea facturilor, generarea rapoartelor și clasificarea tranzacțiilor devin fluxuri automate, integrate în sistemele pe care le ai deja. Diferența față de folosirea manuală a chat-ului e că procesul rulează singur, la volum, cu formatul răspunsului sub control."
+      }
+    ]
+  },
+
+  "workflow-automation": {
+    "q": "Automatizarea fluxurilor: ce procese contabile merită automatizate primele",
+    "lead": "Un declanșator pornește o secvență care rulează fără intervenție: extrage, citește, validează, înregistrează, notifică. Ce procese contabile merită primele.",
+    "faq": [
+      {
+        "q": "Ce procese contabile se automatizează cel mai ușor?",
+        "a": "Cele lunare și repetitive: colectarea documentelor de la clienți, procesarea facturilor, remindere de scadențe, rapoartele standard. Au volum predictibil și pași ficși, exact ce îi trebuie unei linii de asamblare automate."
+      },
+      {
+        "q": "Care e diferența dintre un flux automatizat și un agent AI?",
+        "a": "Fluxul e o linie de asamblare cu pași ficși și ordine fixă, iar ce iese din tipar cade în coșul de rezolvat manual. Agentul improvizează în limitele primite. În practică cele două se combină: fluxuri fixe pentru volumul predictibil, agenți pentru excepții."
+      },
+      {
+        "q": "De unde încep automatizarea?",
+        "a": "De la documentarea procesului, înainte de orice unealtă. Un proces prost, automatizat, rămâne prost, doar că rulează mai repede și greșește în mai multe locuri deodată."
+      }
+    ]
+  },
+
+  "multimodal-ai": {
+    "q": "AI multimodal: cum analizezi facturi, bonuri și contracte scanate cu AI",
+    "lead": "Modelul multimodal citește direct fotografia chitanței, PDF-ul scanat sau captura din ERP, fără OCR separat și fără conversii intermediare.",
+    "faq": [
+      {
+        "q": "Cum analizez facturi cu AI?",
+        "a": "Trimiți documentul direct unui model multimodal, fără să îl converteşti în text mai întâi. Modelul citește fotografia, PDF-ul scanat sau captura de ecran și extrage câmpurile cerute în aceeași cerere. Dispare pasul separat de OCR pe care îl presupuneau soluțiile mai vechi."
+      },
+      {
+        "q": "Mai am nevoie de OCR separat?",
+        "a": "În general nu, pentru că modelul integrează direct imaginea. Rămâne totuși o nuanță: performanța diferă între tipurile de input, iar un model foarte bun pe text poate greși pe un scan de proastă calitate. Pe documentele cu miză, verificarea rămâne obligatorie."
+      },
+      {
+        "q": "Ce fac cu dosarele mixte, cu scanuri, poze și tabele?",
+        "a": "Devin procesabile într-o singură trecere. Nu mai separi documentele pe tipuri și nu mai rulezi unelte diferite pentru fiecare, ci trimiți dosarul așa cum e."
+      }
+    ]
+  },
+
+  "context-window": {
+    "q": "Fereastra de context: de ce AI-ul „uită” documentele lungi",
+    "lead": "Fereastra de context e memoria de lucru a modelului, măsurată în tokeni. Tot ce nu încape în ea este pur și simplu invizibil pentru model.",
+    "faq": [
+      {
+        "q": "De ce nu citește AI-ul tot documentul pe care i l-am dat?",
+        "a": "Pentru că depășește fereastra de context, adică memoria lui de lucru. Ce nu încape nu e citit parțial, ci deloc, iar modelul răspunde ca și cum acele pagini nu ar exista. Soluția e să împarți documentul sau să folosești un model cu fereastră mai mare."
+      },
+      {
+        "q": "Cât înseamnă concret o fereastră de context?",
+        "a": "Se măsoară în tokeni și variază mult între modele, de la câteva mii la sute de mii sau chiar un milion. Orientativ, 1.000 de tokeni înseamnă aproximativ 750 de cuvinte în engleză și mai puține în română. La modelele actuale, un dosar întreg poate încăpea într-o singură cerere."
+      }
+    ]
+  },
+
+  "tokens": {
+    "q": "Tokeni: cum se calculează costul AI-ului și de ce româna costă mai mult",
+    "lead": "Tokenul e unitatea în care modelele măsoară textul și în care se facturează API-urile. Diacriticele și cuvintele lungi fac româna mai scumpă decât engleza.",
+    "faq": [
+      {
+        "q": "Cum se calculează costul unei cereri către AI?",
+        "a": "La numărul de tokeni, atât cei pe care îi trimiți, cât și cei pe care îi primești înapoi. Orientativ, 1.000 de tokeni înseamnă aproximativ 750 de cuvinte în engleză. Un document lung consumă în ambele direcții, deci costul crește și la intrare, și la ieșire."
+      },
+      {
+        "q": "De ce textul în română consumă mai mulți tokeni?",
+        "a": "Din cauza diacriticelor și a cuvintelor mai lungi, care se sparg în mai multe bucăți decât echivalentele din engleză. Practic, același conținut costă mai mult în română. La volume mari, diferența devine vizibilă în factură."
+      }
+    ]
+  },
+
+  "machine-learning": {
+    "q": "Machine learning: ce înseamnă și unde îl folosești deja fără să știi",
+    "lead": "Sistemul învață tipare din date, în loc să fie programat cu reguli. În finanțe e deja peste tot: detectarea fraudei, clasificarea cheltuielilor.",
+    "faq": [
+      {
+        "q": "Care e diferența dintre machine learning și un program clasic?",
+        "a": "Programul clasic execută reguli scrise de om: dacă factura depășește 5.000 de lei, cere aprobare. Machine learning primește mii de exemple și deduce singur regulile, inclusiv unele pe care nimeni nu le-ar fi formulat explicit. De aceea calitatea rezultatului depinde direct de calitatea datelor pe care le-a văzut."
+      },
+      {
+        "q": "Machine learning e același lucru cu AI?",
+        "a": "Nu, este ramura pe care se construiește aproape tot ce numim azi AI, inclusiv modelele de limbaj. Diferența ține de scară și de tipul sarcinii, nu de natura tehnologiei."
+      }
+    ]
+  },
+
+  "fine-tuning": {
+    "q": "Fine-tuning sau RAG: care variantă îți trebuie și când",
+    "lead": "Fine-tuning-ul schimbă comportamentul modelului, nu cunoștințele lui. Pentru legislație actualizată funcționează RAG. Regula de alegere, pe scurt.",
+    "faq": [
+      {
+        "q": "Fine-tuning sau RAG pentru legislația fiscală?",
+        "a": "RAG. Fine-tuning-ul schimbă stilul, formatul și reflexele modelului pe sarcini repetitive, dar nu e felul potrivit de a-i adăuga informație factuală care se schimbă. Legislația se actualizează, deci trebuie să stea în documente pe care le poți înlocui, nu în model."
+      },
+      {
+        "q": "Când merită fine-tuning într-un cabinet?",
+        "a": "La volume mari și sarcini foarte repetitive, de exemplu un model ajustat pe mii de încadrări contabile proprii, care învață planul de conturi și particularitățile clienților. Pentru majoritatea cabinetelor, un prompt bun plus RAG rezolvă aceeași problemă mult mai ieftin."
+      }
+    ]
+  },
+
+  "rag": {
+    "q": "RAG: cum pui AI-ul să răspundă din legislația și procedurile tale",
+    "lead": "RAG este arhitectura prin care AI-ul răspunde pe baza documentelor tale, nu din memoria lui: legislație la zi, proceduri interne, contracte, cu citarea sursei.",
+    "faq": [
+      {
+        "q": "Cum construiesc un asistent AI pe legislația fiscală curentă?",
+        "a": "Ai nevoie de o arhitectură RAG, nu de un model antrenat special. Pui actele normative consolidate într-o bază de documente, iar la fiecare întrebare sistemul caută întâi fragmentul relevant și abia apoi îl dă modelului spre interpretare. Când legislația se schimbă, actualizezi documentele, nu modelul."
+      },
+      {
+        "q": "De ce îmi dă ChatGPT răspunsuri greșite pe legislația românească?",
+        "a": "Pentru că un model fără RAG răspunde din ce a reținut la antrenare, iar acele date au o dată limită și nu conțin modificările recente. Modelul nu știe că nu știe, așa că formulează convingător o versiune veche a textului. Soluția nu e un prompt mai bun, ci alimentarea lui cu sursa la momentul întrebării."
+      },
+      {
+        "q": "Cum mă asigur că AI-ul nu inventează când răspunde despre procedurile firmei?",
+        "a": "Cere referința ca parte obligatorie din răspuns: documentul și pasajul din care a extras informația. Dacă sistemul nu poate indica sursa, răspunsul nu se folosește. RAG reduce mult halucinațiile, dar nu le elimină, iar verificarea în două secunde a trimiterii rămâne partea ta."
+      }
+    ]
+  },
+
+  "ai-fomo": {
+    "q": "AI FOMO: de ce salvezi zeci de articole despre AI și nu le mai citești",
+    "lead": "Frica de a rămâne în urmă produce un teanc de linkuri care nu se citește niciodată. De ce eșuează recuperarea de sâmbătă și ce funcționează în locul ei.",
+    "faq": [
+      {
+        "q": "Cum învăț AI fără să mă simt permanent în urmă?",
+        "a": "Schimbă unitatea de măsură, de la cât ai salvat la ce faci altfel. O oră pe săptămână, un singur subiect, aplicat pe o sarcină reală din firmă, îți lasă un rezultat verificabil, în timp ce trei ore de lectură recuperatorie nu lasă nimic. Un instrument testat efectiv pe documentele tale valorează cât zece salvate pentru mai târziu."
+      },
+      {
+        "q": "AI FOMO e același lucru cu doomscrolling?",
+        "a": "Nu. Doomscrolling înseamnă consum compulsiv de știri negative, iar motorul e anxietatea față de ce citești. La AI FOMO conținutul e util și în general optimist, iar problema e exact opusă: materialul nu ajunge să fie consumat niciodată, doar acumulat. Confuzia apare des, pentru că ambele se simt ca neliniște în fața unui ecran."
+      },
+      {
+        "q": "Ce fac cu sutele de linkuri pe care le-am salvat deja?",
+        "a": "Declară faliment pe ele: șterge fără vinovăție tot ce e mai vechi de o lună sau două. În AI, o bună parte se referă oricum la versiuni de modele deja înlocuite, iar ce contează cu adevărat îți reapare în față din alte surse. Anxietatea scade imediat, competența rămâne neschimbată, ceea ce spune tot despre cât valora teancul."
+      }
+    ]
+  }
+}

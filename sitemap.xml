@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Pagini principale -->
-  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-08-14</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/podcast.html</loc><lastmod>2026-08-11</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-08-14</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/resurse.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/viitorul-profesiei.html</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/contact.html</loc><lastmod>2026-07-19</lastmod></url>
@@ -91,6 +91,14 @@
   <url><loc>https://aiaccountinghub.ro/buzzword/ai-copilot.html</loc><lastmod>2026-08-01</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/api.html</loc><lastmod>2026-08-01</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/workflow-automation.html</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ai-memory.html</loc><lastmod>2026-08-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/guardrails.html</loc><lastmod>2026-08-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/human-in-the-loop.html</loc><lastmod>2026-08-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/system-prompt.html</loc><lastmod>2026-08-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/sycophancy.html</loc><lastmod>2026-08-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ai-ethics-bias.html</loc><lastmod>2026-08-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/deepfake.html</loc><lastmod>2026-08-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ai-fomo.html</loc><lastmod>2026-08-14</lastmod></url>
   <!-- /Termeni buzzword -->
 
 </urlset>

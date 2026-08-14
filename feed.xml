@@ -31,12 +31,37 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Tue, 11 Aug 2026 22:25:00 +0300</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 10:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <!-- ============================================================
+         LOT BUZZWORD — 14.08.2026: opt termeni noi (AI Memory, Guardrails,
+         Human-in-the-Loop, System Prompt, Sycophancy, AI Ethics &amp; Bias,
+         Deepfake, AI FOMO). Ca la loturile anterioare, se anunță doar
+         termenul săptămânii plus unul notabil, nu toți.
+         ============================================================ -->
+
+    <item>
+      <title>Buzzword: AI FOMO — teancul de linkuri pe care nu-l citești niciodată</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#ai-fomo</link>
+      <guid isPermaLink="false">aiah-buzzword-ai-fomo</guid>
+      <pubDate>Fri, 14 Aug 2026 10:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Frica de a rămâne în urmă cu AI, și comportamentul pe care îl produce: salvezi articole, clipuri și postări cu promisiunea că sâmbătă te apuci, iar sâmbătă teancul te copleșește și renunți. Nu e doomscrolling, fiindcă problema nu e consumul, ci neconsumul. Reformularea contabilă care ajută: teancul de linkuri nu e activ, ci datorie acumulată, iar dobânda o plătești în anxietate.</description>
+    </item>
+
+    <item>
+      <title>Buzzword: Deepfake — „am văzut, am auzit” nu mai e verificare</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#deepfake</link>
+      <guid isPermaLink="false">aiah-buzzword-deepfake</guid>
+      <pubDate>Fri, 14 Aug 2026 09:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Conținut audio, video sau foto generat de AI care imită convingător persoane reale: vocea administratorului cerând o plată urgentă, chipul unui coleg într-un apel video. Cazul-școală în finanțe rămâne Arup, unde un apel video cu participanți deepfake a dus la un transfer de circa 25 de milioane de dolari. Apărarea nu e tehnologică în primul rând, ci procedurală: nicio plată pe baza unei singure comunicări.</description>
+    </item>
 
     <!-- ============================================================
          PROIECTUL AI JOURNAL — publicat pe 11.08.2026: cele patru articole
