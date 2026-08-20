@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Pagini principale -->
-  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-08-14</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/podcast.html</loc><lastmod>2026-08-11</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-08-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/resurse.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/viitorul-profesiei.html</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/contact.html</loc><lastmod>2026-07-19</lastmod></url>
@@ -34,6 +34,7 @@
 
   <!-- Proiectul AI Journal — articolele publicate pe 11.08.2026 (S2-S6 se adauga saptamanal) -->
   <url><loc>https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/2026-08-11-AI-Journal-doua-casete-si-o-cafea.html</loc><lastmod>2026-08-11</lastmod></url>
@@ -99,6 +100,21 @@
   <url><loc>https://aiaccountinghub.ro/buzzword/ai-ethics-bias.html</loc><lastmod>2026-08-14</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/deepfake.html</loc><lastmod>2026-08-14</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/ai-fomo.html</loc><lastmod>2026-08-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/output-formatting.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/prompt-engineering.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/hallucination.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/data-leakage-pii.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/automation-bias.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ai-slop.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/workslop.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/workspace.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/project.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/scheduled-tasks.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ocr-ai.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/data-extraction.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/summarization.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/vibe-coding.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/shadow-ai.html</loc><lastmod>2026-08-20</lastmod></url>
   <!-- /Termeni buzzword -->
 
 </urlset>
