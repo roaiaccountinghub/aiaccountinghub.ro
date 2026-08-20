@@ -438,6 +438,10 @@
   }
   function restorePos() {
     var A = els.audio; if (!state.ep) return;
+    /* Sosire pe link partajat (?play=…): mereu de la început. Cine primeşte
+       linkul trebuie să audă episodul din capul lui, nu din locul în care
+       rămăsese el însuşi la o ascultare anterioară. */
+    if (state.fromZero) { state.fromZero = false; seekTo(0); return; }
     try {
       var v = parseFloat(localStorage.getItem(LS_PREFIX + state.ep.id));
       if (v && v > 5 && isFinite(A.duration) && v < A.duration - 5) seekTo(v);
@@ -452,9 +456,7 @@
 
   /* ---------- Distribuire ----------
      Linkul partajat e cel scurt, /p/<slug> — arată curat într-o conversație și
-     are metadate OG proprii. Dacă un episod n-are încă slug, cădem pe deep-link.
-     Foaia nativă de partajare doar pe ecrane cu atingere: pe desktop, Windows
-     deschide un panou greoi, aşa că acolo copiem linkul, care e ce vrea omul. */
+     are metadate OG proprii. Dacă un episod n-are încă slug, cădem pe deep-link. */
   function shareUrl(id) {
     var ep = byId[id];
     if (ep && ep.slug) return 'https://aiaccountinghub.ro/p/' + ep.slug;
@@ -493,8 +495,10 @@
     var ep = byId[id] || {};
     var url = shareUrl(id);
     var title = (ep.ep ? ep.ep + ' — ' : '') + (ep.title || 'Podcast AI Accounting Hub');
-    var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-    if (navigator.share && touch) {
+    /* Foaia nativă oriunde e disponibilă — inclusiv pe desktop (Chrome/Edge pe
+       Windows deschid panoul de partajare al sistemului). Doar unde lipseşte
+       API-ul (ex. Firefox) cădem pe copierea linkului. */
+    if (navigator.share) {
       navigator.share({ title: title, text: title, url: url })["catch"](function () {});
     } else {
       copyLink(url);
@@ -536,10 +540,11 @@
   });
 
   /* ---------- Deschide / închide ---------- */
-  function open(id, autoplay) {
+  function open(id, autoplay, fromZero) {
     if (!els.back) build();
     if (!byId[id]) id = EPISODES[0].id;
     var wasOpen = !els.back.hidden;
+    state.fromZero = !!fromZero;   // citit o singură dată, în restorePos()
     load(id, autoplay !== false);
     els.back.hidden = false;
     requestAnimationFrame(function () { els.back.classList.add('open'); });
@@ -717,6 +722,6 @@
   (function deepLink() {
     var id = new URLSearchParams(location.search).get('play');
     if (!id) return;
-    window.addEventListener('load', function () { setTimeout(function () { open(id, false); }, 250); });
+    window.addEventListener('load', function () { setTimeout(function () { open(id, false, true); }, 250); });
   })();
 })();

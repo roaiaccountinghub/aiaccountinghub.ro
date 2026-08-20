@@ -13,6 +13,26 @@
 - [Podcast](https://aiaccountinghub.ro/podcast.html): episoade audio despre AI în contabilitate
 - [Viitorul profesiei](https://aiaccountinghub.ro/viitorul-profesiei.html): program de pregătire pentru era AI
 
+## Jurnalul AI — program de 30 de zile
+
+Aplicație gratuită într-un singur fișier HTML, care rulează local în browser, fără cont
+și fără conexiune la internet: un termen AI pe zi lucrătoare, 10-15 minute, timp de 30 de
+zile, plus șase activități practice săptămânale. Se descarcă din secțiunea Resurse.
+
+- [Două casete și o cafea — mod de utilizare](https://aiaccountinghub.ro/2026-08-11-AI-Journal-doua-casete-si-o-cafea.html): ghidul aplicației, ecran cu ecran
+- [Europa a accelerat cu 48% într-un an. Noi am rămas la 5,2%](https://aiaccountinghub.ro/2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html): datele Digital Decade 2026 și Eurobarometrul care arată că bariera nr. 1 declarată de români pentru AI generativ este lipsa formării
+- [Obiceiul nu se construiește, se lipește](https://aiaccountinghub.ro/2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html): stratificarea obiceiurilor aplicată la învățarea AI
+- [Ce poate face un fișier HTML descărcat și cum verifici singur](https://aiaccountinghub.ro/2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html): riscurile reale, limitele tehnice și trei metode de verificare
+
+Cele șase activități săptămânale, câte un ghid detaliat pentru fiecare:
+
+- [S1 — Familiarizare: alege-ți tool-ul](https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html)
+- [S2 — Prompturi care chiar funcționează](https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html): rol, context, sarcină, format
+- [S3 — Compară modele și halucinații](https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S3-Compara-modele-si-halucinatii.html)
+- [S4 — Igienă AI: nu ce date folosești, ci unde le pui](https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S4-Igiena-AI-si-consolidare.html): DPA, modele open weight, Shadow AI, human-in-the-loop
+- [S5 — Projects, rutine și lucrul organizat](https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html)
+- [S6 — Documente, date și conexiuni](https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html): extragere din facturi, sinteză, calcul asistat, MCP
+
 ## Articole reprezentative
 
 - [Promptul perfect 2.0 — ce s-a schimbat în trei luni](https://aiaccountinghub.ro/2026-07-31-Promptul-perfect-2.0.html): ghid de prompting pentru contabili, aplicabil cererilor cu miză, nu celor de zi cu zi: tag-uri XML, ordinea contextului, guardrails, prompt injection și un mega-prompt aplicat pe o analiză fiscală

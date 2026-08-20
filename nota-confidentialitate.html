@@ -301,14 +301,20 @@
     <h2 id="terti"><span class="num">03</span>Servicii terțe integrate</h2>
 
     <h3>3.1 Google Fonts</h3>
-    <p>Site-ul folosește trei fonturi — <strong>Inter</strong>, <strong>Space Grotesk</strong> și <strong>JetBrains Mono</strong> — încărcate de pe serverele Google (<em>fonts.googleapis.com</em> și <em>fonts.gstatic.com</em>). Spre deosebire de playerele Spotify, această încărcare are loc <strong>automat, la fiecare accesare a unei pagini</strong>, fără vreo acțiune din partea dumneavoastră.</p>
+    <p>Site-ul folosește trei fonturi — <strong>Inter</strong>, <strong>Space Grotesk</strong> și <strong>JetBrains Mono</strong> — încărcate de pe serverele Google (<em>fonts.googleapis.com</em> și <em>fonts.gstatic.com</em>). Este singura resursă externă care se încarcă <strong>automat, la fiecare accesare a unei pagini</strong>, fără vreo acțiune din partea dumneavoastră.</p>
     <p>În acest proces, Google primește adresa IP de la care accesați internetul, adresa paginii solicitate și informații despre browser și sistemul de operare. Conform documentației oficiale Google, aceste cereri <strong>nu folosesc și nu înregistrează cookies</strong>, iar datele <strong>nu sunt utilizate pentru profilare sau publicitate personalizată</strong> — adresa IP este procesată pentru a livra fontul și în scopuri de securitate. Detaliile complete sunt publicate de Google la <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Google Fonts — Privacy &amp; Data Collection</a>.</p>
 
     <h3>3.2 Spotify</h3>
-    <p>Site-ul integrează playere audio de la <strong>Spotify</strong> pentru redarea episoadelor de podcast. Când interacționați cu aceste playere, Spotify poate colecta date conform propriei politici de confidențialitate, disponibilă la <a href="https://www.spotify.com/legal/privacy-policy/" target="_blank" rel="noopener">spotify.com/privacy</a>.</p>
+    <p>Episoadele de podcast se ascultă printr-un <strong>player propriu, găzduit pe acest site</strong>. Nu există niciun player Spotify integrat în pagini, iar la deschiderea unei pagini nu se încarcă nimic de la Spotify.</p>
+    <p>Există totuși două momente în care se stabilește o legătură cu infrastructura Spotify, ambele declanșate <strong>exclusiv de o acțiune a dumneavoastră</strong>:</p>
+    <ul>
+      <li><strong>Când apăsați redarea.</strong> Fișierul audio se descarcă de pe serverele unde este găzduit podcastul, care aparțin Spotify. În acest proces, adresa dumneavoastră IP ajunge la furnizor, la fel ca la orice descărcare de fișier.</li>
+      <li><strong>Când apăsați „Ascultă pe Spotify".</strong> Părăsiți acest site și ajungeți pe platforma Spotify, unde se aplică politica lor de confidențialitate, disponibilă la <a href="https://www.spotify.com/legal/privacy-policy/" target="_blank" rel="noopener">spotify.com/privacy</a>.</li>
+    </ul>
+    <p>În ambele situații, noi <strong>nu primim și nu stocăm</strong> nicio informație despre ce ați ascultat sau când. Poziția la care ați rămas într-un episod este reținută local, în browserul dumneavoastră, exclusiv pentru a putea relua ascultarea de unde ați lăsat-o.</p>
     <div class="legal-callout">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-      <span>Nu avem control asupra datelor colectate de Google și Spotify prin resursele și playerele integrate și nu suntem responsabili pentru practicile lor de prelucrare a datelor.</span>
+      <span>Nu avem control asupra datelor colectate de Google prin fonturile încărcate automat, respectiv de Spotify în momentul în care porniți redarea sau deschideți platforma lor, și nu suntem responsabili pentru practicile lor de prelucrare a datelor.</span>
     </div>
 
     <h2 id="temei"><span class="num">04</span>Temeiul legal</h2>

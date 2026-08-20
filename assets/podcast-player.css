@@ -325,7 +325,11 @@
 @media (max-width: 600px) {
   .ppl-card { padding: 20px 16px 16px; }
   .ppl-card.ppl-has-chapters .ppl-split { grid-template-columns: 1fr; }
-  .ppl-chapters { max-height: 190px; }
+  /* Ţinta: tot cardul să intre în ecran pe un telefon cu bară de adresă + bară
+     de navigare (~695px utili), fără să atingem artwork-ul. Lista de capitole
+     rămâne derulabilă — se taie doar cât se vede deodată. */
+  .ppl-chapters { max-height: 100px; }
+  .ppl-backdrop { padding: 14px; }
   .ppl-stage { min-height: 120px; }
 }
 
