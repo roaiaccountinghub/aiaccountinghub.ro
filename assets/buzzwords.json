@@ -1121,6 +1121,291 @@
         "Sâmbăta reparată: în loc de trei ore alocate „recuperării”, o oră pe un singur subiect, extragerea datelor din 20 de bonuri reale ale firmei; luni există un flux care merge, nu 30 de file deschise și un sentiment de eșec.",
         "Falimentul de semne de carte: ștergi tot ce e mai vechi de 60 de zile și constați că jumătate se referea la versiuni de modele deja înlocuite; anxietatea scade imediat, competența rămâne neschimbată, ceea ce spune tot despre valoarea teancului."
       ]
+    },
+    {
+      "id": "output-formatting",
+      "date": "2026-08-20",
+      "term": "OUTPUT FORMATTING",
+      "termFull": "FORMATAREA IEȘIRII — RĂSPUNSUL ÎN STRUCTURA EXACTĂ DE CARE AI NEVOIE",
+      "pron": "/ aut·put for·ma·ting /",
+      "type": "substantiv",
+      "ro": "Formatarea Ieșirii",
+      "def": [
+        "Output formatting este instruirea modelului să returneze rezultatul în formatul exact necesar integrării: JSON cu chei predefinite, tabel cu coloane fixe, CSV, structură de raport standard. Diferența dintre „AI care conversează” și „AI care alimentează sisteme”: un răspuns liber e citit de un om; un răspuns structurat intră direct în ERP, în Excel, în fluxul următor, fără copy-paste și fără interpretare.",
+        "Tehnicile care fac formatul fiabil: specificarea explicită a schemei în prompt (chei, tipuri, ce e obligatoriu), exemple de ieșire corectă (few-shot), regula pentru date lipsă („null, nu inventa”) și, în utilizarea prin API, modurile de „ieșire structurată” care garantează tehnic JSON valid. Principiul de proiectare: formatul e un contract, iar orice abatere trebuie să fie detectabilă automat (validare de schemă), pentru că eroarea de format descoperită târziu devine eroare de date descoperită și mai târziu.",
+        "În practica financiar-contabilă, formatarea ieșirii e balamaua întregii automatizări: extragerea perfectă cu ieșire haotică e la fel de neintegrabilă ca extragerea greșită. Standardizarea formatelor de ieșire pe fluxurile firmei (același JSON pentru toate facturile, același șablon pentru toate sintezele) aduce și un beneficiu de disciplină pură: rapoartele devin comparabile, validările devin automate, excepțiile devin vizibile."
+      ],
+      "examples": [
+        "Promptul de facturi cere JSON cu 9 chei fixe și null la lipsă → validatorul de schemă respinge automat orice răspuns neconform, care ajunge la om, nu în ERP.",
+        "Sinteza lunară pentru fiecare client se generează pe același șablon cu 5 secțiuni fixe → cei 40 de clienți primesc rapoarte comparabile, iar abaterile de la șablon se văd instant.",
+        "Lanț de automatizare: ieșirea structurată a pasului de extragere devine intrarea pasului de validare, apoi a celui de înregistrare; formatul stabil e ceea ce ține lanțul în funcțiune."
+      ]
+    },
+    {
+      "id": "prompt-engineering",
+      "date": "2026-08-20",
+      "term": "PROMPT ENGINEERING",
+      "termFull": "TEHNICA DE A CONSTRUI PROMPTURI PENTRU REZULTATE OPTIME",
+      "pron": "/ prompt en·gi·ni·ring /",
+      "type": "substantiv",
+      "ro": "Ingineria Prompturilor",
+      "def": [
+        "Prompt engineering este disciplina de a construi instrucțiuni care scot maximul dintr-un model: definirea rolului („ești expert în fiscalitate românească”), structurarea sarcinii, furnizarea de exemple (few-shot), impunerea formatului de ieșire, cererea raționamentului pas cu pas, anticiparea cazurilor-limită. Diferența dintre un utilizator ocazional și unul eficient de AI e, în mare parte, această competență.",
+        "Nu e magie, ci comunicare profesională aplicată: aceleași principii ca la delegarea către un coleg capabil dar fără context, adică brief clar, exemple, criterii de acceptare, ce să facă la incertitudine. Tehnicile de bază se învață în ore, nu luni: rol + sarcină + context + constrângeri + format + exemple. Pe măsură ce sistemele devin complexe, disciplina se extinde natural în context engineering, dar promptul bine scris rămâne cărămida de bază.",
+        "Pentru echipele contabile, competența are randament direct: prompturile bune produc rezultate consistente, reutilizabile și integrabile; cele vagi produc „workslop” care cere refacere. Investiția organizațională minimă: o bibliotecă internă de prompturi testate pentru sarcinile recurente (reconciliere, extragere, sinteze, corespondență), versionată și îmbunătățită ca orice procedură a firmei."
+      ],
+      "examples": [
+        "Aceeași sarcină, două rezultate: „fă un rezumat al contractului” → generalități; „extrage: părți, obiect, valoare, termene de plată, penalități, clauze de reziliere; tabel, maximum o pagină” → sinteză direct utilizabilă în dosar.",
+        "O singură frază adăugată, „dacă informația nu există în document, scrie «nespecificat», nu presupune”, elimină majoritatea completărilor fanteziste la extragerea din contracte.",
+        "Biblioteca firmei: promptul de analiză a balanței, șlefuit prin 10 iterații de echipă, e folosit identic de toți contabilii, deci consistență între oameni, nu doar între rulări."
+      ]
+    },
+    {
+      "id": "hallucination",
+      "date": "2026-08-20",
+      "term": "HALLUCINATION",
+      "termFull": "HALUCINAȚIE — INFORMAȚII PLAUZIBILE, DAR FALSE, LIVRATE CU ÎNCREDERE",
+      "pron": "/ ha·lu·ci·nei·șăn /",
+      "type": "substantiv",
+      "ro": "Halucinație",
+      "def": [
+        "Halucinația este fenomenul prin care modelul generează informații false cu ton perfect încrezător: articole de lege inexistente, cifre inventate, surse fabricate, detalii plauzibile care nu au existat niciodată. Nu e o „minciună” intenționată: modelul completează tipare statistice, iar când nu știe, produce cel mai probabil-sunând răspuns, nu tăcere.",
+        "Rădăcina problemei: LLM-ul e antrenat să continue textul convingător, nu să-și verifice afirmațiile, iar încrederea tonului nu are nicio corelație cu adevărul conținutului. Zonele de risc maxim sunt exact cele familiare profesioniștilor: referințe precise (articole de lege, numere de decizii, citate), cifre exacte, evenimente recente. Atenuare există (RAG, unelte de căutare, cereri de citare, temperatura mică), dar eliminare completă, nu.",
+        "Pentru contabilitate și fiscalitate, halucinația e riscul profesional numărul unu al folosirii AI: un „articol din Codul Fiscal” inventat într-o opinie trimisă clientului e un incident de răspundere profesională. Regula de fier: orice referință legislativă, cifră sau fapt generat de AI se verifică la sursă înainte de a fi folosit; AI-ul redactează, omul garantează."
+      ],
+      "examples": [
+        "Modelul citează fluent „art. 25 alin. (4) lit. m) din Codul Fiscal” pentru o deductibilitate; articolul există, dar litera invocată se referă la cu totul altceva: verificarea la sursă durează 2 minute și salvează o opinie greșită.",
+        "Într-o sinteză de jurisprudență, două dintre cele cinci decizii citate nu există, ci sunt combinații plauzibile de numere și ani, fabricate; de aceea sintezele juridice cer RAG pe baze de date reale.",
+        "Procedura cabinetului: livrabilele generate cu AI au checklist de verificare a referințelor; nicio trimitere legislativă nu pleacă la client neverificată în textul oficial."
+      ]
+    },
+    {
+      "id": "data-leakage-pii",
+      "date": "2026-08-20",
+      "term": "DATA LEAKAGE / PII",
+      "termFull": "SCURGEREA DE DATE SENSIBILE PRIN INSTRUMENTE AI",
+      "pron": "/ dei·ta li·chigi / pi·ai·ai /",
+      "type": "substantiv",
+      "ro": "Scurgere de Date / Date cu Caracter Personal",
+      "def": [
+        "Data leakage, în context AI, este scurgerea de date sensibile, personale (PII: nume, CNP, date financiare identificabile) sau confidențiale de business, prin introducerea lor în instrumente AI care le pot stoca, jurnaliza sau folosi la antrenarea modelelor viitoare. Promptul pare o conversație efemeră; poate fi, de fapt, un transfer de date către un terț, cu tot ce implică asta juridic.",
+        "Căile tipice de scurgere: angajatul care lipește documente de client în conturi personale gratuite (shadow AI), uneltele cu setări implicite care rețin conversațiile pentru antrenare, integrările care trimit mai mult context decât e necesar. Nuanța liniștitoare și cerința ei: versiunile enterprise ale marilor furnizori oferă de regulă angajamente contractuale de neantrenare și retenție limitată, dar cineva trebuie să fi citit și configurat aceste condiții.",
+        "Pentru profesia contabilă, acesta e riscul AI numărul unu în practică: datele clienților sunt aproape prin definiție confidențiale și adesea personale, deci GDPR și secretul profesional se aplică integral fiecărui prompt. Regulile minime: date de clienți doar în unelte aprobate, cu contract de procesare (DPA); anonimizare unde e posibil; și reflexul de a trata promptul ca pe o corespondență oficială, nu ca pe o ciornă privată."
+      ],
+      "examples": [
+        "Un salariat lipește statul de plată în chatbotul personal „să-l formateze frumos”, iar CNP-uri și salarii au ajuns la un terț fără temei legal: incident GDPR de manual, raportabil.",
+        "Configurare corectă: cabinetul folosește versiunea business a asistentului, cu DPA semnat, retenție zero pentru antrenare și jurnalizare internă, aceeași unealtă cu un profil de risc complet diferit.",
+        "Reflex de anonimizare: înainte de a cere analiza unui contract, numele părților devin „Societatea A” și „Furnizorul B”; analiza e la fel de bună, expunerea dispare."
+      ]
+    },
+    {
+      "id": "automation-bias",
+      "date": "2026-08-20",
+      "term": "AUTOMATION BIAS",
+      "termFull": "PREJUDECATA AUTOMATIZĂRII — ÎNCREDERE EXCESIVĂ ÎN OUTPUT-UL MAȘINII",
+      "pron": "/ o·to·mei·șăn ba·ias /",
+      "type": "substantiv",
+      "ro": "Prejudecata Automatizării",
+      "def": [
+        "Automation bias este tendința umană, documentată de decenii în psihologie, de a acorda încredere excesivă rezultatelor venite de la un sistem automat și de a înceta treptat verificarea. Cifra de pe ecran „arată oficial”, răspunsul AI sună competent, și creierul obosit bifează în loc să controleze. Cu cât sistemul greșește mai rar, cu atât vigilența scade mai mult: paradoxul fiabilității.",
+        "E vărul digital al unei erori vechi de audit: încrederea necuvenită în documentul frumos formatat. LLM-urile agravează problema printr-o trăsătură perfidă, fluența: răspunsul prost formulat impecabil trece mai ușor de filtre decât răspunsul bun formulat stângaci. Contramăsurile sunt de proces, nu de voință: verificări prin sondaj obligatorii, teste cu erori plantate, separarea celui care generează de cel care validează.",
+        "Pentru profesia contabilă, automation bias e riscul care transformă toate celelalte riscuri AI în pierderi reale: halucinația nedetectată, extragerea greșită neobservată, încadrarea eronată aprobată pe bandă. Scepticismul profesional, obligație de standard în audit, trebuie extins explicit asupra rezultatelor AI: „a zis sistemul” nu e nici probă, nici justificare."
+      ],
+      "examples": [
+        "Șase luni de extrageri corecte din facturi → contabilul nu mai verifică → luna a șaptea, un furnizor schimbă formatul și 40 de facturi intră cu TVA greșit, detectat abia la decont.",
+        "Test intern: în lotul de validare se plantează lunar 3 documente cu erori cunoscute; dacă trec neobservate, procesul de verificare, nu oamenii, se reproiectează.",
+        "Regulă de echipă calibrată pe risc: rezultatele AI pe sarcini cu impact fiscal se verifică integral; pe sarcini administrative, prin sondaj documentat, cu vigilență proporțională, nu uniformă."
+      ]
+    },
+    {
+      "id": "ai-slop",
+      "date": "2026-08-20",
+      "term": "AI SLOP",
+      "termFull": "CONȚINUT DE SLABĂ CALITATE, PRODUS ÎN MASĂ DE AI",
+      "pron": "/ ei·ai slop /",
+      "type": "substantiv",
+      "ro": "Maculatură AI (slop = lături)",
+      "def": [
+        "AI slop este conținutul de calitate joasă produs în masă cu AI: texte fluente care nu spun nimic, imagini generice, articole umflate, postări fabricate pe bandă, corect gramatical și gol de substanță. Cuvântul englezesc „slop” înseamnă lături: hrana turnată la troacă, nu gătită pentru cineva. Termenul a explodat în 2024–2025, pe măsură ce internetul s-a umplut de astfel de conținut, și a fost desemnat cuvântul anului.",
+        "Semnalmentele slop-ului: lungime fără miez, generalități interșanjabile („în lumea dinamică de azi...”), liste care nu decid nimic, zero exemple concrete, zero asumare. Testul rapid: dacă după lectură nu poți spune ce ai aflat nou, ai citit slop. Problema sistemică: slop-ul se produce în secunde și se filtrează în minute, asimetrie care mută costul de la producător la cititor.",
+        "În context de business, slop-ul erodează exact moneda profesiilor de încredere: semnalul că cineva a gândit. Un newsletter de cabinet generat pe bandă, comentarii LinkedIn evident artificiale, oferte umflate cu paragrafe generice; toate spun clientului „nu am investit timp în tine”. Regula de igienă: AI-ul ca unealtă de redactare cu materie primă și judecată proprie, da; AI-ul ca fabrică de conținut fără input real, asta e slop cu semnătura ta."
+      ],
+      "examples": [
+        "Newsletter „fiscal” de 800 de cuvinte care reformulează generic „importanța conformării” fără nicio normă concretă, termen sau cifră; clientul îl recunoaște din al doilea paragraf.",
+        "Căutarea „modificări Cod Fiscal” returnează zeci de articole-clonă generate automat, care se citează circular, iar găsirea sursei oficiale durează mai mult ca înainte: costul colectiv al slop-ului.",
+        "Antidotul cabinetului: jumătate din volum, dublu de substanță; fiecare material trimis clienților conține minimum o analiză sau un exemplu din practica reală, pe care AI-ul doar îl șlefuiește."
+      ]
+    },
+    {
+      "id": "workslop",
+      "date": "2026-08-20",
+      "term": "WORKSLOP",
+      "termFull": "MUNCĂ GENERATĂ DE AI CARE ARATĂ BINE, DAR NU ARE SUBSTANȚĂ",
+      "pron": "/ uărc·slop /",
+      "type": "substantiv",
+      "ro": "Maculatură de Serviciu",
+      "def": [
+        "Workslop este slop-ul de la locul de muncă: livrabile generate cu AI care arată profesionist, formatate, fluente, aparent complete, dar nu duc sarcina mai departe, obligând colegul care le primește să descâlcească, să refacă sau să ceară lămuriri. Definiția operațională, dată de cercetătorii care au studiat fenomenul: muncă AI care „se deghizează în muncă bună”, transferând efortul în aval.",
+        "Mecanismul economic e pervers: produci un raport în 5 minute cu AI, iar destinatarul pierde ore să-l valideze sau să-l refacă, deci productivitate individuală aparentă și pierdere colectivă reală. Studiul BetterUp–Stanford publicat în Harvard Business Review (2025) a găsit fenomenul răspândit: aproximativ 40% dintre angajații chestionați primiseră workslop în ultima lună, cu un cost mediu de aproape două ore per incident. Semnătura workslop-ului: nimeni nu-și asumă conținutul, „așa a zis AI-ul”.",
+        "În contabilitate, workslop-ul e ușor de recunoscut: analiza de balanță cu comentarii generice valabile pentru orice firmă, procedura „actualizată” care reformulează fără să rezolve, emailul către client care nu răspunde întrebării puse. Antidotul e o regulă de cultură: AI-ul produce prima versiune, dar cine trimite semnează, adică livrezi doar ce ai verificat și ți-ai asumat, cu concluzie proprie."
+      ],
+      "examples": [
+        "Juniorul predă „analiza clientului”, 4 pagini elegante în care nicio afirmație nu se leagă de cifrele reale ale firmei; seniorul pierde după-amiaza refăcând-o: net negativ pe echipă.",
+        "Semnal de workslop în ședință: autorul raportului nu poate răspunde la „de unde vine cifra asta?”; documentul a fost generat, nu gândit.",
+        "Regula echipei: orice livrabil asistat de AI se predă cu 3 rânduri scrise de om, anume concluzia, limitele, ce ar verifica în plus; simpla obligație elimină grosul workslop-ului."
+      ]
+    },
+    {
+      "id": "workspace",
+      "date": "2026-08-20",
+      "term": "WORKSPACE",
+      "termFull": "SPAȚIUL DE LUCRU CARE SEPARĂ CONTEXTELE ÎNTR-UN INSTRUMENT AI",
+      "pron": "/ uărc·speis /",
+      "type": "substantiv",
+      "ro": "Spațiu de Lucru",
+      "def": [
+        "Workspace este spațiul de lucru care separă contextele într-un instrument AI: nivelul cel mai de sus, sub care stau conversațiile, proiectele, fișierele încărcate și setările. Analogia de birou e directă: workspace-ul e sediul, un Project e dosarul unei teme, iar conversația e ședința de azi. Confuzia frecventă e că workspace-ul ar fi „fereastra unde scrii promptul”; în realitate e cadrul administrativ care decide cine are acces, ce se păstrează și pe ce termen.",
+        "Dincolo de conținut, un workspace ține membrii și rolurile lor, facturarea, politica de retenție a datelor, conectorii activați către alte aplicații și, la abonamentele de firmă, clauza de neutilizare a datelor la antrenarea modelelor. De aici vine distincția practică între contul personal și workspace-ul firmei: același model, aceeași interfață, dar regim juridic și de securitate complet diferite. Denumirile variază de la un furnizor la altul (workspace, organizație, echipă), însă funcția e aceeași peste tot.",
+        "Pentru o firmă de contabilitate, workspace-ul e locul unde guvernanța AI devine concretă. Un workspace de firmă, cu acord de prelucrare a datelor și retenție configurată, transformă folosirea AI dintr-o inițiativă individuală într-un proces controlabil; fără el, fiecare angajat lucrează pe contul lui, iar firma nu știe ce date pleacă din birou. E exact granița dintre Shadow AI și utilizare guvernată, iar trecerea ei e o decizie administrativă, nu tehnică."
+      ],
+      "examples": [
+        "Firma trece de la nouă conturi personale la un workspace unic cu roluri: administratorul vede cine are acces, retenția se setează o singură dată, iar plecarea unui coleg închide accesul imediat.",
+        "Separarea contextelor: un workspace pentru lucrul cu clienții și unul pentru materiale interne (proceduri, training), ca documentele de client să nu ajungă în conversațiile de uz general.",
+        "Verificare înainte de primul document de client urcat: workspace-ul are acord de prelucrare semnat, retenție definită și antrenarea pe date dezactivată. Dacă lipsește una dintre ele, documentul rămâne pe disc."
+      ]
+    },
+    {
+      "id": "project",
+      "date": "2026-08-20",
+      "term": "PROJECT",
+      "termFull": "CONTAINER PERSISTENT CU INSTRUCȚIUNI, DOCUMENTE ȘI ISTORIC",
+      "pron": "/ pro·giect /",
+      "type": "substantiv",
+      "ro": "Project / Spațiu de Temă",
+      "def": [
+        "Project este containerul persistent care ține laolaltă trei lucruri pe o singură temă: instrucțiuni permanente aplicate automat fiecărei conversații din el, documente de referință pe care asistentul le poate consulta, și istoricul discuțiilor pe tema respectivă. Diferența față de o conversație obișnuită e că nu mai rescrii contextul: e deja acolo, de fiecare dată, identic. Denumirea „Project” vine din Claude și ChatGPT; în alte instrumente apare ca Gem, GPT personalizat, agent sau spațiu de lucru, dar ideea e aceeași.",
+        "Criteriul care justifică un Project e recurența, nu complexitatea: o temă la care ai revenit de cel puțin trei ori în ultima lună. Sub pragul ăsta, o conversație obișnuită e suficientă. Câștigul real nu e timpul economisit, ci consistența: instrucțiunile scrise o dată, cu cap, se aplică la fel și marți dimineața, și vineri la ora cinci. Instrucțiunea cea mai valoroasă dintr-un Project profesionist e cea care cere asistentului să semnaleze când informația nu se află în documentele încărcate, în loc să completeze din memoria lui generală.",
+        "În practica contabilă, Projectul e prima infrastructură pe care o construiești, nu doar o interacțiune pe care o repeți: unul pe e-Factura, unul pe SAF-T, unul pe Registrul de Inventar, eventual unul pe un client mare. Condițiile rămân cele de la orice încărcare de date: instrument aprobat de firmă, acord de prelucrare, clauză de neutilizare la antrenare și principiul minimizării, adică urci documentele de care ai nevoie, nu toată arhiva. Pe un cont personal, fără contract în spate, Projectul se construiește anonimizat."
+      ],
+      "examples": [
+        "Project pe e-Factura: instrucțiuni permanente cu legislația aplicabilă și formatul răspunsului, plus ghidurile ANAF ca documente de referință. Întrebările de zi cu zi nu mai încep cu trei paragrafe de context.",
+        "Project pe un client, într-un mediu aprobat: specificul lui în instrucțiuni, contractele și politicile contabile ca documente, istoric consecvent. Colegul care preia dosarul găsește același context, nu memoria altcuiva.",
+        "Test de calitate a unui Project: pune o întrebare al cărei răspuns sigur nu se află în documentele încărcate. Dacă asistentul semnalează lipsa în loc să inventeze, instrucțiunile permanente sunt scrise corect."
+      ]
+    },
+    {
+      "id": "scheduled-tasks",
+      "date": "2026-08-20",
+      "term": "SCHEDULED TASKS",
+      "termFull": "SARCINI RECURENTE, RULATE AUTOMAT LA MOMENTE STABILITE",
+      "pron": "/ ske·giuld tascs /",
+      "type": "substantiv",
+      "ro": "Sarcini Programate",
+      "def": [
+        "Scheduled tasks sunt sarcini recurente pe care le dai o dată unui asistent AI și care rulează singure la momente stabilite: zilnic la o anumită oră, săptămânal, lunar. În loc să deschizi conversația și să repeți aceeași cerere, instrucțiunea e programată, iar rezultatul ajunge la tine ca notificare sau ca o conversație nouă, deja pregătită. Nu e o coadă de așteptare și nu amână răspunsul modelului: e o rutină, echivalentul unei alarme care vine cu treaba făcută.",
+        "Distincția utilă e față de automatizarea fluxurilor: sarcina programată e o singură instrucțiune recurentă, care trăiește în interiorul asistentului și produce de regulă un text; automatizarea fluxurilor înlănțuie pași între sisteme diferite și scrie efectiv în ele. De aici și limita corectă a rutinelor: le pui să observe, să adune și să sintetizeze, nu să acționeze. Riscul specific e tăcut, fiindcă o rutină prost calibrată continuă să livreze la fel de convingător și după ce contextul s-a schimbat, iar la un moment dat nimeni nu mai citește al șaptelea raport identic.",
+        "În activitatea contabilă, rutinele care merită sunt cele de monitorizare și de pregătire: o sinteză săptămânală a modificărilor legislative pe ariile tale, lista termenelor fiscale la începutul lunii, checklistul de închidere generat înainte de ședința de echipă. Regula de igienă are trei puncte: fiecare rutină are un proprietar care o citește, o dată de revizuire și un criteriu clar de oprire. O rutină pe care n-o mai citește nimeni nu e automatizare, e zgomot programat."
+      ],
+      "examples": [
+        "Rutină săptămânală de monitorizare: luni dimineața, o sinteză a noutăților fiscale relevante pentru portofoliul firmei, cu link către sursă, verificată de un om înainte de a pleca spre clienți.",
+        "Rutină lunară de pregătire: pe 25 ale lunii, checklistul de închidere pentru fiecare tip de client, generat din procedurile încărcate în Project, ca punct de plecare al ședinței de echipă.",
+        "Revizuire trimestrială: rutinele necitite de trei luni se opresc, iar cele păstrate se recalibrează pe instrucțiunea curentă. Altfel se acumulează exact ca abonamentele nefolosite."
+      ]
+    },
+    {
+      "id": "ocr-ai",
+      "date": "2026-08-20",
+      "term": "OCR + AI",
+      "termFull": "CITIREA DOCUMENTELOR SCANATE + ÎNȚELEGEREA CONTEXTULUI LOR",
+      "pron": "/ o·si·ar plus ei·ai /",
+      "type": "substantiv",
+      "ro": "Recunoaștere Optică a Caracterelor + AI",
+      "def": [
+        "OCR (recunoașterea optică a caracterelor) transformă imaginea unui document (scan, fotografie, PDF needitabil) în text prelucrabil; combinația cu AI adaugă etajul care lipsea: înțelegerea. OCR-ul clasic îți dă literele; modelul AI îți spune că acele litere formează o factură, că „RO12345678” e un CUI, că totalul de plată e 1.190 lei din care 190 TVA și că data scadenței lipsește.",
+        "Diferența practică față de generația veche: OCR-ul pe șabloane cerea configurare pentru fiecare format de document și ceda la orice abatere, fie ea logo mutat, coloană nouă sau scan strâmb; combinația OCR + AI generalizează, citind documente pe care nu le-a mai văzut, în formate oricât de variate, inclusiv scrisul de mână decent. Limitele oneste: calitatea foarte slabă a imaginii rămâne dușmanul principal, iar cifrele critice extrase automat cer validare, fiindcă eroarea de citire la un total e mică statistic și scumpă contabil.",
+        "Pentru contabilitate, aceasta e poarta de intrare a AI-ului în operațiuni, pasul zero al oricărei automatizări documentare: bonuri, chitanțe, extrase, contracte scanate și facturi de la furnizori externi devin date structurate care curg spre ERP fără retastare. Criteriile de evaluare a soluțiilor: acuratețea pe documentele TALE (nu pe demo), tratarea excepțiilor și validările încorporate."
+      ],
+      "examples": [
+        "Cutia de email „deconturi@” e procesată automat: OCR + AI citesc fiecare bon atașat, extrag câmpurile fiscale și propun înregistrarea, iar retastarea manuală dispare din fișa postului.",
+        "Bonurile de deconturi fotografiate cu telefonul, oricât de șifonate, devin linii de decont structurate, cu validarea umană doar la sumele care depășesc pragul intern.",
+        "Criteriu de achiziție: testezi soluția pe 100 de documente reale ale firmei și măsori rata de extragere corectă pe câmpurile critice, singura cifră care contează, nu procentele din broșură."
+      ]
+    },
+    {
+      "id": "data-extraction",
+      "date": "2026-08-20",
+      "term": "DATA EXTRACTION",
+      "termFull": "EXTRAGEREA DE CÂMPURI STRUCTURATE DIN DOCUMENTE NESTRUCTURATE",
+      "pron": "/ dei·ta ex·trac·șăn /",
+      "type": "substantiv",
+      "ro": "Extragere de Date",
+      "def": [
+        "Data extraction este transformarea documentelor nestructurate (contracte, bonuri, extrase, corespondență, facturi de la furnizori externi) în date structurate, gata de folosit: câmpuri cu nume, valori și format predictibil (furnizor, CUI, dată, sumă, scadență), livrate ca JSON, tabel sau înregistrare direct în sistem. Este probabil cea mai matură și mai rentabilă aplicație AI din practica financiar-contabilă.",
+        "Ce o deosebește de simpla „citire”: extragerea presupune un contract de date, prin care definești exact ce câmpuri vrei, în ce format, ce se întâmplă când un câmp lipsește (null, nu invenție) și cum se validează rezultatul (totalul = net + TVA; CUI-ul are format valid). Aici se decide calitatea: extracția fără schemă strictă și fără validări produce date „aproximative”, mai periculoase decât lipsa datelor, pentru că arată complete.",
+        "Pentru un cabinet sau departament financiar, extragerea de date e locul unde AI-ul își plătește abonamentul cel mai vizibil: orele de retastare devin minute de validare, iar datele odată structurate alimentează tot lanțul, de la înregistrare și reconciliere la raportare și analiză. Regula de implementare: pornești cu un tip de document, o schemă strictă și o buclă de validare umană, apoi extinzi pe măsură ce rata de eroare dovedită scade."
+      ],
+      "examples": [
+        "200 de bonuri de decont scanate, în formate diferite → un tabel uniform cu 9 câmpuri fiscale, în câteva minute; câmpurile lipsă sunt marcate null și rutate spre verificare, nu completate „din burtă”.",
+        "Extragere din contracte: părți, valoare, termene, clauze de penalitate din 80 de contracte scanate → registrul de obligații contractuale al firmei, construit într-o după-amiază.",
+        "Validare încorporată: regula „net + TVA = total, altfel documentul merge la om” prinde atât erorile de extragere, cât și, bonus neplanificat, câteva facturi furnizor calculate greșit."
+      ]
+    },
+    {
+      "id": "summarization",
+      "date": "2026-08-20",
+      "term": "SUMMARIZATION",
+      "termFull": "CONDENSAREA AUTOMATĂ A DOCUMENTELOR LUNGI ÎN SINTEZE UTILE",
+      "pron": "/ sa·ma·rai·zei·șăn /",
+      "type": "substantiv",
+      "ro": "Rezumare / Sinteză Automată",
+      "def": [
+        "Summarization este condensarea automată a materialelor lungi (rapoarte, contracte, corespondență, transcrieri de ședințe) în sinteze care păstrează esențialul: deciziile, cifrele, riscurile, acțiunile. Un LLM face în secunde ce cerea o oră de lectură atentă; întrebarea profesională nu e „poate rezuma?”, ci „rezumatul ăsta e de încredere?”.",
+        "Cheia calității e specificarea: „fă un rezumat” produce o comprimare generică; „extrage deciziile, sumele angajate, termenele și punctele de dezacord, maximum o pagină, cu trimitere la secțiunea-sursă” produce un instrument de lucru. Riscurile specifice: rezumatul poate omite exact nuanța critică (excepția dintr-o clauză, condiția unei aprobări) sau poate netezi incertitudinile textului original în afirmații ferme; de aceea documentele cu miză se rezumă cu trimiteri la sursă, iar decizia finală se ia pe pasajul original, nu pe rezumat.",
+        "În practica financiar-contabilă, sinteza automată schimbă economia informației: rapoartele anuale ale partenerilor comerciali, modificările legislative, corespondența lungă cu clienții devin scanabile sistematic, nu selectiv. Modelul sănătos de utilizare: rezumatul ca hartă de navigație către pasajele care merită citite integral, nu ca înlocuitor al lecturii acolo unde semnezi."
+      ],
+      "examples": [
+        "Raportul anual de 120 de pagini al unui partener comercial → sinteză de o pagină pe structura: poziție financiară, riscuri semnalate de auditor, evenimente ulterioare, cu numărul paginii la fiecare afirmație.",
+        "Ședința de închidere transcrisă automat → rezumat cu decizii, responsabili și termene, circulat în aceeași zi; minuta scrisă manual dispare din proces.",
+        "Monitorizare legislativă: modificările săptămânale din Monitorul Oficial pe domeniile relevante → buletin intern de 10 rânduri per act, cu link la textul integral pentru ce merită aprofundat."
+      ]
+    },
+    {
+      "id": "vibe-coding",
+      "date": "2026-08-20",
+      "term": "VIBE CODING",
+      "termFull": "PROGRAMARE „DUPĂ FEELING” — DESCRII, AI-UL SCRIE, TU ACCEPȚI",
+      "pron": "/ vaib co·ding /",
+      "type": "substantiv",
+      "ro": "Programare pe Încredere („după vibe”)",
+      "def": [
+        "Vibe coding este crearea de software prin simpla descriere a dorinței în limbaj natural, acceptând aproape tot ce generează AI-ul, fără a citi sau înțelege codul rezultat: „vreau o aplicație care urmărește scadențele” → aplicația apare → dacă merge, mergem mai departe. Termenul a fost lansat în 2025 de Andrej Karpathy (cofondator OpenAI, fost șef AI la Tesla) și a devenit rapid cuvântul anului la Collins Dictionary.",
+        "Partea revoluționară: programarea devine accesibilă oamenilor fără pregătire tehnică, iar un contabil își poate construi singur unealta pe care IT-ul nu avea timp s-o facă. Partea periculoasă: cod neînțeles de nimeni, fără teste, cu vulnerabilități invizibile, care „merge” până când nu mai merge, de regulă în cel mai prost moment. Distincția-cheie: excelent pentru prototipuri și unelte personale de mică miză; nepotrivit pentru sisteme cu date sensibile sau procese critice fără revizie tehnică.",
+        "Pentru profesioniștii financiari, vibe coding-ul e o superputere cu instrucțiuni de folosire: automatizări personale (renumit fișiere, comparat liste, formatat rapoarte), da, cu entuziasm; unealta care atinge datele clienților sau alimentează raportări oficiale, doar cu validare serioasă, căci eroarea tăcută dintr-un script neînțeles devine eroarea din situațiile financiare."
+      ],
+      "examples": [
+        "Un contabil își descrie în chat unealta visată, „compară extrasul bancar cu registrul de încasări și listează diferențele”, și o are funcțională într-o oră, fără o linie de cod scrisă de el.",
+        "Reversul: scriptul „vibe-codat” care agregă deconturile rotunjește greșit într-un caz rar; nimeni nu poate depana codul pentru că nimeni nu-l înțelege, așa că se rescrie de la zero.",
+        "Regulă de firmă sănătoasă: uneltele vibe-codate sunt binevenite pentru uz personal și prototipare; înainte să intre în procese cu date de clienți, trec printr-o revizie tehnică minimă."
+      ]
+    },
+    {
+      "id": "shadow-ai",
+      "date": "2026-08-20",
+      "term": "SHADOW AI",
+      "termFull": "FOLOSIREA DE INSTRUMENTE AI NEAPROBATE, FĂRĂ ȘTIREA FIRMEI",
+      "pron": "/ șe·dou ei·ai /",
+      "type": "substantiv",
+      "ro": "AI din Umbră",
+      "def": [
+        "Shadow AI este folosirea de instrumente AI de către angajați, instrumente neaprobate, fără știrea sau acordul organizației: contul personal de ChatGPT în care se încarcă date de serviciu, extensia de browser care „rezumă” documentele firmei, aplicația gratuită de transcriere a ședințelor confidențiale. Este vărul AI al fenomenului mai vechi „shadow IT”, dar cu apetit mult mai mare pentru date.",
+        "Dinamica e previzibilă și aproape universală, iar studiile de industrie raportează utilizare neaprobată în marea majoritate a organizațiilor: angajații găsesc uneltele utile înaintea firmei, iar interdicțiile fără alternative nu opresc folosirea, ci doar o ascund. Riscurile sunt concrete: date confidențiale trimise către servicii care le pot reține sau folosi la antrenare, zero jurnalizare, zero control contractual, imposibilitatea de a răspunde onest la întrebarea clientului „cine îmi procesează datele?”.",
+        "Pentru cabinete contabile și departamente financiare, shadow AI e printre primele riscuri practice de tratat: datele clienților sunt exact genul de informație care „scapă” în prompturi. Răspunsul matur nu e prohibiția totală (care doar ascunde fenomenul), ci canalizarea: unelte aprobate și bune, reguli clare despre ce date au voie unde, și eventual o „amnistie AI” ca să afli ce folosește deja echipa."
+      ],
+      "examples": [
+        "Un contabil lipsește balanța clientului în contul personal al unui chatbot gratuit ca „să-i facă un rezumat”, iar datele au părăsit firma fără contract, jurnal sau drept de ștergere.",
+        "Descoperire tipică la un audit intern: mai multe abonamente AI personale folosite curent pe date de serviciu, niciunul evaluat vreodată de cineva responsabil.",
+        "Tratament: firma oferă un asistent aprobat, cu contract de procesare a datelor, și publică regula simplă, „datele clienților doar în uneltele din lista aprobată”, iar utilizarea iese din umbră."
+      ]
     }
   ]
 }
