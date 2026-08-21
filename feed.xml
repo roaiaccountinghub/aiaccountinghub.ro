@@ -31,12 +31,40 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Fri, 14 Aug 2026 10:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Thu, 20 Aug 2026 10:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <!-- ============================================================
+         LOT BUZZWORD — 20.08.2026: cincisprezece termeni noi. Paisprezece
+         acoperă termenii din AI Journal care nu aveau încă pagină proprie
+         (Output Formatting, Prompt Engineering, Hallucination, Shadow AI,
+         Data Leakage / PII, Automation Bias, AI Slop, Workslop, Workspace,
+         Project, Scheduled Tasks, OCR + AI, Data Extraction, Summarization),
+         al cincisprezecelea e Vibe Coding. Ca la loturile anterioare, se
+         anunță doar termenul săptămânii plus unul notabil, nu toți.
+         ============================================================ -->
+
+    <item>
+      <title>Buzzword: Shadow AI — uneltele pe care echipa le folosește deja, fără să știi</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#shadow-ai</link>
+      <guid isPermaLink="false">aiah-buzzword-shadow-ai</guid>
+      <pubDate>Thu, 20 Aug 2026 10:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Folosirea de instrumente AI neaprobate de către angajați, fără știrea firmei: contul personal în care se lipesc date de serviciu, extensia care „rezumă” documentele, aplicația gratuită de transcriere a unei ședințe confidențiale. Interdicția totală nu oprește fenomenul, doar îl face invizibil. Răspunsul care funcționează e canalizarea: unelte aprobate, reguli clare despre ce date au voie unde.</description>
+    </item>
+
+    <item>
+      <title>Buzzword: Vibe coding — descrii, AI-ul scrie, tu răspunzi de rezultat</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#vibe-coding</link>
+      <guid isPermaLink="false">aiah-buzzword-vibe-coding</guid>
+      <pubDate>Thu, 20 Aug 2026 09:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Crearea de software prin simpla descriere în limbaj natural, acceptând aproape tot ce generează AI-ul, fără a citi codul rezultat. Termen lansat de Andrej Karpathy în 2025 și ajuns cuvântul anului la Collins. Excelent pentru prototipuri și unelte personale; nepotrivit, fără revizie tehnică, oriunde atinge date de clienți sau raportări oficiale.</description>
+    </item>
 
     <!-- ============================================================
          LOT BUZZWORD — 14.08.2026: opt termeni noi (AI Memory, Guardrails,
@@ -115,6 +143,15 @@
       <pubDate>Tue, 11 Aug 2026 09:00:00 +0300</pubDate>
       <category>Articol</category>
       <description>Pachetul „State of the Digital Decade 2026”, raportul de țară și Eurobarometrul special, publicate toate pe 17 iunie 2026. Media europeană a urcat de la 13,5% la 20% dintre firme, noi am rămas la 5,2%. Iar bariera nr. 1 declarată de românii înșiși pentru AI generativ nu e prețul și nu e frica: e lipsa formării. 11 min.</description>
+    </item>
+
+    <item>
+      <title>AI Jurnal S2 — Prompturi care chiar funcționează</title>
+      <link>https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html</guid>
+      <pubDate>Tue, 11 Aug 2026 08:10:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Rol, context, sarcină, format. Structura în patru straturi care transformă „întreb ceva” în „cer exact ce-mi trebuie”, aplicată pe sarcini reale de contabil. Plus testul de guardrails, cu cele trei reacții posibile și ce înseamnă fiecare pentru un profesionist. 9 min.</description>
     </item>
 
     <item>

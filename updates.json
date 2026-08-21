@@ -2,8 +2,26 @@
   "_comment": "FLUXUL DE NOUTĂȚI — se completează MANUAL la fiecare publicare, împreună cu feed.xml (sunt oglindă). Adaugă noul material ca PRIM element din 'items' (ordinea din listă = ordinea afișării, cele mai noi întâi). Câmpuri: id (unic, nu se mai schimbă niciodată — el decide ce e 'citit'), type (DOAR articol | podcast | buzzword — alt tip nu poate fi bifat de cititor, deci nu i-ar fi semnalat niciodată), title, url (adresa la care duce notificarea), date (AAAA-LL-ZZ), meta (text scurt: durată), mark (opțional — selector CSS al cardului care primește eticheta NOU; dacă lipsește, se caută automat legătura către 'url').",
   "_linkuri": "Articol: adresa proprie a paginii. Podcast: 'podcast.html?play=<spotifyId>' — deschide direct playerul pe episodul acela. Buzzword: 'buzzword.html#<id>' — deschide definiția și derulează la ea. Resursele nu intră aici: când publici ceva important în Download zone scrii oricum și un articol pe temă.",
   "_surse": "Datele de publicare există și la sursă: câmpul 'date' din assets/podcast-data.js (episoade) și din assets/buzzwords.json (termeni). De acolo le copiezi când adaugi un material nou aici.",
-  "updated": "2026-08-14",
+  "updated": "2026-08-20",
   "items": [
+    {
+      "id": "buzz-shadow-ai",
+      "type": "buzzword",
+      "title": "Shadow AI — uneltele pe care echipa le folosește deja, fără să știi",
+      "url": "buzzword.html#shadow-ai",
+      "date": "2026-08-20",
+      "meta": "termenul săptămânii",
+      "mark": "#shadow-ai"
+    },
+    {
+      "id": "buzz-vibe-coding",
+      "type": "buzzword",
+      "title": "Vibe coding — descrii, AI-ul scrie, tu răspunzi de rezultat",
+      "url": "buzzword.html#vibe-coding",
+      "date": "2026-08-20",
+      "meta": "termen explicat",
+      "mark": "#vibe-coding"
+    },
     {
       "id": "buzz-ai-fomo",
       "type": "buzzword",
@@ -62,6 +80,14 @@
       "url": "2026-08-11-AI-Literacy-Romania-decalajul-se-adanceste.html",
       "date": "2026-08-11",
       "meta": "11 min · AI Journal 1/4"
+    },
+    {
+      "id": "art-2026-08-11-ai-jurnal-s2",
+      "type": "articol",
+      "title": "AI Jurnal S2 — Prompturi care chiar funcționează",
+      "url": "2026-08-11-AI-Jurnal-S2-Prompturi-care-chiar-functioneaza.html",
+      "date": "2026-08-11",
+      "meta": "9 min · AI Journal · săptămâna 2"
     },
     {
       "id": "art-2026-08-11-ai-jurnal-s1",
