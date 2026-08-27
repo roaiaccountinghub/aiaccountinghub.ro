@@ -31,12 +31,21 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Thu, 20 Aug 2026 10:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Thu, 27 Aug 2026 09:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi</title>
+      <link>https://aiaccountinghub.ro/2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html</guid>
+      <pubDate>Thu, 27 Aug 2026 09:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Pe 26 august, ANAF a pus la dispoziția contribuabililor două tool-uri pentru SAF-T: unul aplică testele de consistență pe fișierul D406, celălalt transpune datele din XML într-un format similar decontului de TVA. Le-am testat pe fișiere SAF-T: din cele 33 de teste publicate în cele două serii sunt implementate 11, transpunerea nu se compară singură cu decontul depus, iar TVA la încasare rămâne o zonă în care rezultatul se verifică separat. Niciunul nu înlocuiește DUKIntegrator. Plus întrebarea care rămâne: va deveni SAF-T sursa decontului precompletat?</description>
+    </item>
 
     <!-- ============================================================
          LOT BUZZWORD — 20.08.2026: cincisprezece termeni noi. Paisprezece

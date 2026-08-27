@@ -35,6 +35,7 @@ Cele șase activități săptămânale, câte un ghid detaliat pentru fiecare:
 
 ## Articole reprezentative
 
+- [Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi](https://aiaccountinghub.ro/2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html): ce fac instrumentele 6 și 7 puse la dispoziție de ANAF pe 26.08.2026, câte dintre cele 33 de teste de consistență sunt implementate și ce limitări are transpunerea datelor SAF-T în format D300
 - [Promptul perfect 2.0 — ce s-a schimbat în trei luni](https://aiaccountinghub.ro/2026-07-31-Promptul-perfect-2.0.html): ghid de prompting pentru contabili, aplicabil cererilor cu miză, nu celor de zi cu zi: tag-uri XML, ordinea contextului, guardrails, prompt injection și un mega-prompt aplicat pe o analiză fiscală
 - [Vibe coding — ce este și unde îl folosim](https://aiaccountinghub.ro/2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html): definiție, origine și aplicații practice în contabilitate
 - [RO e-Factura — când ANAF vede viitorul prin AI](https://aiaccountinghub.ro/2026-05-04-RO-e-Factura-cand-ANAF-vede-viitorul-prin-AI.html): analiza digitalizării fiscale românești
