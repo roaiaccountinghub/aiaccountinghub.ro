@@ -31,12 +31,21 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Thu, 27 Aug 2026 09:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2026 09:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406</title>
+      <link>https://aiaccountinghub.ro/2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html</guid>
+      <pubDate>Sat, 29 Aug 2026 09:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Recapitulare ordonată a tot ce se află în spatele butonului „generează”. De unde vine standardul OCDE, de ce nu impune o formă anume și de ce fișierele nu seamănă între țări, cum a intrat obligația în legislația română prin OG 11/2021, ce conțin cele patru secțiuni cu date, cine intră când în obligație, care sunt cele trei declarații și termenele fiecăreia. Plus partea care contează: de ce miza nu e amenda de 5.000 de lei.</description>
+    </item>
 
     <item>
       <title>Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi</title>

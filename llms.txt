@@ -33,9 +33,16 @@ Cele șase activități săptămânale, câte un ghid detaliat pentru fiecare:
 - [S5 — Projects, rutine și lucrul organizat](https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S5-Projects-rutine-si-lucrul-organizat.html)
 - [S6 — Documente, date și conexiuni](https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html): extragere din facturi, sinteză, calcul asistat, MCP
 
+## SAF-T și declarația D406
+
+Serie dedicată fișierului standard de control fiscal: cadrul legal, structura declarației,
+termenele, sancțiunile și instrumentele cu care se verifică fișierul înainte de depunere.
+
+- [Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406](https://aiaccountinghub.ro/2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html): originea standardului OCDE din 2005, introducerea în legislația română prin OG 11/2021 (art. 59^1 și art. 337^1 din Codul de procedură fiscală), calendarul pe categorii de contribuabili, cele patru secțiuni cu date ale fișierului, cele trei tipuri de declarații (periodică, Active, Stocuri), termenele și contravențiile
+- [Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi](https://aiaccountinghub.ro/2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html): ce fac instrumentele 6 și 7 puse la dispoziție de ANAF pe 26.08.2026, câte dintre cele 33 de teste de consistență sunt implementate și ce limitări are transpunerea datelor SAF-T în format D300
+
 ## Articole reprezentative
 
-- [Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi](https://aiaccountinghub.ro/2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html): ce fac instrumentele 6 și 7 puse la dispoziție de ANAF pe 26.08.2026, câte dintre cele 33 de teste de consistență sunt implementate și ce limitări are transpunerea datelor SAF-T în format D300
 - [Promptul perfect 2.0 — ce s-a schimbat în trei luni](https://aiaccountinghub.ro/2026-07-31-Promptul-perfect-2.0.html): ghid de prompting pentru contabili, aplicabil cererilor cu miză, nu celor de zi cu zi: tag-uri XML, ordinea contextului, guardrails, prompt injection și un mega-prompt aplicat pe o analiză fiscală
 - [Vibe coding — ce este și unde îl folosim](https://aiaccountinghub.ro/2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html): definiție, origine și aplicații practice în contabilitate
 - [RO e-Factura — când ANAF vede viitorul prin AI](https://aiaccountinghub.ro/2026-05-04-RO-e-Factura-cand-ANAF-vede-viitorul-prin-AI.html): analiza digitalizării fiscale românești

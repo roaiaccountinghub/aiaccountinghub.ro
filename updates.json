@@ -2,8 +2,16 @@
   "_comment": "FLUXUL DE NOUTĂȚI — se completează MANUAL la fiecare publicare, împreună cu feed.xml (sunt oglindă). Adaugă noul material ca PRIM element din 'items' (ordinea din listă = ordinea afișării, cele mai noi întâi). Câmpuri: id (unic, nu se mai schimbă niciodată — el decide ce e 'citit'), type (DOAR articol | podcast | buzzword — alt tip nu poate fi bifat de cititor, deci nu i-ar fi semnalat niciodată), title, url (adresa la care duce notificarea), date (AAAA-LL-ZZ), meta (text scurt: durată), mark (opțional — selector CSS al cardului care primește eticheta NOU; dacă lipsește, se caută automat legătura către 'url').",
   "_linkuri": "Articol: adresa proprie a paginii. Podcast: 'podcast.html?play=<spotifyId>' — deschide direct playerul pe episodul acela. Buzzword: 'buzzword.html#<id>' — deschide definiția și derulează la ea. Resursele nu intră aici: când publici ceva important în Download zone scrii oricum și un articol pe temă.",
   "_surse": "Datele de publicare există și la sursă: câmpul 'date' din assets/podcast-data.js (episoade) și din assets/buzzwords.json (termeni). De acolo le copiezi când adaugi un material nou aici.",
-  "updated": "2026-08-27",
+  "updated": "2026-08-29",
   "items": [
+    {
+      "id": "art-saft-de-la-ocde-la-d406",
+      "type": "articol",
+      "title": "Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406",
+      "url": "2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html",
+      "date": "2026-08-29",
+      "meta": "17 min"
+    },
     {
       "id": "art-saft-aplicatii-anaf",
       "type": "articol",
