@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cum verifici fișierul SAF-T D406 înainte de depunere — AI Accounting Hub</title>
+<meta name="description" content="Un fișier D406 validat de DUKIntegrator poate fi greșit. Cele cinci niveluri de verificare, unde cedează Excel-ul și cât costă, de fapt, soluțiile din piață.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-08-30-Verificarea-D406-inainte-de-depunere.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-08-30-Verificarea-D406-inainte-de-depunere.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Cum verifici fișierul SAF-T D406 înainte de depunere — AI Accounting Hub">
+<meta property="og:description" content="Un fișier D406 validat de DUKIntegrator poate fi greșit. Cele cinci niveluri de verificare, unde cedează Excel-ul și cât costă, de fapt, soluțiile din piață.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cum verifici fișierul SAF-T D406 înainte de depunere — AI Accounting Hub">
+<meta name="twitter:description" content="Un fișier D406 validat de DUKIntegrator poate fi greșit. Cele cinci niveluri de verificare, unde cedează Excel-ul și cât costă, de fapt, soluțiile din piață.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Subtitlurile de secțiune. h2 poartă '§', h3 primește '//', același vocabular
+   cu etichetele mono din site. Blocul de surse are propriul '//' scris în text,
+   deci acolo marcajul se anulează. */
+.prose h3 { margin: 44px 0 14px; }
+.prose h3::before { content: '//'; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; color: var(--accent); font-weight: 400; margin-right: 10px; opacity: 0.75; }
+
+
+/* Tabele */
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+.prose tbody tr:hover td { background: color-mix(in oklab, var(--accent) 3%, transparent); }
+.prose td.nr { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--fg-dim); white-space: nowrap; }
+.prose td.pret { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--fg); }
+
+/* Cod inline */
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: color-mix(in oklab, var(--fg) 8%, transparent); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; color: var(--fg); white-space: nowrap; }
+.prose td code { font-size: 12.5px; }
+
+/* Cifrele de deschidere */
+.numbers { margin: 30px 0; display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 720px) { .numbers { grid-template-columns: repeat(4, 1fr); } }
+.numbers > div { border: 1px solid var(--border); border-radius: 12px; background: var(--bg-1); padding: 16px 18px; }
+.numbers b { display: block; font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 500; color: var(--accent); line-height: 1.05; margin-bottom: 8px; }
+.numbers span { display: block; font-size: 12.5px; line-height: 1.45; color: var(--fg-muted); }
+
+/* Ce face / ce nu face validatorul */
+.verdict { margin: 30px 0; display: grid; gap: 14px; }
+.verdict > div { border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); padding: 20px 22px; }
+.verdict .h { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+.verdict .can .h { color: #6fbf8b; }
+.verdict .cant .h { color: #e0a33e; }
+.verdict ul { margin: 0; padding-left: 18px; }
+.verdict li { font-size: 14.5px; color: var(--fg-muted); line-height: 1.6; margin-bottom: 8px; }
+.verdict li:last-child { margin-bottom: 0; }
+.verdict li strong { color: var(--fg); }
+@media (min-width: 820px) { .verdict { grid-template-columns: 1fr 1fr; } }
+
+/* Linkuri în proză — styles.css are a { color: inherit } */
+.prose p > a, .prose li > a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); }
+.prose p > a:hover, .prose li > a:hover { border-bottom-color: var(--accent); }
+
+@media (max-width: 720px) {
+  .prose table { font-size: 13px; }
+  .prose th, .prose td { padding: 10px 12px; }
+}
+@media (max-width: 420px) {
+  .prose table { font-size: 12px; }
+  .prose th, .prose td { padding: 8px 10px; }
+  .numbers b { font-size: 22px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cum verifici fișierul SAF-T D406 înainte de depunere — AI Accounting Hub",
+  "description": "Un fișier D406 validat de DUKIntegrator poate fi greșit. Cele cinci niveluri de verificare, unde cedează Excel-ul și cât costă, de fapt, soluțiile din piață.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-08-30",
+  "dateModified": "2026-08-30",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-08-30-Verificarea-D406-inainte-de-depunere.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce verifică, de fapt, DUKIntegrator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DUKIntegrator verifică dacă fișierul XML respectă schema XSD publicată de ANAF: structura secțiunilor și a elementelor, tipurile de date, câmpurile obligatorii și formatele, adică structura IBAN-ului, codurile de țară sau construcția AccountID. Nu verifică dacă TVA-ul e corect calculat, dacă baza impozabilă e corect codificată, dacă datele corespund balanței contabile sau dacă secțiunile fișierului sunt consistente între ele. Un fișier validat de DUKIntegrator poate fi, deci, un fișier corect ca formă și greșit ca fond."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Câte teste de consistență SAF-T a publicat ANAF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "În total 33 de teste, în două serii: 22 de teste publicate în martie 2023 și 11 teste publicate în august 2024. Aplicația gratuită de verificare pusă la dispoziție de ANAF pe 26 august 2026 implementează integral seria a doua, adică cele 11 teste din 2024, și nimic din prima serie."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum deschid un fișier SAF-T XML?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fișierul e text simplu, deci se deschide cu orice editor de text instalat deja pe calculator, inclusiv Notepad. Se vede însă codul, nu datele: informația e acolo, între etichete, dar nu poate fi filtrată, sortată sau adunată. Pentru a lucra efectiv cu ea, XML-ul trebuie transformat în tabel, prin maparea XML din fila Developer a Excel, prin Data, Get Data, From XML, sau, cel mai robust, prin Power Query."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce verificări trebuie făcute înainte de depunerea declarației D406?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Verificarea are cinci niveluri, plus un nivel zero. N0 sunt controalele din programul de contabilitate, înainte de generare: rulajul din balanță față de registrul jurnal, continuitatea soldurilor, balanța partenerilor și a stocurilor față de balanța contabilă, registrele de casă și bancă, situația imobilizărilor. N1 e validarea de schemă din DUKIntegrator. N2 e validarea globală și recipisa primită de la ANAF după încărcarea pe eguvernare.ro. N3 sunt cele 33 de teste de consistență publicate de ANAF. N4 e cross-check-ul între secțiunile fișierului și față de datele din ERP. N5 e reconcilierea cu celelalte declarații, în special decontul de TVA."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Se poate verifica fișierul D406 în Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Parțial. XML-ul se poate transforma în tabel prin maparea XML din fila Developer, prin Data, Get Data, From XML, sau, cel mai robust, prin Power Query. Limita practică apare însă mult înaintea limitei de 1.048.576 de rânduri a foii de calcul: peste 400.000 - 500.000 de linii, cu un număr rezonabil de coloane, Excel lucrează deja la limită. Iar un D406 lunar al unei firme medii ajunge fără efort la zeci sau sute de mii de linii, dacă registrul jurnal se desface la nivel de linie."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cât costă o soluție de verificare a fișierului SAF-T?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mult mai puțin decât sugerează percepția din piață. Trei dintre cele cinci niveluri de verificare se acoperă gratuit: verificările din ERP, DUKIntegrator și testele de consistență din seria 2024, prin aplicația ANAF. Pentru reconcilierea între secțiuni și între declarații există soluții românești cu preț public de la 990 de lei pe an, care pentru un cabinet cu 30 - 50 de clienți înseamnă între 20 și 33 de lei per client, pe an. Firmele de consultanță nu publică prețuri."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Îmi pot construi singur o aplicație de verificare a fișierului SAF-T?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da, și e un caz potrivit pentru vibe coding: regulă deterministă, volum mare, format structurat. Materia primă e publică toată: schema XSD oficială, fișierul cu definiții și note explicative, cele 33 de teste de consistență și nomenclatorul care mapează codurile de taxă pe rândurile decontului. Trei precauții: fișierul nu se încarcă în instrumente AI publice, fiindcă ce generezi cu AI e codul, nu prelucrarea datelor; enunțul testelor se ia din documentul ANAF, nu din memoria modelului; iar instrumentul se calibrează pe o lună deja depusă și acceptată."
+      }
+    }
+  ]
+}</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Verificarea fișierului D406</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Analiză</span>
+      <span>30 august 2026</span>
+      <span class="sep">·</span>
+      <span>22 min citire</span>
+    </div>
+
+    <h1>Cum verifici fișierul SAF-T D406 <span class="accent">înainte de depunere</span></h1>
+    <p class="article-lede">
+      Generăm fișierul, îl trecem prin DUKIntegrator, citim apoi „Fișierul PDF a fost creat cu succes” și depunem. Numai că mesajul acela nu spune ce credem noi că spune. Cele cinci niveluri de verificare a declarației D406, unde cedează Excel-ul, ce se poate cumpăra de pe piață și cu cât, și ce faci când nu se potrivește nimic.
+    </p>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s0">In DUK we trust</a>
+        <a href="#s1">Ce face, de fapt, DUKIntegrator</a>
+        <a href="#s2">De ce contează acum mai mult ca acum doi ani</a>
+        <a href="#s3">Ce a pus ANAF la dispoziție pe 26 august</a>
+        <a href="#s4">Cele cinci niveluri de verificare</a>
+        <a href="#s5">Noi lucrăm în tabele, fișierul e un arbore</a>
+        <a href="#s6">Ce oferă piața</a>
+        <a href="#s7">Când soluțiile de piață nu sunt disponibile</a>
+        <a href="#s8">Aici intră vibe coding</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">30.08.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// D406 · verificarea fișierului înainte de depunere · ilustrație</div>
+    </div>
+
+    <div class="prose">
+
+      <p>
+        În <a href="2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html">articolul precedent</a> am descris obiectul: de unde vine SAF-T, cum a ajuns la noi prin OG 11/2021, ce conține fișierul, cine depune, până când și ce riscă cine greșește. Cine a sărit peste el poate să se întoarcă oricând, pentru că aici nu reluăm nimic din acea parte.
+      </p>
+      <p>
+        Articolul acesta continuă exact de unde se oprea celălalt, cu întrebarea practică: cum verifici datele din XML înainte să depui. Nu „cum generezi fișierul”, ci ce faci cu el între momentul în care softul de contabilitate îl produce și momentul în care apeși butonul de transmitere.
+      </p>
+      <p>
+        E o întrebare care pare rezolvată și nu e.
+      </p>
+
+      <div class="numbers">
+        <div><b>33</b><span>teste de consistență publicate de ANAF, în două serii</span></div>
+        <div><b>5</b><span>niveluri de verificare, de la ERP la reconcilierea între declarații</span></div>
+        <div><b>500k</b><span>linii, pragul de la care Excel lucrează deja la limită</span></div>
+        <div><b>990</b><span>lei pe an, cel mai ieftin abonament cu reconciliere</span></div>
+      </div>
+
+      <h2 id="s0">In DUK we trust</h2>
+      <p>
+        Bancnota americană de un dolar poartă tipărită formula „In God we trust”. Pentru ce facem noi în fiecare lună cu D406, formularea corectă ar fi <strong>„In DUK we trust”.</strong>
+      </p>
+      <p>
+        Nu e neapărat o glumă care circulă, e felul nostru de a descrie o practică reală: generăm fișierul, îl trecem prin DUKIntegrator și citim în caseta de rezultat trei rânduri, <strong>„Validare fara erori fisier”</strong>, <strong>„Fisierul PDF a fost creat cu succes”</strong> și, dacă am bifat și semnarea la lansarea validării, <strong>„Fisierul PDF a fost semnat cu succes”</strong>. Depunem și considerăm subiectul închis până luna următoare. Încrederea nu vine dintr-o verificare făcută de noi, vine din trei rânduri de text scrise de altcineva.
+      </p>
+      <p>
+        Problema e că rândurile acelea nu spun ce credem noi că spun. „Validare fără erori fișier” înseamnă exact ce scrie: validare. Iar cuvântul acesta are, în DUKIntegrator, un sens mult mai îngust decât cel din vorbirea curentă.
+      </p>
+
+      <h2 id="s1">Ce face, de fapt, DUKIntegrator</h2>
+      <p>
+        DUKIntegrator verifică dacă fișierul XML respectă schema XSD publicată de ANAF. Atât.
+      </p>
+
+      <div class="verdict">
+        <div class="can">
+          <div class="h">// Ce verifică</div>
+          <ul>
+            <li><strong>Structura fișierului,</strong> adică dacă secțiunile și elementele sunt acolo unde le așteaptă schema</li>
+            <li><strong>Tipurile de date,</strong> adică dacă într-un câmp numeric se află un număr și într-un câmp de dată o dată</li>
+            <li><strong>Câmpurile obligatorii,</strong> adică dacă lipsește ceva ce trebuie completat</li>
+            <li><strong>Formatele,</strong> adică structura IBAN-ului, codurile de țară, construcția <code>AccountID</code> pe primele trei sau patru caractere</li>
+          </ul>
+        </div>
+        <div class="cant">
+          <div class="h">// Ce nu verifică</div>
+          <ul>
+            <li>Dacă <strong>TVA-ul e corect calculat</strong></li>
+            <li>Dacă <strong>baza impozabilă e corect codificată</strong></li>
+            <li>Dacă <strong>datele corespund balanței tale</strong></li>
+            <li>Dacă <strong>secțiunile fișierului sunt consistente între ele</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <p>
+        Întrebarea pe care merită să ne-o punem, înainte de orice discuție despre unelte, e simplă.
+      </p>
+
+      <blockquote>
+        Este un fișier SAF-T validat de DUKIntegrator complet și corect din perspectivă contabilă și fiscală?<br><br>
+        <em>Nu neapărat.</em> Validarea confirmă că fișierul e construit după schemă, nu că datele din el sunt cele corecte. Sunt două întrebări diferite, iar validatorul răspunde doar la prima.
+      </blockquote>
+
+      <p>
+        Pentru cine nu lucrează cu scheme XML, comparația cea mai apropiată e din propria noastră meserie: <em>e diferența dintre a verifica dacă o balanță are toate coloanele la locul lor și a verifica dacă balanța este echilibrată.</em>
+      </p>
+      <p>
+        Mai e un nivel pe care îl uită aproape toată lumea. Validarea nu se termină la DUK. După transmitere apar erorile de validare globală returnate prin recipisă, iar acolo pot să iasă la iveală lucruri pe care validatorul local nu le-a atins. În regimul de depunere modală, fiecare dintre cele trei module are propria recipisă, iar un modul respins oprește lanțul: modulul 2 nu se transmite până când recipisa 1 nu e în regulă, iar modulul 3 până când recipisa 2 nu e în regulă.
+      </p>
+      <p>
+        Un fișier „validat” poate să fie, așadar, un fișier respins. Și un fișier acceptat poate să fie un fișier greșit.
+      </p>
+
+      <h2 id="s2">De ce contează acum mai mult decât acum doi ani</h2>
+      <p>
+        Până în 2025, subiectul a fost mai amortit decât pare azi. ANAF a marșat, pe bună dreptate, pe extinderea sistemului: aducerea în obligație a categoriilor de contribuabili, una după alta, cu calendare, amânări și perioade de grație. Prioritatea a fost ca declarațiile să ajungă, nu ca ele să fie corecte până la ultima linie. Amenzile spun același lucru: 5.000 de lei maximum pentru nedepunere, între 500 și 1.500 de lei pentru depunere incorectă sau incompletă.
+      </p>
+      <p>
+        Nu înseamnă că verificarea nu se justifica. Înseamnă că nimeni nu ți-o cerea. Fișierul intra în bazele de date ANAF și rămânea acolo, ca depozit pentru un eventual control viitor.
+      </p>
+      <p>
+        În 2026 se schimbă natura problemei, iar schimbarea are un nume: proiectul pilot.
+      </p>
+      <p>
+        Prin comunicatul nr. 1010 din 7 octombrie 2025, ANAF a anunțat un program pilot cu obiectiv declarat explicit: „implementarea unui mecanism de verificare a consistenței datelor declarate prin declarația D406 prin comparare cu informațiile furnizate prin D300, respectiv D301”. Perioada anunțată, septembrie 2025 până în august 2026. Participanții, maximum 50 de companii, selectate voluntar din categorii diferite, mari, mijlocii și mici, active în domenii variate: construcții, bănci, energie, asigurări sau comerț.
+      </p>
+      <p>
+        La eșantion contează diversitatea, nu numărul. Un pilot care ia și o firmă mică, și o bancă, înseamnă și planuri de conturi diferite, și programe de contabilitate diferite, și moduri diferite de a mapa aceleași operațiuni. Nu e un test de laborator pe un singur ERP.
+      </p>
+      <p>
+        Cât de bine a mers se citește, indirect, chiar din comunicatul din august 2026: aplicațiile „au fost dezvoltate după ce, în etapa pilot, au fost identificate situații în care datele transmise conțineau erori sau neconcordanțe”. Uneltele gratuite nu sunt un cadou, sunt o consecință.
+      </p>
+      <p>
+        Detaliul care contează e metodologia: <em>analiza diferențelor se face pe fiecare rând al decontului de TVA, nu la nivelul sumei finale de plată.</em>
+      </p>
+      <p>
+        Aici e util spus limpede ce nu se schimbă, ca să se vadă ce se schimbă. Comparația pe rând de decont există deja: notificarea de conformare RO e-TVA se declanșează la diferențe semnificative între valorile din rândurile decontului depus și valorile corespunzătoare din decontul precompletat, unde „semnificativ” înseamnă cumulativ minimum 20% și minimum 5.000 de lei în valoare absolută, <em>pe fiecare rând</em>. Nu pe total.
+      </p>
+      <p>
+        Ce se schimbă e sursa comparației, nu granularitatea ei. Astăzi, rândul precompletat se construiește din facturi și din alte declarații. Mâine, dacă pilotul se confirmă, se construiește din registrul jurnal.
+      </p>
+      <p>
+        Iar contextul de acum face schimbarea mai ușor de ratat. Din 1 ianuarie 2026, prin OUG 89/2025, obligația de a răspunde la notificarea de conformare a fost eliminată, împreună cu amenzile aferente, iar motivul invocat public a fost chiar incapacitatea ANAF de a procesa volumul de răspunsuri. Notificarea a devenit informativă. Un mecanism care se odihnește nu e însă un mecanism desființat, iar pilotul construiește exact partea care îi lipsea: o sursă de date mai bună decât mozaicul actual.
+      </p>
+      <p>
+        Merită observată și o distincție care se pierde ușor. Formal, SAF-T e sursă a decontului precompletat încă de la început: OUG 70/2024 îl enumeră alături de RO e-Factura, RO e-Transport, RO e-Sigiliu, casele de marcat electronice și sistemul vamal. Practic însă, lista surselor din care se construiește azi decontul precompletat P300 arată altfel: D394, D390, RO e-Case de marcat, RO e-Factura, registrul achizițiilor de locuințe cu cotă redusă, RO e-Transport și sistemul vamal. <strong>Adică un mozaic de declarații și sisteme, în care registrul jurnal din D406 nu intră încă efectiv.</strong> Pilotul testează exact schimbarea aceasta: de la șase surse indirecte, la contabilitatea propriu-zisă.
+      </p>
+      <p>
+        Consecința practică e cea mai importantă frază din tot articolul acesta, și era deja în cel precedent: <em>ANAF nu extrage TVA-ul din factură, îl extrage din nota contabilă.</em> O factură perfectă în e-Factura, dar contabilizată pe un cod de taxă greșit, produce o diferență. Nu o eroare de formă, o diferență de TVA.
+      </p>
+      <p>
+        Iar cine urmărește documentația ANAF de mai multă vreme știe că nu e o surpriză. Ultimul dintre testele de consistență publicate în august 2024 spunea, negru pe alb, că sumele din <code>TaxAmount</code> pe fiecare <code>TaxCode</code> trebuie să corespundă cu decontul de TVA. ANAF a anunțat în 2024 ce face în 2026.
+      </p>
+
+      <h2 id="s3">Ce a pus ANAF la dispoziție pe 26 august 2026</h2>
+      <p>
+        Aici trebuie spus limpede, înainte de orice nuanță: ANAF a făcut un pas real și util.
+      </p>
+      <p>
+        Prin comunicatul nr. 782 din 26 august 2026, au fost publicate două aplicații gratuite, la instrumentele 6 și 7 de pe pagina SAF-T a portalului. Le-am testat pe amândouă și le-am analizat pe larg în <a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html">articolul dedicat</a>, așa că aici le luăm doar ca piesă din tabloul general.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Aplicație</th><th>Ce face</th><th>Cum se livrează</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Verificarea declarației D406 SAF-T</strong></td>
+              <td>aplică testele de consistență publicate de ANAF și raportează erorile cu indicarea testului care le-a generat</td>
+              <td><code>TestSaftT.jar</code> în linie de comandă și <code>TestSaftW.jar</code> cu interfață grafică, Java 8 sau mai nou, Windows 10/11 sau Linux</td>
+            </tr>
+            <tr>
+              <td><strong>Evaluarea informațiilor din D406 în șablon D300</strong></td>
+              <td>completează un formular asemănător decontului de TVA pornind de la datele SAF-T, ca să poată fi comparat cu decontul depus</td>
+              <td><code>D300_2026.jar</code>, pachetul <code>D300_2026-1.0.7</code>, Java 17</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Câteva detalii care contează în practică:
+      </p>
+      <ul>
+        <li>sunt <strong>în testare, în perioada septembrie - noiembrie 2026</strong>, iar ANAF cere explicit feedback;</li>
+        <li><strong>rulează local, pe calculatorul utilizatorului, fără transmiterea datelor către ANAF</strong> în această fază. E un punct pe care merită să insistăm, pentru că răspunde din start celei mai serioase obiecții pe care o are oricine lucrează cu fișiere care conțin toată contabilitatea firmei;</li>
+        <li>rezultatul primei aplicații e un set de fișiere CSV cu delimitatorul „#”: un fișier de tip Header cu informații generale, plus un fișier de erori, generat doar dacă există erori;</li>
+        <li><strong>niciuna nu înlocuiește DUKIntegrator.</strong> Vin după el, pe un fișier deja valid structural, și se uită la conținut;</li>
+        <li>adresabilitatea, din același comunicat: circa 870.000 de firme depun D406, dintre care circa 580.000 depun și decont de TVA.</li>
+      </ul>
+      <p>
+        A doua aplicație e, de fapt, cel mai bun indiciu despre direcția în care merge lucrul. Îți arată ce decont va construi ANAF din datele tale. Nu îți spune că datele sunt corecte, îți spune ce va vedea administrația fiscală când se va uita la ele.
+      </p>
+
+      <h3>De ce nu e suficient</h3>
+      <p>
+        Recunoașterea de mai sus rămâne în picioare. Dar cele două aplicații nu acoperă decât o parte din problemă, și e cinstit să spunem care.
+      </p>
+      <p>
+        <strong>Rulează un set fix de teste, definit de ANAF, și nici măcar pe tot.</strong> Testele de consistență sunt 33, publicate în două serii: 22 în martie 2023 și 11 în august 2024. Aplicația acoperă integral seria a doua și nimic din prima, adică exact verificările pe care un contabil le-ar face greu de mână: completarea nomenclatoarelor, egalitatea și continuitatea soldurilor, egalitatea rulajelor din jurnal, coerența sumelor în valută.
+      </p>
+      <p>
+        <strong>Nu verifică maparea, care e partea cea mai specifică din tot fișierul.</strong> Corespondența dintre planul tău de conturi și conturile standardizate din schemă, dintre tipurile tale de documente și nomenclatorul de documente, dintre operațiunile tale și codurile de taxă, s-a stabilit o singură dată, la implementare, în firma ta. De atunci se aplică automat, lună de lună. Un test generic vede că un cod de taxă e completat și că se potrivește cu cota. Nu are cum să vadă că e codul greșit pentru operațiunea aceea, pentru că nu știe ce operațiune a fost.
+      </p>
+      <p>
+        Tot de aici vin și verificările pe care doar tu le poți formula. Că toate analiticele tale de clienți se regăsesc pe același cont standardizat din schemă, nu împrăștiate pe două, fiindcă cineva a adăugat un analitic nou după implementare și nu l-a mapat. Că partenerii din grup, pe care doar tu îi știi, apar consecvent cu codul de taxare inversă și se regăsesc și în recapitulativul D390. Că fiecare factură din secțiunea de documente-sursă are corespondent în registrul jurnal, pentru fluxurile în care cele două se despart: autofacturare, stornări, note de credit. Niciun instrument construit pentru 870.000 de firme nu poate cunoaște maparea uneia singure.
+      </p>
+      <p>
+        <strong>Îți dau erori, nu date.</strong> Un CSV cu linii care au picat testul nu e același lucru cu a putea privi conținutul fișierului. Problema de fond, aceea că nu poți citi ce depui, rămâne întreagă.
+      </p>
+      <p>
+        <strong>Nu acoperă reconcilierea cu propria contabilitate.</strong> SAF-T față de balanța lunară, față de situația analitică a clienților și a furnizorilor, față de registrele de casă și bancă, față de situația imobilizărilor. Nimeni din afara firmei nu poate face verificarea asta, nici ANAF. Nu pentru că nu ar vrea, ci pentru că nu are datele.
+      </p>
+      <p>
+        <strong>Sunt în testare.</strong> Cu un orizont declarat până în noiembrie 2026. Procedura lunară a unui cabinet nu se construiește pe un instrument aflat în testare.
+      </p>
+      <p>
+        Aplicațiile ANAF acoperă un nivel dintr-o problemă care are cinci.
+      </p>
+
+      <h2 id="s4">Grila de citire: cele cinci niveluri de verificare</h2>
+      <p>
+        Ca să nu ne pierdem în enumerări, merită fixat un cadru. Orice soluție discutată mai jos se așază pe unul dintre nivelurile acestea.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nivel</th><th>Ce verifică</th><th>Cine îl poate face</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="nr">N0</td><td>verificările din programul de contabilitate, înainte de generare</td><td>doar contribuabilul</td></tr>
+            <tr><td class="nr">N1</td><td>validarea de schemă</td><td>DUKIntegrator</td></tr>
+            <tr><td class="nr">N2</td><td>validarea globală și depunerea modală</td><td>ANAF, prin recipisă, după încărcarea pe eguvernare.ro</td></tr>
+            <tr><td class="nr">N3</td><td>cele 33 de teste de consistență ANAF</td><td>aplicația ANAF, pentru cele 11 din seria 2024. Tool-urile dedicate, pentru ambele serii</td></tr>
+            <tr><td class="nr">N4</td><td>cross-check între secțiunile fișierului și față de ERP</td><td>tool-uri dedicate și consultanță</td></tr>
+            <tr><td class="nr">N5</td><td>reconcilierea cu celelalte declarații</td><td>foarte puține soluții</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Nivelul zero merită dezvoltat aici, pentru că e gratuit, e cel mai eficient și îl sare aproape toată lumea. Lista nu trebuie inventată: prima serie de teste de consistență publicată de ANAF, cea din martie 2023, e ea însăși un checklist de reconciliere internă, iar documentațiile publice ale furnizorilor de software repetă aceleași corelații.
+      </p>
+      <p>
+        Se rezumă la a compara fișierul cu ceea ce știi deja că e corect. Rulajul lunar din balanță trebuie să dea același lucru cu registrul jurnal, iar soldurile de deschidere ale lunii trebuie să fie exact soldurile de închidere ale lunii precedente. Restul sunt corelații pe care le faci oricum la închidere: balanța partenerilor și cea a stocurilor față de balanța contabilă, verificate <em>pe solduri, nu pe rulaje</em>, stocurile pe conturi față de stocurile la moment, registrele de casă și bancă față de balanță, iar la imobilizări amortizările curente față de rulajul conturilor 28x și valoarea rămasă față de diferența soldurilor finale.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+        </div>
+        <div class="cbody">
+          Două reguli care apar în absolut toate sursele. Prima: <strong>declarația se generează obligatoriu doar pe luni închise.</strong> A doua: <strong>corecțiile se fac la sursă, în ERP, niciodată prin editarea manuală a XML-ului.</strong> Un patch aplicat direct pe fișier rezolvă o lună și lasă cauza să se repete în următoarele unsprezece.
+        </div>
+      </div>
+
+      <h2 id="s5">Noi lucrăm în tabele, fișierul e un arbore</h2>
+      <p>
+        Aici ajungem la partea care ne privește direct, ca profesie.
+      </p>
+      <p>
+        Contabilul lucrează tabelar. Balanța e un tabel. Jurnalul e un tabel. Fișa de cont e un tabel. Pivotul e tot un tabel. Instrumentul pe care îl stăpânim, în care ne mișcăm repede și în care avem intuiție pentru ce e greșit, e foaia de calcul.
+      </p>
+      <p>
+        XML-ul e un arbore. Elemente imbricate pe mai multe niveluri, fiecare cu propriii copii, repetate de zeci de mii de ori. Nu e un defect al formatului, e chiar destinația lui: a fost proiectat ca să fie parcurs de un program, nu citit de un om.
+      </p>
+      <p>
+        Între fișierul pe care îl depui și instrumentul cu care știi să lucrezi există, deci, o traducere obligatorie. Iar întrebarea reală nu e „cum verific SAF-T”, ci <em>„cum transform un XML arborescent într-un tabel”</em>.
+      </p>
+
+      <h3>Întâi Notepad, apoi Excel</h3>
+      <p>
+        Toți am avut curiozitatea să vedem cum arată datele din XML. Iar unealta la îndemână a fost editorul de text deja instalat pe calculator, în cele mai multe cazuri clasicul Notepad. Se deschide, într-adevăr. Fișierul e text simplu, nu are nevoie de niciun program special.
+      </p>
+      <p>
+        Numai că, la prima înșiruire de etichete, gândul e același pentru toată lumea: <em>cum transform totul într-un tabel, ca să pot citi.</em> Notepad îți arată fișierul, nu datele. Vezi că informația e acolo, undeva între paranteze unghiulare, dar nu poți nici să o filtrezi, nici să o sortezi, nici să o aduni.
+      </p>
+      <p>
+        De acolo, pasul următor pentru mare parte dintre noi a fost de a încerca să găsim o soluție în Excel.
+      </p>
+      <p>
+        <strong>Fila Developer, XML Source și maparea XML.</strong> Importi schema, mapezi elementele pe coloane, aduci datele. Funcționează frumos pe structuri plate. Se comportă prost pe scheme cu liste imbricate repetitive, unde Excel fie refuză maparea, fie denormalizează în feluri pe care nu le controlezi. Schema SAF-T e exact genul de structură care produce probleme.
+      </p>
+      <p>
+        <strong>Data, Get Data, From XML.</strong> Mai comod ca punct de plecare, dar te lasă cu tabele imbricate pe care tot trebuie să le expandezi manual, nivel cu nivel.
+      </p>
+      <p>
+        <strong>Power Query.</strong> Cea mai robustă dintre cele trei, și singura care merită investiție. Expandezi controlat, filtrezi, agregi, iar luna următoare reîmprospătezi fără să refaci munca. E și cea mai lentă pe fișiere mari, iar pașii de expandare pe o structură cu multe niveluri devin repede greu de întreținut de altcineva decât cel care i-a scris.
+      </p>
+
+      <h3>Unde cedează</h3>
+      <p>
+        Limita unei foi de calcul e de 1.048.576 de rânduri. E o cifră pe care o știe orice contabil și care, în discuția asta, nu e problema.
+      </p>
+      <p>
+        Problema e mai devreme. <em>Peste 400.000 - 500.000 de linii, cu un număr rezonabil de coloane, Excel lucrează deja la limită.</em> Recalculări de zeci de secunde, fișiere de sute de megabiți, blocaje la sortare și la filtrare, pivot tables care nu se mai reîmprospătează.
+      </p>
+      <p>
+        Iar volumele sunt exact acolo. Pentru o firmă medie, un D406 lunar ajunge fără efort la zeci sau sute de mii de linii, dacă desfaci registrul jurnal la nivel de linie. Pentru companiile mari, cifrele sunt deja de ordinul milioanelor. Nu vorbim despre un caz extrem, vorbim despre luna obișnuită a unui client obișnuit.
+      </p>
+      <p>
+        O nuanță, ca să nu spunem o inexactitate: Power Query poate încărca datele în Data Model, adică în Power Pivot, peste limita foii de calcul. Deci limita de 1.048.576 nu e absolută. Dar în momentul acela lucrezi cu un model tabelar și cu DAX, ai ieșit din zona de confort a foii de calcul și ai făcut, oricum, jumătate din drumul către un instrument dedicat.
+      </p>
+      <p>
+        Concluzia onestă e că traducerea se poate face, dar costă. Trei zile de construit și încă o zi pe lună de întreținut, pentru fiecare client, cu riscul ca la o schimbare de schemă să reiei o parte din muncă.
+      </p>
+      <p>
+        Ceea ce ne duce firesc la întrebarea următoare.
+      </p>
+
+      <h2 id="s6">Direcția următoare: ce oferă piața</h2>
+      <p>
+        Dacă traducerea din XML în tabel și verificările de peste ea sunt o muncă repetitivă, deterministă și lunară, întrebarea rezonabilă e dacă nu cumva a construit-o deja cineva. Adică dacă există pe piață aplicații care rulează automat verificările, produc rapoarte detaliate cu elementele inventariate și cu neconcordanțele găsite, și fac reconcilieri între datele din SAF-T și informațiile contabile: balanțe lunare, situații analitice de clienți și furnizori, declarații.
+      </p>
+      <p>
+        Răspunsul scurt: da, există, mai multe decât se știe în general, și cu prețuri publice mult mai mici decât percepția din piață.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Două precizări, înainte de listă.</strong> Prima: nu recomandăm niciun furnizor. Prezentăm ce tip de verificare face fiecare categorie și lăsăm cititorul să aleagă. A doua, mai importantă: <strong>nu am testat niciuna dintre soluțiile de mai jos.</strong> Tot ce urmează provine din documentația publică a furnizorilor, verificată la 29 august 2026.
+        </div>
+      </div>
+
+      <h3>Ce fac programele de contabilitate și ERP-urile</h3>
+      <p>
+        Practic toate programele de contabilitate au un strat de validare proprie înainte de DUK: coduri fiscale invalide, parteneri fără date complete, unități de măsură fără corespondent, coduri de taxă necompletate.
+      </p>
+      <p>
+        Ce diferă de la un furnizor la altul e cât din mecanica asta se poate citi din afară. O parte dintre ei o publică. WinMENTOR ține documentația D406 pe serverul propriu de descărcare, deschis oricui, fără cont și fără cerere de ofertă. RVX ERP are manualul online, cu rapoartele de verificare enumerate pe secțiuni: vânzări și cumpărări fără cod SAF-T, articole cu unități de măsură invalide, conturi fără analitice, parteneri cu țară sau tip fiscal invalid, note contabile pe conturi de terți fără partener asociat. SmartBill Conta livrează, odată cu declarația, un fișier CSV de sinteză cu indicatori extrași din D406 și cu sugestii despre cum se corelează fiecare cu datele din contabilitate. Nexus ERP publică lista erorilor de validare și cauzele lor.
+      </p>
+      <p>
+        Merită oprit puțin la SAGA, probabil cel mai răspândit program de contabilitate din România, tocmai pentru că nu e un ERP și totuși documentează public procedura. Pagina lor de sfaturi practice pentru SAF-T trimite la o verificare care se rulează <em>înainte</em> de generare, din Administrare, Întreținere BD, fila Verificare date, butonul Verificare plan conturi. Compară planul de conturi din baza ta cu cel reglementat, semnalează analiticele de clienți și furnizori folosite în note dar inexistente în plan și le propune spre adăugare, iar la final scoate un raport cu ce s-a adăugat, ce s-a eliminat și ce ar trebui eliminat dar nu se poate, fiindcă are rulaj în spate.
+      </p>
+      <p>
+        Tot înainte de generare, programul verifică și lucrurile care par formalități până când opresc depunerea: datele de identificare ale firmei, telefon și email, existența măcar a unui cont bancar, încadrarea corectă la tipul de contabilitate și la categoria de TVA. Iar lista de erori scoate raportul cu ce trebuie corectat: denumiri de conturi incomplete, parteneri fără județ sau localitate, coduri fiscale greșite, coduri de nomenclator lipsă la articole.
+      </p>
+      <p>
+        Alții, printre care Charisma, Wizrom, Senior Software cu SeniorERP și SeniorXRP, Transart cu ERP-ul propriu, prezintă funcționalitatea la nivel de produs și lasă detaliul pentru clientul care are deja soluția implementată. E o alegere legitimă, nu o ascundere: SAF-T e un modul dintr-un ERP integral, nu un produs vândut separat, deci nu există niciun preț distinct de publicat. Manualul ajunge la client prin implementare, nu prin site.
+      </p>
+      <p>
+        Pentru cine alege un furnizor, distincția rămâne totuși utilă. Documentația publică îți permite să compari mecanica înainte de a intra în discuții comerciale. Cea livrată la implementare îți spune ce primești abia după ce ai semnat.
+      </p>
+      <p>
+        O observație transversală merită însă reținută, indiferent de furnizor: <em>niciun program dintre cele de mai sus nu declară public reconcilierea SAF-T către decontul de TVA.</em> Toate reconcilierile documentate sunt interne, SAF-T față de propria contabilitate. Exact golul pe care îl atacă pilotul ANAF.
+      </p>
+
+      <h3>Soluțiile dedicate românești</h3>
+      <p>
+        Segmentul cel mai interesant și cel mai puțin cunoscut. Aici sunt și singurele prețuri publice din toată piața.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Soluție</th><th>Ce acoperă</th><th>Preț public</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tigris SAF-T Control</strong><br>(Medialogic)</td>
+              <td>consistență de date, validarea partenerilor în registrul ANAF, conformitate TVA, reconciliere pe solduri și corelații între SAF-T și D100, D112, D300, D390, D394</td>
+              <td class="pret">990 lei/an + TVA, pentru un număr <strong>nelimitat de firme</strong></td>
+            </tr>
+            <tr>
+              <td><strong>SAF-T Interpret</strong><br>(FinanceTop)</td>
+              <td>conversie XML în Excel pe foi organizate, reconstruiește decontul de TVA din datele SAF-T, rulează nominal testele de consistență din seria 2024. Local, pe Windows</td>
+              <td class="pret">plată unică, sumă nepublicată</td>
+            </tr>
+            <tr>
+              <td><strong>Latitude</strong><br>modulul RO SAF-T Check</td>
+              <td>reconciliere între SAF-T și D300, D390, D394, D100, cu rapoarte de corelație în Excel. Modul separat de conversie XML în Excel</td>
+              <td class="pret">100 EUR/lună modulul, 250 EUR/lună pachetul cu conversia, 500 EUR/lună toate cele opt module, cu 17% reducere la plata anuală</td>
+            </tr>
+            <tr>
+              <td><strong>SAF-T Smart Validator</strong><br>(Ubicuu Soft Prod)</td>
+              <td>peste 100 de erori de consistență și conținut, fișiere de peste 2 GB, afișare structurată pe secțiuni, export Excel, rapoarte de audit PDF și TXT. Desktop local, instalare pe stații nelimitate</td>
+              <td class="pret">900 lei, TVA inclus, licență pe viață cu actualizări gratuite. Plus 90 lei per cod fiscal validat și 500 lei per modul opțional</td>
+            </tr>
+            <tr>
+              <td><strong>Soft Team Validator</strong></td>
+              <td>reconciliere încrucișată cu D300, D390, D394, D112, plus comparație de solduri</td>
+              <td class="pret">versiune lite gratuită, restul la cerere</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Câteva note de precizie, pentru că cifrele de mai sus au vârste diferite. Prețul Tigris și grila Latitude au fost reconfirmate direct pe paginile furnizorilor la 29 august 2026. La Smart Validator, grila e publicată pe pagina de comandă a producătorului și e construită modular: licența de bază, plus un cod de validare pentru fiecare firmă, plus modulele pe care le alegi. La SAF-T Interpret, pagina publică nu afișează suma și pare neactualizată din noiembrie 2025.
+      </p>
+      <p>
+        Iar acum cifra care merită scoasă în evidență: <em>pentru un cabinet cu 30 - 50 de clienți, 990 de lei pe an înseamnă între 20 și 33 de lei per client, pe an.</em> Nu pe lună.
+      </p>
+
+      <h3>Big Four și restul, sau de ce nu vedem prețuri</h3>
+      <p>
+        O precizare despre ce urmează, fiindcă delimitează ce am reușit să documentăm. Aproape tot ce se poate citi public despre soluțiile de verificare venite din consultanță aparține celor patru firme mari, plus Crowe, prin Digital Mind. Dincolo de ele, nu am găsit firme de consultanță fiscală din eșalonul următor care să documenteze public un instrument dedicat de verificare SAF-T. Ce există în afara lor sunt furnizori de software și de servicii de raportare, adică exact categoria din tabelul de mai sus.
+      </p>
+      <p>
+        Iar despre ele există o constatare care se poate scrie fără nicio nuanță: <em>niciuna dintre ele nu publică prețuri pentru soluțiile SAF-T.</em> Fără excepție. Toate paginile de produs se termină cu un formular de contact.
+      </p>
+      <p>
+        Ce oferă, pe scurt: PwC are SAF-T cross-check, cu vizualizare pe secțiuni, validări de consistență între secțiuni și reconciliere între decont și SAF-T. KPMG are SAF-T Verifier și e-VAT Verifier, al doilea comparând decontul precompletat cu evidențele contabile. Deloitte are taxCube, instalabil inclusiv pe serverul clientului. EY prezintă în cadrul propriilor evenimente instrumente de verificare SAF-T care promit inclusiv reconcilierea datelor cu decontul de TVA. Direcția e aceeași pe care o descriu și <a href="https://www.bursa.ro/ey-romania-controalele-anaf-se-muta-pe-analiza-substantei-economice-si-a-datelor-raportate-digital-05579950" target="_blank" rel="noopener">public, în presă</a>: controalele ANAF se mută pe corelarea automată a datelor raportate digital. În afara celor patru, Crowe, prin Digital Mind, are modulul SAF-T din ContaX, cu conectori direcți către ERP-uri românești.
+      </p>
+      <p>
+        Sunt, așadar, cei mai „secretoși” din toată piața când vine vorba de costul aplicațiilor de validare. Merită însă spusă și explicația rezonabilă, nu doar constatarea. O soluție de consultanță nu e un produs de raft, e o implementare: se adaptează la planul de conturi al clientului, la particularitățile lui de mapare, la ERP-ul lui, uneori la mai multe entități dintr-un grup, cu perioade fiscale diferite. În momentul în care livrezi ceva croit pe măsură, un preț fix afișat pe site devine, dacă nu imposibil, cel puțin înșelător pentru amândouă părțile.
+      </p>
+      <p>
+        Observația cea mai utilă din tot capitolul acesta e însă alta, și se poate verifica oricine. În martie 2023, doi consultanți PwC descriau public, <a href="https://taxnews.ro/2023/03/22/raportarea-saf-t-la-urmatorul-nivel-cum-se-poate-asigura-o-companie-ca-declaratia-este-corecta-si-completa/" target="_blank" rel="noopener">într-un articol de specialitate</a>, exact metoda pe care o vedem azi în aplicațiile gratuite ale ANAF: reconciliere între declarația SAF-T și datele-sursă din ERP, reconciliere între D406 și celelalte declarații periodice, în special D300 și D390, plus un set de teste de consistență rulate ca rutină lunară automatizată.
+      </p>
+      <p>
+        Cu alte cuvinte, modelul „îmi construiesc singur comparația, ca să știu ce va vedea ANAF” exista pe piață cu trei ani înainte ca ANAF să publice instrumentul care îl face gratuit. Ceea ce administrația tocmai a democratizat, consultanța vindea deja.
+      </p>
+
+      <h3>Cât costă, în context</h3>
+      <p>
+        Percepția din piață e că verificarea SAF-T e scumpă. Cifrele care circulă vin însă, aproape toate, din altă discuție: costul implementării, adică al ajustării programului de contabilitate ca să poată genera fișierul. Aia chiar a costat, și chiar a fost o dată. Nu are legătură cu ce discutăm aici, adică verificarea lunară a unui fișier deja generat.
+      </p>
+      <p>
+        Așezate una lângă alta, cifrele de mai sus arată altfel. Trei niveluri din cinci se acoperă <strong>gratuit</strong>: verificările din programul de contabilitate la N0, DUKIntegrator la N1, aplicația ANAF la N3. Ce lipsește, adică reconcilierea între secțiuni și cea cu celelalte declarații, se acoperă cu aproximativ 990 de lei pe an.
+      </p>
+      <p>
+        <em>Ecartul dintre percepția de cost și oferta reală de piață e, în sine, un subiect.</em>
+      </p>
+      <p>
+        Iar dacă 990 de lei pe an rezolvă ce ție ți-ar lua trei zile de construit în Power Query și încă o zi pe lună de întreținut, atunci cumperi. E o concluzie rațională, nu o capitulare.
+      </p>
+
+      <h2 id="s7">Când soluțiile de piață nu sunt disponibile</h2>
+      <p>
+        Există însă situații, deloc rare, în care direcția de mai sus e închisă. Patru dintre ele, fără dramatizare.
+      </p>
+      <p>
+        <strong>Nu poți trimite fișierul în afara firmei.</strong> D406 conține datele fiscale complete ale firmei și ale tuturor partenerilor: solduri, facturi la nivel de linie, plăți, marje care se deduc din prețuri. Multe soluții sunt web, iar întrebarea „pe ce server ajunge fișierul și în ce jurisdicție” nu are întotdeauna un răspuns pe care să-l accepte departamentul juridic sau grupul din care faci parte. E corect spus că o parte dintre soluții rulează local, exact ca aplicațiile ANAF: SAF-T Interpret, Smart Validator, taxCube în varianta on-premise. Nu toate presupun trimiterea datelor afară. Dar disponibilitatea trebuie verificată de la caz la caz, nu presupusă.
+      </p>
+      <p>
+        <strong>Nu poți instala nimic local.</strong> În companiile cu politici de securitate stricte, instalarea unui executabil neaprobat e imposibilă, iar procedura de aprobare durează luni. Ironia e că asta blochează inclusiv aplicațiile gratuite ale ANAF, care sunt fișiere <code>.jar</code> și cer un mediu Java instalat.
+      </p>
+      <p>
+        Cine a lucrat într-o multinațională recunoaște imediat scena, pentru că problema apare deja la DUKIntegrator. Are nevoie de Java, de driverul token-ului USB și de acces la magazia de certificate din Windows, iar toate trei sunt exact lucrurile pe care o politică IT de grup le închide: fără runtime neaprobat, fără dispozitive USB, fără intervenții în magazia de certificate. Consecința practică e că, în multe firme, validarea și semnarea declarațiilor se fac de pe o stație scoasă din rețeaua corporativă, în afara domeniului și a VPN-ului, uneori pe o conexiune separată. Un instrument propriu de verificare, oricât de util, intră în aceeași fundătură.
+      </p>
+      <p>
+        <strong>Nu există buget.</strong> Nu pentru că 990 de lei ar fi mult, ci pentru că, în unele organizații, orice achiziție nouă declanșează un proces de aprobare complet disproporționat față de sumă.
+      </p>
+      <p>
+        <strong>Ai nevoie de verificări pe care nu ți le vinde nimeni.</strong> Maparea ta, analiticele tale, fluxurile tale. Un instrument generic nu are cum să știe pe ce cont standardizat ar trebui să cadă analiticul pe care l-ai deschis luna trecută, nici care dintre partenerii tăi sunt din grup și trebuie să apară consecvent cu taxare inversă.
+      </p>
+      <p>
+        În oricare dintre situațiile astea, rămâne o singură direcție. Și s-a deschis abia recent.
+      </p>
+
+      <h2 id="s8">Aici intră vibe coding</h2>
+      <p>
+        SAF-T e cazul aproape ideal de problemă pe care AI-ul chiar o rezolvă: regulă deterministă, volum mare, format structurat, zero creativitate necesară. Nu e o problemă de judecată profesională, e o problemă de aplicat mecanic o regulă cunoscută pe foarte multe linii. Exact genul de muncă la care computerul e imbatabil și la care atenția unui om se epuizează după câteva sute de linii.
+      </p>
+      <p>
+        Constatarea care face argumentul credibil e că nu există alternativă gata făcută. <em>Ecosistemul open-source pentru D406 e cvasi-inexistent.</em> Căutările pe GitHub nu identifică niciun proiect activ dedicat parsării sau validării D406. Ce există pentru ANAF e aproape exclusiv pentru e-Factura, iar proiectele SAF-T mature aparțin altor jurisdicții, Norvegia și Portugalia, și nu se aplică României. Nu există un depozit de cod de la care să pornești.
+      </p>
+      <p>
+        Dar există materia primă, și e publică toată: schema XSD oficială, fișierul XLS cu definiții și note explicative, cele 33 de teste de consistență enunțate public de ANAF în cele două serii, nomenclatorul care mapează codurile de taxă pe rândurile decontului. Adică exact ce îi trebuie unui model ca să genereze cod determinist.
+      </p>
+      <p>
+        Întrebarea de la care pornim mai departe e aceasta: <em>cum ar fi să-ți poți construi propria aplicație, care rulează pe calculatorul tău, care nu trimite nimic nicăieri, care costă zero și care face exact verificările specifice firmei tale?</em>
+      </p>
+      <p>
+        Înainte de asta, trei precauții care nu se negociază:
+      </p>
+      <ul>
+        <li><strong>fișierul nu se încarcă în instrumente AI publice.</strong> Ce generezi cu AI e <strong>codul</strong>, nu prelucrarea datelor. Prelucrarea rămâne locală, pe calculatorul tău;</li>
+        <li><strong>AI-ul e bun la scris codul care aplică o regulă cunoscută, nu la a decide care e regula corectă.</strong> Enunțul testelor se ia din documentul ANAF, nu din memoria modelului;</li>
+        <li><strong>orice instrument propriu se calibrează pe o lună deja depusă și acceptată</strong>, ca să știi că dă aceleași cifre ca fișierul real.</li>
+      </ul>
+      <p>
+        Cu asta se încheie partea de diagnostic. Am parcurs ce face DUKIntegrator, ce a adăugat ANAF în august, unde cedează Excel-ul și ce se poate cumpăra de pe piață. Ce urmează nu mai e o analiză, e o construcție.
+      </p>
+      <p>
+        În articolele următoare ne apucăm efectiv de treabă: pornim de la schema publicată, scriem împreună aplicația care citește D406, o facem să scoată rapoartele de care avem nevoie și adăugăm pe rând verificările pe care nu ni le vinde nimeni. Pas cu pas, cu prompturile la vedere, așa cum ne-o dorim să fie.
+      </p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#SAF-T</span>
+          <span class="tag">#D406</span>
+          <span class="tag">#ANAF</span>
+          <span class="tag">#validare</span>
+          <span class="tag">#Excel</span>
+          <span class="tag">#vibe-coding</span>
+        </div>
+        <span class="footer-mono">Articolul #032</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-08-30-Verificarea-D406-inainte-de-depunere"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s0">In DUK we trust</a>
+        <a href="#s1">Ce face DUKIntegrator</a>
+        <a href="#s2">De ce contează acum</a>
+        <a href="#s3">Ce a pus ANAF la dispoziție</a>
+        <a href="#s4">Cele cinci niveluri</a>
+        <a href="#s5">Tabele față de arbore</a>
+        <a href="#s6">Ce oferă piața</a>
+        <a href="#s7">Când piața nu ajută</a>
+        <a href="#s8">Aici intră vibe coding</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- ARTICOLE CONEXE -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Pe aceeași temă.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html" class="related-card fade-in">
+        <div class="related-date">LEGISLAȚIE · SAF-T · #031</div>
+        <h3>Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406</h3>
+        <p>Prima parte a seriei: originea standardului, cadrul legal, structura fișierului, termenele și de ce miza nu e amenda.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html" class="related-card fade-in">
+        <div class="related-date">ANALIZĂ · SAF-T · #030</div>
+        <h3>Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi</h3>
+        <p>Cele două tool-uri publicate pe 26 august, testate pe fișiere reale: câte teste de consistență aplică și unde se opresc.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · #012</div>
+        <h3>Vibe coding: ce este, de unde vine și unde îl folosim în contabilitate</h3>
+        <p>Ce înseamnă să descrii ce vrei și să primești cod, unde ajută în fluxurile contabile și unde nu are ce căuta.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

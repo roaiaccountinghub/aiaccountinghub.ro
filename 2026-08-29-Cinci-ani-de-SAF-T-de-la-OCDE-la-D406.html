@@ -311,7 +311,7 @@
         Articolul acesta e o recapitulare ordonată a ce se află în spatele butonului, utilă atât pentru cine lucrează cu declarația și vrea să-și reia noțiunile, cât și pentru cine nu este familiarizat cu SAF-T și care nu a intrat vreodată în detaliile ei. De unde vine formatul, de ce arată așa cum arată, ce conține, cine intră când în obligație, până când se depune și ce se întâmplă dacă greșești.
       </p>
       <p>
-        Verificarea propriu-zisă a fișierului o tratăm separat. Uneltele gratuite publicate de ANAF le-am analizat deja în <a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html">articolul despre cele două aplicații de verificare</a>, iar cum se verifică datele din fișier, cu ce se poate cumpăra de pe piață și cu cât, e subiectul articolului următor. Aici ne oprim la ce este.
+        Verificarea propriu-zisă a fișierului o tratăm separat. Uneltele gratuite publicate de ANAF le-am analizat deja în <a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html">articolul despre cele două aplicații de verificare</a>, iar cum se verifică datele din fișier, cu ce se poate cumpăra de pe piață și cu cât, e subiectul <a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html">articolului următor</a>. Aici ne oprim la ce este.
       </p>
 
       <div class="numbers">
@@ -332,7 +332,7 @@
         Detaliul care ne privește direct: România nu e încă membră, dar procesul de aderare, deschis oficial în ianuarie 2022, e aproape de final. Din cele 25 de avize tehnice cerute de comitetele de specialitate, 24 sunt deja obținute, iar finalizarea e așteptată chiar spre sfârșitul lui 2026. Alinierea la standardele OCDE se evaluează pe tot parcursul acestui proces, iar SAF-T e exact genul de standard care se bifează vizibil. E rezonabil de presupus că o parte din viteza cu care s-au mișcat autoritățile în ultimii ani, de la e-Factura la e-Transport și SAF-T, are și această motivație în spate, nu doar nevoia internă de colectare.
       </p>
       <p>
-        Consecința practică e mai importantă decât pare: <strong>OCDE nu impune o formă anume a fișierului.</strong> Definește principiul și un set de secțiuni, iar fiecare stat își construiește propria schemă. De aceea o firmă cu operațiuni în România, Polonia și Portugalia produce trei fișiere SAF-T care nu seamănă între ele decât conceptual, și de aceea un consultant care „a făcut SAF-T în altă țară” nu are automat răspunsul pentru varianta românească.
+        Consecința practică e mai importantă decât pare: <em>OCDE nu impune o formă anume a fișierului.</em> Definește principiul și un set de secțiuni, iar fiecare stat își construiește propria schemă. De aceea o firmă cu operațiuni în România, Polonia și Portugalia produce trei fișiere SAF-T care nu seamănă între ele decât conceptual, și de aceea un consultant care „a făcut SAF-T în altă țară” nu are automat răspunsul pentru varianta românească.
       </p>
       <p>
         Formatul ales este XML, pentru că e standardizat internațional și poate fi citit de un program fără ambiguități.
@@ -453,7 +453,7 @@
 
       <h3>Perioadele de grație au expirat</h3>
       <p>
-        Mesajul ANAF pe acest subiect e neobișnuit de tranșant: <strong>nicio categorie de contribuabili nu mai beneficiază de perioadă de grație, iar începând cu 1 iulie 2025 obligativitatea e deplină pentru toate categoriile.</strong>
+        Mesajul ANAF pe acest subiect e neobișnuit de tranșant: <em>nicio categorie de contribuabili nu mai beneficiază de perioadă de grație, iar începând cu 1 iulie 2025 obligativitatea e deplină pentru toate categoriile.</em>
       </p>
       <p>
         Mecanismul original, prevăzut de OPANAF 1783/2021, era degresiv. Un mare contribuabil cu raportare lunară avea 6 luni pentru prima raportare, 5 pentru a doua, 4 pentru a treia, 3 pentru a patra și 2 pentru a cincea. Cei cu obligație trimestrială aveau 3 luni pentru prima raportare. Ultimele termene au expirat astfel:
@@ -630,7 +630,7 @@
         Este secțiunea care contează cel mai mult, deși în discuția publică se vorbește mai ales despre facturi. Aici se raportează toate tranzacțiile așa cum sunt înregistrate în contabilitate, iar fiecare notă contabilă generează câte un element <code>TransactionLine</code> pentru fiecare cont debitor și creditor. O factură de achiziție cu TVA deductibilă produce cel puțin trei linii: contul de furnizor, contul de cheltuială sau de stoc și contul de TVA. Poate produce mai multe, dacă factura atinge mai multe conturi de cheltuială sau de stoc, iar la taxare inversă intră două conturi de TVA, deductibilă și colectată.
       </p>
       <p>
-        Elementul esențial, care explică jumătate din problemele de mai târziu: <strong>informația de taxă se raportează pe linia bazei impozabile</strong>, nu pe linia de TVA și nu pe linia totalului. În fragmentul de mai jos se vede direct. Pe linia contului 628100, cea cu baza de 1.000 de lei, apar <code>TaxType</code> 300 și un cod de taxă, împreună cu suma TVA de 210 lei. Pe linia contului 442601, unde valoarea contabilă e chiar TVA-ul de 210 lei, și pe linia contului de furnizor, care poartă totalul de 1.210 lei, taxa e neutră: <code>000</code>, <code>000000</code> și sumă zero.
+        Elementul esențial, care explică jumătate din problemele de mai târziu: <em>informația de taxă se raportează pe linia bazei impozabile</em>, nu pe linia de TVA și nu pe linia totalului. În fragmentul de mai jos se vede direct. Pe linia contului 628100, cea cu baza de 1.000 de lei, apar <code>TaxType</code> 300 și un cod de taxă, împreună cu suma TVA de 210 lei. Pe linia contului 442601, unde valoarea contabilă e chiar TVA-ul de 210 lei, și pe linia contului de furnizor, care poartă totalul de 1.210 lei, taxa e neutră: <code>000</code>, <code>000000</code> și sumă zero.
       </p>
       <p>
         Se vede și regula de partener: <code>CustomerID</code> e zero pe toate cele trei linii, iar <code>SupplierID</code> poartă codul furnizorului.
@@ -804,7 +804,7 @@
         Ce nu se depune este chiar fișierul XML generat de softul contabil. El e materia primă, iar declarația propriu-zisă o produce <strong>DUKIntegrator</strong>, aplicația pusă la dispoziție de ANAF: prelucrează XML-ul, îl validează față de schemă și generează un PDF care poartă fișierul ca atașament, în formă comprimată.
       </p>
       <p>
-        Aici sunt două cifre care se confundă des. <strong>Limita tehnică de 500 MB se referă la fișierul XML comprimat</strong>, așa cum ajunge atașat formularului electronic D406, nu la fișierul brut al unei secțiuni. Rata de compresie, spune ANAF, variază între 1:10 și 1:25, în funcție de conținut, adică de înregistrările contabile. Fișierele XML pregătite, cu una sau mai multe subsecțiuni, pot ajunge la circa 5 GB, sau chiar mai mult, după cât se extrage din sistemul informatic al contribuabilului. Practic, un fișier brut de câteva GB ajunge după comprimare la ordinul zecilor sau sutelor de MB, deci limita nu trebuie citită ca un plafon pe volumul contabilității.
+        Aici sunt două cifre care se confundă des. <em>Limita tehnică de 500 MB se referă la fișierul XML comprimat</em>, așa cum ajunge atașat formularului electronic D406, nu la fișierul brut al unei secțiuni. Rata de compresie, spune ANAF, variază între 1:10 și 1:25, în funcție de conținut, adică de înregistrările contabile. Fișierele XML pregătite, cu una sau mai multe subsecțiuni, pot ajunge la circa 5 GB, sau chiar mai mult, după cât se extrage din sistemul informatic al contribuabilului. Practic, un fișier brut de câteva GB ajunge după comprimare la ordinul zecilor sau sutelor de MB, deci limita nu trebuie citită ca un plafon pe volumul contabilității.
       </p>
       <p>
         PDF-ul rezultat se semnează electronic, cu certificatul calificat înrolat pentru depunere, și se încarcă pe <a href="https://www.e-guvernare.ro/" target="_blank" rel="noopener">eguvernare.ro</a>. Validatorul poate fi rulat și din linie de comandă, ceea ce contează pentru cine vrea să automatizeze pasul acesta pe un portofoliu de clienți.
@@ -929,13 +929,13 @@
         <strong>Primul este poziția firmei în analiza de risc.</strong> ANAF nu comunică public o regulă care să lege explicit calitatea fișierului D406 de clasa de risc fiscal, așa că nimeni nu poate cita un prag. Dar mecanismul de analiză de risc funcționează exact pe acest tip de date, iar o firmă care depune constant cu întârziere sau cu erori într-o raportare care conține integral contabilitatea nu are cum să treacă neobservată într-un sistem construit tocmai pentru a compara automat.
       </p>
       <p>
-        <strong>Al doilea, mai concret, e ce se întâmplă în 2026.</strong> Prin proiectul pilot derulat între decembrie 2025 și august 2026, ANAF a testat construirea decontului de TVA direct din datele SAF-T și compararea lui, rând cu rând, cu decontul depus de contribuabil. Declarația nu mai e un depozit de date pentru un eventual control viitor. Devine sursa din care se calculează ce ar fi trebuit să declari.
+        <strong>Al doilea, mai concret, e ce se întâmplă în 2026.</strong> Prin proiectul pilot anunțat pentru perioada septembrie 2025 până în august 2026, ANAF a testat construirea decontului de TVA direct din datele SAF-T și compararea lui, rând cu rând, cu decontul depus de contribuabil. <em>Declarația nu mai e un depozit de date pentru un eventual control viitor. Devine sursa din care se calculează ce ar fi trebuit să declari.</em>
       </p>
       <p>
-        Într-un asemenea mecanism, o mapare greșită de cod de taxă nu mai produce o amendă de 1.500 de lei. Produce o diferență de TVA.
+        Într-un asemenea mecanism, <em>o mapare greșită de cod de taxă nu mai produce o amendă de 1.500 de lei. Produce o diferență de TVA.</em>
       </p>
       <p>
-        Ceea ce ne aduce la întrebarea practică: dacă fișierul contează atât de mult, cum verifici că e corect înainte să-l semnezi? Iar răspunsul „l-a validat DUKIntegrator” nu e suficient. Nici pe departe. Ce se poate face cu <a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html">uneltele gratuite de la ANAF</a> am scris deja. Ce verifică de fapt validatorul, ce oferă piața contra cost și dacă merită banii, în articolul următor.
+        Ceea ce ne aduce la întrebarea practică: dacă fișierul contează atât de mult, cum verifici că e corect înainte să-l semnezi? Iar răspunsul „l-a validat DUKIntegrator” nu e suficient. Nici pe departe. Ce se poate face cu <a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html">uneltele gratuite de la ANAF</a> am scris deja. Ce verifică de fapt validatorul, ce oferă piața contra cost și dacă merită banii, în <a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html">articolul următor</a>.
       </p>
 
       <h2 id="s10">Surse oficiale</h2>
@@ -1028,10 +1028,10 @@
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
       </a>
-      <a href="2026-07-04-Short-Friday-analiza-fiscala-zece-livrabile.html" class="related-card fade-in">
-        <div class="related-date">AGENȚI AI · #014</div>
-        <h3>Short Friday, o analiză fiscală cu zece livrabile</h3>
-        <p>Cum arată o analiză legislativă completă produsă într-un weekend, cu un orchestrator și opt subagenți AI.</p>
+      <a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html" class="related-card fade-in">
+        <div class="related-date">ANALIZĂ · SAF-T · #032</div>
+        <h3>Cum verifici fișierul SAF-T D406 înainte de depunere</h3>
+        <p>Partea a doua a seriei: cele cinci niveluri de verificare a D406, unde cedează Excel-ul și ce se poate cumpăra de pe piață.</p>
         <span class="related-read">Citește articolul
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>

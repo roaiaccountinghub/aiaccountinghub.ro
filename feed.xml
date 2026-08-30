@@ -31,12 +31,21 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sat, 29 Aug 2026 09:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2026 09:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Cum verifici fișierul SAF-T D406 înainte de depunere</title>
+      <link>https://aiaccountinghub.ro/2026-08-30-Verificarea-D406-inainte-de-depunere.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-08-30-Verificarea-D406-inainte-de-depunere.html</guid>
+      <pubDate>Sun, 30 Aug 2026 09:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Generăm fișierul, îl trecem prin DUKIntegrator, citim „Fișierul PDF a fost creat cu succes” și depunem. Numai că validatorul verifică schema, nu datele: e diferența dintre a vedea că o balanță are toate coloanele la locul lor și a vedea că balanța este echilibrată. Cele cinci niveluri de verificare a D406, de la controalele gratuite din programul de contabilitate până la reconcilierea cu deconturile, de ce Excel cedează mult înainte de limita de 1.048.576 de rânduri, ce oferă piața românească și cu ce prețuri publice, plus direcția pentru cine nu poate folosi nimic din ce se vinde: propria aplicație, construită cu AI, care rulează local.</description>
+    </item>
 
     <item>
       <title>Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406</title>
