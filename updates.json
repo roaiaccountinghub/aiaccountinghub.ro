@@ -5,6 +5,24 @@
   "updated": "2026-08-30",
   "items": [
     {
+      "id": "buzz-prompt-injection",
+      "type": "buzzword",
+      "title": "Prompt injection — documentul primit din exterior poate conține ordine",
+      "url": "buzzword.html#prompt-injection",
+      "date": "2026-08-30",
+      "meta": "termenul săptămânii",
+      "mark": "#prompt-injection"
+    },
+    {
+      "id": "buzz-geo",
+      "type": "buzzword",
+      "title": "GEO — te citează AI-ul când cineva întreabă de un contabil?",
+      "url": "buzzword.html#geo",
+      "date": "2026-08-30",
+      "meta": "termen explicat",
+      "mark": "#geo"
+    },
+    {
       "id": "art-saft-verificare-d406",
       "type": "articol",
       "title": "Cum verifici fișierul SAF-T D406 înainte de depunere",
