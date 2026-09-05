@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Proiectul care ține minte — AI Accounting Hub</title>
+<meta name="description" content="Un asistent AI care uită totul între conversații nu poate duce un proiect care se întinde pe mai multe săptămâni. Înainte de conversația de planificare, ne facem un spațiu de lucru: un proiect dedicat, cu folder local, cu regulile scrise într-un fișier și cu o memorie pe care asistentul și-o ține singur.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-09-05-Proiectul-care-tine-minte.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-09-05-Proiectul-care-tine-minte.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Proiectul care ține minte — AI Accounting Hub">
+<meta property="og:description" content="Un asistent AI care uită totul între conversații nu poate duce un proiect care se întinde pe mai multe săptămâni. Înainte de conversația de planificare, ne facem un spațiu de lucru: un proiect dedicat, cu folder local, cu regulile scrise într-un fișier și cu o memorie pe care asistentul și-o ține singur.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Proiectul care ține minte — AI Accounting Hub">
+<meta name="twitter:description" content="Un asistent AI care uită totul între conversații nu poate duce un proiect care se întinde pe mai multe săptămâni. Înainte de conversația de planificare, ne facem un spațiu de lucru: un proiect dedicat, cu folder local, cu regulile scrise într-un fișier și cu o memorie pe care asistentul și-o ține singur.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Subtitlurile de secțiune. h2 poartă '§', h3 primește '//', același vocabular
+   cu etichetele mono din site. */
+.prose h3 { margin: 44px 0 14px; }
+.prose h3::before { content: '//'; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; color: var(--accent); font-weight: 400; margin-right: 10px; opacity: 0.75; }
+/* Titlurile de capitol care sunt nume de fișier rămân în mono, fără '//'. */
+.prose h3.file::before { content: none; }
+.prose h3.file { font-family: 'JetBrains Mono', monospace; font-size: 17px; letter-spacing: 0; }
+
+/* Tabele */
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+.prose tbody tr:hover td { background: color-mix(in oklab, var(--accent) 3%, transparent); }
+
+/* Săgeata către pagina de termen: afordanță de atins pe telefon, unde fiecare
+   rând devine card. Fără subliniere, ca să nu semene cu un link în proză. */
+.prose td a.tlink { font-family: 'JetBrains Mono', monospace; border-bottom: none; padding-left: 4px; }
+.prose td a.tlink:hover { background: none; opacity: 0.75; }
+
+/* Cod inline */
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: color-mix(in oklab, var(--fg) 8%, transparent); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; color: var(--fg); white-space: nowrap; }
+.prose pre code { white-space: pre; }
+.prose td code { font-size: 12.5px; }
+
+/* Arborele de foldere: mono, fără evidențierea de bloc de cod, ca să se citească
+   ca o schemă, nu ca o comandă de rulat. */
+.prose pre.tree { background: var(--bg-1); font-size: 12.5px; line-height: 1.75; }
+.prose pre.tree b { color: var(--accent); font-weight: 500; }
+.prose pre.tree i { color: var(--fg-dim); font-style: normal; }
+
+/* Checklistul din finalul articolului: pătrățele goale, de bifat pe hârtie sau
+   în cap. Nu sunt controale, deci nu primesc <input> și nici stare. */
+.prose .checklist { margin: 24px 0; }
+.prose .checklist li { position: relative; padding: 9px 0 9px 32px; }
+.prose .checklist li::before { content: ''; position: absolute; left: 2px; top: 13px; width: 14px; height: 14px; border: 1.5px solid color-mix(in oklab, var(--accent) 55%, transparent); border-radius: 4px; }
+.prose .checklist li::marker { content: none; }
+
+/* Linkuri în proză — styles.css are a { color: inherit } */
+.prose p > a, .prose li > a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); }
+.prose p > a:hover, .prose li > a:hover { border-bottom-color: var(--accent); }
+
+@media (max-width: 720px) {
+  .prose table { font-size: 13px; }
+  .prose th, .prose td { padding: 10px 12px; }
+  .prose pre.tree { font-size: 11.5px; }
+}
+@media (max-width: 420px) {
+  .prose table { font-size: 12px; }
+  .prose th, .prose td { padding: 8px 10px; }
+  .prose pre.tree { font-size: 10.5px; }
+}
+
+/* ===== Banda de serie =====================================================
+   Eticheta de sus e chiar rezumatul casetei pliate, deci o singură componentă,
+   nu două. Lista arată doar părțile dinainte: nu promitem un total, fiindcă
+   s-ar schimba la fiecare articol nou din serie, iar articolele deja publicate
+   nu se mai ating niciodată. Tiparul de <details> e cel de la .toc-mobile,
+   fundalul e cel al .callout, componenta cu care site-ul spune „uită-te aici”. */
+.serie { margin: 0 0 34px; border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 14px; background: radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 60%), var(--bg-1); box-shadow: 0 10px 30px -18px color-mix(in oklab, var(--accent) 70%, transparent); }
+.serie summary, .serie .serie-rand { display: flex; align-items: center; gap: 14px; padding: 16px; list-style: none; font-family: 'JetBrains Mono', monospace; }
+.serie summary { cursor: pointer; }
+.serie summary::-webkit-details-marker { display: none; }
+.serie-ic { flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: color-mix(in oklab, var(--accent) 15%, transparent); color: var(--accent); }
+.serie-ic svg { width: 16px; height: 16px; }
+.serie-cap { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.serie-nume { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.serie-poz { font-size: 13px; letter-spacing: 0.02em; color: var(--fg); }
+.serie-hint { display: inline-flex; align-items: center; gap: 9px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); white-space: nowrap; transition: color 0.2s; }
+.serie summary:hover .serie-hint { color: var(--accent); }
+.serie-hint::after { content: ''; width: 6px; height: 6px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg); transition: transform 0.25s ease; margin-top: -3px; }
+.serie[open] .serie-hint::after { transform: rotate(-135deg); margin-top: 2px; }
+.serie-link { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); white-space: nowrap; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); }
+.serie-link:hover { border-bottom-color: var(--accent); }
+.serie-lista { margin: 0; padding: 0 16px 14px 62px; list-style: none; counter-reset: sp; }
+.serie-lista li { counter-increment: sp; display: flex; gap: 13px; padding: 11px 0; border-top: 1px solid color-mix(in oklab, var(--accent) 15%, transparent); }
+.serie-lista li::before { content: counter(sp); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); min-width: 13px; padding-top: 3px; }
+.serie-lista a { display: block; font-size: 15px; line-height: 1.4; color: var(--fg); }
+.serie-lista a:hover { color: var(--accent); }
+.serie-data { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.05em; color: var(--fg-dim); margin-top: 4px; }
+@media (max-width: 560px) {
+  .serie summary, .serie .serie-rand { padding: 14px; gap: 12px; }
+  .serie-hint span { display: none; }
+  .serie-lista { padding: 0 14px 12px; }
+  .serie-lista a { font-size: 14px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Proiectul care ține minte — AI Accounting Hub",
+  "description": "Un asistent AI care uită totul între conversații nu poate duce un proiect care se întinde pe mai multe săptămâni. Înainte de conversația de planificare, ne facem un spațiu de lucru: un proiect dedicat, cu folder local, cu regulile scrise într-un fișier și cu o memorie pe care asistentul și-o ține singur.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-09-05",
+  "dateModified": "2026-09-05",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-09-05-Proiectul-care-tine-minte.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce este un proiect într-un asistent AI și cu ce diferă de o conversație obișnuită?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un proiect nu e un folder cu fișiere și nu e o conversație mai lungă. E un container care ține laolaltă patru lucruri: instrucțiunile, adică regulile care se aplică automat fiecărei conversații din proiect; contextul, adică un folder local de pe calculator la care asistentul are acces, plus alte surse de referință; istoricul, adică discuțiile purtate pe tema respectivă; și memoria, adică ce a reținut asistentul din lucrul de până acum. Consecințele practice sunt că nu mai reîncarci contextul la fiecare conversație, nu mai copiezi rezultatele din chat, regulile nu se erodează pe parcursul discuției și deciziile se adună într-un singur loc."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Se poate duce un proiect lung pe un plan gratuit de asistent AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nu. Motivul nu e că pe gratuit nu se poate scrie cod, fiindcă se poate: planul gratuit include crearea și execuția de fișiere cu cod, căutare pe web și memorie între conversații. Blocajul e altul. Pe gratuit lipsesc proiectele, deci nu ai container persistent și reîncarci manual contextul; lipsește folderul conectat, deci asistentul nu vede fișierele proiectului și nu scrie în ele; lipsește alegerea modelului, deci nu poți folosi un model de raționament tocmai în faza de planificare; iar volumul de utilizare al unui proiect lung, cu documente mari, e chiar tiparul care lovește limitele. Pe gratuit poți construi un tool, dar nu același tool săptămână după săptămână."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce este fișierul CLAUDE.md și cum se scrie corect?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Este un fișier text simplu, așezat în rădăcina folderului de lucru sau în subfolderul .claude, care conține instrucțiunile și regulile permanente ale proiectului și pe care asistentul îl citește la începutul fiecărei sesiuni. Documentația recomandă patru lucruri: sub 200 de rânduri, fiindcă fișierele mai lungi consumă context și scad aderența; concret în loc de general, adică „rulează testele înainte de livrare” în loc de „testează bine”; structurat, cu titluri și liste, nu paragrafe dense; și fără contradicții, fiindcă două reguli care se bat cap în cap lasă alegerea la latitudinea modelului. Criteriul de adăugare: scrie acolo ce altfel ai reexplica."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Care e diferența dintre CLAUDE.md și MEMORY.md?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CLAUDE.md e ce scrii tu, MEMORY.md e ce reține asistentul. Unul e regulamentul, celălalt e jurnalul de lucru. MEMORY.md nu îl scrii tu, ci se completează singur pe măsură ce lucrați, cu notițe despre cine ești și cum lucrezi, corecturile date și abordările confirmate, mersul proiectului cu deciziile și termenele lui, și unde se află informația din afara proiectului. Mecanismul e un index, câte un rând per notiță, încărcat la începutul fiecărei conversații, cu detaliile în fișiere separate pe teme, deschise doar la nevoie. Nu salvează ce poate deduce singur din fișiere și nici ce spune deja CLAUDE.md."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pot instala un asistent AI pe laptopul de serviciu?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depinde de politica IT, iar restricțiile nu se ocolesc: instalarea unui asistent AI pe un laptop de companie fără aprobare are un nume, shadow AI. Primul lucru de verificat, înainte de orice abonament, e aplicația Company Portal, afișată în română ca „Portal firmă”, prin care compania își administrează calculatoarele și prin care instalezi aplicațiile deja aprobate de IT. Dacă asistentul e acolo, îl instalezi și ai și acordul organizației. Dacă nu e, ai două variante oneste: ceri IT-ului să îl evalueze, sau lucrezi pe un calculator personal, fără date reale ale firmei. O cerere către IT are șanse mult mai mari dacă spune ce aplicație, pentru ce sarcină, ce date atinge și ce date nu atinge."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "De ce nu se folosesc diacritice în numele folderelor de proiect?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pentru că sparg scripturile și comenzile de consolă pe Windows. Textul dinăuntrul fișierelor se scrie normal, cu diacritice complete. Numele de fișiere și de foldere, nu. E un detaliu mărunt care costă o oră când îl descoperi singur, în mijlocul unei rulări care eșuează fără explicație."
+      }
+    }
+  ]
+}</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Proiectul care ține minte</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Vibe coding</span>
+      <span>5 septembrie 2026</span>
+      <span class="sep">·</span>
+      <span>12 min citire</span>
+    </div>
+
+    <h1>Proiectul care <span class="accent">ține minte</span></h1>
+    <p class="article-lede">
+      Un asistent AI care uită totul între conversații nu poate duce un proiect care se întinde pe mai multe săptămâni. Înainte de conversația de planificare, ne facem un spațiu de lucru: un proiect dedicat, cu folder local, cu regulile scrise într-un fișier și cu o memorie pe care asistentul și-o ține singur.
+    </p>
+
+    <details class="serie">
+      <summary>
+        <span class="serie-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><span class="serie-cap"><span class="serie-nume">Seria SAF-T</span><span class="serie-poz">partea a cincea</span></span>
+        <span class="serie-hint"><span>ce a fost înainte</span></span>
+      </summary>
+      <ol class="serie-lista">
+        <li><a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html">Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi<span class="serie-data">27 august 2026 · 12 min</span></a></li>
+        <li><a href="2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html">Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406<span class="serie-data">29 august 2026 · 17 min</span></a></li>
+        <li><a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html">Cum verifici fișierul SAF-T D406 înainte de depunere<span class="serie-data">30 august 2026 · 22 min</span></a></li>
+        <li><a href="2026-09-05-Nu-cere-drumul-cel-mai-scurt.html">Nu cere drumul cel mai scurt<span class="serie-data">5 septembrie 2026 · 12 min</span></a></li>
+      </ol>
+    </details>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s1">Întrebarea pe care nu am pus-o</a>
+        <a href="#s2">Unde lucrăm, spus de la început</a>
+        <a href="#s3">Ce face un proiect, de fapt</a>
+        <a href="#s4">Cele două fișiere care fac diferența</a>
+        <a href="#s5">Skills: procedurile scrise o dată</a>
+        <a href="#s6">Cum arată folderul proiectului</a>
+        <a href="#s7">Laptopul de companie</a>
+        <a href="#s8">Vocabularul de construcție</a>
+        <a href="#s9">Checklistul</a>
+        <a href="#s10">Ce urmează</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">05.09.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// D406 · spațiul de lucru al proiectului · ilustrație</div>
+    </div>
+
+    <div class="prose">
+
+      <p>
+        <a href="2026-09-05-Nu-cere-drumul-cel-mai-scurt.html">Articolul precedent</a> s-a încheiat cu uneltele pe masă: vocabularul, metoda de a formula cererea, lecțiile celor două tool-uri construite până acum, ritmul de documentare și materia primă publicată de ANAF. Și cu un principiu, „nu cere aplicația, cere planul”.
+      </p>
+      <p>
+        Am promis că trecem la conversația de planificare. Între timp mi-am dat seama că sărisem o întrebare, și că e una care decide dacă seria are cum să funcționeze.
+      </p>
+      <p>
+        Nu am spus <strong>unde</strong> se poartă conversația aceea.
+      </p>
+
+      <h2 id="s1">Întrebarea pe care nu am pus-o</h2>
+      <p>
+        Un proiect care se întinde pe mai multe săptămâni are o proprietate incomodă: în săptămâna a șaptea trebuie să știi de ce ai decis, în săptămâna a doua, ca aplicația să citească fișierul într-un anumit fel. Nu „aproximativ de ce”. Exact.
+      </p>
+      <p>
+        Într-o fereastră obișnuită de chat, informația asta nu există. Fiecare conversație pornește de la zero, iar tu reîncarci de fiecare dată schema, lista testelor, regulile de lucru și contextul deciziilor luate. La a treia repetare renunți și explici pe scurt. La a cincea nu mai explici deloc, iar asistentul începe să propună lucruri care contrazic ce ați hotărât împreună acum o lună.
+      </p>
+      <p>
+        <em>Nu e o problemă de model. E o problemă de spațiu de lucru.</em>
+      </p>
+      <p>
+        Articolul acesta o rezolvă și nu trece mai departe. Nu conține plan mode, nu conține promptul de planificare, nu conține cod, și nu conține nici alegerea arhitecturii aplicației. Aceea rămâne, integral, pentru conversația de planificare. Altfel ne-am contrazice singuri pe tema articolului precedent.
+      </p>
+
+      <h2 id="s2">Unde lucrăm, spus de la început</h2>
+      <p>
+        Din experiența de până acum, două instrumente merită luate în calcul serios, și pe amândouă le-am folosit efectiv: <a href="buzzword/chatgpt-work.html">ChatGPT Work</a> și <a href="buzzword/claude-cowork.html">Claude Cowork</a>. Fac aceleași lucruri esențiale pentru ce urmează: proiecte cu instrucțiuni permanente, acces la un folder local de pe calculator și, sub același nume la amândouă, un mod de planificare separat de execuție. Merită observată convergența: doi producători diferiți au ajuns, independent, la concluzia că etapa de dinaintea codului trebuie să fie un mod distinct, nu o formulare norocoasă a utilizatorului.
+      </p>
+      <p>
+        <strong>Alegerea nu e, de obicei, a ta.</strong> Dacă firma a aprobat deja unul dintre ele, acela e răspunsul, iar dacă vine la pachet cu un plan de tip enterprise, partea cea mai incomodă a discuției e ca și închisă: contractul acoperă exact ce, pe un cont personal, rămâne în sarcina ta, adică regimul datelor care intră în instrument.
+      </p>
+      <p>
+        <strong>Dacă îl duci pe cont propriu</strong>, alege-l pe cel cu care ești deja familiarizat. Diferențele de capabilitate contează mai puțin decât viteza cu care te miști prin interfață, iar costul e comparabil oricum: un plan individual cu plată e undeva la 20-25 de euro pe lună, cu tot cu TVA, la oricare dintre ele. E un ordin de mărime, nu o cifră de citat: prețurile diferă pe țară și pe monedă și se schimbă, deci se verifică la sursă înainte de plată.
+      </p>
+      <p>
+        Pentru comparație, singura care mi se pare relevantă: în <a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html">articolul despre soluțiile de pe piață</a>, cel mai ieftin abonament dedicat de verificare SAF-T era 990 de lei pe an. Ordinul de mărime e comparabil, cu diferența că abonamentul de asistent rămâne util și după ce proiectul acesta se termină.
+      </p>
+      <p>
+        <strong>Varianta gratuită nu e o opțiune aici,</strong> și e mai bine spus de la început decât descoperit în a treia săptămână. Pe gratuit primești răspunsuri de la modelele de intrare, limite de utilizare foarte strânse și pauze impuse exact când ai prins ritm. Iar lucrurile de care depinde tot ce urmează, adică proiectele cu instrucțiuni permanente și folderul conectat, nu există acolo deloc.
+      </p>
+      <p>
+        Mai există și alte soluții, unele bune. Vorbim despre acestea două fiindcă sunt cele pe care le-am testat noi, iar restul seriei trebuie să fie reproductibil pas cu pas, nu descris din auzite.
+      </p>
+      <p>
+        <strong>De aici înainte mergem pe Claude, versiunea desktop, modulul Cowork.</strong> Nu pentru că ar fi singura combinație care funcționează, ci pentru că altfel fiecare pas ar trebui scris în două variante, iar seria ar deveni de două ori mai lungă și pe jumătate la fel de utilă. Cine lucrează pe cealaltă va regăsi aceleași noțiuni sub alte nume. Configurația exactă, ca să poți reproduce pașii:
+      </p>
+
+      <div class="table-wrap is-stacked">
+        <table class="t-stack">
+          <thead>
+            <tr><th>Element</th><th>Ce folosim</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Aplicația</strong></td><td data-label="Ce folosim"><a href="buzzword/claude-desktop-app.html">Claude, versiunea desktop</a>, instalată pe calculator</td></tr>
+            <tr><td><strong>Sistemul de operare</strong></td><td data-label="Ce folosim">Windows 11</td></tr>
+            <tr><td><strong>Modulul</strong></td><td data-label="Ce folosim"><a href="buzzword/claude-cowork.html">Cowork</a></td></tr>
+            <tr><td><strong>Organizarea</strong></td><td data-label="Ce folosim">un proiect dedicat, creat pentru seria asta</td></tr>
+            <tr><td><strong>Accesul la fișiere</strong></td><td data-label="Ce folosim">un <a href="buzzword/work-folder.html">folder local</a> de pe laptop, conectat explicit la proiect</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="s3">Ce face un proiect, de fapt</h2>
+      <p>
+        Aici e miezul articolului, și e partea pe care merită s-o citești chiar dacă nu te interesează SAF-T deloc.
+      </p>
+      <p>
+        Un <a href="buzzword/project.html">proiect</a> nu e un folder cu fișiere și nu e o conversație mai lungă. E un container care ține laolaltă patru lucruri:
+      </p>
+      <ul>
+        <li><strong>instrucțiunile</strong>, adică regulile care se aplică automat fiecărei conversații din proiect: ton, format, ce e permis și ce nu;</li>
+        <li><strong>contextul</strong>, adică un <a href="buzzword/work-folder.html">folder local</a> de pe calculatorul tău, la care asistentul are acces, plus alte surse de referință aduse prin <a href="buzzword/connector.html">conectori</a>;</li>
+        <li><strong>istoricul</strong>, adică discuțiile purtate pe tema respectivă, care rămân acolo;</li>
+        <li><strong>memoria</strong>, adică ce a reținut asistentul din lucrul de până acum.</li>
+      </ul>
+      <p>
+        Sună administrativ. Consecințele practice nu sunt deloc administrative.
+      </p>
+      <p>
+        <strong>Nu mai reîncarci contextul.</strong> Schema oficială, lista celor 33 de teste, nomenclatorul, toate stau în folder. Asistentul le consultă când are nevoie, fără să i le mai atașezi. Ai scris o dată că testele se iau din documentul ANAF și nu din memoria modelului, iar regula se aplică singură, în conversația de azi și în cea de peste șase săptămâni.
+      </p>
+      <p>
+        <strong>Nu mai copiezi din chat.</strong> Asistentul citește și scrie direct în folderul conectat. Rapoartele apar acolo unde le vrei, nu într-o fereastră din care le muți manual. E o diferență care pare mică până când o faci de treizeci de ori.
+      </p>
+      <p>
+        <strong>Regulile nu se erodează.</strong> Într-un chat obișnuit, o regulă spusă în mesajul al treilea se pierde până la al patruzecilea. Într-un proiect, e citită de la început de fiecare dată.
+      </p>
+      <p>
+        <strong>Ai un loc unde se adună deciziile.</strong> Nu doar codul, ci și de ce arată așa. Pentru un contabil, argumentul nu are nevoie de traducere: e diferența dintre a lucra pe un dosar și a lucra pe foi volante.
+      </p>
+      <p>
+        Un lucru care merită menționat, pentru că e genul de detaliu care liniștește pe cineva care dă prima dată acces la fișierele lui: asistentul poate citi și scrie <strong>doar în folderele pe care le-ai conectat explicit</strong>, iar înainte să șteargă definitiv un fișier cere permisiune.
+      </p>
+      <p>
+        Instrucțiunile se așază pe trei niveluri, de la general la particular. Cele <strong>globale</strong> se aplică în orice lucrezi. Cele <strong>de proiect</strong> se aplică doar acolo. Cele de <strong>organizație</strong> sunt setate de administrator, la conturile de firmă. Nu se bat cap în cap, se adaugă.
+      </p>
+
+      <h2 id="s4">Cele două fișiere care fac diferența</h2>
+      <p>
+        Peste instrucțiunile din interfață vin două fișiere care stau chiar în proiect. Merită înțeleasă distincția dintre ele, pentru că e curată și ușor de ținut minte:
+      </p>
+
+      <blockquote>
+        <code>CLAUDE.md</code> e ce scrii tu. <code>MEMORY.md</code> e ce reține Claude.<br><br>
+        Unul e regulamentul. Celălalt e jurnalul de lucru.
+      </blockquote>
+
+      <h3 class="file">CLAUDE.md, regulamentul</h3>
+      <p>
+        Un <a href="buzzword/claude-md.html">fișier text simplu</a>, în rădăcina folderului de lucru sau în subfolderul <code>.claude</code>. Conține instrucțiunile și regulile permanente ale proiectului, iar asistentul îl citește la începutul fiecărei sesiuni.
+      </p>
+      <p>
+        Documentația oficială e neașteptat de directă în privința felului în care se scrie:
+      </p>
+      <ul>
+        <li><strong>sub 200 de rânduri.</strong> Fișierele mai lungi consumă context și scad aderența, adică exact opusul a ce vrei;</li>
+        <li><strong>concret, nu general.</strong> „Rulează testele înainte de livrare” bate „testează bine”;</li>
+        <li><strong>structurat</strong>, cu titluri și liste, nu paragrafe dense;</li>
+        <li><strong>fără contradicții.</strong> Dacă două reguli se bat cap în cap, e la alegerea modelului pe care o urmează. Se recitește periodic și se scot regulile expirate.</li>
+      </ul>
+      <p>
+        Criteriul cel mai util de adăugare, tot din documentație: scrie în <code>CLAUDE.md</code> <strong>ce altfel ai reexplica.</strong> Dacă ai corectat același lucru a doua oară, dacă ai tastat aceeași clarificare pe care o tastaseși și sesiunea trecută, acolo e locul ei.
+      </p>
+      <p>
+        <strong>Ce intră în fișierul proiectului nostru.</strong> Aici se închide un cerc deschis în articolul precedent, unde am scris că cele trei precauții devin clauze de proiect. Iată unde ajung, concret:
+      </p>
+      <ul>
+        <li>cele trei reguli: fișierul real nu iese din calculator, enunțul testelor se ia din documentul ANAF și nu din memoria modelului, calibrarea se face pe o lună deja depusă și acceptată;</li>
+        <li>guardrail-ul, formulat pozitiv: dacă informația nu se află în documentele din folderul de surse, scrie exact „Nu rezultă din textele furnizate”;</li>
+        <li>structura folderului, ca asistentul să știe de unde citește și unde scrie;</li>
+        <li>convențiile: limba, formatul rapoartelor, cum se numesc fișierele.</li>
+      </ul>
+      <p>
+        Avantajul față de instrucțiunile din interfață merită spus limpede: <strong>fișierul stă în folder.</strong> Îl vezi, îl deschizi cu orice editor, îl trimiți unui coleg, îl păstrezi când schimbi calculatorul. Instrucțiunile din interfață trăiesc în cont. Fișierul trăiește în proiect.
+      </p>
+      <p>
+        <strong>Numele diferă de la un furnizor la altul.</strong> La OpenAI, agentul de programare citește <a href="buzzword/agents-md.html">AGENTS.md</a>, care nu e formatul unui singur producător, ci un standard deschis, aflat sub Agentic AI Foundation din Linux Foundation și adoptat de peste douăzeci și cinci de unelte. Gemini CLI citește implicit GEMINI.md, dar poate fi configurat să citească tot AGENTS.md. Conținutul e același ca natură, adică regulile permanente ale proiectului. Recomandarea practică pentru cine folosește mai multe instrumente e un singur fișier ca sursă de adevăr, cu celelalte configurate să trimită la el. Două fișiere întreținute în paralel devin, inevitabil, două seturi de reguli care se contrazic, iar diferența de rezultat nu se mai explică.
+      </p>
+
+      <h3 class="file">MEMORY.md, jurnalul</h3>
+      <p>
+        Al doilea fișier nu îl scrii tu. Îl <a href="buzzword/memory-md.html">scrie asistentul</a>, singur, pe măsură ce lucrați.
+      </p>
+      <p>
+        Sunt notițe pe care și le ia despre patru lucruri: cine ești și cum lucrezi, corecturile pe care i le-ai dat și abordările pe care i le-ai confirmat, mersul proiectului cu deciziile și termenele lui, și unde se află informația din afara proiectului.
+      </p>
+      <p>
+        Mecanismul e simplu și eficient. <code>MEMORY.md</code> e un <strong>index</strong>, câte un rând per notiță, și se încarcă la începutul fiecărei conversații. Detaliile stau în fișiere separate, pe teme, pe care asistentul le deschide doar când are nevoie de ele. Așa poate ține minte mult fără să plătească de fiecare dată contextul a tot ce știe, adică fără să provoace exact degradarea descrisă la <a href="buzzword/context-rot.html">context rot</a>.
+      </p>
+      <p>
+        Ce nu salvează, tot din documentație: lucrurile pe care le poate deduce singur din fișiere, și lucrurile pe care <code>CLAUDE.md</code> le spune deja. Nu dublează.
+      </p>
+      <p>
+        Totul e text simplu, pe care îl poți citi, edita sau șterge direct din folder. În varianta de linie de comandă există și comenzi dedicate, <code>/memory</code> pentru fișierele de memorie și <code>/context</code> pentru ce s-a încărcat efectiv în sesiunea curentă. În interfața desktop, verificarea cea mai sigură rămâne tot cea directă: deschizi fișierul și îl citești.
+      </p>
+      <p>
+        <strong>De ce contează pentru noi.</strong> În săptămâna a șaptea, întrebarea „de ce am ales varianta asta” are un răspuns scris. Nu se reconstruiește din memorie și nu se reia discuția de la zero. E chiar problema de la care a pornit articolul.
+      </p>
+
+      <h2 id="s5">Skills: procedurile scrise o dată</h2>
+      <p>
+        A treia piesă. Un <strong><a href="buzzword/skills.html">skill</a></strong> e un fișier de instrucțiuni prin care asistentul duce la capăt o sarcină anume, în mod repetabil. Stă într-un folder propriu, cu un fișier <code>SKILL.md</code> înăuntru, plus, dacă e cazul, scripturi și fișiere auxiliare.
+      </p>
+      <p>
+        Partea elegantă, care rezolvă o problemă reală: din <code>SKILL.md</code> se încarcă la pornire <strong>doar numele și descrierea.</strong> Corpul se încarcă abia când skill-ul e chemat. Poți avea douăzeci de proceduri scrise în detaliu fără să plătești contextul niciuneia până nu o folosești.
+      </p>
+      <p>
+        Regula de separare între cele trei mecanisme, care merită reținută:
+      </p>
+
+      <div class="table-wrap is-stacked">
+        <table class="t-stack">
+          <thead>
+            <tr><th>Ce ai de spus</th><th>Unde merge</th><th>De ce</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>informație valabilă tot timpul</strong></td><td data-label="Unde merge"><code>CLAUDE.md</code></td><td data-label="De ce">trebuie să fie mereu disponibilă</td></tr>
+            <tr><td><strong>procedură cu pași, folosită ocazional</strong></td><td data-label="Unde merge">skill</td><td data-label="De ce">se încarcă doar la nevoie</td></tr>
+            <tr><td><strong>ce a învățat asistentul lucrând</strong></td><td data-label="Unde merge"><code>MEMORY.md</code></td><td data-label="De ce">se scrie singur, nu îl întreții tu</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <strong>Pentru proiectul nostru, skill-ul evident</strong> e procedura de adăugare a unui test de consistență: citește enunțul din documentul ANAF, scrie verificarea, rulează pe luna de calibrare, compară rezultatul cu fișierul real, raportează diferențele. Se scrie o dată. Se folosește de 33 de ori. E exemplul care justifică noțiunea mai bine decât orice definiție.
+      </p>
+
+      <h2 id="s6">Cum arată folderul proiectului nostru</h2>
+
+      <pre class="tree"><b>SAFT-D406\</b>
+├─ <b>CLAUDE.md</b>         <i>regulile permanente ale proiectului</i>
+├─ <b>.claude\</b>
+│  └─ <b>skills\</b>        <i>procedurile repetabile</i>
+├─ <b>surse\</b>            <i>schema oficiala, definitiile, cele 33 de teste, nomenclatorul</i>
+├─ <b>calibrare\</b>        <i>luna deja depusa si acceptata</i>
+├─ <b>app\</b>              <i>aplicatia, pe masura ce se construieste</i>
+└─ <b>rapoarte\</b>         <i>iesirile</i></pre>
+
+      <p>
+        Un detaliu mărunt care costă o oră când îl descoperi singur: <strong>fără diacritice în numele folderelor.</strong> Sparg scripturile și comenzile de consolă pe Windows. Textul dinăuntru se scrie normal, cu diacritice complete. Numele de fișiere și foldere, nu.
+      </p>
+      <p>
+        Structura asta nu e inventată pentru articol. Proiectul în care se scriu chiar articolele de pe site arată la fel: un fișier de reguli în rădăcină, o memorie a proiectului, skill-uri pentru sarcinile care se repetă, și câte un folder per articol cu documentarea și draftul înăuntru.
+      </p>
+
+      <h2 id="s7">Laptopul de companie</h2>
+      <p>
+        Până aici am presupus că poți instala ce vrei pe calculatorul tău. Pe un laptop de companie, de multe ori nu poți, iar asta schimbă lucrurile.
+      </p>
+      <p>
+        Există două scenarii, și merită să știi în care ești înainte să plătești un abonament.
+      </p>
+      <p>
+        <strong>Scenariul deschis.</strong> Ai drepturi pe calculator. Asistentul primește un folder și lucrează în el: creează fișiere, folosește instrumente instalate, testează, corectează. Bucla de la „scrie codul” la „rulează-l și spune-mi ce a ieșit” se închide fără tine. Tu verifici rezultatul, nu execuți pașii.
+      </p>
+      <p>
+        <strong>Scenariul restrictiv.</strong> Laptop administrat de IT. Nu ai drepturi de administrator, politica poate bloca instalările, iar aplicațiile permise sunt o listă scurtă și explicită.
+      </p>
+      <p>
+        <strong>Restricțiile nu sunt un capriciu și nu se ocolesc.</strong> Sunt răspunsul la un risc real, iar contabilul e tocmai omul care lucrează cu datele cele mai sensibile din firmă. Instalarea unui asistent AI pe un laptop de companie fără aprobare are un nume, e chiar un termen din glosarul articolului precedent: <a href="buzzword/shadow-ai.html">shadow AI</a>.
+      </p>
+
+      <h3>Company Portal, locul unde afli în două minute</h3>
+      <p>
+        Probabil ai pe bara de activități o aplicație numită <strong><a href="buzzword/company-portal.html">Company Portal</a></strong>, afișată pe un Windows în română ca <strong>Portal firmă</strong>. Denumirea englezească e cea care contează în discuția cu IT-ul, fiindcă aceea apare în documentație. Face parte din sistemul prin care compania își administrează calculatoarele. Prin ea accesezi în siguranță resursele organizației, îți înscrii dispozitivul și, partea care ne interesează, <strong>instalezi aplicațiile pe care IT-ul le-a aprobat deja.</strong>
+      </p>
+      <p>
+        E primul lucru de verificat, înainte de orice abonament. Deschizi Company Portal, te uiți în lista de aplicații disponibile și afli imediat dacă asistentul pe care voiai să-l folosești e deja acolo. Dacă e, discuția s-a încheiat: îl instalezi și ai și acordul organizației.
+      </p>
+      <p>
+        Dacă nu e, ai două variante oneste. Ceri IT-ului să îl evalueze, sau lucrezi pe un calculator personal, fără date reale ale firmei. A treia variantă nu există.
+      </p>
+      <p>
+        O cerere către IT are șanse mult mai mari dacă spune patru lucruri, în trei rânduri: ce aplicație, pentru ce sarcină, ce date atinge și ce date nu atinge. <em>„Aș vrea să instalez X” nu e o cerere, e o dorință.</em>
+      </p>
+      <p>
+        Nu toate firmele folosesc același sistem de administrare, deci s-ar putea să găsești altă denumire. Principiul rămâne: undeva există o listă de aplicații preaprobate, și merită căutată înainte să ceri.
+      </p>
+      <p>
+        <strong>Pentru restul seriei presupunem scenariul restrictiv,</strong> din motivul cel mai simplu: dacă pașii funcționează în condiții restrânse, funcționează și în condiții largi. Invers nu e adevărat. Cine are laptopul liber va parcurge aceiași pași mai repede.
+      </p>
+
+      <h2 id="s8">Vocabularul de construcție</h2>
+      <p>
+        Cincisprezece termeni care apar din momentul în care asistentul începe să propună soluții tehnice. Sunt, aproape toți, despre <strong>ce ai voie să instalezi și să rulezi</strong>, deci exact lista pe care o cauți în Company Portal sau o pui într-o cerere către IT.
+      </p>
+      <p>
+        Ca și în articolul precedent, denumirea duce la <a href="buzzword.html">arhiva de termeni</a>, iar descrierea de aici e cât să știi despre ce e vorba.
+      </p>
+
+      <div class="table-wrap is-stacked">
+        <table class="t-stack">
+          <thead>
+            <tr><th>Termen</th><th>Ce e, pe scurt</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="buzzword/python.html">Python</a></td><td data-label="Ce e, pe scurt">Limbajul folosit pentru prelucrarea datelor. Alegerea implicită a asistenților pentru unelte de birou. <a class="tlink" href="buzzword/python.html">→</a></td></tr>
+            <tr><td><a href="buzzword/biblioteca-library.html">Bibliotecă</a></td><td data-label="Ce e, pe scurt">Cod scris de altcineva, gata de folosit, pe care programul tău îl importă. <a class="tlink" href="buzzword/biblioteca-library.html">→</a></td></tr>
+            <tr><td><a href="buzzword/mediu-virtual-venv.html">Mediu virtual, venv</a></td><td data-label="Ce e, pe scurt">Folder separat cu bibliotecile unui singur proiect, ca să nu se amestece cu ale altuia. <a class="tlink" href="buzzword/mediu-virtual-venv.html">→</a></td></tr>
+            <tr><td><a href="buzzword/powershell.html">Terminal, PowerShell</a></td><td data-label="Ce e, pe scurt">Fereastra în care scrii comenzi în loc să dai clic. Pe Windows e PowerShell. <a class="tlink" href="buzzword/powershell.html">→</a></td></tr>
+            <tr><td><a href="buzzword/editor-cod-ide.html">Editor de cod</a></td><td data-label="Ce e, pe scurt">Programul în care se scrie și se citește codul. Colorează sintaxa, semnalează greșelile. <a class="tlink" href="buzzword/editor-cod-ide.html">→</a></td></tr>
+            <tr><td><a href="buzzword/executabil-exe.html">Executabil, .exe</a></td><td data-label="Ce e, pe scurt">Fișierul care pornește aplicația cu dublu clic, fără Python instalat. <a class="tlink" href="buzzword/executabil-exe.html">→</a></td></tr>
+            <tr><td><a href="buzzword/java.html">Java</a></td><td data-label="Ce e, pe scurt">Mediul de rulare cerut de aplicațiile fiscale oficiale, livrate ca fișiere .jar. Îți trebuie ca să rulezi ce dă instituția, nu ca să construiești. <a class="tlink" href="buzzword/java.html">→</a></td></tr>
+            <tr><td><a href="buzzword/xml.html">XML</a></td><td data-label="Ce e, pe scurt">Formatul fișierului D406. Text structurat ca un arbore, nu ca un tabel. <a class="tlink" href="buzzword/xml.html">→</a></td></tr>
+            <tr><td><a href="buzzword/xsd.html">XSD</a></td><td data-label="Ce e, pe scurt">Schema care descrie ce elemente are voie să conțină un XML și în ce ordine. <a class="tlink" href="buzzword/xsd.html">→</a></td></tr>
+            <tr><td><a href="buzzword/json.html">JSON</a></td><td data-label="Ce e, pe scurt">Format pentru setări și liste, citibil și de om, și de program. <a class="tlink" href="buzzword/json.html">→</a></td></tr>
+            <tr><td><a href="buzzword/html.html">HTML</a></td><td data-label="Ce e, pe scurt">Formatul unui raport care se citește, nu se prelucrează. Se deschide cu dublu clic, în browserul deja instalat. <a class="tlink" href="buzzword/html.html">→</a></td></tr>
+            <tr><td><a href="buzzword/parsare.html">Parsare</a></td><td data-label="Ce e, pe scurt">Operația prin care programul desface un fișier structurat în date cu care poate lucra. <a class="tlink" href="buzzword/parsare.html">→</a></td></tr>
+            <tr><td><a href="buzzword/fisier-de-configurare.html">Fișier de configurare</a></td><td data-label="Ce e, pe scurt">Fișierul editabil cu ce se schimbă în timp: adrese, praguri, opțiuni. <a class="tlink" href="buzzword/fisier-de-configurare.html">→</a></td></tr>
+            <tr><td><a href="buzzword/log-jurnal-executie.html">Jurnal de execuție</a></td><td data-label="Ce e, pe scurt">Unde programul scrie ce a făcut și ce a mers prost. Singura pistă de audit. <a class="tlink" href="buzzword/log-jurnal-executie.html">→</a></td></tr>
+            <tr><td><a href="buzzword/sandbox.html">Sandbox</a></td><td data-label="Ce e, pe scurt">Cutia în care rulează codul, care îl împiedică să atingă ce nu are voie. <a class="tlink" href="buzzword/sandbox.html">→</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Ultimii trei se leagă direct de lecțiile <a href="2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html">tool-ului precedent</a>, despre care am scris în articolul anterior: ce se schimbă în timp merge în fișierul de configurare, nu în cod, unde ar deveni <a href="buzzword/hardcoding.html">hardcoding</a>, iar fiecare operație se scrie în jurnal, pentru că „a apărut o eroare” nu e un mesaj, e o ridicare din umeri.
+      </p>
+
+      <h2 id="s9">Checklistul</h2>
+      <p>
+        De bifat înainte de articolul următor. E prima dată în seria asta când ai efectiv ce face, nu doar ce citi.
+      </p>
+
+      <ul class="checklist">
+        <li>am parcurs <a href="2026-09-05-Nu-cere-drumul-cel-mai-scurt.html#s2">lista de unelte</a> din articolul precedent și știu ce am deja pe masă;</li>
+        <li>am verificat în Company Portal ce asistenți sunt aprobați de IT;</li>
+        <li>știu dacă am sau nu drepturi de instalare pe calculatorul de lucru;</li>
+        <li>am un plan cu plată, care include lucrul în proiecte și folder conectat;</li>
+        <li>am instalat aplicația desktop;</li>
+        <li>am creat proiectul dedicat și i-am scris instrucțiunile;</li>
+        <li>am creat folderul de lucru, cu subfolderele din capitolul 6, fără diacritice în nume;</li>
+        <li>am conectat folderul la proiect;</li>
+        <li>am scris <code>CLAUDE.md</code>, cu cele trei reguli și cu guardrail-ul;</li>
+        <li>am pus în <code>surse\</code> schema oficială, fișierul cu definiții și lista celor 33 de teste;</li>
+        <li>am pus în <code>calibrare\</code> o lună deja depusă și acceptată;</li>
+        <li>am pornit sau am reluat <a href="2026-08-11-AI-Journal-doua-casete-si-o-cafea.html">AI Journal</a>.</li>
+      </ul>
+
+      <p>
+        Dacă ai bifat tot, ai un spațiu de lucru care ține minte. Restul seriei stă pe el.
+      </p>
+
+      <h2 id="s10">Ce urmează</h2>
+      <p>
+        Săptămâna viitoare deschidem, în sfârșit, conversația de planificare. Promptul se publică integral, așa cum a fost scris, cu tot cu cele trei rânduri care îi cer asistentului să pună întrebări înainte să înceapă. Publicăm și întrebările pe care le pune, și răspunsurile date, pentru că acolo se vede diferența dintre metoda asta și o cerere directă.
+      </p>
+      <p>
+        La finalul ei iese o specificație. Din ea, în articolul de după, iese primul cod care deschide efectiv un fișier D406.
+      </p>
+      <p>
+        Uneltele erau pe masă de dimineață. De acum au și unde să stea.
+      </p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#SAF-T</span>
+          <span class="tag">#D406</span>
+          <span class="tag">#vibe-coding</span>
+          <span class="tag">#project</span>
+          <span class="tag">#Cowork</span>
+          <span class="tag">#spatiu-de-lucru</span>
+        </div>
+        <span class="footer-mono">Articolul #034</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-09-05-Proiectul-care-tine-minte"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s1">Întrebarea pe care nu am pus-o</a>
+        <a href="#s2">Unde lucrăm</a>
+        <a href="#s3">Ce face un proiect</a>
+        <a href="#s4">Cele două fișiere</a>
+        <a href="#s5">Skills</a>
+        <a href="#s6">Folderul proiectului</a>
+        <a href="#s7">Laptopul de companie</a>
+        <a href="#s8">Vocabularul de construcție</a>
+        <a href="#s9">Checklistul</a>
+        <a href="#s10">Ce urmează</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- ARTICOLE CONEXE -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Pe aceeași temă.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-09-05-Nu-cere-drumul-cel-mai-scurt.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #033</div>
+        <h3>Nu cere drumul cel mai scurt</h3>
+        <p>Partea precedentă, publicată în aceeași zi: inventarul uneltelor, glosarul de 30 de termeni și principiul „nu cere aplicația, cere planul”.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html" class="related-card fade-in">
+        <div class="related-date">ANALIZĂ · SAF-T · #032</div>
+        <h3>Cum verifici fișierul SAF-T D406 înainte de depunere</h3>
+        <p>Cele cinci niveluri de verificare, unde cedează Excel-ul, ce oferă piața românească și cu ce prețuri publice.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · TOOL · #015</div>
+        <h3>Tool-ul ANAF, versiunea 2: de la „funcționează” la „rezistă în timp”</h3>
+        <p>Configurarea externă, jurnalul de execuție și interfața care lasă utilizatorul să aleagă. Lecțiile care au devenit cerințe.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

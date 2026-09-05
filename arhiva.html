@@ -308,12 +308,10 @@
       <div class="chips" id="chips">
         <button class="chip active" data-cat="all">Toate</button>
         <button class="chip" data-cat="pick" title="Recomandarea editorului">Recomandate</button>
+        <button class="chip" data-cat="saft" title="Seria SAF-T: declarația D406, de la cadrul legal până la aplicația proprie de verificare">SAF-T</button>
         <button class="chip" data-cat="ai-jurnal" title="Proiectul AI Journal — jurnalul de 30 de zile și tot ce ține de el">AI Journal</button>
-        <button class="chip" data-cat="opinie">Opinie</button>
-        <button class="chip" data-cat="analiza">Analiză</button>
-        <button class="chip" data-cat="ghid">Ghid</button>
-        <button class="chip" data-cat="legislatie">Legislație</button>
-        <button class="chip" data-cat="tool">Tool</button>
+        <button class="chip" data-cat="ghid" title="Ghiduri practice: prompting, vibe coding, unelte construite pas cu pas">Ghid</button>
+        <button class="chip" data-cat="profesie" title="Profesia contabilă, datele și contextul digital">Profesie</button>
       </div>
       <div class="sort-group">
         <span>Sort</span>
@@ -433,17 +431,31 @@
 <script src="assets/site.js"></script>
 <script>
 const ARTICLES = [
-  { date: '2026-08-30', day: '30', month: 'AUGUST', cat: 'analiza', catLabel: 'SAF-T · Verificare',
+  /* ===== SERIA SAF-T, faza de construcție — două articole publicate în aceeași zi.
+     Ordinea din tablou le ține în succesiunea de citit: întâi uneltele (#033),
+     apoi spațiul de lucru în care se folosesc (#034). */
+
+  { date: '2026-09-05', day: '05', month: 'SEPTEMBRIE', cat: 'saft', catLabel: 'SAF-T · Vibe Coding', pick: true,
+    title: 'Nu cere drumul cel mai scurt',
+    excerpt: 'Prima aplicație construită aici a mers pe drumul cel mai scurt către destinația pe care i-am dat-o: a făcut exact ce am cerut, ceea ce nu e același lucru cu a face ce aveam nevoie. Cele cinci lipsuri au apărut abia în versiunea a doua, iar niciuna nu era o limită tehnică. Înainte de prima linie de cod a aplicației de verificare D406, facem inventarul celor cinci unelte publicate deja aici, fără să știm că ajung într-un singur proiect: glosarul de 30 de termeni, cele 7+7 elemente ale unei cereri bine formulate, lecțiile celor două tool-uri, ritmul din AI Journal și materia primă publicată de ANAF. Plus principiul care le pune pe toate la treabă: nu cere aplicația, cere planul.',
+    read: '12 min', tags: ['#SAF-T', '#D406', '#vibe-coding', '#plan-mode', '#prompt', '#Buzzword'], href: '2026-09-05-Nu-cere-drumul-cel-mai-scurt.html' },
+
+  { date: '2026-09-05', day: '05', month: 'SEPTEMBRIE', cat: 'saft', catLabel: 'SAF-T · Spațiul de lucru',
+    title: 'Proiectul care ține minte',
+    excerpt: 'În săptămâna a șaptea trebuie să știi exact de ce ai decis, în săptămâna a doua, ca aplicația să citească fișierul într-un anumit fel. Într-o fereastră obișnuită de chat, informația aceea nu există. Ce face de fapt un proiect dedicat, de ce blocajul planului gratuit nu e scrierea de cod, care e diferența dintre fișierul de reguli pe care îl scrii tu și memoria pe care asistentul și-o ține singur, cum arată folderul de lucru și ce verifici în Company Portal înainte să plătești un abonament. La final, un checklist de doisprezece rânduri: prima dată în serie când ai efectiv ce face, nu doar ce citi.',
+    read: '12 min', tags: ['#SAF-T', '#D406', '#vibe-coding', '#project', '#Cowork', '#spatiu-de-lucru'], href: '2026-09-05-Proiectul-care-tine-minte.html' },
+
+  { date: '2026-08-30', day: '30', month: 'AUGUST', cat: 'saft', catLabel: 'SAF-T · Verificare',
     title: 'Cum verifici fișierul SAF-T D406 înainte de depunere',
     excerpt: 'Generăm fișierul, îl trecem prin DUKIntegrator, citim „Fișierul PDF a fost creat cu succes” și depunem. Numai că validatorul verifică schema, nu datele: e diferența dintre a vedea că o balanță are toate coloanele la locul lor și a vedea că balanța este echilibrată. Cele cinci niveluri de verificare a D406, de la controalele gratuite din programul de contabilitate până la reconcilierea cu deconturile, de ce Excel cedează mult înainte de limita de 1.048.576 de rânduri, ce oferă piața românească și cu ce prețuri publice, plus direcția pentru cine nu poate folosi nimic din ce se vinde.',
     read: '22 min', tags: ['#SAF-T', '#D406', '#ANAF', '#validare', '#Excel', '#vibe-coding'], href: '2026-08-30-Verificarea-D406-inainte-de-depunere.html' },
 
-  { date: '2026-08-29', day: '29', month: 'AUGUST', cat: 'legislatie', catLabel: 'SAF-T · Cadru legal',
+  { date: '2026-08-29', day: '29', month: 'AUGUST', cat: 'saft', catLabel: 'SAF-T · Cadru legal',
     title: 'Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406',
     excerpt: 'Recapitulare ordonată a tot ce se află în spatele butonului „generează”. De unde vine standardul OCDE și de ce fișierele nu seamănă între țări, cum a intrat obligația în legislația română prin OG 11/2021, ce conțin cele patru secțiuni cu date, cine intră când în obligație, care sunt cele trei declarații și până când se depune fiecare. Plus partea care contează cu adevărat: de ce miza nu e amenda de 5.000 de lei, ci poziția în analiza de risc și decontul de TVA construit din datele tale.',
     read: '17 min', tags: ['#SAF-T', '#D406', '#ANAF', '#raportare-fiscala', '#OCDE', '#digitalizare'], href: '2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html' },
 
-  { date: '2026-08-27', day: '27', month: 'AUGUST', cat: 'analiza', catLabel: 'SAF-T · ANAF', pick: true,
+  { date: '2026-08-27', day: '27', month: 'AUGUST', cat: 'saft', catLabel: 'SAF-T · ANAF', pick: true,
     title: 'Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi',
     excerpt: 'Pe 26 august, ANAF a pus la dispoziția contribuabililor două tool-uri pentru SAF-T: unul aplică testele de consistență pe fișierul D406, celălalt transpune datele din XML într-un format similar decontului de TVA. Le-am testat pe fișiere SAF-T: din cele 33 de teste publicate în cele două serii sunt implementate 11, transpunerea nu se compară singură cu decontul depus, iar TVA la încasare rămâne o zonă în care rezultatul se verifică separat. Niciunul nu înlocuiește DUKIntegrator. Plus întrebarea care rămâne: va deveni SAF-T sursa decontului precompletat?',
     read: '12 min', tags: ['#SAF-T', '#D406', '#D300', '#ANAF', '#TVA', '#digitalizare'], href: '2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html' },
@@ -494,7 +506,7 @@ const ARTICLES = [
     title: 'S6 · Documente, date și conexiuni: munca grea',
     excerpt: 'Ultima săptămână: extragere din facturi și PDF-uri scanate, cu verificare cifră cu cifră, sinteza unui document lung, calcul asistat cu raționamentul la vedere și conectarea opțională la un folder sau la o aplicație.',
     read: '10 min', tags: ['#ai-jurnal', '#ocr', '#extragere-date', '#chain-of-thought', '#mcp', '#facturi'], href: '2026-08-11-AI-Jurnal-S6-Documente-date-si-conexiuni.html' },
-  { date: '2026-08-01', day: '01', month: 'AUGUST', cat: 'opinie', catLabel: 'Editorial', pick: true,
+  { date: '2026-08-01', day: '01', month: 'AUGUST', cat: 'profesie', catLabel: 'Editorial', pick: true,
     title: 'Cum anunți o comunitate când nu colectezi date de contact',
     excerpt: 'M-am săturat să-mi predau datele personale pentru resurse minimale care ar trebui să fie libere: un prompt ascuns după un cont, un utilitar ascuns după o adresă de email, rezultatele unui sondaj ascunse după un număr de telefon. De ce am ales ca tot ce publicăm să fie direct accesibil și cum am rezolvat, totuși, problema pe care mi-a ridicat-o un prieten: dacă nu ai mailul nimănui, cum afli că am publicat ceva nou?',
     read: '12 min', tags: ['#confidentialitate', '#fara-cont', '#date-personale', '#comunitate', '#pwa', '#produs'], href: '2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact.html' },
@@ -502,47 +514,47 @@ const ARTICLES = [
     title: 'Promptul perfect 2.0 — ce s-a schimbat în trei luni',
     excerpt: 'În mai am scris despre cele 7 ingrediente ale unui prompt bun. Rămân valabile, s-a schimbat însă ce construiești cu ele și ce nu mai merită făcut deloc. Nu pentru cererile de zi cu zi, ci pentru cele în care rezultatul chiar contează: tag-uri XML pentru separarea datelor de instrucțiuni, ordinea în care așezi documentele lungi, guardrails, „instrucțiunea-canar” pentru drift și riscul de prompt injection dintr-un PDF. La final, un mega-prompt complet, aplicat pe o analiză de prețuri de transfer.',
     read: '18 min', tags: ['#prompting', '#context-engineering', '#guardrails', '#llm', '#securitate', '#automatizare'], href: '2026-07-31-Promptul-perfect-2.0.html' },
-  { date: '2026-07-24', day: '24', month: 'IULIE', cat: 'opinie', catLabel: 'Editorial',
+  { date: '2026-07-24', day: '24', month: 'IULIE', cat: 'profesie', catLabel: 'Editorial',
     title: 'Adoptare vs. adaptare: ce înseamnă, de fapt, să lucrezi cu AI în contabilitate',
     excerpt: 'Poți deschide un chatbot în fiecare zi și, în tot acest timp, să lucrezi exact ca acum trei ani. Un raport Deloitte pune degetul pe rană: adoptarea AI e ușor de demonstrat și de simulat, adaptarea nu. Am tradus cele trei comportamente umane care fac diferența — judecată, experimentare și gândire independentă — în limbaj de contabil, cu exemple practice.',
     read: '9 min', tags: ['#adoptare-ai', '#adaptare', '#deloitte', '#judecata-profesionala', '#contabilitate', '#viitorul-muncii'], href: '2026-07-24-Adoptare-vs-adaptare-ai-contabilitate.html' },
-  { date: '2026-07-21', day: '21', month: 'IULIE', cat: 'opinie', catLabel: 'Vibe Coding', pick: true,
+  { date: '2026-07-21', day: '21', month: 'IULIE', cat: 'ghid', catLabel: 'Vibe Coding', pick: true,
     title: 'Vibe Coding pentru prezentări: o pagină interactivă în loc de slide-uri',
     excerpt: 'Trebuia să pregătesc o prezentare despre vibe coding și nu voiam încă un teanc de slide-uri. Cum am înlocuit PowerPoint-ul cu o pagină HTML care rulează în browser, se trimite ca un fișier și e, în același timp, un prototip funcțional (MVP) — cu avantajele, limitele și partea de securitate.',
     read: '9 min', tags: ['#vibe-coding', '#html', '#prezentari', '#mvp', '#securitate', '#claude'], href: '2026-07-21-Vibe-Coding-prezentare-interactiva-html.html' },
-  { date: '2026-07-05', day: '05', month: 'IULIE', cat: 'opinie', catLabel: 'Vibe Coding', pick: true,
+  { date: '2026-07-05', day: '05', month: 'IULIE', cat: 'ghid', catLabel: 'Vibe Coding', pick: true,
     title: 'Tool-ul ANAF, versiunea 2 — de la „funcționează” la „rezistă în timp”',
     excerpt: 'Primul nostru executabil verifica CIF-uri la ANAF și mergea perfect. Punându-i codul înapoi în fața AI-ului, am aflat de ce „merge” nu e același lucru cu „e bine făcut”. Povestea versiunii 2: configurare externă, fișiere editabile, jurnal de rulare și maturizarea tehnică a non-programatorului.',
     read: '15 min', tags: ['#vibe-coding', '#anaf', '#mentenanta', '#config', '#python'], href: '2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html' },
-  { date: '2026-07-04', day: '04', month: 'IULIE', cat: 'analiza', catLabel: 'Agenți AI', pick: true,
+  { date: '2026-07-04', day: '04', month: 'IULIE', cat: 'ghid', catLabel: 'Agenți AI', pick: true,
     title: 'Short Friday, o analiză fiscală cu zece livrabile — cum am pus o echipă întreagă de agenți AI la treabă',
     excerpt: 'OPANAF 828/2026 a rescris din temelii dosarul prețurilor de transfer chiar înainte de weekend. Povestea unei zile de vineri în care un agent orchestrator și opt subagenți AI, rulați pe modelul Fable, au produs zece livrabile — de la analiza completă la un podcast — până luni dimineața.',
     read: '11 min', tags: ['#agenti-ai', '#preturi-de-transfer', '#opanaf', '#fable', '#automatizare'], href: '2026-07-04-Short-Friday-analiza-fiscala-zece-livrabile.html' },
-  { date: '2026-06-14', day: '14', month: 'IUNIE', cat: 'opinie', catLabel: 'Vibe Coding',
+  { date: '2026-06-14', day: '14', month: 'IUNIE', cat: 'ghid', catLabel: 'Vibe Coding',
     title: 'Vibe coding — ce este, de unde vine și unde îl folosim în contabilitate',
     excerpt: 'De la un tweet viral la Collins Word of the Year: ce înseamnă vibe coding, cum l-am folosit deja pentru verificări ANAF și unde mai poate ajunge în lumea contabilă.',
     read: '14 min', tags: ['#vibe-coding', '#python', '#automatizare', '#excel', '#securitate', '#anaf'], href: '2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html' },
-  { date: '2026-05-17', day: '17', month: 'MAI', cat: 'opinie', catLabel: 'AI Literacy',
+  { date: '2026-05-17', day: '17', month: 'MAI', cat: 'profesie', catLabel: 'AI Literacy',
     title: '5,21% și 17,8%. Cifrele care ne plasează ultimii la AI în Europa — și ce poate face profesia contabilă',
     excerpt: 'Eurostat 2026: România, ultima la AI în Europa, la întreprinderi și la persoane fizice. De ce profesia contabilă este cea mai potrivită să schimbe asta, de ce primele 30 de zile decid totul și ce arată studiul Lally despre formarea obiceiurilor.',
     read: '12 min', tags: ['#ai-literacy', '#Eurostat', '#Romania', '#educatie', '#CECCAR'], href: '2026-05-17-AI-Literacy-Romania-cifrele-care-ne-plaseaza-ultimii.html' },
-  { date: '2026-05-12', day: '12', month: 'MAI', cat: 'analiza', catLabel: 'Cloud vs On-Premise',
+  { date: '2026-05-12', day: '12', month: 'MAI', cat: 'profesie', catLabel: 'Cloud vs On-Premise',
     title: 'Evaluarea investițiilor în Inteligență Artificială: Cloud Enterprise sau On-Premise? Modele AI care garantează confidențialitatea datelor financiare',
     excerpt: 'Cum evaluezi investiția în AI pentru cabinetul tău: comparație între planurile Cloud Enterprise (ChatGPT, Gemini, Claude) și alternativele on-premise (Gemma 4, Llama, Qwen). Prețuri mai 2026 și recomandări practice.',
     read: '14 min', tags: ['#enterprise', '#onpremise', '#Gemma', '#Claude', '#ChatGPT', '#Gemini', '#pricing'], href: '2026-05-12-Evaluarea-investitiilor-in-Inteligenta-Artificiala.html' },
-  { date: '2026-05-09', day: '09', month: 'MAI', cat: 'opinie', catLabel: 'Confidentialitatea datelor', pick: true,
+  { date: '2026-05-09', day: '09', month: 'MAI', cat: 'profesie', catLabel: 'Confidentialitatea datelor', pick: true,
     title: 'Agentul AI nu știe să țină un secret: Riscurile nevăzute ale automatizării și cum să le eviți',
     excerpt: 'Scurt ghid contabil despre securitatea și confidențialitatea datelor: cum să folosești AI-ul fără să trimiți datele clienților tăi pe internet.',
     read: '14 min', tags: ['#confidentialitate', '#GDPR', '#CECCAR', '#AI', '#compliance', '#anonimizare'], href: '2026-05-09-Agentul-AI-nu-stie-sa-tina-un-secret.html' },
-  { date: '2026-05-04', day: '04', month: 'MAI', cat: 'opinie', catLabel: 'RO e-Factura',
+  { date: '2026-05-04', day: '04', month: 'MAI', cat: 'profesie', catLabel: 'RO e-Factura',
     title: 'RO e-Factura: când ANAF vede viitorul prin AI, iar tu ești blocat în UI-ul anului 2007',
     excerpt: 'Sistemul național RO e-Factura are un backend impresionant și un stat care folosește deja datele algoritmic. Dar contabilul care vrea să exporte un simplu Excel cu facturile lunii lovește o interfață rămasă cu un deceniu în urmă. Recunoaștere, critică și o solicitare publică concretă.',
     read: '9 min', tags: ['#ro e-factura', '#anaf', '#spv'], href: '2026-05-04-RO-e-Factura-cand-ANAF-vede-viitorul-prin-AI.html' },
-  { date: '2026-05-02', day: '02', month: 'MAI', cat: 'opinie', catLabel: 'Vibe Coding',
+  { date: '2026-05-02', day: '02', month: 'MAI', cat: 'ghid', catLabel: 'Vibe Coding',
     title: 'Vibe coding pentru contabili — cum am construit un tool fără să scriu o linie de cod',
     excerpt: 'Povestea unui weekend în care 8.000 de CIF-uri s-au verificat în 80 de secunde la ANAF — fără developer, fără ofertă, fără factură. Doar un dialog răbdător cu AI-ul.',
     read: '10 min', tags: ['#vibe-coding', '#anaf', '#automatizare'], href: '2026-05-02-Vibe-coding-in-contabilitate.html' },
-  { date: '2026-05-01', day: '01', month: 'MAI', cat: 'opinie', catLabel: 'Prompting', pick: true,
+  { date: '2026-05-01', day: '01', month: 'MAI', cat: 'ghid', catLabel: 'Prompting', pick: true,
     title: 'Goana după promptul perfect — plus shortcut-ul care schimbă jocul',
     excerpt: 'Cele 7 ingrediente ale unui prompt bun — și scurtătura pe care o folosesc ca să nu le mai memorez.',
     read: '12 min', tags: ['#prompting', '#workflow'], href: '2026-05-01-Goana-dupa-promptul-perfect.html' }

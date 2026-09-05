@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Pagini principale -->
-  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-08-30</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/podcast.html</loc><lastmod>2026-08-11</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/resurse.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/viitorul-profesiei.html</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/contact.html</loc><lastmod>2026-07-19</lastmod></url>
@@ -39,9 +39,11 @@
   <url><loc>https://aiaccountinghub.ro/2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact.html</loc><lastmod>2026-08-01</lastmod></url>
 
   <!-- Articole 2026 -->
-  <url><loc>https://aiaccountinghub.ro/2026-08-30-Verificarea-D406-inainte-de-depunere.html</loc><lastmod>2026-08-30</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html</loc><lastmod>2026-08-29</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-09-05-Nu-cere-drumul-cel-mai-scurt.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-09-05-Proiectul-care-tine-minte.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-08-30-Verificarea-D406-inainte-de-depunere.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html</loc><lastmod>2026-09-05</lastmod></url>
 
   <!-- Proiectul AI Journal — toate articolele publicate pe 11.08.2026 -->
   <url><loc>https://aiaccountinghub.ro/2026-08-11-AI-Jurnal-S1-Familiarizare-alege-ti-tool-ul.html</loc><lastmod>2026-08-11</lastmod></url>
@@ -145,6 +147,51 @@
   <url><loc>https://aiaccountinghub.ro/buzzword/ai-governance.html</loc><lastmod>2026-08-30</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/geo.html</loc><lastmod>2026-08-30</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/prompt-injection.html</loc><lastmod>2026-08-30</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/python.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/biblioteca-library.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/mediu-virtual-venv.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/editor-cod-ide.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/executabil-exe.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/powershell.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/xml.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/xsd.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/parsare.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/fisier-de-configurare.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/hardcoding.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/log-jurnal-executie.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/artefact-artifact.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/interfata-utilizator-ui.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/context-rot.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/lost-in-the-middle.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/skills.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/work-folder.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/connector.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/claude-anthropic.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/claude-code.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/claude-cowork.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/claude-desktop-app.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/claude-design.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/claude-md.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/agents-md.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/gemini-md.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/canvas.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/gem.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/chatgpt-openai.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/chatgpt-codex.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/chatgpt-work.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/gpt-personalizat.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/gemini-google.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/google-stitch.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/deep-research.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/prd-tehnic.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/json.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/java.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/html.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/sandbox.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/meta-prompt.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/memory-md.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/company-portal.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/plan-mode.html</loc><lastmod>2026-09-05</lastmod></url>
   <!-- /Termeni buzzword -->
 
 </urlset>

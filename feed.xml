@@ -31,12 +31,66 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sun, 30 Aug 2026 11:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 10:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <!-- ============================================================
+         SERIA SAF-T, faza de construcție — 05.09.2026: două articole
+         publicate în aceeași dimineață. Ore diferite în pubDate, ca
+         ordinea din feed să rămână descrescătoare și să pună în capul
+         listei articolul care se citește al doilea.
+         ============================================================ -->
+
+    <item>
+      <title>Proiectul care ține minte</title>
+      <link>https://aiaccountinghub.ro/2026-09-05-Proiectul-care-tine-minte.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-09-05-Proiectul-care-tine-minte.html</guid>
+      <pubDate>Sat, 05 Sep 2026 10:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Un asistent AI care uită totul între conversații nu poate duce un proiect care se întinde pe mai multe săptămâni: în săptămâna a șaptea trebuie să știi exact de ce ai decis, în săptămâna a doua, ca aplicația să citească fișierul într-un anumit fel. Ce face de fapt un proiect dedicat, de ce blocajul planului gratuit nu e scrierea de cod, care e diferența dintre fișierul de reguli pe care îl scrii tu și memoria pe care asistentul și-o ține singur, cum arată folderul de lucru și ce verifici în Company Portal înainte să plătești un abonament. La final, un checklist de doisprezece rânduri.</description>
+    </item>
+
+    <item>
+      <title>Nu cere drumul cel mai scurt</title>
+      <link>https://aiaccountinghub.ro/2026-09-05-Nu-cere-drumul-cel-mai-scurt.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-09-05-Nu-cere-drumul-cel-mai-scurt.html</guid>
+      <pubDate>Sat, 05 Sep 2026 09:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Prima aplicație construită aici a mers pe drumul cel mai scurt către destinația pe care i-am dat-o: a făcut exact ce am cerut, ceea ce nu e același lucru cu a face ce aveam nevoie. Înainte de prima linie de cod a aplicației de verificare D406, facem inventarul celor cinci unelte publicate deja aici, fără să știm că ajung într-un singur proiect: glosarul de 30 de termeni, cele 7+7 elemente ale unei cereri bine formulate, lecțiile celor două tool-uri, ritmul din AI Journal și materia primă publicată de ANAF. Plus principiul care le pune pe toate la treabă: nu cere aplicația, cere planul.</description>
+    </item>
+
+    <!-- ============================================================
+         LOT BUZZWORD — 05.09.2026: patruzeci și cinci de termeni noi,
+         lotul „Vibe coding: unelte și termeni tehnici”. Cuprinde termenii
+         tehnici de care depind tabelele de glosar din cele două articole
+         de mai sus (Python, XML, XSD, JSON, parsare, sandbox, jurnal de
+         execuție și restul), fișierele de instrucțiuni (CLAUDE.md,
+         AGENTS.md, MEMORY.md), skills, work folder și ecosistemele celor
+         trei furnizori. Ca la loturile anterioare, se anunță doar termenul
+         săptămânii plus unul notabil, nu toți.
+         ============================================================ -->
+
+    <item>
+      <title>Buzzword: Plan mode — etapa în care ceri planul, nu aplicația</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#plan-mode</link>
+      <guid isPermaLink="false">aiah-buzzword-plan-mode</guid>
+      <pubDate>Sat, 05 Sep 2026 08:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Etapa de dinaintea codului, în care ceri variante și argumente, nu o soluție. Unele asistente au un mod explicit, care refuză să scrie cod până nu i-l ceri; la restul se obține din felul în care formulezi cererea. Denumirile diferă, de la „brainstorming” la „fază de descoperire”, dar regula e aceeași: în etapa asta nu se scrie cod, ci se pun întrebări, se enumeră variante, se resping variante și se ajunge la o specificație. Are două avantaje: afli ce se poate cere, fiindcă nu ai cum să ceri ce nu știi că se poate, iar deciziile rămân documentate împreună cu alternativele respinse.</description>
+    </item>
+
+    <item>
+      <title>Buzzword: Context rot — de ce se înrăutățesc răspunsurile într-o conversație lungă</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#context-rot</link>
+      <guid isPermaLink="false">aiah-buzzword-context-rot</guid>
+      <pubDate>Sat, 05 Sep 2026 07:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Degradarea răspunsurilor pe măsură ce conversația se lungește și contextul se umple. Nu e o impresie și nu e o defecțiune: cu cât fereastra de context conține mai mult text, cu atât modelul are mai multe șanse să rateze exact informația care conta, iar regulile stabilite la începutul discuției se erodează. Consecința practică pentru un proiect lung e că regulile permanente se scriu într-un fișier citit la fiecare sesiune, nu se repetă în chat, iar conversațiile se închid și se reiau în loc să crească la nesfârșit.</description>
+    </item>
 
     <!-- ============================================================
          LOT BUZZWORD — 30.08.2026: cincisprezece termeni noi, din
