@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Conversația care nu a produs cod — AI Accounting Hub</title>
+<meta name="description" content="Am construit spațiul de lucru descris în articolul precedent, i-am dat asistentului contextul întregului proiect și am deschis o conversație de planificare. Am ieșit din ea fără nicio linie de cod, dar cu patru decizii de temelie scrise și cu motivele lor. Apoi am rulat aceeași cerere în încă două modele, ca să văd dacă răspunsul ține.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-09-08-Conversatia-care-nu-a-produs-cod.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-09-08-Conversatia-care-nu-a-produs-cod.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Conversația care nu a produs cod — AI Accounting Hub">
+<meta property="og:description" content="Am construit spațiul de lucru descris în articolul precedent, i-am dat asistentului contextul întregului proiect și am deschis o conversație de planificare. Am ieșit din ea fără nicio linie de cod, dar cu patru decizii de temelie scrise și cu motivele lor. Apoi am rulat aceeași cerere în încă două modele, ca să văd dacă răspunsul ține.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Conversația care nu a produs cod — AI Accounting Hub">
+<meta name="twitter:description" content="Am construit spațiul de lucru descris în articolul precedent, i-am dat asistentului contextul întregului proiect și am deschis o conversație de planificare. Am ieșit din ea fără nicio linie de cod, dar cu patru decizii de temelie scrise și cu motivele lor. Apoi am rulat aceeași cerere în încă două modele, ca să văd dacă răspunsul ține.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Subtitlurile de secțiune. h2 poartă '§', h3 primește '//', același vocabular
+   cu etichetele mono din site. */
+.prose h3 { margin: 44px 0 14px; }
+.prose h3::before { content: '//'; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; color: var(--accent); font-weight: 400; margin-right: 10px; opacity: 0.75; }
+/* Titlurile de capitol care sunt nume de fișier rămân în mono, fără '//'. */
+.prose h3.file::before { content: none; }
+/* Titlul din caseta de descărcare: caseta are deja eticheta ei mono deasupra. */
+.prose h3.dl-title::before { content: none; }
+.prose h3.file { font-family: 'JetBrains Mono', monospace; font-size: 17px; letter-spacing: 0; }
+
+/* Tabele */
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+.prose tbody tr:hover td { background: color-mix(in oklab, var(--accent) 3%, transparent); }
+
+/* Cod inline */
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: color-mix(in oklab, var(--fg) 8%, transparent); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; color: var(--fg); white-space: nowrap; }
+.prose pre code { white-space: pre; }
+.prose td code { font-size: 12.5px; }
+
+/* Arborele de foldere: mono, fără evidențierea de bloc de cod, ca să se citească
+   ca o schemă, nu ca o comandă de rulat. */
+.prose pre.tree { background: var(--bg-1); font-size: 12.5px; line-height: 1.75; }
+.prose pre.tree b { color: var(--accent); font-weight: 500; }
+.prose pre.tree i { color: var(--fg-dim); font-style: normal; }
+
+/* Șablonul de completat. Câmpurile de înlocuit primesc accentul, exemplele
+   rămân stinse: ochiul vede din prima ce se completează și ce se șterge.
+   Același vocabular ca la arborele de foldere, ca să nu apară un al doilea. */
+.prose pre.sablon b { color: var(--accent); font-weight: 500; }
+.prose pre.sablon i { color: var(--fg-dim); font-style: normal; }
+
+/* Checklistul, dacă articolul are unul: pătrățele goale, de bifat pe hârtie sau
+   în cap. Nu sunt controale, deci nu primesc <input> și nici stare. */
+.prose .checklist { margin: 24px 0; }
+.prose .checklist li { position: relative; padding: 9px 0 9px 32px; }
+.prose .checklist li::before { content: ''; position: absolute; left: 2px; top: 13px; width: 14px; height: 14px; border: 1.5px solid color-mix(in oklab, var(--accent) 55%, transparent); border-radius: 4px; }
+.prose .checklist li::marker { content: none; }
+
+/* Linkuri în proză — styles.css are a { color: inherit } */
+.prose p > a, .prose li > a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); }
+.prose p > a:hover, .prose li > a:hover { border-bottom-color: var(--accent); }
+
+@media (max-width: 720px) {
+  .prose table { font-size: 13px; }
+  .prose th, .prose td { padding: 10px 12px; }
+  .prose pre.tree { font-size: 11.5px; }
+}
+@media (max-width: 420px) {
+  .prose table { font-size: 12px; }
+  .prose th, .prose td { padding: 8px 10px; }
+  .prose pre.tree { font-size: 10.5px; }
+}
+
+/* ===== Banda de serie =====================================================
+   Eticheta de sus e chiar rezumatul casetei pliate, deci o singură componentă,
+   nu două. Lista arată doar părțile dinainte: nu promitem un total, fiindcă
+   s-ar schimba la fiecare articol nou din serie, iar articolele deja publicate
+   nu se mai ating niciodată. Tiparul de <details> e cel de la .toc-mobile,
+   fundalul e cel al .callout, componenta cu care site-ul spune „uită-te aici”. */
+.serie { margin: 0 0 34px; border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 14px; background: radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 60%), var(--bg-1); box-shadow: 0 10px 30px -18px color-mix(in oklab, var(--accent) 70%, transparent); }
+.serie summary, .serie .serie-rand { display: flex; align-items: center; gap: 14px; padding: 16px; list-style: none; font-family: 'JetBrains Mono', monospace; }
+.serie summary { cursor: pointer; }
+.serie summary::-webkit-details-marker { display: none; }
+.serie-ic { flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: color-mix(in oklab, var(--accent) 15%, transparent); color: var(--accent); }
+.serie-ic svg { width: 16px; height: 16px; }
+.serie-cap { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.serie-nume { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.serie-poz { font-size: 13px; letter-spacing: 0.02em; color: var(--fg); }
+.serie-hint { display: inline-flex; align-items: center; gap: 9px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); white-space: nowrap; transition: color 0.2s; }
+.serie summary:hover .serie-hint { color: var(--accent); }
+.serie-hint::after { content: ''; width: 6px; height: 6px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg); transition: transform 0.25s ease; margin-top: -3px; }
+.serie[open] .serie-hint::after { transform: rotate(-135deg); margin-top: 2px; }
+.serie-link { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); white-space: nowrap; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); }
+.serie-link:hover { border-bottom-color: var(--accent); }
+.serie-lista { margin: 0; padding: 0 16px 14px 62px; list-style: none; counter-reset: sp; }
+.serie-lista li { counter-increment: sp; display: flex; gap: 13px; padding: 11px 0; border-top: 1px solid color-mix(in oklab, var(--accent) 15%, transparent); }
+.serie-lista li::before { content: counter(sp); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); min-width: 13px; padding-top: 3px; }
+.serie-lista a { display: block; font-size: 15px; line-height: 1.4; color: var(--fg); }
+.serie-lista a:hover { color: var(--accent); }
+.serie-data { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.05em; color: var(--fg-dim); margin-top: 4px; }
+@media (max-width: 560px) {
+  .serie summary, .serie .serie-rand { padding: 14px; gap: 12px; }
+  .serie-hint span { display: none; }
+  .serie-lista { padding: 0 14px 12px; }
+  .serie-lista a { font-size: 14px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Conversația care nu a produs cod — AI Accounting Hub",
+  "description": "Am construit spațiul de lucru descris în articolul precedent, i-am dat asistentului contextul întregului proiect și am deschis o conversație de planificare. Am ieșit din ea fără nicio linie de cod, dar cu patru decizii de temelie scrise și cu motivele lor. Apoi am rulat aceeași cerere în încă două modele, ca să văd dacă răspunsul ține.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-09-08-Conversatia-care-nu-a-produs-cod.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce este plan mode și de ce nu se scrie cod în el?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Plan mode este un mod de lucru separat, în care asistentul poate citi documentele și poate propune direcții, dar nu poate scrie sau modifica fișiere. Diferența față de o rugăminte de tipul „nu scrie cod încă” este că modul de lucru garantează lucrul acesta, în timp ce o rugăminte poate fi uitată la al treizecilea mesaj al unei conversații lungi. Consecința practică este că discuția rămâne despre variante și despre motivele lor, nu despre o implementare care există deja și pe care nimeni nu mai are chef să o arunce."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce context trebuie dat unui asistent AI înainte de o conversație de planificare?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Documentele oficiale ale domeniului, cu regula că enunțul oricărei reguli se ia din ele; un eșantion de rezultat final, marcat explicit ca model de formă și nu ca sursă de reguli; mărimea fișierelor de prelucrat și numărul de rânduri după aplatizare; echiparea stațiilor pe care va rula aplicația, adică sistemul de operare și memoria disponibilă; modul de distribuție, adică dacă se pot face instalări pe stațiile noi; cine sunt utilizatorii și cât de tehnici sunt; regimul de confidențialitate al datelor; și, esențial, toată aplicația, nu doar bucata care se construiește acum, fiindcă o decizie luată pentru primul modul e bună doar dacă nu blochează etapele următoare."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "De ce a fost scris promptul la sfârșitul conversației și nu la început?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pentru că promptul e produsul conversației, nu punctul ei de plecare. Ordinea cu care suntem obișnuiți se răstoarnă: nu scrii o cerere bună ca să obții un răspuns bun, ci discuți până înțelegi ce ceri, și abia atunci ai cum să scrii cererea. În cazul descris aici, cererea care transformă discuția într-un raport final de decizii a fost scrisă de asistent, la cererea utilizatorului, după ce contextul fusese dat integral."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dacă trei modele AI dau același răspuns, înseamnă că răspunsul e corect?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nu. Cele trei modele au primit aceeași cerere, aceleași documente și aceleași constrângeri, deci nu e o validare independentă. Convergența arată în primul rând că întrebarea a fost bine pusă și că nu ascunde o ambiguitate care s-ar rezolva diferit de la un model la altul. Nu arată că răspunsul e adevărat. Verificarea rămâne calibrarea pe date reale, nu numărul de modele care au căzut de acord."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum adaptez la cazul meu un prompt scris pentru alt context?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Îl încarci într-o conversație nouă, cu instrucțiunea explicită de a nu îl executa, și îi dai un șablon completat cu datele tale în locul celor din exemplu: ce face aplicația, fișierul de intrare și mărimea lui, câte rânduri are, stația și memoria disponibilă, dacă ai sau nu drepturi de instalare, cine întreține codul, cine folosește aplicația, unde ajung datele, ce iese la capăt și ce nu vrei. Adaugi două instrucțiuni care contează la fel de mult ca datele: să te întrebe despre orice câmp rămas gol sau prea vag, în loc să presupună, și la final să dea promptul rescris integral, în aceeași structură, plus lista modificărilor și motivele lor."
+      }
+    }
+  ]
+}</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Conversația care nu a produs cod</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Vibe coding</span>
+      <span>8 septembrie 2026</span>
+      <span class="sep">·</span>
+      <span>13 min citire</span>
+    </div>
+
+    <h1>Conversația care <span class="accent">nu a produs cod</span></h1>
+    <p class="article-lede">
+      Am construit spațiul de lucru descris în articolul precedent, i-am dat asistentului contextul întregului proiect și am deschis o conversație de planificare. Am ieșit din ea fără nicio linie de cod, dar cu patru decizii de temelie scrise și cu motivele lor. Apoi am rulat aceeași cerere în încă două modele, ca să văd dacă răspunsul ține.
+    </p>
+
+    <details class="serie">
+      <summary>
+        <span class="serie-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><span class="serie-cap"><span class="serie-nume">Seria SAF-T</span><span class="serie-poz">partea a șasea</span></span>
+        <span class="serie-hint"><span>ce a fost înainte</span></span>
+      </summary>
+      <ol class="serie-lista">
+        <li><a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html">Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi<span class="serie-data">27 august 2026 · 12 min</span></a></li>
+        <li><a href="2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html">Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406<span class="serie-data">29 august 2026 · 17 min</span></a></li>
+        <li><a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html">Cum verifici fișierul SAF-T D406 înainte de depunere<span class="serie-data">30 august 2026 · 22 min</span></a></li>
+        <li><a href="2026-09-05-Nu-cere-drumul-cel-mai-scurt.html">Nu cere drumul cel mai scurt<span class="serie-data">5 septembrie 2026 · 12 min</span></a></li>
+        <li><a href="2026-09-05-Proiectul-care-tine-minte.html">Proiectul care ține minte<span class="serie-data">5 septembrie 2026 · 12 min</span></a></li>
+      </ol>
+    </details>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s1">Am construit ce am descris</a>
+        <a href="#s2">Ce scrie în fișierul de reguli</a>
+        <a href="#s3">Conversația în care nu se scrie cod</a>
+        <a href="#s4">Întrebările la care am căutat răspuns</a>
+        <a href="#s5">Contextul pe care i l-am dat</a>
+        <a href="#s6">Direcțiile primite</a>
+        <a href="#s7">Promptul pe care nu l-am scris eu</a>
+        <a href="#s8">Înainte să rulați și voi promptul</a>
+        <a href="#s9">Resursele descărcabile</a>
+        <a href="#s10">Ce urmează</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">08.09.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// D406 · conversația de planificare · ilustrație</div>
+    </div>
+
+    <div class="prose">
+
+      <p>
+        <a href="2026-09-05-Proiectul-care-tine-minte.html">Articolul precedent</a> s-a încheiat cu un checklist și cu o promisiune. Checklistul e bifat, iar textul de acum e ce a ieșit din promisiune.
+      </p>
+      <p>
+        Am purtat cea mai lungă conversație din tot proiectul și nu am scris nicio linie de cod. Nu e o scăpare, e chiar rezultatul: la capătul ei aveam patru decizii de temelie, fiecare cu motivul ei și cu condiția scrisă în care se reia.
+      </p>
+      <p>
+        Iată cum a decurs, în ordinea în care s-a petrecut.
+      </p>
+
+      <h2 id="s1">Am construit ce am descris</h2>
+      <p>
+        Fără nicio abatere de la ce a fost publicat: proiect dedicat, <a href="buzzword/work-folder.html">folder local</a> conectat, fișierul de reguli în rădăcină, subfolderele la locul lor.
+      </p>
+
+      <pre class="tree"><b>SAFT-D406\</b>
+├─ <b>CLAUDE.md</b>         <i>regulile permanente ale proiectului</i>
+├─ <b>MEMORY.md</b>         <i>jurnalul de lucru, scris de asistent</i>
+├─ <b>.claude\skills\</b>   <i>procedurile repetabile</i>
+├─ <b>surse\</b>            <i>documentele oficiale si materialele de referinta</i>
+├─ <b>calibrare\</b>        <i>luna deja depusa si acceptata</i>
+├─ <b>app\</b>              <i>codul aplicatiei</i>
+└─ <b>rapoarte\</b>         <i>iesirile aplicatiei</i></pre>
+
+      <p>
+        Singura adăugire față de structura publicată e <a href="buzzword/memory-md.html"><code>MEMORY.md</code></a>, jurnalul pe care îl scrie asistentul, nu eu. Acolo ajung deciziile luate și motivul respingerii variantei alternative. În articolul precedent l-am descris ca mecanism. De aici înainte e un fișier care se completează singur, conversație după conversație.
+      </p>
+      <p>
+        În <code>surse\</code> au intrat schema oficială, registrul de definiții cu cele 55 de file, ghidul ANAF, întrebările și răspunsurile specifice și ambele serii de teste de consistență. <code>calibrare\</code> aici avem datele pentru o lună deja depusă și acceptată ca să am cu ce compara rezultatul.
+      </p>
+
+      <h2 id="s2">Ce scrie în fișierul de reguli</h2>
+      <p>
+        <a href="buzzword/claude-md.html"><code>CLAUDE.md</code></a> e singurul lucru din tot proiectul care se citește la începutul fiecărei conversații. Deci acolo pui ce nu vrei să reexplici niciodată.
+      </p>
+      <p>
+        L-am ținut sub o pagină și l-am scris în ordinea în care apar întrebările: ce trebuie să facă aplicația, ce nu se negociază, cum lucrăm, ce convenții respectăm și ce nu se face niciodată. Îl las mai jos, fiindcă e mai util citit decât descris.
+      </p>
+
+      <div class="code-collapsible" id="claude-md">
+      <pre><code># SAF-T-D406
+
+Aplicatie locala de verificare a declaratiei D406, construita pas cu pas prin
+conversatie. Proiectul va trebui explicat către echipă, deci fiecare
+decizie trebuie sa fie explicabila in scris, nu doar sa functioneze.
+
+## Ce trebuie sa faca aplicatia
+1. Citeste fisierul XML D406 si exporta sectiunile in tabele.
+2. Valideaza, ruland testele de consistenta publicate de ANAF.
+3. Reconciliaza datele cu decontul de TVA, D300.
+4. Verifica fata de contabilitate: balanta, analitice de clienti si furnizori.
+5. Confrunta cu D390 si D394.
+Ordinea de mai sus e si ordinea de constructie.
+
+## Cele trei reguli care nu se negociaza
+1. Fisierul real nu se incarca in instrumente AI publice. Ce se genereaza cu AI
+   e codul. Prelucrarea datelor ramane pe calculatorul acesta.
+2. Enuntul testelor se ia din documentul ANAF, nu din memoria modelului. Fiecare
+   test citeaza sursa: numele fisierului si numarul testului.
+3. Orice verificare se calibreaza pe o luna deja depusa si acceptata. Daca
+   rezultatul nu se potriveste cu fisierul real, aplicatia trebuie verificată.
+
+## Guardrail
+Daca informatia nu se afla in documentele din surse\, scrie exact:
+"Nu rezulta din textele furnizate." Nu completa cu ce pare probabil.
+
+## Cum lucram
+- Intai planul, apoi codul. Daca in primele doua raspunsuri apare cod, cererea
+  a fost formulata gresit.
+- Intrebari inainte de a incepe: 3-5, despre ce a ramas ambiguu.
+- Iteratii mici, verificate. V&amp;V, Vibe &amp; Verify.
+- Deciziile se scriu, cu motivul respingerii celeilalte variante.
+
+## Conventii
+- Ce se schimba in timp nu intra in cod, ci intr-un fisier de configurare extern.
+- Fiecare rulare scrie un jurnal. Fara jurnal nu exista pista de audit.
+- Fara dependente noi fara discutie.
+
+## Ce nu se face niciodata
+- Nu se editeaza XML-ul manual ca sa treaca o verificare.
+- Nu se ajusteaza pragurile ca sa iasa rezultatul.</code></pre>
+      </div>
+      <button type="button" class="code-toggle" aria-expanded="false" data-more="Rezumatul fișierului CLAUDE.md ↓" data-less="Ascunde rezumatul ↑" onclick="toggleCode('claude-md', this)">Rezumatul fișierului CLAUDE.md ↓</button>
+
+      <p>
+        Fișierul e scris fără diacritice, ca tot ce ajunge în folderul de lucru. E convenția pe care am fixat-o în articolul precedent și pe care o respect inclusiv în conținutul fișierelor tehnice, ca să nu am două reguli de ținut minte.
+      </p>
+
+      <h2 id="s3">Conversația în care nu se scrie cod</h2>
+      <p>
+        Am lucrat în <a href="buzzword/plan-mode.html">plan mode</a> și, practic, am purtat cu asistentul o discuție de descoperire. Nu am scris un prompt elaborat. Am povestit contextul, exact cum i l-aș fi povestit unui coleg care preia dosarul.
+      </p>
+      <p>
+        Trei lucruri de reținut din felul în care a decurs:
+      </p>
+      <ul>
+        <li><strong>Nu s-a scris niciun fel de cod</strong>, și nu pentru că am cerut asta la fiecare mesaj, ci pentru că modul de lucru o garantează. E diferența dintre o rugăminte, care se poate pierde până la al treizecilea mesaj, și o constrângere, care nu are cum.</li>
+        <li>Am cerut <strong>direcții și clarificări</strong>, nu soluții. O direcție vine cu un motiv, o soluție vine de-a gata. Prima se poate contesta, a doua doar se acceptă sau se refuză.</li>
+        <li><strong>Promptul a venit la sfârșit, nu la început</strong>, și l-a scris asistentul. Asta corectează o așteptare răspândită, aceea că „a lucra cu AI” înseamnă să știi să scrii cereri complicate.</li>
+      </ul>
+      <p>
+        Meritul principal al acestui mod de lucru nu e că oprește codul. E că oprește <em>atașamentul</em> față de cod. Odată ce implementarea există, nimeni nu mai are chef să o arunce, iar discuția despre variante se transformă în discuție despre cum salvăm ce s-a scris deja.
+      </p>
+
+      <h2 id="s4">Întrebările la care am căutat răspuns</h2>
+      <p>
+        Le-am pus punctual, după ce dădusem contextul, nu înainte. Ordinea contează: aceleași întrebări, puse pe gol, ar fi primit răspunsuri de manual.
+      </p>
+      <ul>
+        <li><strong>Ce limbaj de programare folosim?</strong> Cu variante la plural, nu cu recomandarea cea mai bună, și cu motivul fiecărei eliminări.</li>
+        <li><strong>Cum se scrie interfața?</strong> Nu ce tip de soluție, ci ce <a href="buzzword/biblioteca-library.html">bibliotecă</a> anume, și de ce ea și nu alta din același limbaj.</li>
+        <li><strong>Cum se împachetează aplicația</strong>, ca să ajungă la un coleg fără instalări pe stația lui?</li>
+        <li><strong>Ce formă vor avea fișierele de export?</strong> Și, separat, în ce format rămân datele între rulări, dacă aplicația trebuie să citească tot fișierul înainte de a exporta ceva.</li>
+        <li><strong>În ce format iese raportul de rulare</strong>, cel care merge la dosarul de lucru, și poate fi el completat dintr-un <a href="buzzword/fisier-de-configurare.html">șablon editabil</a>, fără atingerea codului?</li>
+        <li><strong>Ce dintre cerințele mele e greșit?</strong> Întrebarea asta a produs cea mai utilă parte a răspunsului.</li>
+      </ul>
+      <p>
+        Fiecare întrebare a cerut argumentul, nu doar concluzia. Argumentul e singurul lucru pe care îl poți verifica peste șase luni, când nu mai ții minte discuția.
+      </p>
+
+      <h2 id="s5">Contextul pe care i l-am dat</h2>
+      <p>
+        Fără el, întrebările de mai sus ar fi primit o listă de bune practici generale.
+      </p>
+      <ul>
+        <li><strong>Documentele oficiale</strong>, descărcate de pe site-ul ANAF: schema <a href="buzzword/xsd.html">XSD</a>, registrul de definiții, ghidul contribuabilului, întrebările și răspunsurile specifice, cele două serii de teste. Cu regula că enunțul oricărei reguli se ia din ele, iar schema are întâietate când două documente se contrazic.</li>
+        <li><strong>Un eșantion de rezultat</strong>, adică un fișier Excel anonimizat care arată cum ar trebui să arate ieșirea finală: câte o filă per secțiune, aplatizată. I-am spus explicit că e model de formă, nu sursă de reguli, și că are imperfecțiuni de găsit.</li>
+        <li><strong>Mărimea fișierelor</strong>: la unele companii <a href="buzzword/xml.html">XML</a>-ul depășește 1, 2, 3 GB sau chiar mai mult.</li>
+        <li><strong>Numărul de rânduri</strong>: unele secțiuni au sute de mii, chiar milioane de rânduri după aplatizare, excel pentru output s-ar putea să nu fie potrivit.</li>
+        <li><strong>Echiparea stațiilor</strong>: Windows 11, cel mult 8 GB memorie disponibilă.</li>
+        <li><strong>Distribuția</strong>: aplicația trebuie să se mute ușor de pe un calculator pe altul, fără instalări suplimentare pe stațiile noi, nici de limbaje, nici de programe ajutătoare.</li>
+        <li><strong>Utilizatorii</strong>: colegi contabili, fără pregătire tehnică, care deschid aplicația câteva zile pe lună și nu au cui cere ajutor când ceva nu merge.</li>
+        <li><strong>Confidențialitatea</strong>: totul local, fără date luate de pe internet, fișierul și rezultatele rămân pe stație.</li>
+        <li><strong>Toată aplicația, nu doar bucata pe care voiam să o construiesc.</strong> Pare risipă de context. Nu e: o decizie luată pentru modulul 1 e bună doar dacă nu blochează etapele 2 până la 5, iar asta nu se poate verifica fără să știi ce urmează.</li>
+      </ul>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>De reținut.</strong> Patru rânduri despre birou au eliminat mai multe soluții decât orice discuție despre limbaje. O constrângere bine spusă nu ordonează soluțiile, le elimină.
+        </div>
+      </div>
+
+      <h2 id="s6">Direcțiile primite</h2>
+      <ul>
+        <li><strong><a href="buzzword/python.html">Python</a></strong> Argumentul obișnuit împotriva Python-ului, viteza, a fost măsurat, nu presupus, și s-a dovedit că nu se aplică unei prelucrări în flux, în care fișierul se citește bucată cu bucată și nu se ține niciodată întreg în memorie.</li>
+        <li><strong>PySide6</strong> pentru <a href="buzzword/interfata-utilizator-ui.html">interfață</a>, singura bibliotecă din Python care rezolvă simultan tabelul de milioane de rânduri și fereastra care rămâne utilizabilă în timpul unei prelucrări de minute. Biblioteca pe care o cunoșteam deja (Streamlit), din uneltele construite în articolele anterioare, a fost eliminată: nu are tabel virtualizat, adică afișarea ei încarcă în memorie toate rândurile, nu doar pe cele vizibile.</li>
+        <li><strong>Folder portabil</strong>, copiat pe disc sau pe stick și pornit cu dublu clic. Varianta <a href="buzzword/executabil-exe.html">„un singur fișier executabil”</a>, care pare mai curată, a fost respinsă cu motive concrete: pornire lentă, dezarhivare într-un folder temporar la fiecare rulare și, mai ales, semnalări false din partea antivirusului, exact pe genul de stație pe care nu ai cui să te plângi.</li>
+        <li><strong>Trei formate produse la fiecare export</strong>: Excel ca livrare principală, CSV și Parquet. Formatul nu mai e o alegere a utilizatorului, e o consecință a apăsării butonului.</li>
+        <li><strong>O bază de lucru locală</strong> între rulări, ca fișierul XML să fie citit exact o dată, iar sinteza și toate exporturile să se construiască din ea. Tot ea e punctul de plecare al etapelor următoare, adică al validărilor și al reconcilierilor.</li>
+        <li><strong>Raportul de rulare direct în PDF</strong>, fiindcă orice conversie din Word ar presupune un program instalat pe stație, ipoteză pe care un folder portabil nu o poate face. Textele raportului ies într-un fișier de configurare editabil.</li>
+      </ul>
+      <p>
+        Aveam direcțiile. Nu aveam motivele scrise nicăieri, ci împrăștiate într-o conversație lungă. Iar o direcție fără motivul ei se uită exact atunci când cineva propune alta.
+      </p>
+
+      <h2 id="s7">Promptul pe care nu l-am scris eu</h2>
+      <p>
+        I-am cerut asistentului să scrie el cererea care transformă discuția noastră într-un raport final de decizii. Nu i-am cerut raportul. I-am cerut instrumentul cu care se produce raportul.
+      </p>
+      <p>
+        Promptul e produsul conversației, nu punctul ei de plecare. Ordinea cu care suntem obișnuiți se răstoarnă: nu scrii o cerere bună ca să obții un răspuns bun, ci discuți până înțelegi ce ceri, și abia atunci ai cum să scrii cererea. Termenul pentru asta, dacă vă e de folos într-o discuție cu un coleg, e <a href="buzzword/meta-prompt.html">meta-prompt</a>.
+      </p>
+      <p>
+        Ce a ieșit e un prompt care fixează rolul, adică evaluator, nu consultant care validează, ca antidot direct la <a href="buzzword/sycophancy.html">tendința asistentului de a-ți da dreptate</a>. Separă faptele despre D406, care se iau exclusiv din documentele oficiale, de analiza tehnică, care e a modelului. Și impune raportului o formă anume: minimum trei opțiuni comparate pentru fiecare decizie, un nivel de certitudine pe fiecare afirmație, o condiție scrisă dinainte în care decizia se reia, o secțiune întreagă rezervată contestării cerințelor mele și una finală care verifică dacă documentele din folderul de surse conțin instrucțiuni adresate asistentului.
+      </p>
+      <p>
+        Ultima are un nume și merită reținut, fiindcă e o problemă reală, nu o precauție teoretică: <a href="buzzword/prompt-injection.html">prompt injection</a>. Un document pe care îl dai ca sursă poate conține, ascuns în el, text formulat ca instrucțiune. Când sursele sunt PDF-uri oficiale descărcate direct de la ANAF riscul e mic. Obiceiul de a verifica se formează însă acum, nu în ziua în care cineva îți trimite pe mail un fișier de pus în folderul de surse.
+      </p>
+      <p>
+        <strong>Apoi l-am rulat în alte două modele AI</strong>, cu aceleași documente. Rezultatele au fost asemănătoare: toate trei au ajuns la Python din același motiv, la Qt pentru interfață, la folderul portabil și la un pas intermediar pe disc între citire și export. Toate trei rapoartele sunt în arhiva descărcabilă.
+      </p>
+
+      <div class="callout">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+        </div>
+        <div class="cbody">
+          <strong>Nu e o validare independentă.</strong> Cele trei modele au primit aceeași cerere și aceleași constrângeri. Convergența arată în primul rând că întrebarea a fost bine pusă, nu că răspunsul e adevărat. Și nu compar calitatea celor trei modele: articolul e despre metodă.
+        </div>
+      </div>
+
+      <h2 id="s8">Înainte să rulați și voi promptul</h2>
+      <p>
+        Promptul din arhivă e scris pentru un caz anume. Dacă îl rulați ca atare, primiți răspunsul meu, nu al vostru.
+      </p>
+      <p>
+        Recomandarea: îl încărcați într-o conversație nouă, cu <strong>instrucțiunea explicită să nu îl ruleze</strong>, și îi dați datele voastre completate în locul exemplelor. Copiați șablonul de mai jos ca atare. Singurul lucru pe care îl schimbați sunt câmpurile din paranteze drepte, iar exemplele scrise stins se șterg pe măsură ce le înlocuiți:
+      </p>
+
+      <pre class="sablon"><code>Îți încarc un prompt scris pentru alt context.
+
+NU îl executa. Vreau să îl adaptezi la situația mea.
+
+Rescrie, cu datele de mai jos, secțiunile &lt;context&gt;,
+&lt;cerinte_functionale&gt;, &lt;cerinte_interfata&gt; și &lt;constrangeri&gt;.
+Restul promptului îl păstrezi neatins.
+
+<b>[CE FACE APLICAȚIA]</b>     <i>ex: citește un XML și scoate fiecare secțiune în Excel</i>
+<b>[FIȘIERUL DE INTRARE]</b>   <i>ex: XML de 40 MB, unul pe lună</i>
+<b>[CÂTE RÂNDURI]</b>          <i>ex: 30.000 pe cea mai mare secțiune</i>
+<b>[STAȚIA]</b>                <i>ex: Windows 11, 16 GB memorie</i>
+<b>[DREPTURI PE STAȚIE]</b>    <i>ex: fără drepturi de instalare, laptop administrat</i>
+<b>[CINE ÎNTREȚINE CODUL]</b>  <i>ex: eu, fără pregătire tehnică</i>
+<b>[CINE O FOLOSEȘTE]</b>      <i>ex: patru colegi contabili, două zile pe lună</i>
+<b>[UNDE AJUNG DATELE]</b>     <i>ex: totul local, nimic în instrumente AI publice</i>
+<b>[CE IESE LA CAPĂT]</b>      <i>ex: un Excel pentru mine, un PDF pentru dosar</i>
+<b>[CE NU VREAU]</b>           <i>ex: nicio instalare pe stațiile colegilor</i>
+
+Dacă un câmp a rămas necompletat, sau dacă răspunsul meu e prea
+vag ca să scrii o cerință din el, întreabă-mă despre el înainte
+să rescrii. Nu presupune și nu completa cu ce pare probabil.
+
+La final dă-mi promptul rescris, integral, în aceeași structură,
+și spune-mi ce ai schimbat și de ce.</code></pre>
+
+      <p>
+        Ultimele trei rânduri contează la fel de mult ca datele. Fără ele, un câmp lăsat gol se umple singur cu presupunerea cea mai plauzibilă, iar presupunerea intră în cerință fără să o vedeți trecând.
+      </p>
+
+      <p>
+        Câteva dintre câmpuri schimbă răspunsul mai mult decât toate celelalte la un loc:
+      </p>
+      <ul>
+        <li><strong>Mărimea fișierului și numărul de rânduri.</strong> Dacă XML-ul vostru are 40 MB, jumătate din raportul meu devine irelevantă: constrângerile de memorie și pragurile de spargere a filelor pică, iar concluzia despre formate se simplifică. Probabil vă ajunge Excel, fără CSV și fără Parquet.</li>
+        <li><strong>Drepturile pe stație.</strong> Dacă aveți drepturi de administrator și puteți instala ce vreți, constrângerea folderului portabil dispare, iar cu ea și o parte din argumentul pentru un limbaj sau altul.</li>
+        <li><strong>Câți oameni o folosesc.</strong> Pentru un singur utilizator, cel care a scris-o, dispar jumătate din cerințele de interfață și tot capitolul despre distribuție.</li>
+        <li><strong>Unde ajung datele.</strong> Dacă firma are un tenant AI propriu sau o politică deja aprobată, regula „fișierul nu părăsește calculatorul” se rescrie, și se deschid soluții pe care eu le-am eliminat din start.</li>
+        <li><strong>Ce faceți cu rezultatul.</strong> Un fișier pentru voi, un fișier pentru dosarul de lucru și un fișier pentru Power BI sunt trei cerințe diferite, nu una.</li>
+      </ul>
+      <p>
+        Restul promptului, adică regimul surselor, nivelul de certitudine, condiția de răsturnare și secțiunea de obiecții, îl păstrați. Acolo stă valoarea lui, și e independentă de mărimea fișierului vostru.
+      </p>
+
+      <h2 id="s9">Resursele descărcabile</h2>
+      <p>
+        Promptul integral și cele trei rapoarte, publicate ca material de lucru, nu ca recomandare tehnică. Raportul final e cel care intră ca punct de plecare pentru <a href="buzzword/prd-tehnic.html">specificația tehnică</a>, adică pentru pasul următor.
+      </p>
+
+      <div style="margin:40px 0; padding:28px; border:1px solid var(--border-strong); border-radius:16px; background: radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%), var(--bg-1); text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:10px;">// Resurse descărcabile</div>
+        <h3 class="dl-title" style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:600; margin:0 0 8px;">Promptul și cele trei rapoarte</h3>
+        <p style="font-size:14px; color:var(--fg-muted); line-height:1.6; margin:0 auto 20px; max-width:520px;">Promptul de raport final, exact așa cum a fost scris, plus rapoartele produse de cele trei modele pe aceleași documente. Șapte fișiere, cu un ghid de pornire și lista surselor ANAF de descărcat separat.</p>
+        <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Prompt_SAF-T.zip" download class="btn btn-primary" style="color:#07121a; border-bottom:none; text-decoration:none;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Prompt_SAF-T.zip
+        </a>
+      </div>
+
+      <h2 id="s10">Ce urmează</h2>
+      <p>
+        Săptămâna viitoare se scrie cod: modulul 1, citirea fișierului XML și transpunerea lui în tabele. Adică exact bucata pe care o promite prima linie din fișierul de reguli, și prima ocazie de a vedea dacă direcțiile de mai sus rezistă la contactul cu un fișier real.
+      </p>
+      <p>
+        După cea mai lungă conversație din tot proiectul, zero linii de cod. De săptămâna viitoare nu mai e adevărat.
+      </p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#SAF-T</span>
+          <span class="tag">#D406</span>
+          <span class="tag">#vibe-coding</span>
+          <span class="tag">#plan-mode</span>
+          <span class="tag">#raport-de-decizii</span>
+        </div>
+        <span class="footer-mono">Articolul #035</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-09-08-Conversatia-care-nu-a-produs-cod"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s1">Am construit ce am descris</a>
+        <a href="#s2">Fișierul de reguli</a>
+        <a href="#s3">Conversația fără cod</a>
+        <a href="#s4">Întrebările</a>
+        <a href="#s5">Contextul dat</a>
+        <a href="#s6">Direcțiile primite</a>
+        <a href="#s7">Promptul scris de asistent</a>
+        <a href="#s8">Înainte să îl rulați</a>
+        <a href="#s9">Resursele descărcabile</a>
+        <a href="#s10">Ce urmează</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- ARTICOLE CONEXE -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Pe aceeași temă.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-09-05-Proiectul-care-tine-minte.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #034</div>
+        <h3>Proiectul care ține minte</h3>
+        <p>Partea precedentă: spațiul de lucru pe care s-a purtat conversația de aici, fișierul de reguli, memoria care se scrie singură și checklistul de pornire.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-09-05-Nu-cere-drumul-cel-mai-scurt.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #033</div>
+        <h3>Nu cere drumul cel mai scurt</h3>
+        <p>Inventarul uneltelor, glosarul de 30 de termeni și principiul care a făcut posibilă conversația de față: nu cere aplicația, cere planul.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html" class="related-card fade-in">
+        <div class="related-date">ANALIZĂ · SAF-T · #032</div>
+        <h3>Cum verifici fișierul SAF-T D406 înainte de depunere</h3>
+        <p>Cele cinci niveluri de verificare, unde cedează Excel-ul, ce oferă piața românească și cu ce prețuri publice.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+<script>
+/* Blocurile de cod pliate. Etichetele butonului vin din data-more / data-less,
+   ca acelasi handler sa serveasca si un rezumat de fisier, si un prompt. */
+function toggleCode(id, btn){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var open = el.classList.toggle('expanded');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.textContent = open
+    ? (btn.dataset.less || 'Ascunde ↑')
+    : (btn.dataset.more || 'Vizualizare completă ↓');
+}
+</script>
+</body>
+</html>

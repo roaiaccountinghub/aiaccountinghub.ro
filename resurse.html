@@ -313,8 +313,37 @@
           "item": {
             "@id": "https://aiaccountinghub.ro/resurse.html#anaf-v2"
           }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#saft-decizii"
+          }
         }
       ]
+    },
+    {
+      "@type": "DigitalDocument",
+      "@id": "https://aiaccountinghub.ro/resurse.html#saft-decizii",
+      "name": "SAF-T D406, promptul de raport final și cele trei rapoarte de decizii",
+      "description": "Materialul de lucru din conversația de planificare a aplicației de verificare D406: promptul care transformă o discuție de descoperire într-un raport de decizii, exact așa cum a fost scris, plus rapoartele produse de trei modele AI diferite pe aceleași documente. Fiecare decizie vine cu minimum trei opțiuni comparate, un nivel de certitudine și condiția scrisă în care se reia. Se publică drept material de lucru, nu drept recomandare tehnică.",
+      "url": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Prompt_SAF-T.zip",
+      "encodingFormat": "application/zip",
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Conversația care nu a produs cod",
+        "url": "https://aiaccountinghub.ro/2026-09-08-Conversatia-care-nu-a-produs-cod.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
     },
     {
       "@type": "PresentationDigitalDocument",
@@ -663,6 +692,16 @@
    Resursele „În curând" nu se trec acolo: n-au adresă de descărcare. */
 const RESOURCES = [
   /* ===== DE CITIT ===== */
+  { type: 'pdf', slug: 'decizii', kind: 'Material de lucru · ZIP', title: 'SAF-T D406, promptul și cele trei rapoarte de decizii',
+    desc: 'Promptul care transformă o discuție de descoperire într-un raport de decizii, exact așa cum a fost scris, plus rapoartele produse de trei modele AI diferite pe aceleași documente. Fiecare decizie vine cu minimum trei opțiuni comparate, un nivel de certitudine și condiția scrisă dinainte în care se reia. Material de lucru, nu recomandare tehnică: promptul e scris pentru un caz anume, iar articolul explică ce se schimbă la al vostru.',
+    size: 'ZIP · 7 fișiere', cta: 'Descarcă',
+    track: 'resursa:decizii',
+    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Prompt_SAF-T.zip',
+    articles: {
+      label: 'Articolul din care vine',
+      items: [
+        { href: '2026-09-08-Conversatia-care-nu-a-produs-cod.html', title: 'Conversația care nu a produs cod' },
+      ] } },
   { type: 'pdf', kind: 'Cheat sheet · PPTX', title: 'Promptul perfect, cele 14 elemente',
     desc: 'Două one-pagere vizuale care se citesc împreună. Partea 1 e gramatica: cele 7 ingrediente ale unui prompt bun plus meta-promptul shortcut. Partea 2 e arhitectura: cele 7 elemente din 2.0, de la tag-uri XML la guardrails, plus trucul clarificărilor. Gata de printat sau de adaptat la fluxul tău.',
     size: 'PPTX · 2 fișiere',

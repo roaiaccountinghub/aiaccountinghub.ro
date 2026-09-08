@@ -31,12 +31,21 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sat, 05 Sep 2026 10:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 09:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Conversația care nu a produs cod</title>
+      <link>https://aiaccountinghub.ro/2026-09-08-Conversatia-care-nu-a-produs-cod.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-09-08-Conversatia-care-nu-a-produs-cod.html</guid>
+      <pubDate>Tue, 08 Sep 2026 09:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Spațiul de lucru era gata, așa că am deschis conversația de planificare: documentele oficiale, mărimile reale ale fișierelor, echiparea stațiilor și toată aplicația, nu doar bucata pe care voiam să o construiesc. Cea mai lungă conversație a proiectului s-a încheiat fără nicio linie de cod, dar cu patru decizii de temelie scrise, fiecare cu motivul ei și cu condiția în care se reia. Plus lucrul care răstoarnă o așteptare răspândită: promptul a venit la sfârșit, nu la început, și l-a scris asistentul. Aceeași cerere a fost rulată apoi în încă două modele, iar convergența lor spune ceva despre întrebare, nu despre adevăr.</description>
+    </item>
 
     <!-- ============================================================
          SERIA SAF-T, faza de construcție — 05.09.2026: două articole
