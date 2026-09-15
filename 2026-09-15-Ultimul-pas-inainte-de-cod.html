@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ultimul pas înainte de cod — AI Accounting Hub</title>
+<meta name="description" content="Între decizia tehnică și prima linie de cod mai e o etapă pe care aproape toată lumea o sare. Aplicația a primit un nume, i-am desenat fereastra în trei unelte diferite și abia apoi am scris specificația. Cu articolul acesta se încheie pregătirea; de săptămâna viitoare se scrie cod.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-09-15-Ultimul-pas-inainte-de-cod.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-09-15-Ultimul-pas-inainte-de-cod.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Ultimul pas înainte de cod — AI Accounting Hub">
+<meta property="og:description" content="Între decizia tehnică și prima linie de cod mai e o etapă pe care aproape toată lumea o sare. Aplicația a primit un nume, i-am desenat fereastra în trei unelte diferite și abia apoi am scris specificația. Cu articolul acesta se încheie pregătirea; de săptămâna viitoare se scrie cod.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ultimul pas înainte de cod — AI Accounting Hub">
+<meta name="twitter:description" content="Între decizia tehnică și prima linie de cod mai e o etapă pe care aproape toată lumea o sare. Aplicația a primit un nume, i-am desenat fereastra în trei unelte diferite și abia apoi am scris specificația. Cu articolul acesta se încheie pregătirea; de săptămâna viitoare se scrie cod.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Subtitlurile de secțiune. h2 poartă '§', h3 primește '//', același vocabular
+   cu etichetele mono din site. */
+.prose h3 { margin: 44px 0 14px; }
+.prose h3::before { content: '//'; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; color: var(--accent); font-weight: 400; margin-right: 10px; opacity: 0.75; }
+/* Titlul din caseta de descărcare: caseta are deja eticheta ei mono deasupra. */
+.prose h3.dl-title::before { content: none; }
+
+/* Cod inline */
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: color-mix(in oklab, var(--fg) 8%, transparent); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; color: var(--fg); white-space: nowrap; }
+.prose pre code { white-space: pre; }
+
+/* Șabloanele de prompt. Câmpurile de înlocuit primesc accentul, exemplele
+   rămân stinse: ochiul vede din prima ce se completează și ce se șterge.
+   Același vocabular ca în articolul despre conversația de planificare. */
+.prose pre.sablon b { color: var(--accent); font-weight: 500; }
+.prose pre.sablon i { color: var(--fg-dim); font-style: normal; }
+
+/* Imaginile de interfață: același tipar ca la capturile din AI Journal */
+.shot { margin: 32px 0; }
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-1); }
+.shot figcaption { margin-top: 12px; font-size: 13.5px; line-height: 1.6; color: var(--fg-dim); border-left: 2px solid color-mix(in oklab, var(--accent) 45%, transparent); padding-left: 14px; }
+.shot figcaption b { color: var(--fg-muted); font-weight: 600; }
+
+/* Linkuri în proză — styles.css are a { color: inherit } */
+.prose p > a, .prose li > a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); }
+.prose p > a:hover, .prose li > a:hover { border-bottom-color: var(--accent); }
+
+/* ===== Banda de serie =====================================================
+   Eticheta de sus e chiar rezumatul casetei pliate, deci o singură componentă,
+   nu două. Lista arată doar părțile dinainte: nu promitem un total, fiindcă
+   s-ar schimba la fiecare articol nou din serie, iar articolele deja publicate
+   nu se mai ating niciodată. Tiparul de <details> e cel de la .toc-mobile,
+   fundalul e cel al .callout, componenta cu care site-ul spune „uită-te aici”. */
+.serie { margin: 0 0 34px; border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 14px; background: radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 60%), var(--bg-1); box-shadow: 0 10px 30px -18px color-mix(in oklab, var(--accent) 70%, transparent); }
+.serie summary, .serie .serie-rand { display: flex; align-items: center; gap: 14px; padding: 16px; list-style: none; font-family: 'JetBrains Mono', monospace; }
+.serie summary { cursor: pointer; }
+.serie summary::-webkit-details-marker { display: none; }
+.serie-ic { flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: color-mix(in oklab, var(--accent) 15%, transparent); color: var(--accent); }
+.serie-ic svg { width: 16px; height: 16px; }
+.serie-cap { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.serie-nume { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.serie-poz { font-size: 13px; letter-spacing: 0.02em; color: var(--fg); }
+.serie-hint { display: inline-flex; align-items: center; gap: 9px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); white-space: nowrap; transition: color 0.2s; }
+.serie summary:hover .serie-hint { color: var(--accent); }
+.serie-hint::after { content: ''; width: 6px; height: 6px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg); transition: transform 0.25s ease; margin-top: -3px; }
+.serie[open] .serie-hint::after { transform: rotate(-135deg); margin-top: 2px; }
+.serie-link { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); white-space: nowrap; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); }
+.serie-link:hover { border-bottom-color: var(--accent); }
+.serie-lista { margin: 0; padding: 0 16px 14px 62px; list-style: none; counter-reset: sp; }
+.serie-lista li { counter-increment: sp; display: flex; gap: 13px; padding: 11px 0; border-top: 1px solid color-mix(in oklab, var(--accent) 15%, transparent); }
+.serie-lista li::before { content: counter(sp); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); min-width: 13px; padding-top: 3px; }
+.serie-lista a { display: block; font-size: 15px; line-height: 1.4; color: var(--fg); }
+.serie-lista a:hover { color: var(--accent); }
+.serie-data { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.05em; color: var(--fg-dim); margin-top: 4px; }
+@media (max-width: 560px) {
+  .serie summary, .serie .serie-rand { padding: 14px; gap: 12px; }
+  .serie-hint span { display: none; }
+  .serie-lista { padding: 0 14px 12px; }
+  .serie-lista a { font-size: 14px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ultimul pas înainte de cod — AI Accounting Hub",
+  "description": "Între decizia tehnică și prima linie de cod mai e o etapă pe care aproape toată lumea o sare. Aplicația a primit un nume, i-am desenat fereastra în trei unelte diferite și abia apoi am scris specificația. Cu articolul acesta se încheie pregătirea; de săptămâna viitoare se scrie cod.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-09-15",
+  "dateModified": "2026-09-15",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-09-15-Ultimul-pas-inainte-de-cod.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce este un PRD tehnic executabil?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PRD vine din engleză, Product Requirements Document, adică documentul cerințelor de produs. Un PRD tehnic executabil este specificația unei aplicații, scrisă astfel încât conversațiile de implementare să pornească din ea fără ca vreuna să redeschidă o decizie deja luată. Nu conține cod. Conține comportament, structuri de date și criterii de acceptare, adică ce trebuie să se întâmple și cum se verifică faptul că s-a întâmplat. Specificația modulului 1 din SAF-T Inspector are 21 de capitole și 58 de criterii de acceptare."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "De ce se desenează interfața înainte de a scrie specificația?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pentru că desenul scoate la suprafață stările pe care conversația le ocolise. În cazul descris, una dintre cele trei unelte a desenat fereastra goală, adică ce vede colegul care deschide aplicația prima oară și nu are manual, iar răspunsul la întrebarea asta a intrat în specificație ca cerință de sine stătătoare. Desenul nu decide însă nimic: unde ecranul desenat contrazice raportul de decizii, se corectează ecranul."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum ceri unui asistent AI propuneri de nume pentru o aplicație?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ceri o fază de descoperire, nu o recomandare. Îi spui ce face aplicația, cine o folosește și unde va apărea numele, apoi îi ceri 20-25 de variante grupate pe 4-5 direcții diferite, fiecare cu un subtitlu scurt care spune ce face aplicația. Îi mai ceri să nu aleagă el, ci să îți pună la final trei întrebări care te ajută să restrângi lista la trei variante."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Poate un asistent AI să scrie PRD-ul tehnic?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da, cu condiția să pornească de la decizii deja luate. În cazul SAF-T Inspector, PRD-ul modulului 1 a fost scris cu ajutorul asistentului AI, pe baza raportului final de decizii și a promptului care generase raportul. Cererea spune explicit că deciziile din raport sunt închise, că documentul începe cu ordinea surselor și cu perimetrul, că fiecare capitol de comportament se încheie cu criterii de acceptare verificabile și că, unde raportul nu decide ceva, asistentul întreabă în loc să presupună."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum arată un criteriu de acceptare bine scris?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "E formulat ca verificare, nu ca intenție, deci i se poate răspunde cu da sau nu. „Trei colegi care nu au mai văzut aplicația pornesc o prelucrare în sub un minut, fără instrucțiuni, cronometrat” este un criteriu de acceptare. „Interfața e intuitivă” nu este, fiindcă nu are cum să fie bifat."
+      }
+    }
+  ]
+}</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Ultimul pas înainte de cod</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Vibe coding</span>
+      <span>15 septembrie 2026</span>
+      <span class="sep">·</span>
+      <span>12 min citire</span>
+    </div>
+
+    <h1>Ultimul pas <span class="accent">înainte de cod</span></h1>
+    <p class="article-lede">
+      Între decizia tehnică și prima linie de cod mai e o etapă pe care aproape toată lumea o sare. Aplicația a primit un nume, i-am desenat fereastra în trei unelte diferite și abia apoi am scris specificația. Cu articolul acesta se încheie pregătirea; de săptămâna viitoare se scrie cod.
+    </p>
+
+    <details class="serie">
+      <summary>
+        <span class="serie-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><span class="serie-cap"><span class="serie-nume">Seria SAF-T</span><span class="serie-poz">partea a șaptea</span></span>
+        <span class="serie-hint"><span>ce a fost înainte</span></span>
+      </summary>
+      <ol class="serie-lista">
+        <li><a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html">Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi<span class="serie-data">27 august 2026 · 12 min</span></a></li>
+        <li><a href="2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html">Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406<span class="serie-data">29 august 2026 · 17 min</span></a></li>
+        <li><a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html">Cum verifici fișierul SAF-T D406 înainte de depunere<span class="serie-data">30 august 2026 · 22 min</span></a></li>
+        <li><a href="2026-09-05-Nu-cere-drumul-cel-mai-scurt.html">Nu cere drumul cel mai scurt<span class="serie-data">5 septembrie 2026 · 12 min</span></a></li>
+        <li><a href="2026-09-05-Proiectul-care-tine-minte.html">Proiectul care ține minte<span class="serie-data">5 septembrie 2026 · 12 min</span></a></li>
+        <li><a href="2026-09-08-Conversatia-care-nu-a-produs-cod.html">Conversația care nu a produs cod<span class="serie-data">8 septembrie 2026 · 13 min</span></a></li>
+      </ol>
+    </details>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s1">Numele, care nu e o chestiune de marketing</a>
+        <a href="#s2">Aceeași fereastră, desenată de trei unelte</a>
+        <a href="#s3">PRD-ul tehnic, și ce înseamnă „executabil”</a>
+        <a href="#s4">Ce găsiți în specificație</a>
+        <a href="#s5">Resursa descărcabilă</a>
+        <a href="#s6">Ce urmează</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">15.09.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// D406 · nume, formă, specificație · ilustrație</div>
+    </div>
+
+    <div class="prose">
+
+      <p>
+        <a href="2026-09-08-Conversatia-care-nu-a-produs-cod.html">Articolul trecut</a> s-a încheiat cu patru decizii de temelie și cu promisiunea că urmează codul. Nu urmează încă. Între raportul de decizii și prima linie de <a href="buzzword/python.html">Python</a> mai încap trei lucruri, pe care le-am făcut în ultimele zile și pe care aproape toată lumea le sare: aplicația a primit un nume, i-am desenat fereastra, și abia apoi am scris specificația tehnică.
+      </p>
+      <p>
+        Etapa aceasta nu produce nimic care să ruleze. Produce, în schimb, singurul lucru care face ca o conversație de implementare să nu reia de fiecare dată deciziile deja luate: <a href="buzzword/prd-tehnic.html">PRD-ul tehnic</a>.
+      </p>
+      <p>
+        Acronimul vine din engleză, <em>Product Requirements Document</em>, adică documentul cerințelor de produs. E practica veche a echipelor de software de a scrie, înainte de cod, ce trebuie să facă aplicația, pentru cine, ce primește și ce livrează, ce face când datele sunt greșite, ce nu face deloc și după ce se recunoaște că a ieșit bine. Când construiești cu un asistent AI, rolul lui crește: e memoria comună a proiectului. Fiecare conversație nouă pornește de la el, nu de la zero, iar tu ai un criteriu scris față de care judeci ce primești, în loc de o impresie.
+      </p>
+
+      <h2 id="s1">Numele, care nu e o chestiune de marketing</h2>
+      <p>
+        Am cerut liste, nu recomandări. Au ieșit în jur de douăzeci și cinci de variante, grupate pe patru direcții: audit și asigurare, date și analiză, reconciliere și acuratețe, plus nume de produs care renunță de tot la „SAF-T”. Câteva dintre ele:
+      </p>
+      <ul>
+        <li><strong>SAF-T Auditor</strong>, cu accent pe verificare și controale;</li>
+        <li><strong>SAF-T Insight</strong>, cu accent pe transformarea fișierului XML în informație utilă;</li>
+        <li><strong>SAF-T Balance</strong>, o trimitere la echilibrul și la reconcilierea din contabilitate;</li>
+        <li><strong>SAF-T Proof</strong>, ideea că aplicația dovedește că datele sunt corecte;</li>
+        <li><strong>FiscalLens</strong>, un nume de produs, cu loc pentru extinderi dincolo de SAF-T.</li>
+      </ul>
+      <p>
+        Am mers pe <strong>SAF-T Inspector</strong>. E o alegere personală: ni se pare un nume care se înțelege dintr-o privire, pentru oricine deschide aplicația. Celelalte variante rămân în picioare, iar dacă vă construiți propria unealtă, oricare dintre ele poate fi punctul vostru de plecare.
+      </p>
+
+      <blockquote>
+        <strong>SAF-T Inspector</strong><br>
+        <em>Analiză, validare și reconciliere</em><br>
+        by AI Accounting Hub
+      </blockquote>
+
+      <p>
+        Trei niveluri, deliberat. Numele spune despre ce e vorba: declarația SAF-T și un instrument care se uită în ea. Subtitlul spune ce face, în trei cuvinte care acoperă și etapele care vin după modulul 1. Al treilea nivel spune cine îl întreține, fiindcă un instrument construit public are nevoie de o adresă la care se întoarce cineva cu o problemă.
+      </p>
+      <p>
+        Numele a intrat apoi în numele bazei de lucru, în titlul ferestrei, în antetul raportului PDF și în numele folderului livrat. De aceea se alege înainte, nu după.
+      </p>
+      <p>
+        Dacă vreți să faceți același exercițiu pentru propria aplicație, cererea poate arăta așa. Înlocuiți câmpurile din paranteze drepte, iar exemplele scrise stins le ștergeți:
+      </p>
+
+      <pre class="sablon"><code>Construiesc o aplicație pentru uz intern și am nevoie de un nume.
+
+<b>[CE FACE APLICAȚIA]</b>   <i>ex: verifică declarația D406 înainte de depunere</i>
+<b>[CINE O FOLOSEȘTE]</b>    <i>ex: colegi contabili, câteva zile pe lună</i>
+<b>[UNDE APARE NUMELE]</b>   <i>ex: fereastra, raportul PDF, folderul livrat</i>
+
+Nu vreau o recomandare, vreau o fază de descoperire:
+
+1. Propune 20-25 de nume, grupate pe 4-5 direcții
+   diferite, fiecare direcție cu ideea ei într-un rând.
+2. Pentru fiecare nume, un subtitlu de cel mult cinci
+   cuvinte, care spune ce face aplicația.
+3. Nu alege tu. La final, pune-mi trei întrebări care
+   m-ar ajuta să restrâng lista la trei variante.</code></pre>
+
+      <h2 id="s2">Aceeași fereastră, desenată de trei unelte</h2>
+      <p>
+        Am descris aceeași aplicație, cu aceleași constrângeri, în <a href="buzzword/chatgpt-openai.html">ChatGPT</a>, în <a href="buzzword/gemini-google.html">Gemini</a> și în <a href="buzzword/claude-design.html">Claude Design</a>. Nu ca să compar uneltele, ci ca să văd ce anume nu îmi spusesem încă mie însumi.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/saft/saft-inspector-mockup-chatgpt-1600.webp"
+             srcset="assets/saft/saft-inspector-mockup-chatgpt-880.webp 880w, assets/saft/saft-inspector-mockup-chatgpt-1600.webp 1600w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1600" height="900" loading="lazy" decoding="async"
+             alt="Fereastra SAF-T Inspector desenată de ChatGPT, cu trei coloane: selecția fișierelor, rularea în curs și tabelul de rezultate.">
+        <figcaption>
+          <b>Varianta ChatGPT.</b> Aspect Windows 11, bară de meniu, trei coloane, tabelul de secțiuni complet.
+        </figcaption>
+      </figure>
+
+      <p>
+        ChatGPT a produs cea mai „completă” imagine: aspect Windows 11, bară de meniu, trei coloane, tabelul de secțiuni complet. E cel mai aproape de ce voiam. Tocmai de aceea cere cea mai multă atenție: o imagine care arată ca un produs finit te îndeamnă să o preiei ca atare, cu tot cu detaliile pe care nu le-a cerut nimeni.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/saft/saft-inspector-mockup-gemini-1760.webp"
+             srcset="assets/saft/saft-inspector-mockup-gemini-880.webp 880w, assets/saft/saft-inspector-mockup-gemini-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="982" loading="lazy" decoding="async"
+             alt="Varianta Gemini, cu cei patru pași ai prelucrării într-o coloană din stânga și panourile de conținut stivuite în dreapta.">
+        <figcaption>
+          <b>Varianta Gemini.</b> Cei patru pași ca etape în stânga, conținutul stivuit în panouri care se pliază. Panourile se numesc, pe ecran, „Area 1” și „Area 2, Rulare”.
+        </figcaption>
+      </figure>
+
+      <p>
+        Gemini a propus altceva: cei patru pași ai prelucrării așezați ca etape într-o coloană din stânga, iar conținutul stivuit în panouri care se pliază. Adică un asistent pas cu pas, nu o fereastră unică.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/saft/saft-inspector-mockup-claude-design-1342.webp"
+             srcset="assets/saft/saft-inspector-mockup-claude-design-880.webp 880w, assets/saft/saft-inspector-mockup-claude-design-1342.webp 1342w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1342" height="837" loading="lazy" decoding="async"
+             alt="Ecranul de pornire în varianta Claude Design, cu titlul „Vezi ce ai depus, înainte să semnezi” și cei trei pași explicați.">
+        <figcaption>
+          <b>Varianta Claude Design.</b> Singura care a desenat fereastra goală, adică starea în care programul nu face nimic.
+        </figcaption>
+      </figure>
+
+      <p>
+        Claude Design a fost singurul care a desenat fereastra <strong>goală</strong>, adică starea în care programul nu face nimic. Acolo apare titlul „Vezi ce ai depus, înainte să semnezi”, o explicație în trei pași și o linie despre cât durează. Nu ceruse nimeni ecranul acesta. El a produs însă cea mai utilă întrebare din toată etapa: <em>ce vede colegul care deschide aplicația prima oară și nu are manual?</em> Răspunsul a intrat în specificație ca o cerință de sine stătătoare. Ecranul gol nu e un ecran gol, e locul unde se decide dacă instrumentul e de încredere.
+      </p>
+
+      <p>
+        Specificația conține, de altfel, o propoziție care poate părea excesivă, dar nu este:
+      </p>
+
+      <blockquote>
+        Canvasul de design este orientare artistică. Nu decide nimic. Unde ecranul desenat spune altceva decât raportul, se corectează ecranul.
+      </blockquote>
+
+      <p>
+        Desenul e bun la ce e bun: scoate la suprafață stările pe care conversația le ocolise. Nu are voie să devină sursă de adevăr pentru comportament sau pentru reguli.
+      </p>
+      <p>
+        Din cele trei variante a rămas structura pe care o susțineau, în forme diferite, toate trei: o singură fereastră, trei zone, nimic modal. Cinci stări, desenate fiecare separat, inclusiv stările de eșec.
+      </p>
+      <p>
+        Dacă vreți să încercați exercițiul pe propria aplicație, iată o cerere de pornire în care intră deja cele trei lecții de mai sus: româna cerută explicit, nimic în plus față de pașii descriși și fereastra goală desenată separat.
+      </p>
+
+      <pre class="sablon"><code>Desenează fereastra principală a unei aplicații desktop
+pentru Windows 11. Vreau o machetă de interfață, nu cod.
+
+<b>[NUMELE ȘI SUBTITLUL]</b>  <i>ex: SAF-T Inspector, Analiză, validare și reconciliere</i>
+<b>[CE FACE]</b>              <i>ex: citește un XML de 1-3 GB și îl transformă în tabele</i>
+<b>[CINE O FOLOSEȘTE]</b>     <i>ex: contabili, câteva zile pe lună, fără manual</i>
+<b>[PAȘII]</b>                <i>ex: alege fișierele, confirmă tipul, pornește, exportă</i>
+
+Reguli:
+- o singură fereastră, fără ferestre de dialog peste ea
+- tot textul din interfață în limba română, cu diacritice
+- doar elementele care rezultă din pașii de mai sus,
+  fără meniuri sau butoane pe care nu le-am cerut
+
+Desenează separat fiecare stare: fereastra goală, la
+prima deschidere; pregătită de pornire; în timpul
+prelucrării; după export; și cel puțin o stare de eroare.</code></pre>
+
+      <h2 id="s3">PRD-ul tehnic, și ce înseamnă „executabil”</h2>
+      <p>
+        Cu numele și cu forma pe masă, am continuat cu PRD-ul tehnic al modulului 1, tot cu ajutorul asistentului AI. La bază au stat cele două documente din etapa anterioară: raportul final de decizii și promptul care l-a generat. Specificația nu reia argumentele din raport, ci pornește de la deciziile lui și trimite la ele. Au ieșit douăzeci și unu de capitole, de la perimetru și model de date până la catalogul de erori, împachetare și matricea de trasabilitate.
+      </p>
+      <p>
+        Cuvântul care contează e „executabil”. Un document executabil nu se citește, se folosește: din el pornesc conversațiile de implementare, fără ca vreuna să redeschidă o decizie deja luată. Două mecanisme fac diferența.
+      </p>
+
+      <h3>Ce document decide, când două documente se contrazic</h3>
+      <p>
+        Într-un proiect construit din conversații, contradicțiile nu sunt un accident, sunt starea normală. Deci ordinea se scrie o dată, la începutul documentului, și nu se mai discută:
+      </p>
+      <ol>
+        <li>documentele oficiale din <code>surse\</code>, pentru orice enunț de regulă privind D406, cu <a href="buzzword/xsd.html">schema</a> având întâietate;</li>
+        <li>raportul de decizii, pentru deciziile tehnice și cerințele codificate;</li>
+        <li><a href="buzzword/claude-md.html"><code>CLAUDE.md</code></a>, pentru regulile de proiect;</li>
+        <li><a href="buzzword/memory-md.html"><code>MEMORY.md</code></a>, pentru alternativele respinse și motivele lor.</li>
+      </ol>
+      <p>
+        Canvasul de design nu apare în listă, de asta e menționat separat.
+      </p>
+
+      <h3>Criteriile de acceptare, scrise înainte de cod</h3>
+      <p>
+        Capitolele care descriu comportamentul aplicației se termină fiecare cu lista lor de criterii, cincizeci și opt în total. Sunt scrise ca verificări, nu ca intenții: „trei colegi care nu au mai văzut aplicația pornesc o prelucrare în sub un minut, fără instrucțiuni, cronometrat”. Se poate răspunde cu da sau nu, ceea ce despre „interfața e intuitivă” nu se poate.
+      </p>
+      <p>
+        Aceeași logică se aplică și corectitudinii. Aplicațiile publicate de ANAF rulează pe același fișier, iar rezultatele se compară. Regula scrisă în document e deliberat asimetrică: <strong>dacă rezultatele diferă, presupunerea de pornire e că noi greșim.</strong>
+      </p>
+      <p>
+        Dacă aveți deja un raport de decizii pentru propria aplicație, cererea pentru PRD poate arăta așa. Ca la celelalte, înlocuiți câmpurile din paranteze drepte:
+      </p>
+
+      <pre class="sablon"><code>Îți atașez raportul final de decizii din etapa anterioară
+și promptul care l-a generat. Deciziile din raport sunt
+închise: nu le rediscuta, pornește de la ele.
+
+<b>[APLICAȚIA ȘI MODULUL]</b>  <i>ex: SAF-T Inspector, modulul 1, citirea D406</i>
+<b>[SURSELE OFICIALE]</b>      <i>ex: schema XSD, ghidul ANAF, registrul de definiții</i>
+<b>[CINE O FOLOSEȘTE]</b>      <i>ex: contabili, câteva zile pe lună, fără manual</i>
+
+Scrie PRD-ul tehnic al modulului. Nu scrie cod.
+
+1. La început: ce document decide când două surse se
+   contrazic, apoi perimetrul, adică ce face modulul
+   și, separat, ce nu face.
+2. Pentru fiecare capitol de comportament: ce se
+   întâmplă, cu ce date, în ce ordine și ce vede
+   utilizatorul, inclusiv stările de eroare.
+3. La finalul fiecărui capitol, criterii de acceptare
+   scrise ca verificări, la care se răspunde cu da
+   sau nu.
+4. Unde raportul nu decide ceva, nu presupune:
+   întreabă-mă, apoi notează decizia și motivul ei.</code></pre>
+
+      <h2 id="s4">Ce găsiți în specificație</h2>
+      <p>
+        Rolul PRD-ului în proiect se spune într-o frază: e documentul pe care îl primește fiecare conversație de implementare și față de care se verifică fiecare bucată de cod. Nu conține cod. Descrie ce trebuie să se întâmple, cu ce date, în ce ordine, ce vede utilizatorul și după ce se recunoaște că a ieșit bine. Din cele douăzeci și unu de capitole, trei merită citite primele, fiindcă din ele se înțelege restul.
+      </p>
+
+      <h3>Perimetrul: ce face modulul și ce nu face</h3>
+      <p>
+        Primul capitol spune, în șapte rânduri, ce face modulul 1: citește integral declarația, inclusiv pe cea depusă în mai multe fișiere, o transpune în tabele, produce la fiecare export registrul Excel și fișierele CSV și Parquet, arată ce conține declarația înainte de export, și scrie jurnalul și raportul de rulare.
+      </p>
+      <p>
+        La fel de importantă e cealaltă listă, a lucrurilor pe care modulul nu le face, deliberat: cele 33 de teste de consistență publicate de ANAF, reconcilierea cu decontul de TVA, confruntarea cu balanța și cu D390 și D394, fiecare cu etapa ei. Și validarea completă contra schemei, pe care o face deja aplicația oficială. Fără lista aceasta, asistentul completează singur golurile cu presupuneri rezonabile, dar care nu sunt ale tale.
+      </p>
+
+      <h3>Fluxul, în patru pași</h3>
+      <p>
+        Tot ce se întâmplă cu fișierul e împărțit în patru pași, vizibili și în fereastră:
+      </p>
+      <ol>
+        <li><strong>Inventarul antetelor</strong>, în câteva secunde: cine a depus, pentru ce perioadă, ce tip de declarație, dacă fișierele formează o secvență completă și dacă e spațiu suficient pe disc.</li>
+        <li><strong>Trecerea unică prin fișier</strong>, partea lungă: XML-ul se citește o singură dată, bucată cu bucată, și se scrie într-o bază de lucru locală.</li>
+        <li><strong>Sinteza</strong>, instantaneu: câte documente și rânduri are fiecare secțiune, totalurile declarate față de cele calculate și o listă scurtă a lucrurilor care cer atenție.</li>
+        <li><strong>Exportul</strong>, în câteva minute: cele trei formate, produse din baza de lucru, fără recitirea fișierului.</li>
+      </ol>
+      <p>
+        Nivelul de detaliu se vede cel mai bine la sinteză. Un total pe care declarația nu îl conține apare ca „nedeclarat”, nu ca zero. Afișat ca zero, ar produce o diferență falsă, egală cu întregul total calculat, și l-ar trimite pe contabil pe o pistă greșită exact în ecranul în care caută probleme.
+      </p>
+
+      <h3>Cele cinci stări ale ferestrei</h3>
+      <p>
+        Aici se întâlnesc desenele de mai sus cu specificația. Fereastra are cinci stări: goală, pregătită de pornire, în lucru, terminată și răsfoirea unei secțiuni. Pentru fiecare, documentul spune ce se vede, ce e blocat și de ce.
+      </p>
+      <p>
+        Două exemple. Butonul START devine activ numai când trec patru verificări: fișierele formează o secvență completă, tipul declarației se potrivește cu cel așteptat, spațiul ajunge și folderul de export poate fi scris. Când una pică, motivul e scris lângă buton, în română, nu ascuns într-un jurnal. Iar starea „în lucru” are o cerință aparte: colegul care pleacă de la birou și revine după zece minute trebuie să vadă în două secunde dacă aplicația mai lucrează sau a terminat.
+      </p>
+
+      <h2 id="s5">Resursa descărcabilă</h2>
+      <p>
+        PRD-ul tehnic al modulului 1, în forma completă, e disponibil mai jos. Nu e o recomandare tehnică și nu e un șablon universal: e specificația unui caz concret, cu constrângeri concrete, publicată ca material de lucru. Dacă o citiți ca să vă scrieți propria specificație, partea utilă nu sunt deciziile mele, ci forma: ierarhia surselor, perimetrul scris explicit și criteriile de acceptare care se pot bifa.
+      </p>
+
+      <div style="margin:40px 0; padding:28px; border:1px solid var(--border-strong); border-radius:16px; background: radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%), var(--bg-1); text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:10px;">// Resursă descărcabilă</div>
+        <h3 class="dl-title" style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:600; margin:0 0 8px;">PRD tehnic, SAF-T Inspector, modulul 1</h3>
+        <p style="font-size:14px; color:var(--fg-muted); line-height:1.6; margin:0 auto 20px; max-width:520px;">Specificația completă a citirii declarației D406 și a transpunerii ei în tabele: 21 de capitole, 58 de criterii de acceptare și matricea de trasabilitate. Versiunea 1.0, 53 de pagini.</p>
+        <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/D406-Modul-1-PRD-Tehnic.pdf" download class="btn btn-primary" style="color:#07121a; border-bottom:none; text-decoration:none;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          D406-Modul-1-PRD-Tehnic.pdf
+        </a>
+      </div>
+
+      <h2 id="s6">Ce urmează</h2>
+      <p>
+        Aplicația are nume, are formă și are specificație. Nu are încă nicio linie de cod.
+      </p>
+      <p>
+        Săptămâna viitoare o are: motorul modulului 1, adică citirea fișierului <a href="buzzword/xml.html">XML</a> în flux și scrierea lui în baza de lucru, plus prima versiune a ferestrei. Primul obiectiv nu e o aplicație „gata”, ci una care trece pe fișierele de test construite anume. Verificarea pe o lună reală, deja depusă, vine abia după aceea, la locul de muncă.
+      </p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#SAF-T</span>
+          <span class="tag">#D406</span>
+          <span class="tag">#vibe-coding</span>
+          <span class="tag">#PRD</span>
+          <span class="tag">#interfață</span>
+        </div>
+        <span class="footer-mono">Articolul #036</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-09-15-Ultimul-pas-inainte-de-cod"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s1">Numele</a>
+        <a href="#s2">Trei unelte, o fereastră</a>
+        <a href="#s3">PRD-ul executabil</a>
+        <a href="#s4">Ce conține PRD-ul</a>
+        <a href="#s5">Resursa descărcabilă</a>
+        <a href="#s6">Ce urmează</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- ARTICOLE CONEXE -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Pe aceeași temă.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-09-08-Conversatia-care-nu-a-produs-cod.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #035</div>
+        <h3>Conversația care nu a produs cod</h3>
+        <p>Partea precedentă: conversația de planificare din care au ieșit cele patru decizii de temelie și raportul de decizii pe care se sprijină specificația de aici.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-09-05-Proiectul-care-tine-minte.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #034</div>
+        <h3>Proiectul care ține minte</h3>
+        <p>Spațiul de lucru al proiectului: fișierul de reguli <code>CLAUDE.md</code>, memoria care se scrie singură și de ce ambele apar în ierarhia surselor.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-09-05-Nu-cere-drumul-cel-mai-scurt.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #033</div>
+        <h3>Nu cere drumul cel mai scurt</h3>
+        <p>Începutul fazei de construcție: inventarul uneltelor, glosarul de 30 de termeni și principiul care duce până aici: nu cere aplicația, cere planul.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

@@ -291,7 +291,7 @@
       "@type": "ItemList",
       "@id": "https://aiaccountinghub.ro/resurse.html#resurse",
       "name": "Resurse disponibile pentru descărcare",
-      "numberOfItems": 3,
+      "numberOfItems": 5,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -320,8 +320,37 @@
           "item": {
             "@id": "https://aiaccountinghub.ro/resurse.html#saft-decizii"
           }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#prd-modul-1"
+          }
         }
       ]
+    },
+    {
+      "@type": "DigitalDocument",
+      "@id": "https://aiaccountinghub.ro/resurse.html#prd-modul-1",
+      "name": "PRD tehnic, SAF-T Inspector, modulul 1",
+      "description": "Specificația tehnică a modulului 1 din SAF-T Inspector, adică a citirii declarației D406 și a transpunerii ei în tabele: 21 de capitole, de la perimetru și modelul de date până la catalogul de erori, împachetare și matricea de trasabilitate, cu 58 de criterii de acceptare scrise înaintea codului. Se publică drept material de lucru, nu drept recomandare tehnică sau șablon universal.",
+      "url": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/D406-Modul-1-PRD-Tehnic.pdf",
+      "encodingFormat": "application/pdf",
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Ultimul pas înainte de cod",
+        "url": "https://aiaccountinghub.ro/2026-09-15-Ultimul-pas-inainte-de-cod.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
     },
     {
       "@type": "DigitalDocument",
@@ -692,6 +721,16 @@
    Resursele „În curând" nu se trec acolo: n-au adresă de descărcare. */
 const RESOURCES = [
   /* ===== DE CITIT ===== */
+  { type: 'pdf', slug: 'prd-modul-1', kind: 'Specificație · PDF', title: 'PRD tehnic, SAF-T Inspector, modulul 1',
+    desc: 'Specificația completă a citirii declarației D406 și a transpunerii ei în tabele: 21 de capitole, de la perimetru și modelul de date până la catalogul de erori și împachetare, plus 58 de criterii de acceptare scrise înaintea codului. Material de lucru, nu șablon universal: partea refolosibilă e forma, adică ierarhia surselor, perimetrul scris explicit și criteriile care se pot bifa.',
+    size: 'PDF · 53 de pagini · 0,9 MB', cta: 'Descarcă',
+    track: 'resursa:prd-modul-1',
+    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/D406-Modul-1-PRD-Tehnic.pdf',
+    articles: {
+      label: 'Articolul din care vine',
+      items: [
+        { href: '2026-09-15-Ultimul-pas-inainte-de-cod.html', title: 'Ultimul pas înainte de cod' },
+      ] } },
   { type: 'pdf', slug: 'decizii', kind: 'Material de lucru · ZIP', title: 'SAF-T D406, promptul și cele trei rapoarte de decizii',
     desc: 'Promptul care transformă o discuție de descoperire într-un raport de decizii, exact așa cum a fost scris, plus rapoartele produse de trei modele AI diferite pe aceleași documente. Fiecare decizie vine cu minimum trei opțiuni comparate, un nivel de certitudine și condiția scrisă dinainte în care se reia. Material de lucru, nu recomandare tehnică: promptul e scris pentru un caz anume, iar articolul explică ce se schimbă la al vostru.',
     size: 'ZIP · 7 fișiere', cta: 'Descarcă',

@@ -31,12 +31,21 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Tue, 08 Sep 2026 09:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2026 09:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Ultimul pas înainte de cod</title>
+      <link>https://aiaccountinghub.ro/2026-09-15-Ultimul-pas-inainte-de-cod.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-09-15-Ultimul-pas-inainte-de-cod.html</guid>
+      <pubDate>Tue, 15 Sep 2026 09:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>Între raportul de decizii și prima linie de cod mai încap trei lucruri pe care aproape toată lumea le sare. Aplicația a primit un nume, SAF-T Inspector, ales dintr-o listă de douăzeci și cinci de variante pentru că se înțelege dintr-o privire. Apoi fereastra ei a fost desenată în ChatGPT, Gemini și Claude Design, nu ca o comparație între unelte, ci ca să iasă la suprafață ce nu fusese încă spus, iar singura variantă care a desenat ecranul gol a pus cea mai utilă întrebare din toată etapa. Abia apoi a venit PRD-ul tehnic al modulului 1: 21 de capitole, o ordine fixă între documente, 58 de criterii de acceptare scrise înaintea codului, perimetrul, fluxul în patru pași și cele cinci stări ale ferestrei. Plus două cereri de pornire, una pentru nume și una pentru machetele de interfață.</description>
+    </item>
 
     <item>
       <title>Conversația care nu a produs cod</title>
