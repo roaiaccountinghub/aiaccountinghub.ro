@@ -433,9 +433,14 @@
 const ARTICLES = [
   /* ===== SERIA SAF-T, faza de construcție — numele, forma și specificația (#036),
      conversația de planificare (#035), apoi cele două articole publicate în
-     aceeași zi. Ordinea din tablou le ține în succesiunea de citit: întâi
-     uneltele (#033), apoi spațiul de lucru în care se folosesc (#034), apoi
-     conversația purtată în el (#035), apoi specificația care iese din ea (#036). */
+     aceeași zi. Între cele două decide câmpul `seq` (numărul din serie), nu
+     ordinea din tablou: la „cele mai noi”, #034 stă deasupra lui #033, ca în
+     restul arhivei, unde partea mai nouă a seriei e mai sus. */
+
+  { date: '2026-09-28', day: '28', month: 'SEPTEMBRIE', cat: 'saft', catLabel: 'SAF-T · Aplicație',
+    title: 'Apeși Verifică, și D406 devine Excel',
+    excerpt: 'Modulul 1 al aplicației SAF-T Inspector e gata, iar articolul e un tur complet al ei. Întâi o rulare filmată pe un fișier sintetic de aproape 3 GB, apoi fiecare ecran explicat: selecția și tipul declarației folosit drept control, scanarea care arată în câteva secunde firma, perioada și structura declarației, procesarea care rămâne în jur de 100 MB de memorie, rezultatele cu totalurile declarate față de cele calculate, raportul de rulare și registrul Excel. Plus Fabrica de fișiere sintetice D406, pe care a fost construită și verificată aplicația fără nicio dată reală, formatul .xlsb, cele două forme de livrare, un fișier sau un folder, și cele trei pachete de descărcat.',
+    read: '15 min', tags: ['#SAF-T', '#D406', '#vibe-coding', '#Python', '#Excel'], href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html' },
 
   { date: '2026-09-15', day: '15', month: 'SEPTEMBRIE', cat: 'saft', catLabel: 'SAF-T · Specificație',
     title: 'Ultimul pas înainte de cod',
@@ -447,12 +452,12 @@ const ARTICLES = [
     excerpt: 'Spațiul de lucru era gata, așa că am deschis conversația de planificare: i-am dat asistentului documentele oficiale, mărimile reale ale fișierelor, echiparea stațiilor și toată aplicația, nu doar bucata pe care voiam să o construiesc. Am ieșit din cea mai lungă conversație a proiectului fără nicio linie de cod, dar cu patru decizii de temelie scrise, fiecare cu motivul ei și cu condiția în care se reia. Plus lucrul care răstoarnă o așteptare răspândită: promptul a venit la sfârșit, nu la început, și l-a scris asistentul. Apoi aceeași cerere a fost rulată în încă două modele, iar convergența lor spune ceva despre întrebare, nu despre adevăr.',
     read: '13 min', tags: ['#SAF-T', '#D406', '#vibe-coding', '#plan-mode', '#raport-de-decizii'], href: '2026-09-08-Conversatia-care-nu-a-produs-cod.html' },
 
-  { date: '2026-09-05', day: '05', month: 'SEPTEMBRIE', cat: 'saft', catLabel: 'SAF-T · Vibe Coding', pick: true,
+  { date: '2026-09-05', day: '05', month: 'SEPTEMBRIE', cat: 'saft', catLabel: 'SAF-T · Vibe Coding', pick: true, seq: 33,
     title: 'Nu cere drumul cel mai scurt',
     excerpt: 'Prima aplicație construită aici a mers pe drumul cel mai scurt către destinația pe care i-am dat-o: a făcut exact ce am cerut, ceea ce nu e același lucru cu a face ce aveam nevoie. Cele cinci lipsuri au apărut abia în versiunea a doua, iar niciuna nu era o limită tehnică. Înainte de prima linie de cod a aplicației de verificare D406, facem inventarul celor cinci unelte publicate deja aici, fără să știm că ajung într-un singur proiect: glosarul de 30 de termeni, cele 7+7 elemente ale unei cereri bine formulate, lecțiile celor două tool-uri, ritmul din AI Journal și materia primă publicată de ANAF. Plus principiul care le pune pe toate la treabă: nu cere aplicația, cere planul.',
     read: '12 min', tags: ['#SAF-T', '#D406', '#vibe-coding', '#plan-mode', '#prompt', '#Buzzword'], href: '2026-09-05-Nu-cere-drumul-cel-mai-scurt.html' },
 
-  { date: '2026-09-05', day: '05', month: 'SEPTEMBRIE', cat: 'saft', catLabel: 'SAF-T · Spațiul de lucru',
+  { date: '2026-09-05', day: '05', month: 'SEPTEMBRIE', cat: 'saft', catLabel: 'SAF-T · Spațiul de lucru', seq: 34,
     title: 'Proiectul care ține minte',
     excerpt: 'În săptămâna a șaptea trebuie să știi exact de ce ai decis, în săptămâna a doua, ca aplicația să citească fișierul într-un anumit fel. Într-o fereastră obișnuită de chat, informația aceea nu există. Ce face de fapt un proiect dedicat, de ce blocajul planului gratuit nu e scrierea de cod, care e diferența dintre fișierul de reguli pe care îl scrii tu și memoria pe care asistentul și-o ține singur, cum arată folderul de lucru și ce verifici în Company Portal înainte să plătești un abonament. La final, un checklist de doisprezece rânduri: prima dată în serie când ai efectiv ce face, nu doar ce citi.',
     read: '12 min', tags: ['#SAF-T', '#D406', '#vibe-coding', '#project', '#Cowork', '#spatiu-de-lucru'], href: '2026-09-05-Proiectul-care-tine-minte.html' },
@@ -615,7 +620,14 @@ function filtered() {
     const q = state.q.toLowerCase();
     arr = arr.filter(a => (a.title + ' ' + a.excerpt + ' ' + a.tags.join(' ')).toLowerCase().includes(q));
   }
-  arr.sort((a, b) => state.sort === 'new' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date));
+  /* La aceeași dată decide `seq` (numărul articolului din serie), dacă îl au
+     ambele: la „cele mai noi” numărul mare urcă, la „cele mai vechi” coboară.
+     Fără `seq`, sortarea stabilă păstrează ordinea din tablou (grupul AI Journal). */
+  arr.sort((a, b) => {
+    const d = state.sort === 'new' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date);
+    if (d || a.seq == null || b.seq == null) return d;
+    return state.sort === 'new' ? b.seq - a.seq : a.seq - b.seq;
+  });
   return arr;
 }
 

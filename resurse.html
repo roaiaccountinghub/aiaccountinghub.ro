@@ -327,8 +327,122 @@
           "item": {
             "@id": "https://aiaccountinghub.ro/resurse.html#prd-modul-1"
           }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector-folder"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector-fisier"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#fabrica-d406"
+          }
         }
       ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector-folder",
+      "name": "SAF-T Inspector 0.1.0, varianta folder",
+      "description": "Citește declarația D406, de la câteva zeci de MB până la câțiva GB, o verifică înainte de orice prelucrare și o transformă în registre Excel, plus raport de rulare în Word și PDF. CSV și Parquet la cerere, fără recitirea XML-ului. Totul local, fără internet. Varianta folder pornește repede și e potrivită pentru folosire zilnică. Modulul 1: implementat și verificat pe date sintetice, calibrarea o faceți pe o lună proprie deja depusă.",
+      "url": "https://aiaccountinghub.ro/resurse.html#rail-run",
+      "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-folder.zip",
+      "encodingFormat": "application/zip",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows",
+      "softwareVersion": "0.1.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RON"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Apeși Verifică, și D406 devine Excel",
+        "url": "https://aiaccountinghub.ro/2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector-fisier",
+      "name": "SAF-T Inspector 0.1.0, un singur fișier",
+      "description": "Aceeași aplicație, împachetată într-un singur .exe: ușor de mutat sau de trimis între calculatoare, fără nimic de despachetat. Pornește ceva mai încet decât varianta folder, fiindcă se despachetează la fiecare pornire, și poate fi oprită mai des de antivirus.",
+      "url": "https://aiaccountinghub.ro/resurse.html#rail-run",
+      "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-file.zip",
+      "encodingFormat": "application/zip",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows",
+      "softwareVersion": "0.1.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RON"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Apeși Verifică, și D406 devine Excel",
+        "url": "https://aiaccountinghub.ro/2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://aiaccountinghub.ro/resurse.html#fabrica-d406",
+      "name": "Fabrica de fișiere sintetice D406",
+      "description": "Generează declarații SAF-T D406 cu valori inventate, construite după schema oficială: mică, medie sau mare, de la aproximativ 200 MB până la 3-5 GB, cu linii și câmpuri opționale la alegere, într-un fișier sau în segmente. Pentru cine vrea să-și testeze sau să-și construiască propria aplicație fără să atingă date reale.",
+      "url": "https://aiaccountinghub.ro/resurse.html#rail-run",
+      "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/FabricaD406.zip",
+      "encodingFormat": "application/zip",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows",
+      "softwareVersion": "1.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RON"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Apeși Verifică, și D406 devine Excel",
+        "url": "https://aiaccountinghub.ro/2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
     },
     {
       "@type": "DigitalDocument",
@@ -777,6 +891,36 @@ const RESOURCES = [
     size: 'XLSM · 480 KB', cta: 'În curând' },
 
   /* ===== DE RULAT ===== */
+  { type: 'tool', slug: 'saft-inspector-folder', kind: 'Aplicație · Windows', title: 'SAF-T Inspector 0.1.0, varianta folder',
+    desc: 'Citește declarația D406, de la câteva zeci de MB până la câțiva GB, o verifică înainte de orice prelucrare și o transformă în registre Excel, plus raport de rulare în Word și PDF. CSV și Parquet la cerere, fără recitirea XML-ului. Totul local, fără internet. Varianta folder pornește repede și e potrivită pentru folosire zilnică. Modulul 1: implementat și verificat pe date sintetice, calibrarea o faceți pe o lună proprie deja depusă.',
+    size: 'ZIP · 54,2 MB · Windows', cta: 'Descarcă',
+    track: 'resursa:saft-inspector-folder',
+    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-folder.zip',
+    articles: {
+      label: 'Articolul din care vine',
+      items: [
+        { href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', title: 'Apeși Verifică, și D406 devine Excel' },
+      ] } },
+  { type: 'tool', slug: 'saft-inspector-fisier', kind: 'Aplicație · Windows', title: 'SAF-T Inspector 0.1.0, un singur fișier',
+    desc: 'Aceeași aplicație, împachetată într-un singur .exe: ușor de mutat sau de trimis între calculatoare, fără nimic de despachetat. Pornește ceva mai încet decât varianta folder, fiindcă se despachetează la fiecare pornire, și poate fi oprită mai des de antivirus.',
+    size: 'ZIP · 39,6 MB · Windows', cta: 'Descarcă',
+    track: 'resursa:saft-inspector-fisier',
+    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-file.zip',
+    articles: {
+      label: 'Articolul din care vine',
+      items: [
+        { href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', title: 'Apeși Verifică, și D406 devine Excel' },
+      ] } },
+  { type: 'tool', slug: 'fabrica-d406', kind: 'Tool · Windows', title: 'Fabrica de fișiere sintetice D406',
+    desc: 'Generează declarații SAF-T D406 cu valori inventate, construite după schema oficială: mică, medie sau mare, de la aproximativ 200 MB până la 3-5 GB, cu linii și câmpuri opționale la alegere, într-un fișier sau în segmente. Pentru cine vrea să-și testeze sau să-și construiască propria aplicație fără să atingă date reale.',
+    size: 'ZIP · 12,8 MB · Windows', cta: 'Descarcă',
+    track: 'resursa:fabrica-d406',
+    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/FabricaD406.zip',
+    articles: {
+      label: 'Articolul din care vine',
+      items: [
+        { href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', title: 'Apeși Verifică, și D406 devine Excel' },
+      ] } },
   { type: 'tool', slug: 'jurnalul-ai', kind: 'Aplicație · HTML', title: 'Jurnalul AI — 30 de zile de adaptare',
     desc: 'Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe zi lucrătoare, 10–15 minute, timp de 30 de zile, plus șase activități practice săptămânale. Făcut pentru PC sau laptop, pe ecran mare. Dacă lipsești câteva zile, te întreabă singur cum reiei. Fără cont, fără email, fără internet: totul se salvează local, cu export și import în fișier .md.',
     size: 'ZIP · 85 KB · rulează în browser', cta: 'Descarcă jurnalul',
@@ -802,10 +946,7 @@ const RESOURCES = [
       ] } },
   { type: 'tool', kind: 'Tool · Web', title: 'Extractor BF travel PDF, imagini → Excel',
     desc: 'Drag-and-drop pentru BF scanate PDF, imagini. Extrage furnizor, CIF, total, TVA și le exportă într-un Excel gata pentru import.',
-    size: 'Browser · Fără upload server', cta: 'În curând' },
-  { type: 'tool', kind: 'Tool · API', title: 'Verificare SAF-T',
-    desc: 'Completează template-uri pornind de la fișierul XML — validare instantanee și transpunere XML în Excel conform SAF-T.',
-    size: 'Browser · Verificare XML', cta: 'În curând' }
+    size: 'Browser · Fără upload server', cta: 'În curând' }
 ];
 
 /* Ordinea rail-urilor pe pagină; `track` e containerul în care se injectează cardurile. */

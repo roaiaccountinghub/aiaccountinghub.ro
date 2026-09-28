@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Apeși Verifică, și D406 devine Excel — AI Accounting Hub</title>
+<meta name="description" content="Modulul 1 al aplicației SAF-T Inspector e gata. Citește declarația D406, de la câteva zeci de MB până la câțiva GB și o transformă în registre Excel, CSV și Parquet, totul local. Video cu o rulare completă, fiecare ecran explicat și cele trei pachete de descărcat.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Apeși Verifică, și D406 devine Excel — AI Accounting Hub">
+<meta property="og:description" content="Modulul 1 al aplicației SAF-T Inspector e gata. Citește declarația D406, de la câteva zeci de MB până la câțiva GB și o transformă în registre Excel, CSV și Parquet, totul local. Video cu o rulare completă, fiecare ecran explicat și cele trei pachete de descărcat.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Apeși Verifică, și D406 devine Excel — AI Accounting Hub">
+<meta name="twitter:description" content="Modulul 1 al aplicației SAF-T Inspector e gata. Citește declarația D406, de la câteva zeci de MB până la câțiva GB și o transformă în registre Excel, CSV și Parquet, totul local. Video cu o rulare completă, fiecare ecran explicat și cele trei pachete de descărcat.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Coverul articolului: ecranul de start al aplicației în loc de imaginea comună.
+   Banda are înălțime fixă, deci decupăm de jos (object-position: top), ca să
+   rămână numele aplicației și subtitlul. Același tipar ca la AI Journal. */
+.article-cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+/* Scrim mai puternic decât cel comun: peste o interfață luminoasă,
+   gradientul din article.css nu ține subtitrarea lizibilă. */
+.article-cover::after { background: linear-gradient(180deg, transparent 40%, color-mix(in oklab, var(--bg-0) 55%, transparent) 72%, color-mix(in oklab, var(--bg-0) 94%, transparent) 100%); }
+
+/* Subtitlurile de secțiune. h2 poartă '§', h3 primește '//', același vocabular
+   cu etichetele mono din site. */
+.prose h3 { margin: 44px 0 14px; }
+.prose h3::before { content: '//'; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; color: var(--accent); font-weight: 400; margin-right: 10px; opacity: 0.75; }
+/* Titlul din caseta de descărcare: caseta are deja eticheta ei mono deasupra. */
+.prose h3.dl-title::before { content: none; }
+
+/* Cod inline */
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: color-mix(in oklab, var(--fg) 8%, transparent); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; color: var(--fg); white-space: nowrap; }
+
+/* Capturile și clipul din aplicație: același tipar ca în AI Journal */
+.shot { margin: 32px 0; }
+.shot img, .shot video { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-1); }
+.shot figcaption { margin-top: 12px; font-size: 13.5px; line-height: 1.6; color: var(--fg-dim); border-left: 2px solid color-mix(in oklab, var(--accent) 45%, transparent); padding-left: 14px; }
+.shot figcaption b { color: var(--fg-muted); font-weight: 600; }
+/* pereche de capturi, una lângă alta, ca o comparație */
+.shot.pair { display: grid; gap: 10px; }
+.shot.pair figcaption { grid-column: 1 / -1; }
+@media (min-width: 820px) { .shot.pair { grid-template-columns: 1fr 1fr; } }
+.shot.narrow img { max-width: 720px; margin-inline: auto; }
+
+/* Tabelele */
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+
+/* Linkuri în proză — styles.css are a { color: inherit } */
+.prose p > a, .prose li > a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); }
+.prose p > a:hover, .prose li > a:hover { border-bottom-color: var(--accent); }
+
+/* Caseta de descărcare cu trei pachete */
+.dl-box { margin: 40px 0; padding: 28px; border: 1px solid var(--border-strong); border-radius: 16px; background: radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%), var(--bg-1); }
+.dl-box .dl-k { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 10px; text-align: center; }
+.dl-box h3.dl-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 8px; text-align: center; }
+.dl-box > p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; margin: 0 auto 22px; max-width: 560px; text-align: center; }
+.dl-list { display: grid; gap: 12px; }
+.dl-item { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-0); }
+.dl-item-txt { flex: 1; min-width: 0; }
+.dl-item-txt strong { display: block; font-size: 15px; color: var(--fg); margin-bottom: 3px; }
+.dl-item-txt span { font-size: 13px; color: var(--fg-dim); line-height: 1.5; }
+.dl-item .btn { flex-shrink: 0; color: #07121a; border-bottom: none; text-decoration: none; white-space: nowrap; }
+.dl-note { margin: 18px 0 0; font-size: 13px; color: var(--fg-dim); line-height: 1.6; text-align: center; }
+@media (max-width: 560px) {
+  .dl-box { padding: 22px 16px; }
+  .dl-item { flex-direction: column; align-items: stretch; }
+  .dl-item .btn { justify-content: center; }
+}
+
+/* ===== Banda de serie =====================================================
+   Eticheta de sus e chiar rezumatul casetei pliate, deci o singură componentă,
+   nu două. Lista arată doar părțile dinainte: nu promitem un total, fiindcă
+   s-ar schimba la fiecare articol nou din serie, iar articolele deja publicate
+   nu se mai ating niciodată. Tiparul de <details> e cel de la .toc-mobile,
+   fundalul e cel al .callout, componenta cu care site-ul spune „uită-te aici”. */
+.serie { margin: 0 0 34px; border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 14px; background: radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 60%), var(--bg-1); box-shadow: 0 10px 30px -18px color-mix(in oklab, var(--accent) 70%, transparent); }
+.serie summary, .serie .serie-rand { display: flex; align-items: center; gap: 14px; padding: 16px; list-style: none; font-family: 'JetBrains Mono', monospace; }
+.serie summary { cursor: pointer; }
+.serie summary::-webkit-details-marker { display: none; }
+.serie-ic { flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: color-mix(in oklab, var(--accent) 15%, transparent); color: var(--accent); }
+.serie-ic svg { width: 16px; height: 16px; }
+.serie-cap { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.serie-nume { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.serie-poz { font-size: 13px; letter-spacing: 0.02em; color: var(--fg); }
+.serie-hint { display: inline-flex; align-items: center; gap: 9px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); white-space: nowrap; transition: color 0.2s; }
+.serie summary:hover .serie-hint { color: var(--accent); }
+.serie-hint::after { content: ''; width: 6px; height: 6px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg); transition: transform 0.25s ease; margin-top: -3px; }
+.serie[open] .serie-hint::after { transform: rotate(-135deg); margin-top: 2px; }
+.serie-lista { margin: 0; padding: 0 16px 14px 62px; list-style: none; counter-reset: sp; }
+.serie-lista li { counter-increment: sp; display: flex; gap: 13px; padding: 11px 0; border-top: 1px solid color-mix(in oklab, var(--accent) 15%, transparent); }
+.serie-lista li::before { content: counter(sp); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); min-width: 13px; padding-top: 3px; }
+.serie-lista a { display: block; font-size: 15px; line-height: 1.4; color: var(--fg); }
+.serie-lista a:hover { color: var(--accent); }
+.serie-data { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.05em; color: var(--fg-dim); margin-top: 4px; }
+@media (max-width: 560px) {
+  .serie summary, .serie .serie-rand { padding: 14px; gap: 12px; }
+  .serie-hint span { display: none; }
+  .serie-lista { padding: 0 14px 12px; }
+  .serie-lista a { font-size: 14px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Apeși Verifică, și D406 devine Excel — AI Accounting Hub",
+  "description": "Modulul 1 al aplicației SAF-T Inspector e gata. Citește declarația D406, de la câteva zeci de MB până la câțiva GB și o transformă în registre Excel, CSV și Parquet, totul local. Video cu o rulare completă, fiecare ecran explicat și cele trei pachete de descărcat.",
+  "image": "https://aiaccountinghub.ro/assets/saft/saft-inspector-start-1760.webp",
+  "datePublished": "2026-09-28",
+  "dateModified": "2026-09-28",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce face modulul 1 din SAF-T Inspector?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Citește integral declarația SAF-T D406, inclusiv pe cea depusă în mai multe fișiere, verifică înainte de prelucrare spațiul de nume, secvența de segmente, tipul declarației și spațiul pe disc, apoi transformă secțiunile bifate în registre Excel, cu un raport de rulare în Word și PDF. CSV și Parquet se scriu la cerere, din baza de lucru, fără recitirea fișierului XML. Totul rulează local, fără internet. Testele de consistență ANAF nu fac parte din modulul 1."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce este formatul Excel Binary Workbook (.xlsb) și când merită folosit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Este formatul binar al Excel: aceleași date și aceleași foi ca într-un .xlsx, salvate compact. Microsoft confirmă că fișierele .xlsb sunt mai mici, fără să dea un procent. În rulările făcute pe registrele mari rezultate dintr-o declarație D406, au ocupat cu 50-70% mai puțin spațiu pe disc și s-au deschis mai repede. Rularea durează ceva mai mult, iar unele sisteme de e-mail sau politici de firmă blochează fișierele .xlsb, deci formatul se alege în funcție de unde ajung fișierele."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "De ce se testează aplicația pe fișiere D406 sintetice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pentru că un fișier SAF-T conține, practic, toată contabilitatea companiei: planul de conturi, clienții și furnizorii, notele contabile și facturile. Un astfel de fișier nu se pune într-o conversație cu un asistent AI, nici ca exemplu de test. Fabrica de fișiere D406 generează declarații cu valori inventate, construite după schema oficială, de la aproximativ 200 MB până la câțiva GB."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Care e diferența dintre varianta într-un singur fișier și varianta folder?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Varianta într-un singur fișier e un .exe de aproximativ 40 MB, ușor de mutat și de trimis, dar care se despachetează la fiecare pornire, deci pornește mai încet și e mai des oprit de antivirus. Varianta folder conține executabilul și componentele lui la vedere, pornește mai repede și e potrivită pentru folosire zilnică sau pentru stații cu politici stricte."
+      }
+    }
+  ]
+}</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Apeși Verifică, și D406 devine Excel</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Vibe coding</span>
+      <span>28 septembrie 2026</span>
+      <span class="sep">·</span>
+      <span>15 min citire</span>
+    </div>
+
+    <h1>Apeși Verifică, <span class="accent">și D406 devine Excel</span></h1>
+    <p class="article-lede">
+      Modulul 1 din SAF-T Inspector e gata. Aplicația citește declarația D406, de la câteva zeci de MB până la câțiva GB și o transformă în registre Excel, CSV și Parquet, totul pe calculatorul vostru. Mai jos găsiți o rulare completă înregistrată, fiecare ecran explicat, pe scurt cum a fost construită și cele trei pachete de descărcat.
+    </p>
+
+    <details class="serie">
+      <summary>
+        <span class="serie-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><span class="serie-cap"><span class="serie-nume">Seria SAF-T</span><span class="serie-poz">partea a opta</span></span>
+        <span class="serie-hint"><span>ce a fost înainte</span></span>
+      </summary>
+      <ol class="serie-lista">
+        <li><a href="2026-08-27-Aplicatii-ANAF-SAFT-ce-verifica-si-ce-nu.html">Două aplicații ANAF pentru SAF-T: pași corecți, dar timizi<span class="serie-data">27 august 2026 · 12 min</span></a></li>
+        <li><a href="2026-08-29-Cinci-ani-de-SAF-T-de-la-OCDE-la-D406.html">Cinci ani de SAF-T în România: de la standardul OCDE la declarația D406<span class="serie-data">29 august 2026 · 17 min</span></a></li>
+        <li><a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html">Cum verifici fișierul SAF-T D406 înainte de depunere<span class="serie-data">30 august 2026 · 22 min</span></a></li>
+        <li><a href="2026-09-05-Nu-cere-drumul-cel-mai-scurt.html">Nu cere drumul cel mai scurt<span class="serie-data">5 septembrie 2026 · 12 min</span></a></li>
+        <li><a href="2026-09-05-Proiectul-care-tine-minte.html">Proiectul care ține minte<span class="serie-data">5 septembrie 2026 · 12 min</span></a></li>
+        <li><a href="2026-09-08-Conversatia-care-nu-a-produs-cod.html">Conversația care nu a produs cod<span class="serie-data">8 septembrie 2026 · 13 min</span></a></li>
+        <li><a href="2026-09-15-Ultimul-pas-inainte-de-cod.html">Ultimul pas înainte de cod<span class="serie-data">15 septembrie 2026 · 12 min</span></a></li>
+      </ol>
+    </details>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s1">O rulare completă, înregistrată</a>
+        <a href="#s2">Ecranul de start</a>
+        <a href="#s3">1 · Selecție și setări</a>
+        <a href="#s4">2 · Scanare și verificare</a>
+        <a href="#s5">3 · Procesare și salvare</a>
+        <a href="#s6">4 · Rezultate și export</a>
+        <a href="#s7">Raportul de rulare și registrul Excel</a>
+        <a href="#s8">Fabrica de fișiere D406</a>
+        <a href="#s9">Cum a fost construit SAF-T Inspector</a>
+        <a href="#s10">Un fișier sau un folder</a>
+        <a href="#s11">Descărcare</a>
+        <a href="#s12">Ce urmează</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">28.09.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <img class="article-cover-img"
+           src="assets/saft/saft-inspector-start-1760.webp"
+           srcset="assets/saft/saft-inspector-start-880.webp 880w, assets/saft/saft-inspector-start-1760.webp 1760w"
+           sizes="(max-width: 900px) 100vw, 924px"
+           width="1760" height="1039" decoding="async" fetchpriority="high"
+           alt="Ecranul de start al aplicației SAF-T Inspector, în tema deschisă, cu numele aplicației, subtitlul „Analiză, validare și reconciliere” și semnătura by AI Accounting Hub.">
+      <div class="article-cover-caption">// SAF-T Inspector 0.1.0 · ecranul de start · captură din aplicație</div>
+    </div>
+
+    <div class="prose">
+
+      <p>
+        <a href="2026-09-15-Ultimul-pas-inainte-de-cod.html">Articolul trecut</a> se încheia cu o aplicație care avea nume, formă și specificație, dar nicio linie de cod. Acum are și cod. Modulul 1 din SAF-T Inspector face un singur lucru deocamdată, dar îl face până la capăt: ia declarația D406 înainte să plece la ANAF și o întoarce în tabele pe care le puteți filtra, pivota și reconcilia.
+      </p>
+      <p>
+        Articolul e organizat ca un tur al aplicației. Întâi rularea completă, înregistrată. Apoi fiecare ecran pe rând, cu ce vedeți în el și de ce e acolo. La final, pe scurt, cum a fost construită, în ce forme o puteți descărca și ce garantează, respectiv ce nu garantează încă.
+      </p>
+
+      <h2 id="s1">O rulare completă, înregistrată</h2>
+      <p>
+        Filmul urmărește o singură rulare, de la alegerea fișierului până la registrul deschis în Excel. Fișierul XML de transformat are aproximativ 3 GB (2,89 GB, mai exact) și este sintetic, generat cu Fabrica de fișiere prezentată mai jos. Toate cifrele din imagini, inclusiv denumirea firmei și codul fiscal, sunt inventate.
+      </p>
+
+      <figure class="shot">
+        <video controls muted playsinline preload="metadata"
+               poster="assets/saft/saft-inspector-demo-poster.webp"
+               width="1600" height="948"
+               aria-label="Rulare completă în SAF-T Inspector: alegerea fișierului XML, scanarea și verificarea, procesarea, rezultatele, raportul PDF și registrul deschis în Excel">
+          <source src="assets/saft/saft-inspector-modul-1-demo.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          Două minute și jumătate, fără sonor. <b>Procesarea e accelerată de două ori</b> și scurtată, mențiunea apare pe ecran. În timp real, citirea și scrierea celor 2.923.366 de rânduri au durat aproximativ 11 minute, cu bifa pentru formatul Excel Binary Workbook activă.
+        </figcaption>
+      </figure>
+
+      <p>
+        Cifrele de timp sunt orientative. Durata depinde de mărimea fișierului, de câte secțiuni bifați, de formatul ales pentru registre și de stația pe care rulează. Un fișier de câteva sute de MB se termină în câteva minute, unul de mai mulți GB poate ajunge la 10 - 15 minute, după cum se vede.
+      </p>
+
+      <h2 id="s2">Ecranul de start</h2>
+      <p>
+        Captura din capul articolului este ecranul pe care îl vedeți la prima deschidere, înainte de orice fișier. E gândit pentru colegul care deschide aplicația fără manual: spune în patru pași ce urmează (alegi fișierele, scanezi și verifici, procesezi și salvezi, vezi rezultatele), ce se produce la final și cât durează, apoi vă lasă să trageți fișierele XML direct în zona marcată cu roșu.
+      </p>
+      <p>
+        Fereastra are patru panouri, numerotate în ordinea în care le folosiți. Panoul 1 stă în stânga, panoul 4 în dreapta, iar 2 și 3 sunt benzile orizontale din mijloc. Oricare se strânge sau se extinde, deci pe un monitor mic vedeți doar ce vă interesează în acel moment. Bara de jos arată tot timpul trei lucruri: starea rulării, schema folosită (<code>v249_2025</code>, schema oficială în vigoare) și mențiunea „Lucrează local, fără internet”.
+      </p>
+      <p>
+        Ultima mențiune e una de fond, nu de formă. Aplicația nu trimite nimic nicăieri. Un fișier SAF-T conține toată contabilitatea firmei, iar el nu pleacă de pe calculatorul pe care îl deschideți.
+      </p>
+
+      <h2 id="s3">1 · Selecție și setări</h2>
+
+      <figure class="shot">
+        <img src="assets/saft/saft-inspector-1-selectie-1760.webp"
+             srcset="assets/saft/saft-inspector-1-selectie-880.webp 880w, assets/saft/saft-inspector-1-selectie-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1042" loading="lazy" decoding="async"
+             alt="Panoul 1, Selecție și setări: fișierul ales, tipul declarației Lunară, Active sau Stocuri, folderul de rezultate, spațiul disponibil, cele două opțiuni și butonul Verifică.">
+        <figcaption>
+          <b>Panoul 1.</b> Fișierul ales, tipul declarației, folderul de rezultate și cele două opțiuni. Nimic nu pornește până nu apăsați <b>Verifică</b>.
+        </figcaption>
+      </figure>
+
+      <p>
+        Aici se pregătește rularea, în cinci mișcări:
+      </p>
+      <ul>
+        <li><strong>Adaugă fișiere XML.</strong> Unul sau mai multe. În cazul raportării modale, când declarația e transmisă în mai multe fișiere, aplicația le recunoaște singură, verifică dacă aparțin aceleiași declarații și le pune în ordine. Lângă fiecare fișier apare mărimea lui, iar după verificare și poziția în secvență, de exemplu „segment 1 din 1”.</li>
+        <li><strong>Tipul declarației: Lunară, Active sau Stocuri.</strong> Nu e o setare, e un control. Alegeți ce credeți că aveți în mână, iar aplicația compară cu tipul scris în antetul fișierului. Dacă nu se potrivesc, rularea nu pornește. Pare un detaliu, dar prinde exact greșeala tipică de la final de lună: fișierul corect, dar din alt folder.</li>
+        <li><strong>Folderul de rezultate.</strong> Aplicația arată imediat spațiul disponibil pe disc, fiindcă un fișier de 3 GB produce, între baza de lucru și registre, mai mult de un GB de date.</li>
+        <li><strong>Păstrează baza de lucru după închidere.</strong> Implicit, baza de lucru intermediară se șterge când închideți aplicația. Bifați doar dacă vreți să reveniți asupra aceleiași declarații fără să o mai citiți o dată.</li>
+        <li><strong>Salvează registrele ca Excel Binary Workbook (.xlsb).</strong> Opțiunea care merită o explicație separată.</li>
+      </ul>
+
+      <h3>Formatul .xlsb, pe scurt</h3>
+      <p>
+        Excel Binary Workbook e formatul binar al Excel. Conține aceleași foi și aceleași date ca un .xlsx, dar le salvează compact. Microsoft confirmă că formatul binar produce fișiere mai mici, dar nu dă un procent, fiindcă diferența depinde de conținut. În rulările noastre, pe registrele mari dintr-o declarație D406, <strong>fișierele .xlsb au ocupat cu 50-70% mai puțin spațiu pe disc</strong> și s-au deschis mai repede.
+      </p>
+      <p>
+        Costul e dublu. Rularea durează ceva mai mult, fiindcă registrele se scriu întâi ca .xlsx, apoi Excel le salvează în format binar și le șterge pe cele vechi, deci pe stație trebuie să existe Excel. Apoi, unele sisteme de e-mail și unele politici de firmă blochează fișierele .xlsb. Dacă registrele rămân la voi, bifa merită. Dacă pleacă pe e-mail, verificați întâi că ajung.
+      </p>
+
+      <h2 id="s4">2 · Scanare și verificare</h2>
+
+      <figure class="shot">
+        <img src="assets/saft/saft-inspector-2-scanare-1760.webp"
+             srcset="assets/saft/saft-inspector-2-scanare-880.webp 880w, assets/saft/saft-inspector-2-scanare-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1043" loading="lazy" decoding="async"
+             alt="Panoul 2, Scanare și verificare: în stânga datele firmei, verificările trecute și estimările de timp, în dreapta structura declarației cu numărul de linii pe fiecare secțiune și sub-secțiune.">
+        <figcaption>
+          <b>Panoul 2.</b> În stânga, ce a găsit aplicația și verificările dinainte de pornire. În dreapta, structura declarației, cu liniile numărate pe fiecare sub-secțiune. 2,89 GB scanați în 21,6 secunde.
+        </figcaption>
+      </figure>
+
+      <p>
+        Scanarea e o trecere rapidă prin fișier, făcută înainte de orice prelucrare. Scopul ei e simplu: să aflați ce aveți în față înainte să așteptați zece minute.
+      </p>
+      <p>
+        <strong>În stânga</strong>, trei blocuri. <em>Descoperiri</em>: societatea, codul fiscal, perioada, tipul declarației, versiunea fișierului, numărul de segmente (fișierele unei raportări modale) și programul care a generat fișierul. Ultimul rând e mai util decât pare: când ceva arată ciudat în date, primul lucru de verificat e programul de contabilitate care le-a exportat. <em>Verificări înainte de pornire</em>: spațiul de nume al fișierului, secvența de segmente, potrivirea tipului declarației și spațiul pe disc. Toate patru trebuie să fie bifate cu verde. <em>Estimat pentru ce ai bifat</em>: cât va dura citirea, cât va dura scrierea și cât spațiu e nevoie. Estimările sunt necalibrate până la prima rulare completă pe stația respectivă, iar aplicația spune asta explicit, sub cifre.
+      </p>
+      <p>
+        <strong>În dreapta</strong>, structura declarației, ca un arbore: Header, MasterFiles cu cele douăsprezece sub-secțiuni, GeneralLedgerEntries și SourceDocuments cu cele cinci. Lângă fiecare, numărul de linii găsite. Legenda de sub arbore face distincția care contează: o sub-secțiune goală lipsește din fișier, una cu 0 e prezentă, dar fără înregistrări, iar una hașurată, cum e Taxonomies, nu se raportează în România. Tot aici bifați ce vreți exportat. Citirea nu depinde de bife, XML-ul se citește oricum întreg, o singură dată. Bifele decid doar ce se scrie în registre.
+      </p>
+
+      <h2 id="s5">3 · Procesare și salvare</h2>
+
+      <figure class="shot pair">
+        <img src="assets/saft/saft-inspector-3-procesare-1760.webp"
+             srcset="assets/saft/saft-inspector-3-procesare-880.webp 880w, assets/saft/saft-inspector-3-procesare-1760.webp 1760w"
+             sizes="(max-width: 820px) 92vw, 430px"
+             width="1760" height="1044" loading="lazy" decoding="async"
+             alt="Panoul 3, Procesare și salvare, în tema deschisă, la 70%: rândurile scrise, debitul pe ultimele 60 de secunde, timpul rămas, memoria și procesorul folosite.">
+        <img src="assets/saft/saft-inspector-3-procesare-dark-1760.webp"
+             srcset="assets/saft/saft-inspector-3-procesare-dark-880.webp 880w, assets/saft/saft-inspector-3-procesare-dark-1760.webp 1760w"
+             sizes="(max-width: 820px) 92vw, 430px"
+             width="1760" height="1042" loading="lazy" decoding="async"
+             alt="Același panou de procesare în tema închisă, la 83%, cu registrul separat pentru GeneralLedgerEntries semnalat în lista „Necesită atenție”.">
+        <figcaption>
+          <b>Panoul 3, în ambele teme.</b> Comutatorul soare și lună din colțul din dreapta sus schimbă tema oricând, inclusiv în timpul unei rulări. Celelalte capturi din articol sunt în tema deschisă.
+        </figcaption>
+      </figure>
+
+      <p>
+        Panoul de procesare răspunde la o singură întrebare, cea pe care o pune oricine se întoarce la birou după o pauză: <em>mai lucrează sau a terminat?</em> Procentul mare se vede de la distanță, iar sub el stă faza curentă, citire sau scriere, cu bara ei proprie.
+      </p>
+      <p>
+        În dreapta, rândurile scrise din totalul celor citite, debitul pe ultimele 60 de secunde, timpul rămas cu ora estimată de final, timpul scurs și două indicatoare: memoria și procesorul. Indicatorul de memorie e cel mai grăitor. Pe un fișier de aproape 3 GB, aplicația a folosit în jur de <strong>100 MB de RAM</strong>, dintr-un total de 15,49 GB. Fișierul nu se încarcă în memorie, se citește în flux, bucată cu bucată, și se scrie într-o bază de lucru pe disc. De aceea a putut fi gândită de la început pentru o stație de birou obișnuită, cu 8 GB de RAM.
+      </p>
+      <p>
+        În stânga, lista secțiunilor cu starea fiecăreia (în așteptare, citită, se scrie, scrisă) și caseta <em>Necesită atenție</em>, care se completează pe parcurs, nu abia la final. Butonul <strong>Anulează</strong> oprește rularea la finalul fișierului curent și șterge ce era început, deci nu rămân registre scrise pe jumătate, pe care cineva le-ar putea lua drept complete.
+      </p>
+
+      <h2 id="s6">4 · Rezultate și export</h2>
+
+      <figure class="shot">
+        <img src="assets/saft/saft-inspector-4-rezultate-1760.webp"
+             srcset="assets/saft/saft-inspector-4-rezultate-880.webp 880w, assets/saft/saft-inspector-4-rezultate-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1039" loading="lazy" decoding="async"
+             alt="Panoul 4, Rezultate și export: folderul cu cele 12 fișiere scrise, nota despre registrul separat în cinci părți și tabelul cu documente, rânduri, total declarat, total calculat și diferență pe fiecare secțiune.">
+        <figcaption>
+          <b>Panoul 4.</b> Unde s-au scris fișierele, ce a cerut atenție și conținutul declarației, cu totalurile declarate față de cele calculate.
+        </figcaption>
+      </figure>
+
+      <p>
+        Sus, banda roșie spune unde s-au scris fișierele: un folder nou, numit după codul fiscal, perioadă, tipul declarației și momentul rulării, ca două rulări să nu se suprapună niciodată. În exemplu, 12 fișiere, 356 MB.
+      </p>
+      <p>
+        Dedesubt, <em>Necesită atenție</em>. În exemplu apare o singură notă: GeneralLedgerEntries are 2.247.967 de rânduri, mai mult decât încape pe o foaie Excel (1.048.576 de rânduri), așa că a primit registrul lui, împărțit în cinci părți, lângă registrul principal. Registrul principal rămâne ușor de deschis, iar secțiunea mare nu se pierde și nici nu se trunchiază în tăcere.
+      </p>
+      <p>
+        Partea cea mai utilă e tabelul <em>Conținutul declarației</em>. Pe fiecare secțiune: câte documente, câte rânduri și unde se află în Excel. Pentru secțiunile care au totaluri de control în fișier (NumberOfEntries, TotalDebit, TotalCredit), aplicația pune alături totalul declarat, totalul recalculat din linii și diferența. În exemplu, toate diferențele sunt zero, cum e normal pentru un fișier sintetic. Pe un fișier real, aici se vede primul semnal că exportul din programul de contabilitate nu e coerent cu el însuși.
+      </p>
+      <p>
+        Butonul <strong>Previzualizează</strong> arată direct în aplicație, fără să porniți Excel, cel mult primele 10 rânduri ale oricărei secțiuni. E gândit doar ca să urmăriți structura: ce coloane are secțiunea și cum arată datele. Fișierul întreg se găsește în folderul de rezultate. Jos, <strong>Deschide folderul</strong> și <strong>Deschide raportul</strong>. În dreapta, <strong>Scrie CSV</strong> și <strong>Scrie Parquet</strong>. Cele două formate se cer după rulare și se scriu din baza de lucru, fără să recitiți XML-ul. CSV e pentru orice alt program, Parquet pentru arhivă sau pentru Power BI.
+      </p>
+
+      <h2 id="s7">Raportul de rulare și registrul Excel</h2>
+      <p>
+        Fiecare rulare lasă în folder, pe lângă registre, un raport. Se scrie în Word și, dacă Word e instalat pe stație, și în PDF. Are opt pagini, de la rezumatul verificărilor până la conținutul detaliat al declarației. E documentul pe care îl atașați la dosarul lunii, ca dovadă că fișierul a fost deschis și citit înainte de depunere.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/saft/saft-inspector-raport-pagina-5-1380.webp"
+             srcset="assets/saft/saft-inspector-raport-pagina-5-880.webp 880w, assets/saft/saft-inspector-raport-pagina-5-1380.webp 1380w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1380" height="960" loading="lazy" decoding="async"
+             alt="Pagina 5 din raportul de rulare, Conținutul declarației: pentru fiecare secțiune prezența, numărul de documente, linii, coloane, câmpuri completate, ponderea în totalul liniilor și gradul de completare.">
+        <figcaption>
+          <b>Raportul de rulare, pagina 5.</b> Pe fiecare secțiune, cât cântărește în totalul liniilor și cât de completă e.
+        </figcaption>
+      </figure>
+
+      <p>
+        Pagina 5 e cea la care merită să vă opriți. Pe lângă rânduri și documente, arată două măsuri care nu apar nicăieri altundeva: <strong>ponderea în linii</strong>, adică cât din declarație înseamnă fiecare secțiune, și <strong>gradul de completare</strong>, adică ce parte din câmpurile posibile au fost efectiv completate. În exemplu, GeneralLedgerEntries înseamnă 76,9% din linii și are un grad de completare de 90%. Un grad de completare neobișnuit de mic pe o secțiune e, de regulă, un câmp pe care programul de contabilitate nu îl exportă.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/saft/saft-inspector-registru-coperta-1760.webp"
+             srcset="assets/saft/saft-inspector-registru-coperta-880.webp 880w, assets/saft/saft-inspector-registru-coperta-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="837" loading="lazy" decoding="async"
+             alt="Foaia de copertă a registrului Excel: identificarea declarației, starea verificărilor și lista secțiunilor din registru, cu legături către fiecare foaie.">
+        <figcaption>
+          <b>Registrul Excel, foaia de copertă.</b> Cine, ce perioadă, ce verificări au trecut și unde găsiți fiecare secțiune.
+        </figcaption>
+      </figure>
+
+      <p>
+        Registrul Excel începe cu o foaie de copertă. Sus, identificarea declarației și versiunea aplicației care l-a produs. La mijloc, starea verificărilor. Un rând de aici spune deschis ce nu face încă aplicația: <em>Teste de consistență ANAF: neimplementate încă în modulul 1</em>. Jos, lista secțiunilor, cu numărul de linii, de coloane și de câmpuri completate, plus o legătură care deschide direct foaia fiecărei secțiuni. Pentru secțiunile mutate în registru separat, legătura trimite la fișierele respective.
+      </p>
+      <p>
+        Datele din foi sunt aplatizate din XML: fiecare structură repetată din fișier devine rânduri și coloane, cu numele câmpurilor din schema oficială. Se filtrează, se pivotează și se leagă cu balanța exact ca orice alt tabel Excel.
+      </p>
+
+      <h2 id="s8">Fabrica de fișiere D406</h2>
+      <p>
+        Aplicația a fost construită și verificată <strong>fără niciun fișier XML real</strong>. Regula a fost stabilită de la începutul seriei: în discuțiile cu un asistent AI nu intră date reale de tranzacții. D406 e cazul extrem, fiindcă un fișier SAF-T conține, practic, toată contabilitatea companiei: planul de conturi, clienții și furnizorii, toate notele contabile, toate facturile. Dacă nu ați pune așa ceva într-un instrument public, nu îl puneți nici ca exemplu de test.
+      </p>
+      <p>
+        Fără fișiere reale, era nevoie de altceva pe care să construim și să testăm. Așa a apărut un instrument separat, <strong>Fabrica de fișiere sintetice D406</strong>. Generează declarații cu valori inventate, dar construite după schema oficială și după regulile de completare din ghidul ANAF. Nu sunt fișiere de umplutură cu o structură aproximativă. Aplicația trebuie să le trateze exact ca pe unele reale.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/saft/fabrica-d406-1760.webp"
+             srcset="assets/saft/fabrica-d406-880.webp 880w, assets/saft/fabrica-d406-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="732" loading="lazy" decoding="async"
+             alt="Fereastra Fabricii de fișiere sintetice D406: mărimea declarației, numărul de linii pe secțiuni, câmpurile opționale, raportarea modală pe segmente și setările de lună, sămânță și folder de ieșire.">
+        <figcaption>
+          <b>Fabrica de fișiere sintetice D406.</b> O singură fereastră, cinci blocuri de setări, un buton Generează. În captură, un fișier de aproximativ 2 GB în curs de scriere.
+        </figcaption>
+      </figure>
+
+      <p>
+        Fereastra are cinci blocuri:
+      </p>
+      <ol>
+        <li><strong>Mărimea declarației.</strong> Trei puncte de plecare: mică, aproximativ 200 MB; medie, aproximativ 700 MB; mare, aproximativ 2 GB.</li>
+        <li><strong>Numărul de linii, modificabil.</strong> Facturi de vânzare, facturi de achiziție, plăți și note contabile suplimentare din jurnalul de diverse, de exemplu salarii, 641 = 421. Notele din registrul jurnal ies din documente, fiecare factură și plată își aduce nota ei, iar cele suplimentare fac registrul să crească separat.</li>
+        <li><strong>Câmpuri opționale.</strong> Pe registrul jurnal și pe facturi: identificatori de sistem, tipul tranzacției, centrul de cost, documentul sursă, perioada livrării, motivul scutirii, adresa de livrare și altele. Fiecare bifă adaugă structura întreagă.</li>
+        <li><strong>Raportarea modală.</strong> Un singur fișier sau declarația împărțită în 2, 3 sau 5 segmente, cu antet identic în toate și fără ca o sub-secțiune să fie ruptă în două fișiere, după regula din ghidul D406.</li>
+        <li><strong>Setări.</strong> Luna, folderul de ieșire, numele fișierului și sămânța. Aceeași sămânță produce exact același fișier, deci un test se poate repeta identic oricând.</li>
+      </ol>
+      <p>
+        Cele trei mărimi sunt doar puncte de plecare. Cu mai multe înregistrări scrise de mână în blocul 2 și cu mai multe câmpuri opționale bifate, fișierul final trece de 2 GB și poate ajunge la 3-5 GB, cât aveți nevoie ca să vedeți cum se comportă o aplicație la limită. Fișierul din filmul de mai sus a ieșit exact așa, la 2,89 GB.
+      </p>
+      <p>
+        Fabrica se descarcă separat, mai jos. Merită luată și dacă nu folosiți SAF-T Inspector: e punctul de plecare pentru oricine vrea să-și construiască <strong>propria aplicație</strong> pe D406 fără să atingă date reale.
+      </p>
+
+      <h2 id="s9">Cum a fost construit SAF-T Inspector, pe scurt</h2>
+      <p>
+        Tot codul aplicației SAF-T Inspector a fost scris în conversații cu <a href="buzzword/claude-anthropic.html">Claude Opus 5.5</a>, în proiectul de lucru descris în <a href="2026-09-05-Proiectul-care-tine-minte.html">articolul despre spațiul de lucru</a>, pornind de la <a href="2026-09-15-Ultimul-pas-inainte-de-cod.html">PRD-ul tehnic</a>. Fiecare conversație de implementare a primit specificația, iar fiecare bucată de cod a fost verificată pe criteriile de acceptare scrise înainte, pe fișiere generate de Fabrică.
+      </p>
+      <p>
+        Limbajul este <a href="buzzword/python.html">Python</a>. Dintre limbajele folosite în practică, e cel mai apropiat de limbajul natural: un fragment de cod se citește aproape ca o frază, deci poți urmări ce face aplicația chiar dacă nu știi să programezi. E și limbajul pe care asistenții AI îl scriu cel mai sigur, fiindcă au văzut cel mai mult cod în el, și are deja biblioteci mature pentru tot ce cere D406: XML, Excel, baze de date. Bibliotecile au fost ținute la minimum, fiindcă fiecare dependență în plus se plătește la mărimea pachetului, la timpul de pornire și la riscul de a fi blocată de antivirus:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Componentă</th><th>La ce folosește</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>PySide6</strong></td><td>Fereastra aplicației: o aplicație desktop nativă, fără browser și fără server</td></tr>
+            <tr><td><strong>lxml</strong></td><td>Citirea fișierului XML în flux, bucată cu bucată, și lucrul cu schema oficială XSD</td></tr>
+            <tr><td><strong>SQLite</strong></td><td>Baza de lucru intermediară, pe disc, care ține milioane de rânduri fără să încarce memoria</td></tr>
+            <tr><td><strong>XlsxWriter</strong></td><td>Scrierea registrelor Excel, tot în flux, cu consum mic de memorie</td></tr>
+            <tr><td><strong>DuckDB</strong></td><td>Exportul în Parquet, direct din baza de lucru</td></tr>
+            <tr><td><strong>python-docx</strong></td><td>Raportul de rulare în Word</td></tr>
+            <tr><td><strong>pywin32</strong></td><td>Legătura cu Word și Excel, dacă sunt instalate: raportul în PDF și registrele în .xlsb</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Nicio componentă nu are nevoie de internet și nimic nu se instalează pe stație. Totul vine în pachet.
+      </p>
+
+      <h3>Nu totul a mers după plan</h3>
+      <p>
+        PRD-ul a fost punctul de plecare, nu un contract bătut în cuie. Pe măsură ce codul a început să ruleze pe fișiere reale ca mărime, câteva decizii s-au răsturnat. Patru merită spuse.
+      </p>
+      <ul>
+        <li><strong>Citirea XML-ului.</strong> Specificația prevedea biblioteca standard din Python, ElementTree, fără nicio dependență în plus. Un test pe un fișier mare a blocat însă totul, așa că citirea a trecut pe <strong>lxml</strong>, o bibliotecă construită pentru fișiere XML mari, care lucrează și direct cu schema oficială.</li>
+        <li><strong>Raportul de rulare.</strong> Specificația cerea un raport generat direct în PDF, cu o bibliotecă dedicată, tocmai ca să nu depindă de Word. Am renunțat la ea: raportul se scrie acum în Word, un format pe care orice contabil îl poate deschide și completa, iar PDF-ul se produce din Word, atunci când Word e instalat pe stație.</li>
+        <li><strong>Exportul.</strong> Specificația cerea ca fiecare rulare să producă obligatoriu toate cele trei formate: Excel, CSV și Parquet. După primele rulări ne-am dat seama că ieșeau prea multe fișiere, iar cele mai multe nu erau deschise niciodată. Acum registrele Excel se scriu la rulare, iar CSV și Parquet au butoanele lor, separate. Sunt utile pentru prelucrări ulterioare, în alte programe sau în Power BI, iar când ai nevoie de ele le generezi dintr-un click, din baza de lucru.</li>
+        <li><strong>Pornirea.</strong> Specificația avea un singur buton START și o fereastră în trei zone. Am ales să extindem pașii: întâi <strong>Verifică</strong>, apoi <strong>Procesare</strong>, în patru panouri. Motivul e că vrem să vedem cât mai mult din proces și să avem cât mai multe opțiuni înainte de prelucrare. De aici vine și structura declarației afișată ca arbore, exact în ordinea din ghidul ANAF, ca să rămânem tot timpul conectați la formatul și la structura declarației.</li>
+      </ul>
+      <p>
+        Mai e un lucru pe care specificația nu avea cum să-l rezolve dinainte: mare parte din partea vizuală și din mișcarea aplicației, adică ce vezi pe ecran, în ce ordine și cum reacționează fereastra, s-a putut ajusta abia după teste reale. Nu dintr-o singură cerere, ci prin multe iterații cu asistentul AI: rulezi, te uiți, spui ce nu merge, rulezi din nou.
+      </p>
+      <p>
+        Asta e, de fapt, partea cea mai utilă din tot procesul: specificația nu te scutește de surprize, dar îți spune exact ce anume s-a schimbat și de ce, în loc să descoperi abia la final că aplicația face altceva decât credeai.
+      </p>
+
+      <h2 id="s10">Un fișier sau un folder</h2>
+      <p>
+        Aplicația trebuia să circule între calculatoare fără instalări de limbaj sau de programe ajutătoare, iar mediile de lucru diferă. De aceea există în două forme, cu același conținut:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th></th><th>Un singur fișier</th><th>Folder</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Ce descărcați</strong></td><td>.zip de 39,6 MB, cu un singur .exe de 39,8 MB</td><td>.zip de 54,2 MB, care se dezarhivează în 141,7 MB</td></tr>
+            <tr><td><strong>Puncte forte</strong></td><td>Un singur fișier de mutat sau de trimis, nimic de despachetat, bun pentru „copiez și rulez”</td><td>Pornește repede; componentele sunt la vedere, deci o excludere în antivirus sau o verificare a conținutului e ușoară</td></tr>
+            <tr><td><strong>Puncte slabe</strong></td><td>Se despachetează la fiecare pornire în folderul temporar, deci pornește mai încet; e oprit mai des de antivirus și poate fi blocat pe stațiile cu politici stricte</td><td>Un folder întreg de mutat; cineva poate șterge din greșeală fișiere din el</td></tr>
+            <tr><td><strong>Când o alegeți</strong></td><td>Transfer rapid între calculatoare, demonstrații, folosire ocazională</td><td>Folosire zilnică, stații cu restricții</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        În varianta folder, aplicația se pornește din <code>SAF-T Inspector.exe</code>, aflat direct în folderul principal. Subfolderul <code>componente</code> nu se atinge.
+      </p>
+      <p>
+        Înainte de descărcare, un avertisment. Riscul ca aplicația să fie blocată de antivirus sau de politicile de securitate ale firmei este destul de mare, pentru că executabilele nu sunt semnate digital. Am analizat opțiunile de semnare, dar implică niște costuri care depășesc bugetul acestui proiect. Oricum, speranța noastră este ca fiecare cititor care depune declarația să-și fi construit deja propria aplicație, urmând pas cu pas ce am scris în articolele seriei.
+      </p>
+      <p>
+        Concret, la prima pornire Windows poate afișa ecranul albastru SmartScreen, „Windows a protejat PC-ul”. Nu e un semn că fișierul e infectat, ci doar că Windows nu îl cunoaște încă. Apăsați <strong>Mai multe informații</strong>, apoi <strong>Rulați oricum</strong>. Pe stațiile administrate de departamentul IT, butonul poate lipsi; atunci e nevoie de o excepție de la administrator, iar varianta folder se aprobă de obicei mai ușor.
+      </p>
+
+      <h2 id="s11">Descărcare</h2>
+      <p>
+        Ce garantează programul, pe scurt. Modulul 1 este <strong>implementat</strong>, adică face ce spune specificația, și <strong>verificat</strong>, adică a trecut criteriile de acceptare pe fișiere sintetice, de la câteva sute de MB până la aproape 3 GB. Pasul al treilea, calibrarea, îl face fiecare pe fișierele lui: rulați aplicația pe o lună deja depusă și acceptată, apoi comparați ce vedeți cu ce știți din contabilitate, înainte să vă bazați pe ea într-o lună nouă.
+      </p>
+
+      <div class="dl-box">
+        <div class="dl-k">// Resurse descărcabile</div>
+        <h3 class="dl-title">SAF-T Inspector 0.1.0 și Fabrica de fișiere D406</h3>
+        <p>Trei pachete .zip, pentru Windows. Se dezarhivează și se rulează, fără instalare și fără internet.</p>
+        <div class="dl-list">
+          <div class="dl-item">
+            <div class="dl-item-txt">
+              <strong>SAF-T Inspector, un singur fișier</strong>
+              <span>Un .exe, 39,6 MB arhivat. Pentru mutat ușor între calculatoare.</span>
+            </div>
+            <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-file.zip" download class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Descarcă
+            </a>
+          </div>
+          <div class="dl-item">
+            <div class="dl-item-txt">
+              <strong>SAF-T Inspector, folder</strong>
+              <span>Executabil plus componente, 54,2 MB arhivat. Pentru folosire zilnică.</span>
+            </div>
+            <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-folder.zip" download class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Descarcă
+            </a>
+          </div>
+          <div class="dl-item">
+            <div class="dl-item-txt">
+              <strong>Fabrica de fișiere sintetice D406</strong>
+              <span>Generatorul de declarații de test, 12,8 MB arhivat. Pentru cine vrea să-și construiască propria aplicație fără date reale.</span>
+            </div>
+            <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/FabricaD406.zip" download class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Descarcă
+            </a>
+          </div>
+        </div>
+        <p class="dl-note">Versiunea 0.1.0, pe schema <code>v249_2025</code>. Implementat și verificat pe date sintetice. Calibrarea se face de fiecare utilizator, pe o lună proprie deja depusă și acceptată.</p>
+      </div>
+
+      <h2 id="s12">Ce urmează</h2>
+      <p>
+        Modulul 1 deschide fișierul și îl pune pe masă. Nu spune încă dacă ce e în el e corect. Asta e treaba modulului 2: cele 33 de teste de consistență publicate de ANAF, rulate local, pe același fișier, cu aceeași regulă ca până acum: dacă rezultatul nostru diferă de cel al aplicației oficiale, presupunerea de pornire e că noi greșim. Rândul care spune astăzi „neimplementate încă” pe coperta registrului se va schimba atunci.
+      </p>
+      <p>
+        Un lucru trebuie spus limpede. Scopul seriei SAF-T nu a fost să vă dăm o aplicație, ci să arătăm drumul, pas cu pas, de la documentele oficiale până la un program care rulează. SAF-T Inspector se poate descărca strict ca exemplu de rezultat al pașilor descriși în articolele anterioare, nu ca produs cu asistență.
+      </p>
+      <p>
+        Dacă ați construit-o și vreți să o prezentați într-un articol separat aici, pe site, scrieți-ne intenția prin formularul de <a href="contact.html">contact</a>.
+      </p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#SAF-T</span>
+          <span class="tag">#D406</span>
+          <span class="tag">#vibe-coding</span>
+          <span class="tag">#Python</span>
+          <span class="tag">#Excel</span>
+        </div>
+        <span class="footer-mono">Articolul #037</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-09-28-Apesi-Verifica-si-D406-devine-Excel"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s1">Rularea înregistrată</a>
+        <a href="#s2">Ecranul de start</a>
+        <a href="#s3">1 · Selecție</a>
+        <a href="#s4">2 · Scanare</a>
+        <a href="#s5">3 · Procesare</a>
+        <a href="#s6">4 · Rezultate</a>
+        <a href="#s7">Raport și registru</a>
+        <a href="#s8">Fabrica D406</a>
+        <a href="#s9">Construcția</a>
+        <a href="#s10">Fișier sau folder</a>
+        <a href="#s11">Descărcare</a>
+        <a href="#s12">Ce urmează</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- ARTICOLE CONEXE -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Pe aceeași temă.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-09-15-Ultimul-pas-inainte-de-cod.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #036</div>
+        <h3>Ultimul pas înainte de cod</h3>
+        <p>Partea precedentă: numele aplicației, fereastra desenată în trei unelte AI și PRD-ul tehnic din care s-a scris codul modulului 1.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-08-30-Verificarea-D406-inainte-de-depunere.html" class="related-card fade-in">
+        <div class="related-date">SAF-T · D406</div>
+        <h3>Cum verifici fișierul SAF-T D406 înainte de depunere</h3>
+        <p>Ce verifică aplicațiile oficiale ANAF, ce rămâne neverificat și de unde vine nevoia unui instrument ca SAF-T Inspector.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-09-08-Conversatia-care-nu-a-produs-cod.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #035</div>
+        <h3>Conversația care nu a produs cod</h3>
+        <p>Conversația de planificare din care au ieșit deciziile de temelie ale aplicației: limbajul, interfața și formatele de export.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>
