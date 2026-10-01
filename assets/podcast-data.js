@@ -26,9 +26,114 @@
   var CF  = "/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F";
 
   window.PODCAST_EPISODES = [
-    /* ---------- Sezonul 2 ---------- */
+    /* ---------- Sezonul 3 · AI Journal ---------- */
     {
-      id: "0Vk1a5yXg4HkY7vtV192HD", slug: "ai-journal", ep: "E09", group: "Sezonul 2",
+      id: "0hoGQP05DQmJPfTWZZOzvG", slug: "jurnal-s6", ep: "E07", group: "Sezonul 3 · AI Journal",
+      date: "2026-10-01",
+      title: "Documente, date și conexiuni: „munca grea”",
+      audioUrl: RSS + "126618424" + CF + "2026-9-1%2Fb7b4fff1-0b2e-da80-95b5-097620d4ab4d.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (12:57). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: de ce munca grea vine ultima" },
+        { t: 120 , title: "Extragerea din facturi și erorile tipice" },
+        { t: 284 , title: "Documentul lung și filtrul personal" },
+        { t: 402 , title: "Calculul cu lanț de raționament" },
+        { t: 527 , title: "Conectarea, doar dacă politica firmei permite" },
+        { t: 634 , title: "Capcanele ultimei săptămâni" },
+        { t: 691 , title: "Ce rămâne după 30 de zile" }
+      ]
+    },
+    {
+      id: "4b5GiUtdTyoxZP0tvBxiTf", slug: "jurnal-s5", ep: "E06", group: "Sezonul 3 · AI Journal",
+      date: "2026-10-01",
+      title: "Projects și rutine: ieși din „o conversație nouă de fiecare dată”",
+      audioUrl: RSS + "126618364" + CF + "2026-9-1%2F650d881d-6b42-b18f-1178-e5ed0fb7cf51.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (15:52). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: contextul rescris în fiecare conversație" },
+        { t: 166 , title: "Alegerea temei pentru Project" },
+        { t: 311 , title: "Instrucțiunile permanente, în patru blocuri" },
+        { t: 450 , title: "Documentele de referință și Projectul-depozit" },
+        { t: 542 , title: "Căutarea semantică și golurile din proceduri" },
+        { t: 706 , title: "Rutina programată" },
+        { t: 799 , title: "Mediul greșit și câștigul de consistență" },
+        { t: 874 , title: "Ce rămâne și ce urmează" }
+      ]
+    },
+    {
+      id: "6Yw7LlS1tD8jFSBjLEpkO2", slug: "jurnal-s4", ep: "E05", group: "Sezonul 3 · AI Journal",
+      date: "2026-10-01",
+      title: "Riscurile Shadow AI în contabilitate",
+      audioUrl: RSS + "126618208" + CF + "2026-9-1%2F268cfe1b-481b-2436-3d76-614e9a5136fc.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (22:48). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: interdicția care produce Shadow AI" },
+        { t: 188 , title: "Lista instrumentelor aprobate" },
+        { t: 257 , title: "Cele trei medii: enterprise, open weight, cont personal" },
+        { t: 443 , title: "Minimizare, contractele cu clienții și ce e interzis oriunde" },
+        { t: 761 , title: "Regula de verificare în trei niveluri" },
+        { t: 906 , title: "Curățenia: umplutura generată" },
+        { t: 1106, title: "Biblioteca de prompturi" },
+        { t: 1186, title: "Capcanele și ce rămâne" }
+      ]
+    },
+    {
+      id: "3PCiNPHtITHJHQncDJOCiX", slug: "jurnal-s3", ep: "E04", group: "Sezonul 3 · AI Journal",
+      date: "2026-10-01",
+      title: "Compară modelele AI",
+      audioUrl: RSS + "126614123" + CF + "2026-9-1%2F51216b2b-36d8-396b-be92-2870ce36b0d0.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (14:07). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: greșeala care arată ca un răspuns corect" },
+        { t: 118 , title: "Trei tipuri de modele și regula de alegere" },
+        { t: 220 , title: "Același prompt, două modele" },
+        { t: 337 , title: "Testul multimodal: bonuri și facturi" },
+        { t: 465 , title: "Verificarea la sursă și „ești sigur?”" },
+        { t: 575 , title: "Prima halucinație și semnalele de alarmă" },
+        { t: 672 , title: "Capcanele săptămânii" },
+        { t: 766 , title: "Ce rămâne și ce urmează" }
+      ]
+    },
+    {
+      id: "79qV0H3rA8x74BJsX4A6dB", slug: "jurnal-s2", ep: "E03", group: "Sezonul 3 · AI Journal",
+      date: "2026-10-01",
+      title: "Prompturi care chiar funcționează",
+      audioUrl: RSS + "126613921" + CF + "2026-9-1%2F6d2495b2-8be0-dd00-5299-83f5f5bdffc4.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (13:58). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: juniorul care n-a fost la nicio ședință" },
+        { t: 170 , title: "Trei sarcini reale și cele patru straturi" },
+        { t: 335 , title: "Exemplul: mailul pentru documentele lipsă" },
+        { t: 414 , title: "Rescrii promptul, nu răspunsul" },
+        { t: 562 , title: "Pasul 4: testul limitelor" },
+        { t: 672 , title: "Capcanele: prompturi magice, politețe, date reale" },
+        { t: 769 , title: "Ce rămâne și ce urmează" }
+      ]
+    },
+    {
+      id: "1PcKYx9DqvLVxQQ2fvkLXq", slug: "jurnal-s1", ep: "E02", group: "Sezonul 3 · AI Journal",
+      date: "2026-10-01",
+      title: "„Firma de test” pentru asistentul AI",
+      audioUrl: RSS + "126602237" + CF + "2026-9-1%2Fe2e1aced-06e0-4eb5-e88e-48ce2bdde96c.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (16:19). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: testul nedrept și firma de test" },
+        { t: 155 , title: "Pasul 1: un singur tool, gratuit sau plătit" },
+        { t: 350 , title: "Pasul 2: setările, istoricul și tipul de cont" },
+        { t: 518 , title: "Pasul 3: trei conversații fără miză" },
+        { t: 642 , title: "Pasul 4: aceeași întrebare în trei formate" },
+        { t: 761 , title: "Obiecții și cele trei capcane" },
+        { t: 883 , title: "Ce rămâne după prima săptămână" }
+      ]
+    },
+    {
+      id: "0Vk1a5yXg4HkY7vtV192HD", slug: "ai-journal", ep: "E01", group: "Sezonul 3 · AI Journal",
       date: "2026-08-11",
       title: "Zece minute cu „AI Journal” lângă cafea",
       audioUrl: RSS + "124089334" + CF + "2026-7-11%2F9166f48d-487e-972e-5c71-e47ccdba2f8e.m4a",
@@ -44,6 +149,7 @@
         { t: 850, title: "Închidere: zece minute la prima cafea" }
       ]
     },
+    /* ---------- Sezonul 2 ---------- */
     {
       id: "3HBHI4h8yRlAIdZUkf3pnI", slug: "comunitate", ep: "E08", group: "Sezonul 2",
       date: "2026-08-08",

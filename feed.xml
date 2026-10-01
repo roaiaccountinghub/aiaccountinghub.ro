@@ -31,12 +31,66 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Mon, 28 Sep 2026 09:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 13:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>AI Journal, săptămâna 6 — Documente, date și conexiuni: „munca grea”</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=0hoGQP05DQmJPfTWZZOzvG</link>
+      <guid isPermaLink="false">aiah-podcast-s3e07</guid>
+      <pubDate>Thu, 01 Oct 2026 13:00:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Săptămâna 6 din seria AI Journal. Ultima săptămână e cea pentru care au existat celelalte cinci. AI-ul intră acolo unde munca chiar consumă timp: teancul de facturi, norma de 40 de pagini, calculul cu trei condiții. Și tot aici verificarea încetează să fie o recomandare. 13 min.</description>
+    </item>
+
+    <item>
+      <title>AI Journal, săptămâna 5 — Projects și rutine: ieși din „o conversație nouă de fiecare dată”</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=4b5GiUtdTyoxZP0tvBxiTf</link>
+      <guid isPermaLink="false">aiah-podcast-s3e06</guid>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Săptămâna 5 din seria AI Journal. Vine un moment în care pierzi mai mult timp explicând contextul decât primind răspunsuri. E semnalul că ai depășit faza conversațiilor izolate și că e timpul pentru un spațiu care își aduce aminte cine ești: un Project cu instrucțiuni permanente, câteva documente de referință și, opțional, o rutină programată. 16 min.</description>
+    </item>
+
+    <item>
+      <title>AI Journal, săptămâna 4 — Riscurile Shadow AI în contabilitate</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=6Yw7LlS1tD8jFSBjLEpkO2</link>
+      <guid isPermaLink="false">aiah-podcast-s3e05</guid>
+      <pubDate>Thu, 01 Oct 2026 11:00:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Săptămâna 4 din seria AI Journal. Discuția despre confidențialitate s-a blocat într-o falsă dilemă: date reale sau nimic. În practică, aceeași balanță e un incident într-un cont personal gratuit și o operațiune normală într-un abonament enterprise cu contract în spate. Întrebarea utilă nu e ce date folosești, ci unde le pui. 23 min.</description>
+    </item>
+
+    <item>
+      <title>AI Journal, săptămâna 3 — Compară modelele AI</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=3PCiNPHtITHJHQncDJOCiX</link>
+      <guid isPermaLink="false">aiah-podcast-s3e04</guid>
+      <pubDate>Thu, 01 Oct 2026 10:00:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Săptămâna 3 din seria AI Journal. Cea mai periculoasă greșeală a unui asistent AI nu e cea evidentă. E cea care arată exact ca un răspuns corect: articol cu număr, alineat, formulare de manual, și complet inventat. Punem două modele pe aceeași speță, testăm extragerea din bonuri și îl prindem cu mâța-n sac, în condiții controlate. 14 min.</description>
+    </item>
+
+    <item>
+      <title>AI Journal, săptămâna 2 — Prompturi care chiar funcționează</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=79qV0H3rA8x74BJsX4A6dB</link>
+      <guid isPermaLink="false">aiah-podcast-s3e03</guid>
+      <pubDate>Thu, 01 Oct 2026 09:00:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Săptămâna 2 din seria AI Journal. Un contabil nu-i spune unui coleg junior „fă și tu ceva cu dosarul ăsta”. Îi spune cine e clientul, ce s-a discutat data trecută, ce vrea și sub ce formă. Cu AI-ul, aproape toată lumea revine la „fă și tu ceva”, apoi judecă rezultatul. Rol, context, sarcină, format: cele patru straturi, aplicate pe sarcini reale. 14 min.</description>
+    </item>
+
+    <item>
+      <title>AI Journal, săptămâna 1 — „Firma de test” pentru asistentul AI</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=1PcKYx9DqvLVxQQ2fvkLXq</link>
+      <guid isPermaLink="false">aiah-podcast-s3e02</guid>
+      <pubDate>Thu, 01 Oct 2026 08:00:00 +0300</pubDate>
+      <category>Podcast</category>
+      <description>Săptămâna 1 din seria AI Journal. Nu ai deschis niciodată un program nou de contabilitate direct pe balanța de decembrie. Ai făcut întâi o firmă de test, ai umblat prin nomenclatoare, ai stricat ceva și ai revenit. Cu asistentul AI, aproape toată lumea sare peste pasul ăsta, apoi se miră că „nu merge”. 16 min.</description>
+    </item>
 
     <item>
       <title>Apeși Verifică, și D406 devine Excel</title>

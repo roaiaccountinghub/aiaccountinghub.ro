@@ -2,8 +2,62 @@
   "_comment": "FLUXUL DE NOUTĂȚI — se completează MANUAL la fiecare publicare, împreună cu feed.xml (sunt oglindă). Adaugă noul material ca PRIM element din 'items' (ordinea din listă = ordinea afișării, cele mai noi întâi). Câmpuri: id (unic, nu se mai schimbă niciodată — el decide ce e 'citit'), type (DOAR articol | podcast | buzzword — alt tip nu poate fi bifat de cititor, deci nu i-ar fi semnalat niciodată), title, url (adresa la care duce notificarea), date (AAAA-LL-ZZ), meta (text scurt: durată), mark (opțional — selector CSS al cardului care primește eticheta NOU; dacă lipsește, se caută automat legătura către 'url').",
   "_linkuri": "Articol: adresa proprie a paginii. Podcast: 'podcast.html?play=<spotifyId>' — deschide direct playerul pe episodul acela. Buzzword: 'buzzword.html#<id>' — deschide definiția și derulează la ea. Resursele nu intră aici: când publici ceva important în Download zone scrii oricum și un articol pe temă.",
   "_surse": "Datele de publicare există și la sursă: câmpul 'date' din assets/podcast-data.js (episoade) și din assets/buzzwords.json (termeni). De acolo le copiezi când adaugi un material nou aici.",
-  "updated": "2026-09-28",
+  "updated": "2026-10-01",
   "items": [
+    {
+      "id": "pod-s3e07-jurnal-s6",
+      "type": "podcast",
+      "title": "AI Journal, săptămâna 6 — Documente, date și conexiuni: „munca grea”",
+      "url": "podcast.html?play=0hoGQP05DQmJPfTWZZOzvG",
+      "date": "2026-10-01",
+      "meta": "13 min",
+      "mark": "[data-spotify=\"0hoGQP05DQmJPfTWZZOzvG\"]"
+    },
+    {
+      "id": "pod-s3e06-jurnal-s5",
+      "type": "podcast",
+      "title": "AI Journal, săptămâna 5 — Projects și rutine: ieși din „o conversație nouă de fiecare dată”",
+      "url": "podcast.html?play=4b5GiUtdTyoxZP0tvBxiTf",
+      "date": "2026-10-01",
+      "meta": "16 min",
+      "mark": "[data-spotify=\"4b5GiUtdTyoxZP0tvBxiTf\"]"
+    },
+    {
+      "id": "pod-s3e05-jurnal-s4",
+      "type": "podcast",
+      "title": "AI Journal, săptămâna 4 — Riscurile Shadow AI în contabilitate",
+      "url": "podcast.html?play=6Yw7LlS1tD8jFSBjLEpkO2",
+      "date": "2026-10-01",
+      "meta": "23 min",
+      "mark": "[data-spotify=\"6Yw7LlS1tD8jFSBjLEpkO2\"]"
+    },
+    {
+      "id": "pod-s3e04-jurnal-s3",
+      "type": "podcast",
+      "title": "AI Journal, săptămâna 3 — Compară modelele AI",
+      "url": "podcast.html?play=3PCiNPHtITHJHQncDJOCiX",
+      "date": "2026-10-01",
+      "meta": "14 min",
+      "mark": "[data-spotify=\"3PCiNPHtITHJHQncDJOCiX\"]"
+    },
+    {
+      "id": "pod-s3e03-jurnal-s2",
+      "type": "podcast",
+      "title": "AI Journal, săptămâna 2 — Prompturi care chiar funcționează",
+      "url": "podcast.html?play=79qV0H3rA8x74BJsX4A6dB",
+      "date": "2026-10-01",
+      "meta": "14 min",
+      "mark": "[data-spotify=\"79qV0H3rA8x74BJsX4A6dB\"]"
+    },
+    {
+      "id": "pod-s3e02-jurnal-s1",
+      "type": "podcast",
+      "title": "AI Journal, săptămâna 1 — „Firma de test” pentru asistentul AI",
+      "url": "podcast.html?play=1PcKYx9DqvLVxQQ2fvkLXq",
+      "date": "2026-10-01",
+      "meta": "16 min",
+      "mark": "[data-spotify=\"1PcKYx9DqvLVxQQ2fvkLXq\"]"
+    },
     {
       "id": "art-saft-inspector-modulul-1",
       "type": "articol",

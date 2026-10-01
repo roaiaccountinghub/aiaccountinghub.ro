@@ -28,209 +28,530 @@
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="manifest" href="/manifest.json">
 <style>
-/* ============ NAVIGARE ÎNTRE CATEGORII (stepper cu scroll-spy) ============ */
-.res-types {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin: 36px 0 8px;
-}
-.res-type-pill {
-  display: flex; gap: 16px; align-items: flex-start;
-  padding: 20px;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  background: var(--bg-1);
-  transition: all 0.25s ease;
-}
-.res-type-pill:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow-lg); }
-.rt-ic {
-  width: 40px; height: 40px; border-radius: 10px;
-  display: grid; place-items: center;
-  flex-shrink: 0;
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-}
-.rt-ic svg { width: 18px; height: 18px; }
-.res-type-pill[data-type="pdf"] .rt-ic { color: #fb7185; background: color-mix(in oklab, #fb7185 8%, var(--bg-2)); border-color: color-mix(in oklab, #fb7185 25%, transparent); }
-.res-type-pill[data-type="xls"] .rt-ic { color: #34d399; background: color-mix(in oklab, #34d399 8%, var(--bg-2)); border-color: color-mix(in oklab, #34d399 25%, transparent); }
-.res-type-pill[data-type="tool"] .rt-ic { color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, var(--bg-2)); border-color: color-mix(in oklab, var(--accent) 30%, transparent); }
-.rt-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.rt-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--fg-dim);
-}
-.rt-title { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--fg); transition: color 0.25s ease; }
-.rt-desc { font-size: 12.5px; color: var(--fg-muted); line-height: 1.5; margin-top: 2px; }
-/* Pastila categoriei în care te afli — culoarea proprie a categoriei, nu cyan-ul global */
-.res-type-pill[data-type="pdf"].is-active  { border-color: #fb7185; box-shadow: 0 0 0 1px color-mix(in oklab, #fb7185 45%, transparent); }
-.res-type-pill[data-type="pdf"].is-active .rt-title { color: #fb7185; }
-.res-type-pill[data-type="xls"].is-active  { border-color: #34d399; box-shadow: 0 0 0 1px color-mix(in oklab, #34d399 45%, transparent); }
-.res-type-pill[data-type="xls"].is-active .rt-title { color: #34d399; }
-.res-type-pill[data-type="tool"].is-active { border-color: var(--accent); box-shadow: 0 0 0 1px color-mix(in oklab, var(--accent) 45%, transparent); }
-.res-type-pill[data-type="tool"].is-active .rt-title { color: var(--accent); }
+/* ============ RESURSE · SCENA 3D CU CARDURI ÎNTOARSE ============
+   Culoarea categoriei stă într-o singură variabilă, --cat, moștenită de tot ce
+   ține de rândul ei: eticheta, iconița cardului, fața din spate a cardului. */
+.pdf  { --cat: #fb7185; }
+.xls  { --cat: #34d399; }
+.tool { --cat: var(--accent); }
+[data-theme="light"] .pdf { --cat: #be123c; }
+[data-theme="light"] .xls { --cat: #047857; }
 
-/* ============ RAIL DE RESURSE ============
-   Verticala e scroll-ul paginii (un rail sub altul, nimic ascuns), orizontala e
-   derularea în interiorul unei categorii. Cât timp cardurile încap pe lățimea
-   disponibilă, rail-ul arată exact ca grila de dinainte: săgețile stau ascunse,
-   estomparea marginilor e inactivă. Se activează singure când apar mai multe. */
-.res-rail { margin-top: 56px; scroll-margin-top: 90px; }
-.rail-head {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
-  padding-bottom: 22px;
-  margin-bottom: 24px;
+/* ============ CARDUL COMPACT (fața) ============ */
+.rc {
+  position: relative;
+  width: 100%; height: 100%;
+  min-width: 0;
+  padding: 20px 20px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 0%, color-mix(in oklab, var(--cat) 9%, transparent), transparent 60%),
+    linear-gradient(145deg, var(--bg-2) 0%, var(--bg-1) 100%);
+  display: flex; flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+.rc:hover, .rc:focus-visible {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--cat) 45%, var(--border));
+  box-shadow: var(--shadow-lg);
+}
+.rc.is-lifted { visibility: hidden; }
+.rc-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+.rc-ic {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: grid; place-items: center; flex-shrink: 0;
+  color: var(--cat);
+  background: color-mix(in oklab, var(--cat) 9%, var(--bg-2));
+  border: 1px solid color-mix(in oklab, var(--cat) 28%, transparent);
+}
+.rc-ic svg { width: 17px; height: 17px; }
+.rc-kind {
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim);
+  padding: 3px 7px; border: 1px solid var(--border); border-radius: 6px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.rc h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.28;
+  margin: 0 0 8px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.rc p {
+  margin: 0; flex: 1;
+  font-size: 13px; line-height: 1.5; color: var(--fg-muted);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.rc-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding-top: 12px; margin-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.rc-meta { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--fg-dim); line-height: 1.4; }
+.rc-soon { color: #fbbf24; }
+[data-theme="light"] .rc-soon { color: #b45309; }
+.rc-more {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 10px; border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--cat);
+  border: 1px solid color-mix(in oklab, var(--cat) 45%, transparent);
+  background: color-mix(in oklab, var(--cat) 6%, transparent);
+  transition: all 0.25s ease; white-space: nowrap;
+}
+.rc-more svg { width: 13px; height: 13px; transition: transform 0.35s ease; }
+.rc:hover .rc-more, .rc:focus-visible .rc-more { background: var(--cat); color: #07121a; border-color: var(--cat); }
+[data-theme="light"] .rc:hover .rc-more { color: #fff; }
+.rc:hover .rc-more svg { transform: rotateY(180deg); }
+
+/* ============ CARDUL ÎNTORS (modal) ============ */
+.rxm { position: fixed; inset: 0; z-index: 200; pointer-events: none; }
+.rxm-dim {
+  position: absolute; inset: 0;
+  background: rgba(4, 8, 14, 0.72);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  opacity: 0; transition: opacity 0.4s ease;
+}
+[data-theme="light"] .rxm-dim { background: rgba(15, 40, 55, 0.45); }
+.rxm.open { pointer-events: auto; }
+.rxm.open .rxm-dim { opacity: 1; }
+.rxm-stage {
+  position: fixed;
+  perspective: 1800px;
+  visibility: hidden;
+  transition: left 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), top 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+              width 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.rxm.open .rxm-stage { visibility: visible; }
+.rxm-card {
+  position: absolute; inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.7, 0, 0.25, 1);
+}
+.rxm.flipped .rxm-card { transform: rotateY(180deg); }
+.rxm-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.rxm-front .rc { height: 100%; width: 100%; flex: none; cursor: default; }
+.rxm-back {
+  transform: rotateY(180deg);
+  display: flex; flex-direction: column;
+  border: 1px solid color-mix(in oklab, var(--cat) 55%, transparent);
+  background:
+    radial-gradient(ellipse 70% 50% at 100% 0%, color-mix(in oklab, var(--cat) 13%, transparent), transparent 65%),
+    linear-gradient(160deg, var(--bg-2) 0%, var(--bg-1) 70%);
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.6);
+  border-radius: 22px;
+}
+.rxm-back > * { opacity: 0; transition: opacity 0.3s ease; }
+.rxm.ready .rxm-back > * { opacity: 1; }
+.rxm-back.swap > * { opacity: 0 !important; transition-duration: 0.14s; }
+
+.rxb-head {
+  display: flex; align-items: flex-start; gap: 18px;
+  padding: 28px 30px 20px;
   border-bottom: 1px solid var(--border);
 }
-.rail-head-text { max-width: 720px; }
+.rxb-head .rc-ic { width: 46px; height: 46px; border-radius: 12px; }
+.rxb-head .rc-ic svg { width: 21px; height: 21px; }
+.rxb-titles { flex: 1; min-width: 0; }
+.rxb-crumb {
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--cat);
+  margin-bottom: 6px;
+}
+.rxb-crumb span { color: var(--fg-dim); }
+.rxb-titles h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(22px, 2.6vw, 30px); font-weight: 600;
+  letter-spacing: -0.02em; line-height: 1.15; margin: 0;
+}
+.rxb-close {
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  display: grid; place-items: center;
+  background: var(--bg-1); color: var(--fg);
+  border: 1px solid var(--border-strong); cursor: pointer;
+  transition: all 0.2s;
+}
+.rxb-close svg { width: 17px; height: 17px; }
+.rxb-close:hover { background: var(--accent); color: #07121a; border-color: var(--accent); transform: rotate(90deg); }
+
+.rxb-body {
+  flex: 1; min-height: 0;
+  overflow-y: auto;
+  display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 34px;
+  padding: 26px 30px 30px;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--cat) 40%, transparent) transparent;
+}
+.rxb-sec + .rxb-sec { margin-top: 24px; }
+.rxb-h {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-dim);
+  margin: 0 0 10px;
+}
+.rxb-main p { margin: 0 0 12px; font-size: 15px; line-height: 1.7; color: var(--fg); }
+.rxb-main p.lead { font-size: 16.5px; }
+.rxb-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.rxb-list li { position: relative; padding-left: 20px; font-size: 14px; line-height: 1.6; color: var(--fg-muted); }
+.rxb-list li::before {
+  content: ''; position: absolute; left: 3px; top: 0.62em;
+  width: 7px; height: 7px; border-radius: 2px; background: var(--cat); opacity: 0.8;
+}
+.rxb-note {
+  display: flex; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  font-size: 13.5px; line-height: 1.6; color: var(--fg-muted);
+  background: color-mix(in oklab, #fbbf24 7%, transparent);
+  border: 1px solid color-mix(in oklab, #fbbf24 28%, transparent);
+}
+.rxb-note svg { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; color: #fbbf24; }
+[data-theme="light"] .rxb-note svg { color: #b45309; }
+
+.rxb-side { display: flex; flex-direction: column; gap: 22px; }
+.rxb-dl { display: flex; flex-direction: column; gap: 10px; }
+.dl-opt {
+  padding: 14px 16px; border-radius: 14px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg-0) 45%, transparent);
+}
+.dl-opt.is-rec { border-color: color-mix(in oklab, var(--cat) 45%, transparent); background: color-mix(in oklab, var(--cat) 6%, transparent); }
+.dl-row1 { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+.dl-name { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px; }
+.dl-rec {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--cat); border: 1px solid color-mix(in oklab, var(--cat) 45%, transparent);
+  padding: 2px 6px; border-radius: 5px; white-space: nowrap;
+}
+.dl-hint { font-size: 13px; line-height: 1.5; color: var(--fg-muted); margin: 0 0 12px; }
+.dl-row2 { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dl-size { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); }
+.dl-opt .download-btn { padding: 8px 12px; font-size: 11px; }
+.dl-opt:not(.is-rec) .download-btn {
+  background: transparent; color: var(--accent);
+  border: 1px solid color-mix(in oklab, var(--accent) 50%, transparent);
+}
+.dl-opt:not(.is-rec) .download-btn:hover { background: var(--accent); color: #07121a; }
+.dl-soon {
+  padding: 16px; border-radius: 14px; text-align: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #fbbf24;
+  border: 1px dashed color-mix(in oklab, #fbbf24 45%, transparent);
+}
+[data-theme="light"] .dl-soon { color: #b45309; }
+
+.rxb-facts { display: grid; grid-template-columns: auto 1fr; gap: 7px 14px; margin: 0; }
+.rxb-facts dt { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-dim); padding-top: 2px; }
+.rxb-facts dd { margin: 0; font-size: 13.5px; color: var(--fg-muted); }
+
+.rxb-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg-0) 35%, transparent);
+}
+.rxb-step {
+  display: inline-flex; align-items: center; gap: 8px; max-width: 40%;
+  padding: 8px 12px; border-radius: 10px;
+  background: none; border: 1px solid var(--border); color: var(--fg-muted);
+  font: inherit; font-size: 12.5px; cursor: pointer; transition: all 0.2s;
+}
+.rxb-step span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rxb-step svg { width: 15px; height: 15px; flex-shrink: 0; }
+.rxb-step:hover:not(:disabled) { border-color: var(--cat); color: var(--fg); }
+.rxb-step:disabled { opacity: 0.3; cursor: default; }
+.rxb-pos { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); text-align: center; }
+.rxb-pos b { color: var(--cat); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rxm-stage, .rxm-card { transition: none; }
+}
+
 .rail-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  margin-bottom: 8px;
 }
-.rl-read { color: #fb7185; }
-.rl-fill { color: #34d399; }
-.rl-run  { color: var(--accent); }
-.rail-head h2 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(22px, 2.6vw, 30px);
-  font-weight: 600; letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin-bottom: 10px;
-}
-.rail-head p { color: var(--fg-muted); font-size: 14.5px; line-height: 1.6; max-width: 580px; }
+.rc p { flex: 0 0 auto; }
+.rc-foot { margin-top: auto; }
 
-.rail-nav { display: none; gap: 8px; flex-shrink: 0; padding-bottom: 4px; }
-.res-rail.is-scrollable .rail-nav { display: flex; }
-.rail-btn {
-  width: 38px; height: 38px; border-radius: 50%;
-  display: grid; place-items: center;
-  border: 1px solid var(--border-strong);
-  background: var(--bg-1);
-  color: var(--fg-muted);
-  cursor: pointer;
+@media (max-width: 760px) {
+  .rxm-face { border-radius: 0; }
+  .rxm-back { border-radius: 0; border: none; }
+  .rxb-head { padding: 18px 18px 14px; gap: 12px; }
+  .rxb-head .rc-ic { display: none; }
+  .rxb-body { grid-template-columns: 1fr; gap: 24px; padding: 20px 18px 24px; }
+  .rxb-foot { padding: 10px 12px; }
+  .rxb-step { max-width: 42%; }
+}
+
+/* Antetul paginii, mai scund: caruselul devine conținutul principal */
+.page-header { padding: 16px 32px 16px; }
+.page-header .breadcrumb { margin-bottom: 8px; }
+.page-kicker { margin-bottom: 0; padding: 3px 10px 3px 8px; font-size: 10px; }
+.page-header h1 { font-size: clamp(26px, 2.5vw, 34px); margin-bottom: 4px; }
+.page-lede { font-size: 14.5px; line-height: 1.5; }
+@media (max-width: 760px) {
+  .page-header { padding: 12px 16px 12px; }
+  .page-header .breadcrumb { margin-bottom: 6px; }
+  .page-header h1 { font-size: 26px; }
+  .page-lede { font-size: 13.5px; }
+  /* pe telefon rămâne doar promisiunea scurtă */
+  .lede-long { display: none; }
+}
+/* ============ LEGĂTURA CU ARTICOLELE ============ */
+.art-meta { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.04em; color: var(--fg-dim); }
+.art-role { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cat); }
+.ar { width: 14px; height: 14px; flex-shrink: 0; transition: transform 0.25s ease; }
+
+/* fișa articolului, în coloana din dreapta a cardului întors */
+.art1 { display: flex; flex-direction: column; gap: 10px; }
+.art1-c {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 14px; border-radius: 14px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--accent) 4%, transparent);
   transition: all 0.25s ease;
 }
-.rail-btn svg { width: 18px; height: 18px; }
-.rail-btn:hover:not(:disabled) {
-  border-color: var(--accent); color: var(--accent);
-  background: color-mix(in oklab, var(--accent) 8%, var(--bg-1));
+.art1-c:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 9%, transparent); transform: translateY(-2px); }
+.art1-b { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.art1-b b { font-family: 'Space Grotesk', sans-serif; font-size: 14.5px; font-weight: 600; line-height: 1.3; color: var(--fg); }
+.art-go {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 3px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent);
 }
-.rail-btn:disabled { opacity: 0.3; cursor: default; }
+.art1-c:hover .ar { transform: translateX(4px); }
 
-.rail-viewport { position: relative; }
-.rail-track {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  /* spațiu pentru ridicarea cardului la hover, ca să nu fie tăiată de overflow */
-  padding: 8px 0 14px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.rail-track::-webkit-scrollbar { display: none; }
-/* Ancore pe carduri: /resurse.html#jurnalul-ai duce direct la cardul resursei.
-   Cardul e adus in viewport pe verticala si in rail pe orizontala, apoi pulseaza
-   scurt, ca ochiul sa stie unde sa se opreasca. */
-.resource[id] { scroll-margin-top: 110px; }
-.resource.is-target {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent), 0 0 34px -6px color-mix(in oklab, var(--accent) 55%, transparent);
-  animation: resourcePulse 2.4s ease-out 1;
-}
-@keyframes resourcePulse {
-  0%   { box-shadow: 0 0 0 1px var(--accent), 0 0 0 0 color-mix(in oklab, var(--accent) 45%, transparent); }
-  35%  { box-shadow: 0 0 0 1px var(--accent), 0 0 0 12px transparent; }
-  100% { box-shadow: 0 0 0 1px var(--accent), 0 0 34px -6px color-mix(in oklab, var(--accent) 55%, transparent); }
-}
-@media (prefers-reduced-motion: reduce) { .resource.is-target { animation: none; } }
-.rail-track > .resource {
-  flex: 0 0 calc((100% - 40px) / 3);
-  scroll-snap-align: start;
-}
-/* Estomparea marginii dinspre care mai există carduri — semnalul că rail-ul continuă */
-.res-rail.has-next .rail-viewport {
-  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 56px), transparent 100%);
-          mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 56px), transparent 100%);
-}
-.res-rail.has-prev .rail-viewport {
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 56px, #000 100%);
-          mask-image: linear-gradient(90deg, transparent 0, #000 56px, #000 100%);
-}
-.res-rail.has-prev.has-next .rail-viewport {
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%);
-          mask-image: linear-gradient(90deg, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%);
-}
 
-/* ============ EXTENSII PE CARDUL DE RESURSĂ ============ */
-/* Legătura înapoi spre articolul care explică resursa */
-.res-links {
-  margin: -6px 0 22px;
-  display: flex; flex-direction: column; gap: 7px;
+/* ============ SCENA ============
+   Rândurile sunt categorii, coloanele sunt resursele categoriei. */
+.mx-wrap { max-width: 1212px; margin: 0 auto; padding: 18px 16px 48px; }
+.mx-stage {
+  position: relative;
+  /* scena umple ce rămâne din ecran sub antet, între 520 și 780 px */
+  height: clamp(520px, calc(100svh - 250px), 780px);
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse 50% 45% at 50% 50%, color-mix(in oklab, var(--accent) 7%, transparent), transparent 70%),
+    var(--bg-0);
+  outline: none;
 }
-.res-links-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--fg-dim);
+.mx-stage::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
-.res-link {
-  display: flex; align-items: flex-start; gap: 8px;
-  font-size: 12.5px; line-height: 1.45;
-  color: var(--fg-muted);
-  transition: color 0.2s ease;
+/* vigneta: marginile se estompează spre fundal, ca vecinii să pară „mai departe” */
+.mx-stage::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 4;
+  background:
+    linear-gradient(90deg, var(--bg-0) 0, transparent 9%, transparent 91%, var(--bg-0) 100%),
+    linear-gradient(180deg, var(--bg-0) 0, transparent 10%, transparent 90%, var(--bg-0) 100%);
 }
-.res-link svg { width: 13px; height: 13px; flex-shrink: 0; margin-top: 2px; }
-.res-link:hover { color: var(--accent); }
+.mx-world { position: absolute; inset: 0; }
+.mx-row {
+  position: absolute; left: 0; top: 0; width: 100%; height: var(--ch);
+  transition: transform 0.52s cubic-bezier(0.65, 0, 0.25, 1), opacity 0.52s ease;
+}
+.mx-slot {
+  position: absolute; left: 0; top: 0; width: var(--cw); height: var(--ch);
+  transition: transform 0.52s cubic-bezier(0.65, 0, 0.25, 1), opacity 0.52s ease;
+}
+.mx-noanim, .mx-noanim * { transition: none !important; }
 
-/* Descărcare secundară (o versiune mai veche, o variantă alternativă) */
-.res-secondary {
-  margin-top: 12px;
-  font-size: 12px; line-height: 1.5;
-  color: var(--fg-dim);
-}
-.res-secondary a {
-  color: var(--fg-muted);
-  border-bottom: 1px solid color-mix(in oklab, var(--fg-muted) 35%, transparent);
-}
-.res-secondary a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-
-/* Badge „În curând" pe cardurile de resursă — pastilă chihlimbar plină, ca să se
-   distingă clar de butonul cyan de download */
-.res-soon {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-  color: #fbbf24;
-  padding: 8px 12px;
-  border: 1px solid color-mix(in oklab, #fbbf24 45%, transparent);
-  background: color-mix(in oklab, #fbbf24 14%, var(--bg-2));
-  border-radius: 8px;
+.mx-label {
+  position: absolute; left: calc(50% - var(--cw) / 2); width: var(--cw);
+  bottom: calc(100% + 14px);
+  display: flex; align-items: baseline; gap: 12px;
   white-space: nowrap;
-  box-shadow: 0 4px 12px -6px color-mix(in oklab, #fbbf24 40%, transparent);
+}
+.mx-label .rail-label { color: var(--cat); margin: 0; }
+.mx-lt { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; color: var(--fg); overflow: hidden; text-overflow: ellipsis; }
+.mx-cnt { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim); }
+.mx-cnt b { color: var(--cat); font-weight: 500; }
+
+.mx-slot .rc { cursor: pointer; }
+.mx-row.is-c .mx-slot.is-c .rc {
+  border-color: color-mix(in oklab, var(--cat) 55%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--cat) 30%, transparent), 0 30px 60px -24px rgba(0,0,0,0.7), 0 0 50px -20px var(--cat);
+}
+.mx-slot:not(.is-c) .rc .rc-more, .mx-row:not(.is-c) .rc .rc-more { visibility: hidden; }
+.mx-slot:not(.is-c) .rc:hover, .mx-row:not(.is-c) .rc:hover { transform: none; }
+
+/* --- butoanele de la capete --- */
+.mx-btn {
+  position: absolute; z-index: 6;
+  width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--border-strong);
+  background: color-mix(in oklab, var(--bg-1) 80%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: var(--fg); cursor: pointer;
+  transition: all 0.2s ease;
+}
+.mx-btn svg { width: 20px; height: 20px; }
+.mx-btn:hover { border-color: var(--accent); color: var(--accent); background: color-mix(in oklab, var(--accent) 12%, var(--bg-1)); }
+.mx-btn.up    { top: 14px; left: 50%; transform: translateX(-50%); }
+.mx-btn.down  { bottom: 14px; left: 50%; transform: translateX(-50%); }
+.mx-btn.left  { left: 14px; top: 50%; transform: translateY(-50%); }
+.mx-btn.right { right: 14px; top: 50%; transform: translateY(-50%); }
+.mx-btn small {
+  position: absolute; white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg-dim); pointer-events: none;
+}
+.mx-btn small {
+  padding: 3px 8px; border-radius: 6px;
+  background: color-mix(in oklab, var(--bg-1) 88%, transparent);
+  border: 1px solid var(--border);
+}
+.mx-btn.up small, .mx-btn.down small { left: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+
+/* --- harta: unde ești în catalog --- */
+.mx-map {
+  position: absolute; z-index: 6; top: 14px; left: 14px;
+  display: grid; gap: 7px;
+  padding: 10px 12px; border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg-1) 80%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.mx-map-row { display: flex; align-items: center; gap: 5px; }
+.mx-map-row span {
+  width: 92px; margin-right: 4px; white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--fg-dim);
+}
+.mx-map-row.on span { color: var(--cat); }
+.mx-map button {
+  width: 8px; height: 8px; padding: 0; border-radius: 2px; cursor: pointer;
+  border: 1px solid color-mix(in oklab, var(--cat) 45%, transparent); background: transparent;
+}
+.mx-map-row.on button { border-color: var(--cat); }
+.mx-map button.on { background: var(--cat); box-shadow: 0 0 8px var(--cat); }
+
+.mx-hint {
+  margin-top: 14px; text-align: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-dim);
+}
+.mx-hint kbd {
+  display: inline-block; min-width: 20px; padding: 0 5px; margin: 0 2px;
+  border: 1px solid var(--border-strong); border-radius: 4px; font-family: inherit; font-size: 10px; color: var(--fg-muted);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .rail-track { scroll-behavior: auto; }
+@media (max-width: 760px) {
+  .mx-wrap { padding: 10px 10px 28px; }
+  .mx-stage { height: clamp(500px, calc(100svh - 215px), 680px); border-radius: 18px; }
+  .mx-map { display: none; }
+  .mx-btn { width: 40px; height: 40px; }
+  .mx-btn small { display: none; }
+  .mx-hint { display: none; }
 }
-@media (max-width: 960px) {
-  .res-types { grid-template-columns: 1fr; gap: 12px; margin: 28px 0 8px; }
-  .res-type-pill { padding: 16px; }
-  .res-rail { margin-top: 40px; }
-  .rail-head { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .rail-track > .resource { flex-basis: calc((100% - 20px) / 2); }
+
+/* ============ PERSPECTIVA 3D ============
+   Rândurile stau pe un tambur care se rotește pe orizontală, iar cardurile din
+   rând se așază în evantai, rotite spre centru. */
+.s3d {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 50%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 70%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, color-mix(in oklab, var(--accent) 6%, transparent), transparent 70%),
+    var(--bg-0);
 }
-@media (max-width: 640px) {
-  .rail-track { gap: 14px; }
-  /* sub 640 px se vede un card întreg plus marginea celui următor, ca să fie
-     evident că rail-ul se derulează lateral */
-  .rail-track > .resource { flex-basis: 86%; }
+.s3d::before { opacity: 0.6; }
+.s3d .mx-world, .s3d .mx-row, .s3d .mx-slot { transform-style: preserve-3d; }
+.s3d .mx-row, .s3d .mx-slot {
+  transition: transform 0.65s cubic-bezier(0.65, 0, 0.25, 1), opacity 0.65s ease;
 }
-@media (max-width: 420px) {
-  .rail-track > .resource { flex-basis: 90%; }
-  .rail-btn { width: 34px; height: 34px; }
-  .rail-btn svg { width: 16px; height: 16px; }
+.s3d .mx-slot .rc { backface-visibility: hidden; }
+.s3d .mx-slot:not(.is-c) .rc {
+  background: linear-gradient(145deg, var(--bg-2) 0%, var(--bg-1) 100%);
+}
+.s3d .mx-row:not(.is-c) .mx-label { opacity: 0.6; }
+.s3d .mx-row.is-c .mx-slot.is-c .rc {
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--cat) 35%, transparent), 0 40px 80px -30px rgba(0,0,0,0.8), 0 0 70px -24px var(--cat);
+}
+
+/* ============ INDICIUL: DEMONSTRAȚIA ============
+   Scena își schițează singură cele două mișcări, iar săgeata care face
+   mișcarea respectivă se aprinde în aceeași clipă, cu o etichetă scurtă. */
+.mx-btn.is-cue {
+  border-color: var(--accent); color: #07121a; background: var(--accent);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent) 18%, transparent), 0 0 30px -2px var(--accent);
+}
+.mx-btn { transition: all 0.3s ease; }
+.cue {
+  position: absolute; z-index: 7;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: 10px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--bg-1) 90%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 50%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  white-space: nowrap;
+}
+.cue.on { opacity: 1; }
+.cue-h { right: 74px; top: 50%; transform: translate(10px, -50%); }
+.cue-h.on { transform: translate(0, -50%); }
+.cue-v { top: 18px; left: calc(50% + 150px); transform: translateY(-8px); }
+.cue-v.on { transform: none; }
+.cue kbd {
+  font-family: inherit; font-size: 10px; color: var(--fg-muted);
+  padding: 1px 5px; border: 1px solid var(--border-strong); border-radius: 4px;
+}
+/* în afara demonstrației, săgețile păstrează un accent discret */
+.mx-btn.left, .mx-btn.right, .mx-btn.up, .mx-btn.down { border-color: color-mix(in oklab, var(--accent) 35%, var(--border-strong)); }
+
+@media (max-width: 760px) {
+  .cue-h { right: 58px; }
+  .cue-v { left: 50%; top: 62px; transform: translate(-50%, -8px); }
+  .cue-v.on { transform: translate(-50%, 0); }
+}
+
+/* ============ INDICIUL: PULSUL DISCRET ============
+   După demonstrație rămâne un singur inel lent pe perechea de săgeți încă
+   nefolosită. Perechile alternează: stânga-dreapta, apoi sus-jos. */
+.mx-btn::before {
+  content: ''; position: absolute; inset: -1px; border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  opacity: 0; pointer-events: none;
+}
+.mx-btn.is-soft { border-color: color-mix(in oklab, var(--accent) 60%, var(--border-strong)); color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .mx-btn.is-soft::before { animation: rxSoft 2.6s ease-out infinite; }
+  .mx-btn.left.is-soft svg  { animation: rxSoftL 2.6s ease-in-out infinite; }
+  .mx-btn.right.is-soft svg { animation: rxSoftR 2.6s ease-in-out infinite; }
+  .mx-btn.up.is-soft svg    { animation: rxSoftU 2.6s ease-in-out infinite; }
+  .mx-btn.down.is-soft svg  { animation: rxSoftD 2.6s ease-in-out infinite; }
+}
+@keyframes rxSoft { 0% { transform: scale(1); opacity: 0.4; } 70%, 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes rxSoftL { 0%, 30%, 100% { transform: none; } 15% { transform: translateX(-2px); } }
+@keyframes rxSoftR { 0%, 30%, 100% { transform: none; } 15% { transform: translateX(2px); } }
+@keyframes rxSoftU { 0%, 30%, 100% { transform: none; } 15% { transform: translateY(-2px); } }
+@keyframes rxSoftD { 0%, 30%, 100% { transform: none; } 15% { transform: translateY(2px); } }
+
+/* tema light: textul de pe butonul umplut trece pe alb, ca pe accentul închis,
+   iar umbra cardului din centru devine albastră și mai scurtă */
+[data-theme="light"] .mx-btn.is-cue { color: #fff; }
+[data-theme="light"] .s3d .mx-row.is-c .mx-slot.is-c .rc {
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--cat) 35%, transparent), 0 24px 50px -28px rgba(15, 61, 82, 0.45), 0 0 50px -24px var(--cat);
 }
 </style>
 <!-- Cloudflare Web Analytics -->
@@ -291,7 +612,7 @@
       "@type": "ItemList",
       "@id": "https://aiaccountinghub.ro/resurse.html#resurse",
       "name": "Resurse disponibile pentru descărcare",
-      "numberOfItems": 5,
+      "numberOfItems": 8,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -332,63 +653,35 @@
           "@type": "ListItem",
           "position": 6,
           "item": {
-            "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector-folder"
+            "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector"
           }
         },
         {
           "@type": "ListItem",
           "position": 7,
           "item": {
-            "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector-fisier"
+            "@id": "https://aiaccountinghub.ro/resurse.html#fabrica-d406"
           }
         },
         {
           "@type": "ListItem",
           "position": 8,
           "item": {
-            "@id": "https://aiaccountinghub.ro/resurse.html#fabrica-d406"
+            "@id": "https://aiaccountinghub.ro/resurse.html#jurnalul-ai"
           }
         }
       ]
     },
     {
       "@type": "SoftwareApplication",
-      "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector-folder",
-      "name": "SAF-T Inspector 0.1.0, varianta folder",
-      "description": "Citește declarația D406, de la câteva zeci de MB până la câțiva GB, o verifică înainte de orice prelucrare și o transformă în registre Excel, plus raport de rulare în Word și PDF. CSV și Parquet la cerere, fără recitirea XML-ului. Totul local, fără internet. Varianta folder pornește repede și e potrivită pentru folosire zilnică. Modulul 1: implementat și verificat pe date sintetice, calibrarea o faceți pe o lună proprie deja depusă.",
-      "url": "https://aiaccountinghub.ro/resurse.html#rail-run",
-      "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-folder.zip",
-      "encodingFormat": "application/zip",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Windows",
-      "softwareVersion": "0.1.0",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "RON"
-      },
-      "citation": {
-        "@type": "CreativeWork",
-        "name": "Apeși Verifică, și D406 devine Excel",
-        "url": "https://aiaccountinghub.ro/2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html"
-      },
-      "inLanguage": "ro",
-      "isAccessibleForFree": true,
-      "author": {
-        "@id": "https://aiaccountinghub.ro/#organization"
-      },
-      "publisher": {
-        "@id": "https://aiaccountinghub.ro/#organization"
-      },
-      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector-fisier",
-      "name": "SAF-T Inspector 0.1.0, un singur fișier",
-      "description": "Aceeași aplicație, împachetată într-un singur .exe: ușor de mutat sau de trimis între calculatoare, fără nimic de despachetat. Pornește ceva mai încet decât varianta folder, fiindcă se despachetează la fiecare pornire, și poate fi oprită mai des de antivirus.",
-      "url": "https://aiaccountinghub.ro/resurse.html#rail-run",
-      "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-file.zip",
+      "@id": "https://aiaccountinghub.ro/resurse.html#saft-inspector",
+      "name": "SAF-T Inspector 0.1.0",
+      "description": "Citește declarația D406, de la câteva zeci de MB până la câțiva GB, o verifică înainte de orice prelucrare și o transformă în registre Excel, plus raport de rulare în Word și PDF. CSV și Parquet la cerere, fără recitirea XML-ului. Totul local, fără internet. Două variante: folder, care pornește repede și e potrivită pentru folosire zilnică, și un singur fișier .exe, ușor de mutat între calculatoare. Modulul 1: implementat și verificat pe date sintetice, calibrarea o faceți pe o lună proprie deja depusă.",
+      "url": "https://aiaccountinghub.ro/resurse.html#saft-inspector",
+      "downloadUrl": [
+        "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-folder.zip",
+        "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-file.zip"
+      ],
       "encodingFormat": "application/zip",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Windows",
@@ -418,7 +711,7 @@
       "@id": "https://aiaccountinghub.ro/resurse.html#fabrica-d406",
       "name": "Fabrica de fișiere sintetice D406",
       "description": "Generează declarații SAF-T D406 cu valori inventate, construite după schema oficială: mică, medie sau mare, de la aproximativ 200 MB până la 3-5 GB, cu linii și câmpuri opționale la alegere, într-un fișier sau în segmente. Pentru cine vrea să-și testeze sau să-și construiască propria aplicație fără să atingă date reale.",
-      "url": "https://aiaccountinghub.ro/resurse.html#rail-run",
+      "url": "https://aiaccountinghub.ro/resurse.html#fabrica-d406",
       "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/FabricaD406.zip",
       "encodingFormat": "application/zip",
       "applicationCategory": "BusinessApplication",
@@ -537,7 +830,7 @@
       "@id": "https://aiaccountinghub.ro/resurse.html#jurnalul-ai",
       "name": "Jurnalul AI — 30 de zile de adaptare",
       "description": "Aplicație într-un singur fișier HTML, care rulează în browser fără cont și fără internet: un termen AI pe zi lucrătoare, 10-15 minute, timp de 30 de zile, plus șase activități practice săptămânale. Este făcută pentru PC sau laptop, pe ecran mare, și se ține pe desktop. Dacă lipsești câteva zile, la revenire te întreabă singură cum reiei. Progresul se salvează local, cu export și import în fișier .md.",
-      "url": "https://aiaccountinghub.ro/resurse.html#rail-run",
+      "url": "https://aiaccountinghub.ro/resurse.html#jurnalul-ai",
       "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AI-Journal.zip",
       "encodingFormat": "application/zip",
       "applicationCategory": "EducationalApplication",
@@ -579,7 +872,7 @@
       "@id": "https://aiaccountinghub.ro/resurse.html#anaf-v2",
       "name": "Verificare CIF — ANAF (v2)",
       "description": "Verificare bulk și single CIF direct din API-ul public ANAF: nume firmă, plătitor TVA, stare activă și altele. Configurare externă, câmpuri la alegere, jurnal de rulare și sursele Python incluse în arhivă.",
-      "url": "https://aiaccountinghub.ro/resurse.html#rail-run",
+      "url": "https://aiaccountinghub.ro/resurse.html#verificare-cif-anaf",
       "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AnafCIFChecker_v2.zip",
       "encodingFormat": "application/zip",
       "applicationCategory": "BusinessApplication",
@@ -666,114 +959,28 @@
     </div>
     <div class="page-kicker"><span class="dot"></span>Download zone</div>
     <h1>Resurse &amp; <span class="accent">Tool-uri</span>.</h1>
-    <p class="page-lede">Materiale de citit, foi de calcul de completat și unelte mici de rulat, toate testate pe flux real de contabilitate. Fără cont, fără newsletter, doar download.</p>
+    <p class="page-lede"><span class="lede-long">Materiale de citit, foi de calcul de completat și unelte mici de rulat, toate testate pe flux real de contabilitate. </span>Fără cont, fără newsletter, doar download.</p>
   </div>
 </section>
 
-<section class="block" style="padding-top: 32px;">
-  <div class="block-inner">
-
-    <!-- Navigare între cele 3 categorii; pastila se marchează singură la derulare -->
-    <nav class="res-types" aria-label="Categorii de resurse">
-      <a href="#rail-read" class="res-type-pill" data-type="pdf">
-        <span class="rt-ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h1.5a1.5 1.5 0 0 1 0 3H9v-3zM9 16v3M14 13v6M14 13h2M14 16h1.5"/></svg>
-        </span>
-        <span class="rt-body">
-          <span class="rt-label">De citit</span>
-          <span class="rt-title">Ghiduri &amp; fișe de lucru</span>
-          <span class="rt-desc">Ghiduri, checklist-uri și fișe de o pagină. PDF, PPTX, DOCX, infografice.</span>
-        </span>
-      </a>
-      <a href="#rail-fill" class="res-type-pill" data-type="xls">
-        <span class="rt-ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16M15 4v16"/></svg>
-        </span>
-        <span class="rt-body">
-          <span class="rt-label">De completat</span>
-          <span class="rt-title">Dashboard-uri &amp; template-uri</span>
-          <span class="rt-desc">Foi de calcul cu formule și macro-uri, gata de conectat la datele tale.</span>
-        </span>
-      </a>
-      <a href="#rail-run" class="res-type-pill" data-type="tool">
-        <span class="rt-ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>
-        </span>
-        <span class="rt-body">
-          <span class="rt-label">De rulat</span>
-          <span class="rt-title">Unelte &amp; aplicații mici</span>
-          <span class="rt-desc">Aplicații mici care rulează în browser sau local, fără instalare complicată.</span>
-        </span>
-      </a>
-    </nav>
-
-    <!-- RAIL 1 — DE CITIT -->
-    <section class="res-rail" id="rail-read" data-type="pdf">
-      <div class="rail-head">
-        <div class="rail-head-text">
-          <div class="rail-label rl-read">// De citit</div>
-          <h2>Ghiduri &amp; fișe de lucru</h2>
-          <p>Materiale de parcurs o dată și de ținut la îndemână: ghiduri, checklist-uri și fișe de o pagină. Le citești în 10–20 de minute, le printezi sau le salvezi pe telefon.</p>
-        </div>
-        <div class="rail-nav">
-          <button type="button" class="rail-btn" data-dir="-1" aria-label="Resursele anterioare din „De citit”" aria-controls="grid-pdf">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <button type="button" class="rail-btn" data-dir="1" aria-label="Resursele următoare din „De citit”" aria-controls="grid-pdf">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
-        </div>
-      </div>
-      <div class="rail-viewport">
-        <div class="rail-track" id="grid-pdf"></div>
-      </div>
-    </section>
-
-    <!-- RAIL 2 — DE COMPLETAT -->
-    <section class="res-rail" id="rail-fill" data-type="xls">
-      <div class="rail-head">
-        <div class="rail-head-text">
-          <div class="rail-label rl-fill">// De completat</div>
-          <h2>Dashboard-uri &amp; template-uri</h2>
-          <p>Foi de calcul cu structură pre-validată, formule și macro-uri. Înlocuiești datele tale și ai output-ul dorit, fără să reconstruiești nimic de la zero.</p>
-        </div>
-        <div class="rail-nav">
-          <button type="button" class="rail-btn" data-dir="-1" aria-label="Resursele anterioare din „De completat”" aria-controls="grid-xls">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <button type="button" class="rail-btn" data-dir="1" aria-label="Resursele următoare din „De completat”" aria-controls="grid-xls">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
-        </div>
-      </div>
-      <div class="rail-viewport">
-        <div class="rail-track" id="grid-xls"></div>
-      </div>
-    </section>
-
-    <!-- RAIL 3 — DE RULAT -->
-    <section class="res-rail" id="rail-run" data-type="tool">
-      <div class="rail-head">
-        <div class="rail-head-text">
-          <div class="rail-label rl-run">// De rulat</div>
-          <h2>Unelte &amp; aplicații mici</h2>
-          <p>Tool-uri ușoare care rulează direct în browser sau pe calculatorul tău, fără server și fără upload. Datele rămân la tine.</p>
-        </div>
-        <div class="rail-nav">
-          <button type="button" class="rail-btn" data-dir="-1" aria-label="Resursele anterioare din „De rulat”" aria-controls="grid-tool">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <button type="button" class="rail-btn" data-dir="1" aria-label="Resursele următoare din „De rulat”" aria-controls="grid-tool">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
-        </div>
-      </div>
-      <div class="rail-viewport">
-        <div class="rail-track" id="grid-tool"></div>
-      </div>
-    </section>
-
+<section class="mx-wrap">
+  <div class="mx-stage s3d" id="mx" tabindex="0" aria-roledescription="carusel" aria-label="Catalogul de resurse: sus-jos categorii, stânga-dreapta resurse">
+    <div class="mx-world" id="mx-world"></div>
+    <div class="mx-map" id="mx-map" aria-hidden="true"></div>
+    <button type="button" class="mx-btn up" data-move="up" aria-label="Categoria anterioară">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg><small id="mx-up-l"></small>
+    </button>
+    <button type="button" class="mx-btn down" data-move="down" aria-label="Categoria următoare">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg><small id="mx-down-l"></small>
+    </button>
+    <button type="button" class="mx-btn left" data-move="left" aria-label="Resursa anterioară">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button type="button" class="mx-btn right" data-move="right" aria-label="Resursa următoare">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
   </div>
+  <div class="mx-hint"><kbd>↑</kbd><kbd>↓</kbd> categorii &nbsp;·&nbsp; <kbd>←</kbd><kbd>→</kbd> resurse &nbsp;·&nbsp; <kbd>Enter</kbd> sau click pe cardul din mijloc îl întoarce &nbsp;·&nbsp; la capăt se reia de la început</div>
 </section>
 
 <!-- FOOTER -->
@@ -816,339 +1023,698 @@
 
 <script src="assets/site.js"></script>
 <script>
-/* Fiecare resursă stă într-una din cele trei categorii: `pdf` = de citit,
-   `xls` = de completat, `tool` = de rulat. Câmpul `articles` face legătura
-   înapoi spre articolul care explică resursa: de ce există, cum a fost
-   construită și cum se folosește.
+/* ========== DATE ==========
+   Fiecare resursă stă într-una din cele trei categorii: `pdf` = de citit,
+   `xls` = de completat, `tool` = de rulat. Câmpurile:
+   `short`     textul scurt de pe cardul mic (maximum trei rânduri)
+   `meta`      linia din subsolul cardului mic
+   `body`      paragrafele de pe fața din spate
+   `points`    lista „Ce primești", opțională
+   `note`      caseta de atenționare, opțională
+   `downloads` una sau mai multe variante, fiecare cu explicația ei
+   `facts`     fișa tehnică scurtă
+   `articles`  articolele de pe site care spun povestea resursei; `role` spune
+               ce explică fiecare, `min` e timpul de citire din pagina lui
+   Variantele aceleiași aplicații (SAF-T Inspector folder și fișier, ANAF v2 și
+   v1) sunt o singură resursă cu mai multe descărcări.
 
    `track` = numele contorului trimis în backend la click pe download. Slug-ul e
    ACELAȘI cu cel al link-ului scurt din /r/, ca statisticile din D1 să se poată
-   pune cap la cap cu cele de pe shortlink-uri fără mapare manuală. GitHub
-   Releases dă doar totalul cumulativ per fișier, deci defalcarea pe zile vine
-   exclusiv de aici.
+   pune cap la cap cu cele de pe shortlink-uri fără mapare manuală.
 
    ⚠ LA FIECARE RESURSĂ NOUĂ CHIAR DISPONIBILĂ, actualizează și blocul JSON-LD
-   din <head>. Nu se generează de aici, deliberat: cardurile de mai jos se
-   randează din JavaScript, iar crawlerele care nu execută JS (GPTBot,
-   ClaudeBot, PerplexityBot) n-ar vedea nici resursele, nici datele lor. Blocul
-   static din <head> e singura descriere a catalogului pe care o pot citi.
-   Resursele „În curând" nu se trec acolo: n-au adresă de descărcare. */
+   din <head>. Nu se generează de aici, deliberat: cardurile se randează din
+   JavaScript, iar crawlerele care nu execută JS (GPTBot, ClaudeBot,
+   PerplexityBot) n-ar vedea nici resursele, nici datele lor. Blocul static din
+   <head> e singura descriere a catalogului pe care o pot citi. Resursele
+   „În curând" nu se trec acolo: n-au adresă de descărcare. */
+const REL = 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/';
+
+const FLOORS = [
+  { type: 'pdf',  label: 'De citit',     title: 'Ghiduri & fișe de lucru',
+    lede: 'Materiale de parcurs o dată și de ținut la îndemână. Le citești în 10–20 de minute, le printezi sau le salvezi.' },
+  { type: 'xls',  label: 'De completat', title: 'Dashboard-uri & template-uri',
+    lede: 'Foi de calcul cu structură pre-validată, formule și macro-uri. Înlocuiești datele și ai rezultatul.' },
+  { type: 'tool', label: 'De rulat',     title: 'Unelte & aplicații mici',
+    lede: 'Rulează în browser sau pe calculatorul tău, fără server și fără upload. Datele rămân la tine.' },
+];
+
 const RESOURCES = [
   /* ===== DE CITIT ===== */
   { type: 'pdf', slug: 'prd-modul-1', kind: 'Specificație · PDF', title: 'PRD tehnic, SAF-T Inspector, modulul 1',
-    desc: 'Specificația completă a citirii declarației D406 și a transpunerii ei în tabele: 21 de capitole, de la perimetru și modelul de date până la catalogul de erori și împachetare, plus 58 de criterii de acceptare scrise înaintea codului. Material de lucru, nu șablon universal: partea refolosibilă e forma, adică ierarhia surselor, perimetrul scris explicit și criteriile care se pot bifa.',
-    size: 'PDF · 53 de pagini · 0,9 MB', cta: 'Descarcă',
-    track: 'resursa:prd-modul-1',
-    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/D406-Modul-1-PRD-Tehnic.pdf',
-    articles: {
-      label: 'Articolul din care vine',
-      items: [
-        { href: '2026-09-15-Ultimul-pas-inainte-de-cod.html', title: 'Ultimul pas înainte de cod' },
-      ] } },
+    short: 'Specificația completă a modulului 1 din SAF-T Inspector: 21 de capitole și 58 de criterii de acceptare.',
+    meta: 'PDF · 53 pag. · 0,9 MB',
+    body: [
+      'Specificația completă a citirii declarației D406 și a transpunerii ei în tabele: 21 de capitole, de la perimetru și modelul de date până la catalogul de erori și împachetare, plus 58 de criterii de acceptare scrise înaintea codului.',
+      'Partea refolosibilă e forma: ierarhia surselor, perimetrul scris explicit și criteriile care se pot bifa.'],
+    note: 'Material de lucru, nu șablon universal.',
+    downloads: [{ name: 'Documentul PDF', size: 'PDF · 53 de pagini · 0,9 MB', href: REL + 'D406-Modul-1-PRD-Tehnic.pdf', track: 'resursa:prd-modul-1' }],
+    articles: { items: [{ href: '2026-09-15-Ultimul-pas-inainte-de-cod.html', min: 12, role: 'Cum s-a scris specificația', title: 'Ultimul pas înainte de cod' }] },
+    facts: [['Format', 'PDF'], ['Pagini', '53'], ['Capitole', '21']] },
+
   { type: 'pdf', slug: 'decizii', kind: 'Material de lucru · ZIP', title: 'SAF-T D406, promptul și cele trei rapoarte de decizii',
-    desc: 'Promptul care transformă o discuție de descoperire într-un raport de decizii, exact așa cum a fost scris, plus rapoartele produse de trei modele AI diferite pe aceleași documente. Fiecare decizie vine cu minimum trei opțiuni comparate, un nivel de certitudine și condiția scrisă dinainte în care se reia. Material de lucru, nu recomandare tehnică: promptul e scris pentru un caz anume, iar articolul explică ce se schimbă la al vostru.',
-    size: 'ZIP · 7 fișiere', cta: 'Descarcă',
-    track: 'resursa:decizii',
-    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Prompt_SAF-T.zip',
-    articles: {
-      label: 'Articolul din care vine',
-      items: [
-        { href: '2026-09-08-Conversatia-care-nu-a-produs-cod.html', title: 'Conversația care nu a produs cod' },
-      ] } },
-  { type: 'pdf', kind: 'Cheat sheet · PPTX', title: 'Promptul perfect, cele 14 elemente',
-    desc: 'Două one-pagere vizuale care se citesc împreună. Partea 1 e gramatica: cele 7 ingrediente ale unui prompt bun plus meta-promptul shortcut. Partea 2 e arhitectura: cele 7 elemente din 2.0, de la tag-uri XML la guardrails, plus trucul clarificărilor. Gata de printat sau de adaptat la fluxul tău.',
-    size: 'PPTX · 2 fișiere',
-    files: [
-      { label: 'Partea 1 · mai', title: 'Cei 7 pași pentru promptul perfect (PPTX · 47 KB)',
-        track: 'resursa:prompt-perfect',
-        href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Cei_7_pasi_pentru_promptul_perfect.pptx' },
-      { label: 'Partea 2 · iulie', title: 'Încă 7 pași pentru promptul perfect 2.0 (PPTX · 94 KB)',
-        track: 'resursa:prompt-perfect-2',
-        href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Inca_7_pasi_pentru_promptul_perfect_2-0.pptx' },
-    ],
-    articles: {
-      label: 'Articolele din care vine',
-      items: [
-        { href: '2026-05-01-Goana-dupa-promptul-perfect.html', title: 'Goana după promptul perfect' },
-        { href: '2026-07-31-Promptul-perfect-2.0.html', title: 'Promptul perfect 2.0, ce s-a schimbat în trei luni' },
-      ] } },
-  { type: 'pdf', kind: 'Ghid · PDF', title: 'GDPR în era AI',
-    desc: 'Ce date poți și ce nu poți trimite în modele AI publice. Checklist practic și exemple concrete pentru firmele de contabilitate.',
-    size: 'PDF · 1.8 MB', cta: 'În curând' },
-  { type: 'pdf', kind: 'Cheat-sheet · PDF', title: 'Vocabular AI — fișa A4',
-    desc: 'Toți buzzword-ii din zona AI traduși și exemplificați pe contabilitate, condensat pe o singură pagină pentru imprimat la birou.',
-    size: 'PDF · 540 KB', cta: 'În curând' },
+    short: 'Promptul de raport final și rapoartele de decizii produse de trei modele AI pe aceleași documente.',
+    meta: 'ZIP · 7 fișiere',
+    body: [
+      'Promptul care transformă o discuție de descoperire într-un raport de decizii, exact așa cum a fost scris, plus rapoartele produse de trei modele AI diferite pe aceleași documente.',
+      'Fiecare decizie vine cu minimum trei opțiuni comparate, un nivel de certitudine și condiția scrisă dinainte în care se reia.'],
+    note: 'Material de lucru, nu recomandare tehnică: promptul e scris pentru un caz anume, iar articolul explică ce se schimbă la al vostru.',
+    downloads: [{ name: 'Arhiva completă', size: 'ZIP · 7 fișiere', href: REL + 'Prompt_SAF-T.zip', track: 'resursa:decizii' }],
+    articles: { items: [{ href: '2026-09-08-Conversatia-care-nu-a-produs-cod.html', min: 13, role: 'Cum s-au luat deciziile', title: 'Conversația care nu a produs cod' }] },
+    facts: [['Format', 'ZIP'], ['Conținut', 'un prompt, trei rapoarte']] },
+
+  { type: 'pdf', slug: 'prompt-perfect', kind: 'Cheat sheet · PPTX', title: 'Promptul perfect, cele 14 elemente',
+    short: 'Două one-pagere: cele 7 ingrediente ale unui prompt bun și cele 7 elemente de arhitectură din 2.0.',
+    meta: '2 fișiere · PPTX',
+    body: [
+      'Două one-pagere vizuale care se citesc împreună. Partea 1 e gramatica: cele 7 ingrediente ale unui prompt bun, plus meta-promptul shortcut.',
+      'Partea 2 e arhitectura: cele 7 elemente din 2.0, de la tag-uri XML la guardrails, plus trucul clarificărilor. Gata de printat sau de adaptat la fluxul tău.'],
+    downloads: [
+      { name: 'Partea 1 · mai', hint: 'Cei 7 pași pentru promptul perfect.', size: 'PPTX · 47 KB', href: REL + 'Cei_7_pasi_pentru_promptul_perfect.pptx', track: 'resursa:prompt-perfect', rec: true },
+      { name: 'Partea 2 · iulie', hint: 'Încă 7 pași pentru promptul perfect 2.0.', size: 'PPTX · 94 KB', href: REL + 'Inca_7_pasi_pentru_promptul_perfect_2-0.pptx', track: 'resursa:prompt-perfect-2', rec: true }],
+    articles: { items: [
+      { href: '2026-05-01-Goana-dupa-promptul-perfect.html', min: 8, role: 'Partea 1, gramatica promptului', title: 'Goana după promptul perfect' },
+      { href: '2026-07-31-Promptul-perfect-2.0.html', min: 18, role: 'Partea 2, arhitectura promptului', title: 'Promptul perfect 2.0, ce s-a schimbat în trei luni' }] },
+    facts: [['Format', 'PPTX, editabil'], ['Pagini', '2 × o pagină']] },
+
+  { type: 'pdf', slug: 'gdpr-ai', kind: 'Ghid · PDF', title: 'GDPR în era AI', soon: true,
+    short: 'Ce date poți și ce nu poți trimite în modele AI publice, cu checklist pentru firmele de contabilitate.',
+    meta: 'PDF · 1,8 MB',
+    body: ['Ce date poți și ce nu poți trimite în modele AI publice. Checklist practic și exemple concrete pentru firmele de contabilitate.'],
+    facts: [['Format', 'PDF']] },
+
+  { type: 'pdf', slug: 'vocabular-a4', kind: 'Cheat sheet · PDF', title: 'Vocabular AI, fișa A4', soon: true,
+    short: 'Buzzword-urile din AI, traduse și exemplificate pe contabilitate, pe o singură pagină A4.',
+    meta: 'PDF · 540 KB',
+    body: ['Toți termenii din zona AI traduși și exemplificați pe contabilitate, condensați pe o singură pagină pentru imprimat la birou.'],
+    facts: [['Format', 'PDF, A4']] },
 
   /* ===== DE COMPLETAT ===== */
-  { type: 'xls', kind: 'Template · Excel', title: 'Jurnal de vânzări AI-ready',
-    desc: 'Structură standard pentru jurnalul de vânzări, pregătită pentru import automat în instrumente AI — coloane normalizate și validări.',
-    size: 'XLSX · 120 KB', cta: 'În curând' },
-  { type: 'xls', kind: 'Dashboard · Excel', title: 'Reconciliere bancară automată',
-    desc: 'Template cu formule și macro-uri pentru reconcilierea extraselor bancare cu jurnalul contabil — marchează automat diferențele.',
-    size: 'XLSM · 340 KB', cta: 'În curând' },
-  { type: 'xls', kind: 'Dashboard · Excel', title: 'Tablou de bord financiar lunar',
-    desc: 'Dashboard pre-construit pentru raportarea lunară către administrator: lichiditate, marjă brută, cash conversion. Doar conectezi datele.',
-    size: 'XLSM · 480 KB', cta: 'În curând' },
+  { type: 'xls', slug: 'jurnal-vanzari', kind: 'Template · Excel', title: 'Jurnal de vânzări AI-ready', soon: true,
+    short: 'Structură standard pentru jurnalul de vânzări, cu coloane normalizate, gata de import în unelte AI.',
+    meta: 'XLSX · 120 KB',
+    body: ['Structură standard pentru jurnalul de vânzări, pregătită pentru import automat în instrumente AI: coloane normalizate și validări.'],
+    facts: [['Format', 'XLSX']] },
+  { type: 'xls', slug: 'reconciliere-bancara', kind: 'Dashboard · Excel', title: 'Reconciliere bancară automată', soon: true,
+    short: 'Formule și macro-uri care confruntă extrasele bancare cu jurnalul contabil și marchează diferențele.',
+    meta: 'XLSM · 340 KB',
+    body: ['Template cu formule și macro-uri pentru reconcilierea extraselor bancare cu jurnalul contabil. Marchează automat diferențele.'],
+    facts: [['Format', 'XLSM, cu macro-uri']] },
+  { type: 'xls', slug: 'tablou-lunar', kind: 'Dashboard · Excel', title: 'Tablou de bord financiar lunar', soon: true,
+    short: 'Lichiditate, marjă brută, cash conversion: raportarea lunară către administrator, pe datele tale.',
+    meta: 'XLSM · 480 KB',
+    body: ['Dashboard pre-construit pentru raportarea lunară către administrator: lichiditate, marjă brută, cash conversion. Doar conectezi datele.'],
+    facts: [['Format', 'XLSM, cu macro-uri']] },
 
   /* ===== DE RULAT ===== */
-  { type: 'tool', slug: 'saft-inspector-folder', kind: 'Aplicație · Windows', title: 'SAF-T Inspector 0.1.0, varianta folder',
-    desc: 'Citește declarația D406, de la câteva zeci de MB până la câțiva GB, o verifică înainte de orice prelucrare și o transformă în registre Excel, plus raport de rulare în Word și PDF. CSV și Parquet la cerere, fără recitirea XML-ului. Totul local, fără internet. Varianta folder pornește repede și e potrivită pentru folosire zilnică. Modulul 1: implementat și verificat pe date sintetice, calibrarea o faceți pe o lună proprie deja depusă.',
-    size: 'ZIP · 54,2 MB · Windows', cta: 'Descarcă',
-    track: 'resursa:saft-inspector-folder',
-    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-folder.zip',
-    articles: {
-      label: 'Articolul din care vine',
-      items: [
-        { href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', title: 'Apeși Verifică, și D406 devine Excel' },
-      ] } },
-  { type: 'tool', slug: 'saft-inspector-fisier', kind: 'Aplicație · Windows', title: 'SAF-T Inspector 0.1.0, un singur fișier',
-    desc: 'Aceeași aplicație, împachetată într-un singur .exe: ușor de mutat sau de trimis între calculatoare, fără nimic de despachetat. Pornește ceva mai încet decât varianta folder, fiindcă se despachetează la fiecare pornire, și poate fi oprită mai des de antivirus.',
-    size: 'ZIP · 39,6 MB · Windows', cta: 'Descarcă',
-    track: 'resursa:saft-inspector-fisier',
-    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/SAF-T-Inspector-0.1.0-file.zip',
-    articles: {
-      label: 'Articolul din care vine',
-      items: [
-        { href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', title: 'Apeși Verifică, și D406 devine Excel' },
-      ] } },
+  { type: 'tool', slug: 'saft-inspector', kind: 'Aplicație · Windows', title: 'SAF-T Inspector 0.1.0',
+    short: 'Verifică declarația D406 și o transformă în registre Excel, cu raport în Word și PDF. Totul local.',
+    meta: '2 variante · Windows',
+    body: [
+      'Citește declarația D406, de la câteva zeci de MB până la câțiva GB, o verifică înainte de orice prelucrare și o transformă în registre Excel, plus raport de rulare în Word și PDF.',
+      'CSV și Parquet se generează la cerere, fără recitirea XML-ului. Totul rulează local, fără internet.'],
+    points: ['Verificarea fișierului înainte de prelucrare', 'Registre Excel pe secțiunile declarației', 'Raport de rulare în Word și PDF', 'Export CSV și Parquet la cerere'],
+    note: 'Modulul 1 e implementat și verificat pe date sintetice. Calibrarea o faceți pe o lună proprie, deja depusă.',
+    downloads: [
+      { name: 'Varianta folder', hint: 'Pornește repede. Potrivită pentru folosire zilnică, pe același calculator.', size: 'ZIP · 54,2 MB', href: REL + 'SAF-T-Inspector-0.1.0-folder.zip', track: 'resursa:saft-inspector-folder', rec: true },
+      { name: 'Un singur fișier', hint: 'Un .exe ușor de mutat sau de trimis. Pornește mai încet și poate fi oprit mai des de antivirus.', size: 'ZIP · 39,6 MB', href: REL + 'SAF-T-Inspector-0.1.0-file.zip', track: 'resursa:saft-inspector-fisier' }],
+    articles: { items: [{ href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', min: 15, role: 'Ce face și cum se folosește', title: 'Apeși Verifică, și D406 devine Excel' }] },
+    facts: [['Versiune', '0.1.0'], ['Sistem', 'Windows'], ['Internet', 'nu e necesar']] },
+
   { type: 'tool', slug: 'fabrica-d406', kind: 'Tool · Windows', title: 'Fabrica de fișiere sintetice D406',
-    desc: 'Generează declarații SAF-T D406 cu valori inventate, construite după schema oficială: mică, medie sau mare, de la aproximativ 200 MB până la 3-5 GB, cu linii și câmpuri opționale la alegere, într-un fișier sau în segmente. Pentru cine vrea să-și testeze sau să-și construiască propria aplicație fără să atingă date reale.',
-    size: 'ZIP · 12,8 MB · Windows', cta: 'Descarcă',
-    track: 'resursa:fabrica-d406',
-    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/FabricaD406.zip',
-    articles: {
-      label: 'Articolul din care vine',
-      items: [
-        { href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', title: 'Apeși Verifică, și D406 devine Excel' },
-      ] } },
-  { type: 'tool', slug: 'jurnalul-ai', kind: 'Aplicație · HTML', title: 'Jurnalul AI — 30 de zile de adaptare',
-    desc: 'Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe zi lucrătoare, 10–15 minute, timp de 30 de zile, plus șase activități practice săptămânale. Făcut pentru PC sau laptop, pe ecran mare. Dacă lipsești câteva zile, te întreabă singur cum reiei. Fără cont, fără email, fără internet: totul se salvează local, cu export și import în fișier .md.',
-    size: 'ZIP · 85 KB · rulează în browser', cta: 'Descarcă jurnalul',
-    track: 'resursa:jurnalul-ai',
-    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AI-Journal.zip',
-    articles: {
-      label: 'Cum se folosește și de ce arată așa',
-      items: [
-        { href: '2026-08-11-AI-Journal-doua-casete-si-o-cafea.html', title: 'Două casete și o cafea: tot ce ai de completat în jurnal' },
-        { href: '2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html', title: 'Obiceiul nu se construiește, se lipește' },
-        { href: '2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html', title: 'Ce poate face un fișier HTML descărcat și cum verifici singur' },
-      ] } },
-  { type: 'tool', slug: 'verificare-cif-anaf', kind: 'Tool · API', title: 'Verificare CIF — ANAF (v2)',
-    desc: 'Verificare bulk și single CIF direct din API-ul public ANAF: nume firmă, plătitor TVA, stare activă și altele. Versiunea 2 adaugă configurare externă, câmpuri la alegere, jurnal de rulare și sursele Python în arhivă. Fără cont, fără instalare.',
-    size: 'ZIP · Tool Windows', cta: 'Descarcă v2',
-    track: 'resursa:anaf-v2',
-    href: 'https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AnafCIFChecker_v2.zip',
-    secondary: 'Recomandăm versiunea 2. Ai nevoie de varianta inițială? <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/AnafCIFChecker.zip" download="AnafCIFChecker.zip" data-track="resursa:anaf-v1">Descarcă v1</a>.',
-    articles: {
-      label: 'Cum a fost construit',
-      items: [
-        { href: '2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html', title: 'Tool-ul ANAF, versiunea 2: de la „funcționează” la „rezistă în timp”' },
-      ] } },
-  { type: 'tool', kind: 'Tool · Web', title: 'Extractor BF travel PDF, imagini → Excel',
-    desc: 'Drag-and-drop pentru BF scanate PDF, imagini. Extrage furnizor, CIF, total, TVA și le exportă într-un Excel gata pentru import.',
-    size: 'Browser · Fără upload server', cta: 'În curând' }
+    short: 'Generează declarații D406 cu valori inventate, după schema oficială, de la 200 MB până la câțiva GB.',
+    meta: 'ZIP · 12,8 MB',
+    body: [
+      'Generează declarații SAF-T D406 cu valori inventate, construite după schema oficială: mică, medie sau mare, de la aproximativ 200 MB până la 3-5 GB.',
+      'Liniile și câmpurile opționale se aleg, iar rezultatul poate fi un fișier sau mai multe segmente. Pentru cine vrea să-și testeze sau să-și construiască propria aplicație fără să atingă date reale.'],
+    downloads: [{ name: 'Aplicația', size: 'ZIP · 12,8 MB', href: REL + 'FabricaD406.zip', track: 'resursa:fabrica-d406', rec: true }],
+    articles: { items: [{ href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', min: 15, role: 'Ce face și cum se folosește', title: 'Apeși Verifică, și D406 devine Excel' }] },
+    facts: [['Versiune', '1.0'], ['Sistem', 'Windows']] },
+
+  { type: 'tool', slug: 'jurnalul-ai', kind: 'Aplicație · HTML', title: 'Jurnalul AI, 30 de zile de adaptare',
+    short: 'Un termen AI pe zi lucrătoare, 30 de zile, plus șase activități practice. Un singur fișier HTML.',
+    meta: 'ZIP · 85 KB · browser',
+    body: [
+      'Un singur fișier pe care îl pui pe desktop și îl deschizi cu dublu-click. Un termen AI pe zi lucrătoare, 10–15 minute, timp de 30 de zile, plus șase activități practice săptămânale.',
+      'Dacă lipsești câteva zile, te întreabă singur cum reiei. Fără cont, fără email, fără internet: totul se salvează local, cu export și import în fișier .md.'],
+    note: 'Făcut pentru PC sau laptop, pe ecran mare. Nu e gândit pentru telefon.',
+    downloads: [{ name: 'Jurnalul', size: 'ZIP · 85 KB', href: REL + 'AI-Journal.zip', track: 'resursa:jurnalul-ai', rec: true }],
+    articles: { items: [
+      { href: '2026-08-11-AI-Journal-doua-casete-si-o-cafea.html', min: 14, role: 'Ce completezi în fiecare zi', title: 'Două casete și o cafea: tot ce ai de completat în jurnal' },
+      { href: '2026-08-11-Obiceiul-AI-nu-se-construieste-se-lipeste.html', min: 13, role: 'De ce e construit așa', title: 'Obiceiul nu se construiește, se lipește' },
+      { href: '2026-08-11-Fisier-HTML-descarcat-ce-poate-si-cum-verifici.html', min: 14, role: 'Cum verifici fișierul descărcat', title: 'Ce poate face un fișier HTML descărcat și cum verifici singur' }] },
+    facts: [['Rulează în', 'orice browser modern'], ['Durată', '30 de zile'], ['Date', 'salvate local']] },
+
+  { type: 'tool', slug: 'verificare-cif-anaf', kind: 'Tool · API', title: 'Verificare CIF, ANAF',
+    short: 'Verificare CIF în masă sau unul câte unul, direct din API-ul public ANAF.',
+    meta: 'v2 + v1 · Windows',
+    body: [
+      'Verificare bulk și single CIF direct din API-ul public ANAF: nume firmă, plătitor TVA, stare activă și altele.',
+      'Versiunea 2 adaugă configurare externă, câmpuri la alegere, jurnal de rulare și sursele Python în arhivă. Fără cont, fără instalare.'],
+    downloads: [
+      { name: 'Versiunea 2', hint: 'Recomandată: configurare externă, câmpuri la alegere, jurnal de rulare.', size: 'ZIP · Windows', href: REL + 'AnafCIFChecker_v2.zip', track: 'resursa:anaf-v2', rec: true },
+      { name: 'Versiunea 1', hint: 'Varianta inițială, păstrată pentru cine o folosește deja.', size: 'ZIP · Windows', href: REL + 'AnafCIFChecker.zip', track: 'resursa:anaf-v1' }],
+    articles: { items: [{ href: '2026-07-05-Tool-ANAF-v2-de-la-functioneaza-la-mentenabil.html', min: 15, role: 'Cum a fost construit', title: 'Tool-ul ANAF, versiunea 2: de la „funcționează” la „rezistă în timp”' }] },
+    facts: [['Versiune', '2'], ['Sistem', 'Windows'], ['Sursă date', 'API public ANAF']] },
+
+  { type: 'tool', slug: 'extractor-bf', kind: 'Tool · Web', title: 'Extractor BF travel, PDF și imagini în Excel', soon: true,
+    short: 'Extrage furnizor, CIF, total și TVA din bonuri scanate și le exportă în Excel.',
+    meta: 'Browser · fără upload',
+    body: ['Drag-and-drop pentru bonuri fiscale scanate, PDF sau imagini. Extrage furnizor, CIF, total, TVA și le exportă într-un Excel gata pentru import.'],
+    facts: [['Rulează în', 'browser'], ['Upload', 'niciunul']] },
 ];
 
-/* Ordinea rail-urilor pe pagină; `track` e containerul în care se injectează cardurile. */
-const RAILS = [
-  { type: 'pdf',  track: 'grid-pdf'  },
-  { type: 'xls',  track: 'grid-xls'  },
-  { type: 'tool', track: 'grid-tool' }
-];
-
-const iconFor = (t) => ({
-  pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h1.5a1.5 1.5 0 0 1 0 3H9v-3zM9 16v3M14 13v6M14 13h2M14 16h1.5"/></svg>',
+const ICON = {
+  pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>',
   xls:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16M15 4v16"/></svg>',
   tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-6 6 6 6M16 3l6 6-6 6M14 4l-4 16"/></svg>'
-}[t]);
+};
+const SVG = {
+  flip:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2"/><path d="M3 12A9 9 0 0 1 18.5 5.8"/><path d="M18 2v4h-4M6 22v-4h4"/></svg>',
+  dl:    '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>',
+  close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>',
+  prev:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+  next:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>',
+  warn:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>'
+};
 
-const DL_ICON = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>';
-const ART_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+const byType = t => RESOURCES.filter(r => r.type === t);
 
-/* `data-track` e prins de handler-ul global din assets/site.js, care trimite
-   contorul în backend. Fire-and-forget: `keepalive` face ca cererea să plece
-   chiar dacă navigarea spre fișier începe în aceeași clipă. */
-const dlBtn = (href, label, title, track) =>
-  `<a href="${href}" download="${href.split('/').pop()}" class="download-btn"${title ? ` title="${title}"` : ''}${track ? ` data-track="${track}"` : ''}>
-        ${label}
-        ${DL_ICON}
-      </a>`;
 
-function cardHTML(r) {
-  const downloadUrl = r.href || r.link;
-  /* r.files = mai multe descărcări în același card; footerul trece pe două rânduri */
-  const action = r.files
-    ? `<div style="display:flex; gap:8px; flex-wrap:wrap;">${r.files.map(f => dlBtn(f.href, f.label, f.title, f.track)).join('')}</div>`
-    : downloadUrl
-      ? dlBtn(downloadUrl, r.cta && r.cta !== 'În curând' ? r.cta : 'Download', null, r.track)
-      : `<span class="res-soon">În curând</span>`;
-  const footerStyle = r.files ? ' style="flex-direction:column; align-items:stretch; gap:12px;"' : '';
-  /* Trimiterea înapoi la articol: contextul în care resursa capătă sens */
-  const links = r.articles
-    ? `<div class="res-links">
-        <span class="res-links-label">${r.articles.label}</span>
-        ${r.articles.items.map(a => `<a class="res-link" href="${a.href}">${ART_ICON}<span>${a.title}</span></a>`).join('')}
-      </div>`
-    : '';
-  const secondary = r.secondary ? `<p class="res-secondary">${r.secondary}</p>` : '';
+function backHTML(r) {
+  const list = byType(r.type), pos = list.indexOf(r);
+  const floor = FLOORS.find(f => f.type === r.type);
+  const prev = list[pos - 1], next = list[pos + 1];
+  const dls = r.soon
+    ? '<div class="dl-soon">În curând</div>'
+    : r.downloads.map(d => `
+        <div class="dl-opt${d.rec ? ' is-rec' : ''}">
+          <div class="dl-row1"><span class="dl-name">${d.name}</span>${d.rec && r.downloads.length > 1 && !r.downloads.every(x => x.rec) ? '<span class="dl-rec">Recomandat</span>' : ''}</div>
+          ${d.hint ? `<p class="dl-hint">${d.hint}</p>` : ''}
+          <div class="dl-row2"><span class="dl-size">${d.size}</span>
+            <a class="download-btn" href="${d.href}" download="${d.href.split('/').pop()}" data-track="${d.track}">Descarcă ${SVG.dl}</a></div>
+        </div>`).join('');
   return `
-    <div class="resource ${r.type} fade-in"${r.slug ? ` id="${r.slug}"` : ''}>
-      <div class="resource-header">
-        <div class="resource-icon">${iconFor(r.type)}</div>
-        <span class="resource-type">${r.kind}</span>
+    <div class="rxb-head">
+      <span class="rc-ic">${ICON[r.type]}</span>
+      <div class="rxb-titles">
+        <div class="rxb-crumb">${floor.label} <span>· ${r.kind}</span></div>
+        <h2 id="rxm-title">${r.title}</h2>
       </div>
-      <h3>${r.title}</h3>
-      <p>${r.desc}</p>
-      ${links}
-      <div class="resource-footer"${footerStyle}>
-        <span class="resource-size">${r.size}</span>
-        ${action}
+      <button type="button" class="rxb-close" aria-label="Închide">${SVG.close}</button>
+    </div>
+    <div class="rxb-body">
+      <div class="rxb-main">
+        <div class="rxb-sec">
+          <h4 class="rxb-h">Despre</h4>
+          ${r.body.map((p, k) => `<p${k === 0 ? ' class="lead"' : ''}>${p}</p>`).join('')}
+        </div>
+        ${r.points ? `<div class="rxb-sec"><h4 class="rxb-h">Ce primești</h4><ul class="rxb-list">${r.points.map(p => `<li>${p}</li>`).join('')}</ul></div>` : ''}
+        ${r.note ? `<div class="rxb-sec"><div class="rxb-note">${SVG.warn}<span>${r.note}</span></div></div>` : ''}
       </div>
-      ${secondary}
+      <aside class="rxb-side">
+        <div><h4 class="rxb-h">${!r.soon && r.downloads.length > 1 ? 'Alege varianta' : 'Descarcă'}</h4><div class="rxb-dl">${dls}</div></div>
+        ${artSide(r)}
+        ${r.facts ? `<div><h4 class="rxb-h">Pe scurt</h4><dl class="rxb-facts">${r.facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></div>` : ''}
+      </aside>
+    </div>
+    <div class="rxb-foot">
+      <button type="button" class="rxb-step" data-step="-1" ${prev ? '' : 'disabled'}>${SVG.prev}<span>${prev ? prev.title : 'Început'}</span></button>
+      <span class="rxb-pos"><b>${pos + 1}</b> / ${list.length} în ${floor.label}</span>
+      <button type="button" class="rxb-step" data-step="1" ${next ? '' : 'disabled'}><span>${next ? next.title : 'Final'}</span>${SVG.next}</button>
     </div>`;
 }
 
-/* ========== ANCORA PE CARD ==========
-   Cardurile sunt injectate din JS, deci fragmentul din URL nu are ce gasi cand
-   browserul incearca sa sara la el. Il tratam noi, dupa render: aducem cardul
-   in rail pe orizontala, apoi pagina la el pe verticala, si il marcam scurt. */
-function focusFromHash() {
-  const id = decodeURIComponent((location.hash || '').slice(1));
-  if (!id) return;
-  const card = document.getElementById(id);
-  if (!card || !card.classList.contains('resource')) return;
 
-  const track = card.closest('.rail-track');
-  if (track) {
-    /* fara animatie orizontala: pozitionam direct, ca sa nu se bata cu scroll-ul paginii */
-    const prev = track.style.scrollBehavior;
-    track.style.scrollBehavior = 'auto';
-    track.scrollLeft = card.offsetLeft - track.offsetLeft;
-    track.style.scrollBehavior = prev;
-    track.dispatchEvent(new Event('scroll'));
+/* ========== POVESTEA DIN SPATELE RESURSEI ==========
+   Fișa fiecărui articol: rolul lui (doar când sunt mai multe), titlul, data
+   din numele fișierului și timpul de citire. */
+const LUNI = ['ian.', 'feb.', 'mar.', 'apr.', 'mai', 'iun.', 'iul.', 'aug.', 'sep.', 'oct.', 'nov.', 'dec.'];
+const artDate = h => { const [y, m, d] = h.slice(0, 10).split('-').map(Number); return `${d} ${LUNI[m - 1]} ${y}`; };
+const ARR = '<svg class="ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+function artSide(r) {
+  if (!r.articles) return '';
+  const many = r.articles.items.length > 1;
+  return `<div><h4 class="rxb-h">${many ? 'Povestea din spatele resursei, în articole' : 'Povestea din spatele resursei, în articol'}</h4>
+    <div class="art1">${r.articles.items.map(a => `
+      <a class="art1-c" href="${a.href}">
+        <span class="art1-b">
+          ${many ? `<span class="art-role">${a.role}</span>` : ''}
+          <b>${a.title}</b>
+          <span class="art-meta">Articol · ${artDate(a.href)} · ${a.min} min</span>
+          <span class="art-go">Citește articolul ${ARR}</span>
+        </span>
+      </a>`).join('')}</div></div>`;
+}
+
+/* ========== CARD COMPACT ========== */
+function cardHTML(r, attrs = '') {
+  return `
+    <div class="rc ${r.type}" data-slug="${r.slug}" ${attrs}>
+      <div class="rc-top"><span class="rc-ic">${ICON[r.type]}</span><span class="rc-kind">${r.kind}</span></div>
+      <h3>${r.title}</h3>
+      <p>${r.short}</p>
+      <div class="rc-foot">
+        <span class="rc-meta">${r.soon ? '<span class="rc-soon">În curând</span>' : r.meta}</span>
+        <span class="rc-more">Detalii ${SVG.flip}</span>
+      </div>
+    </div>`;
+}
+const bySlug = s => RESOURCES.find(r => r.slug === s);
+
+/* ========== CARDUL ÎNTORS ==========
+   Secvența: fundalul se estompează, cardul pleacă exact din locul lui, se
+   rotește în jurul axei verticale și crește spre centrul ecranului în aceeași
+   mișcare. Conținutul feței din spate apare abia după ce rotația s-a încheiat.
+   La închidere, drumul invers: se micșorează înapoi pe locul cardului.
+   Detail.open(el, slug, { locate }) pornește din dreptunghiul lui `el`.
+   `locate(slug)` e dat de carusel: când cititorul trece la altă resursă din
+   interiorul cardului întors, caruselul se mută în spate pe resursa aceea și
+   întoarce elementul în care cardul trebuie să aterizeze la închidere. */
+document.body.insertAdjacentHTML('beforeend', `
+<div class="rxm" id="rxm" aria-hidden="true">
+  <div class="rxm-dim" id="rxm-dim"></div>
+  <div class="rxm-stage" id="rxm-stage" role="dialog" aria-modal="true" aria-labelledby="rxm-title">
+    <div class="rxm-card">
+      <div class="rxm-face rxm-front" id="rxm-front"></div>
+      <div class="rxm-face rxm-back" id="rxm-back"></div>
+    </div>
+  </div>
+</div>`);
+
+const Detail = (() => {
+  const rxm = document.getElementById('rxm');
+  const stage = document.getElementById('rxm-stage');
+  const card3d = stage.querySelector('.rxm-card');
+  const front = document.getElementById('rxm-front');
+  const back = document.getElementById('rxm-back');
+  let el = null, slug = null, opts = {}, timers = [], hist = false;
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+  const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function target() {
+    const vw = window.innerWidth, vh = window.innerHeight;
+    if (vw <= 760) return { left: 0, top: 0, width: vw, height: vh };
+    const w = Math.min(1000, vw - 64), h = Math.min(720, vh - 64);
+    return { left: (vw - w) / 2, top: (vh - h) / 2, width: w, height: h };
+  }
+  function place(r) {
+    stage.style.left = r.left + 'px'; stage.style.top = r.top + 'px';
+    stage.style.width = r.width + 'px'; stage.style.height = r.height + 'px';
+  }
+  function fill(r) {
+    rxm.classList.remove('pdf', 'xls', 'tool');
+    rxm.classList.add(r.type);
+    front.innerHTML = cardHTML(r);
+    back.innerHTML = backHTML(r);
+    back.querySelector('.rxb-close').addEventListener('click', close);
+    back.querySelectorAll('.rxb-step').forEach(b => b.addEventListener('click', () => step(Number(b.dataset.step))));
   }
 
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+  function open(srcEl, s, o = {}) {
+    if (rxm.classList.contains('open')) return;
+    timers.forEach(clearTimeout); timers = [];
+    el = srcEl; slug = s; opts = o;
+    fill(bySlug(s));
+    stage.style.transition = 'none'; card3d.style.transition = 'none';
+    place(el.getBoundingClientRect());
+    rxm.classList.remove('flipped', 'ready');
+    rxm.classList.add('open');
+    rxm.setAttribute('aria-hidden', 'false');
+    el.classList.add('is-lifted');
+    document.body.style.overflow = 'hidden';
+    if (!hist) { hist = true; history.pushState({ rx: s }, '', '#' + s); }
+    stage.offsetWidth;
+    stage.style.transition = ''; card3d.style.transition = '';
+    const d = reduce() ? 0 : 1;
+    requestAnimationFrame(() => {
+      rxm.classList.add('flipped');
+      place(target());
+      later(() => { rxm.classList.add('ready'); back.querySelector('.rxb-close').focus({ preventScroll: true }); }, 560 * d);
+    });
+  }
 
-  document.querySelectorAll('.resource.is-target').forEach(el => el.classList.remove('is-target'));
-  card.classList.add('is-target');
-  clearTimeout(focusFromHash._t);
-  focusFromHash._t = setTimeout(() => card.classList.remove('is-target'), 4000);
-}
+  function close(fromHistory) {
+    if (!rxm.classList.contains('open')) return;
+    timers.forEach(clearTimeout); timers = [];
+    if (hist && fromHistory !== true) { hist = false; history.back(); }
+    hist = false;
+    const d = reduce() ? 0 : 1;
+    rxm.classList.remove('ready');
+    later(() => { place(el.getBoundingClientRect()); rxm.classList.remove('flipped'); }, 140 * d);
+    later(() => {
+      rxm.classList.remove('open');
+      rxm.setAttribute('aria-hidden', 'true');
+      el.classList.remove('is-lifted');
+      document.body.style.overflow = '';
+      el.focus({ preventScroll: true });
+      opts.onClosed && opts.onClosed(slug);
+    }, 860 * d);
+  }
 
-function render() {
-  RAILS.forEach(({ type, track }) => {
-    const el = document.getElementById(track);
-    if (!el) return;
-    el.innerHTML = RESOURCES.filter(r => r.type === type).map(cardHTML).join('');
+  function step(dir) {
+    const r = bySlug(slug), list = byType(r.type), n = list[list.indexOf(r) + dir];
+    if (!n) return;
+    back.classList.add('swap');
+    later(() => {
+      el.classList.remove('is-lifted');
+      slug = n.slug;
+      el = (opts.locate && opts.locate(slug)) || el;
+      el.classList.add('is-lifted');
+      fill(n);
+      history.replaceState({ rx: slug }, '', '#' + slug);
+      back.classList.remove('swap');
+      back.querySelector(`.rxb-step[data-step="${dir}"]:not(:disabled)`)?.focus({ preventScroll: true });
+    }, 150);
+  }
+
+  document.getElementById('rxm-dim').addEventListener('click', close);
+  document.addEventListener('keydown', e => {
+    if (!rxm.classList.contains('ready')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+  window.addEventListener('popstate', () => { if (hist) { hist = false; close(true); } });
+  window.addEventListener('resize', () => {
+    if (!rxm.classList.contains('open')) return;
+    stage.style.transition = 'none'; place(target()); stage.offsetWidth; stage.style.transition = '';
+  });
+  return { open, close, isOpen: () => rxm.classList.contains('open') };
+})();
+
+/* Gestul de swipe: întoarce direcția dominantă */
+function onSwipe(node, fn) {
+  let x = null, y = null;
+  node.addEventListener('touchstart', e => { x = e.touches[0].clientX; y = e.touches[0].clientY; }, { passive: true });
+  node.addEventListener('touchend', e => {
+    if (x === null) return;
+    const dx = e.changedTouches[0].clientX - x, dy = e.changedTouches[0].clientY - y;
+    x = y = null;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 40) return;
+    if (Math.abs(dx) > Math.abs(dy)) fn(dx < 0 ? 'right' : 'left'); else fn(dy < 0 ? 'down' : 'up');
   });
 }
+const mod = (a, n) => ((a % n) + n) % n;
 
-/* ========== RAIL ORIZONTAL ==========
-   Săgețile și estomparea marginilor sunt pur reactive: se aprind doar când
-   conținutul chiar depășește lățimea disponibilă. Cu 3 carduri pe desktop
-   rail-ul arată identic cu vechea grilă; pe tabletă și telefon, unde încap 2
-   respectiv 1 card, se activează singure. */
-function initRails() {
-  document.querySelectorAll('.res-rail').forEach(rail => {
-    const track = rail.querySelector('.rail-track');
-    if (!track) return;
-    const btns = [...rail.querySelectorAll('.rail-btn')];
+/* ========== MOTORUL SCENEI ==========
+   Rândurile sunt categorii, coloanele sunt resursele categoriei. Se randează
+   doar o fereastră în jurul centrului: rândurile -2..2 și coloanele -3..3,
+   cu indici luați modulo, deci derularea nu se oprește niciodată la capăt.
+   O mutare deplasează poziția logică a elementelor existente (cu tranziție),
+   apoi, după animație, fereastra se rerandează pe noul centru, fără tranziție.
+   Configurația decide doar cum arată o poziție: rowT(k) și slotT(j). */
+const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 
-    function stepSize() {
-      const card = track.querySelector('.resource');
-      if (!card) return track.clientWidth;
-      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-      return card.getBoundingClientRect().width + gap;
-    }
+function makeMatrix(cfg) {
+  const { stage, world, rowT, slotT, measure, dur = 520 } = cfg;
+  const st = { cat: FLOORS.length - 1, h: Object.fromEntries(FLOORS.map(f => [f.type, 0])) };
+  let busy = false, dims = {};
+  const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function sync() {
-      const max = track.scrollWidth - track.clientWidth;
-      const scrollable = max > 4;
-      const x = track.scrollLeft;
-      rail.classList.toggle('is-scrollable', scrollable);
-      rail.classList.toggle('has-prev', scrollable && x > 4);
-      rail.classList.toggle('has-next', scrollable && x < max - 4);
-      btns.forEach(b => {
-        b.disabled = !scrollable || (Number(b.dataset.dir) < 0 ? x <= 4 : x >= max - 4);
+  function render() {
+    world.innerHTML = range(-2, 2).map(k => {
+      const f = FLOORS[mod(st.cat + k, FLOORS.length)], list = byType(f.type), pos = st.h[f.type];
+      return `<div class="mx-row ${f.type}" data-k="${k}">
+        <div class="mx-label"><span class="rail-label">// ${f.label}</span><span class="mx-lt">${f.title}</span><span class="mx-cnt"><b>${pos + 1}</b> / ${list.length}</span></div>
+        ${range(-3, 3).map(j => `<div class="mx-slot" data-j="${j}">${cardHTML(list[mod(pos + j, list.length)], 'tabindex="-1" role="button"')}</div>`).join('')}
+      </div>`;
+    }).join('');
+    apply();
+    cfg.onRender && cfg.onRender(st);
+  }
+  function apply() {
+    world.querySelectorAll('.mx-row').forEach(row => {
+      const k = Number(row.dataset.k);
+      const n = byType(FLOORS.find(f => row.classList.contains(f.type)).type).length;
+      Object.assign(row.style, rowT(k, dims));
+      row.classList.toggle('is-c', k === 0);
+      row.querySelectorAll('.mx-slot').forEach(s => {
+        const j = Number(s.dataset.j);
+        Object.assign(s.style, slotT(j, dims, k, n));
+        s.classList.toggle('is-c', j === 0);
+      });
+    });
+    const c = center();
+    world.querySelectorAll('.rc').forEach(rc => rc.tabIndex = rc === c ? 0 : -1);
+  }
+  function snap(fn) {
+    stage.classList.add('mx-noanim');
+    fn();
+    stage.offsetWidth;
+    stage.classList.remove('mx-noanim');
+  }
+  function resize() {
+    dims = measure(stage);
+    Object.entries(dims.vars || {}).forEach(([k, v]) => stage.style.setProperty(k, v));
+    snap(apply);
+  }
+  function center() { return world.querySelector('.mx-row[data-k="0"] .mx-slot[data-j="0"] .rc'); }
+
+  function move(axis, dir, auto = false) {
+    if (busy || Detail.isOpen()) return;
+    busy = true;
+    cfg.onMove && cfg.onMove(axis, dir, auto);
+    if (axis === 'h') world.querySelectorAll('.mx-row[data-k="0"] .mx-slot').forEach(s => s.dataset.j = Number(s.dataset.j) - dir);
+    else world.querySelectorAll('.mx-row').forEach(r => r.dataset.k = Number(r.dataset.k) - dir);
+    apply();
+    setTimeout(() => {
+      if (axis === 'h') { const t = FLOORS[st.cat].type; st.h[t] = mod(st.h[t] + dir, byType(t).length); }
+      else st.cat = mod(st.cat + dir, FLOORS.length);
+      snap(render);
+      busy = false;
+    }, reduce() ? 0 : dur);
+  }
+  function goTo(slug) {
+    const r = bySlug(slug);
+    st.cat = FLOORS.findIndex(f => f.type === r.type);
+    st.h[r.type] = byType(r.type).indexOf(r);
+    snap(render);
+    return center();
+  }
+  const rowN = row => byType(FLOORS.find(f => row.classList.contains(f.type)).type).length;
+  /* peek: schițează o mutare fără s-o facă. Elementele pleacă spre poziția
+     „cu `amt` mai încolo” și se întorc; folosit de demonstrație. */
+  function peek(axis, amt, ms = 1300) {
+    if (busy || Detail.isOpen()) return;
+    const kf = (a, b) => [{ transform: a.transform }, { transform: b.transform, offset: 0.42 }, { transform: b.transform, offset: 0.58 }, { transform: a.transform }];
+    if (axis === 'h') {
+      const row = world.querySelector('.mx-row[data-k="0"]'), n = rowN(row);
+      row.querySelectorAll('.mx-slot').forEach(s => {
+        const j = Number(s.dataset.j);
+        s.animate(kf(slotT(j, dims, 0, n), slotT(j - amt, dims, 0, n)), { duration: ms, easing: 'ease-in-out' });
+      });
+    } else {
+      world.querySelectorAll('.mx-row').forEach(r => {
+        const k = Number(r.dataset.k);
+        r.animate(kf(rowT(k, dims), rowT(k - amt, dims)), { duration: ms, easing: 'ease-in-out' });
       });
     }
+  }
+  function openCenter() {
+    const c = center();
+    Detail.open(c, c.dataset.slug, { locate: goTo });
+  }
 
-    /* Starea săgeților vine în mod normal din evenimentul `scroll`. După un click
-       o reverificăm și pe ceas vreo secundă, cât ține derularea lină: dacă
-       browserul termină animația fără să mai emită evenimente, butoanele nu
-       rămân blocate pe starea de dinainte. `sync` e idempotent, deci în browserele
-       care se poartă normal repetarea nu schimbă nimic. */
-    let settleTimer = null;
-    function settle() {
-      clearInterval(settleTimer);
-      let ticks = 0;
-      settleTimer = setInterval(() => {
-        sync();
-        if (++ticks >= 16) { clearInterval(settleTimer); settleTimer = null; }
-      }, 60);
-    }
-
-    btns.forEach(b => b.addEventListener('click', () => {
-      track.scrollBy({ left: Number(b.dataset.dir) * stepSize(), behavior: 'smooth' });
-      settle();
-    }));
-
-    track.addEventListener('scroll', sync, { passive: true });
-    if ('ResizeObserver' in window) {
-      new ResizeObserver(sync).observe(track);
-    } else {
-      window.addEventListener('resize', sync);
-    }
-    sync();
+  /* click: pe cardul din centru îl întoarce; pe un vecin, aduce vecinul în centru */
+  world.addEventListener('click', e => {
+    const slot = e.target.closest('.mx-slot');
+    if (!slot) return;
+    const k = Number(slot.parentElement.dataset.k), j = Number(slot.dataset.j);
+    if (k !== 0) move('v', Math.sign(k));
+    else if (j !== 0) move('h', Math.sign(j));
+    else openCenter();
   });
-}
+  stage.querySelectorAll('[data-move]').forEach(b => b.addEventListener('click', () => {
+    const m = b.dataset.move;
+    move(m === 'up' || m === 'down' ? 'v' : 'h', m === 'up' || m === 'left' ? -1 : 1);
+  }));
+  let hover = false;
+  stage.addEventListener('mouseenter', () => hover = true);
+  stage.addEventListener('mouseleave', () => hover = false);
+  document.addEventListener('keydown', e => {
+    if (Detail.isOpen() || (!hover && !stage.contains(document.activeElement))) return;
+    const map = { ArrowUp: ['v', -1], ArrowDown: ['v', 1], ArrowLeft: ['h', -1], ArrowRight: ['h', 1] };
+    if (map[e.key]) { e.preventDefault(); move(...map[e.key]); }
+    if (e.key === 'Enter' && document.activeElement === center()) { e.preventDefault(); openCenter(); }
+  });
+  onSwipe(stage, d => move(d === 'up' || d === 'down' ? 'v' : 'h', d === 'down' || d === 'right' ? 1 : -1));
+  new ResizeObserver(resize).observe(stage);
 
-/* ========== SCROLL-SPY PE PASTILELE DE CATEGORIE ==========
-   Verticala paginii ține locul caruselului: pastila categoriei în care ai ajuns
-   se marchează singură, ca să știi mereu unde ești în catalog. */
-function initSpy() {
-  const pills = [...document.querySelectorAll('.res-type-pill')];
-  const rails = [...document.querySelectorAll('.res-rail')];
-  if (!pills.length || !rails.length) return;
+  dims = measure(stage);
+  Object.entries(dims.vars || {}).forEach(([k, v]) => stage.style.setProperty(k, v));
+  snap(render);
 
-  function spy() {
-    const line = window.innerHeight * 0.38;
-    let active = null;
-    rails.forEach(r => {
-      if (r.getBoundingClientRect().top <= line) active = r;
-    });
-    pills.forEach(p => {
-      p.classList.toggle('is-active', !!active && p.getAttribute('href') === '#' + active.id);
-    });
+  /* Ancora din adresă: /resurse.html#jurnalul-ai aduce resursa în centru și
+     întoarce cardul. #rail-read, #rail-fill, #rail-run aduc doar categoria.
+     Ancorele vechi, de la variantele separate de dinainte, duc la resursa unită. */
+  const ALIAS = { 'saft-inspector-folder': 'saft-inspector', 'saft-inspector-fisier': 'saft-inspector',
+                  'prompt-perfect-2': 'prompt-perfect', 'saft-decizii': 'decizii', 'anaf-v2': 'verificare-cif-anaf' };
+  const RAILS = { 'rail-read': 'pdf', 'rail-fill': 'xls', 'rail-run': 'tool' };
+  function fromHash() {
+    let h = decodeURIComponent(location.hash.slice(1));
+    h = ALIAS[h] || h;
+    if (Detail.isOpen()) return;
+    if (RAILS[h]) {
+      st.cat = FLOORS.findIndex(f => f.type === RAILS[h]);
+      snap(render);
+      stage.scrollIntoView({ block: 'center' });
+      return;
+    }
+    if (!bySlug(h)) return;
+    goTo(h);
+    stage.scrollIntoView({ block: 'center' });
+    setTimeout(openCenter, 500);
   }
-
-  window.addEventListener('scroll', spy, { passive: true });
-  window.addEventListener('resize', spy);
-  spy();
+  fromHash();
+  window.addEventListener('hashchange', fromHash);
+  return { st, move, goTo, center, openCenter, peek, world, stage };
 }
-
-/* Fade-in la derulare — sau imediat, dacă IntersectionObserver lipsește */
-function initFade() {
-  const cards = document.querySelectorAll('.rail-track .fade-in');
-  if (!('IntersectionObserver' in window)) {
-    cards.forEach(el => el.classList.add('in'));
-    return;
+/* ========== INDICIILE: DEMONSTRAȚIA, APOI PULSUL ==========
+   Ordinea: scena intră în ecran → demonstrație (≈4 s) → puls discret pe
+   perechea de săgeți încă nefolosită, alternând la 5,2 s, și derularea
+   automată. O axă folosită de cititor iese din puls. Demonstrația rulează la
+   fiecare încărcare a paginii, intenționat: nu se ține minte între vizite. */
+const DEMO = { used: { h: false, v: false }, timers: [], turn: 'h', pulse: null };
+const touch = matchMedia('(hover: none)').matches;
+const HINTS = {
+  /* `auto` = mutare făcută de derularea automată, nu de cititor */
+  move(axis, auto) {
+    if (auto) return;
+    DEMO.used[axis] = true;
+    DEMO.timers.forEach(clearTimeout); DEMO.timers = [];
+    cues(null);
+    startPulse();
+    AUTO.interrupt();
   }
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.08 });
-  cards.forEach(el => io.observe(el));
+};
+function cues(axis) {
+  document.querySelectorAll('.mx-btn').forEach(b => b.classList.remove('is-cue'));
+  document.querySelectorAll('.cue').forEach(c => c.classList.remove('on'));
+  if (!axis) return;
+  document.querySelector(axis === 'h' ? '.mx-btn.right' : '.mx-btn.up').classList.add('is-cue');
+  document.querySelector('.cue-' + axis).classList.add('on');
 }
+function softTick() {
+  const left = ['h', 'v'].filter(a => !DEMO.used[a]);
+  document.querySelectorAll('.mx-btn').forEach(b => b.classList.remove('is-soft'));
+  if (!left.length) { stopPulse(); return; }
+  if (!left.includes(DEMO.turn)) DEMO.turn = left[0];
+  const sel = DEMO.turn === 'h' ? '.mx-btn.left, .mx-btn.right' : '.mx-btn.up, .mx-btn.down';
+  document.querySelectorAll(sel).forEach(b => b.classList.add('is-soft'));
+  if (left.length > 1) DEMO.turn = DEMO.turn === 'h' ? 'v' : 'h';
+}
+function startPulse() { stopPulse(); softTick(); DEMO.pulse = setInterval(softTick, 5200); }
+function stopPulse() {
+  clearInterval(DEMO.pulse); DEMO.pulse = null;
+  document.querySelectorAll('.mx-btn').forEach(b => b.classList.remove('is-soft'));
+}
+function demo() {
+  if (Detail.isOpen()) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { startPulse(); return; }
+  const t = (fn, ms) => DEMO.timers.push(setTimeout(fn, ms));
+  t(() => { cues('h'); MX.peek('h', 0.38, 1500); }, 0);
+  t(() => { cues('v'); MX.peek('v', -0.3, 1500); }, 2100);
+  t(() => { cues(null); startPulse(); AUTO.start(); }, 4200);
+}
+setTimeout(() => {
+  const stage = document.getElementById('mx');
+  stage.insertAdjacentHTML('beforeend', `
+    <span class="cue cue-h">${touch ? 'Glisează' : 'Mai multe resurse'} <kbd>→</kbd></span>
+    <span class="cue cue-v">${touch ? 'Glisează în jos' : 'Alte categorii'} <kbd>↑</kbd></span>`);
+  const io = new IntersectionObserver(es => {
+    if (es[0].isIntersecting) { io.disconnect(); setTimeout(demo, 700); }
+  }, { threshold: 0.6 });
+  io.observe(stage);
+}, 0);
 
-render();
-initRails();
-/* dupa initRails, ca sagetile si estomparea sa fie deja calculate */
-requestAnimationFrame(focusFromHash);
-window.addEventListener('hashchange', focusFromHash);
-initSpy();
-initFade();
+/* ========== POZIȚIILE PE SCENĂ ==========
+   Rândurile se înclină pe axa orizontală (rotateX) și se retrag în adâncime,
+   cardurile din rând se rotesc spre centru pe axa verticală (rotateY). */
+const sgn = Math.sign;
+const SCENE = {
+  stage: document.getElementById('mx'),
+  world: document.getElementById('mx-world'),
+  dur: 650,
+  measure(stage) {
+    const W = stage.clientWidth, H = stage.clientHeight, narrow = W < 700;
+    /* pe telefon cardul din centru ia ~80% din lățime; vecinii rămân ca margini înclinate */
+    const cw = Math.min(410, W * (narrow ? 0.8 : 0.35));
+    const ch = narrow ? Math.min(300, H * 0.5) : Math.min(275, H * 0.36);
+    return { W, H, cw, ch, narrow, vars: { '--cw': cw + 'px', '--ch': ch + 'px' } };
+  },
+  rowT: (k, d) => {
+    const a = Math.abs(k);
+    const y = d.H / 2 - d.ch / 2 + k * d.ch * (d.narrow ? 1.12 : 1.3);
+    return {
+      transform: `translate3d(0, ${y}px, ${-a * 230}px) rotateX(${-k * 30}deg)`,
+      opacity: a === 0 ? 1 : a === 1 ? 0.55 : 0
+    };
+  },
+  slotT: (j, d, k, n) => {
+    const a = Math.abs(j);
+    /* marginea a doua apare doar pe rândul din centru și doar dacă nu repetă un card deja vizibil */
+    const far = k === 0 && 2 * a + 1 <= n ? 0.3 : 0;
+    const off = a === 0 ? 0 : d.cw * (d.narrow ? 0.72 : 0.8) + (a - 1) * d.cw * 0.45;
+    return {
+      transform: `translate3d(${d.W / 2 - d.cw / 2 + sgn(j) * off}px, 0, ${-a * 190}px) rotateY(${-sgn(j) * 44}deg)`,
+      opacity: a === 0 ? 1 : a === 1 ? 0.85 : a === 2 ? far : 0
+    };
+  },
+  onRender(st) {
+    document.getElementById('mx-up-l').textContent = FLOORS[mod(st.cat - 1, 3)].label;
+    document.getElementById('mx-down-l').textContent = FLOORS[mod(st.cat + 1, 3)].label;
+    document.getElementById('mx-map').innerHTML = FLOORS.map((f, i) => `
+      <div class="mx-map-row ${f.type}${i === st.cat ? ' on' : ''}"><span>${f.label}</span>
+        ${byType(f.type).map((r, k) => `<button type="button" data-go="${r.slug}" class="${k === st.h[f.type] ? 'on' : ''}" title="${r.title}"></button>`).join('')}
+      </div>`).join('');
+  },
+  onMove: (axis, dir, auto) => HINTS.move(axis, auto)
+};
+const MX = makeMatrix(SCENE);
+document.getElementById('mx-map').addEventListener('click', e => {
+  const b = e.target.closest('[data-go]');
+  if (b) MX.goTo(b.dataset.go);
+});
+
+/* ========== DERULAREA AUTOMATĂ ==========
+   După demonstrație, dacă cititorul nu intervine, scena merge singură: card cu
+   card spre dreapta până se termină seria, apoi urcă la categoria următoare și
+   o ia de la capăt, în buclă. Se oprește la orice gest al cititorului (click,
+   tastă, atingere, rotiță) și stă pe loc cât timp mouse-ul e pe scenă, cardul
+   e întors, scena iese din ecran sau tabul nu e vizibil. Repornește după 15 s
+   fără niciun gest. Nu pornește deloc dacă sistemul cere animații reduse. */
+const AUTO = (() => {
+  const DWELL = 3500, IDLE = 15000;
+  const stageEl = document.getElementById('mx');
+  let timer = null, idle = null, steps = 0, on = false, hover = false, visible = false;
+  function tick() {
+    if (!on) return;
+    if (!hover && visible && !document.hidden && !Detail.isOpen()) {
+      const n = byType(FLOORS[MX.st.cat].type).length;
+      if (steps < n - 1) { steps++; MX.move('h', 1, true); }
+      else { steps = 0; MX.move('v', -1, true); }
+    }
+    timer = setTimeout(tick, DWELL);
+  }
+  function start() {
+    if (on || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    on = true; steps = 0;
+    clearTimeout(timer); timer = setTimeout(tick, DWELL);
+  }
+  function interrupt() {
+    on = false;
+    clearTimeout(timer); clearTimeout(idle);
+    idle = setTimeout(start, IDLE);
+  }
+  ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(ev =>
+    stageEl.addEventListener(ev, interrupt, { passive: true }));
+  stageEl.addEventListener('mouseenter', () => hover = true);
+  stageEl.addEventListener('mouseleave', () => hover = false);
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: 0.4 }).observe(stageEl);
+  return { start, interrupt };
+})();
 </script>
 </body>
 </html>
