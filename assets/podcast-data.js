@@ -36,11 +36,11 @@
          la durata reală (12:57). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: de ce munca grea vine ultima" },
-        { t: 120 , title: "Extragerea din facturi și erorile tipice" },
-        { t: 284 , title: "Documentul lung și filtrul personal" },
-        { t: 402 , title: "Calculul cu lanț de raționament" },
-        { t: 527 , title: "Conectarea, doar dacă politica firmei permite" },
-        { t: 634 , title: "Capcanele ultimei săptămâni" },
+        { t: 70 , title: "Extragerea din facturi și erorile tipice" },
+        { t: 370 , title: "Documentul lung și filtrul personal" },
+        { t: 467 , title: "Calculul cu lanț de raționament" },
+        { t: 555 , title: "Conectarea, doar dacă politica firmei permite" },
+        { t: 640 , title: "Capcanele ultimei săptămâni" },
         { t: 691 , title: "Ce rămâne după 30 de zile" }
       ]
     },
@@ -53,13 +53,13 @@
          la durata reală (15:52). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: contextul rescris în fiecare conversație" },
-        { t: 166 , title: "Alegerea temei pentru Project" },
-        { t: 311 , title: "Instrucțiunile permanente, în patru blocuri" },
+        { t: 248 , title: "Alegerea temei pentru Project" },
+        { t: 435 , title: "Instrucțiunile permanente, în patru blocuri" },
         { t: 450 , title: "Documentele de referință și Projectul-depozit" },
-        { t: 542 , title: "Căutarea semantică și golurile din proceduri" },
+        { t: 650 , title: "Căutarea semantică și golurile din proceduri" },
         { t: 706 , title: "Rutina programată" },
         { t: 799 , title: "Mediul greșit și câștigul de consistență" },
-        { t: 874 , title: "Ce rămâne și ce urmează" }
+        { t: 850 , title: "Ce rămâne și ce urmează" }
       ]
     },
     {
@@ -71,13 +71,13 @@
          la durata reală (22:48). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: interdicția care produce Shadow AI" },
-        { t: 188 , title: "Lista instrumentelor aprobate" },
-        { t: 257 , title: "Cele trei medii: enterprise, open weight, cont personal" },
-        { t: 443 , title: "Minimizare, contractele cu clienții și ce e interzis oriunde" },
-        { t: 761 , title: "Regula de verificare în trei niveluri" },
-        { t: 906 , title: "Curățenia: umplutura generată" },
-        { t: 1106, title: "Biblioteca de prompturi" },
-        { t: 1186, title: "Capcanele și ce rămâne" }
+        { t: 325 , title: "Lista instrumentelor aprobate" },
+        { t: 384 , title: "Cele trei medii: enterprise, open weight, cont personal" },
+        { t: 710 , title: "Minimizare, contractele cu clienții și ce e interzis oriunde" },
+        { t: 840 , title: "Regula de verificare în trei niveluri" },
+        { t: 930 , title: "Curățenia: umplutura generată" },
+        { t: 1072, title: "Biblioteca de prompturi" },
+        { t: 1171, title: "Capcanele și ce rămâne" }
       ]
     },
     {
@@ -89,13 +89,13 @@
          la durata reală (14:07). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: greșeala care arată ca un răspuns corect" },
-        { t: 118 , title: "Trei tipuri de modele și regula de alegere" },
-        { t: 220 , title: "Același prompt, două modele" },
-        { t: 337 , title: "Testul multimodal: bonuri și facturi" },
-        { t: 465 , title: "Verificarea la sursă și „ești sigur?”" },
-        { t: 575 , title: "Prima halucinație și semnalele de alarmă" },
-        { t: 672 , title: "Capcanele săptămânii" },
-        { t: 766 , title: "Ce rămâne și ce urmează" }
+        { t: 201 , title: "Trei tipuri de modele și regula de alegere" },
+        { t: 305 , title: "Același prompt, două modele" },
+        { t: 376 , title: "Testul multimodal: bonuri și facturi" },
+        { t: 528 , title: "Verificarea la sursă și „ești sigur?”" },
+        { t: 593 , title: "Prima halucinație și semnalele de alarmă" },
+        { t: 687 , title: "Capcanele săptămânii" },
+        { t: 770 , title: "Ce rămâne și ce urmează" }
       ]
     },
     {
@@ -107,12 +107,12 @@
          la durata reală (13:58). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: juniorul care n-a fost la nicio ședință" },
-        { t: 170 , title: "Trei sarcini reale și cele patru straturi" },
-        { t: 335 , title: "Exemplul: mailul pentru documentele lipsă" },
+        { t: 155 , title: "Trei sarcini reale și cele patru straturi" },
+        { t: 321 , title: "Exemplul: mailul pentru documentele lipsă" },
         { t: 414 , title: "Rescrii promptul, nu răspunsul" },
-        { t: 562 , title: "Pasul 4: testul limitelor" },
+        { t: 607 , title: "Pasul 4: testul limitelor" },
         { t: 672 , title: "Capcanele: prompturi magice, politețe, date reale" },
-        { t: 769 , title: "Ce rămâne și ce urmează" }
+        { t: 737 , title: "Ce rămâne și ce urmează" }
       ]
     },
     {
@@ -124,11 +124,11 @@
          la durata reală (16:19). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: testul nedrept și firma de test" },
-        { t: 155 , title: "Pasul 1: un singur tool, gratuit sau plătit" },
-        { t: 350 , title: "Pasul 2: setările, istoricul și tipul de cont" },
-        { t: 518 , title: "Pasul 3: trei conversații fără miză" },
-        { t: 642 , title: "Pasul 4: aceeași întrebare în trei formate" },
-        { t: 761 , title: "Obiecții și cele trei capcane" },
+        { t: 192 , title: "Pasul 1: un singur tool, gratuit sau plătit" },
+        { t: 365 , title: "Pasul 2: setările, istoricul și tipul de cont" },
+        { t: 509 , title: "Pasul 3: trei conversații fără miză" },
+        { t: 669 , title: "Pasul 4: aceeași întrebare în trei formate" },
+        { t: 824 , title: "Obiecții și cele trei capcane" },
         { t: 883 , title: "Ce rămâne după prima săptămână" }
       ]
     },
