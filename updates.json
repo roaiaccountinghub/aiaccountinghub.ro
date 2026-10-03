@@ -2,8 +2,35 @@
   "_comment": "FLUXUL DE NOUTĂȚI — se completează MANUAL la fiecare publicare, împreună cu feed.xml (sunt oglindă). Adaugă noul material ca PRIM element din 'items' (ordinea din listă = ordinea afișării, cele mai noi întâi). Câmpuri: id (unic, nu se mai schimbă niciodată — el decide ce e 'citit'), type (DOAR articol | podcast | buzzword — alt tip nu poate fi bifat de cititor, deci nu i-ar fi semnalat niciodată), title, url (adresa la care duce notificarea), date (AAAA-LL-ZZ), meta (text scurt: durată), mark (opțional — selector CSS al cardului care primește eticheta NOU; dacă lipsește, se caută automat legătura către 'url').",
   "_linkuri": "Articol: adresa proprie a paginii. Podcast: 'podcast.html?play=<spotifyId>' — deschide direct playerul pe episodul acela. Buzzword: 'buzzword.html#<id>' — deschide definiția și derulează la ea. Resursele nu intră aici: când publici ceva important în Download zone scrii oricum și un articol pe temă.",
   "_surse": "Datele de publicare există și la sursă: câmpul 'date' din assets/podcast-data.js (episoade) și din assets/buzzwords.json (termeni). De acolo le copiezi când adaugi un material nou aici.",
-  "updated": "2026-10-01",
+  "updated": "2026-10-03",
   "items": [
+    {
+      "id": "pod-s4e03-plan",
+      "type": "podcast",
+      "title": "SAF-T · Nu cere aplicația, cere planul: cum îți construiești cu AI propria verificare SAF-T",
+      "url": "podcast.html?play=5jh7404LdaZKpIPL172Tn6",
+      "date": "2026-10-03",
+      "meta": "19 min",
+      "mark": "[data-spotify=\"5jh7404LdaZKpIPL172Tn6\"]"
+    },
+    {
+      "id": "pod-s4e02-verificare-d406",
+      "type": "podcast",
+      "title": "SAF-T · In DUK we trust: ce nu verifică DUKIntegrator la D406",
+      "url": "podcast.html?play=6ew5z90E86UfrUcrekcb1K",
+      "date": "2026-10-03",
+      "meta": "19 min",
+      "mark": "[data-spotify=\"6ew5z90E86UfrUcrekcb1K\"]"
+    },
+    {
+      "id": "pod-s4e01-d406",
+      "type": "podcast",
+      "title": "SAF-T · Cinci ani de SAF-T: ce se află în spatele butonului",
+      "url": "podcast.html?play=5hH9M5aqZNDsy1ubMOiWns",
+      "date": "2026-10-03",
+      "meta": "17 min",
+      "mark": "[data-spotify=\"5hH9M5aqZNDsy1ubMOiWns\"]"
+    },
     {
       "id": "pod-s3e07-jurnal-s6",
       "type": "podcast",

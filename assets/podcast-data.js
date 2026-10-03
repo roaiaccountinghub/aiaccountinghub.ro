@@ -26,6 +26,63 @@
   var CF  = "/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F";
 
   window.PODCAST_EPISODES = [
+    /* ---------- Sezonul 4 · Seria SAF-T ---------- */
+    {
+      id: "5jh7404LdaZKpIPL172Tn6", slug: "plan", ep: "E03", group: "Sezonul 4 · Seria SAF-T",
+      date: "2026-10-03",
+      title: "SAF-T · Nu cere aplicația, cere planul: cum îți construiești cu AI propria verificare SAF-T",
+      audioUrl: RSS + "126752970" + CF + "2026-9-3%2F0689c972-0a3b-6c72-eb6e-60077197fe86.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (19:10). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: prima aplicație și cele șapte diferențe" },
+        { t: 157 , title: "„Cere planul”: etapa în care nu se scrie cod" },
+        { t: 250 , title: "Spațiul de lucru: proiect, CLAUDE.md, MEMORY.md" },
+        { t: 505 , title: "Laptopul de companie și rolul IT-ului" },
+        { t: 548 , title: "Conversația de planificare: contextul dat" },
+        { t: 721 , title: "Deciziile: Python, folder portabil, exporturi" },
+        { t: 860 , title: "Promptul vine la sfârșit" },
+        { t: 963 , title: "Trei modele, același răspuns" },
+        { t: 1088, title: "Ce urmează: modulul unu" }
+      ]
+    },
+    {
+      id: "6ew5z90E86UfrUcrekcb1K", slug: "verificare-d406", ep: "E02", group: "Sezonul 4 · Seria SAF-T",
+      date: "2026-10-03",
+      title: "SAF-T · In DUK we trust: ce nu verifică DUKIntegrator la D406",
+      audioUrl: RSS + "126752938" + CF + "2026-9-3%2Fb498b6ab-c142-66f9-2895-437a6fc1b733.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (18:59). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: D406 se generează, nu se completează" },
+        { t: 103 , title: "„In DUK we trust”: ce verifică și ce nu" },
+        { t: 265 , title: "De ce contează acum: verificarea automată a TVA" },
+        { t: 416 , title: "Nivelurile de verificare" },
+        { t: 519 , title: "Verificările pe care doar tu le poți formula" },
+        { t: 663 , title: "De ce nu ajunge Excel-ul" },
+        { t: 769 , title: "AI-ul și cine scrie codul" },
+        { t: 949 , title: "Trei reguli care nu se negociază" },
+        { t: 1040, title: "Cum începi și ce urmează" }
+      ]
+    },
+    {
+      id: "5hH9M5aqZNDsy1ubMOiWns", slug: "d406", ep: "E01", group: "Sezonul 4 · Seria SAF-T",
+      date: "2026-10-03",
+      title: "SAF-T · Cinci ani de SAF-T: ce se află în spatele butonului",
+      audioUrl: RSS + "126752467" + CF + "2026-9-3%2F4e4867a4-a116-3f78-1d32-394e255ba7c7.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (16:31). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: cinci ani de SAF-T" },
+        { t: 69  , title: "De unde vine standardul: OCDE și XML" },
+        { t: 230 , title: "Cadrul legal și cine depune" },
+        { t: 345 , title: "Ce e în fișier: mapările și cele patru secțiuni" },
+        { t: 538 , title: "Depunerea, corecțiile și cele trei declarații" },
+        { t: 634 , title: "Amenzile și miza reală: RO e-TVA" },
+        { t: 731 , title: "Cadourile de aniversare: cele două aplicații ANAF" },
+        { t: 951 , title: "Concluzii după cinci ani" }
+      ]
+    },
     /* ---------- Sezonul 3 · AI Journal ---------- */
     {
       id: "0hoGQP05DQmJPfTWZZOzvG", slug: "jurnal-s6", ep: "E07", group: "Sezonul 3 · AI Journal",
