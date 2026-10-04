@@ -36,13 +36,13 @@
          la durata reală (19:10). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: prima aplicație și cele șapte diferențe" },
-        { t: 157 , title: "„Cere planul”: etapa în care nu se scrie cod" },
-        { t: 250 , title: "Spațiul de lucru: proiect, CLAUDE.md, MEMORY.md" },
-        { t: 505 , title: "Laptopul de companie și rolul IT-ului" },
-        { t: 548 , title: "Conversația de planificare: contextul dat" },
-        { t: 721 , title: "Deciziile: Python, folder portabil, exporturi" },
-        { t: 860 , title: "Promptul vine la sfârșit" },
-        { t: 963 , title: "Trei modele, același răspuns" },
+        { t: 247 , title: "„Cere planul”: etapa în care nu se scrie cod" },
+        { t: 361 , title: "Spațiul de lucru: proiect, CLAUDE.md, MEMORY.md" },
+        { t: 507 , title: "Laptopul de companie și rolul IT-ului" },
+        { t: 568 , title: "Conversația de planificare: contextul dat" },
+        { t: 688 , title: "Deciziile: Python, folder portabil, exporturi" },
+        { t: 837 , title: "Promptul vine la sfârșit" },
+        { t: 942 , title: "Trei modele, același răspuns" },
         { t: 1088, title: "Ce urmează: modulul unu" }
       ]
     },
@@ -55,13 +55,13 @@
          la durata reală (18:59). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: D406 se generează, nu se completează" },
-        { t: 103 , title: "„In DUK we trust”: ce verifică și ce nu" },
-        { t: 265 , title: "De ce contează acum: verificarea automată a TVA" },
-        { t: 416 , title: "Nivelurile de verificare" },
+        { t: 137 , title: "„In DUK we trust”: ce verifică și ce nu" },
+        { t: 340 , title: "De ce contează acum: verificarea automată a TVA" },
+        { t: 469 , title: "Nivelurile de verificare" },
         { t: 519 , title: "Verificările pe care doar tu le poți formula" },
-        { t: 663 , title: "De ce nu ajunge Excel-ul" },
-        { t: 769 , title: "AI-ul și cine scrie codul" },
-        { t: 949 , title: "Trei reguli care nu se negociază" },
+        { t: 681 , title: "De ce nu ajunge Excel-ul" },
+        { t: 790 , title: "AI-ul și cine scrie codul" },
+        { t: 895 , title: "Trei reguli care nu se negociază" },
         { t: 1040, title: "Cum începi și ce urmează" }
       ]
     },
@@ -74,12 +74,12 @@
          la durata reală (16:31). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: cinci ani de SAF-T" },
-        { t: 69  , title: "De unde vine standardul: OCDE și XML" },
-        { t: 230 , title: "Cadrul legal și cine depune" },
-        { t: 345 , title: "Ce e în fișier: mapările și cele patru secțiuni" },
-        { t: 538 , title: "Depunerea, corecțiile și cele trei declarații" },
-        { t: 634 , title: "Amenzile și miza reală: RO e-TVA" },
-        { t: 731 , title: "Cadourile de aniversare: cele două aplicații ANAF" },
+        { t: 110  , title: "De unde vine standardul: OCDE și XML" },
+        { t: 337 , title: "Cadrul legal și cine depune" },
+        { t: 473 , title: "Ce e în fișier: mapările și cele patru secțiuni" },
+        { t: 661 , title: "Depunerea, corecțiile și cele trei declarații" },
+        { t: 708 , title: "Amenzile și miza reală: RO e-TVA" },
+        { t: 798 , title: "Cadourile de aniversare: cele două aplicații ANAF" },
         { t: 951 , title: "Concluzii după cinci ani" }
       ]
     },
