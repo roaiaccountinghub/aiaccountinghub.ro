@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Marja firmei față de sector, înainte să întrebe ANAF — AI Accounting Hub</title>
+<meta name="description" content="ANAF compară marja firmei cu reperul sectorului. Fin_Metrics, construit pentru uz intern și publicat doar ca exemplu, face aceeași comparație pe bilanțurile publice 2025: sector, cod CAEN, competitori, județe și 7 ani de istoric. Drumul prin ecosistemul Gemini, de la un raport Deep Research la executabil, ce date folosește și unde greșește.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-10-24-Marja-firmei-fata-de-sector-inainte-de-ANAF.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-10-24-Marja-firmei-fata-de-sector-inainte-de-ANAF.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Marja firmei față de sector, înainte să întrebe ANAF — AI Accounting Hub">
+<meta property="og:description" content="ANAF compară marja firmei cu reperul sectorului. Fin_Metrics, construit pentru uz intern și publicat doar ca exemplu, face aceeași comparație pe bilanțurile publice 2025: sector, cod CAEN, competitori, județe și 7 ani de istoric. Drumul prin ecosistemul Gemini, de la un raport Deep Research la executabil, ce date folosește și unde greșește.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Marja firmei față de sector, înainte să întrebe ANAF — AI Accounting Hub">
+<meta name="twitter:description" content="ANAF compară marja firmei cu reperul sectorului. Fin_Metrics, construit pentru uz intern și publicat doar ca exemplu, face aceeași comparație pe bilanțurile publice 2025: sector, cod CAEN, competitori, județe și 7 ani de istoric. Drumul prin ecosistemul Gemini, de la un raport Deep Research la executabil, ce date folosește și unde greșește.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Coverul articolului: ecranul principal al aplicației în loc de imaginea comună.
+   Același tipar ca la SAF-T Inspector. */
+.article-cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.article-cover::after { background: linear-gradient(180deg, transparent 40%, color-mix(in oklab, var(--bg-0) 55%, transparent) 72%, color-mix(in oklab, var(--bg-0) 94%, transparent) 100%); }
+
+/* Subtitlurile de secțiune. h2 poartă '§', h3 primește '//'. */
+.prose h3 { margin: 44px 0 14px; }
+.prose h3::before { content: '//'; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; color: var(--accent); font-weight: 400; margin-right: 10px; opacity: 0.75; }
+.prose h3.dl-title::before { content: none; }
+
+/* Cod inline */
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: color-mix(in oklab, var(--fg) 8%, transparent); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; color: var(--fg); white-space: nowrap; }
+
+/* Capturile și clipul din aplicație */
+.shot { margin: 32px 0; }
+.shot img, .shot video { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-1); }
+.shot figcaption { margin-top: 12px; font-size: 13.5px; line-height: 1.6; color: var(--fg-dim); border-left: 2px solid color-mix(in oklab, var(--accent) 45%, transparent); padding-left: 14px; }
+.shot figcaption b { color: var(--fg-muted); font-weight: 600; }
+.shot.pair { display: grid; gap: 10px; }
+.shot.pair figcaption { grid-column: 1 / -1; }
+@media (min-width: 820px) { .shot.pair { grid-template-columns: 1fr 1fr; } }
+
+/* Tabelele */
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+
+/* Linkuri în proză — styles.css are a { color: inherit } */
+.prose p > a, .prose li > a, .prose td > a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); }
+.prose p > a:hover, .prose li > a:hover, .prose td > a:hover { border-bottom-color: var(--accent); }
+
+/* Caseta de descărcare */
+.dl-box { margin: 40px 0; padding: 28px; border: 1px solid var(--border-strong); border-radius: 16px; background: radial-gradient(ellipse 80% 100% at 0% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%), var(--bg-1); }
+.dl-box .dl-k { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 10px; text-align: center; }
+.dl-box h3.dl-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 8px; text-align: center; }
+.dl-box > p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; margin: 0 auto 22px; max-width: 560px; text-align: center; }
+.dl-list { display: grid; gap: 12px; }
+.dl-item { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-0); }
+.dl-item-txt { flex: 1; min-width: 0; }
+.dl-item-txt strong { display: block; font-size: 15px; color: var(--fg); margin-bottom: 3px; }
+.dl-item-txt span { font-size: 13px; color: var(--fg-dim); line-height: 1.5; }
+.dl-item .btn { flex-shrink: 0; color: #07121a; border-bottom: none; text-decoration: none; white-space: nowrap; }
+.dl-note { margin: 18px 0 0; font-size: 13px; color: var(--fg-dim); line-height: 1.6; text-align: center; }
+@media (max-width: 560px) {
+  .dl-box { padding: 22px 16px; }
+  .dl-item { flex-direction: column; align-items: stretch; }
+  .dl-item .btn { justify-content: center; }
+}
+
+/* Structura folderului livrat */
+/* Exemplele de cereri API, același aspect ca structura folderului */
+.prose pre.code { font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.7; color: var(--fg); background: var(--bg-1); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 16px 20px; overflow-x: auto; margin: 20px 0 24px; white-space: pre; }
+
+/* Tabelul mărimilor: bară proporțională față de total, iar baza livrată evidențiată */
+.prose table.sizes td:last-child { width: 34%; min-width: 150px; white-space: nowrap; }
+.size-bar { display: block; height: 6px; margin-top: 8px; border-radius: 3px; width: var(--w); min-width: 4px; background: color-mix(in oklab, var(--fg) 26%, transparent); }
+.prose tr.size-final td { background: color-mix(in oklab, var(--accent) 10%, transparent); }
+.prose tr.size-final td:last-child strong { color: var(--accent); font-size: 1.25em; }
+.prose tr.size-final .size-bar { background: var(--accent); height: 8px; }
+.size-note { display: block; margin-top: 4px; font-size: 13px; color: var(--accent); }
+
+.prose pre.tree {font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.7; color: var(--fg-muted); background: var(--bg-1); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin: 24px 0; }
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Marja firmei față de sector, înainte să întrebe ANAF — AI Accounting Hub",
+  "description": "ANAF compară marja firmei cu reperul sectorului. Fin_Metrics, construit pentru uz intern și publicat doar ca exemplu, face aceeași comparație pe bilanțurile publice 2025: sector, cod CAEN, competitori, județe și 7 ani de istoric. Drumul prin ecosistemul Gemini, de la un raport Deep Research la executabil, ce date folosește și unde greșește.",
+  "image": "https://aiaccountinghub.ro/assets/fin-metrics/fin-metrics-start-1760.webp",
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-10-24",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-10-24-Marja-firmei-fata-de-sector-inainte-de-ANAF.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce compară ANAF în notificările despre marja de profit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Din relatările publice, ANAF compară marja firmei cu un reper al domeniului de activitate: în 2024, o medie pe CAEN calculată pentru contribuabilii unei administrații județene; în raportul de activitate pentru semestrul I 2025, un indicator de risc bazat pe marja profitului operațional (EBIT) sub mediana domeniului; în 2026, potrivit Transfer Pricing Services, o marjă medie națională pe CAEN aplicată la cifra de afaceri a firmei. Metodologia completă nu este publicată."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce face aplicația Fin_Metrics?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Compară o firmă, un cod CAEN sau un sector cu referința aleasă pe 14 indicatori calculați din bilanțurile publice 2025, arată topurile și structura economiei pe județe și regiuni și urmărește o firmă și până la 5 competitori între 2019 și 2025, prin serviciul public de bilanț ANAF. Rulează local, pe Windows, fără cont și fără instalare."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Marja din Fin_Metrics este aceeași cu cea folosită de ANAF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nu. Bilanțul public prescurtat conține profitul brut, profitul net și cifra de afaceri, dar nu separă rezultatul financiar, deci marja EBIT nu se poate reconstrui exact. Fin_Metrics calculează marja brută, adică rezultatul brut raportat la cifra de afaceri. Este un reper apropiat și util pentru a vedea unde se situează firma, nu o reproducere a calculului ANAF."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "De unde vin datele din Fin_Metrics?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Din seturile publicate pe data.gov.ro: situațiile financiare 2025 ale Ministerului Finanțelor și registrul firmelor ONRC, ambele sub licența CC BY 4.0. Codul CAEN principal și starea fiscală vin din registrul plătitorilor de TVA al ANAF, iar istoricul 2019–2024 și bilanțurile depuse după publicarea fișierelor MF vin din serviciul public de bilanț ANAF."
+      }
+    }
+  ]
+}</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Marja firmei față de sector</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Vibe coding</span>
+      <span>24 octombrie 2026</span>
+      <span class="sep">·</span>
+      <span>20 min citire</span>
+    </div>
+
+    <h1>Marja firmei față de sector, <span class="accent">înainte să întrebe ANAF</span></h1>
+    <p class="article-lede">
+      ANAF compară marja firmei cu reperul sectorului și trimite notificări de conformare când diferența e mare. Am vrut să putem face aceeași comparație înaintea lui, pe date publice. Așa a apărut Fin_Metrics, construit în primul rând pentru uz intern, pentru fiecare dintre noi care vrea să vadă aceste cifre. Aplicația pune bilanțurile 2025 ale firmelor românești într-un singur fișier de 60 MB. O punem la dispoziția oricui, dar doar ca exemplu: recomandarea noastră rămâne ca fiecare să-și construiască propriile instrumente, după cazurile lui. Mai jos, drumul prin ecosistemul Gemini de la Google, de la un raport Deep Research la executabil, ce date folosește, ce arată și unde poate greși.
+    </p>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s1">Notificarea care compară marja cu sectorul</a>
+        <a href="#s2">Nu e prima dată</a>
+        <a href="#s3">Întrebarea noastră</a>
+        <a href="#s4">Deep Research cu Gemini</a>
+        <a href="#s5">Datele publice de pe data.gov.ro</a>
+        <a href="#s6">Serviciile web ANAF</a>
+        <a href="#s7">Ce vrem să vedem</a>
+        <a href="#s8">De la machete la MVP</a>
+        <a href="#s9">Construcția aplicației</a>
+        <a href="#s10">Aplicația, pe codul CAEN 6920</a>
+        <a href="#s11">Limitele datelor</a>
+        <a href="#s12">Descărcare și prima pornire</a>
+        <a href="#s13">La ce o puteți folosi</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">24.10.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <video class="article-cover-img" autoplay loop muted playsinline preload="auto"
+             poster="assets/fin-metrics/fin-metrics-start-1760.webp"
+             width="1600" height="950"
+             aria-label="Deschiderea aplicației Fin_Metrics: ecranul de pornire, apoi ecranul principal cu animațiile celor trei module, Sector Benchmark, Macro View și Timeline.">
+        <source src="assets/fin-metrics/fin-metrics-intro.mp4" type="video/mp4">
+      </video>
+      <div class="article-cover-caption">// Fin_Metrics 1.0.0 · deschiderea aplicației · înregistrare din aplicație</div>
+    </div>
+
+    <div class="prose">
+
+      <h2 id="s1">Notificarea care compară marja cu sectorul</h2>
+      <p>
+        Punctul de plecare a fost o postare LinkedIn. <a href="https://www.linkedin.com/posts/adrian-luca-6856a41_ai-primit-notificarea-de-conformare-de-la-activity-7508188403948154880-h5bF" target="_blank" rel="noopener">Adrian Luca, de la Transfer Pricing Services</a>, scria în septembrie că mii de companii au primit notificări de conformare legate de diferența dintre marja lor de profit și media națională a codului CAEN. Mecanismul descris e simplu: ANAF comunică o marjă medie pe CAEN, o aplică la cifra de afaceri a firmei și obține un profit de referință. Diferența dintre acest profit și cel declarat devine întrebarea la care firma trebuie să răspundă.
+      </p>
+      <p>
+        Același mesaj, mai pe larg, e în <a href="https://www.transferpricing.ro/am-nevoie-de-transfer-pricing-services/media-center/540-ati-primit-o-notificare-de-conformare-de-la-anaf-inainte-sa-trimiteti-raspunsul" target="_blank" rel="noopener">articolul dedicat de pe site-ul TPS</a>. Autorul critică metodologia: o medie națională pe CAEN pune laolaltă firme de mărimi, modele de afaceri și regiuni foarte diferite, fără analiza de comparabilitate pe care o cere orice studiu de prețuri de transfer. Recomandarea lui e să nu răspundeți în grabă și să documentați explicațiile economice ale diferenței.
+      </p>
+      <p>
+        Numărul de „mii” de destinatari rămâne afirmația autorului: în postarea publică nu era atașată o notificare anonimizată. Ce se poate verifica e altceva: tema nu e nouă.
+      </p>
+
+      <h2 id="s2">Nu e prima dată: 2024 și raportul ANAF</h2>
+      <p>
+        În februarie 2024, un utilizator al forumului Avocatnet <a href="https://www.avocatnet.ro/forum/discutie_831474/RISC-FISCAL-IMPOZIT-PROFIT.html" target="_blank" rel="noopener">reproducea conținutul unei notificări</a> primite de la AJFP Satu Mare, pentru anul 2022. Firma, din CAEN 4120 (construcții de clădiri), avea o marjă de 3,86%. Marja de referință, calculată pentru contribuabilii arondați aceleiași administrații, era 15,28%. Notificarea indica un impozit pe profit suplimentar de 73.600 lei. Reperul era deci o medie locală, nu națională, iar tipul de profit folosit nu era precizat. În aceeași lună, <a href="https://hotnews.ro/cum-si-bate-joc-anaf-de-multi-contribuabili-cu-notificarile-de-conformare-18096" target="_blank" rel="noopener">HotNews</a> discuta notificările de conformare și medianele de profitabilitate pe industrii, pe baza intervențiilor unor specialiști la TaxEU Forum.
+      </p>
+      <p>
+        Documentul oficial vine un an mai târziu. <a href="https://static.anaf.ro/static/10/Anaf/Informatii_R/18.08.2025%20-%20Raport%20de%20activitateANAF_2025S1_V7.pdf#page=21" target="_blank" rel="noopener">Raportul de activitate ANAF pentru semestrul I 2025</a>, la pagina 21, enumeră printre indicatorii de risc în dezvoltare: <em>marja profitului operațional (EBIT) inferioară medianei marjei profitului operațional pe domeniu de activitate</em>. Raportul nu publică formula și nici nu spune câte notificări a declanșat indicatorul.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Perioada</th><th>Notificări de conformare</th><th>Riscuri estimate</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Semestrul I 2024</strong></td><td>9.439</td><td>3,35 mld. lei</td></tr>
+            <tr><td><strong>Anul 2024</strong></td><td>15.432</td><td>4,64 mld. lei</td></tr>
+            <tr><td><strong>Semestrul I 2025</strong></td><td>6.660</td><td>839,54 mil. lei</td></tr>
+            <tr><td><strong>Anul 2025</strong></td><td>14.545</td><td>2.311,34 mil. lei</td></tr>
+            <tr><td><strong>Semestrul I 2026</strong></td><td>2.729</td><td>255,14 mil. lei</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Cifrele din tabel vin din <a href="https://static.anaf.ro/static/10/Anaf/Informatii_R/rapoarte_activitate.htm" target="_blank" rel="noopener">rapoartele de activitate ANAF</a> și sunt totaluri generale ale notificărilor de conformare, pentru toate tipurile de risc. Nu sunt notificări despre marja de profit. Riscurile estimate nu sunt nici obligații stabilite, nici sume încasate.
+      </p>
+      <p>
+        Trei lucruri trebuie ținute separat când citiți o asemenea notificare: <strong>media nu e mediana</strong> (câteva firme foarte profitabile trag media în sus, mediana nu se mișcă), <strong>profitul net nu e EBIT</strong>, iar <strong>reperul național nu e unul local</strong>. Nu putem demonstra că notificarea din 2024, indicatorul din 2025 și notificările descrise în 2026 folosesc aceeași formulă sau aceeași populație de comparație.
+      </p>
+
+      <h2 id="s3">Întrebarea noastră</h2>
+      <p>
+        Nu am primit o asemenea notificare și nici nu am văzut una anonimizată postată pe net. Dar întrebarea a rămas: <em>cum aflăm, înainte să vină ANAF să ne întrebe, unde se situează marja noastră față de sector, față de codul CAEN sau față de toată economia?</em> Pentru un contabil, răspunsul ar trebui să fie la un click distanță, nu un proiect de o săptămână.
+      </p>
+      <p>
+        Am strâns într-un sumar ce s-a putut verifica despre notificări: postările, cazurile de pe forumuri, rapoartele ANAF și diferența dintre EBIT, profitul brut și profitul net. Apoi am trecut la partea practică: de unde iau cifrele celorlalte firme.
+      </p>
+
+      <h2 id="s4">Deep Research cu Gemini</h2>
+      <p>
+        De data aceasta am dat o șansă ecosistemului Google. Am cerut <a href="buzzword/gemini-google.html">Gemini</a> (<a href="https://gemini.google.com/" target="_blank" rel="noopener">gemini.google.com</a>), în modul <a href="buzzword/deep-research.html">Deep Research</a>, un raport despre opțiunile de a obține și analiza bilanțurile firmelor românești pe cod CAEN: ce surse oficiale există, cât costă, ce oferă platformele private și ce se poate automatiza. Raportul a venit ca document Word, cu sursele citate. Pe scurt, iată ce conținea:
+      </p>
+      <ul>
+        <li><strong>Nu există o căutare inversă oficială</strong>, de la un cod CAEN la lista firmelor. Serviciile publice primesc un CUI și întorc date despre acea firmă, nu invers.</li>
+        <li><strong>ONRC vinde rapoarte</strong>, dar costul crește repede: un raport istoric despre o firmă e în jur de 250 de lei, iar statisticile se taxează pe criteriu și pe firmă. Pentru un sector întreg nu e o soluție.</li>
+        <li><strong>Datele deschise ale Ministerului Finanțelor sunt soluția gratuită optimă.</strong> Situațiile financiare anuale se publică pe data.gov.ro, cu indicatorii din bilanț pentru fiecare firmă și cu codul CAEN declarat.</li>
+        <li><strong>Platformele private</strong> fac deja aceste analize, contra cost: Targetare, ListaFirme, DateFirma, TotalFirme sau Scrap.io, cu abonamente de la câteva zeci de euro pe lună. Pentru acces programatic, raportul menționa OpenAPI.ro, Termene.ro și AnalizaFiscala, cu pachete gratuite mici și planuri plătite.</li>
+        <li><strong>API-urile ANAF au limite</strong>: o cerere pe secundă, răspunsuri a căror structură se poate schimba, autentificare pentru serviciile extinse și niciun serviciu care să întoarcă agregate pe sector.</li>
+        <li><strong>Arhitectura propusă</strong> avea trei straturi: o bază locală cu datele descărcate o dată, un strat care pune în cache răspunsurile API și o interfață de analiză deasupra.</li>
+      </ul>
+      <p>
+        Partea cea mai utilă a fost trimiterea la data.gov.ro. Restul raportului a confirmat că piața există și că se plătește, deci o aplicație internă pe date publice are sens.
+      </p>
+
+      <h2 id="s5">Datele publice de pe data.gov.ro</h2>
+      <p>
+        <a href="https://data.gov.ro/" target="_blank" rel="noopener">data.gov.ro</a> e portalul național de date deschise. Instituțiile publice încarcă acolo seturi de date în formate prelucrabile (CSV, TXT, XLSX), sub licența Creative Commons Attribution 4.0, care permite reutilizarea cu mențiunea sursei. Pentru aplicație au contat trei seturi:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Set de date</th><th>Cine publică</th><th>Ce aduce</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="https://data.gov.ro/dataset/situatii_financiare_2025" target="_blank" rel="noopener">Situații financiare 2025</a></td><td>Ministerul Finanțelor</td><td>20 de indicatori din bilanț pentru fiecare firmă (active, datorii, capitaluri, cifră de afaceri, venituri, cheltuieli, profit, salariați) și codul CAEN declarat; în fișiere separate pentru bilanțul complet, micro și mici, IFRS</td></tr>
+            <tr><td><a href="https://data.gov.ro/dataset/firme-02-09-2026" target="_blank" rel="noopener">Firme înregistrate la Registrul Comerțului</a></td><td>ONRC</td><td>denumire, CUI, formă juridică, adresă, starea firmei și toate codurile CAEN autorizate</td></tr>
+            <tr><td><a href="https://data.gov.ro/dataset/nomenclatoare-02-09-2026" target="_blank" rel="noopener">Nomenclatoare</a></td><td>ONRC</td><td>decodificarea stărilor firmei și a codurilor CAEN, pe toate versiunile</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Extrasele publice din situațiile financiare sunt reglementate de <a href="https://legislatie.just.ro/Public/DetaliiDocumentAfis/248595" target="_blank" rel="noopener">Ordinul MF nr. 1.420/2021</a>. Sunt prescurtate: 20 de indicatori, nu bilanțul și contul de profit și pierdere complete.
+      </p>
+      <p>
+        Pe hârtie, datele sunt acolo. În practică, lucrul cu ele e greu. Fișierele ONRC au peste 4 milioane de firme și aproape 20 de milioane de rânduri de coduri CAEN autorizate, separate prin caracterul <code>^</code>. Legătura cu bilanțurile se face prin CUI, iar ONRC lucrează cu numărul de înmatriculare. Registrul nu spune care cod CAEN e cel principal. Iar volumul depășește ce poate deschide Excel, care se oprește la 1.048.576 de rânduri pe foaie. Cu alte cuvinte, nu e o sarcină pentru un tabel pivot.
+      </p>
+
+      <h2 id="s6">Serviciile web ANAF</h2>
+      <p>
+        Al doilea pas cu Gemini a fost o discuție despre o aplicație dedicată, în <a href="buzzword/python.html">Python</a>, și despre serviciile ANAF care pot completa fișierele. Pe <a href="https://www.anaf.ro/anaf/internet/ANAF/servicii_online/servicii_web_anaf" target="_blank" rel="noopener">pagina serviciilor web ANAF</a> sunt publice, fără autentificare, două servicii utile aici:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Serviciu</th><th>Cum se cere</th><th>Ce aduce</th><th>Ritm</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="https://static.anaf.ro/static/10/Anaf/Informatii_R/Servicii_web/doc_WS_V9.txt" target="_blank" rel="noopener">Registrul plătitorilor de TVA (v9)</a></td><td>POST, o listă de CUI-uri</td><td>codul CAEN principal, starea la ANAF, inactiv fiscal</td><td>până la 100 de CUI pe cerere, o cerere pe secundă</td></tr>
+            <tr><td><a href="https://static.anaf.ro/static/10/Anaf/Informatii_R/doc_WS_Bilant_V1.txt" target="_blank" rel="noopener">Serviciul de bilanț</a></td><td>GET, câte un CUI și un an</td><td>aceiași 20 de indicatori ca în fișierele MF, din 2019 încoace</td><td>o firmă și un an pe cerere, o cerere pe secundă</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Diferența dintre ele e de ordin de mărime. Registrul TVA primește o listă de 100 de coduri fiscale într-o singură cerere, deci trece prin câteva mii de firme pe minut. Serviciul de bilanț e o cerere simplă de tip GET, cu un singur CUI și un singur an, pentru câteva mii de bilanțuri poate dura ore întregi. Pentru aplicație, asta a dus la o regulă: bilanțul 2025 vine din fișier, iar <a href="buzzword/api.html">API</a>-ul de bilanț se folosește doar la cerere, pentru puține firme.
+      </p>
+      <p>
+        Cererea de bilanț se poate lipi direct în bara de adrese a browserului. Exemplul folosește OMV Petrom (CUI 1590082), firma cu cea mai mare cifră de afaceri din 2025:
+      </p>
+
+<pre class="code">https://webservicesp.anaf.ro/bilant?an=2025&amp;cui=1590082</pre>
+
+      <p>
+        Răspunsul vine în format JSON: denumirea, codul CAEN și cei 20 de indicatori, fiecare cu valoarea lui. Codul CAEN apare ca 610, fără zeroul din față. Corect e 0610, extracția petrolului brut, și e unul din detaliile care trebuie corectate la prelucrare.
+      </p>
+      <p>
+        Registrul TVA nu se poate interoga din browser, pentru că primește cererea prin POST, cu lista de coduri fiscale în corpul ei. Din PowerShell, pe orice calculator cu Windows, arată așa:
+      </p>
+
+<pre class="code">$r = Invoke-RestMethod -Method Post `
+  -Uri "https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva" `
+  -ContentType "application/json" `
+  -Body '[{"cui":1590082,"data":"2026-10-24"}]'
+$r.found[0].date_generale | Select-Object cui, denumire, cod_CAEN, stare_inregistrare</pre>
+
+      <p>
+        Lista din <code>-Body</code> poate avea până la 100 de perechi formate din CUI și dată, iar răspunsul aduce pentru fiecare firmă codul CAEN principal, starea la ANAF și datele de înregistrare în scopuri de TVA.
+      </p>
+
+      <h2 id="s7">Ce vrem să vedem: indicatorii</h2>
+      <p>
+        Înainte de orice ecran am stabilit ce întrebări trebuie să primească răspuns. Contabilul vrea să știe dacă marja firmei e la nivelul sectorului. Antreprenorul vrea să știe cât de mare e față de competitori și cine sunt ei. Consultantul vrea aceleași cifre pe județ. Toate trebuie să se poată spune într-o frază, de felul „marja firmei (8,1%) e sub mediana codului CAEN (12,4%)”.
+      </p>
+      <p>
+        Din cele 20 de informații publice din bilanț se pot calcula mai mulți indicatori, noi am ales 14 dintre ei. Alți indicatori din cei consacrați cer date care nu sunt în bilanțul prescurtat: amortizarea, dobânzile, cheltuielile cu personalul, datoriile separate pe scadență.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Grupa</th><th>Indicatori</th><th>Ce întrebare acoperă</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Profitabilitate</strong></td><td>marja brută, ROE, ROA, impozitul raportat la cifra de afaceri</td><td>câți bani rămân din vânzări și din capital</td></tr>
+            <tr><td><strong>Poziție pe piață</strong></td><td>cota de piață în țară și în județ, productivitatea pe salariat, clasa de mărime</td><td>cât de mare e firma și cât de eficient lucrează</td></tr>
+            <tr><td><strong>Echilibru financiar</strong></td><td>lichiditatea generală și imediată, îndatorarea, autonomia, fondul de rulment</td><td>cât de sigur își plătește datoriile</td></tr>
+            <tr><td><strong>Eficiență</strong></td><td>rotația activelor, structura activelor</td><td>cât vinde pe fiecare leu investit și unde stau banii</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Toate comparațiile se fac pe <strong>mediane și percentile, nu pe medii</strong>. Distribuția e foarte asimetrică: 14% din firmele cu bilanț complet au cifra de afaceri zero, iar 1% depășesc 336 de milioane de lei. O medie pe asemenea date nu descrie nicio firmă reală.
+      </p>
+
+      <h2 id="s8">De la machete la MVP: Stitch și AI Studio</h2>
+
+      <h3>Pasul 2: machetele în Stitch</h3>
+      <p>
+        Cu indicatorii stabiliți, am cerut machetele ecranelor în <a href="buzzword/google-stitch.html">Stitch</a> (<a href="https://stitch.withgoogle.com/" target="_blank" rel="noopener">stitch.withgoogle.com</a>), unealta de design a Google care generează interfețe din descrieri în limbaj natural. Rezultatul nu a fost o aplicație, ci identitatea ei: paleta, tipografia, felul în care arată o casetă de indicator și cum se așază ecranele.
+      </p>
+
+      <h3>Pasul 3: MVP-ul în Google AI Studio</h3>
+      <p>
+        Identitatea din Stitch și detaliile tehnice din discuțiile cu Gemini (sursele, serviciile, indicatorii) au intrat apoi în <a href="buzzword/google-ai-studio.html">Google AI Studio</a> (<a href="https://aistudio.google.com/" target="_blank" rel="noopener">aistudio.google.com</a>). Față de uneltele clasice de programare, AI Studio are un avantaj important la început: codul generat rulează direct în mediul lui, iar aplicația apare pe loc în fereastră. Nu instalezi nimic, nu configurezi un mediu Python, vezi imediat dacă ideea arată cum ți-ai imaginat-o. Pentru un prim <a href="buzzword/mvp.html">MVP</a>, o versiune minimă care demonstrează că ideea merge, e cel mai scurt drum.
+      </p>
+
+      <h3>Pasul 4: aplicația, pe calculatorul propriu</h3>
+      <p>
+        După MVP, proiectul trebuie mutat într-un mediu care lucrează cu fișierele de pe disc: <a href="buzzword/google-antigravity.html">Google Antigravity</a> (<a href="https://antigravity.google/" target="_blank" rel="noopener">antigravity.google</a>), Claude Code, ChatGPT Codex sau orice alt asistent de programare care rulează local. Noi am continuat în <a href="buzzword/claude-code.html">Claude Code</a>, același mediu în care a fost construit SAF-T Inspector.
+      </p>
+
+      <h2 id="s9">Construcția aplicației</h2>
+      <p>
+        Prima parte nu a fost interfața, ci datele. Am pornit de la o hartă a fișierelor: ce conține fiecare, cum se leagă, ce cheie folosește. Câteva lucruri au ieșit la iveală abia aici:
+      </p>
+      <ul>
+        <li><strong>Bilanțurile sunt în trei fișiere, nu într-unul</strong>: bilanț complet (74.025 de firme), micro și mici (844.207) și IFRS (102, printre care OMV Petrom și Salrom).</li>
+        <li><strong>„Activă” trebuie definit.</strong> O firmă poate avea mai multe stări simultan la ONRC, de exemplu în funcțiune și cu sediul expirat. Regula aleasă: în funcțiune și neradiată. PFA, II și IF nu depun bilanț, deci se scot înainte de comparație.</li>
+        <li><strong>Codul CAEN din bilanțurile 2025 e un amestec de Rev.2 și Rev.3.</strong> 23% din firme declară un cod care există doar în Rev.2, iar unele coduri au același număr și sens diferit în cele două versiuni: 4791 era comerț online, acum e intermediere în comerțul cu amănuntul. Conversia s-a făcut cu <a href="https://insse.ro/cms/ro/caen" target="_blank" rel="noopener">tabelul de corespondență INS</a>, cu codurile autorizate la ONRC, cu registrul ANAF și cu codul din bilanțul 2024, ca a doua sursă.</li>
+        <li><strong>Unele bilanțuri lipsesc din fișiere.</strong> Fișierele MF sunt extrase la o dată fixă. Prin serviciul de bilanț ANAF au mai fost găsite 41.910 bilanțuri, depuse ulterior, printre ele ale unor firme mari.</li>
+      </ul>
+
+      <div class="table-wrap">
+        <table class="sizes">
+          <thead>
+            <tr><th>Ce intră</th><th>Mărime</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Fișierele ONRC</strong> (firme, stări, coduri CAEN autorizate, nomenclatoare)</td><td>1.217 MB<span class="size-bar" style="--w: 81.6%"></span></td></tr>
+            <tr><td><strong>Situațiile financiare MF 2025</strong> (bilanț complet, micro și mici, IFRS)</td><td>88 MB<span class="size-bar" style="--w: 5.9%"></span></td></tr>
+            <tr><td><strong>Situațiile financiare MF 2024</strong> (doar pentru codul CAEN)</td><td>92 MB<span class="size-bar" style="--w: 6.2%"></span></td></tr>
+            <tr><td><strong>Răspunsurile API ANAF</strong> (592.086 de răspunsuri TVA, 41.910 bilanțuri)</td><td>94 MB<span class="size-bar" style="--w: 6.3%"></span></td></tr>
+            <tr><td><strong>Total date folosite</strong></td><td><strong>circa 1,5 GB</strong><span class="size-bar" style="--w: 100%"></span></td></tr>
+            <tr class="size-final"><td><strong>Baza livrată cu aplicația</strong> (<code>date_2025.parquet</code>)<span class="size-note">de circa 25 de ori mai mică decât datele din care a fost construită</span></td><td><strong>60 MB</strong><span class="size-bar" style="--w: 4%"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Baza finală are 1.393.893 de firme și 960.244 de bilanțuri. Înainte să fie acceptată, trece prin 32 de controale automate: numărul de rânduri, unicitatea CUI, fiecare bilanț comparat câmp cu câmp cu tabelele din care s-a construit, sumele de control pe toți cei 20 de indicatori și două eșantioane, unul de 5.000 de firme față de fișierele MF brute și unul de 2.000 față de răspunsurile API salvate.
+      </p>
+
+      <h3>Bibliotecile, și de ce acestea</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Componentă</th><th>La ce folosește</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Python 3.14</strong></td><td>limbajul aplicației și al prelucrării datelor</td></tr>
+            <tr><td><strong>DuckDB</strong></td><td>o bază de date analitică într-un singur fișier de bibliotecă, fără server; citește CSV-urile mari și fișierele Parquet direct și calculează mediane și percentile pe aproape un milion de bilanțuri în fracțiuni de secundă</td></tr>
+            <tr><td><strong>Parquet, cu compresie zstd</strong></td><td>formatul bazei livrate: stochează datele pe coloane, deci se comprimă foarte bine și se citește doar ce e nevoie</td></tr>
+            <tr><td><strong>PySide6 (Qt)</strong></td><td>fereastra aplicației și toate graficele, desenate direct, fără browser și fără bibliotecă de grafice</td></tr>
+            <tr><td><strong>Nuitka</strong></td><td>îl compilează într-un singur executabil Windows</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Parquet e motivul pentru care 1,5 GB de date de intrare devin 60 MB. Fișierul nu păstrează tot ce era în surse, ci doar coloanele de care are nevoie aplicația, iar valorile unei coloane seamănă între ele (același județ, aceeași formă juridică, mii de zerouri), deci se comprimă de zeci de ori. Același conținut, salvat în CSV, ar avea peste 220 MB. Arhivarea ZIP nu mai câștigă aproape nimic, pentru că Parquet e deja comprimat.
+      </p>
+
+      <h2 id="s10">Aplicația, pe codul CAEN 6920</h2>
+      <p>
+        Ca exemplu am ales, firește, chiar sectorul nostru: CAEN 6920, <em>activități de contabilitate și audit financiar; consultanță în domeniul fiscal</em>. Dacă tot ne uităm la marja altora, e corect să începem cu a noastră.
+      </p>
+
+      <figure class="shot">
+        <video controls muted playsinline preload="metadata"
+               poster="assets/fin-metrics/fin-metrics-start-1760.webp"
+               width="1600" height="950"
+               aria-label="Demonstrație Fin_Metrics: analiza codului CAEN 6920 în Sector Benchmark, Macro View și Timeline">
+          <source src="assets/fin-metrics/fin-metrics-demo.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          <b>Demonstrație, două minute și jumătate, fără sonor.</b> Cele trei module pe codul CAEN 6920: comparația cu sectorul, harta și topurile pe județe, apoi evoluția unei firme și a cinci competitori pe 7 ani. Câteva pauze au fost scurtate, iar <b>descărcarea istoricului din API ANAF e accelerată de două ori</b>, mențiunea apare pe ecran.
+        </figcaption>
+      </figure>
+
+      <p>
+        Ecranul principal, din clipul de la începutul articolului, are trei module. Fiecare se deschide cu un click pe card sau cu tastele 1, 2 și 3.
+      </p>
+
+      <h3>01 · Sector Benchmark</h3>
+
+      <figure class="shot">
+        <img src="assets/fin-metrics/fin-metrics-selectie-6920-1760.webp"
+             srcset="assets/fin-metrics/fin-metrics-selectie-6920-880.webp 880w, assets/fin-metrics/fin-metrics-selectie-6920-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Ecranul de selecție din Sector Benchmark: sectorul Contabilitate, juridic și consultanță, codul CAEN 6920, referința economia întreagă și competitorii top 5 din codul CAEN.">
+        <figcaption>
+          <b>Selecția.</b> Ce analizați (sector, cod CAEN sau firmă), cu ce comparați și cu ce competitori. Primele 5 firme din 6920 sunt, fără surpriză, cele patru mari firme de audit.
+        </figcaption>
+      </figure>
+
+      <p>
+        Selecția are patru coloane. În primele trei alegeți subiectul: un sector din cele 30 definite pe limbajul practicianului, un cod CAEN sau o firmă, căutată după denumire sau CUI. În a patra alegeți referința (sectorul, codul CAEN sau economia întreagă), aria (România sau un județ) și competitorii. Pentru o firmă, aplicația poate propune singură trei competitori apropiați ca cifră de afaceri, din același cod CAEN, sau puteți alege până la cinci, manual.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/fin-metrics/fin-metrics-benchmark-6920-1760.webp"
+             srcset="assets/fin-metrics/fin-metrics-benchmark-6920-880.webp 880w, assets/fin-metrics/fin-metrics-benchmark-6920-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Rezultatul Sector Benchmark pentru CAEN 6920 față de economie: banda de sinteză și primele casete de indicatori, fiecare cu titlul care rezumă rezultatul.">
+        <figcaption>
+          <b>Rezultatul.</b> Banda de sinteză sus, apoi 14 casete. Fiecare are un titlu care spune concluzia, nu doar numele indicatorului.
+        </figcaption>
+      </figure>
+
+      <p>
+        Fiecare casetă răspunde la o singură întrebare și are un titlu formulat ca o concluzie. Un click o mărește: graficul, cifrele cheie, tabelul cu competitorii, o notă despre calcul și o interpretare.
+      </p>
+
+      <figure class="shot">
+        <img src="assets/fin-metrics/fin-metrics-marja-6920-1760.webp"
+             srcset="assets/fin-metrics/fin-metrics-marja-6920-880.webp 880w, assets/fin-metrics/fin-metrics-marja-6920-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Caseta Marja brută mărită: marja agregată a clasei CAEN 6920, 32,1%, peste cea a economiei, 7,6%, cu mediana de 40,6%.">
+        <figcaption>
+          <b>Marja brută, mărită.</b> Marja agregată a codului 6920 e 32,1%, față de 7,6% în economie. Mediana e și mai sus: 40,6%, față de 9,4%.
+        </figcaption>
+      </figure>
+
+      <p>
+        Aici e gluma, și ea e una cu tâlc. Codul 6920 are aproape 12.600 de firme cu cifră de afaceri, care au vândut împreună 6,47 miliarde de lei. Marja brută mediană e <strong>40,6%</strong>, de patru ori peste cea a economiei. Vestea bună: profesia stă bine. Vestea mai puțin bună: dacă ANAF compară cu mediana codului CAEN, ștacheta pentru un cabinet de contabilitate e foarte sus. Un cabinet cu o marjă de 20%, perfect sănătoasă în aproape orice alt sector, ar fi la noi sub jumătatea medianei.
+      </p>
+      <p>
+        Diferența dintre agregat și mediană spune și ea ceva. Agregatul adună toate firmele, deci e dominat de cele mari. Mediana arată firma tipică, iar firma tipică din 6920 e un cabinet mic, cu costuri puține în afara muncii proprii, al cărei profit include, de fapt, remunerația asociatului.
+      </p>
+
+      <h3>02 · Macro View</h3>
+
+      <figure class="shot">
+        <img src="assets/fin-metrics/fin-metrics-macro-6920-1760.webp"
+             srcset="assets/fin-metrics/fin-metrics-macro-6920-880.webp 880w, assets/fin-metrics/fin-metrics-macro-6920-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Macro View pentru CAEN 6920: harta României colorată după cifra de afaceri pe județe și cele patru casete, Top firme, Fișa județului, Economia pe sectoare și Județele.">
+        <figcaption>
+          <b>Macro View.</b> Harta pe județe sau pe regiuni de dezvoltare, colorată după indicatorul ales. București și Cluj concentrează 58,8% din cifra de afaceri a codului 6920.
+        </figcaption>
+      </figure>
+
+      <p>
+        Al doilea modul se uită la economie de sus. Alegeți un sector sau un cod CAEN și un indicator pentru hartă (cifra de afaceri, marja, îndatorarea, productivitatea sau numărul de firme). Un click pe județ îl face arie de analiză. În dreapta, patru casete: topul firmelor, fișa județului, economia pe sectoare și clasamentul județelor.
+      </p>
+
+      <figure class="shot pair">
+        <img src="assets/fin-metrics/fin-metrics-top-6920-1760.webp"
+             srcset="assets/fin-metrics/fin-metrics-top-6920-880.webp 880w, assets/fin-metrics/fin-metrics-top-6920-1760.webp 1760w"
+             sizes="(max-width: 820px) 92vw, 430px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Caseta Top firme mărită, pentru CAEN 6920: clasamentul după cifra de afaceri, cu Ernst and Young, PwC Audit, KPMG Audit, EY Assurance și Deloitte Audit în primele locuri.">
+        <img src="assets/fin-metrics/fin-metrics-fisa-cluj-6920-1760.webp"
+             srcset="assets/fin-metrics/fin-metrics-fisa-cluj-6920-880.webp 880w, assets/fin-metrics/fin-metrics-fisa-cluj-6920-1760.webp 1760w"
+             sizes="(max-width: 820px) 92vw, 430px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Fișa județului Cluj pentru CAEN 6920: locul 2 după cifra de afaceri și locul 24 după marjă, cu indicatorii față de România.">
+        <figcaption>
+          <b>Topul și fișa județului.</b> În stânga, primele firme din 6920 după cifra de afaceri. În dreapta, Clujul: al doilea județ ca cifră de afaceri în contabilitate și audit, dar abia pe locul 24 ca marjă.
+        </figcaption>
+      </figure>
+
+      <p>
+        Topul se poate ordona după cifra de afaceri, profitul net sau salariați, iar căutarea arată locul oricărei firme în clasament, oricât de jos ar fi. Fișa județului are un comutator între agregat și mediană: agregatul arată economia județului, mediana arată firma tipică din el.
+      </p>
+
+      <h3>03 · Timeline (7 Y)</h3>
+
+      <figure class="shot">
+        <img src="assets/fin-metrics/fin-metrics-timeline-6920-1760.webp"
+             srcset="assets/fin-metrics/fin-metrics-timeline-6920-880.webp 880w, assets/fin-metrics/fin-metrics-timeline-6920-1760.webp 1760w"
+             sizes="(max-width: 900px) 92vw, 860px"
+             width="1760" height="1100" loading="lazy" decoding="async"
+             alt="Modulul Timeline: marja brută a firmei KPMG Audit și a cinci competitori, între 2019 și 2025, cu tab-urile celor 12 indicatori deasupra graficului.">
+        <figcaption>
+          <b>Timeline.</b> KPMG Audit și cinci competitori, între 2019 și 2025. Marja brută a firmei a crescut de la 8,1% la 19,3%, iar în 2025 e pe locul 3 din 6.
+        </figcaption>
+      </figure>
+
+      <p>
+        Al treilea modul urmărește o firmă și până la cinci competitori, an cu an. Anul 2025 vine din baza aplicației, iar anii 2019–2024 se descarcă la prima analiză, prin serviciul de bilanț ANAF: circa o secundă pe an și firmă, deci sub un minut pentru șase firme. Bilanțurile descărcate se păstrează local, iar o firmă deja analizată apare imediat data următoare. Dacă serviciul ANAF nu răspunde pentru un an, aplicația îl cere din nou la următoarea analiză care include firma.
+      </p>
+
+      <h2 id="s11">Limitele datelor</h2>
+      <p>
+        Fin_Metrics e un exercițiu de <a href="buzzword/vibe-coding.html">vibe coding</a>, nu un produs oficial și nici un studiu de prețuri de transfer. Cifrele lui sunt un reper, iar limitele trebuie spuse direct:
+      </p>
+      <ul>
+        <li><strong>Marja din aplicație nu e marja EBIT.</strong> Bilanțul public are profitul brut și profitul net, dar nu separă rezultatul financiar de cel din exploatare. Aplicația folosește marja brută, adică rezultatul înainte de impozit raportat la cifra de afaceri. Pentru o firmă cu dobânzi mari sau cu venituri financiare importante, diferența față de EBIT poate fi semnificativă.</li>
+        <li><strong>Nu reproduce mediana ANAF.</strong> Chiar cu formula corectă, ar trebui cunoscută populația exactă: ce an, ce cod, ce arie, dacă intră firmele cu pierderi, cum se tratează cifra de afaceri zero. Nimic din toate acestea nu e publicat.</li>
+        <li><strong>Codul CAEN poate fi greșit.</strong> Conversia Rev.2 → Rev.3 e verificată statistic, nu firmă cu firmă. La nivel de sector, codurile sunt corecte în peste 92% din cazuri. La nivel de clasă CAEN, firmele cu cod estimat pot fi în altă clasă decât cea reală.</li>
+        <li><strong>Bilanțul prescurtat limitează unele formule.</strong> Lichiditatea și fondul de rulment se calculează pe datoriile totale, pentru că bilanțul public nu le separă pe scadență. Fiecare casetă spune în notă ce limitare are.</li>
+        <li><strong>Erorile de completare trec în date.</strong> Bilanțurile cu peste 1.000 de salariați și sub 20.000 de lei venituri pe salariat sunt tratate ca lipsă la salariați. Alte greșeli de completare ale firmelor rămân, pentru că nu au cum să fie recunoscute automat.</li>
+        <li><strong>Sediul social decide județul.</strong> O firmă cu activitate în toată țara apare integral la județul sediului, ceea ce mărește ponderea Bucureștiului.</li>
+      </ul>
+      <p>
+        Mesajul de fond rămâne cel din seria SAF-T: oricine își poate construi propria aplicație pe aceleași date publice. Dacă o faceți, testați-o riguros. Comparați câteva firme pe care le cunoașteți cu bilanțul lor real, înainte să vă bazați pe ea.
+      </p>
+
+      <h2 id="s12">Descărcare și prima pornire</h2>
+      <p>
+        Aplicația vine ca arhivă ZIP, cu un folder <code>Fin_Metrics</code> în ea. Se dezarhivează într-un loc la alegere, de exemplu în Documente, și se pornește din <code>Fin_Metrics.exe</code>. Nu are nevoie de instalare, de cont sau de Python pe calculator.
+      </p>
+
+<pre class="tree">Fin_Metrics\
+├─ Fin_Metrics.exe              aplicația
+├─ README.md                    ghidul de utilizare
+└─ baza\
+   ├─ date_2025.parquet         baza de date: firmele și bilanțurile 2025
+   └─ cache_istoric.jsonl       apare după prima analiză în Timeline</pre>
+
+      <ul>
+        <li><strong>Folderul <code>baza</code> rămâne lângă executabil.</strong> Dacă îl mutați sau îl ștergeți, aplicația afișează un mesaj și nu pornește.</li>
+        <li><strong><code>cache_istoric.jsonl</code></strong> păstrează bilanțurile 2019–2024 descărcate din Timeline. Dacă îl ștergeți, nu se pierde nimic: aplicația le descarcă din nou, la nevoie.</li>
+        <li><strong>Cache-ul de pornire.</strong> Executabilul e un singur fișier care conține aplicația comprimată. La prima pornire se despachetează în <code>%LOCALAPPDATA%\Fin_Metrics\1.0.0</code>, de aceea durează câteva secunde în plus. Pornirile următoare folosesc ce e deja acolo.</li>
+        <li><strong>Internetul</strong> e folosit doar în Timeline, pentru serviciul de bilanț ANAF. Aplicația nu trimite în afara calculatorului altceva decât codurile fiscale interogate.</li>
+      </ul>
+
+      <h3>Avertismentele de securitate</h3>
+      <p>
+        Ca și la SAF-T Inspector, executabilul nu e semnat digital, pentru că certificatul de semnare are un cost care depășește bugetul proiectului. La prima pornire, Windows poate afișa ecranul albastru SmartScreen, „Windows a protejat PC-ul”. Nu înseamnă că fișierul e infectat, ci că Windows nu îl cunoaște încă. Apăsați <strong>Mai multe informații</strong>, apoi <strong>Rulați oricum</strong>. Unele antivirusuri tratează cu suspiciune executabilele care se despachetează la pornire. Pe stațiile administrate de IT, butonul poate lipsi; atunci e nevoie de o excepție de la administrator.
+      </p>
+
+      <div class="dl-box">
+        <div class="dl-k">// Resursă descărcabilă</div>
+        <h3 class="dl-title">Fin_Metrics 1.0.0</h3>
+        <p>Arhivă .zip pentru Windows, cu executabilul, baza de date 2025 și ghidul de utilizare. Se dezarhivează și se rulează, fără instalare.</p>
+        <div class="dl-list">
+          <div class="dl-item">
+            <div class="dl-item-txt">
+              <strong>Fin_Metrics, aplicație și bază de date</strong>
+              <span>90,5 MB arhivat: executabilul de 33,7 MB și baza de 57,3 MB.</span>
+            </div>
+            <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Fin_Metrics-1.0.0.zip" download class="btn btn-primary" data-track="resursa:fin-metrics">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Descarcă
+            </a>
+          </div>
+        </div>
+        <p class="dl-note">Versiunea 1.0.0. Date: situațiile financiare 2025 (MF) și registrul firmelor (ONRC), de pe data.gov.ro, sub licența CC BY 4.0; istoricul 2019–2024 prin serviciile web ANAF. Rezultatele nu sunt produse oficiale ale instituțiilor-sursă.</p>
+      </div>
+
+      <h2 id="s13">La ce o puteți folosi</h2>
+      <p>
+        Am pornit de la notificările ANAF, dar aplicația răspunde la mai multe întrebări decât aceasta:
+      </p>
+      <ul>
+        <li><strong>Marja firmei față de sector.</strong> Înainte de închiderea anului sau înainte să răspundeți la o notificare: unde se află firma față de mediana codului ei CAEN, în țară și în județ, și ce explicații economice trebuie documentate dacă e mult sub ea.</li>
+        <li><strong>Competitorii direcți.</strong> Cine sunt firmele apropiate ca mărime din același cod, cum au evoluat în ultimii 7 ani și unde câștigă sau pierd teren.</li>
+        <li><strong>Sectoarele importante ale unui județ.</strong> Ce sectoare duc economia județului, comparat cu ponderea lor națională, util pentru administrații locale, camere de comerț sau firme care se gândesc unde să deschidă un punct de lucru.</li>
+        <li><strong>Topul competitorilor pe o piață nouă.</strong> Înainte de extinderea într-un alt județ sau într-un cod CAEN nou: cine domină, cât de concentrată e piața și ce marje sunt normale acolo.</li>
+        <li><strong>Pregătirea unui interviu.</strong> Cum stă firma la care aplicați: cifra de afaceri, profitul, numărul de salariați și evoluția lor, față de competitori.</li>
+        <li><strong>Topuri și analize de presă.</strong> Cine face conținut media poate construi clasamente pe sectoare, pe județe sau pe regiuni, cu cifre verificabile.</li>
+        <li><strong>Procedurile analitice de audit.</strong> La planificare, abaterea marjei, a rotației activelor sau a lichidității față de sector arată unde merită testat mai mult.</li>
+        <li><strong>Verificarea unui client sau a unui furnizor.</strong> Lichiditatea și îndatorarea față de sector, înainte de un termen de plată lung sau de un contract important.</li>
+        <li><strong>Prospectarea pentru cabinetele de contabilitate.</strong> Firmele dintr-un județ și dintr-un sector, după mărime, ca punct de plecare pentru o ofertă de servicii.</li>
+        <li><strong>O primă trecere înaintea unui studiu de prețuri de transfer.</strong> Nu îl înlocuiește, dar arată repede dacă marja firmei e în zona obișnuită a codului ei sau departe de ea.</li>
+        <li><strong>Discuția cu banca.</strong> Indicatorii firmei față de sector, puși pe masă înainte ca analistul de credit să facă același calcul.</li>
+        <li><strong>Lucrări de licență și de master.</strong> Un set de date curat, pe toată economia, pentru analize sectoriale.</li>
+      </ul>
+      <p>
+        Dacă găsiți alte utilizări, sau dacă ați construit propria variantă pe aceleași date, scrieți-ne prin formularul de <a href="contact.html">contact</a>.
+      </p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#vibe-coding</span>
+          <span class="tag">#ANAF</span>
+          <span class="tag">#benchmark</span>
+          <span class="tag">#date-deschise</span>
+          <span class="tag">#Gemini</span>
+          <span class="tag">#Python</span>
+        </div>
+        <span class="footer-mono">Articolul #038</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-10-24-Marja-firmei-fata-de-sector-inainte-de-ANAF"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s1">Notificarea</a>
+        <a href="#s2">Nu e prima dată</a>
+        <a href="#s3">Întrebarea noastră</a>
+        <a href="#s4">Deep Research</a>
+        <a href="#s5">data.gov.ro</a>
+        <a href="#s6">Serviciile ANAF</a>
+        <a href="#s7">Indicatorii</a>
+        <a href="#s8">Machete și MVP</a>
+        <a href="#s9">Construcția</a>
+        <a href="#s10">Aplicația, pe 6920</a>
+        <a href="#s11">Limitele datelor</a>
+        <a href="#s12">Descărcare</a>
+        <a href="#s13">La ce o folosiți</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- ARTICOLE CONEXE -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Pe aceeași temă.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #037</div>
+        <h3>Apeși Verifică, și D406 devine Excel</h3>
+        <p>Modulul 1 din SAF-T Inspector: declarația D406 transformată în registre Excel, CSV și Parquet, totul local, cu pachetele de descărcat.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-09-15-Ultimul-pas-inainte-de-cod.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #036</div>
+        <h3>Ultimul pas înainte de cod</h3>
+        <p>Numele aplicației, fereastra desenată în trei unelte AI și PRD-ul tehnic din care s-a scris codul.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-09-05-Proiectul-care-tine-minte.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T</div>
+        <h3>Proiectul care ține minte</h3>
+        <p>Cum se organizează spațiul de lucru cu un asistent AI, ca un proiect de cod să nu se piardă între conversații.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

@@ -669,8 +669,46 @@
           "item": {
             "@id": "https://aiaccountinghub.ro/resurse.html#jurnalul-ai"
           }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#fin-metrics"
+          }
         }
       ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://aiaccountinghub.ro/resurse.html#fin-metrics",
+      "name": "Fin_Metrics 1.0.0",
+      "description": "Compară o firmă, un cod CAEN sau un sector cu referința aleasă pe 14 indicatori calculați din bilanțurile publice 2025, arată topurile și structura economiei pe județe și regiuni și urmărește o firmă și până la 5 competitori între 2019 și 2025. Rulează local, pe Windows, fără instalare.",
+      "url": "https://aiaccountinghub.ro/resurse.html#fin-metrics",
+      "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Fin_Metrics-1.0.0.zip",
+      "encodingFormat": "application/zip",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows",
+      "softwareVersion": "1.0.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RON"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Marja firmei față de sector, înainte să întrebe ANAF",
+        "url": "https://aiaccountinghub.ro/2026-10-24-Marja-firmei-fata-de-sector-inainte-de-ANAF.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
     },
     {
       "@type": "SoftwareApplication",
@@ -1127,6 +1165,18 @@ const RESOURCES = [
     facts: [['Format', 'XLSM, cu macro-uri']] },
 
   /* ===== DE RULAT ===== */
+  { type: 'tool', slug: 'fin-metrics', kind: 'Aplicație · Windows', title: 'Fin_Metrics 1.0.0',
+    short: 'Marja, cota de piață și alți 12 indicatori ai firmei, față de sector, cod CAEN și competitori. Bilanțurile 2025, local.',
+    meta: 'ZIP · 90,5 MB · Windows',
+    body: [
+      'Compară o firmă, un cod CAEN sau un sector cu referința aleasă pe 14 indicatori calculați din bilanțurile publice 2025, arată topurile și structura economiei pe județe și regiuni.',
+      'Modulul Timeline urmărește o firmă și până la 5 competitori între 2019 și 2025, prin serviciul public de bilanț ANAF. Fără cont și fără instalare.'],
+    points: ['Benchmark pe sector, cod CAEN sau economie', 'Topuri și fișe pe județe și regiuni', '7 ani de istoric, cu competitorii', 'Baza de date inclusă, 60 MB'],
+    note: 'Date publice MF și ONRC (data.gov.ro, CC BY 4.0). Marja calculată e cea brută, nu marja EBIT folosită de ANAF.',
+    downloads: [{ name: 'Aplicația și baza de date', size: 'ZIP · 90,5 MB', href: REL + 'Fin_Metrics-1.0.0.zip', track: 'resursa:fin-metrics', rec: true }],
+    articles: { items: [{ href: '2026-10-24-Marja-firmei-fata-de-sector-inainte-de-ANAF.html', min: 20, role: 'Cum a fost construită și ce arată', title: 'Marja firmei față de sector, înainte să întrebe ANAF' }] },
+    facts: [['Versiune', '1.0.0'], ['Sistem', 'Windows'], ['Internet', 'doar pentru Timeline']] },
+
   { type: 'tool', slug: 'saft-inspector', kind: 'Aplicație · Windows', title: 'SAF-T Inspector 0.1.0',
     short: 'Verifică declarația D406 și o transformă în registre Excel, cu raport în Word și PDF. Totul local.',
     meta: '2 variante · Windows',

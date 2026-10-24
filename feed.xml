@@ -9,7 +9,34 @@
     1. updates.json  -> pentru aplicația instalată (bulină + notificare)
     2. feed.xml      -> pentru cititoarele de feed (Feedly, Inoreader…)
 
-  Reguli pentru un <item> nou:
+  Reguli pentru un <item>
+      <title>Buzzword: Google Antigravity — agentul care scrie și rulează codul pe calculatorul tău</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#google-antigravity</link>
+      <guid isPermaLink="false">aiah-buzzword-google-antigravity</guid>
+      <pubDate>Sat, 24 Oct 2026 11:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>Antigravity e mediul de dezvoltare al Google construit în jurul agenților AI. Arată ca un editor de cod obișnuit, dar munca principală o face un agent: primește sarcina în cuvinte, își face un plan, scrie codul, rulează comenzi și verifică rezultatul într-un browser integrat. Omul aprobă pașii importanți și urmărește ce s-a făcut prin rapoarte scurte, numite artefacte: planul, lista de modificări, capturi din aplicație.</description>
+    </item>
+
+    <item>
+      <title>Buzzword: MVP — cea mai mică versiune care îți spune dacă ideea merită</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#mvp</link>
+      <guid isPermaLink="false">aiah-buzzword-mvp</guid>
+      <pubDate>Sat, 24 Oct 2026 10:00:00 +0300</pubDate>
+      <category>Buzzword</category>
+      <description>MVP e cea mai mică versiune a unui produs care încă își face treaba principală, construită ca să afli repede dacă ideea merită continuată. Nu e o versiune proastă a produsului final, ci una incompletă intenționat: are funcția centrală și renunță la tot restul, de la setări la aspectul finisat. Termenul vine din lumea startup-urilor, unde rolul lui e să testeze o ipoteză cu un cost cât mai mic, înainte de a investi luni de muncă.</description>
+    </item>
+
+    <item>
+      <title>Marja firmei față de sector, înainte să întrebe ANAF</title>
+      <link>https://aiaccountinghub.ro/2026-10-24-Marja-firmei-fata-de-sector-inainte-de-ANAF.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-10-24-Marja-firmei-fata-de-sector-inainte-de-ANAF.html</guid>
+      <pubDate>Sat, 24 Oct 2026 09:00:00 +0300</pubDate>
+      <category>Articol</category>
+      <description>ANAF compară marja firmei cu reperul sectorului și trimite notificări de conformare când diferența e mare. Articolul pornește de la aceste notificări, de la cazurile din 2024 și de la indicatorul EBIT din raportul ANAF, apoi arată cum am construit Fin_Metrics: raportul Gemini Deep Research, datele deschise de pe data.gov.ro, serviciile web ANAF, machetele din Stitch, MVP-ul din Google AI Studio și aplicația finală, care pune bilanțurile 2025 într-o bază de 60 MB. Demonstrația e pe codul CAEN 6920, contabilitate și audit, cu limitele datelor spuse direct și aplicația, de descărcat ca exemplu.</description>
+    </item>
+
+    <item> nou:
     · se adaugă ca PRIM item, imediat sub <image>;
     · <pubDate> în format RFC-822: „Vin, 31 Jul 2026 08:00:00 +0300”
       se scrie cu ziua și luna în engleză — Mon/Tue/Wed/Thu/Fri/Sat/Sun
@@ -31,7 +58,7 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sat, 03 Oct 2026 12:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 11:00:00 +0300</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>

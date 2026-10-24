@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Pagini principale -->
-  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-10-03</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/podcast.html</loc><lastmod>2026-10-03</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-09-05</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/resurse.html</loc><lastmod>2026-10-01</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/resurse.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/viitorul-profesiei.html</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/contact.html</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/nota-confidentialitate.html</loc><lastmod>2026-07-19</lastmod></url>
@@ -39,6 +39,7 @@
   <url><loc>https://aiaccountinghub.ro/2026-08-01-Cum-anunti-o-comunitate-fara-date-de-contact.html</loc><lastmod>2026-08-01</lastmod></url>
 
   <!-- Articole 2026 -->
+  <url><loc>https://aiaccountinghub.ro/2026-10-24-Marja-firmei-fata-de-sector-inainte-de-ANAF.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/2026-09-05-Nu-cere-drumul-cel-mai-scurt.html</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/2026-09-05-Proiectul-care-tine-minte.html</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/2026-09-08-Conversatia-care-nu-a-produs-cod.html</loc><lastmod>2026-10-03</lastmod></url>
@@ -195,6 +196,23 @@
   <url><loc>https://aiaccountinghub.ro/buzzword/memory-md.html</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/company-portal.html</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/plan-mode.html</loc><lastmod>2026-09-05</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/promptslop-deckslop.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/agentic-engineering.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/shadow-automation.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ai-washing.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ai-amnesty.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/slopsquatting.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/responsible-ai.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/eu-ai-act.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/red-teaming.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/compute-gpu-tpu.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/hyperscalers.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/data-center.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ai-bubble.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/physical-ai.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/google-ai-studio.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/mvp.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/google-antigravity.html</loc><lastmod>2026-10-24</lastmod></url>
   <!-- /Termeni buzzword -->
 
 </urlset>

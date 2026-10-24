@@ -3176,6 +3176,567 @@
           "a": "Ideea e aceeași peste tot, numele diferă. La Claude Code se numește plan mode. Mediul de dezvoltare Antigravity al Google produce planuri de implementare ca artefacte vizibile, aprobate separat de execuție. Codex, agentul OpenAI, expune și el pasul de planificare înainte de a scrie modificările. La orice asistent care nu are un mod dedicat, îl obții cerând explicit: „nu modifica nimic, spune-mi întâi ce ai de gând să faci”."
         }
       ]
+    },
+    {
+      "id": "promptslop-deckslop",
+      "date": "2026-10-24",
+      "term": "PROMPTSLOP / DECKSLOP",
+      "termFull": "VARIANTE DE SLOP: PROMPTURI LENEȘE, PREZENTĂRI GOALE",
+      "pron": "/ prompt·slop / dec·slop /",
+      "type": "substantiv",
+      "ro": "Maculatură de Prompt / de Prezentare",
+      "def": [
+        "Derivate ale „slop”-ului, pe nișe specifice. Promptslop = prompturi leneșe, vagi, aruncate modelului fără context sau intenție („fă-mi un raport despre firmă”), care produc, previzibil, răspunsuri la fel de goale; gunoiul de la intrare devine gunoi la ieșire. Deckslop = prezentări generate automat, cu multe slide-uri, fraze-șablon și grafice decorative, în care nicio idee nu justifică ședința convocată.",
+        "Ambele denumesc aceeași boală în puncte diferite ale lanțului: absența gândirii înainte de generare. Promptslop-ul e cauza: cine nu poate formula ce vrea, primește orice; deckslop-ul e simptomul vizibil în sala de ședințe, unde forma a înlocuit conținutul, iar 20 de slide-uri spun mai puțin decât ar fi spus un email de 10 rânduri. Ironia: AI-ul amplifică productivitatea celor care știu ce vor și zgomotul celor care nu.",
+        "În viața de birou financiar, ambele au cost direct: prompturile vagi pe sarcini de extragere produc date inutilizabile care se refac; prezentările umflate ard timpul comitetelor exact acolo unde deciziile cer cifre clare. Igienă simplă: un prompt de lucru se scrie ca un brief către un coleg (obiectiv, context, format, criterii), iar o prezentare începe de la decizia cerută, nu de la numărul de slide-uri."
+      ],
+      "examples": [
+        "Promptslop: „analizează costurile” pe un fișier de 10.000 de rânduri → generalități; brief-ul corect, „top 10 categorii cu creștere peste 15% față de trimestrul trecut, cu ipoteze de cauză”, produce analiză utilizabilă.",
+        "Deckslop: raportarea trimestrială către board vine în 30 de slide-uri generate, cu stock-photos și „insights” generice, iar decizia despre investiție se amână din lipsă de cifre concrete.",
+        "Regulă de ședință: orice prezentare începe cu un slide scris de om, „decizia cerută + 3 cifre care contează”; restul slide-urilor devin anexe, oricât de frumos le-a generat AI-ul."
+      ],
+      "faq": [
+        {
+          "q": "E vina modelului AI?",
+          "a": "Rareori. Un model primește ce i se dă: o cerere fără context, fără format și fără criteriu produce un răspuns la fel de general. Aceeași unealtă, cu un brief scris ca pentru un coleg, dă rezultate complet diferite."
+        },
+        {
+          "q": "Cum recunosc o prezentare de tip deckslop?",
+          "a": "Are multe slide-uri și puține cifre, titluri care nu spun nicio concluzie și grafice care decorează în loc să arate ceva. Testul simplu: dacă după ultimul slide nu știi ce decizie ți se cere, prezentarea e deckslop."
+        },
+        {
+          "q": "Cum arată un prompt bun pentru o sarcină de lucru?",
+          "a": "Spune obiectivul, dă contextul, cere un format precis și precizează după ce criterii judeci rezultatul. De exemplu: ce categorii de cost au crescut peste 15% față de trimestrul trecut, într-un tabel cu suma și cauza probabilă."
+        }
+      ]
+    },
+    {
+      "id": "agentic-engineering",
+      "date": "2026-10-24",
+      "term": "AGENTIC ENGINEERING",
+      "termFull": "DISCIPLINA MATURĂ A LUCRULUI CU AGENȚI DE COD",
+      "pron": "/ ei·gen·tic en·gi·ni·ring /",
+      "type": "substantiv",
+      "ro": "Inginerie Agentică",
+      "def": [
+        "Agentic engineering este evoluția „matură” a vibe coding-ului: disciplina de a proiecta sisteme în care agenți AI planifică, scriu, testează și livrează cod, dar sub supraveghere umană structurată, cu specificații clare, teste automate, revizie și limite de autoritate. Termenul, propus de Andrej Karpathy în februarie 2026, la un an după „vibe coding”, marchează trecerea de la „acceptă ce iese” la „condu procesul”.",
+        "Diferența față de vibe coding e diferența dintre amator entuziast și profesionist: același motor (AI-ul generează codul), dar cu inginerie în jur, unde omul definește ce trebuie construit și cum se verifică, agentul execută, testele confirmă, iar nimic neverificat nu ajunge în producție. Rolul omului migrează de la „scriitor de cod” la „arhitect și controlor de calitate al muncii agenților”.",
+        "Paralela contabilă e izbitor de familiară: e exact relația senior–junior instituționalizată, în care juniorul (agentul) lucrează mult și repede, seniorul definește sarcina, verifică prin sondaj și semnează. Pentru firmele care își construiesc automatizări, lecția transferabilă: valoarea nu mai e în execuția manuală, ci în specificare, control și asumarea răspunderii, competențe pe care profesia contabilă le exersează de un secol."
+      ],
+      "examples": [
+        "Echipa definește specificația și testele de acceptare pentru un modul de reconciliere; agenții scriu codul, rulează testele, iar inginerul revizuiește doar diferențele: livrare de câteva ori mai rapidă, control păstrat.",
+        "Contrast: prototipul „vibe-codat” al aplicației de deconturi e rescris agentic înainte de producție, cu teste, jurnalizare și limite, iar abia atunci primește acces la date reale.",
+        "Transfer de mentalitate: un cabinet aplică aceeași logică la automatizările proprii, așa că orice flux AI are specificație scrisă, cazuri de test și un responsabil care semnează, ca orice lucrare de client."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă de vibe coding?",
+          "a": "Vibe coding acceptă ce produce AI-ul fără să citească prea mult codul. Agentic engineering păstrează agentul ca executant, dar adaugă specificații, teste și revizie umană, astfel încât nimic neverificat să nu ajungă în folosire reală."
+        },
+        {
+          "q": "Trebuie să fiu programator?",
+          "a": "Nu neapărat, dar trebuie să poți scrie ce vrei să obții și cum verifici că s-a obținut. Partea de specificare și de control e cea care contează, iar acolo experiența de verificare a unui contabil e un avantaj."
+        },
+        {
+          "q": "De unde vine termenul?",
+          "a": "Andrej Karpathy, care a lansat expresia „vibe coding” în februarie 2025, a propus „agentic engineering” un an mai târziu, ca nume pentru lucrul profesionist cu agenți: omul orchestrează și supraveghează, agenții scriu codul."
+        }
+      ]
+    },
+    {
+      "id": "shadow-automation",
+      "date": "2026-10-24",
+      "term": "SHADOW AUTOMATION",
+      "termFull": "AUTOMATIZAREA ÎN SECRET A PROPRIILOR SARCINI",
+      "pron": "/ șe·dou o·to·mei·șăn /",
+      "type": "substantiv",
+      "ro": "Automatizare din Umbră",
+      "def": [
+        "Shadow automation este automatizarea în secret a propriilor sarcini de serviciu: angajatul își construiește cu AI scripturi și fluxuri care îi fac o parte din muncă, fără a informa echipa sau angajatorul. Sarcina „de 3 ore” durează de fapt 10 minute; diferența rămâne nedeclarată. Formă particulară de shadow AI, cu un strat suplimentar: nu doar unealta e ascunsă, ci și noua realitate a muncii.",
+        "Fenomenul are două fețe morale care merită separate cinstit. Ingeniozitatea: omul care își automatizează rutina face exact ce lăudăm la inovatori. Problemele: fluxuri neverificate rulează pe date reale fără nicio plasă de siguranță; procesul depinde de o singură persoană și dispare odată cu ea; iar dacă automatizarea greșește tăcut luni întregi, eroarea e sistemică și nedetectată. Plus întrebarea de echipă: capacitatea eliberată aparține individului sau organizației?",
+        "Pentru un departament financiar, unde acuratețea proceselor e materie primă, răspunsul sănătos e din nou canalizarea, nu vânătoarea: reguli care încurajează declararea automatizărilor („arată-ne ce ți-ai construit”), validare tehnică minimă înainte de rulare pe date reale, și recompensarea, nu penalizarea, celor care își expun uneltele. Alternativa e un birou plin de roboți invizibili, neauditați, care ating datele clienților."
+      ],
+      "examples": [
+        "Un analist descoperă la plecarea unui coleg că „raportul zilnic” era generat integral de un script personal nedocumentat, iar procesul moare odată cu laptopul predat.",
+        "Automatizarea ascunsă a validării deconturilor aproba tacit și cazurile-limită care cereau judecată, iar eroarea iese la iveală după un trimestru, la reconciliere.",
+        "Politica inteligentă: firma lansează un „registru al automatizărilor” cu premii trimestriale pentru cele mai bune unelte declarate; în 3 luni află de fluxuri la care IT-ul nici nu visase."
+      ],
+      "faq": [
+        {
+          "q": "E același lucru cu shadow AI?",
+          "a": "E o formă a lui. Shadow AI înseamnă unelte AI folosite fără aprobare. Shadow automation merge un pas mai departe: unealta face efectiv o parte din muncă, iar faptul că sarcina s-a scurtat rămâne nedeclarat."
+        },
+        {
+          "q": "De ce e o problemă, dacă munca se face?",
+          "a": "Pentru că nimeni nu a verificat automatizarea, procesul depinde de o singură persoană și dispare odată cu ea, iar o eroare repetată tăcut luni întregi devine o eroare de sistem. Problema nu e ingeniozitatea, ci lipsa de control."
+        },
+        {
+          "q": "Ce poate face firma?",
+          "a": "Să facă declararea avantajoasă: un registru al automatizărilor, o verificare tehnică minimă înainte de rularea pe date reale și recunoașterea celor care își arată uneltele. Interdicția doar împinge automatizările mai adânc în umbră."
+        }
+      ]
+    },
+    {
+      "id": "ai-washing",
+      "date": "2026-10-24",
+      "term": "AI WASHING",
+      "termFull": "ETICHETAREA „AI-POWERED” FĂRĂ CAPABILITĂȚI AI REALE",
+      "pron": "/ ei·ai uo·șing /",
+      "type": "substantiv",
+      "ro": "Spoială cu AI",
+      "def": [
+        "AI washing este practica de a eticheta un produs sau o companie drept „AI-powered” pentru a impresiona piața, fără capabilități AI reale sau cu unele marginale: un „if-then” botezat inteligență artificială, un formular cu autocomplete vândut ca „agent”, o companie care adaugă „.ai” în nume înaintea rundei de finanțare. Echivalentul pentru AI al „greenwashing”-ului din raportarea de mediu.",
+        "Fenomenul are consecințe reale, nu doar estetice: autoritățile de piață au început să sancționeze, iar SEC (SUA) a amendat încă din 2024 firme de investiții pentru declarații false despre folosirea AI, iar practica poate constitui publicitate înșelătoare și în dreptul european. Semnale de spoială: nimeni nu poate explica concret ce face „AI-ul”, nu există demo pe datele tale, iar „inteligența” nu apare nicăieri în documentația tehnică.",
+        "Pentru profesioniștii financiari, relevanța e dublă. Ca evaluatori: la due diligence pe furnizori sau ținte de achiziție, capabilitățile AI declarate se verifică ca orice altă afirmație materială; cere demonstrații, nu broșuri. Ca practicieni ai raportării: dacă firma ta comunică public despre propria „transformare AI”, aceleași standarde de acuratețe se aplică în oglindă, fiindcă marketingul de azi poate deveni răspunderea de mâine."
+      ],
+      "examples": [
+        "Softul contabil „cu AI” se dovedește, la demo pe facturile tale, un set de șabloane fixe care eșuează la primul format nou: eticheta era de marketing, nu de arhitectură.",
+        "Precedent de piață: SEC a sancționat administratori de fonduri pentru afirmații false despre AI în strategiile de investiții, iar „AI washing” a intrat oficial în vocabularul de enforcement.",
+        "Checklist de achiziție: „arătați-ne ce model folosiți, pe ce date, cu ce rată de eroare pe un eșantion al nostru”, trei întrebări care despart produsele reale de spoială."
+      ],
+      "faq": [
+        {
+          "q": "Cum îmi dau seama dacă un produs „cu AI” chiar folosește AI?",
+          "a": "Ceri o demonstrație pe datele tale, nu pe cele de prezentare, și întrebi ce model folosește, pe ce date și cu ce rată de eroare. Un furnizor serios răspunde concret; unul care doar a lipit eticheta rămâne la formulări generale."
+        },
+        {
+          "q": "E ilegal?",
+          "a": "Poate fi. Afirmațiile false despre capabilitățile unui produs pot constitui publicitate înșelătoare, iar în piețele financiare autoritățile au sancționat deja declarații false despre folosirea AI. SEC a amendat în 2024 firme de investiții exact pentru asta."
+        },
+        {
+          "q": "De ce contează pentru un contabil?",
+          "a": "La achiziția unui soft sau la evaluarea unei firme, capabilitățile AI declarate se verifică ca orice altă afirmație materială. Iar dacă propria firmă comunică public despre AI, aceleași standarde de acuratețe se aplică și ei."
+        }
+      ]
+    },
+    {
+      "id": "ai-amnesty",
+      "date": "2026-10-24",
+      "term": "AI AMNESTY",
+      "termFull": "AMNISTIE AI — DECLARĂ CE UNELTE FOLOSEȘTI, FĂRĂ SANCȚIUNI",
+      "pron": "/ ei·ai am·nes·ti /",
+      "type": "substantiv",
+      "ro": "Amnistie AI",
+      "def": [
+        "Amnistia AI este politica prin care conducerea oferă o fereastră de timp, tipic câteva săptămâni, în care angajații pot declara instrumentele AI folosite neoficial, fără nicio sancțiune. Scopul nu e iertarea în sine, ci cartografierea realității: ce unelte circulă deja prin firmă, pe ce date, pentru ce sarcini, adică informație pe care interdicțiile o îngroapă, nu o produc.",
+        "Logica e împrumutată din instrumente verificate: amnistiile fiscale și programele de „conformare voluntară”, unde recunoști că regula a fost depășită de realitate, creezi o punte de întoarcere în legalitate, apoi aplici regulile noi cu adevărat. Ingredientele care o fac să funcționeze: garanția credibilă a lipsei de sancțiuni, un proces simplu de declarare și, esențial, angajamentul că uneltele bune declarate vor fi evaluate și, unde se poate, aprobate oficial, nu confiscate.",
+        "Pentru un cabinet sau departament financiar, amnistia AI e adesea primul pas realist al guvernanței: nu poți scrie o politică de utilizare pentru unelte despre care nu știi că există. Rezultatul tipic surprinde plăcut: pe lângă riscuri de închis (date de clienți în conturi personale), ies la iveală și automatizări ingenioase care merită generalizate; inventarul de riscuri vine la pachet cu un inventar de idei."
+      ],
+      "examples": [
+        "Fereastră de 30 de zile: angajații declară uneltele AI folosite pe sarcini de serviciu; rezultatul e o listă de instrumente necunoscute conducerii, din care câteva ating date de clienți, prioritate imediată.",
+        "Pachetul post-amnistie: listă albă de unelte aprobate (inclusiv câteva descoperite prin declarare), reguli pe categorii de date, și un canal permanent de propunere a uneltelor noi.",
+        "Lecția de design: amnistia anunțată împreună cu sancțiuni viitoare clare („după 1 august, utilizarea nedeclarată = abatere”) funcționează; amnistia fără reguli ulterioare e doar un sondaj."
+      ],
+      "faq": [
+        {
+          "q": "Nu încurajează asta încălcarea regulilor?",
+          "a": "Nu, dacă e făcută corect. Amnistia recunoaște că uneltele sunt deja folosite și creează o cale de întoarcere în reguli. Funcționează doar dacă e urmată de reguli clare și aplicate, altfel rămâne un simplu sondaj."
+        },
+        {
+          "q": "Cât ar trebui să dureze?",
+          "a": "De regulă câteva săptămâni, suficient ca oamenii să afle de ea și să declare, dar destul de scurt ca să rămână un moment distinct, cu o dată clară de la care se aplică regulile noi."
+        },
+        {
+          "q": "Ce se întâmplă cu uneltele declarate?",
+          "a": "Se evaluează. Cele riscante se opresc, în special cele care ating date de clienți în conturi personale, iar cele utile se aprobă oficial. Promisiunea că uneltele bune nu vor fi confiscate e ce face oamenii să declare."
+        }
+      ]
+    },
+    {
+      "id": "slopsquatting",
+      "date": "2026-10-24",
+      "term": "SLOPSQUATTING",
+      "termFull": "PACHETE-CAPCANĂ CU NUME PE CARE AI-UL LE HALUCINEAZĂ",
+      "pron": "/ slop·scuo·ting /",
+      "type": "substantiv",
+      "ro": "Ocuparea Numelor Halucinate",
+      "def": [
+        "Slopsquatting este un atac de securitate informatică născut din halucinațiile AI: modelele care generează cod recomandă uneori pachete software (biblioteci) cu nume inexistente, plauzibile dar inventate. Atacatorii identifică aceste nume halucinate recurent, publică sub ele pachete malițioase reale, iar dezvoltatorii care instalează orbește ce le-a recomandat AI-ul își aduc singuri malware-ul în sistem.",
+        "E evoluția AI a unui truc clasic („typosquatting”, pachete cu nume greșite de tastare), dar cu o întorsătură nouă: încrederea în recomandările mașinii. Cercetările pe modelele de cod au arătat că numele halucinate nu sunt aleatorii, ci se repetă predictibil, exact ce-i trebuie unui atacator ca să știe ce „locuri libere” să ocupe. Apărarea: verificarea existenței și reputației oricărui pachet înainte de instalare, liste interne de dependențe aprobate, scanare automată.",
+        "Relevanța pentru un birou financiar crește direct proporțional cu entuziasmul pentru vibe coding: contabilul care își construiește cu AI un script de procesare poate instala, la recomandarea aceluiași AI, pachetul-capcană care exfiltrează exact datele procesate. Regula minimă de igienă: uneltele construite intern cu AI nu rulează pe date reale înainte ca cineva competent să le verifice dependențele."
+      ],
+      "examples": [
+        "AI-ul recomandă în scriptul de reconciliere un pachet inexistent; peste o lună, numele e ocupat de un pachet malițios, iar scriptul „îmbunătățit” al colegului îl instalează fără verificare.",
+        "Politica IT: dependențele scripturilor interne se verifică contra unei liste aprobate; pachetele noi trec printr-un control de proveniență de 10 minute, cost minuscul și risc major închis.",
+        "Semnal de due diligence la furnizorii de automatizări: „cum vă protejați lanțul de dependențe împotriva pachetelor halucinate?”, iar întrebarea deosebește inginerii de entuziaști."
+      ],
+      "faq": [
+        {
+          "q": "Cum mă protejez când instalez un pachet recomandat de AI?",
+          "a": "Verifici înainte de instalare că pachetul există, că are istoric, autor cunoscut și utilizare reală, pe pagina oficială a depozitului de pachete. Un nume pe care nu îl găsești nicăieri în afara răspunsului AI e un semnal de oprire."
+        },
+        {
+          "q": "Prin ce diferă de typosquatting?",
+          "a": "Typosquatting mizează pe greșeli de tastare, cu nume apropiate de cele reale. Slopsquatting mizează pe nume inventate de AI, care se repetă previzibil, deci atacatorul știe dinainte ce nume să ocupe."
+        },
+        {
+          "q": "Mă privește dacă scriu doar scripturi mici?",
+          "a": "Da, poate chiar mai mult. Un script mic, construit cu AI și rulat pe date reale, poate instala la recomandarea aceluiași AI un pachet care trimite exact datele prelucrate în altă parte. Regula: dependențele se verifică înainte de prima rulare."
+        }
+      ]
+    },
+    {
+      "id": "responsible-ai",
+      "date": "2026-10-24",
+      "term": "RESPONSIBLE AI",
+      "termFull": "AI RESPONSABIL — CORECTITUDINE, TRANSPARENȚĂ, SIGURANȚĂ, RĂSPUNDERE",
+      "pron": "/ ris·pon·si·băl ei·ai /",
+      "type": "substantiv",
+      "ro": "AI Responsabil",
+      "def": [
+        "Responsible AI este setul de principii pentru dezvoltarea și utilizarea AI cu accent pe corectitudine (fără discriminare sistematică), transparență (utilizatorul știe că interacționează cu AI și poate înțelege deciziile), siguranță (sistemul nu produce vătămări), confidențialitate și răspundere (un om identificabil răspunde pentru consecințe). Este stratul de valori pe care guvernanța AI îl transformă în proceduri.",
+        "Relația cu termenii vecini merită clarificată: responsible AI e „ce credem și promitem”, guvernanța AI e „cum ne ținem de promisiune” (politici, roluri, controale), iar EU AI Act e „ce ne obligă legea”. Capcana practică: principiile frumoase din slide-uri fără mecanisme reale devin exact echivalentul AI al „greenwashing”-ului, adică declarații de responsabilitate care nu supraviețuiesc primului conflict cu termenul de livrare.",
+        "Pentru profesia contabilă, responsible AI se traduce firesc în limbaj deontologic cunoscut: integritate (nu prezinți munca AI drept judecată proprie neverificată), competență (înțelegi limitele uneltelor folosite), confidențialitate (datele clientului nu intră în unelte neevaluate) și răspundere (semnătura ta acoperă și ce a generat mașina). Profesiile cu coduri etice mature au un avans natural: trebuie doar să-și extindă principiile la unelte noi, nu să le inventeze."
+      ],
+      "examples": [
+        "Politica de transparență a cabinetului: clienții sunt informați că anumite procesări folosesc AI sub supraveghere umană, fiindcă încrederea se construiește înainte de primul incident, nu după.",
+        "Aplicare concretă a principiului răspunderii: fiecare livrabil asistat de AI are un responsabil uman nominal; „a greșit AI-ul” nu există ca explicație către client.",
+        "Test de seriozitate la furnizori: ceri documentul de responsible AI și apoi întrebi „ce mecanisme concrete îl aplică?”, adică diferența dintre principii cu proceduri și principii cu font frumos."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă de guvernanța AI?",
+          "a": "Responsible AI e setul de principii: ce promite firma. Guvernanța AI e felul în care se ține de promisiune, prin politici, roluri și controale. Fără guvernanță, principiile rămân declarații."
+        },
+        {
+          "q": "E o obligație legală?",
+          "a": "Principiile în sine nu, dar multe dintre ele au devenit obligații prin legi precum EU AI Act sau GDPR, de exemplu transparența față de utilizator și supravegherea umană în cazurile cu risc ridicat."
+        },
+        {
+          "q": "Cum se aplică într-un cabinet de contabilitate?",
+          "a": "Prin reguli simple și verificabile: clienții știu unde se folosește AI, fiecare livrabil asistat de AI are un responsabil uman, iar datele clienților intră doar în unelte evaluate. Sunt principiile deontologice cunoscute, extinse la unelte noi."
+        }
+      ]
+    },
+    {
+      "id": "eu-ai-act",
+      "date": "2026-10-24",
+      "term": "EU AI ACT",
+      "termFull": "REGULAMENTUL EUROPEAN PRIVIND INTELIGENȚA ARTIFICIALĂ",
+      "pron": "/ i·iu ei·ai act /",
+      "type": "substantiv",
+      "ro": "Regulamentul UE privind IA (Regulamentul 2024/1689)",
+      "def": [
+        "EU AI Act este primul cadru legal cuprinzător din lume pentru inteligența artificială: Regulamentul (UE) 2024/1689, intrat în vigoare în august 2024, cu obligațiile aplicabile etapizat în anii următori. Logica centrală este clasificarea sistemelor AI pe niveluri de risc: practici interzise (manipulare, social scoring), risc ridicat (obligații stricte), risc limitat (transparență) și risc minim (libere), plus reguli dedicate modelelor de uz general.",
+        "Pentru mediul de business, esențial e că obligațiile cad nu doar pe producătorii de AI, ci și pe utilizatorii profesioniști („deployers”) ai sistemelor cu risc ridicat: supraveghere umană efectivă, monitorizare, păstrarea jurnalelor, instruirea personalului. Direct relevant pentru finanțe: scoringul de credit și evaluarea riscului la asigurări figurează explicit printre cazurile cu risc ridicat, iar folosirea AI în decizii de angajare la fel. Sancțiunile sunt calibrate după modelul GDPR: procente din cifra de afaceri globală.",
+        "Pentru profesioniștii contabili, regulamentul aduce și o piață nouă de servicii: clienții vor avea nevoie de inventare AI, evaluări de încadrare pe risc și documentație de conformitate, muncă ce seamănă structural cu ce a adus GDPR-ul, unde profesia financiară a jucat deja rol de ghid. Punctul de pornire practic: inventarul sistemelor AI folosite de firmă și de clienți, apoi încadrarea fiecăruia pe nivelurile de risc."
+      ],
+      "examples": [
+        "Banca ce folosește AI la scoringul de credit intră pe risc ridicat: documentație tehnică, supraveghere umană, jurnalizare, iar auditorii ei vor verifica exact aceste controale.",
+        "Chatbotul de pe site-ul firmei intră la obligații de transparență: utilizatorul trebuie să știe că vorbește cu un AI, adică o linie de text care evită o încălcare.",
+        "Serviciu nou în portofoliul cabinetului: „inventar AI + încadrare pe risc” pentru IMM-urile care descoperă că folosesc deja AI în HR și creditare fără să fi citit un rând din regulament."
+      ],
+      "faq": [
+        {
+          "q": "Se aplică și firmelor mici care doar folosesc AI?",
+          "a": "Da, în măsura în care folosesc sisteme din categoriile reglementate. Obligațiile cele mai multe cad pe furnizori, dar și utilizatorii profesioniști au obligații, mai ales la sistemele cu risc ridicat, iar obligațiile de transparență privesc pe oricine pune un chatbot în fața clienților."
+        },
+        {
+          "q": "Care e calendarul de aplicare?",
+          "a": "Practicile interzise se aplică din februarie 2025, regulile pentru modelele de uz general din august 2025, iar obligațiile de transparență din august 2026. Prin Omnibusul digital adoptat în 2026, obligațiile pentru sistemele cu risc ridicat au fost amânate: decembrie 2027 pentru cele din anexa III și august 2028 pentru cele integrate în produse reglementate."
+        },
+        {
+          "q": "Ce înseamnă „risc ridicat” pentru finanțe?",
+          "a": "Printre cazurile enumerate explicit sunt evaluarea bonității persoanelor fizice, evaluarea riscului la asigurările de viață și de sănătate și folosirea AI în recrutare și în evaluarea angajaților. Pentru aceste utilizări se cer documentație, supraveghere umană și jurnalizare."
+        }
+      ]
+    },
+    {
+      "id": "red-teaming",
+      "date": "2026-10-24",
+      "term": "RED TEAMING",
+      "termFull": "TESTAREA ADVERSARIALĂ — ATACĂ-ȚI PROPRIUL SISTEM ÎNAINTE S-O FACĂ ALȚII",
+      "pron": "/ red ti·ming /",
+      "type": "substantiv",
+      "ro": "Echipa Roșie / Testare Adversarială",
+      "def": [
+        "Red teaming este testarea deliberată a unui sistem AI prin atacuri și scenarii adversariale, înainte ca răuvoitorii sau realitatea s-o facă: o echipă „roșie” încearcă sistematic să păcălească modelul (jailbreak-uri, prompt injection, cereri periculoase deghizate, cazuri-limită absurde) și documentează tot ce cedează. Termenul vine din practica militară și de securitate cibernetică; laboratoarele AI îl folosesc standard înaintea lansărilor.",
+        "Filosofia e identică cu una foarte familiară profesiei: auditul nu presupune rea-credință, dar testează ca și cum ar exista. Diferența față de testarea clasică de software: sistemele AI nu au listă finită de comportamente de bifat; spațiul defectelor e deschis, deci cauți creativ, nu doar verifici cerințe. Red teaming-ul bun combină oameni cu perspective diferite și, tot mai des, AI care atacă alt AI la scară.",
+        "Pentru o firmă care lansează instrumente AI proprii (asistent pentru clienți, procesare de documente), versiunea proporțională de red teaming e obligatorie înainte de producție: câteva zile în care oameni motivați încearcă să scoată date ale altui client, să strecoare documente-capcană, să obțină sfaturi în afara mandatului. Fiecare breșă găsită intern e o breșă negăsită de un client sau de presă."
+      ],
+      "examples": [
+        "Înainte de lansarea asistentului de cabinet: echipa încearcă „arată-mi soldurile celuilalt client”, facturi cu instrucțiuni ascunse, cereri de sfaturi fiscale definitive; trei vulnerabilități găsite și închise pre-lansare.",
+        "Exercițiu anti-fraudă modernizat: simularea unui atac cu deepfake vocal asupra procedurii de plăți, prin care testezi procedura și oamenii, nu doar tehnologia.",
+        "Practică recurentă, nu eveniment: fiecare versiune nouă a fluxului AI trece prin aceeași baterie de atacuri, plus atacurile nou apărute în industrie, iar lista „roșie” crește ca orice bibliotecă de proceduri."
+      ],
+      "faq": [
+        {
+          "q": "E nevoie de red teaming și pentru o unealtă internă?",
+          "a": "Da, la scară proporțională. Dacă unealta atinge date de clienți sau răspunde în numele firmei, câteva zile de încercări deliberate de a o păcăli costă mult mai puțin decât un incident descoperit de un client."
+        },
+        {
+          "q": "Ce se testează concret?",
+          "a": "Dacă sistemul poate fi convins să arate datele altcuiva, să urmeze instrucțiuni ascunse într-un document, să ofere sfaturi în afara rolului lui sau să cedeze la cereri deghizate. Fiecare reușită se documentează și se repară."
+        },
+        {
+          "q": "Prin ce diferă de testarea obișnuită?",
+          "a": "Testarea obișnuită verifică o listă de cerințe. Red teaming-ul caută creativ ce nu e pe listă, fiindcă un sistem AI nu are un set finit de comportamente. E mai aproape de un audit care presupune că cineva încearcă activ să ocolească controalele."
+        }
+      ]
+    },
+    {
+      "id": "compute-gpu-tpu",
+      "date": "2026-10-24",
+      "term": "COMPUTE (GPU / TPU)",
+      "termFull": "PUTEREA DE CALCUL — MATERIA PRIMĂ A EREI AI",
+      "pron": "/ com·piut — gi·pi·iu / ti·pi·iu /",
+      "type": "substantiv",
+      "ro": "Putere de Calcul",
+      "def": [
+        "„Compute” este puterea de calcul necesară antrenării și rulării modelelor AI, furnizată de procesoare specializate: GPU-uri (plăci grafice, dominate de Nvidia) și TPU-uri (cipurile proprietare Google). Spre deosebire de procesoarele clasice, acestea execută milioane de operații matematice simple în paralel, exact ce cere aritmetica rețelelor neuronale.",
+        "Compute a devenit materia primă strategică a industriei: rară, scumpă și concentrată, fiindcă accesul la zeci de mii de GPU-uri de ultimă generație separă laboratoarele de frontieră de restul lumii, iar comenzile gigant și listele de așteptare au transformat cipurile în subiect geopolitic (controale la export, curse naționale de infrastructură). Pentru economia AI, regula de bază: antrenarea cere compute colosal concentrat o dată; inferența cere compute moderat, dar perpetuu, la fiecare utilizare.",
+        "Pentru un profesionist financiar, compute explică structura de costuri din spatele prețurilor AI pe care le plătești: de ce modelele mari costă mai mult per token, de ce capacitatea e uneori raționalizată la orele de vârf, și de ce rapoartele financiare ale marilor furnizori de cloud au devenit lectură obligatorie pentru înțelegerea sectorului. E și vocabularul din spatele știrilor de investiții: miliardele anunțate în „AI infrastructure” sunt, în esență, compute."
+      ],
+      "examples": [
+        "Diferența de preț per token dintre modelul mic și cel flagship reflectă direct diferența de compute consumat la fiecare răspuns; plătești FLOPS, nu magie.",
+        "În analiza sectorului: cheltuielile de capital ale hyperscalerilor în centre de date AI au atins ordinul sutelor de miliarde de dolari pe an, cifră de urmărit în rapoartele lor trimestriale.",
+        "Decizie de arhitectură internă: sarcinile de rutină rulează pe modele mici (compute ieftin), analizele grele pe modele mari (compute scump); bugetul AI se gestionează ca orice cost de producție."
+      ],
+      "faq": [
+        {
+          "q": "Care e diferența dintre GPU și TPU?",
+          "a": "GPU-ul e procesorul grafic, adaptat pentru calculul paralel, piața fiind dominată de Nvidia. TPU-ul e un cip proiectat de Google special pentru calculele rețelelor neuronale. Ambele fac același tip de muncă: foarte multe operații simple, în paralel."
+        },
+        {
+          "q": "De ce mă interesează, dacă doar folosesc un asistent AI?",
+          "a": "Pentru că explică prețurile. Modelele mari consumă mai mult calcul la fiecare răspuns, deci costă mai mult pe token, iar capacitatea limitată explică de ce unele servicii raționalizează utilizarea la orele de vârf."
+        },
+        {
+          "q": "Ce înseamnă antrenare și inferență, în costuri?",
+          "a": "Antrenarea e efortul uriaș, făcut o dată, prin care se construiește modelul. Inferența e calculul făcut la fiecare utilizare. Prima e un cost de investiție, a doua un cost de funcționare care crește odată cu numărul de utilizatori."
+        }
+      ]
+    },
+    {
+      "id": "hyperscalers",
+      "date": "2026-10-24",
+      "term": "HYPERSCALERS",
+      "termFull": "GIGANȚII CLOUD CARE OPEREAZĂ INFRASTRUCTURA AI LA SCARĂ PLANETARĂ",
+      "pron": "/ hai·păr·schei·lărs /",
+      "type": "substantiv",
+      "ro": "Hyperscaleri (giganții infrastructurii cloud)",
+      "def": [
+        "Hyperscalerii sunt companiile care operează infrastructură cloud la scară planetară: Amazon (AWS), Microsoft (Azure), Google (Cloud), plus challengeri specializați pe AI, cu rețele de centre de date proiectate să crească aproape nelimitat la cerere. Ei găzduiesc grosul antrenării și rulării modelelor mari: laboratoarele AI închiriază de la ei compute-ul pe care puțini și-l pot construi singuri.",
+        "Poziția lor în lanțul valoric e cea de „proprietari de terenuri” ai erei AI: vând infrastructura tuturor, adesea investesc direct în laboratoarele AI și oferă propriile servicii de modele, o triplă calitate (furnizor, investitor, concurent) care ridică întrebări antitrust tot mai insistente. Pentru economia digitală, concentrarea aduce eficiență și un risc sistemic nou: o pană majoră la un hyperscaler oprește simultan mii de servicii aparent independente.",
+        "Pentru un profesionist financiar, relevanța e de due diligence și continuitate: aplicațiile AI pe care le folosește firma rulează, aproape sigur, pe unul dintre acești giganți, deci întrebările despre localizarea datelor (UE sau nu), dependența de un singur furnizor și planul de continuitate au un răspuns care trece prin hyperscaleri. În analiza de investiții, capex-ul lor în AI e unul dintre cele mai urmărite barometre ale întregului sector."
+      ],
+      "examples": [
+        "La due diligence pe furnizorul de soft contabil: „pe ce cloud rulați, în ce regiune sunt datele, ce se întâmplă la o pană regională?”; răspunsurile trec toate prin hyperscaleri.",
+        "Pană majoră la un mare furnizor cloud → mii de aplicații de business, inclusiv unele contabile, indisponibile simultan câteva ore: argumentul concret pentru proceduri de lucru offline.",
+        "În raportul către un client investitor: cheltuielile de capital ale hyperscalerilor și gradul lor de utilizare sunt indicatorul-cheie pentru sănătatea cererii reale de AI."
+      ],
+      "faq": [
+        {
+          "q": "Cine sunt hyperscalerii?",
+          "a": "În principal Amazon Web Services, Microsoft Azure și Google Cloud, la care se adaugă furnizori mai noi specializați pe infrastructură AI. Ce îi definește e scara: rețele de centre de date care pot crește aproape nelimitat la cerere."
+        },
+        {
+          "q": "De ce contează pentru datele clienților mei?",
+          "a": "Pentru că aproape orice aplicație AI sau cloud pe care o folosești rulează la unul dintre ei. Regiunea în care sunt găzduite datele, dependența de un singur furnizor și planul la o pană sunt întrebări care primesc răspuns la nivelul hyperscalerului."
+        },
+        {
+          "q": "Ce risc aduce concentrarea?",
+          "a": "Eficiență mare, dar și un punct comun de cădere: o pană la un singur furnizor poate opri simultan mii de servicii care par independente. De aici argumentul pentru proceduri de lucru care nu depind integral de un singur serviciu."
+        }
+      ]
+    },
+    {
+      "id": "data-center",
+      "date": "2026-10-24",
+      "term": "DATA CENTER",
+      "termFull": "CENTRUL DE DATE — CLĂDIREA ÎN CARE „LOCUIEȘTE” AI-UL",
+      "pron": "/ dei·ta sen·tăr /",
+      "type": "substantiv",
+      "ro": "Centru de Date",
+      "def": [
+        "Centrul de date este infrastructura fizică în care rulează efectiv AI-ul: hale industriale cu mii de servere, sisteme masive de răcire, alimentare redundantă și conexiuni de mare capacitate. „Cloud-ul” e o metaforă; realitatea e o clădire foarte concretă, care consumă energie la scara unui oraș mic și s-a mutat, odată cu boom-ul AI, din anonimatul tehnic în dezbaterea publică.",
+        "Motivul dezbaterii: apetitul energetic al antrenării și inferenței a transformat centrele de date într-o presiune vizibilă pe rețelele electrice, consumul de apă pentru răcire și piețele imobiliare locale, cu comunități care se împart între beneficiile investiției și costurile de infrastructură. Pentru investitori și finanțiști, centrele de date au devenit o clasă de active în sine: se construiesc pe datorie, se evaluează pe contracte de capacitate pe termen lung.",
+        "Pentru un profesionist financiar, relevanța e dublă: operațional, localizarea centrului de date determină jurisdicția datelor clienților (regiunea UE nu e un detaliu tehnic, ci o cerință de conformitate); analitic, valul de finanțări, garanții și parteneriate din jurul centrelor de date AI e una dintre cele mai mari mișcări de capital ale deceniului, cu tot cu întrebarea de sustenabilitate atașată."
+      ],
+      "examples": [
+        "Cerință de conformitate în contractul cu furnizorul AI: procesarea datelor clienților exclusiv în centre de date din UE, o clauză, nu o presupunere.",
+        "În analiza unei regiuni pentru investiții: anunțul unui centru de date mare schimbă cererea locală de energie, terenuri și forță de muncă specializată, efecte de evaluat în modelele economice locale.",
+        "Perspectiva ESG în raportare: consumul de energie al infrastructurii AI folosite de companie începe să apară printre întrebările de sustenabilitate ale investitorilor."
+      ],
+      "faq": [
+        {
+          "q": "Ce legătură are cu „cloud-ul”?",
+          "a": "Cloud-ul e felul în care cumperi serviciul; centrul de date e locul fizic unde rulează. Orice fișier pus în cloud și orice răspuns al unui asistent AI ajung, concret, pe servere dintr-o clădire anume, într-o țară anume."
+        },
+        {
+          "q": "De ce contează unde e centrul de date?",
+          "a": "Pentru că localizarea determină jurisdicția datelor. Procesarea datelor clienților în centre de date din UE e o cerință de conformitate frecventă și se scrie în contract, nu se presupune."
+        },
+        {
+          "q": "De ce sunt atât de discutate?",
+          "a": "Din cauza consumului: energia pentru calcul, apa pentru răcire, presiunea pe rețelele electrice locale. Pentru investitori au devenit o clasă de active separată, finanțată pe datorie și evaluată pe contracte de capacitate pe termen lung."
+        }
+      ]
+    },
+    {
+      "id": "ai-bubble",
+      "date": "2026-10-24",
+      "term": "AI BUBBLE",
+      "termFull": "BALONUL AI — DEZBATEREA DESPRE SUPRAEVALUAREA SECTORULUI",
+      "pron": "/ ei·ai ba·băl /",
+      "type": "substantiv",
+      "ro": "Balonul Speculativ AI",
+      "def": [
+        "„AI bubble” este dezbaterea economică despre posibila supraevaluare a companiilor și investițiilor legate de AI: evaluări la multipli istorici, sute de miliarde investite în infrastructură înaintea veniturilor care s-o justifice, și întrebarea clasică a oricărui boom tehnologic, anume cât e transformare reală și cât e euforie de piață. Paralela invocată constant: bula dot-com din 2000.",
+        "Lecția nuanțată a istoriei, prețioasă pentru un finanțist: bula și transformarea nu se exclud, fiindcă internetul chiar a schimbat totul ȘI dot-com-ul chiar a spulberat capital; supraevaluarea unor active nu infirmă valoarea tehnologiei, iar valoarea tehnologiei nu garantează prețurile activelor. Semnalele urmărite de analiști în ambele direcții: raportul dintre capex-ul în compute și veniturile efective din AI, concentrarea câștigurilor bursiere în câteva companii, structurile circulare de finanțare dintre furnizori și clienți.",
+        "Pentru profesioniștii financiari, termenul cere disciplina de a separa trei întrebări care se amestecă mereu în presă: „e utilă tehnologia?” (întrebare operațională, testabilă în firma ta), „sunt corecte evaluările?” (întrebare de piață, nimeni nu știe sigur) și „ce expunere avem?” (întrebare de risc, asta e treaba ta directă: portofolii, clienți din sector, furnizori dependenți de finanțare speculativă)."
+      ],
+      "examples": [
+        "Client cu exces de lichiditate concentrat pe acțiuni AI: rolul consultantului nu e predicția bulei, ci cuantificarea concentrării și discuția documentată despre diversificare.",
+        "Semnal de urmărit în analiza sectorului: diferența dintre investițiile anuale în infrastructura AI și veniturile efective generate de servicii AI; cât timp o finanțează piața?",
+        "Lecția operațională: indiferent de soarta evaluărilor, automatizarea care îți reduce azi costul de procesare a documentelor rămâne valoroasă; decuplează decizia de adopție de zgomotul bursier."
+      ],
+      "faq": [
+        {
+          "q": "Există un balon AI?",
+          "a": "Nimeni nu știe sigur. Argumentele pentru: investiții uriașe în infrastructură înaintea veniturilor, evaluări la multipli istorici, câștiguri bursiere concentrate în puține companii. Argumentele contra: adopție reală și venituri în creștere. Ambele pot fi adevărate în același timp."
+        },
+        {
+          "q": "Dacă se sparge balonul, dispare și AI-ul?",
+          "a": "Nu. Bula dot-com a distrus capital, dar internetul a rămas. Supraevaluarea unor active nu anulează utilitatea tehnologiei, la fel cum utilitatea tehnologiei nu garantează prețul acțiunilor."
+        },
+        {
+          "q": "Ce semnale urmăresc analiștii?",
+          "a": "Raportul dintre investițiile în infrastructură și veniturile efective din servicii AI, concentrarea câștigurilor bursiere și structurile circulare de finanțare, în care furnizorii investesc în clienții care le cumpără apoi produsele."
+        }
+      ]
+    },
+    {
+      "id": "physical-ai",
+      "date": "2026-10-24",
+      "term": "PHYSICAL AI",
+      "termFull": "AI-UL CARE IESE DIN ECRAN ÎN LUMEA FIZICĂ",
+      "pron": "/ fi·zi·căl ei·ai /",
+      "type": "substantiv",
+      "ro": "AI Fizic",
+      "def": [
+        "Physical AI este inteligența artificială care iese din ecran în lumea reală: roboți, drone, vehicule și dispozitive care percep mediul (camere, senzori), decid și acționează fizic. Dacă AI-ul generativ automatizează munca cu informația, AI-ul fizic țintește munca cu obiectele: manipulare, transport, inspecție, asamblare.",
+        "Saltul tehnologic care a relansat domeniul: aceleași modele mari care înțeleg limbajul și imaginile devin „creierul” mașinilor, iar robotul nu mai e programat rigid pentru o mișcare, ci instruit în limbaj natural și capabil să generalizeze la situații noi. Realismul necesar: lumea fizică iartă mult mai puțin decât chat-ul, fiindcă o halucinație în text e o eroare de corectat, o „halucinație” cu un braț robotic de 200 kg e un accident; de aceea adopția e mai lentă și mai reglementată.",
+        "Pentru profesioniștii financiari, AI-ul fizic e deocamdată subiect de analiză de investiții și de planificare sectorială, nu de birou: clienții din producție, logistică și agricultură vor fi primii afectați, cu întrebări contabile foarte concrete la pachet: cum amortizezi un robot umanoid, cum îl asiguri, cum arată business case-ul unei „flote” robotice față de costul muncii umane."
+      ],
+      "examples": [
+        "Clientul din logistică evaluează roboți de depozit: contabilul modelează comparația între capex + mentenanță + asigurare și costul complet al muncii manuale, cu praguri de rentabilitate pe volum.",
+        "Inventariere cu drone: stocurile din depozitele mari se numără prin survol automat cu recunoaștere vizuală, iar procesul de inventar anual își schimbă procedura și probele.",
+        "În analiza de portofoliu: expunerea „AI” a unui fond se separă pe straturi (software, infrastructură, AI fizic), fiecare cu alt profil de risc și alt orizont de maturizare."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă de robotica clasică?",
+          "a": "Robotul clasic repetă o mișcare programată, într-un mediu controlat. AI-ul fizic folosește modele care înțeleg limbaj și imagini, deci poate primi instrucțiuni în cuvinte și se poate adapta la situații pe care nu le-a mai întâlnit."
+        },
+        {
+          "q": "De ce avansează mai încet decât AI-ul din chat?",
+          "a": "Pentru că greșelile costă altfel. O eroare într-un text se corectează; o eroare a unui braț robotic sau a unui vehicul poate răni pe cineva. Siguranța, fiabilitatea și reglementarea încetinesc firesc adopția."
+        },
+        {
+          "q": "Ce întrebări contabile ridică?",
+          "a": "Cum se amortizează și cum se asigură echipamentele robotice, cum se compară costul lor complet cu cel al muncii manuale și cum se schimbă procedurile, de exemplu la inventarierea stocurilor făcută cu drone."
+        }
+      ]
+    },
+    {
+      "id": "google-ai-studio",
+      "date": "2026-10-24",
+      "term": "GOOGLE AI STUDIO",
+      "termFull": "MEDIUL WEB ÎN CARE LUCREZI DIRECT CU MODELELE GEMINI",
+      "pron": "/ gu·găl ei ai stiu·dio /",
+      "type": "substantiv",
+      "ro": "Google AI Studio",
+      "def": [
+        "Google AI Studio e mediul web în care Google pune la dispoziție modelele Gemini pentru încercare și construcție: scrii o cerere, alegi modelul, reglezi parametrii și vezi răspunsul. Tot de aici se obține cheia API, adică parola tehnică prin care un program propriu poate folosi modelele. Spre deosebire de aplicația Gemini, gândită pentru conversație, AI Studio e gândit pentru cine vrea să construiască ceva cu modelele.",
+        "Partea care l-a făcut cunoscut în vibe coding e modul de construcție a aplicațiilor, numit Build. Descrii în cuvinte ce aplicație vrei, iar AI Studio scrie codul, îl rulează în propriul mediu și îți arată aplicația funcționând, direct în browser. Nu instalezi nimic și nu configurezi nimic pe calculator. Aplicațiile rezultate sunt aplicații web, iar în 2026 au primit și servicii de bază de date și de autentificare. Limita practică e cea a oricărui mediu din browser: aplicația lucrează cu ce încarci în ea, nu cu fișierele mari de pe discul tău.",
+        "Pentru un contabil, AI Studio e un loc bun pentru primul MVP: verifici în câteva ore, pe date de test, dacă o idee de unealtă are sens. Două reguli rămân valabile. Datele reale ale clienților nu se încarcă într-un mediu de încercare, mai ales pe nivelul gratuit, ale cărui condiții permit de regulă folosirea conținutului trimis pentru îmbunătățirea serviciului. Iar când MVP-ul trebuie să lucreze pe volume mari sau pe fișiere locale, proiectul se mută într-un mediu de programare care rulează pe calculatorul tău."
+      ],
+      "examples": [
+        "Primul MVP al unei aplicații de comparare a marjelor: descrierea indicatorilor și o machetă din Stitch, transformate în AI Studio într-o aplicație care rulează pe loc, în browser.",
+        "Testarea unei instrucțiuni înainte de a o pune într-un script: aceeași cerere, încercată pe două modele, cu răspunsurile puse una lângă alta.",
+        "Limita întâlnită repede: un fișier de câteva sute de MB cu date publice nu se prelucrează comod în browser. De acolo se trece la un mediu local."
+      ],
+      "faq": [
+        {
+          "q": "Care e diferența dintre AI Studio și aplicația Gemini?",
+          "a": "Aplicația Gemini e asistentul pentru conversație. AI Studio e mediul de lucru pentru cine construiește: alegi modelul, reglezi parametrii, obții cheia API și poți genera aplicații întregi dintr-o descriere."
+        },
+        {
+          "q": "Aplicațiile din AI Studio rulează pe calculatorul meu?",
+          "a": "Nu, rulează în mediul Google și se deschid în browser. Codul se poate descărca și muta în alt mediu, iar acesta e pasul obișnuit când MVP-ul trebuie dus mai departe."
+        },
+        {
+          "q": "Cum se numește la ceilalți furnizori?",
+          "a": "Pentru încercarea modelelor, OpenAI are Playground, iar Anthropic are Console. Pentru aplicațiile generate dintr-o descriere, echivalentele de la Anthropic sunt Artifacts și Claude Design."
+        }
+      ]
+    },
+    {
+      "id": "mvp",
+      "date": "2026-10-24",
+      "term": "MVP",
+      "termFull": "MINIMUM VIABLE PRODUCT",
+      "pron": "/ em vi pi /",
+      "type": "substantiv",
+      "ro": "Produs minim viabil",
+      "def": [
+        "MVP e cea mai mică versiune a unui produs care încă își face treaba principală, construită ca să afli repede dacă ideea merită continuată. Nu e o versiune proastă a produsului final, ci una incompletă intenționat: are funcția centrală și renunță la tot restul, de la setări la aspectul finisat. Termenul vine din lumea startup-urilor, unde rolul lui e să testeze o ipoteză cu un cost cât mai mic, înainte de a investi luni de muncă.",
+        "În vibe coding, un MVP a devenit foarte ieftin. Un asistent AI poate produce în câteva ore o aplicație care arată convingător și rulează pe date de test. Capcana e tocmai aspectul: un MVP care arată finisat e ușor de confundat cu un produs gata de folosit. În spate pot lipsi tratarea erorilor, verificarea datelor de intrare și calculele testate pe cazuri reale. Distincția utilă e între a demonstra că ideea merge și a garanta că rezultatul e corect. MVP-ul face doar primul lucru.",
+        "Pentru o unealtă internă de contabilitate, MVP-ul răspunde la o întrebare simplă: merită construită mai departe? De exemplu, un tablou care arată marja firmei față de sector, făcut pe un eșantion de date, e suficient ca să vezi dacă indicatorii aleși spun ceva util. Pasul următor, cu datele complete, cu verificări și cu teste, e o etapă separată, care cere de regulă mult mai mult timp decât MVP-ul. Regula de bază: rezultatele unui MVP nu se trimit clientului și nu intră în dosarul lunii."
+      ],
+      "examples": [
+        "Un MVP de raport de marje, construit în Google AI Studio pe câteva sute de firme: arată dacă graficele și indicatorii au sens, înainte de a prelucra un milion de bilanțuri.",
+        "Un script care citește un singur tip de extras bancar, nu toate: dacă potrivirea cu jurnalul funcționează acolo, abia apoi se adaugă celelalte formate.",
+        "Semnal de alarmă: MVP-ul folosit deja la închiderea de lună, fără ca cineva să fi verificat calculele pe o lună cunoscută. Din acel moment nu mai e un MVP, e un risc."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă un MVP de un prototip?",
+          "a": "Prototipul arată cum ar putea funcționa produsul, uneori doar ca imagine sau ca ecrane legate între ele. MVP-ul funcționează efectiv, pe date, chiar dacă face un singur lucru. Prototipul testează forma, MVP-ul testează utilitatea."
+        },
+        {
+          "q": "Cât ar trebui să conțină un MVP?",
+          "a": "Atât cât e nevoie ca să răspundă la întrebarea pentru care l-ai construit, și nimic în plus. Dacă întrebarea e dacă indicatorii aleși sunt utili, MVP-ul are nevoie de indicatori și de câteva date reale, nu de export în Excel sau de teme de culoare."
+        },
+        {
+          "q": "Pot folosi în lucrul curent un MVP construit cu AI?",
+          "a": "Nu fără o etapă separată de verificare. Un MVP e construit ca să demonstreze o idee, nu ca să garanteze rezultate. Înainte de folosire, calculele se compară cu valori cunoscute, iar cazurile neobișnuite se testează explicit."
+        }
+      ]
+    },
+    {
+      "id": "google-antigravity",
+      "date": "2026-10-24",
+      "term": "GOOGLE ANTIGRAVITY",
+      "termFull": "MEDIUL DE PROGRAMARE GOOGLE ÎN CARE LUCREAZĂ AGENȚI AI",
+      "pron": "/ gu·găl en·ti·gre·vi·ti /",
+      "type": "substantiv",
+      "ro": "Google Antigravity",
+      "def": [
+        "Antigravity e mediul de dezvoltare al Google construit în jurul agenților AI. Arată ca un editor de cod obișnuit, dar munca principală o face un agent: primește sarcina în cuvinte, își face un plan, scrie codul, rulează comenzi și verifică rezultatul într-un browser integrat. Omul aprobă pașii importanți și urmărește ce s-a făcut prin rapoarte scurte, numite artefacte: planul, lista de modificări, capturi din aplicație.",
+        "Diferența față de Google AI Studio e locul unde se lucrează. AI Studio rulează în browser, în mediul Google. Antigravity se instalează pe calculator și lucrează direct cu fișierele de pe disc, deci poate prelucra volume mari de date locale. Asta îl pune în aceeași categorie cu Claude Code sau Codex: unelte în care asistentul nu doar propune cod, ci îl și rulează. Are un nivel gratuit, cu limite de utilizare, și abonamente plătite pentru folosire intensă. Condițiile s-au schimbat de mai multe ori de la lansare, deci se verifică la zi.",
+        "Pentru o unealtă internă, Antigravity e una dintre opțiunile pentru pasul de după MVP, când aplicația trebuie să lucreze pe datele reale de pe calculator. Regula care contează aici e cea a oricărui agent cu acces la disc: lucrează într-un folder dedicat proiectului, nu în cel cu documentele firmei, iar comenzile cu efect ireversibil, cum sunt ștergerile, se aprobă una câte una. Un agent care poate rula comenzi poate să și greșească repede."
+      ],
+      "examples": [
+        "Mutarea unui MVP din AI Studio pe calculatorul propriu, ca aplicația să poată citi direct de pe disc fișierele publice de peste 1 GB.",
+        "Sarcină dată agentului: descarcă datele, construiește baza și verifică numărul de rânduri. Agentul revine cu planul, iar omul îl aprobă înainte de rulare.",
+        "Folder separat pentru proiect: agentul vede doar fișierele aplicației, nu și dosarele clienților de pe același calculator."
+      ],
+      "faq": [
+        {
+          "q": "E același lucru cu Google AI Studio?",
+          "a": "Nu. AI Studio rulează în browser și e potrivit pentru încercări și MVP-uri rapide. Antigravity se instalează pe calculator, lucrează cu fișierele locale și e gândit pentru proiectele duse mai departe."
+        },
+        {
+          "q": "Trebuie să știu să programez?",
+          "a": "Nu ca să dai sarcini, dar ajută să poți citi planul și să recunoști o comandă riscantă înainte să o aprobi. Răspunderea pentru ce rulează pe calculator rămâne a omului."
+        },
+        {
+          "q": "Cum se numește la ceilalți furnizori?",
+          "a": "Categoria e cea a agenților de programare: Claude Code la Anthropic, Codex la OpenAI, plus editoare precum Cursor. Toate lucrează pe același principiu: descrii sarcina, agentul planifică, scrie și rulează codul, iar tu aprobi."
+        }
+      ]
     }
   ]
 }
