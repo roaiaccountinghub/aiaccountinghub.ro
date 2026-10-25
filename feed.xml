@@ -31,12 +31,21 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sun, 25 Oct 2026 11:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 12:00:00 +0200</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Pot să confirm? Agentul AI personal care vine singur la tine</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=2CJjj9AKVQeSPXARDFTon8</link>
+      <guid isPermaLink="false">aiah-podcast-s4e04</guid>
+      <pubDate>Sun, 25 Oct 2026 12:00:00 +0200</pubDate>
+      <category>Podcast</category>
+      <description>Episod de sine stătător · Agenți AI. Până acum, asistentul AI aștepta să fie întrebat. În toamna lui 2026 au apărut agenții care vin singuri cu o propunere și îți cer doar confirmarea. Cele trei etape ale anului, cei patru agenți personali lansați în zece săptămâni (Grok Bot, Muse, Dots și Claude Duet), de ce cei mai mulți nu sunt încă disponibili în Europa și ce înseamnă pentru contabil trecerea de la „execut” la „aprob”. 18 min.</description>
+    </item>
 
     <item>
       <title>Buzzword: Agent personal proactiv — AI-ul care vine singur la tine și îți cere doar confirmarea</title>

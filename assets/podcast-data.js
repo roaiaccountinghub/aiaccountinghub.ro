@@ -26,9 +26,31 @@
   var CF  = "/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F";
 
   window.PODCAST_EPISODES = [
-    /* ---------- Sezonul 4 · Seria SAF-T ---------- */
+    /* ---------- Sezonul 4 ---------- */
     {
-      id: "5jh7404LdaZKpIPL172Tn6", slug: "plan", ep: "E03", group: "Sezonul 4 · Seria SAF-T",
+      id: "2CJjj9AKVQeSPXARDFTon8", slug: "agenti-proactivi", ep: "E04", group: "Sezonul 4",
+      date: "2026-10-25",
+      title: "Pot să confirm? Agentul AI personal care vine singur la tine",
+      audioUrl: RSS + "128047226" + CF + "2026-9-25%2F53e69340-06f9-da0b-ed60-91c9f5d36e3a.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (17:56). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: agenții care nu mai așteaptă" },
+        { t: 42  , title: "Analizele medicale: trei tipuri de AI" },
+        { t: 119 , title: "Cele trei etape ale anului" },
+        { t: 275 , title: "Trei mesaje pentru contabil" },
+        { t: 382 , title: "Grok Bot: „colegii” AI" },
+        { t: 460 , title: "Muse: agentul pentru toată lumea" },
+        { t: 555 , title: "Dots: agentul „mereu pornit”" },
+        { t: 632 , title: "Claude Duet: cel mai nou venit" },
+        { t: 713 , title: "Europa așteaptă" },
+        { t: 815 , title: "Ce înseamnă pentru profesie" },
+        { t: 942 , title: "Cinci lucruri de făcut de acum" },
+        { t: 1011, title: "Continuous close și concluzia" }
+      ]
+    },
+    {
+      id: "5jh7404LdaZKpIPL172Tn6", slug: "plan", ep: "E03", group: "Sezonul 4",
       date: "2026-10-03",
       title: "SAF-T · Nu cere aplicația, cere planul: cum îți construiești cu AI propria verificare SAF-T",
       audioUrl: RSS + "126752970" + CF + "2026-9-3%2F0689c972-0a3b-6c72-eb6e-60077197fe86.m4a",
@@ -47,7 +69,7 @@
       ]
     },
     {
-      id: "6ew5z90E86UfrUcrekcb1K", slug: "verificare-d406", ep: "E02", group: "Sezonul 4 · Seria SAF-T",
+      id: "6ew5z90E86UfrUcrekcb1K", slug: "verificare-d406", ep: "E02", group: "Sezonul 4",
       date: "2026-10-03",
       title: "SAF-T · In DUK we trust: ce nu verifică DUKIntegrator la D406",
       audioUrl: RSS + "126752938" + CF + "2026-9-3%2Fb498b6ab-c142-66f9-2895-437a6fc1b733.m4a",
@@ -66,7 +88,7 @@
       ]
     },
     {
-      id: "5hH9M5aqZNDsy1ubMOiWns", slug: "d406", ep: "E01", group: "Sezonul 4 · Seria SAF-T",
+      id: "5hH9M5aqZNDsy1ubMOiWns", slug: "d406", ep: "E01", group: "Sezonul 4",
       date: "2026-10-03",
       title: "SAF-T · Cinci ani de SAF-T: ce se află în spatele butonului",
       audioUrl: RSS + "126752467" + CF + "2026-9-3%2F4e4867a4-a116-3f78-1d32-394e255ba7c7.m4a",

@@ -5,6 +5,15 @@
   "updated": "2026-10-25",
   "items": [
     {
+      "id": "pod-s4e04-agenti-proactivi",
+      "type": "podcast",
+      "title": "Pot să confirm? Agentul AI personal care vine singur la tine",
+      "url": "podcast.html?play=2CJjj9AKVQeSPXARDFTon8",
+      "date": "2026-10-25",
+      "meta": "18 min",
+      "mark": "[data-spotify=\"2CJjj9AKVQeSPXARDFTon8\"]"
+    },
+    {
       "id": "buzz-personal-ai-agent",
       "type": "buzzword",
       "title": "Agent personal proactiv — AI-ul care vine singur la tine și îți cere doar confirmarea",
