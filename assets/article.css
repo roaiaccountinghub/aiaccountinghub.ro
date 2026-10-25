@@ -201,9 +201,11 @@
    își primește eticheta coloanei din atributul data-label. Zero derulare
    pe orizontală, zero text tăiat.
 
-   Cum se folosește: class="compare-table t-stack" (sau doar class="t-stack"
-   pe tabelele fără compare-table) + data-label="<antetul coloanei>" pe
-   fiecare <td>. Antetul rămâne în DOM, doar ascuns vizual.
+   Din 25.10.2026 se aplică automat: assets/site.js adaugă „t-stack” pe
+   tabelele cu text lung și completează data-label din antetul coloanei.
+   Tabelele scurte sau cu cifre rămân tabel. Manual: class="t-stack" forțează
+   cardul, class="no-stack" îl oprește. Antetul rămâne în DOM, doar ascuns
+   vizual.
 
    Selectorii sunt prefixați cu .prose ca să bată regulile locale de tabel
    din <style>-ul fiecărui articol, care se încarcă după acest fișier.
@@ -215,6 +217,9 @@
   .prose .t-stack tbody,
   .prose .t-stack tr,
   .prose .t-stack td { display: block; width: 100%; }
+  /* Unele articole fixează .prose table { min-width: 640px } pentru derulare;
+     cardurile trebuie să încapă în ecran. */
+  .prose .t-stack { min-width: 0; }
 
   .prose .t-stack { border-collapse: collapse; margin: 22px 0; font-size: 14.5px; }
 

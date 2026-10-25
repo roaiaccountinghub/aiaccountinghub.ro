@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>De la „întreabă-mă” la „pot să confirm?”: agentul personal proactiv — AI Accounting Hub</title>
+<meta name="description" content="Asistentul AI răspunde, agentul AI execută, agentul personal proactiv vine singur la tine și îți cere doar confirmarea. Grok Bot, Muse, Dots și Claude Duet, lansați între august și octombrie 2026: ce fac, ce lasă la aprobarea omului, de ce nu se pot folosi încă în UE și ce înseamnă pentru contabili.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-10-25-Agentii-personali-proactivi.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-10-25-Agentii-personali-proactivi.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="De la „întreabă-mă” la „pot să confirm?”: agentul personal proactiv — AI Accounting Hub">
+<meta property="og:description" content="Asistentul AI răspunde, agentul AI execută, agentul personal proactiv vine singur la tine și îți cere doar confirmarea. Grok Bot, Muse, Dots și Claude Duet, lansați între august și octombrie 2026: ce fac, ce lasă la aprobarea omului, de ce nu se pot folosi încă în UE și ce înseamnă pentru contabili.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="De la „întreabă-mă” la „pot să confirm?”: agentul personal proactiv — AI Accounting Hub">
+<meta name="twitter:description" content="Asistentul AI răspunde, agentul AI execută, agentul personal proactiv vine singur la tine și îți cere doar confirmarea. Grok Bot, Muse, Dots și Claude Duet, lansați între august și octombrie 2026: ce fac, ce lasă la aprobarea omului, de ce nu se pot folosi încă în UE și ce înseamnă pentru contabili.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Subtitlurile de secțiune. h2 poartă '§', h3 primește '//'. */
+.prose h3 { margin: 44px 0 14px; }
+.prose h3::before { content: '//'; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; color: var(--accent); font-weight: 400; margin-right: 10px; opacity: 0.75; }
+
+/* Titlul fiecărui agent: avatarul animat, în buclă, lângă nume */
+.prose h3.agent-title { display: flex; align-items: center; gap: 16px; margin-top: 52px; }
+.prose h3.agent-title::before { content: none; }
+.agent-avatar { flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: var(--bg-1); box-shadow: 0 0 0 2px var(--accent); }
+.agent-title small { display: block; margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); }
+
+/* Tabelele */
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+
+/* Linkuri în proză — styles.css are a { color: inherit } */
+.prose p > a, .prose li > a, .prose td > a, .prose .cbody a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); overflow-wrap: anywhere; }
+.prose p > a:hover, .prose li > a:hover, .prose td > a:hover, .prose .cbody a:hover { border-bottom-color: var(--accent); }
+
+/* Cele două stări din concluzie, în culoarea de accent */
+.prose strong.shift { color: var(--accent); }
+
+/* Nota despre proveniența avatarelor */
+.prose .avatar-note { font-size: 13.5px; line-height: 1.6; color: var(--fg-dim); margin-top: -8px; }
+
+@media (max-width: 420px) {
+  .prose h3.agent-title { gap: 12px; }
+  .agent-avatar { width: 44px; height: 44px; }
+}
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "De la „întreabă-mă” la „pot să confirm?”: agentul personal proactiv — AI Accounting Hub",
+  "description": "Asistentul AI răspunde, agentul AI execută, agentul personal proactiv vine singur la tine și îți cere doar confirmarea. Grok Bot, Muse, Dots și Claude Duet, lansați între august și octombrie 2026: ce fac, ce lasă la aprobarea omului, de ce nu se pot folosi încă în UE și ce înseamnă pentru contabili.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-10-25-Agentii-personali-proactivi.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Agentul personal proactiv</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Analiză</span>
+      <span>25 octombrie 2026</span>
+      <span class="sep">·</span>
+      <span>13 min citire</span>
+    </div>
+
+    <h1>De la „întreabă-mă” la „pot să confirm?”: <span class="accent">anul în care AI a învățat să vină singur la tine</span></h1>
+    <p class="article-lede">
+      În zece luni, AI-ul a trecut prin trei etape: asistentul care răspunde, agentul care execută și, de câteva săptămâni, agentul personal care ia inițiativa. Grok Bot, Muse, Dots și Claude Duet au apărut unul după altul între august și octombrie, cu aceeași promisiune: nu mai aștepți să-i întrebi, ei vin la tine. Pentru contabili, schimbarea e mai mare decât pare: rolul se mută de la cel care execută la cel care aprobă.
+    </p>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s1">Un an, trei etape</a>
+        <a href="#s2">Etapa 1: asistentul AI</a>
+        <a href="#s3">Etapa 2: agentul AI</a>
+        <a href="#s4">Etapa 3: agentul personal proactiv</a>
+        <a href="#s5">Patru agenți în zece săptămâni</a>
+        <a href="#s6">Europa așteaptă</a>
+        <a href="#s8">Ce înseamnă pentru profesie</a>
+        <a href="#s9">În loc de concluzie</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">25.10.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// asistent · agent · agent personal proactiv</div>
+    </div>
+
+    <div class="prose">
+
+      <h2 id="s1">Un an, trei etape</h2>
+      <p>Privit dinspre finalul lui 2026, drumul AI-ului din acest an încape în trei propoziții:</p>
+      <ol>
+        <li><strong>Ianuarie:</strong> întrebi, iar AI-ul îți răspunde, foarte bine.</li>
+        <li><strong>Aprilie:</strong> îi dai context și o direcție, iar AI-ul face treaba cap-coadă.</li>
+        <li><strong>Octombrie:</strong> AI-ul observă singur ce urmează, îți propune ce să faci și îți cere doar confirmarea.</li>
+      </ol>
+      <p>Cel mai clar exemplu pentru diferența dintre ele vine la partea de sănătate. Îl redăm așa cum circulă, apoi îl mutăm în biroul de contabilitate.</p>
+      <p><strong>Primul tip</strong> de AI primește analizele de sânge și ți le interpretează. Valoare cu valoare: ce e în limite, ce nu, ce ar merita întrebat medicul.</p>
+      <p><strong>Al doilea tip</strong> primește acces la tot istoricul tău medical și face o analiză completă: evoluția pe ani, corelații între indicatori, tendințe pe care nu le vezi dintr-un singur buletin.</p>
+      <p><strong>Al treilea tip</strong> are acces la datele tale și te anunță el, fără să-l întrebi: „În câteva săptămâni se împlinește un an de la setul de analize anuale anterior. Propun să facem o programare la medicul tău. Am găsit un loc liber marți, la 8:30. Pot să înregistrez rezervarea?”</p>
+      <p>Diferența dintre al doilea și al treilea nu ține de inteligență, ci de <strong>inițiativă</strong>. Primele două așteaptă să fie chemate. Al treilea lucrează pentru tine și atunci când nu te gândești la el.</p>
+
+      <h2 id="s2">Etapa 1: Asistentul AI, care răspunde</h2>
+      <p>La începutul anului, asistenții AI erau deja foarte buni. Lipeai în chat o balanță de verificare și primeai un răspuns structurat: ce conturi au solduri neobișnuite, ce variații trebuie explicate, ce întrebări ar pune un auditor.</p>
+      <p><strong>Transpus în contabilitate:</strong> îi dai balanța lunii și ți-o interpretează.</p>
+      <p>Utilitatea era reală, dar limita era clară. AI-ul vedea doar ce îi arătai, în momentul în care i-l arătai. Tu știai când trebuie făcută o analiză, ce fișier contează și ce să întrebi. Fiecare conversație pornea de la zero.</p>
+
+      <h2 id="s3">Etapa 2: Agentul AI, care execută</h2>
+      <p>Din primăvară, centrul de greutate s-a mutat de la <em>conversație</em> la <em>delegare</em>. <a href="buzzword/ai-agent.html">Agenții AI</a> au primit acces la fișiere, aplicații și unelte, iar formularea s-a schimbat din „ce înseamnă asta?” în „fă asta”.</p>
+      <p><strong>Transpus în contabilitate:</strong> îi dai acces la folderul cu balanțele pe ultimele 12 luni, la registrul jurnal și la extrase bancare și îi ceri o analiză completă. Agentul deschide fișierele, reconciliază, calculează, compară, scrie raportul și ți-l predă ca document Excel sau Word. Ce îi lua unui coleg două zile se face într-o oră.</p>
+      <p>Pe platformă am arătat de mai multe ori cum arată etapa aceasta în practică: cum delegi unui agent sa construiască unelte prin <a href="2026-06-14-Vibe-coding-ce-este-si-unde-il-folosim.html">vibe coding</a>, fluxuri care analizează legislația cu mai mulți agenți în paralel. Agenții sunt capabili.</p>
+      <p>Au păstrat însă o trăsătură a etapei 1: <strong>pornesc tot de la tine</strong>. Tu decizi că e momentul analizei. Tu deschizi sesiunea. Când închizi laptopul, munca se oprește sau, în cel mai bun caz, se termină sarcina începută și atât.</p>
+
+      <h2 id="s4">Etapa 3: Agentul personal proactiv</h2>
+      <p>Etapa în care intrăm acum adaugă exact piesa care lipsea. Tehnic, e tot un agent, dar cu două calități în plus: e <strong>personal</strong>, pentru că are acces permanent la datele și conturile tale, și e <strong>proactiv</strong>, pentru că pornește el, nu tu. În practică, se poartă ca un asistent personal bun: îți știe agenda, îți amintește de termene și te întreabă „să confirm?”. Agentul personal proactiv:</p>
+      <ul>
+        <li><strong>rulează permanent</strong>, pe un calculator propriu în cloud, chiar și când PC-ul tău e închis;</li>
+        <li><strong>are acces la conturile tale</strong> (email, calendar, documente, aplicații de business), cu permisiunile pe care i le dai tu;</li>
+        <li><strong>verifică periodic</strong> ce s-a schimbat și <strong>vine el la tine</strong> cu ce merită atenția ta;</li>
+        <li><strong>pregătește acțiunea</strong>, dar <strong>îți cere confirmarea</strong> înainte de orice pas cu consecințe: trimiterea unui mesaj, o plată, o semnătură, o ștergere.</li>
+      </ul>
+      <p><strong>Transpus în contabilitate</strong>, exemplul analizelor medicale arată cam așa:</p>
+      <blockquote>„Bună dimineața. Certificatul digital calificat cu care depui declarațiile expiră peste 19 zile. Anul trecut l-ai reînnoit prin același furnizor, iar procesul a durat patru zile lucrătoare. Am completat cererea de reînnoire cu datele din contul tău și am pregătit plata. <strong>Pot să trimit solicitarea?</strong>”</blockquote>
+      <p>Sau, în ritmul lunar al unui departament de contabilitate:</p>
+      <blockquote>„Termenul pentru D406 e peste 6 zile. Am comparat jurnalul de vânzări din ERP cu fișierul de luna trecută și am găsit trei facturi emise după închidere, toate către același client. Am pregătit un email către colegul de la facturare, cu lista atașată. <strong>Îl trimit?</strong>”</blockquote>
+      <p>Sau, la nivel anual:</p>
+      <blockquote>„Se împlinește un an de la ultima revizuire a politicilor contabile. Între timp au apărut două modificări de legislație care ating capitolul de stocuri. Ți-am pregătit un rezumat de o pagină și o propunere de actualizare. <strong>Vrei să programez o discuție de 30 de minute cu directorul financiar săptămâna viitoare?</strong>”</blockquote>
+      <p>Tiparul e același în toate trei: agentul <strong>nu ia decizia</strong>. Pregătește tot ce se poate pregăti, arată de ce, apoi se oprește la poarta aprobării. Rolul tău se mută de la cel care <em>execută</em> la cel care <em>aprobă</em>. Pentru o profesie construită pe control, verificare și separarea atribuțiilor, nu e un detaliu.</p>
+
+      <h2 id="s5">Patru agenți personali în zece săptămâni</h2>
+      <p>Între august și octombrie, patru dintre cei mai mari jucători au lansat, unul după altul, propriul agent personal proactiv. Google deschisese drumul încă din mai, cu Gemini Spark, dar valul propriu-zis a venit la final de vară.</p>
+      <p>Merită observat cum își numesc producătorii produsele. Toți folosesc cuvântul <em>agent</em>, iar cele două calități puse în față sunt aceleași: <strong>proactiv</strong> și <strong>mereu activ</strong>. OpenAI le spune, în aceeași prezentare, și „proactive assistants”, ceea ce arată cât de apropiate sunt cele două idei: tehnic e un agent, în comportament e un asistent personal.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Agent personal</th><th>Companie</th><th>Lansare</th><th>Model</th><th>Cui i se adresează</th><th>Disponibil în UE</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Grok Bot</strong></td><td>xAI</td><td>11 august 2026 (beta)</td><td>Grok 4.6 / 4.7</td><td>echipe și utilizatori individuali, „colegi” AI cu roluri</td><td>parțial, vezi mai jos</td></tr>
+            <tr><td><strong>Muse</strong></td><td>Meta</td><td>8 septembrie 2026</td><td>Muse Spark 1.3</td><td>publicul larg și micile afaceri</td><td>nu; doar SUA, Canada, Mexic</td></tr>
+            <tr><td><strong>Dots</strong></td><td>OpenAI</td><td>29 septembrie 2026</td><td>GPT-6 Astra</td><td>profesioniști și echipe</td><td>Pro: nu, exclus în SEE; Business Premium și Enterprise: lansare globală graduală</td></tr>
+            <tr><td><strong>Claude Duet</strong></td><td>Anthropic</td><td>21 octombrie 2026 (research preview)</td><td>Claude Opus 5.5</td><td>profesioniști și antreprenori</td><td>nu; doar SUA, pe bază de waitlist</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="avatar-note">Avatarele animate de lângă nume sunt extrase din materialele oficiale ale producătorilor. La Grok Bot, care nu are o mascotă animată, clipitul e adăugat de noi peste imaginea oficială, cu titlu ilustrativ.</p>
+
+      <h3 class="agent-title" id="grok-bot">
+        <video class="agent-avatar" src="assets/agenti-proactivi/grok-bot.mp4" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+        <span>Grok Bot: „colegii” AI<small>xAI · 11 august 2026</small></span>
+      </h3>
+
+      <div class="callout">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="cbody"><strong>Cum îl descrie producătorul:</strong> „AI teammates with names, jobs, and context that compounds over time”, adică <em>colegi AI cu nume, roluri și un context care se acumulează în timp</em>. Pe site, xAI îl prezintă drept „always-on AI agents”, agenți mereu activi, și „a new kind of colleague”, un nou tip de coleg.</div>
+      </div>
+
+      <p>Primul din val a fost Grok Bot, lansat de xAI în beta pe 11 august. Ideea centrală nu e un singur agent, ci o <strong>echipă de „boți” cu nume și roluri</strong>, care împart un calculator persistent în cloud, cu browser, sistem de fișiere și terminal. Fiecare bot își păstrează memoria, fișierele și sesiunile de browser de la o zi la alta, iar boții pot lucra în paralel, își pot scrie unii altora și își pot preda sarcini.</p>
+      <p>Două particularități merită reținute. Prima: un bot poate <strong>învăța un flux de lucru urmărindu-te</strong> o singură dată, apoi îl salvează ca rutină și îl rulează după un program. A doua: xAI a dus produsul și în mașină. Din 22 septembrie, șoferii Tesla își pot gestiona prin voce emailul, calendarul și sarcinile, iar Grok Bot preia comisioanele mai complicate, de la o rezervare la o programare.</p>
+      <p><strong>Pentru contabil:</strong> modelul „echipei de boți” e cel mai apropiat de felul în care e organizat un departament. Un bot pentru reconcilierile bancare, unul pentru urmărirea termenelor fiscale, unul pentru corespondența cu furnizorii.</p>
+
+      <h3 class="agent-title" id="muse">
+        <video class="agent-avatar" src="assets/agenti-proactivi/muse.mp4" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+        <span>Muse: agentul pentru toată lumea<small>Meta · 8 septembrie 2026</small></span>
+      </h3>
+
+      <div class="callout">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="cbody"><strong>Cum îl descrie producătorul:</strong> „a secure, private personal AI agent that proactively helps people meet their goals and suggests ideas”, adică <em>un agent AI personal, sigur și privat, care te ajută proactiv să-ți atingi obiectivele și îți propune idei</em>. Titlul anunțului oficial: „The World’s First Personal AI Agent Built for Everyone”.</div>
+      </div>
+
+      <p>Pe 8 septembrie, Meta a lansat Muse, prezentat de companie drept primul agent personal „construit pentru toată lumea”. Muse ține conversația ca pe un fir de mesaje, inclusiv în WhatsApp, și are o secțiune de tip feed în care aduce sugestii proactive. Îi dai un obiectiv, el construiește un plan și lucrează mai departe și după ce ai închis aplicația, revenind doar când apare ceva nou sau când are nevoie de aprobarea ta.</p>
+      <p>Muse are și o față: o mascotă rotundă, pufoasă, de culoare bej, pe care fiecare utilizator o poate boteza. La Meta Connect, pe 23 septembrie, Meta a dus-o și în lumea fizică, cu Muse Charm, un mic dispozitiv de tip breloc, comparat de presă cu un Tamagotchi, prin care vorbești cu agentul fără să deschizi telefonul.</p>
+      <p>Cifrele de adopție au venit repede: aproximativ 2,5 milioane de descărcări în primele 13 zile și locul întâi în magazinele de aplicații din SUA.</p>
+      <p><strong>Pentru contabil:</strong> Meta a lansat în paralel o versiune pentru micile afaceri, cu conectori la QuickBooks, Stripe, Shopify și conturile de business din Facebook și Instagram. E un semnal clar că agenții personali țintesc direct zona de facturare, încasări și administrare.</p>
+
+      <h3 class="agent-title" id="dots">
+        <video class="agent-avatar" src="assets/agenti-proactivi/dots.mp4" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+        <span>Dots: agentul „mereu pornit”<small>OpenAI · 29 septembrie 2026</small></span>
+      </h3>
+
+      <div class="callout">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="cbody"><strong>Cum îl descrie producătorul:</strong> „remarkably capable, always-on agents built to handle everything”, adică <em>agenți remarcabil de capabili, mereu activi, construiți să se ocupe de orice</em>. În aceeași lansare, OpenAI îi numește și „proactive assistants that can keep working across complex projects and everyday tasks”, asistenți proactivi care lucrează mai departe atât la proiecte complexe, cât și la sarcinile de zi cu zi.</div>
+      </div>
+
+      <p>Pe 29 septembrie, la DevDay, Sam Altman a prezentat Dots, agenți personali autonomi alimentați de GPT-6 Astra, descriși drept „mereu porniți” și capabili să lucreze 24 de ore din 24. Fiecare „dot” are propriul calculator în cloud, se conectează la peste 4.000 de aplicații prin pluginurile din ChatGPT și poate fi contactat din ChatGPT, Slack sau Teams, inclusiv prin apel vocal. Îl poți numi și personaliza: formă, culoare, ochi, ochelari, accesorii. Arată, la propriu, ca o bulină colorată cu ochi.</p>
+      <p>Pentru tema noastră, cel mai important e mecanismul numit <strong>„proactive research”</strong>: în fundal, dot-ul cercetează aplicațiile conectate ca să găsească moduri în care te poate ajuta. OpenAI a pus însă o limită importantă: în acest mod, uneltele sunt <strong>doar de citire</strong>. Agentul poate observa, dar nu poate trimite mesaje, modifica documente sau controla browserul. Orice acțiune ulterioară trece prin regulile obișnuite de aprobare. Separarea dintre „a observa” și „a acționa” e exact principiul pe care l-ar cere un contabil.</p>
+      <p>OpenAI anunță și pasul următor: echipe de dots care lucrează împreună și „dots specialiști” pentru organizații, cu identitate, credențiale și acces la sisteme proprii, deocamdată în pilot.</p>
+      <p><strong>Pentru contabil:</strong> un „dot specialist” cu acces doar de citire la ERP și la extrasele bancare, care semnalează diferențele și pregătește notele de reconciliere, e un scenariu foarte aproape de realitate.</p>
+
+      <h3 class="agent-title" id="claude-duet">
+        <video class="agent-avatar" src="assets/agenti-proactivi/duet.mp4" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+        <span>Claude Duet: cel mai nou venit<small>Anthropic · 21 octombrie 2026</small></span>
+      </h3>
+
+      <div class="callout">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="cbody"><strong>Cum îl descrie producătorul:</strong> „a new app where Claude works as a proactive agent”, adică <em>o aplicație nouă în care Claude lucrează ca agent proactiv</em>. Mai pe larg, Duet „comes to you with what needs your attention, completes tasks you ask of it, keeps working even when you step away, and checks with you before it acts on your behalf”: <em>vine la tine cu ce are nevoie de atenția ta, duce la capăt ce îi ceri, lucrează mai departe când te îndepărtezi și te întreabă înainte să acționeze în numele tău</em>.</div>
+      </div>
+
+      <p>Pe 21 octombrie, Anthropic a lansat <a href="buzzword/claude-anthropic.html">Claude</a> Duet, construit pe Claude Opus 5.5. Spre deosebire de Muse, publicul-țintă e declarat explicit: <strong>profesioniști și proprietari de mici afaceri</strong> care au prea multe de urmărit.</p>
+      <p>Duet trimite un <strong>brief de dimineață</strong>, verifică la câteva ore conturile conectate și ridică singur subiecte pe care nu i le-ai cerut. Lucrează pe o mașină virtuală proprie, cu browser, deci poate continua și cu telefonul închis. Preia <a href="buzzword/ai-memory.html">memoria</a>, <a href="buzzword/skills.html">skill-urile</a> și aplicațiile pe care un utilizator le are deja în Claude, așa că nu pornește de la zero.</p>
+      <p>Lista acțiunilor care așteaptă aprobarea ta e foarte clară: <strong>trimiterea mesajelor, plățile, semnarea documentelor și ștergerea informațiilor</strong>. Unele lucruri nu le face deloc, nici cu aprobare: tranzacții cu titluri de valoare sau transferuri de bani între conturi. Datele cele mai sensibile (numere de card, acte de identitate) sunt blocate, iar informațiile despre sănătate sau finanțe personale se trimit doar la instrucțiunea ta explicită.</p>
+      <p>Integrările anunțate seamănă cu lista de aplicații a unui birou de contabilitate modern (pe piața din SUA, acolo fiind deja disponibil): Gmail, Slack, QuickBooks, Stripe, Gusto (salarizare), Docusign, HubSpot. Printre exemplele de utilizare apar explicit pregătirea prognozelor financiare și reconcilierea facturilor.</p>
+      <p><strong>Pentru contabil:</strong> dintre cei patru, Duet e cel mai apropiat de scenariul nostru. E gândit pentru omul care are termene, clienți și documente de urmărit și care vrea să păstreze controlul asupra fiecărui pas cu consecințe.</p>
+
+      <h2 id="s6">Europa așteaptă</h2>
+      <p>Nu putem încheia cu „încercați-le de mâine”. Pentru utilizatorul individual din Uniunea Europeană, majoritatea acestor agenți <strong>nu sunt încă disponibili</strong>:</p>
+      <ul>
+        <li><strong>Muse</strong> e disponibil, deocamdată, doar în SUA, Canada și Mexic.</li>
+        <li><strong>Claude Duet</strong> e o versiune de test limitată la abonații Pro și Max din SUA, pe bază de waitlist, fără o dată anunțată pentru extindere.</li>
+        <li><strong>Dots</strong>, în varianta pentru abonații individuali (Pro), exclude explicit Spațiul Economic European, Regatul Unit și Elveția. La DevDay, Altman a pus absența din Europa pe seama reglementărilor din regiune. Variantele pentru companii (Business Premium și Enterprise) se lansează însă gradual la nivel global, iar la Enterprise funcția trebuie activată de administrator.</li>
+        <li><strong>Grok Bot</strong> e excepția. xAI are termeni și condiții specifice pentru Europa, iar analiștii Morgan Stanley îl citează printre puținii agenți deja accesibili consumatorilor europeni. xAI nu publică însă o listă clară de țări.</li>
+      </ul>
+      <p>De ce această diferență? Pe lângă GDPR, care se aplică tuturor, intervine <strong>Regulamentul privind piețele digitale (DMA)</strong>. Meta, Alphabet, Apple, Microsoft și alții sunt desemnați „controlori de acces” (<em>gatekeepers</em>), iar statutul acesta le impune consimțământul explicit al utilizatorului înainte de a combina datele personale între servicii. Un agent ca Muse, a cărui valoare vine tocmai din faptul că leagă WhatsApp, Instagram, calendarul și emailul, lovește direct în această regulă. xAI nu e pe lista controlorilor de acces, ceea ce probabil i-a ușurat intrarea. Precedentul e cunoscut: Meta AI a ajuns în Europa abia în martie 2025, la aproape un an după SUA.</p>
+      <p><strong>Concluzia practică:</strong> avem un avans de câteva luni, poate mai mult, ca să ne pregătim. Nu e timp pierdut.</p>
+
+      <h2 id="s8">Ce înseamnă asta pentru profesia contabilă</h2>
+
+      <h3>1. Rolul se mută de la „execut” la „aprob”</h3>
+      <p>În etapa 1, contabilul punea întrebări. În etapa 2, delega sarcini. În etapa 3, <strong>validează propuneri</strong>. Asta cere exact competențele pe care profesia le are deja: judecată, scepticism profesional, înțelegerea consecințelor. Cere însă și o disciplină nouă: o aprobare dată din reflex, pe telefon, între două ședințe, nu mai e control.</p>
+
+      <h3>2. Separarea atribuțiilor capătă un sens nou</h3>
+      <p>Toți cei patru agenți personali au, într-o formă sau alta, aceeași arhitectură: <strong>observare liberă, acțiune doar cu aprobare</strong>. E principiul celor „patru ochi” transpus în software, ceea ce în limbajul AI se numește <a href="buzzword/human-in-the-loop.html">human in the loop</a>. Pentru un departament financiar, întrebarea de pus înainte de adopție nu e „ce poate face?”, ci „ce poate face <em>fără mine</em>?” și cine răspunde dacă greșește.</p>
+
+      <h3>3. Datele tale devin combustibilul</h3>
+      <p>Agentul personal proactiv valorează exact cât accesul pe care i-l dai. Asta readuce în prim-plan tot ce am discutat despre <a href="2026-05-09-Agentul-AI-nu-stie-sa-tina-un-secret.html">securitate și confidențialitate</a>: ce plan folosești, unde stau datele, cine le poate vedea, dacă sunt folosite la antrenarea modelelor. Datele clienților și ale angajatorului nu sunt ale noastre ca să le conectăm la orice aplicație.</p>
+
+      <h3>4. Calendarul fiscal e terenul ideal</h3>
+      <p>Dacă există o profesie potrivită pentru un agent personal proactiv, e a noastră. Termenele sunt fixe și cunoscute dinainte (D300, D406, D394, D112, situațiile financiare), documentele sunt structurate, iar costul unui termen ratat e concret. Un agent care îți spune cu o săptămână înainte ce lipsește din dosar valorează mai mult decât unul care îți explică perfect, după termen, ce s-a întâmplat.</p>
+
+      <h3>Ce poți face de acum, până ajung în UE</h3>
+      <ul>
+        <li><strong>Scrie-ți calendarul.</strong> Notează termenele recurente, documentele necesare pentru fiecare și cine le furnizează. Un agent personal proactiv are nevoie exact de această „hartă” a muncii tale.</li>
+        <li><strong>Fă ordine în surse.</strong> Foldere coerente, denumiri consecvente, fișiere în formate standard. Agentul vede ce ai, nu ce ai vrea să ai.</li>
+        <li><strong>Decide dinainte unde e poarta.</strong> Ce ai lăsa un agent să pregătească singur? Ce ai lăsa să trimită singur? Ce nu i-ai da niciodată? Mai bine răspunzi acum, la rece, decât în ziua în care îți apare notificarea.</li>
+        <li><strong>Exersează delegarea cu agenții actuali.</strong> Etapa 2 e disponibilă azi. Cine învață acum să dea context și direcție unui agent va ști să lucreze și cu un agent care vine singur la el.</li>
+      </ul>
+
+      <h2 id="s9">În loc de concluzie</h2>
+      <p>În ianuarie ne întrebam cum să scriem <a href="2026-05-01-Goana-dupa-promptul-perfect.html">promptul perfect</a>. În octombrie, agentul ne scrie el primul. Saltul nu e doar tehnologic, ci și de relație: AI-ul trece de la <strong class="shift">„unealta pe care o iei când ai nevoie”</strong> la <strong class="shift">„colegul care îți spune ce urmează”</strong>.</p>
+      <p>Pentru contabili, întrebarea care contează nu mai e „ce poate face AI-ul?”, ci „ce aprob și pe ce bază?”. La întrebarea aceasta, profesia are deja un răspuns bun. Trebuie doar aplicat și aici.</p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#agenți-AI</span>
+          <span class="tag">#agent-personal</span>
+          <span class="tag">#human-in-the-loop</span>
+          <span class="tag">#control-intern</span>
+          <span class="tag">#UE</span>
+        </div>
+        <span class="footer-mono">Articolul #039</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-10-25-Agentii-personali-proactivi"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s1">Trei etape</a>
+        <a href="#s2">Asistentul AI</a>
+        <a href="#s3">Agentul AI</a>
+        <a href="#s4">Agentul proactiv</a>
+        <a href="#s5">Patru agenți</a>
+        <a href="#grok-bot">· Grok Bot</a>
+        <a href="#muse">· Muse</a>
+        <a href="#dots">· Dots</a>
+        <a href="#claude-duet">· Claude Duet</a>
+        <a href="#s6">Europa așteaptă</a>
+        <a href="#s8">Pentru profesie</a>
+        <a href="#s9">În loc de concluzie</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- ARTICOLE CONEXE -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Pe aceeași temă.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-05-09-Agentul-AI-nu-stie-sa-tina-un-secret.html" class="related-card fade-in">
+        <div class="related-date">AGENȚI AI · SECURITATE</div>
+        <h3>Agentul AI nu știe să țină un secret</h3>
+        <p>Ce date ajung la un agent AI, unde stau și ce plan alegi înainte să-i dai acces la documentele clienților.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-05-01-M4-Viitorul-profesiei-contabile.html" class="related-card fade-in">
+        <div class="related-date">MANIFEST · VIITORUL PROFESIEI</div>
+        <h3>Viitorul profesiei contabile</h3>
+        <p>Cum va arăta contabilitatea în 5–10 ani, cu agentul AI ca „coleg digital”.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #037</div>
+        <h3>Apeși Verifică, și D406 devine Excel</h3>
+        <p>Modulul 1 din SAF-T Inspector: declarația D406 transformată în registre Excel, CSV și Parquet, totul local, cu pachetele de descărcat.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+/* Avatarele rămân pe primul cadru pentru cine a cerut mișcare redusă în sistem */
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.agent-avatar').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+}
+</script>
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

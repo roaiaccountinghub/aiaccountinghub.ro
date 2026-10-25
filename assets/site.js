@@ -77,6 +77,61 @@
   document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 })();
 
+/* ========== TABELE PE TELEFON: carduri pentru textul lung ========== */
+/* Tabelele cu text lung primesc clasa „t-stack” din article.css: sub 640px
+   fiecare rând devine card. Tabelele scurte sau cu cifre rămân tabel, cu
+   derularea orizontală obișnuită din .table-wrap. Marcajul <table> nu se
+   schimbă, deci indexarea vede aceeași structură.
+   Eticheta fiecărei celule (data-label) se copiază din antetul coloanei,
+   deci nu mai trebuie scrisă de mână.
+   Excepții: clasa „no-stack” pe tabel îl lasă mereu tabel, iar „t-stack”
+   scris de mână îl face mereu card. Tabelele cu design propriu (ledger,
+   sizes, nt-diag) nu se ating. */
+(function () {
+  const PROPRII = ['no-stack', 'ledger', 'sizes', 'nt-diag', 'nt-diag-head'];
+
+  function etichete(t, antet) {
+    t.querySelectorAll('tbody tr').forEach(tr => {
+      Array.prototype.forEach.call(tr.children, (td, i) => {
+        if (i > 0 && antet[i] && !td.hasAttribute('data-label')) td.setAttribute('data-label', antet[i]);
+      });
+    });
+  }
+
+  function textLung(t) {
+    const randuri = Array.prototype.slice.call(t.querySelectorAll('tbody tr'));
+    if (!randuri.length || t.querySelector('tbody th')) return false;
+    let n = 0, lungime = 0, cifre = 0, coloane = 0;
+    randuri.forEach(tr => {
+      coloane = Math.max(coloane, tr.children.length);
+      Array.prototype.forEach.call(tr.children, td => {
+        const x = td.textContent.replace(/\s+/g, ' ').trim();
+        n++; lungime += x.length;
+        if (x.length <= 14 && /\d/.test(x)) cifre++;
+      });
+    });
+    const medie = lungime / n;
+    if (cifre / n >= 0.4) return false;          /* tabel de cifre: rămâne tabel */
+    if (coloane >= 4) return true;
+    if (coloane === 3) return medie >= 18;
+    if (coloane === 2) return medie >= 40;
+    return false;
+  }
+
+  document.querySelectorAll('.prose table').forEach(t => {
+    if (PROPRII.some(c => t.classList.contains(c))) return;
+    const antet = Array.prototype.map.call(t.querySelectorAll('thead th'), th => th.textContent.replace(/\s+/g, ' ').trim());
+    if (!antet.length) return;
+    if (!t.classList.contains('t-stack')) {
+      if (!textLung(t)) return;
+      t.classList.add('t-stack');
+    }
+    etichete(t, antet);
+    const wrap = t.closest('.table-wrap');
+    if (wrap) wrap.classList.add('is-stacked');
+  });
+})();
+
 /* ========== ARTICLE SHARE BUTTONS ========== */
 (function () {
   const buttons = document.querySelectorAll('.share-btn');

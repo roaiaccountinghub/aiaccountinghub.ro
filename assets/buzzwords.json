@@ -3737,6 +3737,369 @@
           "a": "Categoria e cea a agenților de programare: Claude Code la Anthropic, Codex la OpenAI, plus editoare precum Cursor. Toate lucrează pe același principiu: descrii sarcina, agentul planifică, scrie și rulează codul, iar tu aprobi."
         }
       ]
+    },
+    {
+      "id": "agent-harness",
+      "date": "2026-10-25",
+      "term": "AGENT HARNESS",
+      "termFull": "STRATUL DIN JURUL MODELULUI CARE ÎL TRANSFORMĂ ÎN AGENT",
+      "pron": "/ ei·gent har·nes /",
+      "type": "substantiv",
+      "ro": "Cadrul de execuție al agentului",
+      "def": [
+        "Agent harness e infrastructura care înconjoară un model AI și îl face să lucreze ca agent: instrucțiunile de pornire, uneltele pe care le poate folosi, memoria, accesul la fișiere, regulile de aprobare și bucla prin care planifică, acționează și verifică. Cuvântul englezesc înseamnă ham: modelul e puterea, harness-ul e ce o direcționează. Confuzia frecventă e că un agent ar fi pur și simplu un model mai bun. În realitate, același model se poartă foarte diferit în două harness-uri diferite, iar multe eșecuri ale agenților vin din harness, nu din model.",
+        "Comparația folosită des: modelul e procesorul, fereastra de context e memoria de lucru, iar harness-ul e sistemul de operare care le gestionează. Peste model, un harness adaugă planificarea, lucrul cu fișiere, gestionarea sub-agenților și ce se numește context engineering: rezumarea conversațiilor lungi, mutarea informațiilor în fișiere, izolarea sarcinilor. Claude Code e citat ca exemplu tipic, iar Google spune deschis că Gemini Spark rulează pe harness-ul Antigravity. Termenul a devenit popular în 2026 tocmai pentru că diferențele dintre modelele de vârf s-au micșorat, iar diferența practică dintre produse a ajuns să stea în harness. Se distinge de un framework, care oferă doar piesele de construcție: harness-ul vine cu ele deja montate și cu alegerile făcute.",
+        "Pentru un contabil care alege o unealtă AI, termenul explică de ce clasamentele de modele spun puțin. Contează cum lucrează produsul: ce poate face fără aprobare, unde își notează ce a făcut, ce se întâmplă după al cincizecilea pas dintr-o sarcină lungă. Regulile de aprobare, jurnalul de execuție și limitele de acces sunt părți ale harness-ului, deci sunt exact punctele de control intern ale unui agent. Când compari două unelte construite pe același model, compari de fapt două harness-uri."
+      ],
+      "examples": [
+        "Același model, două produse: în chat răspunde la o întrebare despre o balanță, iar într-un agent de programare deschide fișierele, rulează scripturi și verifică rezultatul. Diferența o face harness-ul.",
+        "Un agent care analizează legislația în mai mulți pași: harness-ul împarte sarcina pe sub-agenți, păstrează notițele în fișiere și reia lucrul de unde a rămas.",
+        "Întrebare de pus la evaluarea unei unelte: unde se văd pașii pe care i-a făcut agentul și care dintre ei cer aprobare? Dacă răspunsul nu e clar, harness-ul nu e gândit pentru un mediu cu control intern."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă un harness de un model?",
+          "a": "Modelul e cel care înțelege și generează text. Harness-ul e tot ce îl înconjoară: unelte, memorie, acces la fișiere, reguli de aprobare și bucla de lucru. Același model poate fi folosit în mai multe harness-uri, cu rezultate diferite."
+        },
+        {
+          "q": "Prin ce diferă de un framework?",
+          "a": "Un framework oferă piesele din care îți construiești agentul. Harness-ul vine cu ele deja asamblate: instrucțiuni, unelte și comportamente reglate dinainte, astfel încât agentul poate fi folosit direct."
+        },
+        {
+          "q": "Unde întâlnesc un harness?",
+          "a": "În orice agent AI folosit azi: Claude Code, Codex, Google Antigravity sau agenții personali proactivi. De regulă nu se vede ca produs separat, ci prin felul în care agentul planifică, folosește uneltele și cere aprobare."
+        }
+      ]
+    },
+    {
+      "id": "computer-use",
+      "date": "2026-10-25",
+      "term": "COMPUTER USE",
+      "termFull": "AGENTUL CARE FOLOSEȘTE CALCULATORUL CA UN OM: VEDE ECRANUL, DĂ CLIC, SCRIE",
+      "pron": "/ com·piu·tăr ius /",
+      "type": "substantiv",
+      "ro": "Agent care folosește calculatorul",
+      "def": [
+        "Computer use e capacitatea unui agent AI de a folosi un calculator așa cum îl folosește un om: se uită la ecran, mișcă mouse-ul, dă clic, scrie în câmpuri și trece de la o aplicație la alta. Nu are nevoie ca aplicația să aibă o interfață de programare (API) sau un conector, fiindcă lucrează direct pe interfața vizuală. Confuzia frecventă e cu automatizarea clasică de tip RPA. RPA repetă o secvență fixă de clicuri și se blochează când se mută un buton. Un agent cu computer use înțelege ce vede și își adaptează pașii.",
+        "Anthropic a introdus capacitatea în octombrie 2024, OpenAI a urmat în ianuarie 2025 cu Operator, iar în 2026 a devenit o componentă obișnuită: fiecare agent personal proactiv are un browser propriu, pe un calculator în cloud. Se disting două variante. Computer use propriu-zis lucrează pe capturi de ecran și poate folosi orice aplicație, inclusiv de desktop, dar e mai lent și mai scump. Browser use, sau agentul de browser, citește structura paginii web și acționează direct pe ea, cu rezultate mai stabile, dar numai pe web. Riscul specific e prompt injection: o pagină poate conține instrucțiuni ascunse, pe care agentul le citește ca pe niște comenzi.",
+        "Pentru un contabil, computer use e calea prin care un agent ajunge la aplicațiile fără API, cum sunt multe portaluri publice și aplicații mai vechi de contabilitate. Tocmai de aceea cere reguli mai stricte decât un conector: agentul vede tot ce e pe ecran și poate apăsa orice buton. Regulile practice sunt trei. Un cont dedicat, cu drepturi minime, nu contul personal al contabilului. Aprobare înaintea oricărei trimiteri, depuneri sau plăți. Nicio sesiune deschisă în aplicații pe care agentul nu trebuie să le atingă. Un agent care poate apăsa „Trimite” poate depune și o declarație greșită."
+      ],
+      "examples": [
+        "Descărcarea lunară a extraselor dintr-o aplicație bancară fără export automat: în sesiunea deschisă de om, agentul descarcă fișierele și le pune în folderul lunii.",
+        "Completarea unui formular dintr-un portal public cu datele din balanță. Agentul completează și se oprește înainte de trimitere, cu o captură de ecran pentru verificare.",
+        "Regulă de igienă: agentul lucrează într-un browser separat, fără alte conturi logate. Ce nu e deschis acolo nu poate fi atins."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă de RPA?",
+          "a": "RPA execută o secvență fixă de pași, înregistrată dinainte, și se oprește când interfața se schimbă. Un agent cu computer use înțelege ecranul și decide pașii pe loc, deci se adaptează, dar poate și să greșească în moduri în care RPA nu greșea."
+        },
+        {
+          "q": "E mai bun decât un conector?",
+          "a": "Nu, e o soluție de rezervă. Când aplicația are API sau conector, acela e mai rapid, mai stabil și mai ușor de controlat. Computer use se folosește acolo unde nu există altă cale."
+        },
+        {
+          "q": "Ce e browser use?",
+          "a": "Varianta limitată la browser: agentul citește structura paginii web în loc de capturi de ecran și acționează direct pe elementele ei. E mai stabilă și mai ieftină, dar nu ajunge la aplicațiile de desktop."
+        }
+      ]
+    },
+    {
+      "id": "agentic-commerce",
+      "date": "2026-10-25",
+      "term": "AGENTIC COMMERCE",
+      "termFull": "CUMPĂRĂTURILE ȘI PLĂȚILE FĂCUTE DE AGENȚI AI ÎN NUMELE TĂU",
+      "pron": "/ ei·gen·tic co·mărs /",
+      "type": "substantiv",
+      "ro": "Comerț agentic",
+      "def": [
+        "Agentic commerce, comerțul agentic, e situația în care un agent AI caută, alege și plătește în numele unei persoane sau al unei firme, după reguli stabilite dinainte. Nu e doar un asistent de cumpărături care recomandă produse: agentul ajunge până la plată. Confuzia frecventă e că agentul ar primi datele cardului. În modelele actuale nu le primește: plata trece prin jetoane de unică folosință sau prin împuterniciri semnate, limitate la un comerciant, o sumă și un interval.",
+        "Ca o plată făcută de un agent să fie acceptată și să poată fi contestată, au apărut protocoale dedicate. AP2 (Agent Payments Protocol), anunțat de Google în septembrie 2025 și preluat apoi spre standardizare de FIDO Alliance, se bazează pe mandate: împuterniciri semnate criptografic, unele deschise, cu buget și limite pentru cumpărături autonome, altele închise, pentru un coș și o sumă anume. Mandatele se leagă între ele într-o pistă de audit care arată cine a autorizat ce. Tot în septembrie 2025, OpenAI și Stripe au lansat Agentic Commerce Protocol, cu jetoane de plată valabile pentru un singur comerciant și o singură sumă. În 2026, agenții personali proactivi au dus comerțul agentic la publicul larg: Muse plătește cu carduri de unică folosință, iar Gemini Spark urmează să plătească prin AP2.",
+        "Pentru un contabil, întrebarea e ce document susține o plată făcută de un agent. Factura rămâne documentul justificativ, dar autorizarea internă nu mai e semnătura unui om pe un referat, ci un mandat dat agentului. Asta cere reguli explicite înainte de prima plată: ce poate cumpăra agentul, de la cine, până la ce sumă și cine aprobă depășirile. Mandatul și pista lui de audit merită păstrate alături de factură, ca dovadă a aprobării. Fără ele, o achiziție făcută de agent arată, la un control, ca o plată fără aprobare."
+      ],
+      "examples": [
+        "Mandat deschis pentru consumabile de birou: maximum 1.500 lei pe lună, doar de la doi furnizori agreați. Ce depășește limita revine la om pentru aprobare.",
+        "Rezervarea unei deplasări: agentul compară variantele, alege una care respectă politica de deplasări a firmei și plătește cu un jeton valabil doar pentru acea rezervare.",
+        "Test la închidere: fiecare plată inițiată de un agent are atașate factura și mandatul care a autorizat-o. O plată fără mandat se tratează ca o plată fără aprobare."
+      ],
+      "faq": [
+        {
+          "q": "Ce e AP2?",
+          "a": "Agent Payments Protocol, standardul deschis propus de Google în septembrie 2025 pentru plățile inițiate de agenți AI. Se bazează pe mandate semnate criptografic, care arată cine a autorizat plata, pentru ce sumă și la ce comerciant. Standardizarea continuă acum în cadrul FIDO Alliance."
+        },
+        {
+          "q": "Agentul vede datele cardului meu?",
+          "a": "În protocoalele actuale, nu. Plata trece prin jetoane sau carduri de unică folosință, limitate la un comerciant și o sumă, iar datele reale ale cardului rămân la emitent sau la procesatorul de plăți."
+        },
+        {
+          "q": "Cine răspunde dacă agentul cumpără greșit?",
+          "a": "E întrebarea încă deschisă a domeniului: utilizatorul, dezvoltatorul agentului, comerciantul sau banca. Protocoalele nu o tranșează, dar păstrează o pistă de audit care ajută la dispute. Pentru o firmă, răspunsul practic e în regulile interne: limitele mandatului și cine le-a aprobat."
+        }
+      ]
+    },
+    {
+      "id": "agent-sprawl",
+      "date": "2026-10-25",
+      "term": "AGENT SPRAWL",
+      "termFull": "ÎNMULȚIREA NECONTROLATĂ A AGENȚILOR AI ÎNTR-O ORGANIZAȚIE",
+      "pron": "/ ei·gent sprol /",
+      "type": "substantiv",
+      "ro": "Proliferarea agenților AI",
+      "def": [
+        "Agent sprawl e înmulțirea necontrolată a agenților AI într-o organizație: agenți creați de angajați diferiți, în unelte diferite, fără inventar, fără proprietar clar și fără o evidență a ce au voie să acceseze. Cuvântul englezesc descrie o creștere dezordonată, ca a unui oraș care se întinde fără plan. Confuzia frecventă e cu shadow AI. Shadow AI înseamnă unelte folosite fără aprobarea firmei. Agent sprawl poate apărea și cu unelte aprobate, doar prin numărul de agenți pe care nu îi mai urmărește nimeni.",
+        "Gartner a pus fenomenul pe agendă în aprilie 2026, cu o estimare care arată ritmul: o companie mare din Fortune 500 ar urma să ruleze, în medie, peste 150.000 de agenți în 2028, față de mai puțin de 15 în 2025. Doar 13% dintre organizații consideră că au deja guvernanța potrivită. Riscurile numite sunt informațiile greșite, partajarea excesivă și pierderea de date. Pașii recomandați sunt șase: reguli despre cine poate crea și partaja agenți și ce conectori sunt permiși, un inventar central, identitate, permisiuni și ciclu de viață pentru fiecare agent, controlul datelor la care au acces, monitorizarea activității și formarea angajaților. Gartner avertizează că interzicerea agenților nu rezolvă problema, ci îi împinge pe oameni spre unelte neaprobate.",
+        "Pentru un departament financiar, agent sprawl e o problemă de control intern cunoscută, sub o formă nouă. Seamănă cu fișierele Excel cu macro-uri de care depinde închiderea și pe care nu le mai înțelege nimeni după plecarea autorului. Întrebările sunt aceleași, doar că agenții acționează singuri: cine a creat agentul, la ce date are acces, ce poate face fără aprobare, cine răspunde de el și când se oprește. Un agent fără proprietar și cu acces la contabilitate e un risc chiar și atunci când funcționează bine."
+      ],
+      "examples": [
+        "Trei colegi și-au construit, fiecare, câte un agent care urmărește facturile din SPV. Rulează în paralel, cu acces la același cont, și nimeni nu mai știe care dintre ei e folosit la închidere.",
+        "Un agent creat de un coleg plecat din firmă trimite în continuare rapoarte săptămânale unui client, cu date dintr-un folder la care încă are acces.",
+        "Inventar minim: pentru fiecare agent, un proprietar, scopul, datele la care are acces, ce poate face fără aprobare și data următoarei revizuiri. Ce nu e în inventar se oprește."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă de shadow AI?",
+          "a": "Shadow AI e folosirea unor unelte AI neaprobate de firmă. Agent sprawl poate apărea și cu unelte aprobate: problema e numărul de agenți și lipsa evidenței, nu neapărat proveniența lor."
+        },
+        {
+          "q": "De ce nu interzicem pur și simplu agenții?",
+          "a": "Fiindcă, după Gartner, interdicția nu ține: angajații trec la unelte neaprobate, deci riscul crește în loc să scadă. Soluția recomandată e guvernanța: reguli, inventar și monitorizare."
+        },
+        {
+          "q": "Cu ce încep într-un departament mic?",
+          "a": "Cu inventarul. O listă simplă cu fiecare agent, proprietarul lui, ce date vede și ce poate face fără aprobare acoperă deja cea mai mare parte a riscului."
+        }
+      ]
+    },
+    {
+      "id": "agentic-close",
+      "date": "2026-10-25",
+      "term": "AGENTIC CLOSE",
+      "termFull": "ÎNCHIDEREA DE LUNĂ ÎN CARE AGENȚII AI LUCREAZĂ ZILNIC, IAR CONTABILUL APROBĂ",
+      "pron": "/ ei·gen·tic clouz /",
+      "type": "substantiv",
+      "ro": "Închidere agentică",
+      "def": [
+        "Agentic close e închiderea de lună în care agenții AI fac munca de rutină pe tot parcursul lunii: înregistrează, reconciliază, potrivesc documentele și propun estimările, iar contabilul revizuiește excepțiile și aprobă. Termenul a devenit cunoscut în iunie 2026, când platforma americană Digits a lansat un produs cu acest nume pentru firmele de contabilitate. Între timp îl folosesc și KPMG și alți furnizori de software, ca nume pentru o abordare, nu pentru un produs anume. Confuzia frecventă e că închiderea ar deveni automată. Nu devine: agentul nu își aprobă propria muncă, iar estimările, ajustările și semnătura rămân la contabil.",
+        "Conceptul din spate e mai vechi: continuous close, închiderea continuă, popularizată din 2016 de BlackLine sub umbrela mai largă continuous accounting, cu ideea de a muta reconcilierile, potrivirile și analizele de variație din ultimele zile ale lunii în fluxul zilnic. Literatura îi spune și rolling close. Ce aduce agentic close e motorul: unde înainte erau reguli fixe și roboți software (RPA), acum sunt agenți care rezolvă singuri cazurile clare și le escaladează pe celelalte, cu context și o acțiune recomandată. La Digits, de exemplu, sistemul identifică tranzacțiile care cer tratament de accrual, cum sunt imobilizările, cheltuielile și veniturile în avans, întocmește un grafic cu ipoteze și înregistrările propuse și îl trimite pe un checklist pentru aprobare. După aprobare, înregistrările lunare sunt menținute automat. Închiderea propriu-zisă nu dispare: rămâne un hard close mai scurt, concentrat pe ce cere judecată profesională.",
+        "Pentru un departament de contabilitate din România, terenul e bun: e-Factura aduce zilnic facturile de achiziție în format structurat, D406 cere oricum date curate și reconciliate, iar cursul BNR e public și zilnic. Riscul principal e însă nou: agenții care înregistrează non-stop au acces de scriere în contabilitate. De aceea, înainte de pornire se decid patru lucruri: ce se înregistrează automat, până la ce prag, cu ce verificare ulterioară și cine aprobă excepțiile. KPMG descrie modelul drept „exception-first”: agenții preiau rutina, oamenii văd doar excepțiile, iar pragurile de aprobare și separarea atribuțiilor sunt construite în flux."
+      ],
+      "examples": [
+        "Ziua 27 a lunii: 41 din 47 de puncte din checklist-ul de închidere sunt bifate. Rămân trei neconcordanțe, între care o încasare de 12.400 lei nealocată, și trei accruals propuse, fiecare cu ipotezele scrise și nota contabilă pregătită.",
+        "Factura de transport sosită în SPV dimineața e înregistrată în aceeași zi, iar lipsa recepției asociate apare imediat ca excepție, nu la închidere, sub presiunea termenului.",
+        "Test înainte de pornire: există o listă scrisă cu ce poate înregistra agentul fără aprobare și până la ce sumă? Dacă nu există, agentul nu primește acces de scriere."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă de continuous close?",
+          "a": "Continuous close e conceptul contabil: munca de închidere se face zilnic, nu într-un sprint la final de lună. Agentic close e forma lui din 2026, în care munca zilnică o fac agenți AI, iar contabilul aprobă excepțiile și estimările."
+        },
+        {
+          "q": "Agentic close e un produs Digits?",
+          "a": "Digits a lansat în iunie 2026 un produs cu acest nume, iar lansarea a făcut termenul cunoscut. Între timp, KPMG și alți furnizori îl folosesc pentru aceeași abordare, deci a devenit un nume de categorie."
+        },
+        {
+          "q": "Ce rămâne la contabil?",
+          "a": "Tot ce cere judecată: estimările și provizioanele, ajustările de valoare, tratamentele neobișnuite, revizuirea și semnătura. Agentul propune și documentează, iar ipotezele scrise devin pista de audit."
+        }
+      ]
+    },
+    {
+      "id": "gemini-spark",
+      "date": "2026-10-25",
+      "term": "GEMINI SPARK",
+      "termFull": "AGENTUL PERSONAL PROACTIV AL GOOGLE, CARE LUCREAZĂ 24 DE ORE DIN 24",
+      "pron": "/ ge·mi·nai spark /",
+      "type": "substantiv",
+      "ro": "Gemini Spark",
+      "def": [
+        "Gemini Spark e agentul personal proactiv al Google, integrat în aplicația Gemini. A fost prezentat la Google I/O, pe 19 mai 2026, cu câteva luni înaintea celorlalți, și rulează pe modelele Gemini 3.5. Google îl descrie drept „a 24/7 personal AI agent designed to proactively manage tasks”, adică un agent AI personal care lucrează non-stop și gestionează proactiv sarcinile. Confuzia frecventă e cu aplicația Gemini propriu-zisă: Gemini răspunde când îl întrebi, Spark e componenta care lucrează în fundal, inclusiv după ce ai închis aplicația. A doua confuzie e de nume: Muse Spark e modelul pe care rulează agentul Muse de la Meta, fără nicio legătură cu Google.",
+        "Ce spune Google că face Spark: sarcini recurente și declanșatori, de exemplu parcurgerea lunară a extraselor de card ca să semnaleze abonamente noi sau comisioane ascunse; deprinderi noi, cum ar fi urmărirea unei căsuțe de email pentru termene, cu un rezumat zilnic; fluxuri în mai mulți pași, cum ar fi transformarea notițelor de ședință într-un document și redactarea emailului de follow-up. Integrarea cea mai adâncă e cu Gmail, Docs și Slides, iar în Chrome poate folosi conturile deja logate, cu pasul de plată lăsat utilizatorului. Google spune că Spark e gândit să te întrebe înainte de acțiunile importante, cum sunt cheltuirea banilor sau trimiterea unui email. Accesul a pornit în SUA, la abonamentul Google AI Ultra, iar din 30 iulie 2026 s-a extins la AI Pro în peste 160 de țări, dar nu și în Spațiul Economic European, Regatul Unit și Elveția.",
+        "Pentru un contabil, Spark e agentul cel mai legat de un ecosistem anume: dacă firma lucrează în Google Workspace, emailul, calendarul și documentele sunt deja acolo unde le caută agentul. Exemplul dat chiar de Google, extrasele de card verificate lunar pentru comisioane ascunse, e o mică reconciliere făcută din proprie inițiativă. Logica de folosire e cea a oricărui agent personal proactiv: agentul pregătește și propune, contabilul aprobă, iar ce poate face agentul singur se stabilește dinainte. Pentru utilizatorii din România, Spark nu e încă disponibil, deci deocamdată e un model de urmărit, nu o unealtă de adoptat."
+      ],
+      "examples": [
+        "Rezumatul de dimineață din Gemini: certificatul digital calificat cu care depui declarațiile expiră peste 19 zile. Anul trecut reînnoirea a durat patru zile lucrătoare, așa că agentul a completat deja cererea la același furnizor, a pregătit plata și întreabă: „Pot să trimit solicitarea?”",
+        "La un an de la ultima revizuire a politicilor contabile, Spark semnalează două modificări de legislație care ating capitolul de stocuri, pregătește un rezumat de o pagină și o propunere de actualizare și întreabă dacă să programeze o discuție de 30 de minute cu directorul financiar săptămâna viitoare.",
+        "Ziua 2 a lunii: 41 din 47 de puncte din checklist-ul de închidere sunt finalizate. Spark prezintă trei neconcordanțe și propune trei accruals, între care energia pentru octombrie, estimată la 18.200 lei din ultimele șase luni, cu notele contabile pregătite. Nu înregistrează nimic fără aprobare: estimarea e judecată profesională și rămâne a contabilului."
+      ],
+      "faq": [
+        {
+          "q": "E disponibil în România?",
+          "a": "Nu, la 25 octombrie 2026. Google a extins Spark în peste 160 de țări, dar a exclus explicit Spațiul Economic European, din care face parte și România, precum și Regatul Unit și Elveția. Nu a anunțat un termen pentru Europa."
+        },
+        {
+          "q": "Are legătură cu Muse Spark?",
+          "a": "Nu. Muse Spark e modelul AI al Meta, pe care rulează agentul Muse. Gemini Spark e agentul Google. Asemănarea de nume e întâmplătoare."
+        },
+        {
+          "q": "Cum se numește la ceilalți furnizori?",
+          "a": "xAI are Grok Bot, Meta are Muse, OpenAI are Dots, iar Anthropic are Claude Duet. Toate sunt agenți personali proactivi: rulează în cloud, au acces la conturile tale și cer aprobare înaintea pașilor cu consecințe."
+        }
+      ]
+    },
+    {
+      "id": "grok-bot",
+      "date": "2026-10-25",
+      "term": "GROK BOT",
+      "termFull": "ECHIPA DE AGENȚI MEREU ACTIVI DE LA XAI, CU NUME ȘI ROLURI",
+      "pron": "/ grok bot /",
+      "type": "substantiv",
+      "ro": "Grok Bot",
+      "def": [
+        "Grok Bot e agentul personal proactiv lansat de xAI pe 11 august 2026, în versiune beta. Numele oficial se scrie în două cuvinte. Ideea centrală nu e un singur agent, ci o echipă de boți, fiecare cu nume, rol și memorie proprie. xAI îi descrie drept „AI teammates with names, jobs, and context that compounds over time”, adică colegi AI cu nume, roluri și un context care se acumulează în timp, și drept „always-on agents”, agenți mereu activi. Confuzia frecventă e cu Grok, asistentul de conversație al aceleiași companii: Grok răspunde la întrebări, Grok Bot preia munca și o duce mai departe singur.",
+        "Ce spune xAI că face: fiecare bot rulează pe propriul calculator în cloud, cu browser, fișiere și terminal, și se conectează la uneltele pe care le folosești deja, inclusiv la site-uri care nu au o interfață de programare. Boții își păstrează memoria și sesiunile de la o zi la alta, lucrează în paralel, își scriu unii altora și își predau sarcini. Un bot poate învăța un flux de lucru urmărindu-te o singură dată, apoi îl salvează ca rutină și îl rulează după un program. Duce sarcinile la capăt singur și revine doar când e nevoie de aprobarea ta, iar în timp învață când să întrebe și când să continue. Din septembrie a ajuns și în mașinile Tesla, unde preia prin voce emailul, calendarul și programările. E inclus în abonamentele SuperGrok, cu o cotă de utilizare separată.",
+        "Pentru un contabil, modelul echipei de boți e cel mai apropiat de felul în care e organizat un departament: un bot pentru reconcilierile bancare, unul pentru urmărirea termenelor fiscale, unul pentru corespondența cu furnizorii. Tocmai de aceea cere cea mai multă atenție la control. Un bot care învață singur când să nu mai întrebe mută granița aprobării fără o decizie explicită a cuiva. Regula rămâne cea a oricărui agent personal proactiv: ce se face fără aprobare se fixează dinainte, în scris, și nu se lasă la latitudinea agentului. Grok Bot e citat printre puținii agenți de acest tip accesibili din Europa, dar xAI nu publică o listă clară de țări."
+      ],
+      "examples": [
+        "Botul care urmărește termenele, dimineața: certificatul digital calificat cu care depui declarațiile expiră peste 19 zile. Anul trecut reînnoirea a durat patru zile lucrătoare, așa că agentul a completat deja cererea la același furnizor, a pregătit plata și întreabă: „Pot să trimit solicitarea?”",
+        "La un an de la ultima revizuire a politicilor contabile, botul care urmărește legislația semnalează două modificări de legislație care ating capitolul de stocuri, pregătește un rezumat de o pagină și o propunere de actualizare și întreabă dacă să programeze o discuție de 30 de minute cu directorul financiar săptămâna viitoare.",
+        "Ziua 2 a lunii: 41 din 47 de puncte din checklist-ul de închidere sunt finalizate. Botul de închidere prezintă trei neconcordanțe și propune trei accruals, între care energia pentru octombrie, estimată la 18.200 lei din ultimele șase luni, cu notele contabile pregătite. Nu înregistrează nimic fără aprobare: estimarea e judecată profesională și rămâne a contabilului."
+      ],
+      "faq": [
+        {
+          "q": "Se scrie Grok Bot sau Grokbot?",
+          "a": "Grok Bot, în două cuvinte, așa apare în anunțul oficial xAI. În texte informale apare și lipit, dar e același produs."
+        },
+        {
+          "q": "E disponibil în România?",
+          "a": "Posibil, dar neclar. xAI are termeni specifici pentru Europa, iar analizele de presă îl citează printre puținii agenți personali accesibili consumatorilor europeni. O listă oficială de țări nu există, deci verificarea sigură e cea din propriul cont."
+        },
+        {
+          "q": "Cum se numește la ceilalți furnizori?",
+          "a": "Google are Gemini Spark, Meta are Muse, OpenAI are Dots, iar Anthropic are Claude Duet. Grok Bot se deosebește prin accentul pus de la început pe o echipă de boți cu roluri, nu pe un singur agent."
+        }
+      ]
+    },
+    {
+      "id": "muse-meta",
+      "date": "2026-10-25",
+      "term": "MUSE (META)",
+      "termFull": "AGENTUL PERSONAL AL META, GÂNDIT PENTRU PUBLICUL LARG",
+      "pron": "/ miuz /",
+      "type": "substantiv",
+      "ro": "Muse",
+      "def": [
+        "Muse e agentul personal proactiv lansat de Meta pe 8 septembrie 2026, prezentat de companie drept primul agent personal construit pentru toată lumea. Meta îl descrie ca „a secure, private personal AI agent that proactively helps people meet their goals and suggests ideas”, adică un agent AI personal, sigur și privat, care te ajută proactiv să-ți atingi obiectivele și îți propune idei. Rulează pe Muse Spark, cel mai nou model al Meta. Confuzia frecventă vine din nume: Muse e agentul, Muse Spark e modelul din spate, iar Gemini Spark e un produs Google, fără legătură cu niciunul dintre ele.",
+        "Ce spune Meta că face: îi dai un obiectiv, el construiește un plan și lucrează mai departe și după ce ai închis aplicația, revenind când apare ceva nou sau când are nevoie de aprobarea ta. Conversația e un singur fir de mesaje, accesibil și din WhatsApp, iar sugestiile proactive apar într-o secțiune de tip feed. Poate trimite emailuri, completa formulare, rezerva călătorii și face cumpărături, dar cere aprobare înaintea acțiunilor sensibile, cum sunt trimiterea unui email sau o plată. Rulează pe o mașină virtuală dedicată, Muse Secure VM, iar un sistem separat, numit Sentinel, controlează ce date ies spre internet. Plățile trec prin carduri de unică folosință, deci agentul nu vede datele cardului. E gratuit pentru majoritatea utilizatorilor, cu abonamente pentru utilizare intensă.",
+        "Pentru un contabil, semnalul important e versiunea pentru micile afaceri, adăugată pe 29 septembrie, cu conectori la QuickBooks, Stripe și Shopify și acces la conturile de business din Facebook și Instagram. Agenții personali țintesc astfel direct facturarea, încasările și administrarea, adică exact zona în care un antreprenor mic ar putea da acces fără să-și întrebe contabilul. Regula e cea a oricărui agent personal proactiv: agentul pregătește, omul aprobă, iar datele clienților și ale angajatorului nu se conectează la o aplicație de consum doar pentru că e gratuită. În UE, Muse nu e disponibil."
+      ],
+      "examples": [
+        "Mesajul de dimineață din firul Muse: certificatul digital calificat cu care depui declarațiile expiră peste 19 zile. Anul trecut reînnoirea a durat patru zile lucrătoare, așa că agentul a completat deja cererea la același furnizor, a pregătit plata și întreabă: „Pot să trimit solicitarea?”",
+        "La un an de la ultima revizuire a politicilor contabile, Muse semnalează două modificări de legislație care ating capitolul de stocuri, pregătește un rezumat de o pagină și o propunere de actualizare și întreabă dacă să programeze o discuție de 30 de minute cu directorul financiar săptămâna viitoare.",
+        "Ziua 2 a lunii: 41 din 47 de puncte din checklist-ul de închidere sunt finalizate. Muse prezintă trei neconcordanțe și propune trei accruals, între care energia pentru octombrie, estimată la 18.200 lei din ultimele șase luni, cu notele contabile pregătite. Nu înregistrează nimic fără aprobare: estimarea e judecată profesională și rămâne a contabilului."
+      ],
+      "faq": [
+        {
+          "q": "E disponibil în România?",
+          "a": "Nu. Muse e disponibil, deocamdată, doar în America de Nord. O explicație probabilă e Regulamentul privind piețele digitale: Meta e desemnată controlor de acces și are nevoie de consimțământul explicit al utilizatorului ca să combine datele din WhatsApp, Instagram, email și calendar, adică exact lucrul din care Muse își trage valoarea."
+        },
+        {
+          "q": "Ce e Muse Charm?",
+          "a": "Un mic dispozitiv de tip breloc, prezentat la Meta Connect pe 23 septembrie 2026, prin care vorbești cu agentul fără să deschizi telefonul. Agentul are și o mascotă, pe care fiecare utilizator o poate boteza."
+        },
+        {
+          "q": "Cum se numește la ceilalți furnizori?",
+          "a": "Google are Gemini Spark, xAI are Grok Bot, OpenAI are Dots, iar Anthropic are Claude Duet. Muse se deosebește prin public: e singurul gândit explicit pentru toată lumea, nu în primul rând pentru profesioniști."
+        }
+      ]
+    },
+    {
+      "id": "dots-openai",
+      "date": "2026-10-25",
+      "term": "DOTS (OPENAI)",
+      "termFull": "AGENȚII MEREU PORNIȚI DIN CHATGPT, FIECARE CU CALCULATORUL LUI ÎN CLOUD",
+      "pron": "/ dots /",
+      "type": "substantiv",
+      "ro": "Dots",
+      "def": [
+        "Dots sunt agenții personali proactivi lansați de OpenAI pe 29 septembrie 2026, la DevDay, și accesibili din ChatGPT. OpenAI scrie numele cu literă mică, dots, iar fiecare agent în parte e un dot. Producătorul îi descrie drept „remarkably capable, always-on agents built to handle everything”, adică agenți remarcabil de capabili, mereu activi, construiți să se ocupe de orice, și, în aceeași lansare, drept „proactive assistants”, asistenți proactivi. Rulează pe GPT-6 Astra. Confuzia frecventă e cu ChatGPT însuși: ChatGPT e conversația, un dot e un agent care lucrează în fundal, pe calculatorul lui, și pe care îl poți contacta din ChatGPT, Slack sau Teams, inclusiv prin apel vocal.",
+        "Ce spune OpenAI că fac: fiecare dot are propriul calculator în cloud, se conectează la peste 4.000 de aplicații prin pluginurile din ChatGPT și poate lucra 24 de ore din 24, la mai multe proiecte deodată. Mecanismul care îl face proactiv se numește proactive research: când nu are o sarcină, dot-ul cercetează aplicațiile conectate ca să găsească moduri în care te poate ajuta. În acest mod, accesul e doar de citire. Agentul poate observa, dar nu poate trimite mesaje, modifica documente sau controla browserul. Orice acțiune care atinge conturile tale trece printr-o verificare automată numită auto-review și prin regulile obișnuite de aprobare. OpenAI a anunțat și echipe de dots, precum și dots specialiști pentru organizații, cu identitate și credențiale proprii, deocamdată în pilot.",
+        "Pentru un contabil, separarea dintre a observa și a acționa e exact principiul pe care l-ar cere controlul intern, iar Dots îl au scris în arhitectură. Scenariul cel mai apropiat de realitate e un dot specialist cu acces doar de citire la ERP și la extrasele bancare, care semnalează diferențele și pregătește notele de reconciliere. OpenAI însăși recomandă revizuirea oricărei lucrări cu consecințe, fiindcă agenții pot greși. Disponibilitatea contează: abonamentul individual Pro exclude Spațiul Economic European, Regatul Unit și Elveția, în timp ce variantele pentru companii, Business Premium și Enterprise, se lansează gradual la nivel global."
+      ],
+      "examples": [
+        "Mesajul de dimineață de la dot: certificatul digital calificat cu care depui declarațiile expiră peste 19 zile. Anul trecut reînnoirea a durat patru zile lucrătoare, așa că agentul a completat deja cererea la același furnizor, a pregătit plata și întreabă: „Pot să trimit solicitarea?”",
+        "La un an de la ultima revizuire a politicilor contabile, dot-ul semnalează două modificări de legislație care ating capitolul de stocuri, pregătește un rezumat de o pagină și o propunere de actualizare și întreabă dacă să programeze o discuție de 30 de minute cu directorul financiar săptămâna viitoare.",
+        "Ziua 2 a lunii: 41 din 47 de puncte din checklist-ul de închidere sunt finalizate. Dot-ul prezintă trei neconcordanțe și propune trei accruals, între care energia pentru octombrie, estimată la 18.200 lei din ultimele șase luni, cu notele contabile pregătite. Nu înregistrează nimic fără aprobare: estimarea e judecată profesională și rămâne a contabilului."
+      ],
+      "faq": [
+        {
+          "q": "Se scrie Dots sau dots?",
+          "a": "OpenAI scrie cu literă mică, dots, iar presa folosește de regulă Dots. E același produs. Un singur agent se numește dot."
+        },
+        {
+          "q": "E disponibil în România?",
+          "a": "Nu pe abonamentul individual: Pro exclude explicit Spațiul Economic European. Variantele pentru companii, Business Premium și Enterprise, se lansează gradual la nivel global, iar la Enterprise funcția trebuie activată de administrator. O firmă din România poate ajunge la Dots pe această cale."
+        },
+        {
+          "q": "Cum se numește la ceilalți furnizori?",
+          "a": "Google are Gemini Spark, xAI are Grok Bot, Meta are Muse, iar Anthropic are Claude Duet. Dots se deosebesc prin regula scrisă explicit pentru modul proactiv: cât timp caută singur ce e de făcut, agentul doar citește."
+        }
+      ]
+    },
+    {
+      "id": "claude-duet",
+      "date": "2026-10-25",
+      "term": "CLAUDE DUET",
+      "termFull": "APLICAȚIA ÎN CARE CLAUDE LUCREAZĂ CA AGENT PROACTIV",
+      "pron": "/ clod diu·et /",
+      "type": "substantiv",
+      "ro": "Claude Duet",
+      "def": [
+        "Claude Duet e agentul personal proactiv lansat de Anthropic pe 21 octombrie 2026, ca research preview, adică o versiune de test cu acces limitat. Producătorul îl descrie drept „a new app where Claude works as a proactive agent”, o aplicație nouă în care Claude lucrează ca agent proactiv: vine la tine cu ce are nevoie de atenția ta, duce la capăt ce îi ceri, lucrează mai departe când te îndepărtezi și te întreabă înainte să acționeze în numele tău. Rulează pe Claude Opus 5.5. Confuzia frecventă e cu Claude Cowork: Cowork duce la capăt o lucrare pe care i-o dai tu, Duet pornește singur și vine el cu subiectele.",
+        "Ce spune Anthropic că face: trimite un brief de dimineață, verifică la câteva ore aplicațiile conectate și ridică singur subiecte pe care nu i le-ai cerut. Lucrează pe o mașină virtuală proprie, cu browser, deci continuă și cu telefonul închis, și preia memoria, skill-urile și aplicațiile pe care le ai deja în contul Claude. Lista acțiunilor care așteaptă aprobarea e explicită: trimiterea mesajelor, plățile, semnarea documentelor și ștergerea informațiilor. Unele lucruri nu le face deloc, nici cu aprobare, cum sunt tranzacțiile cu titluri de valoare sau transferurile de bani între conturi. Publicul declarat sunt profesioniștii și proprietarii de mici afaceri care au prea multe de urmărit. Accesul e limitat la abonații Pro și Max din SUA, pe bază de listă de așteptare, iar verificările din fundal consumă din limitele abonamentului.",
+        "Pentru un contabil, Duet e cel mai apropiat de munca de birou dintre agenții lansați în 2026. Integrările anunțate seamănă cu lista de aplicații a unui birou de contabilitate modern: Gmail, Slack, QuickBooks, Stripe, Gusto pentru salarizare, Docusign și HubSpot, iar printre exemplele de utilizare apar pregătirea prognozelor financiare și reconcilierea facturilor. Faptul că semnarea documentelor e pe lista aprobărilor obligatorii contează direct pentru o profesie care semnează situații și declarații. Regula rămâne cea a oricărui agent personal proactiv: agentul pregătește și arată de ce, contabilul aprobă. Pentru utilizatorii din România, Duet nu e încă disponibil, iar Anthropic nu a anunțat o dată de extindere."
+      ],
+      "examples": [
+        "Brief-ul de dimineață din Duet: certificatul digital calificat cu care depui declarațiile expiră peste 19 zile. Anul trecut reînnoirea a durat patru zile lucrătoare, așa că agentul a completat deja cererea la același furnizor, a pregătit plata și întreabă: „Pot să trimit solicitarea?”",
+        "La un an de la ultima revizuire a politicilor contabile, Duet semnalează două modificări de legislație care ating capitolul de stocuri, pregătește un rezumat de o pagină și o propunere de actualizare și întreabă dacă să programeze o discuție de 30 de minute cu directorul financiar săptămâna viitoare.",
+        "Ziua 2 a lunii: 41 din 47 de puncte din checklist-ul de închidere sunt finalizate. Duet prezintă trei neconcordanțe și propune trei accruals, între care energia pentru octombrie, estimată la 18.200 lei din ultimele șase luni, cu notele contabile pregătite. Nu înregistrează nimic fără aprobare: estimarea e judecată profesională și rămâne a contabilului."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă de Claude Cowork?",
+          "a": "Cowork lucrează când îi dai o sarcină și o duce la capăt. Duet are acces permanent la aplicațiile conectate, le verifică singur și vine el la tine cu ce merită atenția. Preia memoria și skill-urile din contul Claude, deci nu pornește de la zero."
+        },
+        {
+          "q": "E disponibil în România?",
+          "a": "Nu. La lansare, Duet e o versiune de test pentru abonații Pro și Max din SUA, pe bază de listă de așteptare, fără o dată anunțată pentru extindere."
+        },
+        {
+          "q": "Cum se numește la ceilalți furnizori?",
+          "a": "Google are Gemini Spark, xAI are Grok Bot, Meta are Muse, iar OpenAI are Dots. Duet se deosebește prin lista publică de acțiuni pe care nu le face nici cu aprobare."
+        }
+      ]
+    },
+    {
+      "id": "personal-ai-agent",
+      "date": "2026-10-25",
+      "term": "PERSONAL AI AGENT",
+      "termFull": "AGENTUL PERSONAL PROACTIV, CARE VINE EL LA TINE CU CE ARE NEVOIE DE ATENȚIE",
+      "pron": "/ păr·so·năl ei·ai ei·gent /",
+      "type": "substantiv",
+      "ro": "Agent personal proactiv",
+      "def": [
+        "Un agent personal proactiv e un agent AI care are acces permanent la conturile tale, cum sunt emailul, calendarul, documentele și aplicațiile de business, și care pornește singur: urmărește ce se schimbă, observă ce urmează și vine el la tine cu o propunere, în loc să aștepte o întrebare. Confuzia frecventă e că ar fi doar un asistent mai inteligent. Diferența nu ține de inteligență, ci de inițiativă: asistentul răspunde când îl întrebi, agentul obișnuit execută când îi dai o sarcină, iar agentul personal proactiv lucrează și atunci când nu te gândești la el. Categoria nu are încă un nume consacrat în engleză. Producătorii folosesc „personal AI agent” (Google, Meta), „always-on agents” (OpenAI, xAI) sau „proactive agent” (Anthropic), iar denumirea românească le reunește pe cele două calități care contează.",
+        "Produsele lansate în 2026 au aceeași arhitectură de bază. Agentul rulează pe un calculator propriu în cloud, deci continuă să lucreze cu telefonul și laptopul închise. Verifică periodic conturile conectate, de exemplu printr-un brief de dimineață și verificări la câteva ore. Pregătește acțiunea, dar se oprește înainte de orice pas cu consecințe, cum sunt trimiterea unui mesaj, o plată, o semnătură sau o ștergere, și îți cere confirmarea. Față de un agent AI obișnuit diferă două lucruri: accesul e permanent, nu pe durata unei sesiuni, iar momentul în care începe lucrul îl alege agentul. Primul a fost Gemini Spark, de la Google, în mai 2026. Au urmat, între august și octombrie, Grok Bot de la xAI, Muse de la Meta, Dots de la OpenAI și Claude Duet de la Anthropic.",
+        "Pentru un contabil, rolul se mută de la cel care execută la cel care aprobă. Calendarul fiscal e terenul ideal: termenele sunt fixe și cunoscute dinainte, documentele sunt structurate, iar costul unui termen ratat e concret. Pus lângă agenții care înregistrează non-stop, agentul personal proactiv devine stratul de supraveghere care face posibil continuous close: parcurge zilnic checklist-ul de închidere, semnalează neconcordanțele și propune estimările. Regula comună tuturor produselor, observare liberă și acțiune doar cu aprobare, devine aici o cerință de control intern. Ce poate face agentul fără tine se decide înainte de a-l porni, nu după prima greșeală."
+      ],
+      "examples": [
+        "Mesajul agentului, dimineața: certificatul digital calificat cu care depui declarațiile expiră peste 19 zile. Anul trecut reînnoirea a durat patru zile lucrătoare, așa că agentul a completat deja cererea la același furnizor, a pregătit plata și întreabă: „Pot să trimit solicitarea?”",
+        "La un an de la ultima revizuire a politicilor contabile, agentul semnalează două modificări de legislație care ating capitolul de stocuri, pregătește un rezumat de o pagină și o propunere de actualizare și întreabă dacă să programeze o discuție de 30 de minute cu directorul financiar săptămâna viitoare.",
+        "Ziua 2 a lunii: 41 din 47 de puncte din checklist-ul de închidere sunt finalizate. Agentul prezintă trei neconcordanțe și propune trei accruals, între care energia pentru octombrie, estimată la 18.200 lei din ultimele șase luni, cu notele contabile pregătite. Nu înregistrează nimic fără aprobare: estimarea e judecată profesională și rămâne a contabilului."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă de un agent AI obișnuit?",
+          "a": "Un agent AI obișnuit pornește de la tine: deschizi sesiunea, îi dai sarcina, iar când închizi laptopul munca se oprește. Agentul personal proactiv are acces permanent la conturile tale, rulează în cloud și decide singur când e momentul să vină cu o propunere. Tehnic e tot un agent, diferența e inițiativa."
+        },
+        {
+          "q": "Ce poate face fără aprobarea mea?",
+          "a": "Depinde de produs, dar regula comună e observare liberă, acțiune doar cu aprobare. Agentul citește, analizează și pregătește. Trimiterea mesajelor, plățile, semnăturile și ștergerile așteaptă confirmarea ta. Unele produse refuză anumite acțiuni chiar și cu aprobare, de exemplu transferurile de bani între conturi la Claude Duet."
+        },
+        {
+          "q": "Pot folosi un agent personal proactiv în România?",
+          "a": "Deocamdată, în mare parte nu. Gemini Spark exclude Spațiul Economic European, Muse e disponibil doar în America de Nord, Claude Duet doar în SUA, iar Dots exclude SEE la abonamentul individual. Grok Bot e excepția citată de presă, dar fără o listă oficială de țări. Timpul până la lansarea în UE e bun pentru pregătire: calendarul termenelor, ordinea în surse și regulile de aprobare."
+        }
+      ]
     }
   ]
 }

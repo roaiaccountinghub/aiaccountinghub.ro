@@ -9,7 +9,63 @@
     1. updates.json  -> pentru aplicația instalată (bulină + notificare)
     2. feed.xml      -> pentru cititoarele de feed (Feedly, Inoreader…)
 
-  Reguli pentru un <item>
+  Reguli pentru un <item> nou:
+    · se adaugă ca PRIM item, imediat sub <image>;
+    · <pubDate> în format RFC-822: „Vin, 31 Jul 2026 08:00:00 +0300”
+      se scrie cu ziua și luna în engleză — Mon/Tue/Wed/Thu/Fri/Sat/Sun
+      și Jan/Feb/Mar/Apr/May/Jun/Jul/Aug/Sep/Oct/Nov/Dec;
+    · <lastBuildDate> din capul canalului se aliniază cu cel mai nou item;
+    · articolele au guid = adresa proprie (isPermaLink="true");
+      episoadele și termenii trăiesc într-o listă, deci primesc un guid
+      propriu, stabil (isPermaLink="false") — altfel cititoarele ar crede
+      că e mereu același material.
+
+  Podcastul are și feed-ul lui oficial, de la Anchor/Spotify, prin care
+  ajunge în aplicațiile de podcast. Acesta e „tot ce apare pe Hub”.
+  ============================================================
+-->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI Accounting Hub</title>
+    <link>https://aiaccountinghub.ro/</link>
+    <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
+    <language>ro</language>
+    <lastBuildDate>Sun, 25 Oct 2026 11:00:00 +0200</lastBuildDate>
+    <image>
+      <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
+      <title>AI Accounting Hub</title>
+      <link>https://aiaccountinghub.ro/</link>
+    </image>
+
+    <item>
+      <title>Buzzword: Agent personal proactiv — AI-ul care vine singur la tine și îți cere doar confirmarea</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#personal-ai-agent</link>
+      <guid isPermaLink="false">aiah-buzzword-personal-ai-agent</guid>
+      <pubDate>Sun, 25 Oct 2026 11:00:00 +0200</pubDate>
+      <category>Buzzword</category>
+      <description>Un agent personal proactiv e un agent AI care are acces permanent la conturile tale, cum sunt emailul, calendarul, documentele și aplicațiile de business, și care pornește singur: urmărește ce se schimbă, observă ce urmează și vine el la tine cu o propunere, în loc să aștepte o întrebare. Confuzia frecventă e că ar fi doar un asistent mai inteligent. Diferența nu ține de inteligență, ci de inițiativă: asistentul răspunde când îl întrebi, agentul obișnuit execută când îi dai o sarcină, iar agentul personal proactiv lucrează și atunci când nu te gândești la el. Categoria nu are încă un nume consacrat în engleză. Producătorii folosesc „personal AI agent” (Google, Meta), „always-on agents” (OpenAI, xAI) sau „proactive agent” (Anthropic), iar denumirea românească le reunește pe cele două calități care contează.</description>
+    </item>
+
+    <item>
+      <title>Buzzword: Agentic close — închiderea de lună în care agenții lucrează zilnic și contabilul aprobă</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#agentic-close</link>
+      <guid isPermaLink="false">aiah-buzzword-agentic-close</guid>
+      <pubDate>Sun, 25 Oct 2026 10:00:00 +0200</pubDate>
+      <category>Buzzword</category>
+      <description>Agentic close e închiderea de lună în care agenții AI fac munca de rutină pe tot parcursul lunii: înregistrează, reconciliază, potrivesc documentele și propun estimările, iar contabilul revizuiește excepțiile și aprobă. Termenul a devenit cunoscut în iunie 2026, când platforma americană Digits a lansat un produs cu acest nume pentru firmele de contabilitate. Între timp îl folosesc și KPMG și alți furnizori de software, ca nume pentru o abordare, nu pentru un produs anume. Confuzia frecventă e că închiderea ar deveni automată. Nu devine: agentul nu își aprobă propria muncă, iar estimările, ajustările și semnătura rămân la contabil.</description>
+    </item>
+
+    <item>
+      <title>De la „întreabă-mă” la „pot să confirm?”: agentul personal proactiv</title>
+      <link>https://aiaccountinghub.ro/2026-10-25-Agentii-personali-proactivi.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-10-25-Agentii-personali-proactivi.html</guid>
+      <pubDate>Sun, 25 Oct 2026 09:00:00 +0200</pubDate>
+      <category>Articol</category>
+      <description>Asistentul AI răspunde, agentul AI execută, agentul personal proactiv vine singur la tine și îți cere doar confirmarea. Articolul urmărește cele trei etape din 2026 și cei patru agenți personali lansați între august și octombrie: Grok Bot (xAI), Muse (Meta), Dots (OpenAI) și Claude Duet (Anthropic). Ce fac, ce lasă la aprobarea omului, de ce cei mai mulți nu sunt încă disponibili în UE și ce înseamnă pentru contabili, de la rolul de aprobare la calendarul fiscal.</description>
+    </item>
+
+    <item>
       <title>Buzzword: Google Antigravity — agentul care scrie și rulează codul pe calculatorul tău</title>
       <link>https://aiaccountinghub.ro/buzzword.html#google-antigravity</link>
       <guid isPermaLink="false">aiah-buzzword-google-antigravity</guid>
@@ -35,35 +91,6 @@
       <category>Articol</category>
       <description>ANAF compară marja firmei cu reperul sectorului și trimite notificări de conformare când diferența e mare. Articolul pornește de la aceste notificări, de la cazurile din 2024 și de la indicatorul EBIT din raportul ANAF, apoi arată cum am construit Fin_Metrics: raportul Gemini Deep Research, datele deschise de pe data.gov.ro, serviciile web ANAF, machetele din Stitch, MVP-ul din Google AI Studio și aplicația finală, care pune bilanțurile 2025 într-o bază de 60 MB. Demonstrația e pe codul CAEN 6920, contabilitate și audit, cu limitele datelor spuse direct și aplicația, de descărcat ca exemplu.</description>
     </item>
-
-    <item> nou:
-    · se adaugă ca PRIM item, imediat sub <image>;
-    · <pubDate> în format RFC-822: „Vin, 31 Jul 2026 08:00:00 +0300”
-      se scrie cu ziua și luna în engleză — Mon/Tue/Wed/Thu/Fri/Sat/Sun
-      și Jan/Feb/Mar/Apr/May/Jun/Jul/Aug/Sep/Oct/Nov/Dec;
-    · <lastBuildDate> din capul canalului se aliniază cu cel mai nou item;
-    · articolele au guid = adresa proprie (isPermaLink="true");
-      episoadele și termenii trăiesc într-o listă, deci primesc un guid
-      propriu, stabil (isPermaLink="false") — altfel cititoarele ar crede
-      că e mereu același material.
-
-  Podcastul are și feed-ul lui oficial, de la Anchor/Spotify, prin care
-  ajunge în aplicațiile de podcast. Acesta e „tot ce apare pe Hub”.
-  ============================================================
--->
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>AI Accounting Hub</title>
-    <link>https://aiaccountinghub.ro/</link>
-    <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
-    <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
-    <language>ro</language>
-    <lastBuildDate>Sat, 24 Oct 2026 11:00:00 +0300</lastBuildDate>
-    <image>
-      <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
-      <title>AI Accounting Hub</title>
-      <link>https://aiaccountinghub.ro/</link>
-    </image>
 
     <item>
       <title>SAF-T · Nu cere aplicația, cere planul: cum îți construiești cu AI propria verificare SAF-T</title>
