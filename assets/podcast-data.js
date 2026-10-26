@@ -28,6 +28,29 @@
   window.PODCAST_EPISODES = [
     /* ---------- Sezonul 4 ---------- */
     {
+      id: "7JaZLTYGu51bRmSH5rmK5u", slug: "continuous-close", ep: "E05", group: "Sezonul 4",
+      date: "2026-10-27",
+      title: "Închiderea continuă, cu doi agenți AI în roluri diferite",
+      audioUrl: RSS + "128060626" + CF + "2026-9-25%2F48c72c29-6cd4-9e8a-8fc3-871436aac12c.m4a",
+      /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat
+         la durata reală (16:15). De corectat după ascultare. */
+      chapters: [
+        { t: 0   , title: "Intro: ziua cea mai periculoasă a lunii" },
+        { t: 105  , title: "Legătura cu agenții proactivi" },
+        { t: 145  , title: "Închiderea clasică, un sprint" },
+        { t: 250 , title: "Un concept vechi, un motor nou" },
+        { t: 520 , title: "Două straturi: execuția și supravegherea" },
+        { t: 403 , title: "Accruals, pe înțeles" },
+        { t: 389 , title: "Mesajul de dimineață din ziua 27" },
+        { t: 511 , title: "Nu e teorie: Digits Agentic Close" },
+        { t: 575 , title: "De ce România e un teren bun" },
+        { t: 680 , title: "Riscul: acces de scriere în contabilitate" },
+        { t: 740 , title: "Ce rămâne la contabil" },
+        { t: 845 , title: "Patru lucruri de făcut de acum" },
+        { t: 905 , title: "Concluzia" }
+      ]
+    },
+    {
       id: "2CJjj9AKVQeSPXARDFTon8", slug: "agenti-proactivi", ep: "E04", group: "Sezonul 4",
       date: "2026-10-25",
       title: "Pot să confirm? Agentul AI personal care vine singur la tine",
@@ -36,17 +59,17 @@
          la durata reală (17:56). De corectat după ascultare. */
       chapters: [
         { t: 0   , title: "Intro: agenții care nu mai așteaptă" },
-        { t: 42  , title: "Analizele medicale: trei tipuri de AI" },
-        { t: 119 , title: "Cele trei etape ale anului" },
-        { t: 275 , title: "Trei mesaje pentru contabil" },
-        { t: 382 , title: "Grok Bot: „colegii” AI" },
-        { t: 460 , title: "Muse: agentul pentru toată lumea" },
-        { t: 555 , title: "Dots: agentul „mereu pornit”" },
-        { t: 632 , title: "Claude Duet: cel mai nou venit" },
-        { t: 713 , title: "Europa așteaptă" },
-        { t: 815 , title: "Ce înseamnă pentru profesie" },
-        { t: 942 , title: "Cinci lucruri de făcut de acum" },
-        { t: 1011, title: "Continuous close și concluzia" }
+        { t: 90  , title: "Analizele medicale: trei tipuri de AI" },
+        { t: 270 , title: "Cele trei etape ale anului" },
+        { t: 410 , title: "Trei mesaje pentru contabil" },
+        { t: 565 , title: "Grok Bot: „colegii” AI" },
+        { t: 645 , title: "Muse: agentul pentru toată lumea" },
+        { t: 685 , title: "Dots: agentul „mereu pornit”" },
+        { t: 732 , title: "Claude Duet: cel mai nou venit" },
+        { t: 768 , title: "Europa așteaptă" },
+        { t: 878 , title: "Ce înseamnă pentru profesie" },
+        { t: 938 , title: "Cinci lucruri de făcut de acum" },
+        { t: 980, title: "Continuous close și concluzia" }
       ]
     },
     {
