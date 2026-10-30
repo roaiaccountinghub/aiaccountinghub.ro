@@ -29,7 +29,7 @@
     /* ---------- Sezonul 4 ---------- */
     {
       id: "7JaZLTYGu51bRmSH5rmK5u", slug: "continuous-close", ep: "E05", group: "Sezonul 4",
-      date: "2026-10-27",
+      date: "2026-10-30",
       title: "Închiderea continuă, cu doi agenți AI în roluri diferite",
       audioUrl: RSS + "128060626" + CF + "2026-9-25%2F48c72c29-6cd4-9e8a-8fc3-871436aac12c.m4a",
       /* TIMPI ESTIMAȚI — proporțional cu lungimea replicilor din script, raportat

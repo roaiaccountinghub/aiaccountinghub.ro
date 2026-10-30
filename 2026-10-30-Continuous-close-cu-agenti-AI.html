@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Închiderea continuă, cu doi agenți AI în roluri diferite: unul ține contabilitatea la zi, celălalt preia inițiativa — AI Accounting Hub</title>
+<meta name="description" content="Închiderea continuă (continuous close) înseamnă o contabilitate ținută la zi în fiecare zi a lunii, cu o închidere de final scurtă în locul unui sprint de câteva zile. Agenții AI fac înregistrările non-stop, iar agentul personal proactiv supraveghează checklist-ul, prezintă neconcordanțele și propune accruals cu ipotezele scrise, până la aprobarea contabilului.">
+<link rel="canonical" href="https://aiaccountinghub.ro/2026-10-30-Continuous-close-cu-agenti-AI.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aiaccountinghub.ro/2026-10-30-Continuous-close-cu-agenti-AI.html">
+<meta property="og:site_name" content="AI Accounting Hub">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Închiderea continuă, cu doi agenți AI în roluri diferite: unul ține contabilitatea la zi, celălalt preia inițiativa — AI Accounting Hub">
+<meta property="og:description" content="Închiderea continuă (continuous close) înseamnă o contabilitate ținută la zi în fiecare zi a lunii, cu o închidere de final scurtă în locul unui sprint de câteva zile. Agenții AI fac înregistrările non-stop, iar agentul personal proactiv supraveghează checklist-ul, prezintă neconcordanțele și propune accruals cu ipotezele scrise, până la aprobarea contabilului.">
+<meta property="og:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Închiderea continuă, cu doi agenți AI în roluri diferite: unul ține contabilitatea la zi, celălalt preia inițiativa — AI Accounting Hub">
+<meta name="twitter:description" content="Închiderea continuă (continuous close) înseamnă o contabilitate ținută la zi în fiecare zi a lunii, cu o închidere de final scurtă în locul unui sprint de câteva zile. Agenții AI fac înregistrările non-stop, iar agentul personal proactiv supraveghează checklist-ul, prezintă neconcordanțele și propune accruals cu ipotezele scrise, până la aprobarea contabilului.">
+<meta name="twitter:image" content="https://aiaccountinghub.ro/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="assets/article.css">
+<style>
+/* Particularitățile acestui articol — restul vine din assets/article.css */
+.toc { padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-1); max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain; }
+.toc::-webkit-scrollbar { width: 4px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.related-read { letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Subtitlurile de secțiune. h2 poartă '§', h3 primește '//'. */
+.prose h3 { margin: 44px 0 14px; }
+.prose h3::before { content: '//'; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; color: var(--accent); font-weight: 400; margin-right: 10px; opacity: 0.75; }
+
+/* Tabelele */
+.table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.prose th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-1); white-space: nowrap; }
+.prose td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--fg-muted); }
+.prose td strong { color: var(--fg); }
+.prose tr:last-child td { border-bottom: none; }
+
+/* Linkuri în proză — styles.css are a { color: inherit } */
+.prose p > a, .prose li > a, .prose td > a, .prose .cbody a, .article-lede a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 38%, transparent); overflow-wrap: anywhere; }
+.prose .pp { color: var(--accent); font-weight: 600; }
+.prose p > a:hover, .prose li > a:hover, .prose td > a:hover, .prose .cbody a:hover, .article-lede a:hover { border-bottom-color: var(--accent); }
+
+
+</style>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ac1b3ce281e142b6a427dfebb846fa8f"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Date structurate (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Închiderea continuă, cu doi agenți AI în roluri diferite: unul ține contabilitatea la zi, celălalt preia inițiativa — AI Accounting Hub",
+  "description": "Închiderea continuă (continuous close) înseamnă o contabilitate ținută la zi în fiecare zi a lunii, cu o închidere de final scurtă în locul unui sprint de câteva zile. Agenții AI fac înregistrările non-stop, iar agentul personal proactiv supraveghează checklist-ul, prezintă neconcordanțele și propune accruals cu ipotezele scrise, până la aprobarea contabilului.",
+  "image": "https://aiaccountinghub.ro/assets/og-image.png",
+  "datePublished": "2026-10-30",
+  "dateModified": "2026-10-30",
+  "inLanguage": "ro",
+  "mainEntityOfPage": "https://aiaccountinghub.ro/2026-10-30-Continuous-close-cu-agenti-AI.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Accounting Hub",
+    "url": "https://aiaccountinghub.ro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aiaccountinghub.ro/assets/og-image.png"
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>AI Accounting Hub</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="arhiva.html" class="active">Articole</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="buzzword.html">Buzzword</a>
+      <a href="resurse.html">Resurse</a>
+      <a href="arcade.html">Arcade</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Schimbă tema">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE -->
+<div class="article-wrap">
+
+  <!-- LEFT RAIL : breadcrumb / back -->
+  <aside class="article-side left">
+    <div class="sticky">
+      <div class="breadcrumb" style="flex-direction:column; align-items:flex-start; gap:14px;">
+        <a href="arhiva.html" style="display:inline-flex; align-items:center; gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Înapoi la arhivă
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <article class="article-main fade-in">
+    <div class="breadcrumb article-breadcrumb">
+      <a href="index.html">Acasă</a>
+      <span class="sep">/</span>
+      <a href="arhiva.html">Articole</a>
+      <span class="sep">/</span>
+      <span>Continuous close</span>
+    </div>
+
+    <div class="article-meta-top">
+      <span class="article-category">Analiză</span>
+      <span>30 octombrie 2026</span>
+      <span class="sep">·</span>
+      <span>7 min citire</span>
+    </div>
+
+    <h1>Închiderea continuă, cu doi agenți AI în roluri diferite: <span class="accent">unul ține contabilitatea la zi, celălalt preia inițiativa</span></h1>
+    <p class="article-lede">
+      În <a href="2026-10-25-Agentii-personali-proactivi.html">articolul despre agenții personali proactivi</a> am urmărit cum a trecut AI-ul, în 2026, de la asistentul care răspunde la agentul care vine singur cu o propunere și îți cere confirmarea. Pentru un departament de contabilitate, miza cea mai mare apare când acești agenți personali sunt puși lângă agenții care înregistrează non-stop. Împreună fac posibil <em>continuous close</em>: o contabilitate ținută la zi în fiecare zi a lunii, cu o închidere de final scurtă în locul unui sprint de câteva zile.
+    </p>
+
+    <details class="toc-mobile">
+      <summary>// Cuprins</summary>
+      <nav aria-label="Cuprins">
+        <a href="#s1">Legătura cu agenții proactivi</a>
+        <a href="#s2">Ideea, pe scurt</a>
+        <a href="#s3">Execuția și supravegherea</a>
+        <a href="#s4">Nu e teorie</a>
+        <a href="#s5">De ce România e un teren bun</a>
+        <a href="#s6">Ce rămâne la contabil</a>
+        <a href="#s7">Ce poți pregăti de acum</a>
+        <a href="#s8">În loc de concluzie</a>
+      </nav>
+    </details>
+
+    <div class="author-row">
+      <div class="author-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+      </div>
+      <div class="author-info">
+        <div class="author-name">AI Accounting Hub</div>
+        <div class="author-role">30.10.2026</div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Copiază link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Distribuie LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Printează">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <div class="article-cover-bg"></div>
+      <div class="article-cover-caption">// execuție · supraveghere · aprobare</div>
+    </div>
+
+    <div class="prose">
+
+      <h2 id="s1">Legătura: ce aduc agenții personali proactivi</h2>
+      <p>Pe scurt, etapele din articolul anterior: asistentul AI răspunde când îl întrebi, agentul AI execută o sarcină pe care i-o dai, iar <strong><span class="pp">agentul personal proactiv</span></strong> rulează permanent, urmărește singur ce se schimbă în conturile la care are acces și vine la tine cu o propunere gata pregătită. Toți cei patru agenți personali lansați între august și octombrie (Grok Bot, Muse, Dots și Claude Duet) au aceeași regulă de bază: <strong>observă liber, dar acționează doar cu aprobarea ta</strong>.</p>
+      <p>Pentru un om, asta înseamnă un asistent care îi amintește de termene. Pentru un departament de contabilitate, înseamnă mai mult. Agenții din etapa a doua știu deja să înregistreze, să reconcilieze și să potrivească documente. Le lipsea cineva care să urmărească tot procesul, zi de zi, și să aducă la contabil doar ce cere o decizie. Exact acest rol îl poate prelua <span class="pp">agentul personal proactiv</span>. Puse împreună, cele două tipuri de agenți fac posibil un mod de lucru cu nume consacrat: <strong><em>continuous close</em></strong>, închiderea continuă.</p>
+      <p>Conceptul nu e nou. Îl găsim de aproape zece ani sub umbrela mai largă <em>continuous accounting</em>, popularizată în 2016 de BlackLine, cu ideea de a muta reconcilierile, potrivirile și analizele de variație din ultimele zile ale lunii în fluxul zilnic. Literatura folosește și <em>rolling close</em> pentru aceeași idee. Ce e nou în 2026 e motorul: unde înainte erau reguli fixe și roboți software (RPA), acum sunt agenți AI care rezolvă singuri cazurile simple și le escaladează pe celelalte.</p>
+
+      <h2 id="s2">Ideea, pe scurt</h2>
+      <p>Închiderea clasică e un sprint. Luna se termină, apoi urmează trei, cinci, uneori zece zile lucrătoare în care se recuperează tot: înregistrări rămase în urmă, reconcilieri, cheltuieli în avans, regularizări, diferențe de curs, verificări încrucișate. Abia la final ai o balanță în care ai încredere.</p>
+      <p>În închiderea continuă, munca aceasta nu se mai adună la sfârșitul lunii. Se face <strong>pe măsură ce apar tranzacțiile</strong>. Agenții AI lucrează non-stop: preiau documentele, le înregistrează, reconciliază banca, potrivesc facturile cu recepțiile și contractele. Consecința practică: <strong>în orice zi vrei să extragi date, evidența e la zi</strong>, iar o balanță din mijlocul lunii spune aproape la fel de mult ca cea finală. Închiderea propriu-zisă nu dispare. Rămâne un <em>hard close</em> mult mai scurt, concentrat pe ce nu se poate face zilnic: estimările și provizioanele, amortizarea, ajustările care cer judecată profesională, revizuirea și semnătura.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th></th><th>Închiderea clasică</th><th>Continuous close</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Când se face munca</strong></td><td>după finalul lunii, într-un sprint</td><td>zilnic, pe măsură ce apar tranzacțiile</td></tr>
+            <tr><td><strong>Reconcilierea bancară</strong></td><td>o dată pe lună</td><td>la fiecare extras</td></tr>
+            <tr><td><strong>Neconcordanțele</strong></td><td>descoperite la închidere, sub presiunea termenului</td><td>semnalate în ziua în care apar</td></tr>
+            <tr><td><strong>Estimările (accruals)</strong></td><td>calculate la final, din memorie și tabele</td><td>propuse din timp, cu ipotezele documentate</td></tr>
+            <tr><td><strong>Ce face contabilul la final</strong></td><td>recuperează, corectează, închide</td><td>ajustările de final, revizuirea, semnătura</td></tr>
+            <tr><td><strong>Balanța din ziua 15</strong></td><td>incompletă, nefolositoare pentru decizii</td><td>aproape la fel de bună ca cea finală</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="s3">Două straturi: execuția și supravegherea</h2>
+      <p>Aici se vede rolul agenților personali proactivi. Închiderea continuă are nevoie de două tipuri de muncă.</p>
+      <p><strong>Stratul de execuție, agenții.</strong> Lucrează în fundal, fără întrerupere: înregistrează facturile de furnizor, încadrează cheltuielile pe conturi, reconciliază extrasele, marchează dublurile și tranzacțiile neobișnuite. E munca din etapa 2, doar că rulează permanent, nu la cerere.</p>
+      <p><strong>Stratul de supraveghere, <span class="pp">agentul personal proactiv</span>.</strong> Nu înregistrează el, ci urmărește ca totul să fie în regulă și vine la tine când e ceva de decis:</p>
+      <ul>
+        <li><strong>parcurge checklist-ul de închidere</strong> zilnic, nu doar în ultima săptămână, și îți spune ce e bifat și ce nu;</li>
+        <li><strong>analizează datele</strong>: variații față de luna trecută și față de buget, conturi cu solduri neobișnuite, furnizori care nu au mai facturat;</li>
+        <li><strong>prezintă neconcordanțele</strong>: diferențe bancă–contabilitate, facturi fără recepție, recepții fără factură, solduri de furnizori care nu se potrivesc cu extrasele de cont primite de la ei;</li>
+        <li><strong>propune accruals și regularizări</strong>, cu ipotezele scrise, și așteaptă aprobarea ta înainte de a le înregistra.</li>
+      </ul>
+      <p>Un mesaj de dimineață, în ziua 27 a lunii, ar putea arăta așa:</p>
+      <blockquote>„Situația închiderii pentru octombrie: 41 din 47 de puncte din checklist sunt finalizate. Rămân șase. Trei sunt neconcordanțe: o încasare de 12.400 lei nealocată din 22 octombrie, o factură de transport în SPV fără recepție asociată și o diferență de 380 lei între soldul unui furnizor din Germania și extrasul de cont primit de la el. Trei sunt propuneri de accruals: factura de energie pentru octombrie nu a sosit încă, iar pe baza ultimelor șase luni estimez 18.200 lei; mentenanța din contract se facturează la finalul trimestrului, deci trebuie înregistrată treimea pentru octombrie; dobânda la creditul de investiții se plătește trimestrial, iar partea pentru octombrie este de 4.150 lei. Am pregătit notele contabile și calculul pentru fiecare. <strong>Le înregistrez pe cele trei accruals? Pentru neconcordanțe, vrei să trimit întrebările colegilor de la trezorerie și achiziții?</strong>”</blockquote>
+      <p>Agentul personal nu decide ce e o estimare rezonabilă. O propune, arată de unde vine și lasă decizia la contabil. Un accrual e prin definiție o <strong>estimare</strong>, deci judecată profesională, iar ipotezele documentate devin automat pista de audit.</p>
+
+      <h2 id="s4">Nu e teorie</h2>
+      <p>Componentele există deja. Pe 8 iunie 2026, platforma americană Digits a lansat <em>Agentic Close</em> pentru firmele de contabilitate: sistemul semnalează tranzacțiile care cer tratament de accrual (imobilizări, cheltuieli în avans, venituri în avans), întocmește un grafic cu ipoteze și înregistrările propuse și îl trimite pe un checklist pentru aprobare. După aprobare, înregistrările lunare sunt menținute automat. Reconcilierile pornesc singure, iar excepțiile ajung la contabil cu context și o acțiune recomandată. Digits raportează că peste 96% dintre tranzacții se înregistrează fără intervenție umană. E o cifră declarată de furnizor, dar arată direcția.</p>
+      <p>Agenții personali proactivi aduc peste toate acestea stratul care lipsea: cel care leagă contabilitatea de tot ce e în jurul ei. Emailul de la furnizor, calendarul cu termenele, colegul care trebuie întrebat, documentul care trebuie semnat.</p>
+
+      <h2 id="s5">De ce România e un teren bun</h2>
+      <p>Deși agenții personali nu au ajuns încă în UE, infrastructura fiscală românească e una dintre cele mai pregătite pentru continuous close:</p>
+      <ul>
+        <li><strong>e-Factura</strong> aduce zilnic, prin SPV, facturile de achiziție într-un format structurat. E exact fluxul continuu de care are nevoie un agent ca să înregistreze pe măsură ce apar documentele, nu când ajung pe hârtie la contabilitate.</li>
+        <li><strong>D406 (SAF-T)</strong> e obligatorie pentru toate firmele, lunar sau trimestrial, și cere oricum date curate, coerente și reconciliate. O contabilitate ținută la zi face din D406 un export, nu un proiect.</li>
+        <li><strong>Cursul BNR</strong> e public și zilnic, deci reevaluarea soldurilor în valută poate fi simulată în orice zi a lunii.</li>
+      </ul>
+
+      <h2 id="s6">Ce rămâne la contabil și ce trebuie păzit</h2>
+      <p>Închiderea continuă nu elimină contabilul, ci îi mută munca spre partea care cere judecată: estimări, provizioane, ajustări de valoare, tratamente contabile neobișnuite, semnătura pe situații. Aduce însă și cel mai important risc: agenții care înregistrează non-stop au <strong>acces de scriere în contabilitate</strong>. De aceea, regula comună celor patru agenți personali lansați în această toamnă, „observare liberă, acțiune doar cu aprobare”, devine aici o cerință de control intern, nu o opțiune de confort. Ce se înregistrează automat, până la ce prag, cu ce verificare ulterioară și cine aprobă excepțiile se decide înainte de a porni, nu după prima greșeală.</p>
+
+      <h2 id="s7">Ce poți pregăti de acum</h2>
+      <p>Agenții personali proactivi nu sunt încă disponibili în UE, dar o bună parte din continuous close se poate pregăti fără ei:</p>
+      <ul>
+        <li><strong>Scrie-ți checklist-ul de închidere și politica de accruals.</strong> Ce se verifică, în ce ordine, ce se estimează și după ce metodă. E exact ce va urma agentul de supraveghere, iar fără ele nu are ce urma.</li>
+        <li><strong>Mută o parte din muncă în timpul lunii.</strong> Reconcilierea bancară săptămânală în loc de lunară și preluarea zilnică a facturilor din SPV sunt deja pași spre închiderea continuă, cu sau fără agenți.</li>
+        <li><strong>Stabilește pragurile.</strong> Ce tipuri de înregistrări ar putea intra automat, până la ce valoare, și ce trebuie să treacă mereu pe la un om.</li>
+        <li><strong>Gândește pista de audit.</strong> Fiecare propunere aprobată trebuie să lase urme: cine a propus, pe ce ipoteze, cine a aprobat și când.</li>
+      </ul>
+
+      <h2 id="s8">În loc de concluzie</h2>
+      <p>Închiderea de lună a fost mereu un sprint pentru că munca se aduna la final. Continuous close o împarte pe toată luna: agenții lucrează zilnic, <span class="pp">agentul personal proactiv</span> urmărește procesul, iar contabilul decide la fiecare pas cu consecințe. Ultimele zile ale lunii rămân pentru ce cere cu adevărat judecată profesională.</p>
+      <p>Tehnologia pentru asta se adună acum. Ce trebuie să existe dinainte e ce nu poate aduce niciun agent: un checklist clar, o politică de estimări scrisă și regula despre ce se aprobă, de către cine și pe ce bază.</p>
+
+      <div class="article-end">
+        <div class="tags-row">
+          <span class="tag">#continuous-close</span>
+          <span class="tag">#închiderea-lunii</span>
+          <span class="tag">#agenți-AI</span>
+          <span class="tag">#accruals</span>
+          <span class="tag">#control-intern</span>
+          <span class="tag">#e-Factura</span>
+        </div>
+        <span class="footer-mono">Articolul #040</span>
+      </div>
+
+      <div id="article-rating" data-article="2026-10-30-Continuous-close-cu-agenti-AI"></div>
+
+    </div>
+  </article>
+
+  <!-- RIGHT RAIL : TOC -->
+  <aside class="article-side">
+    <div class="sticky">
+      <nav class="toc" aria-label="Cuprins">
+        <div class="toc-title">// Cuprins</div>
+        <a href="#s1">Legătura</a>
+        <a href="#s2">Ideea, pe scurt</a>
+        <a href="#s3">Două straturi</a>
+        <a href="#s4">Nu e teorie</a>
+        <a href="#s5">România</a>
+        <a href="#s6">Ce rămâne la contabil</a>
+        <a href="#s7">Ce poți pregăti</a>
+        <a href="#s8">În loc de concluzie</a>
+      </nav>
+    </div>
+  </aside>
+</div>
+
+<!-- ARTICOLE CONEXE -->
+<section class="block" style="padding-top: 48px;">
+  <div class="block-inner">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-label">Continuă</div>
+        <h2>Pe aceeași temă.</h2>
+      </div>
+      <a href="arhiva.html" class="btn btn-ghost">Arhiva articolelor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="related-grid">
+      <a href="2026-10-25-Agentii-personali-proactivi.html" class="related-card fade-in">
+        <div class="related-date">ANALIZĂ · AGENȚI AI · #039</div>
+        <h3>De la „întreabă-mă” la „pot să confirm?”</h3>
+        <p>Asistentul, agentul și agentul personal proactiv: Grok Bot, Muse, Dots și Claude Duet, ce fac și de ce nu sunt încă în UE.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-05-09-Agentul-AI-nu-stie-sa-tina-un-secret.html" class="related-card fade-in">
+        <div class="related-date">AGENȚI AI · SECURITATE</div>
+        <h3>Agentul AI nu știe să țină un secret</h3>
+        <p>Ce date ajung la un agent AI, unde stau și ce plan alegi înainte să-i dai acces la documentele clienților.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a href="2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html" class="related-card fade-in">
+        <div class="related-date">VIBE CODING · SAF-T · #037</div>
+        <h3>Apeși Verifică, și D406 devine Excel</h3>
+        <p>Modulul 1 din SAF-T Inspector: declarația D406 transformată în registre Excel, CSV și Parquet, totul local, cu pachetele de descărcat.</p>
+        <span class="related-read">Citește articolul
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 20V10l6-5 6 5v10"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="logo-text">
+            <span>AI Accounting Hub</span>
+            <small>aiaccountinghub.ro</small>
+          </div>
+        </div>
+        <p>Hub educațional independent pentru profesioniștii financiari care vor să integreze AI în procesele contabile — analize, termeni explicați și unelte testate în fluxuri reale.</p>
+        <p>Credem în democratizarea cunoașterii, așa că oferim totul fără bariere — fără conturi, fără taxe, fără reclame.</p>
+        <p>Evoluție fără zgomot, pentru cei care prețuiesc timpul și calitatea.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Conținut</h4>
+        <div class="footer-nav-grid">
+          <a href="arhiva.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg><span>Articole</span></a>
+          <a href="podcast.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg><span>Podcast</span></a>
+          <a href="buzzword.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buzzword</span></a>
+          <a href="resurse.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Resurse</span></a>
+          <a href="arcade.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg><span>Arcade</span></a>
+          <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>Contact</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="nota-confidentialitate.html">Notă de confidențialitate</a>
+        <span class="sep">·</span>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/site.js"></script>
+<script src="assets/rating.js" defer></script>
+</body>
+</html>

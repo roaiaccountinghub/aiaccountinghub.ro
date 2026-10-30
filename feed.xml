@@ -31,12 +31,30 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sun, 25 Oct 2026 12:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 12:00:00 +0200</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Închiderea continuă, cu doi agenți AI în roluri diferite</title>
+      <link>https://aiaccountinghub.ro/podcast.html?play=7JaZLTYGu51bRmSH5rmK5u</link>
+      <guid isPermaLink="false">aiah-podcast-s4e05</guid>
+      <pubDate>Fri, 30 Oct 2026 12:00:00 +0200</pubDate>
+      <category>Podcast</category>
+      <description>Episod de sine stătător · Agenți AI. Închiderea de lună a fost mereu un sprint. În continuous close, agenții AI țin contabilitatea la zi în fiecare zi, iar agentul personal proactiv urmărește checklist-ul, prezintă neconcordanțele și propune accruals cu ipotezele scrise, până la aprobarea contabilului. Un mesaj de dimineață din ziua 27, Digits Agentic Close, de ce e-Factura și D406 fac din România un teren bun și ce poți pregăti de acum. 16 min.</description>
+    </item>
+
+    <item>
+      <title>Închiderea continuă, cu doi agenți AI în roluri diferite: unul ține contabilitatea la zi, celălalt preia inițiativa</title>
+      <link>https://aiaccountinghub.ro/2026-10-30-Continuous-close-cu-agenti-AI.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-10-30-Continuous-close-cu-agenti-AI.html</guid>
+      <pubDate>Fri, 30 Oct 2026 09:00:00 +0200</pubDate>
+      <category>Articol</category>
+      <description>Închiderea continuă (continuous close) înseamnă o contabilitate ținută la zi în fiecare zi a lunii, cu o închidere de final scurtă în locul unui sprint de câteva zile. Agenții AI fac înregistrările non-stop, iar agentul personal proactiv supraveghează checklist-ul, prezintă neconcordanțele și propune accruals cu ipotezele scrise, până la aprobarea contabilului. Plus exemplul Digits Agentic Close, de ce e-Factura și D406 fac din România un teren bun și ce se poate pregăti de acum.</description>
+    </item>
 
     <item>
       <title>Pot să confirm? Agentul AI personal care vine singur la tine</title>
