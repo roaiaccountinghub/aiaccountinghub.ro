@@ -4100,6 +4100,336 @@
           "a": "Deocamdată, în mare parte nu. Gemini Spark exclude Spațiul Economic European, Muse e disponibil doar în America de Nord, Claude Duet doar în SUA, iar Dots exclude SEE la abonamentul individual. Grok Bot e excepția citată de presă, dar fără o listă oficială de țări. Timpul până la lansarea în UE e bun pentru pregătire: calendarul termenelor, ordinea în surse și regulile de aprobare."
         }
       ]
+    },
+    {
+      "id": "spaghetti-code",
+      "date": "2026-11-14",
+      "term": "SPAGHETTI CODE",
+      "termFull": "COD ÎNCÂLCIT, GREU DE URMĂRIT ȘI DE MODIFICAT",
+      "pron": "/ spă·ghe·ti coud /",
+      "type": "substantiv",
+      "ro": "Cod spaghetti",
+      "def": [
+        "Spaghetti code nu e un termen de inteligență artificială, ci unul din programare. Apare aici fiindcă revine des în discuțiile despre codul scris cu AI. Descrie un program în care logica e atât de încâlcită încât nu mai poți urmări pe unde trece execuția: bucăți copiate în mai multe locuri, funcții care fac prea multe lucruri, dependențe ascunse între părți care nu par legate. Confuzia frecventă e că un cod care funcționează ar fi și un cod bun. Spaghetti code poate rula corect ani de zile. Problema apare la prima modificare, când schimbarea dintr-un loc strică ceva în altă parte.",
+        "Expresia vine din anii '70, când programele săreau dintr-un punct în altul cu instrucțiuni GOTO, iar desenul acestor salturi semăna cu o farfurie de spaghete. Asistenții AI au readus termenul în discuție pentru că scriu cod repede și local: rezolvă cererea din fața lor, fără o imagine a întregului proiect. Rezultatul tipic e duplicarea. Un studiu GitClear pe 211 milioane de linii de cod modificate a găsit că în 2024, pentru prima dată, liniile copiate le-au depășit pe cele mutate și reorganizate, iar blocurile de cod duplicat au devenit de opt ori mai frecvente. Termenul vecin e datoria tehnică: spaghetti code e una dintre formele ei cele mai costisitoare.",
+        "Pentru un contabil care își construiește singur scripturi cu AI, de pildă un convertor de fișiere sau o verificare de balanță, riscul nu e teoretic. Primul script merge. După zece cereri de tipul „mai adaugă și asta”, fișierul are sute de linii, aceeași regulă de calcul scrisă de trei ori și nimeni nu mai știe care variantă se aplică. Seamănă cu un Excel moștenit, cu formule legate între foi în care nu mai îndrăznește nimeni să umble. Remediul e același: structură de la început și curățenie periodică, nu doar funcții noi."
+      ],
+      "examples": [
+        "Un script de import facturi a crescut prin cereri succesive către AI. Cota de TVA e acum scrisă în patru locuri diferite, iar la schimbarea ei s-a corectat doar în trei.",
+        "Programatorul cere asistentului AI să „repare eroarea”. Asistentul adaugă o excepție nouă în loc să găsească cauza, iar codul devine încă puțin mai greu de urmărit.",
+        "Test simplu: dacă pentru o modificare mică trebuie să cauți în cinci locuri din cod și nu știi sigur dacă le-ai găsit pe toate, ai spaghetti code. Cere AI-ului întâi o reorganizare, apoi funcția nouă."
+      ],
+      "faq": [
+        {
+          "q": "E codul scris cu AI întotdeauna spaghetti code?",
+          "a": "Nu. Devine așa când e construit prin cereri mici și succesive, fără plan și fără reorganizare. Același asistent poate scrie cod curat dacă i se cere explicit o structură și dacă e pus periodic să elimine dublurile."
+        },
+        {
+          "q": "Prin ce diferă de hardcoding?",
+          "a": "Hardcoding înseamnă valori fixe scrise direct în cod, cum ar fi o cotă de TVA sau o cale de fișier. E adesea o cauză a codului spaghetti, fiindcă aceeași valoare ajunge copiată în mai multe locuri, dar spaghetti code descrie încâlcirea întregului program."
+        },
+        {
+          "q": "Cum previn asta când lucrez cu vibe coding?",
+          "a": "Cere întâi un plan al structurii, păstrează regulile de calcul într-un singur loc, de exemplu un fișier de configurare, și oprește-te din când în când ca să ceri o reorganizare fără funcții noi. Un cod scurt și clar e mai ușor de verificat decât unul lung care „merge”."
+        }
+      ]
+    },
+    {
+      "id": "instruction-drift",
+      "date": "2026-11-14",
+      "term": "INSTRUCTION DRIFT",
+      "termFull": "ABATEREA TREPTATĂ A MODELULUI DE LA INSTRUCȚIUNILE PRIMITE",
+      "pron": "/ in·strac·șăn drift /",
+      "type": "substantiv",
+      "ro": "Drift-ul instrucțiunilor",
+      "def": [
+        "Instruction drift e tendința unui model AI de a respecta tot mai slab, pe parcursul unei conversații lungi, instrucțiunile primite la început. Regula „răspunde doar în română, cu trimitere la articolul de lege” e urmată impecabil la primele mesaje și uitată pe nesimțite după douăzeci. Confuzia frecventă e că modelul ar fi „hotărât” să nu mai asculte. Nu e o decizie, ci un efect mecanic: instrucțiunile vechi cântăresc tot mai puțin pe măsură ce se adună text nou deasupra lor.",
+        "Fenomenul a fost măsurat de cercetători de la Harvard, într-un studiu prezentat la conferința COLM 2024: modele populare au arătat o abatere semnificativă de la instrucțiuni în doar opt runde de conversație. Explicația propusă ține de mecanismul de atenție al modelului, care acordă tot mai puțină greutate textului de la începutul conversației. Instruction drift e înrudit cu context rot, dar nu e același lucru. Context rot descrie scăderea generală a calității când contextul crește. Instruction drift privește strict regulile: răspunsurile pot rămâne bune pe fond, doar că nu mai respectă formatul, tonul sau restricțiile cerute. Nu trebuie confundat nici cu model drift, unde modelul însuși rămâne în urma realității în luni sau ani.",
+        "În practica contabilă, drift-ul se vede la sesiunile lungi de lucru: verificarea unui lot mare de facturi, o analiză pe mai multe conturi, un document redactat pe bucăți. Restricțiile importante (nu inventa cifre, marchează ce nu poți verifica, folosește doar planul de conturi românesc) sunt exact cele care se pierd primele, fiindcă nu se văd în fiecare răspuns. Regula de lucru e să nu te bazezi pe memoria conversației pentru reguli critice: pune-le în instrucțiunile proiectului sau într-un fișier de reguli, repetă-le la momentele importante și începe o conversație nouă când sesiunea se lungește."
+      ],
+      "examples": [
+        "La început, asistentul marca fiecare cifră neverificată cu „de confirmat”. După o oră de lucru, a început să prezinte estimări ca date sigure, fără niciun marcaj.",
+        "Un prompt de sistem cere răspunsuri scurte, în tabel. După 15 schimburi de mesaje, răspunsurile au devenit paragrafe lungi, fără ca utilizatorul să fi cerut asta.",
+        "Test de verificare: la fiecare zece mesaje, întreabă modelul „care sunt regulile pe care le aplici în conversația asta?”. Dacă lista e incompletă, repetă regulile sau începe o conversație nouă."
+      ],
+      "faq": [
+        {
+          "q": "Cum se numește în engleză?",
+          "a": "Termenul folosit în cercetare este instruction drift. Apar și variantele persona drift, când modelul își pierde rolul atribuit, și prompt drift, folosit mai ales în lumea aplicațiilor construite peste modele."
+        },
+        {
+          "q": "Prin ce diferă de context rot?",
+          "a": "Context rot e scăderea generală a calității răspunsurilor când contextul devine foarte lung. Instruction drift privește doar respectarea regulilor primite: răspunsul poate fi corect pe fond, dar fără formatul, tonul sau restricțiile cerute. Cele două apar adesea împreună."
+        },
+        {
+          "q": "Ajută dacă scriu instrucțiunile mai apăsat?",
+          "a": "Puțin, nu suficient. Mai sigur e ca regulile să stea într-un loc pe care modelul îl primește la fiecare pas, cum sunt instrucțiunile unui proiect sau un fișier de reguli, și ca sesiunile lungi să fie împărțite în conversații mai scurte."
+        }
+      ]
+    },
+    {
+      "id": "verbosity",
+      "date": "2026-11-14",
+      "term": "VERBOSITY",
+      "termFull": "TENDINȚA MODELELOR AI DE A RĂSPUNDE MAI LUNG DECÂT E NEVOIE",
+      "pron": "/ vă·bo·si·ti /",
+      "type": "substantiv",
+      "ro": "Verbozitate",
+      "def": [
+        "Verbosity, în română verbozitate, e tendința modelelor AI de a răspunde mai lung decât cere întrebarea: introduceri, reformulări ale cererii, avertismente de rutină, liste de opțiuni nesolicitate și un rezumat final al unui răspuns care încăpea în două rânduri. Confuzia frecventă e că un răspuns lung ar fi un răspuns mai complet. Lungimea nu spune nimic despre corectitudine, iar o informație importantă îngropată în al patrulea paragraf se ratează mai ușor decât una pusă în prima frază.",
+        "Cauza principală ține de antrenare. Modelele sunt rafinate pe baza preferințelor exprimate de evaluatori, oameni sau alte modele, iar aceștia tind să noteze mai bine răspunsurile lungi, chiar la calitate egală. Fenomenul are un nume în cercetare: verbosity bias sau length bias. Un studiu din 2026 pe 76 de asistenți AI a găsit diferențe de zece ori între modele în cât text în plus produc la întrebări care cer un răspuns scurt. Verbozitatea are și un cost direct: serviciile AI se plătesc pe token, deci fiecare paragraf inutil se facturează. Termenul vecin e AI slop, textul fără conținut produs în masă. Verbozitatea poate apărea și într-un răspuns corect, doar umflat.",
+        "Pentru un contabil, verbozitatea contează în două locuri. Primul e timpul: un răspuns de o pagină la o întrebare de tipul „ce cotă de TVA se aplică?” trebuie citit integral ca să găsești cifra. Al doilea e riscul de a prelua textul umflat în documente oficiale, note explicative sau e-mailuri către clienți, unde lungimea fără conținut slăbește mesajul. Remediul e să ceri explicit forma răspunsului: lungimea maximă, ce să lipsească, dacă vrei doar cifra sau și justificarea."
+      ],
+      "examples": [
+        "Întrebare: „Care e termenul de depunere pentru D300 lunar?”. Răspuns de trei paragrafe, cu istoria declarației și sfaturi generale despre organizare, iar data apare abia la final.",
+        "O notă explicativă generată cu AI are două pagini. După eliminarea reformulărilor și a avertismentelor generale, rămân opt rânduri cu tot ce conta.",
+        "Regulă de igienă: adaugă în instrucțiunile permanente „Răspunde direct, fără introducere și fără rezumat final. Dacă răspunsul încape într-o frază, folosește o frază.”"
+      ],
+      "faq": [
+        {
+          "q": "Cum se numește în engleză?",
+          "a": "Verbosity. În cercetare se folosesc și verbosity bias sau length bias, pentru tendința evaluatorilor de a prefera răspunsurile lungi. Colocvial, în comunitățile online, se spune că modelul face yapping."
+        },
+        {
+          "q": "De ce nu ajunge să-i cer să fie concis?",
+          "a": "Ajută, dar studiile arată că modelele adaugă text în plus chiar și când li se cere concizie. E mai eficient să dai o limită concretă, de exemplu trei rânduri sau un tabel, și să pui regula în instrucțiunile permanente, nu doar în mesajul curent."
+        },
+        {
+          "q": "Un răspuns mai lung costă mai mult?",
+          "a": "Da, când folosești AI prin API sau prin unelte plătite pe consum, fiindcă taxarea se face pe token. Într-un abonament cu preț fix nu plătești în plus direct, dar consumi mai repede limitele de utilizare și timpul de citire."
+        }
+      ]
+    },
+    {
+      "id": "benchmark",
+      "date": "2026-11-14",
+      "term": "BENCHMARK",
+      "termFull": "TESTUL STANDARD PRIN CARE SE COMPARĂ MODELELE AI",
+      "pron": "/ bench·marc /",
+      "type": "substantiv",
+      "ro": "Test de referință",
+      "def": [
+        "Un benchmark AI e un set fix de sarcini, cu răspunsuri corecte cunoscute, pe care sunt rulate mai multe modele ca să poată fi comparate pe aceeași bază: întrebări de cultură generală, probleme de matematică, sarcini de programare, documente de redactat. Scorurile apar în fiecare anunț de lansare și în clasamentele publice. Contabilii cunosc cuvântul din alt context, al prețurilor de transfer și al analizelor de comparabilitate, unde benchmarking înseamnă compararea cu piața. Ideea e aceeași, dar aici se compară modele, nu tranzacții. Confuzia frecventă e că scorul mare la un benchmark ar garanta rezultate bune la propria sarcină.",
+        "Benchmark-urile au trei slăbiciuni cunoscute. Prima e saturarea: când toate modelele de vârf trec de 90%, testul nu mai deosebește nimic, iar o mare parte dintre benchmark-urile clasice au ajuns aici în 2025 și 2026. A doua e contaminarea: dacă întrebările testului sunt publice, ajung în datele de antrenare ale modelelor următoare, care practic au văzut răspunsurile dinainte. OpenAI a renunțat să mai raporteze un test de programare foarte citat tocmai din acest motiv. A treia e distanța față de munca reală. De aceea au apărut teste construite din sarcini profesionale, cum e GDPval, cu peste o mie de sarcini din 44 de ocupații, printre care și contabili și auditori, evaluate de specialiști din domeniu.",
+        "Pentru cine alege o unealtă AI într-un departament financiar, benchmark-ul e un filtru inițial, nu un verdict. Spune care modele merită încercate, nu care va lucra bine pe balanța ta, pe facturile tale sau pe legislația română. Testul care contează e cel intern: un set mic de cazuri reale, cu răspunsuri pe care le cunoști deja, rulat pe fiecare unealtă candidată. E același principiu ca la verificarea unui furnizor nou: referințele sunt utile, dar proba se face pe propriile date."
+      ],
+      "examples": [
+        "Un anunț de lansare spune că noul model „depășește toți concurenții” la cinci benchmark-uri. Niciunul nu măsoară lucrul cu documente financiare sau cu limba română.",
+        "Două modele au scoruri aproape identice într-un clasament public. Testate pe zece contracte reale, unul extrage corect toate scadențele, celălalt ratează trei.",
+        "Benchmark intern minim: 20 de cazuri reale anonimizate, cu răspunsul corect notat dinainte, rulate pe fiecare unealtă înainte de alegere și reluate la fiecare schimbare de model."
+      ],
+      "faq": [
+        {
+          "q": "Ce înseamnă că un benchmark e saturat?",
+          "a": "Că modelele de vârf obțin toate scoruri foarte mari, aproape de maxim, așa că testul nu mai poate arăta care e mai bun. Atunci se construiește un test nou, mai greu, iar ciclul se reia."
+        },
+        {
+          "q": "Ce e contaminarea unui benchmark?",
+          "a": "Situația în care întrebările și răspunsurile testului au ajuns, de obicei prin internet, în datele de antrenare ale modelului. Scorul crește fără ca modelul să fi devenit mai capabil, fiindcă a văzut deja subiectele."
+        },
+        {
+          "q": "Există benchmark-uri pentru contabilitate?",
+          "a": "Există teste construite din sarcini profesionale, cum e GDPval, care includ și ocupații din finanțe și contabilitate. Niciunul nu acoperă însă legislația și practica românească, deci un set de verificare intern rămâne necesar."
+        }
+      ]
+    },
+    {
+      "id": "ai-fluency",
+      "date": "2026-11-14",
+      "term": "AI FLUENCY",
+      "termFull": "CAPACITATEA DE A LUCRA CU AI EFICIENT, CRITIC ȘI RESPONSABIL",
+      "pron": "/ ei ai flu·ăn·si /",
+      "type": "substantiv",
+      "ro": "Fluență în AI",
+      "def": [
+        "AI fluency descrie capacitatea unei persoane de a lucra cu inteligența artificială în mod eficient, critic și responsabil: să știe ce să-i dea și ce să păstreze pentru sine, cum să ceară, cum să verifice și cine răspunde de rezultat. Confuzia frecventă e cu prompt engineering. Scrierea cererilor e doar o parte. Un utilizator fluent poate scrie un prompt mediocru și totuși să obțină un rezultat sigur, fiindcă știe să-l verifice. Unul care scrie prompturi excelente, dar preia orice răspuns fără control, nu e fluent.",
+        "Cel mai citat cadru e cel publicat în 2025 de Anthropic împreună cu profesorii Rick Dakan și Joseph Feller, sub numele de cadrul 4D. Cele patru competențe sunt Delegation, decizia despre ce lucrezi cu AI și ce faci singur, Description, comunicarea clară a sarcinii, Discernment, evaluarea critică a rezultatelor și a felului în care s-a lucrat, și Diligence, asumarea responsabilității pentru ce faci cu AI. Cadrul e însoțit de cursuri gratuite, iar termenul a ajuns în planurile de formare ale multor companii, ca standard de competență pentru angajați. Se deosebește de AI literacy, care înseamnă înțelegerea generală a ce e și ce poate AI. Fluency înseamnă practică, nu doar cunoaștere.",
+        "Pentru profesia contabilă, cadrul se suprapune aproape perfect peste obiceiuri existente. Delegarea e decizia pe care o ia orice șef de departament când împarte sarcinile. Discernământul e scepticismul profesional cerut de standardele de audit. Diligența e principiul că semnătura de pe raport îți aparține, indiferent cine a pregătit cifrele. Fluența în AI nu cere deci o meserie nouă, ci aplicarea acelorași reguli unui colaborator nou, rapid și uneori sigur pe el fără motiv."
+      ],
+      "examples": [
+        "Un contabil fluent lasă AI-ului extragerea datelor din 200 de facturi, dar păstrează pentru sine încadrarea fiscală a celor cinci tranzacții neobișnuite.",
+        "Asistentul propune o notă contabilă plauzibilă. Utilizatorul fluent întreabă pe ce articol se bazează, verifică articolul și constată că era abrogat.",
+        "Test rapid pe cele patru D-uri: știi de ce ai dat sarcina AI-ului? Ai explicat contextul? Ai verificat rezultatul? Ești pregătit să semnezi pentru el?"
+      ],
+      "faq": [
+        {
+          "q": "Ce sunt cele 4D?",
+          "a": "Cele patru competențe din cadrul AI Fluency: Delegation (ce delegi), Description (cum descrii sarcina), Discernment (cum evaluezi rezultatul) și Diligence (cum îți asumi responsabilitatea). Funcționează împreună, nu ca pași separați."
+        },
+        {
+          "q": "Prin ce diferă de AI literacy?",
+          "a": "AI literacy e cunoașterea de bază: ce e un model, ce poate și ce nu. AI fluency e capacitatea practică de a lucra bine cu el zi de zi. Poți avea prima fără a doua, la fel cum poți cunoaște regulile fără să știi să le aplici."
+        },
+        {
+          "q": "Unde pot învăța?",
+          "a": "Anthropic oferă gratuit cursuri bazate pe cadrul 4D, cu certificat, iar alte companii au propriile programe. Pentru un contabil, cel mai util exercițiu rămâne aplicarea celor patru întrebări pe sarcinile reale din săptămâna curentă."
+        }
+      ]
+    },
+    {
+      "id": "ai-brain-fry",
+      "date": "2026-11-14",
+      "term": "AI BRAIN FRY",
+      "termFull": "OBOSEALA MENTALĂ DIN LUCRUL INTENS CU MAI MULTE UNELTE AI",
+      "pron": "/ ei ai brein frai /",
+      "type": "substantiv",
+      "ro": "Epuizare cognitivă de la AI",
+      "def": [
+        "AI brain fry e oboseala mentală acută care apare când cineva folosește sau supraveghează unelte AI peste capacitatea lui de atenție: formulează cereri continuu, citește și verifică rezultate, sare între mai mulți asistenți și urmărește ce fac agenții. Cei afectați descriu o stare de ceață, un „bâzâit” în cap, decizii mai lente și senzația că au o duzină de file deschise în minte. Confuzia frecventă e cu burnout-ul. Burnout-ul vine din suprasolicitare cronică, pe luni întregi. Brain fry e o supraîncărcare de moment, care poate apărea și la oameni motivați, care se descurcă bine cu AI.",
+        "Termenul a fost lansat în martie 2026 de un studiu Boston Consulting Group, publicat în Harvard Business Review, pe 1.488 de angajați americani. Unul din șapte utilizatori de AI a spus că a trăit această stare. Productivitatea raportată creștea până la trei unelte AI folosite în paralel și scădea de la a patra. Sarcinile care cer supraveghere atentă, cum e citirea și interpretarea textului generat, au fost asociate cu mai mult efort mental, mai multă oboseală și mai multă suprasolicitare informațională. Cei afectați raportau mai multe erori mărunte și o intenție mai mare de a pleca din firmă. Aceeași echipă a lansat anterior termenul workslop. Cele două se leagă: cineva trebuie să verifice tot textul generat, iar acel cineva obosește.",
+        "Pentru un contabil, riscul e concret în perioadele de închidere și de raportare, când volumul e mare și verificarea rezultatelor AI se adaugă peste munca obișnuită. Erorile mărunte sunt exact cele care scapă la control. Studiul arată că remediul nu e renunțarea la AI, ci organizarea: mai puține unelte, folosite deliberat, sarcinile cu AI grupate în blocuri de timp, pauze reale și formare oferită de manageri. Folosit pentru a elimina munca repetitivă, AI a fost asociat chiar cu mai puțin stres."
+      ],
+      "examples": [
+        "În ultima zi de închidere, un contabil lucrează simultan cu un asistent de chat, un agent de reconciliere, un instrument de extragere din facturi și copilotul din Excel. Spre seară observă că a aprobat de două ori aceeași corecție.",
+        "O echipă introduce trei unelte AI noi în aceeași lună. Productivitatea raportată scade în loc să crească, iar plângerile de oboseală se înmulțesc.",
+        "Regulă de igienă: cel mult trei unelte AI active pe aceeași sarcină, verificarea rezultatelor în blocuri fixe de timp și o pauză după fiecare sesiune lungă de supraveghere."
+      ],
+      "faq": [
+        {
+          "q": "Prin ce diferă de burnout?",
+          "a": "Burnout-ul e o stare cronică, construită în timp din suprasolicitare, lipsă de control și epuizare emoțională. Brain fry e o supraîncărcare cognitivă acută, legată de folosirea și supravegherea intensă a uneltelor AI, care trece cu odihnă și cu o organizare mai bună a lucrului."
+        },
+        {
+          "q": "Cine e cel mai expus?",
+          "a": "Potrivit studiului BCG, cei care folosesc multe unelte în paralel sau supraveghează mai mulți agenți AI. Paradoxal, sunt adesea cei mai entuziaști utilizatori și cei văzuți ca performeri."
+        },
+        {
+          "q": "Ce poate face un manager?",
+          "a": "Să limiteze numărul de unelte introduse deodată, să ofere formare și sprijin în folosirea lor și să regândească rolurile, astfel încât supravegherea AI să nu se adauge pur și simplu peste sarcinile existente. Studiul a găsit mai puțin brain fry acolo unde managerii au făcut asta."
+        }
+      ]
+    },
+    {
+      "id": "tokenmaxxing",
+      "date": "2026-11-14",
+      "term": "TOKENMAXXING",
+      "termFull": "CONSUMUL MAXIM DE TOKENI AI, TRATAT CA DOVADĂ DE PRODUCTIVITATE",
+      "pron": "/ tou·căn·mec·sing /",
+      "type": "substantiv",
+      "ro": "Maximizarea consumului de tokeni",
+      "def": [
+        "Tokenmaxxing e practica de a folosi cât mai mulți tokeni AI, adică cât mai mult volum de lucru cu modelele, și de a trata acest consum ca dovadă de productivitate sau de adoptare a tehnologiei. Termenul e un joc de cuvinte din argoul online, unde sufixul „-maxxing” înseamnă a împinge ceva la maximum. Confuzia frecventă e că un consum mare ar însemna o folosire bună. Tokenii măsoară cât a lucrat modelul, nu ce valoare a produs. Un agent care se învârte în cerc consumă mult și livrează nimic.",
+        "Fenomenul a atins apogeul în primăvara lui 2026, când mai multe companii mari de tehnologie au introdus clasamente interne ale consumului de AI. Cel mai citat exemplu e un clasament intern de la Meta, unde angajații concurau pentru titluri ca „Token Legend”. Au urmat rapid problemele: angajați care umflau consumul cu sarcini inutile și bugete anuale de AI epuizate în câteva luni. Uber, de exemplu, a raportat că și-a consumat bugetul de AI pe 2026 până la finalul lui aprilie. Până în toamnă, multe companii au renunțat la clasamente și au trecut la măsurarea rezultatelor, ceea ce unii comentatori au numit valuemaxxing.",
+        "Pentru un contabil sau un controller, tokenmaxxing e un exemplu clasic de indicator prost ales, cunoscut ca legea lui Goodhart: când o măsură devine țintă, încetează să mai fie o măsură bună. E aceeași greșeală ca evaluarea unui departament după numărul de documente înregistrate, nu după calitatea închiderii. Costurile AI cresc odată cu utilizarea, nu cu numărul de licențe, deci bugetul se urmărește ca orice cheltuială variabilă: pe centru de cost, raportat la un rezultat măsurabil."
+      ],
+      "examples": [
+        "O firmă publică lunar clasamentul angajaților după consumul de AI. Primul loc e ocupat de cineva care lasă agenți să ruleze peste noapte pe sarcini pe care nu le mai verifică nimeni.",
+        "Factura lunară pentru serviciile AI se triplează într-un trimestru, fără nicio schimbare vizibilă în termenele de închidere sau în numărul de erori.",
+        "Test de verificare: pentru fiecare linie mare de cost AI, poate cineva spune ce rezultat a produs? Dacă singurul indicator e consumul, bugetul măsoară activitate, nu valoare."
+      ],
+      "faq": [
+        {
+          "q": "Ce e un token?",
+          "a": "Unitatea în care modelele AI citesc și scriu text, aproximativ o bucată de cuvânt. Serviciile AI plătite pe consum se facturează pe numărul de tokeni procesați, deci consumul de tokeni e direct un cost."
+        },
+        {
+          "q": "De ce au încurajat companiile asta?",
+          "a": "Ca să grăbească adoptarea AI și să descopere utilizări noi prin experimentare. Logica era că cine folosește mult învață repede. Problema a apărut când consumul a devenit țintă în sine și a început să fie premiat."
+        },
+        {
+          "q": "Ce e valuemaxxing?",
+          "a": "Reacția la tokenmaxxing: măsurarea AI după rezultatele produse, timp economisit, erori evitate, termene scurtate, nu după cât s-a consumat. E, în fond, principiul obișnuit al controlului de gestiune aplicat unei cheltuieli noi."
+        }
+      ]
+    },
+    {
+      "id": "incognito-chat",
+      "date": "2026-11-14",
+      "term": "INCOGNITO CHAT",
+      "termFull": "CONVERSAȚIA CU CLAUDE CARE NU RĂMÂNE ÎN ISTORIC ȘI ÎN MEMORIE",
+      "pron": "/ in·cog·ni·tou ceat /",
+      "type": "substantiv",
+      "ro": "Conversație incognito",
+      "def": [
+        "Incognito chat e numele pe care Anthropic îl folosește în Claude pentru o conversație temporară, care nu se salvează în istoricul de conversații și nu intră în memoria asistentului. Se pornește din iconița în formă de fantomă, la începutul unei conversații noi, iar interfața o marchează vizibil. Confuzia frecventă e că „incognito” ar însemna că nimic nu se păstrează nicăieri. Ca la modul incognito din browser, diferența e ce vezi tu, nu ce rămâne la furnizor: conversația nu apare în istoric, dar e păstrată o perioadă pe serverele Anthropic.",
+        "Concret, o conversație incognito nu folosește memoria existentă, nu adaugă nimic în ea, nu poate fi găsită ulterior prin căutarea în conversațiile vechi și nu e folosită pentru antrenarea modelelor. Preferințele de profil, cum sunt stilurile personalizate, rămân însă active. Odată închisă, conversația nu mai poate fi redeschisă și nu poate fi transformată în conversație obișnuită. Datele sunt păstrate 30 de zile din motive de siguranță, mai mult dacă sunt semnalate. La planurile Team și Enterprise, conversațiile incognito apar în exporturile de date ale organizației, iar la Enterprise sunt accesibile prin Compliance API. Modul nu e disponibil în interiorul proiectelor. Pentru cazul în care vrei doar să ocolești memoria, dar să păstrezi conversația, Claude are o opțiune separată, de oprire a memoriei pentru o singură conversație.",
+        "Pentru un contabil, incognito e util când vrei o conversație fără urme în istoricul personal: o întrebare punctuală care nu are legătură cu proiectele obișnuite sau un test în care nu vrei ca memoria să influențeze răspunsul. Nu e însă un instrument de confidențialitate pentru datele firmei. Datele unui client nu devin mai protejate în incognito decât într-o conversație obișnuită, iar la contul de serviciu angajatorul le poate vedea în continuare. Ce date au voie să ajungă la un furnizor AI se decide prin contract și prin politica firmei, nu prin modul de conversație."
+      ],
+      "examples": [
+        "Un contabil vrea să testeze cum răspunde Claude la o întrebare fiscală fără influența memoriei, care știe deja la ce firmă lucrează. Deschide o conversație incognito.",
+        "Un angajat crede că poate discuta în incognito datele salariale ale colegilor fiindcă „nu se salvează”. Contul e Enterprise, iar conversația ajunge în exportul de date al organizației.",
+        "Regulă de igienă: tot ce contează dintr-o conversație incognito se copiază înainte de închidere. După ce o închizi, nu o mai poți recupera."
+      ],
+      "faq": [
+        {
+          "q": "Conversațiile incognito sunt folosite la antrenare?",
+          "a": "Nu. Potrivit Anthropic, conversațiile incognito nu sunt folosite pentru antrenarea modelelor, indiferent de setările contului. Sunt totuși păstrate 30 de zile din motive de siguranță, sau mai mult dacă sunt semnalate."
+        },
+        {
+          "q": "Prin ce diferă de oprirea memoriei pentru o conversație?",
+          "a": "Cu memoria oprită, conversația rămâne în istoric și poate fi găsită ulterior, doar că nu folosește și nu alimentează memoria. Incognito înseamnă că nici conversația nu rămâne în istoric."
+        },
+        {
+          "q": "Cum se numește la celelalte instrumente?",
+          "a": "În ChatGPT și în Gemini, echivalentul se numește Temporary Chat, cu reguli de păstrare diferite: până la 30 de zile la ChatGPT și până la 72 de ore la Gemini. Ideea e aceeași, detaliile diferă, deci se verifică la fiecare instrument."
+        }
+      ]
+    },
+    {
+      "id": "temporary-chat",
+      "date": "2026-11-14",
+      "term": "TEMPORARY CHAT",
+      "termFull": "CONVERSAȚIA TEMPORARĂ DIN CHATGPT ȘI GEMINI",
+      "pron": "/ tem·pă·ră·ri ceat /",
+      "type": "substantiv",
+      "ro": "Conversație temporară",
+      "def": [
+        "Temporary Chat e numele folosit de OpenAI în ChatGPT și de Google în Gemini pentru o conversație care nu apare în istoric, nu creează amintiri și nu e folosită pentru antrenarea modelelor. Se pornește dintr-un buton dedicat, la începutul unei conversații noi. Confuzia frecventă e că o conversație temporară ar fi ștearsă pe loc. Nu dispare din istoricul tău, dar furnizorul o păstrează o perioadă: până la 30 de zile la ChatGPT, până la 72 de ore la Gemini.",
+        "Cele două implementări seamănă, dar nu sunt identice. În ChatGPT, înainte de primul mesaj alegi dacă vrei răspunsuri personalizate, folosind memoriile și instrucțiunile existente, sau nepersonalizate. Conversația nu creează amintiri noi și poate fi salvată ulterior ca o conversație obișnuită, moment în care intră sub regulile obișnuite ale contului. La planurile Enterprise, conversațiile temporare sunt accesibile 30 de zile prin Compliance API. În Gemini, conversația temporară nu apare în activitatea contului, nu folosește contextul personal și nu poate fi redeschisă după închidere, iar perioada de 72 de ore servește la generarea răspunsurilor și la procesarea feedback-ului. Atenție la GPT-urile personalizate cu acțiuni externe: datele trimise prin ele către terți urmează regulile acelor terți, nu ale conversației temporare.",
+        "Pentru un contabil, conversația temporară e utilă la întrebări punctuale sau la teste fără influența memoriei. Nu rezolvă însă problema de fond la conturile personale: la planurile individuale de ChatGPT și Gemini, conversațiile obișnuite pot fi folosite la îmbunătățirea modelelor dacă setarea nu e oprită. Temporary Chat ocolește asta pentru o singură conversație, dar pentru datele firmei soluția corectă e un cont de business cu contract de prelucrare a datelor, nu un mod de conversație."
+      ],
+      "examples": [
+        "Un utilizator vrea un răspuns neutru la o întrebare despre un software contabil, fără ca ChatGPT să țină cont de preferințele lui salvate. Deschide o conversație temporară nepersonalizată.",
+        "O colegă întreabă Gemini, dintr-un cont personal, despre structura unui contract de leasing și folosește Temporary Chat ca să nu rămână în activitatea contului. Conversația e păstrată încă 72 de ore la Google.",
+        "Regulă de igienă: modul temporar ascunde conversația de istoric, nu de furnizor. Datele clienților se introduc doar în conturi de business acoperite contractual, indiferent de modul de conversație."
+      ],
+      "faq": [
+        {
+          "q": "Cât timp e păstrată o conversație temporară?",
+          "a": "La ChatGPT, OpenAI poate păstra o copie până la 30 de zile din motive de siguranță. La Gemini, Google o păstrează până la 72 de ore. Obligațiile legale pot prelungi aceste perioade la oricare furnizor."
+        },
+        {
+          "q": "Pot salva o conversație temporară?",
+          "a": "În ChatGPT, da: o poți salva și devine conversație obișnuită, cu regulile obișnuite ale contului. În Gemini, nu: după închidere nu mai poate fi accesată."
+        },
+        {
+          "q": "Cum se numește la celelalte instrumente?",
+          "a": "În Claude, echivalentul se numește incognito chat. Funcția e asemănătoare, dar conversația nu poate fi salvată ulterior, iar perioada de păstrare din motive de siguranță e de 30 de zile."
+        }
+      ]
+    },
+    {
+      "id": "dpa",
+      "date": "2026-11-14",
+      "term": "DPA",
+      "termFull": "DATA PROCESSING AGREEMENT, CONTRACTUL DE PRELUCRARE A DATELOR",
+      "pron": "/ di·pi·ei /",
+      "type": "substantiv",
+      "ro": "Acord de prelucrare a datelor",
+      "def": [
+        "DPA nu e un termen de inteligență artificială, ci unul din protecția datelor. Apare aici fiindcă e documentul la care se ajunge de fiecare dată când o firmă întreabă dacă furnizorul AI își antrenează modelele pe datele ei. DPA vine de la Data Processing Agreement, uneori Data Processing Addendum, și e contractul cerut de articolul 28 din GDPR între firma care decide asupra datelor personale, operatorul, și furnizorul care le prelucrează în numele ei, persoana împuternicită. Confuzia frecventă e că DPA-ul ar fi chiar promisiunea de neantrenare. De multe ori, angajamentul de a nu antrena modele pe datele clientului stă în termenii comerciali ai serviciului, iar DPA-ul acoperă prelucrarea datelor personale. Se citesc împreună.",
+        "Un DPA stabilește în ce scop pot fi prelucrate datele, ce măsuri de securitate se aplică, ce subcontractori folosește furnizorul, cum se transferă datele în afara Spațiului Economic European, cum se notifică un incident și ce se întâmplă cu datele la încetarea contractului. Marii furnizori AI oferă DPA pentru produsele de business: OpenAI pentru ChatGPT Business, Enterprise și API, Anthropic pentru planurile comerciale și API, Google pentru Gemini din Workspace. La aceste produse, datele clientului nu sunt folosite implicit pentru antrenare. La conturile personale regula diferă: utilizatorul trebuie să verifice și, după caz, să oprească singur folosirea conversațiilor pentru îmbunătățirea modelelor.",
+        "Pentru un departament financiar, DPA-ul e documentul care separă o unealtă AI folosibilă cu date reale de una care nu e. Facturile, statele de plată și datele partenerilor conțin date personale, deci folosirea lor într-o unealtă AI fără DPA înseamnă o prelucrare fără bază contractuală. Întrebările de verificare sunt puține: există DPA semnat sau acceptat pentru produsul folosit efectiv, contul e de business sau personal, unde sunt prelucrate datele, cât sunt păstrate și unde e scris, cu forță contractuală, că nu sunt folosite la antrenare."
+      ],
+      "examples": [
+        "Un departament folosește ChatGPT din conturi personale plătite de angajați, apoi descoperă că DPA-ul OpenAI acoperă doar planurile de business și API-ul.",
+        "La achiziția unei unelte AI pentru extragerea datelor din facturi, juristul cere DPA-ul, lista de subcontractori și locul în care sunt prelucrate datele. Furnizorul mic nu are niciunul, iar achiziția se oprește.",
+        "Test de verificare: pentru fiecare unealtă AI folosită cu date reale, poți arăta DPA-ul și clauza de neantrenare? Dacă răspunsul e „scrie pe site”, nu e încă un angajament contractual."
+      ],
+      "faq": [
+        {
+          "q": "DPA-ul garantează că datele nu sunt folosite la antrenare?",
+          "a": "Nu neapărat de unul singur. Angajamentul de neantrenare apare adesea în termenii comerciali sau în contractul principal, iar DPA-ul reglementează prelucrarea datelor personale. Trebuie citite împreună și verificat că angajamentul e contractual, nu doar o declarație pe site."
+        },
+        {
+          "q": "Am nevoie de DPA dacă folosesc doar planul personal?",
+          "a": "Planurile personale nu sunt gândite pentru datele unei firme și de regulă nu vin cu DPA. Dacă trebuie folosite date personale ale clienților, angajaților sau partenerilor, e nevoie de un plan de business acoperit de DPA."
+        },
+        {
+          "q": "Prin ce diferă de EU AI Act?",
+          "a": "DPA-ul e un contract între firmă și furnizor, cerut de GDPR, și privește datele personale. EU AI Act e un regulament european care privește sistemele AI în sine, clasificate pe niveluri de risc. O firmă poate avea nevoie de amândouă, dar răspund la întrebări diferite."
+        }
+      ]
     }
   ]
 }

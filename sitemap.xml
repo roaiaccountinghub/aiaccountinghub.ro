@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Pagini principale -->
-  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/</loc><lastmod>2026-11-14</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/arhiva.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/podcast.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword.html</loc><lastmod>2026-11-14</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/resurse.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/viitorul-profesiei.html</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/contact.html</loc><lastmod>2026-07-19</lastmod></url>
@@ -226,6 +226,16 @@
   <url><loc>https://aiaccountinghub.ro/buzzword/dots-openai.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/claude-duet.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://aiaccountinghub.ro/buzzword/personal-ai-agent.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/spaghetti-code.html</loc><lastmod>2026-11-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/instruction-drift.html</loc><lastmod>2026-11-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/verbosity.html</loc><lastmod>2026-11-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/benchmark.html</loc><lastmod>2026-11-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ai-fluency.html</loc><lastmod>2026-11-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/ai-brain-fry.html</loc><lastmod>2026-11-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/tokenmaxxing.html</loc><lastmod>2026-11-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/incognito-chat.html</loc><lastmod>2026-11-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/temporary-chat.html</loc><lastmod>2026-11-14</lastmod></url>
+  <url><loc>https://aiaccountinghub.ro/buzzword/dpa.html</loc><lastmod>2026-11-14</lastmod></url>
   <!-- /Termeni buzzword -->
 
 </urlset>

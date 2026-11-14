@@ -31,12 +31,30 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Fri, 30 Oct 2026 12:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 11:00:00 +0200</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Buzzword: DPA — contractul care decide dacă AI-ul se antrenează pe datele firmei</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#dpa</link>
+      <guid isPermaLink="false">aiah-buzzword-dpa</guid>
+      <pubDate>Sat, 14 Nov 2026 11:00:00 +0200</pubDate>
+      <category>Buzzword</category>
+      <description>DPA nu e un termen de inteligență artificială, ci unul din protecția datelor. Apare aici fiindcă e documentul la care se ajunge de fiecare dată când o firmă întreabă dacă furnizorul AI își antrenează modelele pe datele ei. DPA vine de la Data Processing Agreement, uneori Data Processing Addendum, și e contractul cerut de articolul 28 din GDPR între firma care decide asupra datelor personale, operatorul, și furnizorul care le prelucrează în numele ei, persoana împuternicită. Confuzia frecventă e că DPA-ul ar fi chiar promisiunea de neantrenare. De multe ori, angajamentul de a nu antrena modele pe datele clientului stă în termenii comerciali ai serviciului, iar DPA-ul acoperă prelucrarea datelor personale. Se citesc împreună.</description>
+    </item>
+
+    <item>
+      <title>Buzzword: AI brain fry — oboseala mentală de la prea multe unelte AI</title>
+      <link>https://aiaccountinghub.ro/buzzword.html#ai-brain-fry</link>
+      <guid isPermaLink="false">aiah-buzzword-ai-brain-fry</guid>
+      <pubDate>Sat, 14 Nov 2026 10:00:00 +0200</pubDate>
+      <category>Buzzword</category>
+      <description>AI brain fry e oboseala mentală acută care apare când cineva folosește sau supraveghează unelte AI peste capacitatea lui de atenție: formulează cereri continuu, citește și verifică rezultate, sare între mai mulți asistenți și urmărește ce fac agenții. Cei afectați descriu o stare de ceață, un „bâzâit” în cap, decizii mai lente și senzația că au o duzină de file deschise în minte. Confuzia frecventă e cu burnout-ul. Burnout-ul vine din suprasolicitare cronică, pe luni întregi. Brain fry e o supraîncărcare de moment, care poate apărea și la oameni motivați, care se descurcă bine cu AI.</description>
+    </item>
 
     <item>
       <title>Închiderea continuă, cu doi agenți AI în roluri diferite</title>
