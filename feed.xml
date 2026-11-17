@@ -31,12 +31,21 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Sat, 14 Nov 2026 11:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 09:00:00 +0200</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Comparații de randamente pe 30 de ani, grafice și simulări: terenul perfect pentru o nouă prezentare în HTML</title>
+      <link>https://aiaccountinghub.ro/2026-11-17-Comparatii-randamente-30-ani-grafice-simulari-prezentare-HTML.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-11-17-Comparatii-randamente-30-ani-grafice-simulari-prezentare-HTML.html</guid>
+      <pubDate>Tue, 17 Nov 2026 09:00:00 +0200</pubDate>
+      <category>Articol</category>
+      <description>CEI-S, CEI-D sau cont obișnuit? Legea 202/2026 privind conturile de economii și de investiții, explicată într-o prezentare HTML care calculează în locul slide-urilor. Aceiași 1.000 de lei pe lună, ca salariu sau în CEI-D: fluturașul pe două drumuri, simularea pe 30 de ani, plafonul de 33% și legea pe articole. Plus ce s-a schimbat față de prezentarea din iulie, ce verifici înainte să ai încredere în cifre și în fișier, și prezentarea de descărcat.</description>
+    </item>
 
     <item>
       <title>Buzzword: DPA — contractul care decide dacă AI-ul se antrenează pe datele firmei</title>

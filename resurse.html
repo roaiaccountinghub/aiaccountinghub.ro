@@ -612,7 +612,7 @@
       "@type": "ItemList",
       "@id": "https://aiaccountinghub.ro/resurse.html#resurse",
       "name": "Resurse disponibile pentru descărcare",
-      "numberOfItems": 8,
+      "numberOfItems": 11,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -675,6 +675,20 @@
           "position": 9,
           "item": {
             "@id": "https://aiaccountinghub.ro/resurse.html#fin-metrics"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#prezentare-cei"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@id": "https://aiaccountinghub.ro/resurse.html#prezentare-vibe-coding"
           }
         }
       ]
@@ -808,6 +822,50 @@
         "@type": "CreativeWork",
         "name": "Conversația care nu a produs cod",
         "url": "https://aiaccountinghub.ro/2026-09-08-Conversatia-care-nu-a-produs-cod.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
+    },
+    {
+      "@type": "PresentationDigitalDocument",
+      "@id": "https://aiaccountinghub.ro/resurse.html#prezentare-cei",
+      "name": "CEI sau cont clasic? Prezentare interactivă despre Legea 202/2026",
+      "description": "Prezentare interactivă într-un singur fișier HTML despre conturile de economii și de investiții (CEI-S și CEI-D) din Legea 202/2026: regulile, cele patru variante comparate de la același cost pentru angajator, fluturașul pe două drumuri, simularea pe 30 de ani, plafonul de 33% și legea explicată pe articole. Rulează în browser, fără internet. Material educativ, nu consultanță fiscală sau de investiții.",
+      "url": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/CEI-sau-cont-clasic.zip",
+      "encodingFormat": "application/zip",
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Comparații de randamente pe 30 de ani, grafice și simulări: terenul perfect pentru o nouă prezentare în HTML",
+        "url": "https://aiaccountinghub.ro/2026-11-17-Comparatii-randamente-30-ani-grafice-simulari-prezentare-HTML.html"
+      },
+      "inLanguage": "ro",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "publisher": {
+        "@id": "https://aiaccountinghub.ro/#organization"
+      },
+      "license": "https://aiaccountinghub.ro/termeni-conditii.html"
+    },
+    {
+      "@type": "PresentationDigitalDocument",
+      "@id": "https://aiaccountinghub.ro/resurse.html#prezentare-vibe-coding",
+      "name": "Vibe Coding, prezentare interactivă în HTML",
+      "description": "Prezentarea despre vibe coding pentru departamentul financiar-contabil, într-un singur fișier HTML: calculator TVA funcțional, ciclul de revizuire animat, dulapul cu șase dosare de aplicații și arcade-ul cu trei jocuri. Se deschide local în browser.",
+      "url": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/Vibe-coding-prezentare.zip",
+      "encodingFormat": "application/zip",
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Vibe Coding pentru prezentări: cum am renunțat la slide-uri pentru o pagină care rulează în browser",
+        "url": "https://aiaccountinghub.ro/2026-07-21-Vibe-Coding-prezentare-interactiva-html.html"
       },
       "inLanguage": "ro",
       "isAccessibleForFree": true,
@@ -1099,6 +1157,22 @@ const FLOORS = [
 
 const RESOURCES = [
   /* ===== DE CITIT ===== */
+  { type: 'pdf', slug: 'prezentari-html', kind: 'Prezentări · HTML', title: 'Prezentări interactive în HTML',
+    short: 'Două prezentări care rulează în browser: CEI sau cont clasic?, despre Legea 202/2026, și Vibe Coding.',
+    meta: '2 fișiere · ZIP · browser',
+    body: [
+      'Două prezentări construite cu AI, fiecare într-un singur fișier HTML care se deschide cu dublu-click, fără instalare și fără cont. „CEI sau cont clasic?” explică Legea 202/2026: fluturașul pe două drumuri, simularea pe 30 de ani pentru patru variante, plafonul de 33% și legea pe articole, cu metodologia scrisă în clar.',
+      'Vibe Coding e prima din serie, din iulie: calculator TVA în loc de titlu, ciclul de revizuire animat, dulapul cu dosare și arcade-ul. Le poți folosi ca atare sau ca model pentru propria prezentare.'],
+    points: ['Simulator CEI cu ipoteze editabile', 'Două trasee de lectură, după public', 'Funcționează offline (CEI)', 'Codul se poate citi și verifica'],
+    note: 'Material educativ, nu consultanță fiscală sau de investiții. Cifrele din simulator depind de ipotezele afișate pe ecran.',
+    downloads: [
+      { name: 'CEI sau cont clasic? · noiembrie', hint: 'Legea 202/2026, CEI-S, CEI-D și contul obișnuit, comparate pe 30 de ani.', size: 'ZIP · 4,9 MB', href: REL + 'CEI-sau-cont-clasic.zip', track: 'resursa:cei', rec: true },
+      { name: 'Vibe Coding · iulie', hint: 'Prima prezentare în HTML, despre vibe coding în contabilitate.', size: 'ZIP · 22 KB', href: REL + 'Vibe-coding-prezentare.zip', track: 'resursa:prezentari', rec: true }],
+    articles: { items: [
+      { href: '2026-11-17-Comparatii-randamente-30-ani-grafice-simulari-prezentare-HTML.html', min: 11, role: 'Prezentarea CEI și ce arată cifrele', title: 'Comparații de randamente pe 30 de ani, grafice și simulări' },
+      { href: '2026-07-21-Vibe-Coding-prezentare-interactiva-html.html', min: 9, role: 'De ce HTML în loc de slide-uri', title: 'Vibe Coding pentru prezentări' }] },
+    facts: [['Format', 'HTML, în arhivă ZIP'], ['Rulează în', 'orice browser modern'], ['Instalare', 'niciuna']] },
+
   { type: 'pdf', slug: 'prd-modul-1', kind: 'Specificație · PDF', title: 'PRD tehnic, SAF-T Inspector, modulul 1',
     short: 'Specificația completă a modulului 1 din SAF-T Inspector: 21 de capitole și 58 de criterii de acceptare.',
     meta: 'PDF · 53 pag. · 0,9 MB',
