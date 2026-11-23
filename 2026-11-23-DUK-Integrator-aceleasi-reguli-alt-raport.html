@@ -57,7 +57,8 @@
 /* Mesajul DUK: textul se rupe pe rânduri, ca să se poată citi întreg și pe telefon. */
 .prose pre code { white-space: pre-wrap; word-break: break-word; font-size: 1em; }
 /* Întrebarea care contează cel mai mult, scoasă în evidență în accent. */
-.prose strong.q-accent { color: var(--accent); }
+.prose strong.q-accent, .article-lede strong.q-accent { color: var(--accent); }
+.article-lede strong.q-accent { font-weight: 600; }
 
 /* Tabelele */
 .table-wrap { margin: 28px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
@@ -257,7 +258,7 @@
 
     <h1>DUK Integrator: <span class="accent">aceleași reguli, alt raport</span></h1>
     <p class="article-lede">
-      La începutul proiectului SAF-T Inspector am pornit cu ideea să lăsăm validarea fișierului D406 în seama DUK Integrator. Pe parcurs am înțeles că tocmai acolo se decide dacă tot ce urmează are sens, și cât de puțin spune DUK despre ce face. Așa a apărut o validare proprie, rulată în paralel cu DUK: aceleași reguli, dar un raport detaliat pe care îl poate citi un contabil, în locul unui mesaj sec. Modulul nu e public, dar la final găsiți harta celor 1.863 de reguli cu referință publică, de la care vă puteți construi propria validare.
+      La începutul proiectului SAF-T Inspector am pornit cu ideea să lăsăm validarea fișierului D406 în seama DUK Integrator. Pe parcurs am înțeles că tocmai acolo se decide dacă tot ce urmează are sens, și cât de puțin spune DUK despre ce face. Așa a apărut o validare proprie, rulată în paralel cu DUK: aceleași reguli, dar <strong class="q-accent">cu un raport complet și detaliat</strong>, pe care îl poate citi un contabil, în locul unui mesaj sec. Tot ce am documentat pe drum e aici, liber, ca fiecare să-și poată construi propria verificare SAF-T, potrivită nevoilor lui. La final găsiți harta celor 1.863 de reguli cu referință publică, de descărcat.
     </p>
 
     <details class="serie">
@@ -287,9 +288,8 @@
         <a href="#s5">Ce lasă DUK să treacă</a>
         <a href="#s6">Decizia: aceleași reguli, alt raport</a>
         <a href="#s7">Ce se primește la final</a>
-        <a href="#s8">Cum știu că sunt aceleași reguli</a>
         <a href="#s9">Ce nu face validarea</a>
-        <a href="#s10">Propria validare, pornind de la hartă</a>
+        <a href="#s10">Propria verificare, pornind de la hartă</a>
         <a href="#s11">În loc de concluzie</a>
       </nav>
     </details>
@@ -386,7 +386,7 @@
 
       <h2 id="s4">Cât de mult se verifică, de fapt</h2>
       <p>
-        Ca să știu ce reproduc, am extras din documentele publice ANAF fiecare regulă de validare, pe fiecare loc din fișier în care se aplică. Sursele au fost SchemaDefCod, schema XSD, ghidul D406 și cele două documente de întrebări și răspunsuri. Rezultatul e o hartă cu 1.863 de reguli, pe 442 de coduri ANAF, grupate în 9 categorii:
+        Ca să știu ce reproduc, am extras din documentele publice ANAF fiecare regulă de validare, pe fiecare loc din fișier în care se aplică. Sursele au fost SchemaDefCod, schema XSD, ghidul D406 și cele două documente de întrebări și răspunsuri. Rezultatul e o hartă cu 1.863 de reguli, grupate în 9 categorii. Ele acoperă 442 de elemente ale fișierului, câmpuri și secțiuni, fiecare cu codul lui din SchemaDefCod, de exemplu S.H.11 pentru HeaderComment, din antet. O regulă se numără o dată pentru fiecare loc în care se aplică, de aceea regulile sunt mai multe decât codurile:
       </p>
 
       <div class="table-wrap">
@@ -408,7 +408,7 @@
           </tbody>
         </table>
       </div>
-      <p class="table-note">Totalul codurilor ANAF numără fiecare cod o singură dată, chiar dacă apare în mai multe categorii.</p>
+      <p class="table-note">Coloana „Coduri ANAF” arată câte elemente din fișier, identificate prin codul lor din SchemaDefCod, sunt atinse de fiecare categorie. Totalul numără fiecare cod o singură dată, chiar dacă apare în mai multe categorii.</p>
 
       <p>
         Primele patru categorii sunt stratul sintactic, ultimele cinci sunt stratul semantic. Fiecare rând din hartă are codul câmpului din SchemaDefCod, calea din XML și documentul public, cu pagina, în care se găsește regula. Regulile pe care documentația doar le sugerează, fără să le formuleze, au rămas deocamdată în afara hărții. Harta poate fi descărcată de la finalul articolului.
@@ -421,7 +421,7 @@
       <ul>
         <li>date care nu există în calendar, ca 30 februarie sau 31 iunie;</li>
         <li>date scrise fără zero în față, ca 2026-7-5;</li>
-        <li>NaN și Infinity în câmpurile de sume (NaN e respins doar la baza de impozitare);</li>
+        <li>NaN și Infinity în câmpurile de sume. Sunt cuvinte, nu cifre: NaN vine din engleză, <em>Not a Number</em>, adică „nu e un număr”, iar Infinity înseamnă „infinit”. Unele programe le scriu în locul unei sume când un calcul eșuează, de exemplu la o împărțire la zero. NaN e respins doar la baza de impozitare;</li>
         <li>sume scrise cu exponent sau în alte formate de programare, ca 1e2;</li>
         <li>IBAN-uri cu cifrele de control greșite;</li>
         <li>CNP-uri cu cifra de control greșită;</li>
@@ -429,9 +429,6 @@
       </ul>
       <p>
         Nu știu dacă aceste valori sunt respinse mai târziu, pe serverul ANAF, la depunere. Verificările de acolo nu sunt publice. Știu doar că DUK le lasă să treacă.
-      </p>
-      <p>
-        Lista nu e în harta descărcabilă, și intenționat. Harta descrie ce cer documentele ANAF, iar comportamentul DUK se poate schimba de la o versiune la alta.
       </p>
 
       <h2 id="s6">Decizia: aceleași reguli, alt raport</h2>
@@ -517,17 +514,6 @@
         Raportul arată cel mult cinci exemple pentru fiecare regulă. Lista completă e în registrul Excel, cu rândul întreg pentru fiecare eroare, gata de filtrat și de trimis colegului care corectează în programul de contabilitate. Un capitol separat compară cele două drumuri: unde coincid DUK și SAF-T Inspector și ce vede în plus SAF-T Inspector.
       </p>
 
-      <h2 id="s8">Cum știu că sunt aceleași reguli</h2>
-      <p>
-        O validare care pretinde că aplică aceleași reguli ca DUK trebuie să poată dovedi asta. Am două probe, ambele pe fișiere sintetice.
-      </p>
-      <p>
-        Prima e setul celor 95 de fișiere cu o singură greșeală. Pe fiecare dintre ele, rezultatul SAF-T Inspector trebuie să coincidă cu al DUK: aceeași cale, aceeași gravitate, același text al mesajului. Singura excepție permisă sunt valorile marcate „DUK acceptă”.
-      </p>
-      <p>
-        A doua privește versiunile noi. DUK se actualizează, iar o regulă schimbată acolo trebuie să se vadă și în aplicație. La fiecare versiune nouă, validarea e pusă din nou la probă pe un set de 37 de fișiere-etalon, rulate în paralel prin DUK și prin SAF-T Inspector. Versiunea nouă intră în lucru doar dacă rezultatele coincid pe toate fișierele. Pentru versiunea actuală, J2.2.18, nepotrivirile au fost zero.
-      </p>
-
       <h2 id="s9">Ce nu face validarea</h2>
       <p>
         Nu înlocuiește DUK. El rămâne validatorul oficial, iar fișierul trebuie să treacă de el înainte de depunere. De aceea drumul DUK rămâne în aplicație, alături de validarea proprie.
@@ -539,9 +525,9 @@
         Nu verifică corectitudinea contabilă. Validarea spune dacă fișierul respectă regulile declarației, nu dacă înregistrările sunt corecte. Pentru asta există testele de consistență ANAF și reconcilierea cu decontul D300, care au modulele lor în aplicație și despre care scriu separat.
       </p>
 
-      <h2 id="s10">Propria validare, pornind de la hartă</h2>
+      <h2 id="s10">Propria verificare, pornind de la hartă</h2>
       <p>
-        Modulul de validare din SAF-T Inspector nu va fi public. Raportul descris mai sus îl obține doar cine își construiește o validare după aceleași reguli și cu aceleași condiții: fără oprire la prima eroare, fără avalanșe, cu datele de regăsire ale fiecărei erori. Drumul, în schimb, e deschis oricui.
+        Tot ce am descris aici am documentat pe parcurs și îl las liber. Recomandarea mea e ca fiecare să-și construiască propria verificare SAF-T, potrivită fișierelor și programului lui de contabilitate. Un raport ca cel de mai sus îl obține oricine aplică aceleași reguli și aceleași condiții: fără oprire la prima eroare, fără avalanșe, cu datele de regăsire ale fiecărei erori.
       </p>
       <p>
         Regulile sunt publice, în documentele ANAF. Le puteți aduna singuri, într-o hartă proprie, sau puteți porni de la cea pe care o pun la dispoziție mai jos. Fișierele de test le puteți genera cu <a href="2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html#s8">Fabrica de fișiere sintetice D406</a>, stricate intenționat câte un singur loc, ca să confruntați rezultatul validării voastre cu al DUK, regulă cu regulă. Așa am lucrat și eu, fără niciun fișier real.
@@ -568,7 +554,7 @@
               <strong>D406-Harta-verificarilor.zip</strong>
               <span>1.863 de reguli, 442 de coduri ANAF, 9 categorii. Fiecare regulă cu documentul public și pagina.</span>
             </div>
-            <a href="downloads/D406-Harta-verificarilor.zip" download class="btn btn-primary" data-track="resursa:harta-d406">
+            <a href="https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/D406-Harta-verificarilor.zip" download class="btn btn-primary" data-track="resursa:harta-d406">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               Descarcă
             </a>
@@ -582,7 +568,7 @@
         Am pornit de la ideea că sintaxa e treaba DUK. Am ajuns la concluzia că nu ajunge să știi că fișierul are erori. Trebuie să știi ce s-a verificat, cât s-a verificat, ce s-a găsit și unde, cu destule detalii încât să poți corecta singur. Diferența dintre un mesaj sec, cu poziții în paranteză, și un raport care duce până la factură, partener și linie e diferența dintre a trimite fișierul la IT și a-l corecta pe loc.
       </p>
       <p>
-        Versiunea SAF-T Inspector de pe site, 0.1.0, conține doar citirea și exportul în Excel, prezentate în <a href="2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html">articolul anterior</a>. Validarea descrisă aici nu face parte dintr-o versiune publică. Harta, în schimb, e a oricui, ca punct de plecare pentru propria validare.
+        Pașii sunt descriși tocmai ca să poată fi refăcuți. Cu documentele ANAF, harta de mai sus și fișiere de test generate cu Fabrica, oricine își poate construi o verificare SAF-T croită pe nevoile lui.
       </p>
       <p>
         Dacă lucrați cu D406 și v-a blocat o eroare DUK greu de descifrat, scrieți-mi prin formularul de <a href="contact.html">contact</a>. Exemplele reale, anonimizate, mă ajută să fac harta mai utilă.
@@ -616,9 +602,8 @@
         <a href="#s5">Ce lasă DUK să treacă</a>
         <a href="#s6">Decizia</a>
         <a href="#s7">Raportul final</a>
-        <a href="#s8">Proba regulilor</a>
         <a href="#s9">Ce nu face validarea</a>
-        <a href="#s10">Propria validare</a>
+        <a href="#s10">Propria verificare</a>
         <a href="#s11">În loc de concluzie</a>
       </nav>
     </div>

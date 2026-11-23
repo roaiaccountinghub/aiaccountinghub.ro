@@ -769,13 +769,13 @@
       "@type": "SoftwareApplication",
       "@id": "https://aiaccountinghub.ro/resurse.html#fabrica-d406",
       "name": "Fabrica de fișiere sintetice D406",
-      "description": "Generează declarații SAF-T D406 cu valori inventate, construite după schema oficială, de la aproximativ 200 MB până la 3-5 GB, într-un fișier sau în segmente. Scrie și balanțele a două luni, registrul jurnal, fișele de trezorerie, jurnalele de TVA, D300, D390 și D394 în XML ANAF, toate din aceleași operațiuni, plus fișiere stricate intenționat, fiecare cu o fișă care spune ce defect conține și unde. Pentru testarea aplicațiilor și pentru exerciții, fără date reale.",
+      "description": "Generează declarații SAF-T D406 cu valori inventate, construite după schema oficială: mică, medie sau mare, de la aproximativ 200 MB până la 3-5 GB, cu linii și câmpuri opționale la alegere, într-un fișier sau în segmente. Pentru cine vrea să-și testeze sau să-și construiască propria aplicație fără să atingă date reale.",
       "url": "https://aiaccountinghub.ro/resurse.html#fabrica-d406",
       "downloadUrl": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/FabricaD406.zip",
       "encodingFormat": "application/zip",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Windows",
-      "softwareVersion": "5.0",
+      "softwareVersion": "1.0",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -801,7 +801,7 @@
       "@id": "https://aiaccountinghub.ro/resurse.html#harta-d406",
       "name": "Harta verificărilor D406",
       "description": "Registru Excel cu 1.863 de reguli de validare a fișierului SAF-T D406 care au referință în documentele publicate de ANAF, pe 442 de coduri ANAF și 9 categorii. Pentru fiecare regulă: secțiunea, categoria, codul din SchemaDefCod, calea din XML, ce se verifică, ce cere documentația și documentul sursă, cu pagina. Construită pe SchemaDefCod 16.02.2026, schema XSD v2.4.9, Ghidul D406 și documentele Întrebări și răspunsuri v1.1 și v1.2. Nu este un document oficial ANAF și nu înlocuiește DUK Integrator.",
-      "url": "https://aiaccountinghub.ro/downloads/D406-Harta-verificarilor.zip",
+      "url": "https://github.com/roaiaccountinghub/aiaccountinghub.ro/releases/download/resurse/D406-Harta-verificarilor.zip",
       "encodingFormat": "application/zip",
       "citation": {
         "@type": "CreativeWork",
@@ -1210,7 +1210,7 @@ const RESOURCES = [
       'Pentru fiecare regulă: secțiunea, codul din SchemaDefCod, calea din XML, ce se verifică, ce cere documentația și documentul sursă, cu pagina. Utilă când primești o eroare DUK pe un câmp sau când discuți cu furnizorul programului de contabilitate.'],
     points: ['Filtrabilă pe secțiune, categorie și cod ANAF', 'Stratul sintactic și cel semantic, separat', 'Nomenclatoarele ANAF, cu numărul de valori', 'Sursele, cu versiunea și data lor'],
     note: 'Nu e un document oficial ANAF și nu înlocuiește DUK Integrator. Nu acoperă verificările făcute de ANAF pe server, la depunere.',
-    downloads: [{ name: 'Registrul Excel', size: 'ZIP · 78 KB', href: 'downloads/D406-Harta-verificarilor.zip', track: 'resursa:harta-d406', rec: true }],
+    downloads: [{ name: 'Registrul Excel', size: 'ZIP · 78 KB', href: REL + 'D406-Harta-verificarilor.zip', track: 'resursa:harta-d406', rec: true }],
     articles: { items: [{ href: '2026-11-23-DUK-Integrator-aceleasi-reguli-alt-raport.html', min: 11, role: 'De unde vine și cum se folosește', title: 'DUK Integrator: aceleași reguli, alt raport' }] },
     facts: [['Format', 'Excel (.xlsx)'], ['Reguli', '1.863'], ['Versiune', '1, 26.10.2026']] },
 
@@ -1307,17 +1307,14 @@ const RESOURCES = [
     facts: [['Versiune', '0.1.0'], ['Sistem', 'Windows'], ['Internet', 'nu e necesar']] },
 
   { type: 'tool', slug: 'fabrica-d406', kind: 'Tool · Windows', title: 'Fabrica de fișiere sintetice D406',
-    short: 'Generează D406, balanțe, registre, D300, D390, D394 și fișiere stricate cu barem, toate cu date inventate.',
-    meta: 'ZIP · [mărime]',
+    short: 'Generează declarații D406 cu valori inventate, după schema oficială, de la 200 MB până la câțiva GB.',
+    meta: 'ZIP · 12,8 MB',
     body: [
-      'Generează declarații SAF-T D406 cu valori inventate, construite după schema oficială, de la aproximativ 200 MB până la 3-5 GB, într-un fișier sau în segmente.',
-      'Din versiunea 5 scrie și fișierele cu care se reconciliază declarația: balanțele a două luni, registrul jurnal, fișele de trezorerie, jurnalele de TVA, D300, D390 și D394 în XML ANAF, toate din aceleași operațiuni.',
-      'A treia zonă strică intenționat un fișier corect, cu defecte alese dintr-un catalog, și scrie lângă fiecare o fișă cu ce s-a stricat și unde. Pentru testarea aplicațiilor și pentru exerciții, fără date reale.'],
-    downloads: [{ name: 'Aplicația', size: 'ZIP · [mărime]', href: REL + 'FabricaD406.zip', track: 'resursa:fabrica-d406', rec: true }],
-    articles: { items: [
-      { href: '2026-12-01-Cine-mai-invata-sa-gaseasca-greseala.html', min: 13, role: 'Ce face și la ce mai poate folosi', title: 'Cine mai învață să găsească greșeala? Fabrica de fișiere sintetice D406' },
-      { href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', min: 15, role: 'Prima versiune', title: 'Apeși Verifică, și D406 devine Excel' }] },
-    facts: [['Versiune', '[5.0]'], ['Sistem', 'Windows']] },
+      'Generează declarații SAF-T D406 cu valori inventate, construite după schema oficială: mică, medie sau mare, de la aproximativ 200 MB până la 3-5 GB.',
+      'Liniile și câmpurile opționale se aleg, iar rezultatul poate fi un fișier sau mai multe segmente. Pentru cine vrea să-și testeze sau să-și construiască propria aplicație fără să atingă date reale.'],
+    downloads: [{ name: 'Aplicația', size: 'ZIP · 12,8 MB', href: REL + 'FabricaD406.zip', track: 'resursa:fabrica-d406', rec: true }],
+    articles: { items: [{ href: '2026-09-28-Apesi-Verifica-si-D406-devine-Excel.html', min: 15, role: 'Ce face și cum se folosește', title: 'Apeși Verifică, și D406 devine Excel' }] },
+    facts: [['Versiune', '1.0'], ['Sistem', 'Windows']] },
 
   { type: 'tool', slug: 'jurnalul-ai', kind: 'Aplicație · HTML', title: 'Jurnalul AI, 30 de zile de adaptare',
     short: 'Un termen AI pe zi lucrătoare, 30 de zile, plus șase activități practice. Un singur fișier HTML.',
