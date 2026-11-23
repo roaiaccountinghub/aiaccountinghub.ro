@@ -31,12 +31,39 @@
     <atom:link href="https://aiaccountinghub.ro/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Unde Inteligența Artificială întâlnește contabilitatea. Articole, podcast și termeni explicați pentru profesioniștii financiari.</description>
     <language>ro</language>
-    <lastBuildDate>Tue, 17 Nov 2026 09:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 01 Dec 2026 09:00:00 +0200</lastBuildDate>
     <image>
       <url>https://aiaccountinghub.ro/assets/icons/app-512.png</url>
       <title>AI Accounting Hub</title>
       <link>https://aiaccountinghub.ro/</link>
     </image>
+
+    <item>
+      <title>Cine mai învață să găsească greșeala? Fabrica de fișiere sintetice D406</title>
+      <link>https://aiaccountinghub.ro/2026-12-01-Cine-mai-invata-sa-gaseasca-greseala.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-12-01-Cine-mai-invata-sa-gaseasca-greseala.html</guid>
+      <pubDate>Tue, 01 Dec 2026 09:00:00 +0200</pubDate>
+      <category>Articol</category>
+      <description>Când agenții AI preiau înregistrarea și reconcilierea, juniorii pierd exact munca din care se forma ochiul contabil. Fabrica de fișiere sintetice D406 a pornit ca unealtă de test pentru SAF-T Inspector, fără date reale în chat-uri AI, și generează acum declarații D406, balanțe, registrul jurnal, fișe, jurnale de TVA, D300, D390 și D394 care se leagă între ele, plus fișiere stricate intenționat, fiecare cu baremul alături. Cum poate deveni teren de antrenament pentru juniori, ce nu poate face, și versiunea 5, de descărcat.</description>
+    </item>
+
+    <item>
+      <title>Testele de consistență D406: raportul pe care aplicația ANAF nu îl dă</title>
+      <link>https://aiaccountinghub.ro/2026-11-25-Teste-de-consistenta-D406-raportul-ANAF.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-11-25-Teste-de-consistenta-D406-raportul-ANAF.html</guid>
+      <pubDate>Wed, 25 Nov 2026 09:00:00 +0200</pubDate>
+      <category>Articol</category>
+      <description>Aplicația ANAF de teste de consistență rulează 11 din cele 33 de teste publicate și scrie doar liniile semnalate, fără pragurile folosite și fără numărul de verificări. SAF-T Inspector rulează toate cele 33, în paralel cu ea, iar raportul arată pentru fiecare test enunțul ANAF, fragmentul XML, formula, câte verificări s-au făcut și unde sunt erorile, plus Excelul cu liniile problemă și un raport de exemplu, de descărcat.</description>
+    </item>
+
+    <item>
+      <title>DUK Integrator: aceleași reguli, alt raport</title>
+      <link>https://aiaccountinghub.ro/2026-11-23-DUK-Integrator-aceleasi-reguli-alt-raport.html</link>
+      <guid isPermaLink="true">https://aiaccountinghub.ro/2026-11-23-DUK-Integrator-aceleasi-reguli-alt-raport.html</guid>
+      <pubDate>Mon, 23 Nov 2026 09:00:00 +0200</pubDate>
+      <category>Articol</category>
+      <description>SAF-T Inspector are acum o validare proprie a fișierului D406, rulată în paralel cu DUK Integrator: aceleași reguli, dar un raport care spune ce s-a verificat, câte verificări s-au făcut, ce s-a găsit și unde, până la factură și partener. Cum se citesc mesajele DUK, ce lasă DUK să treacă deși documentația ANAF respinge, cum se probează că regulile sunt aceleași și harta celor 1.863 de reguli cu referință publică, de descărcat.</description>
+    </item>
 
     <item>
       <title>Comparații de randamente pe 30 de ani, grafice și simulări: terenul perfect pentru o nouă prezentare în HTML</title>
